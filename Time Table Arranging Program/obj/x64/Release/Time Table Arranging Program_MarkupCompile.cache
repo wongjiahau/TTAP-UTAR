@@ -1,0 +1,20 @@
+﻿Time Table Arranging Program
+
+
+winexe
+C#
+.cs
+C:\Users\User\Desktop\Time Table Arranging Program v6.7.4\Time Table Arranging Program v6.7.3\Time Table Arranging Program v6.7.1\Time Table Arranging Program\obj\x64\Release\
+Time_Table_Arranging_Program
+none
+false
+TRACE
+C:\Users\User\Desktop\Time Table Arranging Program v6.7.4\Time Table Arranging Program v6.7.3\Time Table Arranging Program v6.7.1\Time Table Arranging Program\App.xaml
+27-1061321007
+
+76-1742861416
+14-2069899902
+Pages\Page_About.xaml;Pages\Page_AddSlot.xaml;Pages\Page_CreateTimetable.xaml;Pages\Page_Help.xaml;Pages\Page_ShowLikedSubject.xaml;User Control\LikeButton.xaml;User Control\TimetableDescriptionViewer.xaml;User Control\NumberBox.xaml;User Control\NumberCounter\SingleDigitCounter.xaml;User Control\PreviousNextButton.xaml;User Control\SearchBox.xaml;User Control\TextboxWithInlineLabel.xaml;User Control\TimeChooserCircular\TimeChooserCircular.xaml;User Control\TimeChooserCircular\TimeChooserCircular_InnerPart.xaml;User Control\TimeChooserCircular\TimeChooser_InnerPart_Window.xaml;User Control\TimeChooserCircular\TimeHand.xaml;User Control\TimeChooserCircular\XorButton.xaml;User Control\TimetableViewer.xaml;Windows Control\AddRuleWindow_v2.xaml;User Control\CheckBoxWithListDownMenu.xaml;MainWindow.xaml;User Control\RuleSetter.xaml;Windows Control\ProgressWindow.xaml;User Control\TimeChooser.xaml;User Control\TimeTableGUI.xaml;Windows Control\SummaryWindow.xaml;Windows Control\Window_GetConstructionStringOfSlots.xaml;
+
+False
+

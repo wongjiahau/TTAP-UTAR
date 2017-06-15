@@ -1,0 +1,95 @@
+﻿<UserControl x:Class="Time_Table_Arranging_Program.MVVM_Framework.Views.CyclicIndexView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Time_Table_Arranging_Program.MVVM_Framework.Views"
+             xmlns:userControl="clr-namespace:Time_Table_Arranging_Program.User_Control"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:iValueConverter="clr-namespace:Time_Table_Arranging_Program.IValueConverter"
+             xmlns:viewModels="clr-namespace:Time_Table_Arranging_Program.MVVM_Framework.ViewModels"
+             mc:Ignorable="d" 
+            >
+    
+    <UserControl.Resources>
+        <userControl:IndexViewerVisibilityConverter x:Key="IndexViewerVisibilityConverter" />
+    </UserControl.Resources>
+    <UserControl.DataContext>
+        <viewModels:CyclicIndexVM />
+    </UserControl.DataContext>
+    <UserControl.InputBindings>
+        <KeyBinding Command="{Binding IncrementCommand}" Key="Right" />
+        <KeyBinding Command="{Binding IncrementCommand}" Key="Down" />
+        <KeyBinding Command="{Binding DecrementCommand}" Key="Left" />
+        <KeyBinding Command="{Binding DecrementCommand}" Key="Up" />
+        <KeyBinding Command="{Binding ToRandomCommand}" Key="R" />
+        <KeyBinding Command="{Binding ToFirstCommand}" Key="Home" />
+        <KeyBinding Command="{Binding ToLastCommand}" Key="End" />
+
+    </UserControl.InputBindings>
+    <materialDesign:Card 
+        Visibility="{Binding MaxValue, Converter={StaticResource IndexViewerVisibilityConverter}}"
+        Background="DarkGray"
+        >
+        <StackPanel Margin="5">
+            <StackPanel.Resources>
+                <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignFlatButton}">
+                    <Setter Property="Height" Value="35" />
+                    <Setter Property="Width" Value="70" />
+                    <Setter Property="Foreground" Value="White"></Setter>
+                </Style>
+                <Style TargetType="materialDesign:PackIcon">
+                    <Setter Property="Height" Value="25" />
+                    <Setter Property="Width" Value="40" />
+                </Style>
+                <iValueConverter:AddConverter x:Key="AddConverter" />
+            </StackPanel.Resources>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button x:Name="PreviousButton" ToolTip="Go to previous timetable [Left Arrow]" Command="{Binding DecrementCommand}">
+                    <materialDesign:PackIcon Kind="ChevronLeft" />
+                </Button>
+                <StackPanel Orientation="Horizontal">
+                    <Border BorderThickness="0" BorderBrush="Black">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBox x:Name="CurrentIndexLabel" VerticalAlignment="Center" TextAlignment="Center"
+                                       Width="{Binding ActualWidth, ElementName=MaxIndexLabel, Converter={StaticResource AddConverter}, ConverterParameter=5}" FontWeight="Bold" FontFamily="Consolas" FontSize="20"  
+                                       Text="{Binding CurrentValue, UpdateSourceTrigger=PropertyChanged}"                                       
+                                       Margin="5,0,0,0" Foreground="White" />
+                            <Label VerticalAlignment="Center" Foreground="White"  FontFamily="consolas" FontSize="20" Content="/"/>
+                            <TextBlock x:Name="MaxIndexLabel" Foreground="White" VerticalAlignment="Center"  FontFamily="consolas" FontSize="20" Style="{x:Null}" 
+                                       Text="{Binding MaxValue, UpdateSourceTrigger=PropertyChanged}" 
+                                       Margin="0,0,5,0"/>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+                <Button x:Name="NextButton" ToolTip="Go to next timetable [Right Arrow]" Command="{Binding IncrementCommand}">
+                    <materialDesign:PackIcon Kind="ChevronRight" />
+                </Button>
+
+            </StackPanel>
+            <DockPanel>
+
+                <Button x:Name="RandomButton" DockPanel.Dock="Right" ToolTip="Get random timetable [R]" Command="{Binding ToRandomCommand}">
+                    <materialDesign:PackIcon Kind="Dice5" />
+                </Button>
+                <Slider x:Name="Slider" Foreground="White" HorizontalAlignment="Stretch" Value="{Binding CurrentValue, UpdateSourceTrigger=PropertyChanged}" Maximum="{Binding MaxValue}" Margin="10,0,0,0" VerticalAlignment="Center">
+                    <Slider.InputBindings>
+                        <KeyBinding Command="{Binding IncrementCommand}" Key="Right" />
+                        <KeyBinding Command="{Binding IncrementCommand}" Key="Down" />
+                        <KeyBinding Command="{Binding DecrementCommand}" Key="Left" />
+                        <KeyBinding Command="{Binding DecrementCommand}" Key="Up" />
+                        <KeyBinding Command="{Binding ToRandomCommand}" Key="R" />
+                    </Slider.InputBindings>
+                </Slider>
+            </DockPanel>
+        </StackPanel>
+    </materialDesign:Card>
+</UserControl>
+
+
+
+
+
+
+

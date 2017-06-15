@@ -1,12 +1,93 @@
-﻿<Window x:Class="Time_Table_Arranging_Program.MainWindow"
+﻿<Window x:Name="Main_Window" x:Class="Time_Table_Arranging_Program.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+          xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Time_Table_Arranging_Program"
+        xmlns:views="clr-namespace:Time_Table_Arranging_Program.MVVM_Framework.Views"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        
-    </Grid>
+        Title="Time Table Arranging Program (TTAP) - UTAR" WindowState="Maximized" Icon="Icon/calendar.png"
+        Closing=" MainWindow_OnClosing" >
+    <Window.Resources>
+        <ControlTemplate TargetType="Frame" x:Key="ControlTemplateForNavigator">
+            <DockPanel Margin="0" LastChildFill="True">
+                <materialDesign:ColorZone Padding="16" materialDesign:ShadowAssist.ShadowDepth="Depth2"
+                                            Mode="PrimaryMid" DockPanel.Dock="Top">
+                    <DockPanel>
+                        <Button  x:Name="MenuToggleButton"  Foreground="White" Style="{StaticResource MaterialDesignFlatButton}" DockPanel.Dock="Left"
+                                                         Command="{x:Static NavigationCommands.BrowseBack}"
+                        IsEnabled="{TemplateBinding CanGoBack}"
+                             >
+
+                            <materialDesign:PackIcon Kind="ArrowLeftBold"  Height="30" Width="30"/>
+                        </Button>
+                        <Button Foreground="White" Style="{StaticResource MaterialDesignFlatButton}" DockPanel.Dock="Left"
+                                    Command="{x:Static NavigationCommands.BrowseForward}"
+                                 IsEnabled="{TemplateBinding CanGoBack}"
+                                    >
+                            <materialDesign:PackIcon Kind="ArrowRightBold"  Height="30" Width="30"/>
+                        </Button>
+                        <materialDesign:PopupBox DockPanel.Dock="Right" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False">
+                            <StackPanel>
+                                <Button x:Name="AboutButton"  Content="About" Click="AboutButton_Click" />
+                                <Button Content="Feedback" Click="FeedbackButton_OnClick" />
+                                <Button x:Name="HelpButton"  Content="HELP" Click="HelpButton_Click" />
+                                <Button Click="GoToCourseRegistrationWebsiteButton_OnClick" Content="Go to course registration website" />
+                                <Button Content="Add slots manually" Click="GoToAddSlotPage_OnClick" />
+                            </StackPanel>
+                        </materialDesign:PopupBox>
+                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22">Timetable Arranging Program ( TTAP )</TextBlock>
+                    </DockPanel>
+                </materialDesign:ColorZone>
+                <materialDesign:Card DockPanel.Dock="Top" HorizontalAlignment="Stretch">
+                    <Menu DockPanel.Dock="Top">
+                        <MenuItem Header="_File">
+                            <MenuItem Header="Load slots" Click="LoadSlots_OnClick">
+                                <MenuItem.Icon>
+                                    <materialDesign:PackIcon Kind="Upload" />
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <Separator />
+                            <MenuItem Header="Save slots" Click="SaveSlot_OnClick" InputGestureText="Ctrl+S">
+                                <MenuItem.Icon>
+                                    <materialDesign:PackIcon Kind="ContentSave" />
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <MenuItem Header="Save slots as . . ." Click="SaveSlotAs_OnClick" />
+                        </MenuItem>
+                    </Menu>
+                </materialDesign:Card>
+
+                <ContentPresenter />
+                <!--<Button x:Name="BackButton"
+                        Content="Back"
+                        Command="{x:Static NavigationCommands.BrowseBack}"
+                        IsEnabled="{TemplateBinding CanGoBack}"
+                       />-->
+
+            </DockPanel>
+        </ControlTemplate>
+    </Window.Resources>
+    <materialDesign:DialogHost x:Name="DialogHost" >
+        <materialDesign:DialogHost.DialogContent>
+            <Border Padding="20">
+                <StackPanel>
+                    <TextBlock x:Name="Title" Margin="10" FontSize="30" FontWeight="Bold">Error :(</TextBlock>
+                    <TextBlock x:Name="Message" Margin="10" FontSize="20" MinWidth="300" MaxWidth="{Binding Path=ActualWidth, ElementName=Title }" TextWrapping="Wrap">Please make sure you copied the correct content and is using Google Chrome</TextBlock>
+                    <Button x:Name="DialogButton" Margin="10" HorizontalAlignment="Center" FontSize="20" Height="40" Command="materialDesign:DialogHost.CloseDialogCommand">Got it!</Button>
+                </StackPanel>
+            </Border>
+        </materialDesign:DialogHost.DialogContent>
+
+        <DockPanel LastChildFill="True">
+            <Grid>
+                <Frame x:Name="MainFrame" Template="{DynamicResource ControlTemplateForNavigator}"
+           Navigating="MainFrame_OnNavigating" />
+                <materialDesign:Snackbar x:Name="Snackbar"  MessageQueue="{materialDesign:MessageQueue}" />
+            </Grid>
+            
+            
+        </DockPanel>
+    </materialDesign:DialogHost>
 </Window>

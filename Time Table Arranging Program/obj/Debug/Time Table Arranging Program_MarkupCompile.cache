@@ -1,0 +1,20 @@
+﻿Time Table Arranging Program
+
+
+winexe
+C#
+.cs
+C:\Users\User\Desktop\Time Table Arranging Program v7.5\Time Table Arranging Program\obj\Debug\
+Time_Table_Arranging_Program
+none
+false
+DEBUG;TRACE
+C:\Users\User\Desktop\Time Table Arranging Program v7.5\Time Table Arranging Program\App.xaml
+36467097612
+
+1101322617767
+25249173932
+MVVM_Framework\Views\CyclicIndexView.xaml;MVVM_Framework\Views\TimetableListView.xaml;Pages\Page_About.xaml;Pages\Page_AddSlot.xaml;Pages\Page_AddToGoogleCalendar.xaml;Pages\Page_CreateTimetable.xaml;Pages\Page_Intro.xaml;Pages\Page_Help.xaml;Pages\Page_ShowLikedSubject.xaml;User Control\EnhancedMessageBox.xaml;User Control\LikeButton.xaml;User Control\PromptUserForFeedbackControl.xaml;User Control\SelectSubjectPanel.xaml;User Control\Snackbar.xaml;User Control\TimeChooserDialog.xaml;User Control\TimetableDescriptionViewer.xaml;User Control\NumberBox.xaml;User Control\IndexViewer.xaml;User Control\SearchBox.xaml;User Control\TextboxWithInlineLabel.xaml;User Control\TimeChooserCircular\TimeChooserCircular.xaml;User Control\TimeChooserCircular\TimeChooserCircular_InnerPart.xaml;User Control\TimeChooserCircular\TimeChooser_InnerPart_Window.xaml;User Control\TimeChooserCircular\TimeHand.xaml;User Control\TimeChooserCircular\XorButton.xaml;User Control\TimetableDescriptionViewer2.xaml;User Control\TimetableViewer.xaml;Windows Control\AddRuleWindow_v2.xaml;User Control\CheckBoxWithListDownMenu.xaml;MainWindow.xaml;User Control\RuleSetter.xaml;Windows Control\ProgressWindow.xaml;User Control\TimeChooser.xaml;User Control\TimeTableGUI.xaml;Windows Control\SummaryWindow.xaml;Windows Control\Window_GetConstructionStringOfSlots.xaml;
+
+False
+

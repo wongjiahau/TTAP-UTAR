@@ -1,0 +1,21 @@
+﻿<Page x:Class="Time_Table_Arranging_Program.Pages.Page_ShowLikedTimetable"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Time_Table_Arranging_Program.Pages"
+      xmlns:userControl="clr-namespace:Time_Table_Arranging_Program.User_Control"
+      mc:Ignorable="d"     
+      Title="Page_ShowLikedSubject">
+
+    <DockPanel>
+        <StackPanel Orientation="Vertical" DockPanel.Dock="Top" HorizontalAlignment="Stretch">
+        <Label x:Name="TitleLabel" FontSize="40" HorizontalContentAlignment="Center" FontWeight="Bold" Content="These are the timetables that you liked" />
+            <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+        <Button x:Name="RemoveButton" Content="👎 Dislike this timetable"  Click="RemoveButton_OnClick" />
+                <Button x:Name="ShowSummaryButton" Content="📔 Show summary" Click="ShowSummaryButton_OnClick" />
+            </StackPanel>
+        </StackPanel>
+        <userControl:TimetableViewer x:Name="TimetableViewer"/>
+    </DockPanel>
+</Page>

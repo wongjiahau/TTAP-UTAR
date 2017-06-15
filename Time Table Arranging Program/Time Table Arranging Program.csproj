@@ -13,31 +13,143 @@
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <TargetFrameworkProfile />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+  <PropertyGroup>
+    <ApplicationIcon>calendar_XNR_icon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
     <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>full</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>false</SignManifests>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Google.Apis, Version=1.26.2.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.1.26.2\lib\net45\Google.Apis.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Google.Apis.Auth, Version=1.26.2.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.Auth.1.26.2\lib\net45\Google.Apis.Auth.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Google.Apis.Auth.PlatformServices, Version=1.26.2.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.Auth.1.26.2\lib\net45\Google.Apis.Auth.PlatformServices.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Google.Apis.Calendar.v3, Version=1.26.2.866, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.Calendar.v3.1.26.2.866\lib\net45\Google.Apis.Calendar.v3.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Google.Apis.Core, Version=1.26.2.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.Core.1.26.2\lib\net45\Google.Apis.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Google.Apis.PlatformServices, Version=1.26.2.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.1.26.2\lib\net45\Google.Apis.PlatformServices.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="HtmlAgilityPack, Version=1.4.9.5, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <HintPath>..\packages\HtmlAgilityPack.1.4.9.5\lib\Net45\HtmlAgilityPack.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MaterialDesignColors, Version=1.1.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialDesignColors.1.1.2\lib\net45\MaterialDesignColors.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MaterialDesignThemes.Wpf, Version=2.3.0.823, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialDesignThemes.2.3.0.823\lib\net45\MaterialDesignThemes.Wpf.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
-    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.CSharp">
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\Microsoft.CSharp.dll</HintPath>
+    </Reference>
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -54,6 +166,298 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="MVVM_Framework\Models\TimetableList_2.cs" />
+    <Compile Include="MVVM_Framework\ObservableObject.cs" />
+    <Compile Include="Class\BoundedInt.cs" />
+    <Compile Include="Class\Converter\ConvertibleToString.cs" />
+    <Compile Include="Class\Converter\Day.cs" />
+    <Compile Include="Class\Converter\TimePeriod.cs" />
+    <Compile Include="Class\Converter\WeekNumber.cs" />
+    <Compile Include="Class\ConvertibleToListOf.cs" />
+    <Compile Include="Class\CustomBackgroundWorker.cs" />
+    <Compile Include="Class\ExtensionClass.cs" />
+    <Compile Include="Class\Filterer.cs" />
+    <Compile Include="Class\GoogleCalendarApi\GoogleCalendarApi.cs" />
+    <Compile Include="Class\HashedList.cs" />
+    <Compile Include="Class\HtmlToText.cs" />
+    <Compile Include="Class\IChecklessJoinable.cs" />
+    <Compile Include="Class\LevenshteinDistance.cs" />
+    <Compile Include="Class\ObjectSerializer.cs" />
+    <Compile Include="Class\ObservableTimetable.cs" />
+    <Compile Include="Class\ObservableTimetableList.cs" />
+    <Compile Include="Class\SlotList.cs" />
+    <Compile Include="Class\StartDateEndDateParser.cs" />
+    <Compile Include="Class\Timetable.cs" />
+    <Compile Include="Class\TimetableList.cs" />
+    <Compile Include="Class\Timetable_Obsolete.cs" />
+    <Compile Include="Class\TimetableRow.cs" />
+    <Compile Include="Controller\CreateTimetableController.cs" />
+    <Compile Include="Interfaces\IHashable.cs" />
+    <Compile Include="Interfaces\IHashedList.cs" />
+    <Compile Include="Class\Indices.cs" />
+    <Compile Include="Class\TokenParser\Token.cs" />
+    <Compile Include="Class\TokenParser\Tokenizer.cs" />
+    <Compile Include="Class\TokenParser\SlotParser.cs" />
+    <Compile Include="Class\TokenParser\TokenStream.cs" />
+    <Compile Include="Interfaces\IAddable.cs" />
+    <Compile Include="Interfaces\IDuplicable.cs" />
+    <Compile Include="Interfaces\IIndexable.cs" />
+    <Compile Include="Interfaces\IInequalityComparable.cs" />
+    <Compile Include="Interfaces\ICyclicIteratable.cs" />
+    <Compile Include="Interfaces\IntersectionCheckable.cs" />
+    <Compile Include="Class\Subject.cs" />
+    <Compile Include="Interfaces\ObserverPattern.cs" />
+    <Compile Include="Interfaces\ISubtractable.cs" />
+    <Compile Include="Interfaces\IToConstructionString.cs" />
+    <Compile Include="IValueConverter\AddConverter.cs" />
+    <Compile Include="Model\OutputTimetableModel.cs" />
+    <Compile Include="Model\SlotListModel.cs" />
+    <Compile Include="MVVM_Framework\RelayCommand.cs" />
+    <Compile Include="MVVM_Framework\ViewModelBase.cs" />
+    <Compile Include="MVVM_Framework\ViewModels\TimetableListVM.cs" />
+    <Compile Include="MVVM_Framework\ViewModels\TimetableVM.cs" />
+    <Compile Include="MVVM_Framework\Views\CyclicIndexView.xaml.cs">
+      <DependentUpon>CyclicIndexView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM_Framework\Views\TimetableListView.xaml.cs">
+      <DependentUpon>TimetableListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="IValueConverter\ComboBoxSelectionConverter.cs" />
+    <Compile Include="Pages\Page_About.xaml.cs">
+      <DependentUpon>Page_About.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Page_AddSlot.xaml.cs">
+      <DependentUpon>Page_AddSlot.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Page_AddToGoogleCalendar.xaml.cs">
+      <DependentUpon>Page_AddToGoogleCalendar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Page_CreateTimetable.xaml.cs">
+      <DependentUpon>Page_CreateTimetable.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Page_Intro.xaml.cs">
+      <DependentUpon>Page_Intro.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Page_Help.xaml.cs">
+      <DependentUpon>Page_Help.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Page_ShowLikedSubject.xaml.cs">
+      <DependentUpon>Page_ShowLikedSubject.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Annotations.cs" />
+    <Compile Include="Settings.cs" />
+    <Compile Include="TestData.cs" />
+    <Compile Include="User Control\AutoClosePopup.cs" />
+    <Compile Include="MVVM_Framework\Models\CyclicIndex.cs" />
+    <Compile Include="User Control\EnhancedMessageBox.xaml.cs">
+      <DependentUpon>EnhancedMessageBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User Control\HighlightTextBlock.cs" />
+    <Compile Include="User Control\LikeButton.xaml.cs">
+      <DependentUpon>LikeButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User Control\PromptUserForFeedbackControl.xaml.cs">
+      <DependentUpon>PromptUserForFeedbackControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User Control\SelectSubjectPanel.xaml.cs">
+      <DependentUpon>SelectSubjectPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User Control\Snackbar.xaml.cs">
+      <DependentUpon>Snackbar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User Control\TimeChooserDialog.xaml.cs">
+      <DependentUpon>TimeChooserDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User Control\TimetableDescriptionViewer.xaml.cs">
+      <DependentUpon>TimetableDescriptionViewer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User Control\NumberBox.xaml.cs">
+      <DependentUpon>NumberBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User Control\NumberCounter\INumberCounter.cs" />
+    <Compile Include="User Control\ObserverButton.cs" />
+    <Compile Include="User Control\IndexViewer.xaml.cs">
+      <DependentUpon>IndexViewer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User Control\SearchBox.xaml.cs">
+      <DependentUpon>SearchBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User Control\TextboxWithInlineLabel.xaml.cs">
+      <DependentUpon>TextboxWithInlineLabel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User Control\TimeChooserCircular\TimeChooserCircular.xaml.cs">
+      <DependentUpon>TimeChooserCircular.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User Control\TimeChooserCircular\TimeChooserCircular_InnerPart.xaml.cs">
+      <DependentUpon>TimeChooserCircular_InnerPart.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User Control\TimeChooserCircular\TimeChooser_InnerPart_Window.xaml.cs">
+      <DependentUpon>TimeChooser_InnerPart_Window.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User Control\TimeChooserCircular\TimeHand.xaml.cs">
+      <DependentUpon>TimeHand.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User Control\TimeChooserCircular\XorButton.xaml.cs">
+      <DependentUpon>XorButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User Control\TimetableDescriptionViewer2.xaml.cs">
+      <DependentUpon>TimetableDescriptionViewer2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User Control\TimetableViewer.xaml.cs">
+      <DependentUpon>TimetableViewer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserInterface\ColorDictionary.cs" />
+    <Compile Include="UserInterface\CustomAnimation.cs" />
+    <Compile Include="MVVM_Framework\ViewModels\CyclicIndexVM.cs" />
+    <Compile Include="VisibilityConverter.cs" />
+    <Compile Include="Windows Control\AddRuleWindow_v2.xaml.cs">
+      <DependentUpon>AddRuleWindow_v2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User Control\CheckBoxWithListDownMenu.xaml.cs">
+      <DependentUpon>CheckBoxWithListDownMenu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Class\ColorGenerator.cs" />
+    <Compile Include="Global.cs" />
+    <Compile Include="Class\ExtensionMethods.cs" />
+    <Compile Include="Class\PermutateV4.cs" />
+    <Compile Include="User Control\RuleSetter.xaml.cs">
+      <DependentUpon>RuleSetter.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows Control\ProgressWindow.xaml.cs">
+      <DependentUpon>ProgressWindow.xaml</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Class\Slot.cs" />
+    <Compile Include="Class\Converter\Time.cs" />
+    <Compile Include="User Control\TimeChooser.xaml.cs">
+      <DependentUpon>TimeChooser.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User Control\TimeTableGUI.xaml.cs">
+      <DependentUpon>TimeTableGUI.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Class\WindowsBehaviour.cs" />
+    <Compile Include="Windows Control\SummaryWindow.xaml.cs">
+      <DependentUpon>SummaryWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows Control\Window_GetConstructionStringOfSlots.xaml.cs">
+      <DependentUpon>Window_GetConstructionStringOfSlots.xaml</DependentUpon>
+    </Compile>
+    <Page Include="MVVM_Framework\Views\CyclicIndexView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVVM_Framework\Views\TimetableListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Page_About.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Page_AddSlot.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Page_AddToGoogleCalendar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Page_CreateTimetable.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Page_Intro.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Page_Help.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Page_ShowLikedSubject.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User Control\EnhancedMessageBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User Control\LikeButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User Control\PromptUserForFeedbackControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User Control\SelectSubjectPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User Control\Snackbar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User Control\TimeChooserDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User Control\TimetableDescriptionViewer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User Control\NumberBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User Control\IndexViewer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User Control\SearchBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User Control\TextboxWithInlineLabel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User Control\TimeChooserCircular\TimeChooserCircular.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User Control\TimeChooserCircular\TimeChooserCircular_InnerPart.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User Control\TimeChooserCircular\TimeChooser_InnerPart_Window.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User Control\TimeChooserCircular\TimeHand.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User Control\TimeChooserCircular\XorButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User Control\TimetableDescriptionViewer2.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User Control\TimetableViewer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows Control\AddRuleWindow_v2.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User Control\CheckBoxWithListDownMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -66,6 +470,30 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="User Control\RuleSetter.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows Control\ProgressWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User Control\TimeChooser.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User Control\TimeTableGUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows Control\SummaryWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows Control\Window_GetConstructionStringOfSlots.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -85,6 +513,10 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="client_secret.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -94,7 +526,40 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon\calendar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="calendar_XNR_icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="FodyWeavers.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Class\AbstractClass\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\Fody.2.0.6\build\dotnet\Fody.targets" Condition="Exists('..\packages\Fody.2.0.6\build\dotnet\Fody.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Fody.2.0.6\build\dotnet\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Fody.2.0.6\build\dotnet\Fody.targets'))" />
+    <Error Condition="!Exists('..\packages\Costura.Fody.1.5.1\build\dotnet\Costura.Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Costura.Fody.1.5.1\build\dotnet\Costura.Fody.targets'))" />
+  </Target>
+  <Import Project="..\packages\Costura.Fody.1.5.1\build\dotnet\Costura.Fody.targets" Condition="Exists('..\packages\Costura.Fody.1.5.1\build\dotnet\Costura.Fody.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

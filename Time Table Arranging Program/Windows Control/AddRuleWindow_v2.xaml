@@ -1,0 +1,26 @@
+﻿<Window x:Class="Time_Table_Arranging_Program.AddRuleWindow_v2"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:Time_Table_Arranging_Program"
+        mc:Ignorable="d"
+        Title="Manage rules" Closing="AddRuleWindow_v2_OnClosing"  SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen" >
+
+    <DockPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="30">
+
+        <Label DockPanel.Dock="Top" FontSize="30" FontWeight="Bold">Manange your own rules</Label>
+        <Border  BorderBrush="Gray" BorderThickness="1" MinWidth="600" Margin="5" DockPanel.Dock="Top" Height="300">
+            <ScrollViewer x:Name="ScrollViewer"  VerticalScrollBarVisibility="Visible" Padding="5">
+                <StackPanel x:Name="innerSp" />
+            </ScrollViewer>
+        </Border>
+
+        <Grid DockPanel.Dock="Bottom" VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="10"
+                    >
+            <Button x:Name="AddRuleButton"    Content="Add rules" FontSize="20" Height="50" HorizontalAlignment="Center" Click="AddRuleButton_OnClick" />
+            <Button x:Name="OkButton" Content="OK" Style="{StaticResource MaterialDesignFlatButton}" HorizontalAlignment="Right" Height="50" Width="70" Click="OkButton_OnClick"  />
+        </Grid>
+    </DockPanel>
+</Window>

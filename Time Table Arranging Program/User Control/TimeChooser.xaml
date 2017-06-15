@@ -1,0 +1,17 @@
+﻿<UserControl x:Class="Time_Table_Arranging_Program.TimeChooser"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:Time_Table_Arranging_Program"
+             mc:Ignorable="d">
+    <StackPanel Orientation="Horizontal">
+        <ComboBox SelectedIndex="0" x:Name="HourCB" SelectionChanged="ComboBox_OnSelectionChanged" />
+        <Label>:</Label>
+        <ComboBox SelectedIndex="0" x:Name="MinuteCB" SelectionChanged="ComboBox_OnSelectionChanged" />
+        <ComboBox SelectedIndex="0" x:Name="AmOrPmCB" SelectionChanged="ComboBox_OnSelectionChanged">
+            <ComboBoxItem>AM</ComboBoxItem>
+            <ComboBoxItem>PM</ComboBoxItem>
+        </ComboBox>
+    </StackPanel>
+</UserControl>

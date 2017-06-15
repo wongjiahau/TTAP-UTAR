@@ -1,0 +1,14 @@
+﻿<Page x:Class="Time_Table_Arranging_Program.Pages.Page_Help"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Time_Table_Arranging_Program.Pages"
+      xmlns:userControl="clr-namespace:Time_Table_Arranging_Program.User_Control"
+      mc:Ignorable="d"       
+      Title="Page_Help">
+    <DockPanel LastChildFill="True">
+        <userControl:IndexViewer DockPanel.Dock="Top" />
+        <Frame x:Name="Frame" />
+    </DockPanel>
+</Page>

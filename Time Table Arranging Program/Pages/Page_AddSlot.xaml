@@ -1,0 +1,72 @@
+﻿<Page x:Class="Time_Table_Arranging_Program.Pages.Page_AddSlot"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="clr-namespace:Time_Table_Arranging_Program.Pages"
+      xmlns:timeTableArrangingProgram="clr-namespace:Time_Table_Arranging_Program"
+      xmlns:class="clr-namespace:Time_Table_Arranging_Program.Class"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:numberCounter="clr-namespace:Time_Table_Arranging_Program.User_Control.NumberCounter"
+      xmlns:userControl="clr-namespace:Time_Table_Arranging_Program.User_Control"
+      xmlns:timeChooserCircular="clr-namespace:Time_Table_Arranging_Program.User_Control.TimeChooserCircular"
+      mc:Ignorable="d"
+      Title="Page_AddSlot" >
+    <DockPanel LastChildFill="True">
+        <DockPanel LastChildFill="True">
+            
+                <StackPanel x:Name="InnerSp" HorizontalAlignment="Stretch" DockPanel.Dock="Bottom" Margin="0,10,0,20" >
+                <Button x:Name="CreateTimetableButton" HorizontalAlignment="Center" Style="{StaticResource MaterialDesignRaisedAccentButton}" Height="70" 
+                        Click="CreateTimetableButton_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="Timetable" Height="40" Width="40" />
+                    <TextBlock FontSize="30" >Create Timetable</TextBlock>
+                    </StackPanel>
+                </Button>
+               
+            </StackPanel>
+          
+            <StackPanel  Orientation="Horizontal" DockPanel.Dock="Top" HorizontalAlignment="Center">
+                <Label Content="Number of added slots : " VerticalContentAlignment="Center" />
+                <Label x:Name="NOAS_Label">0</Label>
+            </StackPanel>
+            <Border HorizontalAlignment="Center" Padding="15" BorderBrush="Gray" BorderThickness="1" CornerRadius="5">
+                <Grid >
+                    <ListView x:Name="InputSlotsListView" 
+                  MouseRightButtonDown="InputSlotsListView_MouseRightButtonDown" KeyDown="InputSlotsListView_KeyDown" >
+                        <ListView.DataContext>
+                            <class:Slot />
+                        </ListView.DataContext>
+                        <ListView.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Delete" Click="MenuItemDelete_Click" />
+                            </ContextMenu>
+                        </ListView.ContextMenu>
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Name" DisplayMemberBinding="{Binding SubjectName}" />
+                                <GridViewColumn Header="Code" DisplayMemberBinding="{Binding Code}" />
+                                <GridViewColumn Header="Type" DisplayMemberBinding="{Binding Type}" />
+                                <GridViewColumn Header="Number" DisplayMemberBinding="{Binding Number}" />
+                                <GridViewColumn Header="Day" DisplayMemberBinding="{Binding Day}" />
+                                <GridViewColumn Header="Time" DisplayMemberBinding="{Binding TimePeriod}" />
+                                <GridViewColumn Header="Week" DisplayMemberBinding="{Binding WeekNumber}" />
+                            </GridView>
+                        </ListView.View>
+
+                    </ListView>
+                    <StackPanel HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,30,20">
+                        <materialDesign:Badged               
+                                   x:Name="CountingBadge"                            
+                                   BadgeColorZoneMode="PrimaryDark">
+                            <Button x:Name="AddSlotButton" Content="Add slots"  FontSize="20" Height="40" Click="AddSlotButton_Click" />
+                        </materialDesign:Badged>
+
+                        <Button x:Name="ResetButton" IsEnabled="False" Style="{StaticResource MaterialDesignRaisedLightButton}" Content=" Reset" Click="ResetButton_Click" />
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </DockPanel>
+
+    </DockPanel>
+</Page>

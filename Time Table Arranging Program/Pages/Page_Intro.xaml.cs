@@ -1,0 +1,121 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+using HtmlAgilityPack;
+using Time_Table_Arranging_Program.Class;
+using Time_Table_Arranging_Program.Class.TokenParser;
+
+namespace Time_Table_Arranging_Program.Pages {
+    /// <summary>
+    /// Interaction logic for Page_First.xaml
+    /// </summary>
+    public partial class Page_Intro : Page {
+        private const string LoginPageUrl = "https://unitreg.utar.edu.my/portal/courseRegStu/login.jsp";
+
+        private const string LoginFailedUrl =
+            "https://unitreg.utar.edu.my/portal/courseRegStu/login.jsp?message=invalidSecurity";
+
+        private const string CourseTimetablePreviewUrl =
+            "https://unitreg.utar.edu.my/portal/courseRegStu/schedule/masterSchedule.jsp";
+
+        private const string EndUrl = "https://www.google.com/";
+
+        private int _currentPage = 1;
+
+        public Page_Intro() {
+            InitializeComponent();
+        }
+
+        private void Page_First_OnLoaded(object sender, RoutedEventArgs e) {
+            GotItButton_OnClick(null, null);
+        }
+
+        private void Browser_OnLoadCompleted(object sender, NavigationEventArgs e) {
+            RefreshButton.IsEnabled = true;
+            string currentUrl = Browser.Source.ToString();
+            if (currentUrl == LoginPageUrl || currentUrl == LoginFailedUrl || currentUrl == EndUrl) {
+                return;
+            }
+            if (currentUrl.Contains(CourseTimetablePreviewUrl) == false) {
+                _currentPage = 1;
+                Browser.Navigate(CourseTimetablePreviewUrl);
+                return;
+            }
+            if (currentUrl.Contains(CourseTimetablePreviewUrl) == false) {
+                Browser.Navigate(LoginPageUrl);
+                return;
+            }
+            Browser.Visibility = Visibility.Hidden;
+            string plainText = LoadPlainText();
+            var bg = CustomBackgroundWorker<string, List<Slot>>.RunAndShowLoadingScreen(
+                new SlotParser().Parse, plainText, "Loading slots . . .");
+            GetStartDateAndEndDate(plainText);
+
+            Global.InputSlotList.AddRange(bg.GetResult());
+            if (CanGoToPage(_currentPage + 1)) {
+                Browser.InvokeScript("changePage", _currentPage + 1);
+                _currentPage++;
+            }
+            else {
+                Browser.Navigate(EndUrl);
+                NavigationService.Navigate(new Page_CreateTimetable(Global.InputSlotList));
+            }
+        }
+
+        private void GetStartDateAndEndDate(string input) {
+            try {
+                var parser = new StartDateEndDateParser(input);
+                Global.TimetableStartDate = parser.GetStartDate();
+                Global.TimetableEndDate = parser.GetEndDate();
+            }
+            catch {}
+        }
+
+        private bool CanGoToPage(int pageNumber) {
+            dynamic doc = Browser.Document;
+            string htmlText = doc.documentElement.InnerHtml;
+            return htmlText.Contains($"javascript:changePage(\'{pageNumber}\')");
+        }
+
+        private string LoadPlainText() {
+            dynamic doc = Browser.Document;
+            var htmlText = doc.documentElement.InnerHtml;
+            return ConvertHtmlToPlainText(htmlText);
+        }
+
+        private string ConvertHtmlToPlainText(string htmlText) {
+            string result = "";
+            var htmlDocument = new HtmlDocument();
+            htmlDocument.LoadHtml(htmlText);
+            foreach (HtmlNode node in htmlDocument.DocumentNode.SelectNodes("//text()")) {
+                result += node.InnerText;
+            }
+            return result;
+        }
+
+        private void AddSlotManuallyButton_OnClick(object sender, RoutedEventArgs e) {
+            NavigationService.Navigate(new Page_AddSlot());
+        }
+
+        private void RefreshButton_OnClick(object sender, RoutedEventArgs e) {
+            Browser.Refresh();
+        }
+
+        private void GotItButton_OnClick(object sender, RoutedEventArgs e) {
+            DialogHost.IsOpen = false;
+            Browser.Navigate(LoginPageUrl);
+            Browser.Visibility = Visibility.Visible;
+        }
+    }
+}

@@ -1,0 +1,40 @@
+﻿<Page x:Class="Time_Table_Arranging_Program.Pages.Page_AddToGoogleCalendar"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+          xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:local="clr-namespace:Time_Table_Arranging_Program.Pages"
+      mc:Ignorable="d"       
+      Title="Page_AddToGoogleCalendar">
+    <materialDesign:DialogHost x:Name="DialogHost"  IsOpen="False">
+        <materialDesign:DialogHost.DialogContent>
+            <Border Padding="20">
+                <StackPanel>
+                    <TextBlock MaxWidth="400" TextWrapping="Wrap" FontWeight="Bold" FontSize="20">Do you want to add this timetable to your Google Calendar?</TextBlock>
+                    <TextBlock Margin="0,10,0,0" FontSize="15" Text="Date of Monday of Week One = " />
+                    <StackPanel Orientation="Horizontal">
+                  <TextBlock x:Name="DateTextBlock" VerticalAlignment="Center" Margin="0,10,0,0" FontSize="20" FontWeight="DemiBold" Text="123" />
+                        <Button x:Name="RepickDateButton" Click="RepickDateButton_OnClick" Style="{StaticResource MaterialDesignRaisedLightButton}" Content="Repick date" Margin="10" />
+                    </StackPanel>
+
+                    <TextBlock Margin="0,10,0,0">Please note that this action CANNOT be undone.</TextBlock>
+                    <Grid>
+                    <ProgressBar x:Name="ProgressBar"  Margin="0,20,0,0" Visibility="Hidden" IsIndeterminate="True" />
+                        <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" Margin="0,20,0,0">
+                        <Button x:Name="CancelButton" Margin="10,0,10,0" Style="{StaticResource MaterialDesignFlatButton}" Click="CancelButton_OnClick">CANCEL</Button>
+
+                            <Button x:Name="AddButton" Visibility="Visible" Click="Dialog_AddButton_OnClick">ADD</Button>
+                        </StackPanel>
+                    </Grid>
+                </StackPanel>
+
+            </Border>
+        </materialDesign:DialogHost.DialogContent>
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Label x:Name="InstructionLabel" Visibility="Hidden" FontSize="30">Pick a date that represents the Monday of Week One</Label>
+            <Button HorizontalAlignment="Center" x:Name="ChooseDateButton" Content="Pick date" Click="ChooseDateButton_OnClick" />
+            <DatePicker  x:Name="DatePicker" Visibility="Hidden" FirstDayOfWeek="Monday"  CalendarClosed="DatePicker_OnCalendarClosed" />
+        </StackPanel>
+    </materialDesign:DialogHost>
+</Page>

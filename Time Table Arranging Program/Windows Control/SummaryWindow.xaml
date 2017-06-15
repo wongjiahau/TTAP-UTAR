@@ -1,0 +1,39 @@
+﻿<Window x:Class="Time_Table_Arranging_Program.Windows_Control.SummaryWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Time_Table_Arranging_Program.Windows_Control"
+        xmlns:userControl="clr-namespace:Time_Table_Arranging_Program.User_Control"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Title="Summary" SizeToContent="WidthAndHeight"  Topmost="True" ResizeMode="NoResize" Closing="SummaryWindow_OnClosing" WindowStartupLocation="CenterScreen" >
+    <DockPanel>
+        <DockPanel DockPanel.Dock="Top">
+            <Button x:Name="BackButton" Content="Back" Click="BackButton_OnClick" DockPanel.Dock="Left" />
+            <TextBlock Margin="10,0,0,0"  VerticalAlignment="Center" DockPanel.Dock="Left" FontSize="15" >Note : This Window will always stay on top.</TextBlock>
+            
+            <Button DockPanel.Dock="Right"  Style="{StaticResource MaterialDesignFlatButton}" Click="RightButton_OnClick">
+                <materialDesign:PackIcon Kind="ChevronRight" />
+            </Button>
+            <Button DockPanel.Dock="Right" Visibility="Visible" Style="{StaticResource MaterialDesignFlatButton}" Click="LeftButton_OnClick">
+                <materialDesign:PackIcon Kind="ChevronLeft" />
+            </Button>
+            <Button  DockPanel.Dock="Right" x:Name="ToggleViewButton" Style="{StaticResource MaterialDesignRaisedLightButton}" HorizontalAlignment="Right" Click="ToggleViewButton_OnClick">Minimize</Button>
+        </DockPanel>
+        <Border x:Name="MainBorder" BorderBrush="Black" BorderThickness="0">
+            <StackPanel HorizontalAlignment="Stretch">
+                <DockPanel>
+
+                    <TextBlock x:Name="TipsLabel" DockPanel.Dock="Top" FontWeight="Bold" Margin="5,5,0,5" FontSize="20">You can use this to help you to bid timetable!</TextBlock>
+                </DockPanel>
+                <Grid >
+                    
+                   
+                    <userControl:TimetableDescriptionViewer x:Name="DescriptionViewer" />
+                    
+                </Grid>
+            </StackPanel>
+        </Border>
+    </DockPanel>
+</Window>
