@@ -1,11 +1,16 @@
 ﻿using System;
 using System.Globalization;
 using System.Windows;
-using System.Windows.Data;
 
-namespace Time_Table_Arranging_Program {
+namespace Time_Table_Arranging_Program.IValueConverter {
     public class VisibilityConverter : System.Windows.Data.IValueConverter {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture) {
+            if (parameter != null) {
+                if (value == null || (bool)value == false) {
+                    return Visibility.Visible;
+                }
+                return Visibility.Collapsed;
+            }
             if (value == null || (bool) value == false) {
                 return Visibility.Collapsed;
             }

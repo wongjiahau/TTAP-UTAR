@@ -11,11 +11,15 @@
       xmlns:views="clr-namespace:Time_Table_Arranging_Program.MVVM_Framework.Views"
       mc:Ignorable="d"
       Title="Page_SelectSubject" Loaded="Page_SelectSubject_OnLoaded" >
+    <Page.Resources>
+        <iValueConverter:ComboBoxSelectionConverter x:Key="ComboBoxSelectionConverter" />
+        <iValueConverter:VisibilityConverter x:Key="VisibilityConverter"></iValueConverter:VisibilityConverter>
+        <iValueConverter:TooltipConverterForToggleButton x:Key="TooltipConverterForToggleButton"/>
+    </Page.Resources>
     <Grid>
         <DockPanel>
-            <userControl:SelectSubjectPanel x:Name="SelectSubjectPanel" DockPanel.Dock="Left" SlotSelectionChanged="SelectSubjectPanel_OnSlotSelectionChanged" />
-
-            <!--</materialDesign:Card>-->
+            <userControl:SelectSubjectPanel x:Name="SelectSubjectPanel" DockPanel.Dock="Left" SlotSelectionChanged="SelectSubjectPanel_OnSlotSelectionChanged" 
+                                            Visibility="{Binding IsChecked, ElementName=ToggleViewButton, Converter={StaticResource VisibilityConverter}, ConverterParameter=1}"/>
             <DockPanel DockPanel.Dock="Right">
                 <Grid DockPanel.Dock="Top">
                     <Grid.Resources>
@@ -28,19 +32,14 @@
                             <Setter Property="Height" Value="35" />
                             <Setter Property="Width" Value="40" />
                         </Style>
-                        <iValueConverter:ComboBoxSelectionConverter x:Key="ComboBoxSelectionConverter" />
                     </Grid.Resources>
                     <materialDesign:Card IsEnabled="False" x:Name="ToolBoxCard" Background="DarkGray" Margin="5" HorizontalAlignment="Center" DockPanel.Dock="Right" Padding="5" >
                         <StackPanel Orientation="Horizontal">
                             <userControl:LikeButton x:Name="FavouriteButton" Width="70"  IsEnabled="False" Checked="FavoriteButton_OnChecked" Unchecked="FavoriteButton_OnUnchecked"  />
-                            <ToggleButton x:Name="ViewLikedTimetableButton" Margin="10,0,10,0" ToolTip="View LIKED timetables" Foreground="White" Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}" Checked="ViewLikedTimetableButton_OnChecked" Unchecked="ViewLikedTimetableButton_OnUnchecked" Visibility="Collapsed">
-                                <materialDesign:PackIcon Kind="Eye"  />
-                            </ToggleButton>
-
-                            <Button x:Name="ShowSummaryButton" Visibility="Collapsed" Click="ShowSummaryButton_OnClick" ToolTip="Show summary">
+                            <Button x:Name="ShowSummaryButton" Visibility="{Binding IsChecked, ElementName=ToggleViewButton, Converter={StaticResource VisibilityConverter}}"  Click="ShowSummaryButton_OnClick" ToolTip="Show summary">
                                 <materialDesign:PackIcon Kind="ViewList" />
                             </Button>
-                            <Button x:Name="AddToGoogleCalenderButton" Visibility="Collapsed" ToolTip="Add this timetable to Google Calendar" Click="AddToGoogleCalendarButton_OnClick">
+                            <Button x:Name="AddToGoogleCalenderButton" Visibility="{Binding IsChecked, ElementName=ToggleViewButton, Converter={StaticResource VisibilityConverter}}"  ToolTip="Add this timetable to Google Calendar" Click="AddToGoogleCalendarButton_OnClick">
                                 <materialDesign:PackIcon Kind="Calendar" />
                             </Button>
 
@@ -56,20 +55,25 @@
                             </materialDesign:PopupBox>
                         </StackPanel>
                     </materialDesign:Card>
-                    <Button x:Name="ManageRuleButton" FontSize="20" Height="50" Margin="10" Click="AddRuleButton_OnClick" Style="{StaticResource MaterialDesignRaisedAccentButton}" HorizontalAlignment="Left" ToolTip="Manage rules">
+                    <Button x:Name="ManageRuleButton" 
+                            Visibility="{Binding IsChecked, ElementName=ToggleViewButton, Converter={StaticResource VisibilityConverter}, ConverterParameter=1}" 
+                            FontSize="20" Height="50" Margin="10" Click="AddRuleButton_OnClick" Style="{StaticResource MaterialDesignRaisedAccentButton}" 
+                            HorizontalAlignment="Left" ToolTip="Manage rules">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="PlaylistPlus" />
                             <TextBlock Margin="5,0,0,0" Text="Manage rules" VerticalAlignment="Center" />
                         </StackPanel>
                     </Button>
                     <StackPanel Orientation="Horizontal" Margin="10" HorizontalAlignment="Right">
-                        <ToggleButton x:Name="ToggleViewButton"  Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}" Margin="5"  IsChecked="False">
-                        <materialDesign:PackIcon Kind="Eye" VerticalAlignment="Center" Foreground="Black"  />
-                        </ToggleButton>
                         <ComboBox x:Name="ViewSelector"  FontSize="15" FontWeight="DemiBold" SelectionChanged="ViewSelector_OnSelectionChanged" SelectedIndex="{Binding IsChecked, ElementName=ToggleViewButton, Converter={StaticResource ComboBoxSelectionConverter} }">
                             <ComboBoxItem IsSelected="True">Show all timetable</ComboBoxItem>
                             <ComboBoxItem>Show favourite timetable</ComboBoxItem>
                         </ComboBox>
+                        <ToggleButton x:Name="ToggleViewButton"  Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}" Margin="5"  IsChecked="False"
+                                      ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=IsChecked, Converter={StaticResource TooltipConverterForToggleButton}, ConverterParameter='Show all timetable, Show favourite timetable'}"
+                                      >
+                            <materialDesign:PackIcon Kind="Eye" VerticalAlignment="Center" Foreground="Black"  />
+                        </ToggleButton>
                     </StackPanel>
                 </Grid>
                 <userControl:TimetableViewer x:Name="TimetableViewer" Visibility="Visible" ViewChanged="TimetableViewer_OnViewChanged"/>

@@ -135,30 +135,6 @@ namespace Time_Table_Arranging_Program.Pages {
             UpdateGUI(_inputSlots.GetSlotsOf(SelectSubjectPanel.UIDofSelectedSlots));
         }
 
-        private void ViewLikedTimetableButton_OnChecked(object sender, RoutedEventArgs e) {
-            var likedTimetable = _outputTimetables.GetLikedTimetableOnly();
-            _outputTimetables?.SetState(likedTimetable);
-            TimetableViewer?.Initialize(new CyclicIndex() {MaxValue =  likedTimetable.Count-1, CurrentValue = 0});
-            ViewLikedTimetableButton.ToolTip = "View ALL timetables";
-            SelectSubjectPanel.Visibility = Visibility.Collapsed;
-            Global.Snackbar.MessageQueue.Enqueue("Showing FAVORITE timetables");
-            ShowSummaryButton.Visibility = Visibility.Visible;
-            AddToGoogleCalenderButton.Visibility = Visibility.Visible;
-            ManageRuleButton.Visibility = Visibility.Collapsed;
-        }
-
-        private void ViewLikedTimetableButton_OnUnchecked(object sender, RoutedEventArgs e) {            
-            var allTimetables = _outputTimetables.GetPreviousState();
-            _outputTimetables?.SetState(allTimetables);                        
-            TimetableViewer?.Initialize(new CyclicIndex() {MaxValue = allTimetables.Count-1, CurrentValue = 0});
-            ViewLikedTimetableButton.ToolTip = "View FAVORITE timetables";
-            SelectSubjectPanel.Visibility = Visibility.Visible;
-            Global.Snackbar.MessageQueue.Enqueue("Showing ALL timetables");
-            ShowSummaryButton.Visibility = Visibility.Collapsed;
-            AddToGoogleCalenderButton.Visibility = Visibility.Collapsed;
-            ManageRuleButton.Visibility = Visibility.Visible;
-        }
-
         private void ShowSummaryButton_OnClick(object sender, RoutedEventArgs e) {
             SummaryWindow.GetSingletonInstance(_outputTimetables.GetCurrentState()).ShowWindow();
         }
@@ -168,12 +144,19 @@ namespace Time_Table_Arranging_Program.Pages {
                 Global.TimetableStartDate));
         }
 
-        private void ViewSelector_OnSelectionChanged(object sender, SelectionChangedEventArgs e) {            
-            if (ViewSelector.SelectedIndex == 0) 
-                ViewLikedTimetableButton_OnUnchecked(null,null);
+        private void ViewSelector_OnSelectionChanged(object sender, SelectionChangedEventArgs e) {
+            if (ViewSelector.SelectedIndex == 0) {
+                var allTimetables = _outputTimetables.GetPreviousState();
+                _outputTimetables?.SetState(allTimetables);
+                TimetableViewer?.Initialize(new CyclicIndex(allTimetables.Count - 1));
+                Global.Snackbar.MessageQueue.Enqueue("Showing ALL timetables");
+            }
             else {
-                ViewLikedTimetableButton_OnChecked(null,null);
-            }            
+                var likedTimetable = _outputTimetables.GetLikedTimetableOnly();
+                _outputTimetables?.SetState(likedTimetable);
+                TimetableViewer?.Initialize(new CyclicIndex(likedTimetable.Count - 1));
+                Global.Snackbar.MessageQueue.Enqueue("Showing FAVORITE timetables");
+            }
         }
     }
 }

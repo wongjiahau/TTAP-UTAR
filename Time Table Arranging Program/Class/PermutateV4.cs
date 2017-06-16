@@ -4,39 +4,6 @@ using Time_Table_Arranging_Program.Class;
 
 namespace Time_Table_Arranging_Program {
     public static class PermutateV4 {
-        public static List<List<Slot>> Run(Slot[] inputSlots) {
-            return Run_v2(inputSlots);
-
-            //new command
-            var _subjects = PartitionizeBySubject(inputSlots);
-            var timetables = Run_v3(_subjects.ToArray());
-            var result = new List<List<Slot>>();
-            if (timetables == null) return null;
-            for (var i = 0; i < timetables.Count; i++) {
-                result.Add(timetables[i].ToListOfSlot());
-            }
-            return result;
-            //end new
-
-
-            return Run_v2(inputSlots);
-        }
-
-        private static List<Subject> PartitionizeBySubject(Slot[] input) {
-            var result = new List<Subject>();
-            var dic = new Dictionary<string, List<Slot>>();
-            foreach (var s in input) {
-                if (!dic.ContainsKey(s.Code))
-                    dic.Add(s.Code, new List<Slot>());
-                dic[s.Code].Add(s);
-            }
-            foreach (var d in dic) {
-                result.Add(Subject.CreateNewInstance(d.Value.ToArray(), d.Key));
-            }
-            return result;
-        }
-
-
         public static List<List<Slot>> Run_v2(Slot[] input) {
             if (input == null || input.Length == 0) return null;
             var result = new List<List<Slot>>();
@@ -69,45 +36,6 @@ namespace Time_Table_Arranging_Program {
             return result;
         }
 
-        public static List<Timetable_Obsolete> Run_v3(Subject[] subjects) {
-            if (subjects == null || subjects.Length == 0) return null;
-            var upperLimits = new int[subjects.Length];
-            for (var i = 0; i < subjects.Length; i++) {
-                upperLimits[i] = subjects[i].GetUpperLimitOfIterator();
-            }
-            var indices = new Indices(upperLimits);
-            var result = new List<Timetable_Obsolete>();
-            var timetableList = new List<Timetable_Obsolete>(indices.Count);
-            while (indices.Increment()) {
-                //if (indices.CurrentIndicesContainCrashedIndex()) continue;
-                timetableList.Add(subjects[0].GetClashlessTimetable(indices[0].Value));
-                for (var i = 1; i < indices.Count; i++) {
-                    var current = subjects[i].GetClashlessTimetable(indices[i].Value);
-                    for (var j = 0; j < timetableList.Count; j++) {
-                        if (!current.IntersectWith(timetableList[j])) continue;
-                        //indices.AddNewCrashedIndex(new KeyValuePair[2]
-                        //{new KeyValuePair(j, indices[j].Value), new KeyValuePair(i, indices[i].Value)});
-                        goto here;
-                    }
-                    timetableList.Add(current);
-                }
-                result.Add(Join(timetableList));
-                here:
-                timetableList.Clear();
-            }
-
-
-            return result;
-        }
-
-
-        private static Timetable_Obsolete Join(List<Timetable_Obsolete> t) {
-            var result = Timetable_Obsolete.CreateNew();
-            for (var i = 0; i < t.Count; i++) {
-                result = result.JoinWithoutChecking(t[i]);
-            }
-            return result;
-        }
 
         private static bool ContainCrashedIndex(List<BoundedInt> indices, KeyValuePair[] crashedIndex) {
             if (indices[crashedIndex[0].Key].Value == crashedIndex[0].Value

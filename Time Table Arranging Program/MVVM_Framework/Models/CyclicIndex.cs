@@ -6,6 +6,18 @@ namespace Time_Table_Arranging_Program.MVVM_Framework.Models {
         private int _currentValue = -1;
         private int _maxValue = -1;
 
+        public CyclicIndex(int maxValue) {
+            _maxValue = maxValue;
+            if (_maxValue < 0) {
+                _currentValue = -1;
+            }
+            else {
+                _currentValue = 0;
+            }
+        }
+        public CyclicIndex() {
+            
+        }
         public int CurrentValue {
             get { return _currentValue; }
             set
