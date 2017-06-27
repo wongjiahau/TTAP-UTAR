@@ -1,5 +1,8 @@
 ﻿using NUnit.Framework;
+using NUnit.Framework.Internal;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using Time_Table_Arranging_Program;
 using Time_Table_Arranging_Program.Class;
@@ -7,11 +10,75 @@ using Time_Table_Arranging_Program.Class;
 namespace NUnit.Tests2 {
     [TestFixture]
     public class TestClass_PermutateV4 {
-        private static readonly List<Slot> TestData = new List<Slot>
+        private static readonly List<Slot> _testData = new List<Slot>
         {
             new Slot {SubjectName = "English", Type = "L", Number = ""}
         };
 
+        [Test]
+        public void Test_PermutateV4_Runv2_WithConsideringWeekNumber() {
+            int expectedCount = 616872;
+            var input = new List<Slot>();
+            input.AddRange(TestData.GetSlotsByName(TestData.Subjects.Hydrology));
+            input.AddRange(TestData.GetSlotsByName(TestData.Subjects.StructuralAnalysisII));
+            input.AddRange(TestData.GetSlotsByName(TestData.Subjects.HighwayAndTransportation));
+            input.AddRange(TestData.GetSlotsByName(TestData.Subjects.FluidMechanicsII));
+            input.AddRange(TestData.GetSlotsByName(TestData.Subjects.IntroductionToBuildingServices));
+            var timer = Stopwatch.StartNew();
+            var result = Permutator.Run_v2_WithConsideringWeekNumber(input.ToArray());
+            timer.Stop();
+            Console.WriteLine("Combination count : " + result.Count);
+            Console.WriteLine("Elapsed time : " + timer.Elapsed.TotalSeconds + " s");
+            Assert.True(result.Count == expectedCount);
+        }
+
+        [Test]
+        public void Test_PermutateV4_Runv2_WithoutConsideringWeekNumber() {
+            int expectedCount = 285696;
+            var input = new List<Slot>();
+            input.AddRange(TestData.GetSlotsByName(TestData.Subjects.Hydrology));
+            input.AddRange(TestData.GetSlotsByName(TestData.Subjects.StructuralAnalysisII));
+            input.AddRange(TestData.GetSlotsByName(TestData.Subjects.HighwayAndTransportation));
+            input.AddRange(TestData.GetSlotsByName(TestData.Subjects.FluidMechanicsII));
+            input.AddRange(TestData.GetSlotsByName(TestData.Subjects.IntroductionToBuildingServices));
+            var timer = Stopwatch.StartNew();
+            var result = Permutator.Run_v2_withoutConsideringWeekNumber(input.ToArray());
+            timer.Stop();
+            Console.WriteLine("Combination count : " + result.Count);
+            Console.WriteLine("Elapsed time : " + timer.Elapsed.TotalSeconds + " s");
+            Assert.True(result.Count == expectedCount);
+        }
+
+
+        [Test]
+        public void Test_PermutateV4_Runv3_PermutateOnSixSubject() {
+            int expectedCount = 616872;
+            var input = new List<Slot>();
+            input.AddRange(TestData.GetSlotsByName(TestData.Subjects.Hydrology));
+            input.AddRange(TestData.GetSlotsByName(TestData.Subjects.StructuralAnalysisII));
+            input.AddRange(TestData.GetSlotsByName(TestData.Subjects.HighwayAndTransportation));
+            input.AddRange(TestData.GetSlotsByName(TestData.Subjects.FluidMechanicsII));
+            input.AddRange(TestData.GetSlotsByName(TestData.Subjects.IntroductionToBuildingServices));
+            var timer_ofRunV3 = Stopwatch.StartNew();
+            var result_ofRunV3 = Permutator.Run_v3(input.ToArray());
+            timer_ofRunV3.Stop();
+            Console.WriteLine("RunV3 result : ");
+            Console.WriteLine("Combination count : " + result_ofRunV3.Count);
+            Console.WriteLine("Elapsed time : " + timer_ofRunV3.Elapsed.TotalMilliseconds + " ms");
+
+            var timer_ofRunV2 = Stopwatch.StartNew();
+            var result_ofRunV2 = Permutator.Run_v2_WithConsideringWeekNumber(input.ToArray());
+            timer_ofRunV2.Stop();
+            Console.WriteLine("RunV2 result : ");
+            Console.WriteLine("Combination count : " + result_ofRunV2.Count);
+            Console.WriteLine("Elapsed time : " + timer_ofRunV2.Elapsed.TotalMilliseconds + " ms");
+
+
+            Assert.Pass();
+
+
+
+        }
         [Test]
         public void Test_PermutateV4_GenerateIndices() {
             var input = new List<List<Slot>>
@@ -21,7 +88,7 @@ namespace NUnit.Tests2 {
                 new List<Slot> {new Slot(), new Slot(), new Slot()}
             };
 
-            var actual = PermutateV4.GenerateIndices(input);
+            var actual = Permutator.GenerateIndices(input);
             var expected = new List<BoundedInt>
             {
                 new BoundedInt(0, 0),
@@ -53,7 +120,7 @@ namespace NUnit.Tests2 {
                 new BoundedInt(2, 1),
                 new BoundedInt(3, 3)
             };
-            var actual = PermutateV4.Increment(input);
+            var actual = Permutator.Increment(input);
 
             for (var i = 0 ; i < 3 ; i++) {
                 if (!actual[i].Equals(expected[i])) Assert.Fail();
@@ -77,7 +144,7 @@ namespace NUnit.Tests2 {
                 new BoundedInt(2, 2),
                 new BoundedInt(3, 0)
             };
-            var actual = PermutateV4.Increment(input);
+            var actual = Permutator.Increment(input);
 
             for (var i = 0 ; i < 3 ; i++) {
                 if (!actual[i].Equals(expected[i])) Assert.Fail();
@@ -101,7 +168,7 @@ namespace NUnit.Tests2 {
                 new BoundedInt(2, 0),
                 new BoundedInt(3, 0)
             };
-            var actual = PermutateV4.Increment(input);
+            var actual = Permutator.Increment(input);
 
             for (var i = 0 ; i < 3 ; i++) {
                 if (!actual[i].Equals(expected[i])) Assert.Fail();
@@ -125,7 +192,7 @@ namespace NUnit.Tests2 {
                 new BoundedInt(0, 0),
                 new BoundedInt(0, 0)
             };
-            var actual = PermutateV4.Increment(input);
+            var actual = Permutator.Increment(input);
 
             for (var i = 0 ; i < 3 ; i++) {
                 if (!actual[i].Equals(expected[i])) Assert.Fail();
@@ -141,7 +208,7 @@ namespace NUnit.Tests2 {
                 new BoundedInt(1, 1)
             };
 
-            var actual = PermutateV4.Increment(input);
+            var actual = Permutator.Increment(input);
             Assert.True(actual == null);
         }
 
@@ -152,7 +219,7 @@ namespace NUnit.Tests2 {
                 new Slot {Code = "abc", Type = "L", Number = "1"},
                 new Slot {Code = "abc", Type = "L", Number = "2"}
             };
-            var actual = PermutateV4.Partitionize(input);
+            var actual = Permutator.Partitionize(input);
             var expected = new List<List<Slot>>
             {
                 new List<Slot>(input.ToList())
@@ -171,7 +238,7 @@ namespace NUnit.Tests2 {
                 new Slot {Code = "abc", Type = "L", Number = "1"},
                 new Slot {Code = "abc", Type = "T", Number = "1"}
             };
-            var actual = PermutateV4.Partitionize(input);
+            var actual = Permutator.Partitionize(input);
             var expected = new List<List<Slot>>
             {
                 new List<Slot> {input[0]},
@@ -192,7 +259,7 @@ namespace NUnit.Tests2 {
                 new Slot {Code = "abc", Type = "T", Number = "1"},
                 new Slot {Code = "banana", Type = "L", Number = "1"}
             };
-            var actual = PermutateV4.Partitionize(input);
+            var actual = Permutator.Partitionize(input);
             var expected = new List<List<Slot>>
             {
                 new List<Slot> {input[0]},
@@ -215,7 +282,7 @@ namespace NUnit.Tests2 {
                 new Slot {Code = "banana", Type = "T", Number = "1"},
                 new Slot {Code = "banana", Type = "T", Number = "2"}
             };
-            var actual = PermutateV4.Partitionize(input);
+            var actual = Permutator.Partitionize(input);
             var expected = new List<List<Slot>>
             {
                 new List<Slot> {input[0]},
@@ -239,7 +306,7 @@ namespace NUnit.Tests2 {
                 new Slot {Code = "banana", Type = "T", Number = "2"},
                 new Slot {Code = "abc", Type = "T", Number = "2"}
             };
-            var actual = PermutateV4.Partitionize(input);
+            var actual = Permutator.Partitionize(input);
             var expected = new List<List<Slot>>
             {
                 new List<Slot> {input[0]},
@@ -264,7 +331,7 @@ namespace NUnit.Tests2 {
                 new Slot {Code = "abc", Type = "L", Number = "2"},
                 new Slot {Code = "abc", Type = "L", Number = "3"}
             };
-            var actual = PermutateV4.Partitionize(input);
+            var actual = Permutator.Partitionize(input);
             var expected = new List<List<Slot>>
             {
                 new List<Slot> {input[0], input[1], input[2]},

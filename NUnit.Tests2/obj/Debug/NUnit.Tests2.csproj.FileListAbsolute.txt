@@ -191,3 +191,14 @@ C:\Users\User\Desktop\Time Table Arranging Program v7.5\NUnit.Tests2\bin\Debug\n
 C:\Users\User\Desktop\Time Table Arranging Program v7.5\NUnit.Tests2\obj\Debug\NUnit.Tests2.csprojResolveAssemblyReference.cache
 C:\Users\User\Desktop\Time Table Arranging Program v7.5\NUnit.Tests2\obj\Debug\NUnit.Tests2.dll
 C:\Users\User\Desktop\Time Table Arranging Program v7.5\NUnit.Tests2\obj\Debug\NUnit.Tests2.pdb
+C:\Users\User\Desktop\TTAPv7.6\NUnit.Tests2\bin\Debug\client_secret.json
+C:\Users\User\Desktop\TTAPv7.6\NUnit.Tests2\bin\Debug\NUnit.Tests2.dll
+C:\Users\User\Desktop\TTAPv7.6\NUnit.Tests2\bin\Debug\NUnit.Tests2.pdb
+C:\Users\User\Desktop\TTAPv7.6\NUnit.Tests2\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+C:\Users\User\Desktop\TTAPv7.6\NUnit.Tests2\bin\Debug\nunit.framework.dll
+C:\Users\User\Desktop\TTAPv7.6\NUnit.Tests2\bin\Debug\Time Table Arranging Program.exe
+C:\Users\User\Desktop\TTAPv7.6\NUnit.Tests2\bin\Debug\Time Table Arranging Program.pdb
+C:\Users\User\Desktop\TTAPv7.6\NUnit.Tests2\bin\Debug\nunit.framework.xml
+C:\Users\User\Desktop\TTAPv7.6\NUnit.Tests2\obj\Debug\NUnit.Tests2.csprojResolveAssemblyReference.cache
+C:\Users\User\Desktop\TTAPv7.6\NUnit.Tests2\obj\Debug\NUnit.Tests2.dll
+C:\Users\User\Desktop\TTAPv7.6\NUnit.Tests2\obj\Debug\NUnit.Tests2.pdb

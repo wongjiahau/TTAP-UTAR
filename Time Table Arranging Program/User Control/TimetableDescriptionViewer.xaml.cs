@@ -1,19 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using MaterialDesignThemes.Wpf;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Time_Table_Arranging_Program.Class;
 
 namespace Time_Table_Arranging_Program.User_Control {
@@ -28,46 +17,30 @@ namespace Time_Table_Arranging_Program.User_Control {
 
         public void Update(List<Slot> slots) {
             SubjectDescGrid.Children.Clear();
-            var previousSubjectName = "";
             IColorGenerator c = new ColorGenerator();
-            var currentTextBlock = new Label();
             var gridRowIndex = 0;
-            foreach (var s in slots) {
-                if (s.SubjectName != previousSubjectName) {
-                    SubjectDescGrid.RowDefinitions.Add(new RowDefinition());
-
-                    var box = GenerateSubjectName(s, c);
-                    AddGridChildren(box, 0, gridRowIndex);
-
-                    currentTextBlock = GenerateSubjectCode(c);
-                    currentTextBlock.Content = $"{s.Code} \t=> {s.Type}{s.Number}";
-                    AddGridChildren(currentTextBlock, 1, gridRowIndex);
-
-                    var copyBtn = GenerateCopyButton(s.Code);
-                    AddGridChildren(copyBtn, 2, gridRowIndex++);
-                    c.GoToNextColor();
-                }
-                else {
-                    string toBeAppended = $" {s.Type}{s.Number}";
-                    if (!((string) currentTextBlock.Content).Contains(toBeAppended))
-                        currentTextBlock.Content += toBeAppended;
-                }
-
-                previousSubjectName = s.SubjectName;
+            var subjects = Subject.GroupIntoSubjects(slots);
+            foreach (Subject s in subjects) {
+                SubjectDescGrid.RowDefinitions.Add(new RowDefinition());
+                AddGridChildren(GetSubjectNameLabel(s.Name , c) , 0 , gridRowIndex);
+                AddGridChildren(GetLabel(c , s.Lecture) , 1 , gridRowIndex);
+                AddGridChildren(GetLabel(c , s.Tutorial) , 2 , gridRowIndex);
+                AddGridChildren(GetLabel(c , s.Practical) , 3 , gridRowIndex);
+                AddGridChildren(GetCopyButton(s.Code) , 4 , gridRowIndex);
+                gridRowIndex++;
+                c.GoToNextColor();
             }
         }
 
-        private Button GenerateCopyButton(string codeToBeCopied) {
-            var button = new Button
-            {
-                Margin = new Thickness(1),
-                Width = 200,
-                Content = $"Copy code {codeToBeCopied}",
-                FontSize = 12,
-                HorizontalAlignment = HorizontalAlignment.Left
+        private Button GetCopyButton(string codeToBeCopied) {
+            var button = new Button {
+                Margin = new Thickness(1) ,
+                Width = 180 ,
+                Content = $"Copy code {codeToBeCopied}" ,
+                FontSize = 12 ,
+                HorizontalAlignment = HorizontalAlignment.Center
             };
-            button.Click += (sender, args) =>
-            {
+            button.Click += (sender , args) => {
                 Clipboard.SetDataObject(codeToBeCopied);
                 AutoClosePopup.Show($"{codeToBeCopied} is copied to clipboard!");
                 button.Background = Brushes.DarkCyan;
@@ -76,41 +49,88 @@ namespace Time_Table_Arranging_Program.User_Control {
             return button;
         }
 
-        private Label GenerateSubjectCode(IColorGenerator c) {
-            return new Label
-            {
-                FontWeight = FontWeights.Bold,
-                VerticalContentAlignment = VerticalAlignment.Center,
-                HorizontalContentAlignment = HorizontalAlignment.Center,
-                BorderBrush = Brushes.Black,
-                BorderThickness = new Thickness(1),
+        private Label GetLabel(IColorGenerator c , string content = "") {
+            return new Label {
+                Content = content ,
+                FontWeight = FontWeights.Bold ,
+                VerticalContentAlignment = VerticalAlignment.Center ,
+                HorizontalContentAlignment = HorizontalAlignment.Center ,
+                FontFamily = new FontFamily("Consolas") ,
+                FontSize = 13.5 ,
+                BorderBrush = Brushes.Black ,
+                BorderThickness = new Thickness(1) ,
                 Background = c.GetCurrentBrush()
             };
         }
 
-        private void AddGridChildren(UIElement child, int columnIndex, int rowIndex) {
+        private void AddGridChildren(UIElement child , int columnIndex , int rowIndex) {
             SubjectDescGrid.Children.Add(child);
-            Grid.SetColumn(child, columnIndex);
-            Grid.SetRow(child, rowIndex);
+            Grid.SetColumn(child , columnIndex);
+            Grid.SetRow(child , rowIndex);
         }
 
-        private Border GenerateSubjectName(Slot s, IColorGenerator c) {
-            var textblock = new TextBlock
-            {
-                Text = s.SubjectName,
-                Margin = new Thickness(2),
-                TextAlignment = TextAlignment.Center,
-                FontWeight = FontWeights.DemiBold,
+        private Border GetSubjectNameLabel(string subjectName , IColorGenerator c) {
+            var textblock = new TextBlock {
+                Text = subjectName.TruncateRight(30) ,
+                Margin = new Thickness(2) ,
+                TextAlignment = TextAlignment.Center ,
+                FontWeight = FontWeights.DemiBold ,
                 VerticalAlignment = VerticalAlignment.Center
             };
-            var border = new Border
-            {
-                BorderThickness = new Thickness(1),
-                BorderBrush = Brushes.Black,
-                Child = textblock,
-                Background = c.GetCurrentBrush()
+            var border = new Border {
+                BorderThickness = new Thickness(1) ,
+                BorderBrush = Brushes.Black ,
+                Child = textblock ,
+                Background = c.GetCurrentBrush() ,
+                ToolTip = subjectName
             };
+            var originalColor = c.GetCurrentColor();
+            var originalBrush = c.GetCurrentBrush();
+            border.MouseEnter += (sender , args) => {
+                border.Background = new SolidColorBrush(originalColor.Darker());
+            };
+            border.MouseLeave += (sender , args) => {
+                border.Background = originalBrush;
+            };
+
             return border;
+        }
+    }
+
+    public class Subject {
+        public string Name { get; set; }
+        public string Code { get; set; }
+        public string Lecture { get; set; }
+        public string Tutorial { get; set; }
+        public string Practical { get; set; }
+        public Subject(List<Slot> slots) {            
+            Name = slots[0].SubjectName;
+            Code = slots[0].Code;
+            Lecture = "-";
+            Tutorial = "-";
+            Practical = "-";
+            foreach (var s in slots) {
+                switch (s.Type) {
+                    case "L": Lecture = $"{s.Type}-{s.Number}"; break;
+                    case "T": Tutorial = $"{s.Type}-{s.Number}"; break;
+                    case "P": Practical = $"{s.Type}-{s.Number}"; break;
+                }
+            }
+        }
+        public static List<Subject> GroupIntoSubjects(List<Slot> slots) {
+            var result = new List<Subject>();
+            var dic = new Dictionary<string , List<Slot>>();
+            foreach (Slot s in slots) {
+                if (!dic.ContainsKey(s.Code)) {
+                    dic.Add(s.Code , new List<Slot>());
+                }
+                dic[s.Code].Add(s);
+            }
+            foreach (KeyValuePair<string , List<Slot>> entry in dic) {
+                result.Add(new Subject(entry.Value));
+            }
+            return result;
+
         }
     }
 }

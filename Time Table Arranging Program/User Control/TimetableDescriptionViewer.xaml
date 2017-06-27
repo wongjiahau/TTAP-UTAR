@@ -5,6 +5,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Time_Table_Arranging_Program.User_Control"
              mc:Ignorable="d">
+    <UserControl.Resources>
+        <Style TargetType="Border">
+            <Setter Property="ToolTipService.InitialShowDelay" Value="0"/>
+        </Style>
+    </UserControl.Resources>
     <Grid>
     <StackPanel>
         <Grid x:Name="SubjectDescGrid">
@@ -12,9 +17,12 @@
                 <ColumnDefinition />
                 <ColumnDefinition />
                 <ColumnDefinition />
-            </Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
         </Grid>
     </StackPanel>
       
     </Grid>
 </UserControl>
+

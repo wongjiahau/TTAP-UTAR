@@ -40,15 +40,13 @@ namespace Time_Table_Arranging_Program.User_Control {
             _outputTimeTable = currentState.ToList();
             TimeTableGui.GenerateGui(_outputTimeTable[0]);
             InstructionLabel.Visibility = Visibility.Collapsed;
-            TimeTableGui.Visibility = Visibility.Visible;
-            CyclicIndexView.Focus();
+            TimeTableGui.Visibility = Visibility.Visible;            
             //  IndexViewer.Initialize(_cyclicIndex);
         }
 
         public void Initialize(CyclicIndex cyclicIndex) {
             _cyclicIndex = cyclicIndex;
-            _cyclicIndex.CurrentValueChanged += CyclicIndexOnCurrentValueChanged;
-            CyclicIndexView.DataContext = new CyclicIndexVM(cyclicIndex);
+            _cyclicIndex.CurrentValueChanged += CyclicIndexOnCurrentValueChanged;            
         }
 
         private void CyclicIndexOnCurrentValueChanged(object sender, EventArgs eventArgs) {

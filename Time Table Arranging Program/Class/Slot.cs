@@ -14,13 +14,13 @@ namespace Time_Table_Arranging_Program.Class {
             WeekNumber = new WeekNumber(new List<int>());
             UID = _nextUid++;
             IsSelected = false;
-            StartTime = Time.CreateTime_24HourFormat(0, 0);
-            EndTime = Time.CreateTime_24HourFormat(0, 0);
+            StartTime = Time.CreateTime_24HourFormat(0 , 0);
+            EndTime = Time.CreateTime_24HourFormat(0 , 0);
             _day = Day.Unassigned;
         }
 
-        public Slot(int uid, string code, string subjectName, string number, string type, Day day, string venue,
-                    TimePeriod timePeriod, WeekNumber weekNumber, bool isSelected) {
+        public Slot(int uid , string code , string subjectName , string number , string type , Day day , string venue ,
+                    TimePeriod timePeriod , WeekNumber weekNumber , bool isSelected) {
             UID = uid;
             Code = code;
             SubjectName = subjectName;
@@ -33,6 +33,18 @@ namespace Time_Table_Arranging_Program.Class {
             IsSelected = isSelected;
         }
 
+        public Slot(Slot s) {
+            UID = s.UID;
+            Code = s.Code;
+            SubjectName = s.SubjectName;
+            Number = s.Number;
+            Type = s.Type;
+            Day = s.Day;
+            Venue = s.Venue;
+            TimePeriod = s.TimePeriod;
+            WeekNumber = s.WeekNumber;
+            IsSelected = s.IsSelected;
+        }
         public int UID { get; set; } //public setters of UID is for serialization purpose only!
         public string Code { get; set; }
         public string SubjectName { get; set; }
@@ -40,11 +52,10 @@ namespace Time_Table_Arranging_Program.Class {
         public string Type { get; set; }
 
         public Day Day {
-            get { return (Day) _day; }
+            get { return (Day)_day; }
             set { _day = value; }
         }
 
-        //public string Day { get; set; }
         public string Venue { get; set; }
 
         public Time StartTime {
@@ -66,7 +77,7 @@ namespace Time_Table_Arranging_Program.Class {
 
         public int CompareTo(Slot obj) {
             var s = obj;
-            return StringComparer.Ordinal.Compare(SubjectName, s.SubjectName);
+            return StringComparer.Ordinal.Compare(SubjectName , s.SubjectName);
         }
 
         public Slot GetDuplicate() {
@@ -101,12 +112,9 @@ namespace Time_Table_Arranging_Program.Class {
 
         public bool IntersectWith(Slot other) {
             if (Code == other.Code && Type == other.Type && Number != other.Number) return true;
-
-            if (!Day.Equals(other.Day)) return false;
-            if (TimePeriod.IntersectWith(other.TimePeriod)) {
-                if (WeekNumber.IntersectWith(other.WeekNumber)) return true;
-            }
-            return false;
+            if (!Day.Equals(other.Day)) return false;            
+            if (!TimePeriod.IntersectWith(other.TimePeriod)) return false;
+            return WeekNumber.IntersectWith(other.WeekNumber);
         }
 
         public string ToConstructionString() {
@@ -124,14 +132,14 @@ namespace Time_Table_Arranging_Program.Class {
         }
 
 
-        public bool EqualsExceptNumber(Slot b) {
+        public bool EqualsExceptNumberAndVenue(Slot b) {
             return
                 SubjectName == b.SubjectName &&
                 Type == b.Type &&
                 Day.Equals(b.Day) &&
                 StartTime.Equals(b.StartTime) &&
                 EndTime.Equals(b.EndTime) &&
-                WeekNumber == b.WeekNumber
+                WeekNumber.Equals(b.WeekNumber)
                 ;
         }
     }

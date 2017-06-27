@@ -8,9 +8,9 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:iValueConverter="clr-namespace:Time_Table_Arranging_Program.IValueConverter"
              xmlns:viewModels="clr-namespace:Time_Table_Arranging_Program.MVVM_Framework.ViewModels"
-             mc:Ignorable="d" 
+             mc:Ignorable="d" VerticalAlignment="Stretch"
             >
-    
+
     <UserControl.Resources>
         <userControl:IndexViewerVisibilityConverter x:Key="IndexViewerVisibilityConverter" />
     </UserControl.Resources>
@@ -27,11 +27,11 @@
         <KeyBinding Command="{Binding ToLastCommand}" Key="End" />
 
     </UserControl.InputBindings>
-    <materialDesign:Card 
+    <materialDesign:Card VerticalAlignment="Stretch" 
         Visibility="{Binding MaxValue, Converter={StaticResource IndexViewerVisibilityConverter}}"
-        Background="DarkGray"
+        Background="Gray" 
         >
-        <StackPanel Margin="5">
+        <StackPanel Margin="5"  VerticalAlignment="Center">
             <StackPanel.Resources>
                 <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignFlatButton}">
                     <Setter Property="Height" Value="35" />
@@ -44,7 +44,6 @@
                 </Style>
                 <iValueConverter:AddConverter x:Key="AddConverter" />
             </StackPanel.Resources>
-
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <Button x:Name="PreviousButton" ToolTip="Go to previous timetable [Left Arrow]" Command="{Binding DecrementCommand}">
                     <materialDesign:PackIcon Kind="ChevronLeft" />
@@ -55,7 +54,9 @@
                             <TextBox x:Name="CurrentIndexLabel" VerticalAlignment="Center" TextAlignment="Center"
                                        Width="{Binding ActualWidth, ElementName=MaxIndexLabel, Converter={StaticResource AddConverter}, ConverterParameter=5}" FontWeight="Bold" FontFamily="Consolas" FontSize="20"  
                                        Text="{Binding CurrentValue, UpdateSourceTrigger=PropertyChanged}"                                       
-                                       Margin="5,0,0,0" Foreground="White" />
+                                       Margin="5,0,0,0" Foreground="White"
+                                     IsReadOnly="True"
+                                     />
                             <Label VerticalAlignment="Center" Foreground="White"  FontFamily="consolas" FontSize="20" Content="/"/>
                             <TextBlock x:Name="MaxIndexLabel" Foreground="White" VerticalAlignment="Center"  FontFamily="consolas" FontSize="20" Style="{x:Null}" 
                                        Text="{Binding MaxValue, UpdateSourceTrigger=PropertyChanged}" 
@@ -66,14 +67,14 @@
                 <Button x:Name="NextButton" ToolTip="Go to next timetable [Right Arrow]" Command="{Binding IncrementCommand}">
                     <materialDesign:PackIcon Kind="ChevronRight" />
                 </Button>
-
+                <Button x:Name="RandomButton" Visibility="Visible" DockPanel.Dock="Right" ToolTip="Get random timetable [R]" Command="{Binding ToRandomCommand}">
+                    <materialDesign:PackIcon Kind="Dice5" />
+                </Button>
             </StackPanel>
             <DockPanel>
 
-                <Button x:Name="RandomButton" DockPanel.Dock="Right" ToolTip="Get random timetable [R]" Command="{Binding ToRandomCommand}">
-                    <materialDesign:PackIcon Kind="Dice5" />
-                </Button>
-                <Slider x:Name="Slider" Foreground="White" HorizontalAlignment="Stretch" Value="{Binding CurrentValue, UpdateSourceTrigger=PropertyChanged}" Maximum="{Binding MaxValue}" Margin="10,0,0,0" VerticalAlignment="Center">
+
+                <Slider x:Name="Slider" Visibility="Collapsed" Foreground="White" HorizontalAlignment="Stretch" Value="{Binding CurrentValue, UpdateSourceTrigger=PropertyChanged}" Maximum="{Binding MaxValue}" Margin="10,0,0,0" VerticalAlignment="Center">
                     <Slider.InputBindings>
                         <KeyBinding Command="{Binding IncrementCommand}" Key="Right" />
                         <KeyBinding Command="{Binding IncrementCommand}" Key="Down" />

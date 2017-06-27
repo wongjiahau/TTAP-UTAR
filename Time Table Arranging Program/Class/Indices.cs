@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using static Time_Table_Arranging_Program.PermutateV4;
+using static Time_Table_Arranging_Program.Permutator;
 
 namespace Time_Table_Arranging_Program.Class {
     public interface IIndices {

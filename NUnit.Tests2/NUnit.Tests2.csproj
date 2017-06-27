@@ -56,16 +56,23 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Sandbox_Testing.cs" />
     <Compile Include="TestClass_PermutateV4.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestData.cs" />
     <Compile Include="Test_Class_ExtensionMethods.cs" />
+    <Compile Include="Test_Class_Subject.cs" />
     <Compile Include="Test_Class_Time.cs" />
     <Compile Include="Test_Class_TimePeriod.cs" />
     <Compile Include="Test_Class_WeekNumber.cs" />
     <Compile Include="Test_Filterer.cs" />
+    <Compile Include="Test_Helper.cs" />
     <Compile Include="Test_Indices.cs" />
+    <Compile Include="Test_Slot.cs" />
+    <Compile Include="Test_SlotGeneralizer.cs" />
+    <Compile Include="Test_SlotIndex.cs" />
     <Compile Include="Test_StartTimeEndTimeParser.cs" />
+    <Compile Include="Test_StateTable.cs" />
     <Compile Include="Test_TimetableRow.cs" />
     <Compile Include="Test_Token.cs" />
     <Compile Include="Test_SlotParser.cs" />

@@ -31,7 +31,7 @@ namespace Time_Table_Arranging_Program.User_Control {
             CheckerBoxStackPanel.Children.Clear();
         }
 
-        public void Collapsed() {
+        public void Collapse() {
             SubjectExpander.IsExpanded = false;
         }
 
@@ -110,12 +110,10 @@ namespace Time_Table_Arranging_Program.User_Control {
         private void ToggleViewButton_OnChecked(object sender, RoutedEventArgs e) {
             foreach (UIElement child in CheckerBoxStackPanel.Children) {
                 if (child is ICheckBoxWithListDownMenu) {
-                    if ((child as ICheckBoxWithListDownMenu).IsChecked) {
-                        child.Visibility = Visibility.Visible;
-                    }
-                    else {
-                        child.Visibility = Visibility.Collapsed;
-                    }
+                    child.Visibility = 
+                        (child as ICheckBoxWithListDownMenu).IsChecked ? 
+                        Visibility.Visible : 
+                        Visibility.Collapsed;
                 }
             }
             ToggleViewButton.ToolTip = "Show all subject";
@@ -127,7 +125,31 @@ namespace Time_Table_Arranging_Program.User_Control {
                     child.Visibility = Visibility.Visible;
                 }
             }
-            ToggleViewButton.ToolTip = "Show selected subject only";
+            ToggleViewButton.ToolTip = "Show selected subjects";
+        }
+
+        private void ViewChangerButton_OnClick(object sender, RoutedEventArgs e) {
+            if (ViewChangerButton.Content.ToString() == "Show selected subjects") {
+                foreach (UIElement child in CheckerBoxStackPanel.Children) {
+                    if (child is ICheckBoxWithListDownMenu) {
+                        child.Visibility =
+                            (child as ICheckBoxWithListDownMenu).IsChecked
+                                ? Visibility.Visible
+                                : Visibility.Collapsed;
+                    }
+                }
+                ViewChangerButton.Content = "Show all subjects";
+                SearchBox.Visibility = Visibility.Collapsed;
+            }
+            else {
+                foreach (UIElement child in CheckerBoxStackPanel.Children) {
+                    if (child is ICheckBoxWithListDownMenu) {
+                        child.Visibility = Visibility.Visible;
+                    }
+                }
+                ViewChangerButton.Content = "Show selected subjects";
+                SearchBox.Visibility = Visibility.Visible;
+            }
         }
 
         private void SearchBoxOnTextChanged(object sender, TextChangedEventArgs textChangedEventArgs) {

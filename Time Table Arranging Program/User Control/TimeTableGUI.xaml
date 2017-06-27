@@ -11,11 +11,12 @@
         <Style TargetType="Border">
             <Setter Property="ToolTipService.InitialShowDelay" Value="0"/>
         </Style>
+      
     </UserControl.Resources>
     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-            <Label>Number of selected subject :</Label>
-            <Label x:Name="NoOfSelectedSubjectLabel" />
+            <Label Visibility="Hidden">Number of selected subject :</Label>
+            <Label Visibility="Hidden" x:Name="NoOfSelectedSubjectLabel" />
         </StackPanel>
 
         <UniformGrid Grid.IsSharedSizeScope="True">
@@ -30,7 +31,7 @@
 
             </Grid>
         </UniformGrid>
-        <userControl:TimetableDescriptionViewer x:Name="DescriptionViewer" />
+        <userControl:TimetableDescriptionViewer Visibility="Collapsed" x:Name="DescriptionViewer" />
     </StackPanel>
     
 </UserControl>

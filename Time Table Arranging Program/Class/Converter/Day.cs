@@ -23,6 +23,9 @@ namespace Time_Table_Arranging_Program.Class.Converter {
         public static readonly Day NullDay = new Day("Null", -1);
         public static readonly int NumberOfDaysPerWeek = 7;
 
+        public static Day GetDay(int value) {
+            return Days.Find(x => x.IntValue == value);
+        }
         private static readonly List<Day> Days = new List<Day>
         {
             Monday,

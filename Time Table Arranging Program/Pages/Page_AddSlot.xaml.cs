@@ -8,6 +8,7 @@ using System.Windows.Input;
 using System.Windows.Navigation;
 using System.Windows.Threading;
 using Time_Table_Arranging_Program.Class;
+using Time_Table_Arranging_Program.Class.SlotGeneralizer;
 using Time_Table_Arranging_Program.Class.TokenParser;
 using Time_Table_Arranging_Program.UserInterface;
 
@@ -23,16 +24,16 @@ namespace Time_Table_Arranging_Program.Pages {
             InnerSp.Height = 0;
         }
 
-        private void InputSlotsListView_MouseRightButtonDown(object sender, MouseButtonEventArgs e) {}
+        private void InputSlotsListView_MouseRightButtonDown(object sender , MouseButtonEventArgs e) { }
 
-        private void InputSlotsListView_KeyDown(object sender, KeyEventArgs e) {
+        private void InputSlotsListView_KeyDown(object sender , KeyEventArgs e) {
             if (e.Key == Key.Delete)
                 DeleteSelectedItem();
         }
 
-        private void MenuItemDelete_Click(object sender, RoutedEventArgs e) {
+        private void MenuItemDelete_Click(object sender , RoutedEventArgs e) {
             if (InputSlotsListView.SelectedIndex == -1) {
-                DialogBox.ShowDialog("Hey...", "You selected nothing to be deleted.");
+                DialogBox.ShowDialog("Hey..." , "You selected nothing to be deleted.");
                 return;
             }
             DeleteSelectedItem();
@@ -50,39 +51,37 @@ namespace Time_Table_Arranging_Program.Pages {
 
         private void UpdateListView(List<Slot> input) {
             InputSlotsListView.Items.Clear();
-            for (int i = 0; i < input.Count; i++) {
+            for (int i = 0 ; i < input.Count ; i++) {
                 var s = input[i];
                 InputSlotsListView.Items.Add(
-                    new Slot
-                    {
-                        SubjectName = s.SubjectName,
-                        Code = s.Code,
-                        Day = s.Day,
-                        StartTime = s.StartTime,
-                        EndTime = s.EndTime,
-                        Type = s.Type,
-                        Number = s.Number,
+                    new Slot {
+                        SubjectName = s.SubjectName ,
+                        Code = s.Code ,
+                        Day = s.Day ,
+                        StartTime = s.StartTime ,
+                        EndTime = s.EndTime ,
+                        Type = s.Type ,
+                        Number = s.Number ,
                         WeekNumber = s.WeekNumber
                     });
             }
-            Dispatcher.Invoke(new Action(() => { AnimateHiddenContent(true); }), DispatcherPriority.ContextIdle, null);
+            Dispatcher.Invoke(new Action(() => { AnimateHiddenContent(true); }) , DispatcherPriority.ContextIdle , null);
             // AnimateInnerSp(true);
         }
 
 
-        private void AddSlotButton_Click(object sender, RoutedEventArgs e) {
+        private void AddSlotButton_Click(object sender , RoutedEventArgs e) {
             var input = Clipboard.GetText();
             if (_previousInputString.Any(s => s.Contains(input))) {
-                DialogBox.ShowDialog("Erm...", "The content you copied is already added to the program just now.");
+                DialogBox.ShowDialog("Erm..." , "The content you copied is already added to the program just now.");
                 return;
             }
-
             var previousCount = Global.InputSlotList.Count;
-            var bg = CustomBackgroundWorker<string, List<Slot>>.RunAndShowLoadingScreen
-                (new SlotParser().Parse, input, "Loading time slots . . .");
+            var bg = CustomBackgroundWorker<string , List<Slot>>.RunAndShowLoadingScreen
+                (new SlotParser().Parse , input , "Loading time slots . . .");
             Global.InputSlotList.AddRange(bg.GetResult());
             if (Global.InputSlotList.Count == previousCount) {
-                DialogBox.ShowDialog("Please use GOOGLE CHROME",
+                DialogBox.ShowDialog("Please use GOOGLE CHROME" ,
                     "Unable to load data, please make sure you copied the correct content from the course registration website using Google Chrome.");
                 return;
             }
@@ -101,12 +100,12 @@ namespace Time_Table_Arranging_Program.Pages {
                 Global.TimetableStartDate = parser.GetStartDate();
                 Global.TimetableEndDate = parser.GetEndDate();
             }
-            catch {}
+            catch { }
         }
 
         private int FindMaxTime(List<Slot> inputSlots) {
             ITime max = inputSlots[0].EndTime;
-            for (int i = 1; i < inputSlots.Count; i++) {
+            for (int i = 1 ; i < inputSlots.Count ; i++) {
                 Slot s = inputSlots[i];
                 if (s.EndTime.MoreThan(max))
                     max = s.EndTime;
@@ -115,7 +114,7 @@ namespace Time_Table_Arranging_Program.Pages {
         }
 
 
-        private void ResetButton_Click(object sender, RoutedEventArgs e) {
+        private void ResetButton_Click(object sender , RoutedEventArgs e) {
             Global.InputSlotList.Clear();
             Global.InputSlotList.SelectedSubjectNames.Clear();
             _previousInputString.Clear();
@@ -129,22 +128,25 @@ namespace Time_Table_Arranging_Program.Pages {
             double totalHeight = CreateTimetableButton.ActualHeight;
             if (IsExpand) {
                 if (InnerSp.Height == 0) {
-                    InnerSp.BeginAnimation(HeightProperty,
-                        CustomAnimation.GetEnteringScreenAnimation(0, totalHeight, false));
+                    InnerSp.BeginAnimation(HeightProperty ,
+                        CustomAnimation.GetEnteringScreenAnimation(0 , totalHeight , false));
                     ResetButton.IsEnabled = true;
                     AddSlotButton.Content = "Add more slots";
                 }
             }
             else {
-                InnerSp.BeginAnimation(HeightProperty, CustomAnimation.GetLeavingScreenAnimation(totalHeight, 0, false));
+                InnerSp.BeginAnimation(HeightProperty , CustomAnimation.GetLeavingScreenAnimation(totalHeight , 0 , false));
                 ResetButton.IsEnabled = false;
                 AddSlotButton.Content = "Add slots";
             }
         }
 
 
-        private void CreateTimetableButton_Click(object sender, RoutedEventArgs e) {
-            NavigationService.Navigate(Page_CreateTimetable.GetSingletonInstance(Global.InputSlotList));
+        private void CreateTimetableButton_Click(object sender , RoutedEventArgs e) {
+            NavigationService.Navigate(
+                                Global.Factory
+                                    .Generate_Page_CreateTimetable_with_GeneralizedSlots
+                                    (Global.InputSlotList));
         }
     }
 }

@@ -39,5 +39,13 @@ namespace NUnit.Tests2 {
             var input2 = new TimePeriod(Time.CreateTime_24HourFormat(8 , 30) , Time.CreateTime_24HourFormat(9 , 30));
             Assert.True(input1.IntersectWith(input2));
         }
+
+        [Test]
+        public void Test_TimePeriod_Intersection_6() {
+            var input1 = new TimePeriod(Time.CreateTime_24HourFormat(8 , 0) , Time.CreateTime_24HourFormat(10 , 0));
+            var input2 = new TimePeriod(Time.CreateTime_24HourFormat(9 , 00) , Time.CreateTime_24HourFormat(11 , 0));
+            Assert.True(input1.IntersectWith(input2));
+
+        }
     }
 }

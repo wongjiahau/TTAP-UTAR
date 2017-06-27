@@ -145,7 +145,9 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp">
       <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\Microsoft.CSharp.dll</HintPath>
@@ -166,6 +168,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Class\Helper\Helper.cs" />
+    <Compile Include="Class\IndexedSlot.cs" />
+    <Compile Include="Class\SlotGeneralizer\SlotGeneralizer.cs" />
+    <Compile Include="Class\StateSummary\StateTable.cs" />
+    <Compile Include="IValueConverter\TooltipConverterForToggleButton.cs" />
     <Compile Include="MVVM_Framework\Models\TimetableList_2.cs" />
     <Compile Include="MVVM_Framework\ObservableObject.cs" />
     <Compile Include="Class\BoundedInt.cs" />
@@ -175,7 +182,6 @@
     <Compile Include="Class\Converter\WeekNumber.cs" />
     <Compile Include="Class\ConvertibleToListOf.cs" />
     <Compile Include="Class\CustomBackgroundWorker.cs" />
-    <Compile Include="Class\ExtensionClass.cs" />
     <Compile Include="Class\Filterer.cs" />
     <Compile Include="Class\GoogleCalendarApi\GoogleCalendarApi.cs" />
     <Compile Include="Class\HashedList.cs" />
@@ -205,7 +211,6 @@
     <Compile Include="Interfaces\IInequalityComparable.cs" />
     <Compile Include="Interfaces\ICyclicIteratable.cs" />
     <Compile Include="Interfaces\IntersectionCheckable.cs" />
-    <Compile Include="Class\Subject.cs" />
     <Compile Include="Interfaces\ObserverPattern.cs" />
     <Compile Include="Interfaces\ISubtractable.cs" />
     <Compile Include="Interfaces\IToConstructionString.cs" />
@@ -244,11 +249,18 @@
     <Compile Include="Pages\Page_ShowLikedSubject.xaml.cs">
       <DependentUpon>Page_ShowLikedSubject.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Window_StateSummary.xaml.cs">
+      <DependentUpon>Window_StateSummary.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="TestData.cs" />
+    <Compile Include="TrashFile.cs" />
     <Compile Include="User Control\AutoClosePopup.cs" />
     <Compile Include="MVVM_Framework\Models\CyclicIndex.cs" />
+    <Compile Include="User Control\ConfirmationForExitPrompt.xaml.cs">
+      <DependentUpon>ConfirmationForExitPrompt.xaml</DependentUpon>
+    </Compile>
     <Compile Include="User Control\EnhancedMessageBox.xaml.cs">
       <DependentUpon>EnhancedMessageBox.xaml</DependentUpon>
     </Compile>
@@ -256,6 +268,7 @@
     <Compile Include="User Control\LikeButton.xaml.cs">
       <DependentUpon>LikeButton.xaml</DependentUpon>
     </Compile>
+    <Compile Include="User Control\MaybeUnoccupiedToggleButton.cs" />
     <Compile Include="User Control\PromptUserForFeedbackControl.xaml.cs">
       <DependentUpon>PromptUserForFeedbackControl.xaml</DependentUpon>
     </Compile>
@@ -309,7 +322,7 @@
     <Compile Include="UserInterface\ColorDictionary.cs" />
     <Compile Include="UserInterface\CustomAnimation.cs" />
     <Compile Include="MVVM_Framework\ViewModels\CyclicIndexVM.cs" />
-    <Compile Include="VisibilityConverter.cs" />
+    <Compile Include="IValueConverter\VisibilityConverter.cs" />
     <Compile Include="Windows Control\AddRuleWindow_v2.xaml.cs">
       <DependentUpon>AddRuleWindow_v2.xaml</DependentUpon>
     </Compile>
@@ -319,9 +332,12 @@
     <Compile Include="Class\ColorGenerator.cs" />
     <Compile Include="Global.cs" />
     <Compile Include="Class\ExtensionMethods.cs" />
-    <Compile Include="Class\PermutateV4.cs" />
+    <Compile Include="Class\Permutator.cs" />
     <Compile Include="User Control\RuleSetter.xaml.cs">
       <DependentUpon>RuleSetter.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows Control\MyMessageBox.xaml.cs">
+      <DependentUpon>MyMessageBox.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows Control\ProgressWindow.xaml.cs">
       <DependentUpon>ProgressWindow.xaml</DependentUpon>
@@ -338,6 +354,9 @@
     <Compile Include="Class\WindowsBehaviour.cs" />
     <Compile Include="Windows Control\SummaryWindow.xaml.cs">
       <DependentUpon>SummaryWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows Control\Windows_Settings.xaml.cs">
+      <DependentUpon>Windows_Settings.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows Control\Window_GetConstructionStringOfSlots.xaml.cs">
       <DependentUpon>Window_GetConstructionStringOfSlots.xaml</DependentUpon>
@@ -375,6 +394,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\Page_ShowLikedSubject.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Window_StateSummary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User Control\ConfirmationForExitPrompt.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -474,6 +501,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Windows Control\MyMessageBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows Control\ProgressWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -487,6 +518,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows Control\SummaryWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows Control\Windows_Settings.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -548,7 +583,8 @@
     <None Include="FodyWeavers.xml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Class\AbstractClass\" />
+    <EmbeddedResource Include="Images\greenbox.png" />
+    <EmbeddedResource Include="Images\xcross.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Fody.2.0.6\build\dotnet\Fody.targets" Condition="Exists('..\packages\Fody.2.0.6\build\dotnet\Fody.targets')" />

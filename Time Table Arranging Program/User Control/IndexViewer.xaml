@@ -48,10 +48,10 @@
             </StackPanel>
             <DockPanel>
 
-                <Button x:Name="RandomButton" DockPanel.Dock="Right" ToolTip="Get random timetable" Click="RandomButton_OnClick">
+                <Button Visibility="Collapsed" x:Name="RandomButton" DockPanel.Dock="Right" ToolTip="Get random timetable" Click="RandomButton_OnClick">
                     <materialDesign:PackIcon Kind="Dice5" />
                 </Button>
-                <Slider x:Name="Slider" HorizontalAlignment="Stretch" Value="{Binding Current}" Maximum="{Binding Max}" Margin="10,0,0,0" VerticalAlignment="Center" />
+                <Slider x:Name="Slider" Visibility ="Collapsed" HorizontalAlignment="Stretch" Value="{Binding Current}" Maximum="{Binding Max}" Margin="10,0,0,0" VerticalAlignment="Center" />
             </DockPanel>
         </StackPanel>
     </materialDesign:Card>

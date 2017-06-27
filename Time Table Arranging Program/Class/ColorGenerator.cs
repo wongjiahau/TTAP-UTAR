@@ -1,4 +1,5 @@
-﻿using System.Windows.Media;
+﻿using System.Windows.Forms;
+using System.Windows.Media;
 
 namespace Time_Table_Arranging_Program {
     public interface IColorGenerator {
@@ -9,27 +10,31 @@ namespace Time_Table_Arranging_Program {
 
     public class ColorGenerator : IColorGenerator {
         private readonly Color[] _chosenColors =
-        {
+        {            
             Colors.LightPink,
             Colors.Orange,
-            Colors.LightGoldenrodYellow,
+            Colors.Yellow,
             Colors.LightGreen,
-            Colors.LightBlue,
+            Colors.LightBlue,            
             Colors.MediumPurple,
+            Colors.GreenYellow,
+            Colors.MediumVioletRed,
             Colors.LightGray,
-            Colors.Honeydew,
-            Colors.LightCoral
+            Colors.LightGoldenrodYellow,
+            Colors.DeepSkyBlue,
+            Colors.LightCoral,
+
         };
 
-        private int pointer;
+        private int _pointer;
 
         public void GoToNextColor() {
-            pointer++;
+            _pointer++;
         }
 
         public Color GetCurrentColor() {
-            if (pointer == _chosenColors.Length) return Colors.White;
-            return _chosenColors[pointer];
+            if (_pointer == _chosenColors.Length) return Colors.White;
+            return _chosenColors[_pointer];
         }
 
         public Brush GetCurrentBrush() {

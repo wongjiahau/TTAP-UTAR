@@ -11,11 +11,7 @@
              mc:Ignorable="d"             >
 
     <Grid Margin="5">
-
         <DockPanel HorizontalAlignment="Stretch" LastChildFill="True">
-
-
-
             <Border BorderBrush="DarkGray" BorderThickness="1">
                 <ScrollViewer VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible" DockPanel.Dock="Bottom">
                     <Grid VerticalAlignment="Center">
@@ -27,7 +23,6 @@
                 </ScrollViewer>
             </Border>
         </DockPanel>
-        <views:CyclicIndexView x:Name="CyclicIndexView" HorizontalAlignment="Right" Margin="0,0,30,30" VerticalAlignment="Bottom" />
     </Grid>
 
 </UserControl>

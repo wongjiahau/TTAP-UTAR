@@ -54,7 +54,7 @@ namespace Time_Table_Arranging_Program.Model {
 
 
         public void GenerateTimetables(SlotList slotList) {
-            var result = PermutateV4.Run_v2(slotList.ToArray());
+            var result = Permutator.Run_v2_WithConsideringWeekNumber(slotList.ToArray());
             _timetableList = new TimetableList(result);
             NotifyObserver();
         }

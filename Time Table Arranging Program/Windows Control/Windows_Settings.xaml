@@ -1,0 +1,28 @@
+﻿<Window x:Class="Time_Table_Arranging_Program.Windows_Control.Windows_Settings"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Time_Table_Arranging_Program.Windows_Control"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Title="Windows_Settings" WindowStartupLocation="CenterScreen" WindowStyle="None" Height="300" Width="450" Closing="Windows_Settings_OnClosing">
+    <Window.Resources>
+        <local:Settings x:Key="Setting1" Description="SearchForCombinationByConsideringWeekNumber" IsChecked="False"></local:Settings>
+    </Window.Resources>
+    <DockPanel>
+        <StackPanel Margin="0,15,0,0" HorizontalAlignment="Center" Orientation="Horizontal" DockPanel.Dock="Top">
+            <materialDesign:PackIcon Kind="Settings" Width="30" Height="30" VerticalAlignment="Center"></materialDesign:PackIcon>
+        <Label  FontWeight="Bold"  VerticalAlignment="Center" FontSize="30" HorizontalAlignment="Center">Settings</Label>
+        </StackPanel>
+        <Button DockPanel.Dock="Bottom" Click="DoneButton_OnClick" Margin="20" HorizontalAlignment="Center">DONE</Button>
+        <materialDesign:Card VerticalAlignment="Stretch" Margin="10" Padding="10">
+            <StackPanel >
+                <DockPanel HorizontalAlignment="Stretch" >
+                    <Label DockPanel.Dock="Left" FontWeight="DemiBold" HorizontalAlignment="Left">1. Search for combination by considering week number</Label>
+                    <ToggleButton DockPanel.Dock="Right" HorizontalAlignment="Right" x:Name="Setting_1_Button"   IsChecked="{Binding Source={StaticResource Setting1}, Path=IsChecked}"></ToggleButton>
+                </DockPanel>
+            </StackPanel>
+        </materialDesign:Card>
+    </DockPanel>
+</Window>

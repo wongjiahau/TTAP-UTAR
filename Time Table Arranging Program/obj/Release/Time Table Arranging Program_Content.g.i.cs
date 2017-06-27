@@ -8,6 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("calendar_xnr_icon.ico")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/greenbox.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/xcross.png")]
 
 

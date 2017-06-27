@@ -8,6 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("client_secret.json")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/xcross.png")]
 
 

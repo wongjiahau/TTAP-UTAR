@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using Time_Table_Arranging_Program.Class.Converter;
 
@@ -16,14 +17,23 @@ namespace NUnit.Tests2 {
         public void Test_WeekNumber_ClashesWith_2() {
             var input1 = new WeekNumber(new List<int> { 1 , 3 , 5 , 7 , 9 });
             var input2 = new WeekNumber(new List<int> { 2 , 4 , 6 , 8 , 10 });
-            Assert.False(input1.IntersectWith( input2));
+            Console.WriteLine(Convert.ToString(input1._weekNumberInBinary , 2));
+            Console.WriteLine(Convert.ToString(input2._weekNumberInBinary , 2));
+            Assert.False(input1.IntersectWith(input2));
         }
 
         [Test]
         public void Test_WeekNumber_ClashesWith_3() {
             var input1 = new WeekNumber(new List<int> { 6 , 8 });
             var input2 = new WeekNumber(new List<int> { 4 , 3 });
-            Assert.False(input1.IntersectWith( input2));
+            Assert.False(input1.IntersectWith(input2));
+        }
+
+        [Test]
+        public void Test_WeekNumber_ClashesWith_4() {
+            var input1 = new WeekNumber(new List<int> { 1 , 3 , 7 , 9 , 11 , 13 });
+            var input2 = new WeekNumber(new List<int> { 1 , 2 , 3 , 4 , 5 , 6 , 7 , 8 , 9 , 10 , 11 , 12 , 13 , 14 });
+            Assert.True(input1.IntersectWith(input2));
         }
 
         [Test]

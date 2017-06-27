@@ -2,10 +2,11 @@
 using Time_Table_Arranging_Program;
 using Time_Table_Arranging_Program.Class;
 using Time_Table_Arranging_Program.Class.Converter;
+using static NUnit.Tests2.TestData.Subjects;
 
 namespace NUnit.Tests2 {
     public static class TestData {
-        private static List<Slot> TestSlots = new List<Slot>()
+        public readonly static List<Slot> TestSlots = new List<Slot>()
         {
          new Slot(3,"MPU3113", " Hubungan Etnik (for Local Students)", "1", "L", Day.Parse("Mon"), "KB521", new TimePeriod(Time.CreateTime_24HourFormat(9,0),Time.CreateTime_24HourFormat(12,0)), WeekNumber.Parse("1-14"), false),
 new Slot(5,"MPU3113", " Hubungan Etnik (for Local Students)", "2", "L", Day.Parse("Mon"), "KB521", new TimePeriod(Time.CreateTime_24HourFormat(14,0),Time.CreateTime_24HourFormat(17,0)), WeekNumber.Parse("1-14"), false),
@@ -369,5 +370,132 @@ new Slot(703,"UKMM1043", " Basic Economics, Accounting And Management", "7", "T"
             return TestSlots.FindAll(x => x.UID >= fromUid && x.UID <= toUid);
         }
 
+        public static List<Slot> GetSlotsByName(Subjects name) {
+            switch (name) {
+                case HubunganEtnik:
+                    return GetSlotRange(3 , 9);
+                case TamadunIslamDanTamadunAsia:
+                    return GetSlotRange(11 , 17);
+                case BahasaMelayuKomunikasi2:
+                    return GetSlotRange(19 , 19);
+                case MalaysianStudies3:
+                    return GetSlotRange(21 , 21);
+                case BahasaKebangsaanA:
+                    return GetSlotRange(23 , 23);
+                case EnglishForEngineering:
+                    return GetSlotRange(25 , 33);
+                case EngineerInSociety:
+                    return GetSlotRange(35 , 37);
+                case SocialEntrepreneurshipProject:
+                    return GetSlotRange(39 , 39);
+                case ArtsAndCulturalPerformance:
+                    return GetSlotRange(41 , 41);
+                case ArtCraftAndDesign:
+                    return GetSlotRange(43 , 43);
+                case IntroductionToGermanLanguage:
+                    return GetSlotRange(45 , 55);
+                case IntroductionToFrench:
+                    return GetSlotRange(57 , 67);
+                case IntroductionToJapanese:
+                    return GetSlotRange(69 , 73);
+                case MathematicsForEngineeringI:
+                    return GetSlotRange(75 , 81);
+                case MathematicsForEngineeringII:
+                    return GetSlotRange(83 , 117);
+                case NumericalMethodsAndStatistics:
+                    return GetSlotRange(119 , 153);
+                case FundamentalsOfProgramming:
+                    return GetSlotRange(155 , 165);
+                case EngineeringThermodynamicsI:
+                    return GetSlotRange(167 , 229);
+                case Statics:
+                    return GetSlotRange(231 , 279);
+                case EngineeringDrawingAndCad:
+                    return GetSlotRange(281 , 307);
+                case FluidMechanicsI:
+                    return GetSlotRange(309 , 399);
+                case FluidMechanicsII:
+                    return GetSlotRange(401 , 465);
+                case IntroductionToBuildingServices:
+                    return GetSlotRange(467 , 481);
+                case SurveyI:
+                    return GetSlotRange(483 , 493);
+                case StructuralAnalysisII:
+                    return GetSlotRange(495 , 509);
+                case ConcreteStructuresDesignII:
+                    return GetSlotRange(511 , 525);
+                case GeotechnicalEngineering:
+                    return GetSlotRange(527 , 557);
+                case Hydrology:
+                    return GetSlotRange(559 , 573);
+                case StructuralSteelDesign:
+                    return GetSlotRange(575 , 589);
+                case HighwayAndTransportation:
+                    return GetSlotRange(591 , 623);
+                case FiniteElementMethodInStructuralEngineering:
+                    return GetSlotRange(625 , 635);
+                case AdvancedStructuralSteelDesign:
+                    return GetSlotRange(637 , 647);
+                case ConcreteTechnology:
+                    return GetSlotRange(649 , 661);
+                case IntegratedDesignProject:
+                    return GetSlotRange(663 , 665);
+                case EngineeringApplicationInEnvironment:
+                    return GetSlotRange(667 , 677);
+                case IntroductionToKorean:
+                    return GetSlotRange(679 , 683);
+                case SunZisArtOfWarAndBusinessStrategies:
+                    return GetSlotRange(685 , 689);
+                case BasicEconomicsAccountingAndManagement:
+                    return GetSlotRange(691 , 703);
+
+                default:
+                    return null;
+            }
+        }
+
+        public enum Subjects {
+
+            HubunganEtnik,
+            TamadunIslamDanTamadunAsia,
+            BahasaMelayuKomunikasi2,
+            MalaysianStudies3,
+            BahasaKebangsaanA,
+            EnglishForEngineering,
+            EngineerInSociety,
+            SocialEntrepreneurshipProject,
+            ArtsAndCulturalPerformance,
+            ArtCraftAndDesign,
+            IntroductionToGermanLanguage,
+            IntroductionToFrench,
+            IntroductionToJapanese,
+            MathematicsForEngineeringI,
+            MathematicsForEngineeringII,
+            NumericalMethodsAndStatistics,
+            FundamentalsOfProgramming,
+            EngineeringThermodynamicsI,
+            Statics,
+            EngineeringDrawingAndCad,
+            FluidMechanicsI,
+            FluidMechanicsII,
+            IntroductionToBuildingServices,
+            SurveyI,
+            StructuralAnalysisII,
+            ConcreteStructuresDesignII,
+            GeotechnicalEngineering,
+            Hydrology,
+            StructuralSteelDesign,
+            HighwayAndTransportation,
+            FiniteElementMethodInStructuralEngineering,
+            AdvancedStructuralSteelDesign,
+            ConcreteTechnology,
+            IntegratedDesignProject,
+            EngineeringApplicationInEnvironment,
+            IntroductionToKorean,
+            SunZisArtOfWarAndBusinessStrategies,
+            BasicEconomicsAccountingAndManagement,
+        }
+
     }
+
 }

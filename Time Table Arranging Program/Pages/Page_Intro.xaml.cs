@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using HtmlAgilityPack;
 using Time_Table_Arranging_Program.Class;
+using Time_Table_Arranging_Program.Class.SlotGeneralizer;
 using Time_Table_Arranging_Program.Class.TokenParser;
 
 namespace Time_Table_Arranging_Program.Pages {
@@ -37,11 +38,12 @@ namespace Time_Table_Arranging_Program.Pages {
             InitializeComponent();
         }
 
-        private void Page_First_OnLoaded(object sender, RoutedEventArgs e) {
-            GotItButton_OnClick(null, null);
+        private void Page_First_OnLoaded(object sender , RoutedEventArgs e) {
+            GotItButton_OnClick(null , null);
+            Browser.Navigate(LoginPageUrl);
         }
 
-        private void Browser_OnLoadCompleted(object sender, NavigationEventArgs e) {
+        private void Browser_OnLoadCompleted(object sender , NavigationEventArgs e) {
             RefreshButton.IsEnabled = true;
             string currentUrl = Browser.Source.ToString();
             if (currentUrl == LoginPageUrl || currentUrl == LoginFailedUrl || currentUrl == EndUrl) {
@@ -58,28 +60,31 @@ namespace Time_Table_Arranging_Program.Pages {
             }
             Browser.Visibility = Visibility.Hidden;
             string plainText = LoadPlainText();
-            var bg = CustomBackgroundWorker<string, List<Slot>>.RunAndShowLoadingScreen(
-                new SlotParser().Parse, plainText, "Loading slots . . .");
-            GetStartDateAndEndDate(plainText);
+            var bg = CustomBackgroundWorker<string , List<Slot>>.RunAndShowLoadingScreen(
+                new SlotParser().Parse , plainText , "Loading slots . . .");
+            TryGetStartDateAndEndDate(plainText);
 
             Global.InputSlotList.AddRange(bg.GetResult());
             if (CanGoToPage(_currentPage + 1)) {
-                Browser.InvokeScript("changePage", _currentPage + 1);
+                Browser.InvokeScript("changePage" , _currentPage + 1);
                 _currentPage++;
             }
             else {
                 Browser.Navigate(EndUrl);
-                NavigationService.Navigate(new Page_CreateTimetable(Global.InputSlotList));
+                NavigationService.Navigate(
+                                Global.Factory
+                                    .Generate_Page_CreateTimetable_with_GeneralizedSlots
+                                    (Global.InputSlotList));
             }
         }
 
-        private void GetStartDateAndEndDate(string input) {
+        private void TryGetStartDateAndEndDate(string input) {
             try {
                 var parser = new StartDateEndDateParser(input);
                 Global.TimetableStartDate = parser.GetStartDate();
                 Global.TimetableEndDate = parser.GetEndDate();
             }
-            catch {}
+            catch { }
         }
 
         private bool CanGoToPage(int pageNumber) {
@@ -104,15 +109,15 @@ namespace Time_Table_Arranging_Program.Pages {
             return result;
         }
 
-        private void AddSlotManuallyButton_OnClick(object sender, RoutedEventArgs e) {
+        private void AddSlotManuallyButton_OnClick(object sender , RoutedEventArgs e) {
             NavigationService.Navigate(new Page_AddSlot());
         }
 
-        private void RefreshButton_OnClick(object sender, RoutedEventArgs e) {
+        private void RefreshButton_OnClick(object sender , RoutedEventArgs e) {
             Browser.Refresh();
         }
 
-        private void GotItButton_OnClick(object sender, RoutedEventArgs e) {
+        private void GotItButton_OnClick(object sender , RoutedEventArgs e) {
             DialogHost.IsOpen = false;
             Browser.Navigate(LoginPageUrl);
             Browser.Visibility = Visibility.Visible;

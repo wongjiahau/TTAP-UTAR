@@ -7,7 +7,7 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" KeyDown="SelectSubjectPanel_OnKeyDown"   FocusManager.IsFocusScope="True" FocusManager.FocusedElement="{Binding ElementName=SearchBox}"
              >
-    <Expander x:Name="SubjectExpander"  ExpandDirection="Left" DockPanel.Dock="Left" VerticalAlignment="Stretch" IsExpanded="True">
+    <Expander x:Name="SubjectExpander" VerticalContentAlignment="Stretch"  ExpandDirection="Left" DockPanel.Dock="Left" VerticalAlignment="Stretch" IsExpanded="True">
         <Expander.Header>
             <TextBlock Text="Select subjects" RenderTransformOrigin=".5,.5">
                 <TextBlock.LayoutTransform>
@@ -15,10 +15,10 @@
                 </TextBlock.LayoutTransform>
             </TextBlock>
         </Expander.Header>
-        <DockPanel LastChildFill="True">
+        <DockPanel LastChildFill="True" >
             <DockPanel LastChildFill="True"  DockPanel.Dock="Top">
 
-                <ToggleButton x:Name="ToggleViewButton" Margin="5"  Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}" DockPanel.Dock="Left" HorizontalAlignment="Center"  ToolTip="Show selected subject only" Checked="ToggleViewButton_OnChecked" Unchecked="ToggleViewButton_OnUnchecked" IsEnabled="False">
+                <ToggleButton x:Name="ToggleViewButton" Visibility="Collapsed" Margin="5"  Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}" DockPanel.Dock="Left" HorizontalAlignment="Center"  ToolTip="Show selected subject only" Checked="ToggleViewButton_OnChecked" Unchecked="ToggleViewButton_OnUnchecked" IsEnabled="False">
                     <materialDesign:PackIcon Kind="Eye" Height="20" Width="20"/>
                 </ToggleButton>
                 <local:SearchBox x:Name="SearchBox"  TextChanged="SearchBoxOnTextChanged" GotFocus="SearchBox_OnGotFocus"/>
@@ -37,21 +37,24 @@
                     <TextBlock x:Name="FeedbackTextBlock" Text="Showing result for  " />
                     <TextBlock  Text="Accounting" FontStyle="Italic" FontWeight="Bold" x:Name="SuggestedTextLabel" />
                     <Button Click="YesButton_OnClick" Visibility="Collapsed">YES</Button>
-            </StackPanel>
-                <TextBlock x:Name="ErrorLabel" FontWeight="Bold" Visibility="Collapsed">No result found . . . </TextBlock>
+                </StackPanel>
+                <TextBlock x:Name="ErrorLabel" FontWeight="Bold" Visibility="Collapsed">No result found . . .</TextBlock>
             </Grid>
-            
-            <ScrollViewer x:Name="SelectSubjectScrollViewer" VerticalAlignment="Stretch" FlowDirection="LeftToRight"
+            <Button x:Name="ViewChangerButton" Margin="10" Height="50" VerticalAlignment="Bottom" Click="ViewChangerButton_OnClick" DockPanel.Dock="Bottom">
+                Show selected subjects
+            </Button>
+            <Border BorderBrush="DarkGray" BorderThickness="0.5" VerticalAlignment="Stretch" DockPanel.Dock="Bottom">
+                <ScrollViewer x:Name="SelectSubjectScrollViewer"  FlowDirection="LeftToRight"
                               VerticalScrollBarVisibility="Auto"
-                              HorizontalScrollBarVisibility="Hidden" DockPanel.Dock="Bottom" ToolTipService.ShowOnDisabled="True" ToolTipService.InitialShowDelay="0">
+                              HorizontalScrollBarVisibility="Hidden"  ToolTipService.ShowOnDisabled="True" ToolTipService.InitialShowDelay="0">
 
-                <StackPanel FlowDirection="LeftToRight" Name="CheckerBoxStackPanel" HorizontalAlignment="Stretch"
+                    <StackPanel FlowDirection="LeftToRight" Name="CheckerBoxStackPanel" HorizontalAlignment="Stretch"
                                 VerticalAlignment="Top"
                                 CanVerticallyScroll="True" Margin="1" />
-            </ScrollViewer>
-            
+                </ScrollViewer>
+            </Border>
+
         </DockPanel>
     </Expander>
-    
 </UserControl>
 

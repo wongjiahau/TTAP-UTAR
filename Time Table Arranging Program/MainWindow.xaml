@@ -24,24 +24,23 @@
                         </Button>
                         <Button Foreground="White" Style="{StaticResource MaterialDesignFlatButton}" DockPanel.Dock="Left"
                                     Command="{x:Static NavigationCommands.BrowseForward}"
-                                 IsEnabled="{TemplateBinding CanGoBack}"
+                                 IsEnabled="{TemplateBinding CanGoForward}"
                                     >
                             <materialDesign:PackIcon Kind="ArrowRightBold"  Height="30" Width="30"/>
                         </Button>
                         <materialDesign:PopupBox DockPanel.Dock="Right" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False">
                             <StackPanel>
+                                <Button x:Name="SettingButton" Content="Settings" Click="SettingButton_OnClick"></Button>
                                 <Button x:Name="AboutButton"  Content="About" Click="AboutButton_Click" />
                                 <Button Content="Feedback" Click="FeedbackButton_OnClick" />
                                 <Button x:Name="HelpButton"  Content="HELP" Click="HelpButton_Click" />
-                                <Button Click="GoToCourseRegistrationWebsiteButton_OnClick" Content="Go to course registration website" />
-                                <Button Content="Add slots manually" Click="GoToAddSlotPage_OnClick" />
                             </StackPanel>
                         </materialDesign:PopupBox>
                         <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22">Timetable Arranging Program ( TTAP )</TextBlock>
                     </DockPanel>
                 </materialDesign:ColorZone>
                 <materialDesign:Card DockPanel.Dock="Top" HorizontalAlignment="Stretch">
-                    <Menu DockPanel.Dock="Top">
+                    <Menu DockPanel.Dock="Top" Visibility="Collapsed">
                         <MenuItem Header="_File">
                             <MenuItem Header="Load slots" Click="LoadSlots_OnClick">
                                 <MenuItem.Icon>
@@ -69,7 +68,7 @@
             </DockPanel>
         </ControlTemplate>
     </Window.Resources>
-    <materialDesign:DialogHost x:Name="DialogHost" >
+    <materialDesign:DialogHost x:Name="DialogHost"  >
         <materialDesign:DialogHost.DialogContent>
             <Border Padding="20">
                 <StackPanel>
@@ -86,8 +85,8 @@
            Navigating="MainFrame_OnNavigating" />
                 <materialDesign:Snackbar x:Name="Snackbar"  MessageQueue="{materialDesign:MessageQueue}" />
             </Grid>
-            
-            
+
+
         </DockPanel>
     </materialDesign:DialogHost>
 </Window>

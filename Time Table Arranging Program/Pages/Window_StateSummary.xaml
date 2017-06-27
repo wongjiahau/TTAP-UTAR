@@ -1,0 +1,68 @@
+﻿<Window x:Class="Time_Table_Arranging_Program.Pages.Window_StateSummary"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Time_Table_Arranging_Program.Pages"
+      xmlns:timeTableArrangingProgram="clr-namespace:Time_Table_Arranging_Program"
+      xmlns:userControl="clr-namespace:Time_Table_Arranging_Program.User_Control"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      mc:Ignorable="d"       
+      Title="Page_StateSummary" WindowStyle="None" WindowState="Maximized" Loaded="Window_StateSummary_OnLoaded">
+    
+        
+        <StackPanel Margin="10" VerticalAlignment="Top" HorizontalAlignment="Stretch">
+            <Grid>
+                <Button HorizontalAlignment="Left" VerticalAlignment="Top" Click="BackButton_OnClick" Style="{StaticResource MaterialDesignRaisedLightButton}" Margin="0,10,0,0">BACK</Button>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <materialDesign:PackIcon Height="50" Width="50" VerticalAlignment="Center" Kind="Clock"></materialDesign:PackIcon>
+                    <Label FontSize="40" VerticalAlignment="Center" FontWeight="Bold" HorizontalAlignment="Center" Margin="10">Set time constraint</Label>
+                    <Button ToolTip="Tell me how it works" Click="HelpButton_OnClick" HorizontalAlignment="Right" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFlatButton}">
+                        <materialDesign:PackIcon Width="20" Height="20" Kind="HelpCircle"></materialDesign:PackIcon>
+                    </Button>
+                </StackPanel>
+
+            </Grid>
+            <Border Padding="5" HorizontalAlignment="Center" BorderBrush="LightGray" BorderThickness="1" >
+                <Grid HorizontalAlignment="Center" x:Name="LegendGrid" IsSharedSizeScope="True" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition ></ColumnDefinition>
+                        <ColumnDefinition Width="400"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition  SharedSizeGroup="b"></RowDefinition>
+                        <RowDefinition Height="30" SharedSizeGroup="a"></RowDefinition>
+                        <RowDefinition SharedSizeGroup="a"></RowDefinition>
+                        <RowDefinition SharedSizeGroup="a"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid.Resources>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+                            <Setter Property="Margin" Value="5"></Setter>
+                            <Setter Property="FontSize" Value="15"></Setter>
+                        </Style>
+                        <Style TargetType="Rectangle">
+                            <Setter Property="HorizontalAlignment" Value="Right"></Setter>
+                            <Setter Property="Width" Value="30"></Setter>
+                            <Setter Property="Margin" Value="5"></Setter>
+                        </Style>
+                    </Grid.Resources>
+                    <Rectangle Fill="DarkGray" Grid.Row="1" ></Rectangle>
+                    <TextBlock Foreground="DarkGray"  Grid.Row="1" Grid.Column="1">Definitely no class</TextBlock>
+                    <Rectangle Fill="DarkRed"  Grid.Row="2" Grid.Column="0"></Rectangle>
+                    <TextBlock Foreground="DarkRed"  Grid.Column="1" Grid.Row="2">Definitely have class</TextBlock>
+                    <Rectangle x:Name="R3" Fill="{Binding Source={x:Static userControl:MaybeUnoccupiedToggleButton.BackgroundColor}}" Grid.Row="3"></Rectangle>
+
+                    <TextBlock Grid.Column="1" Grid.Row="3" Foreground="Black" >Click me if you dont want to have class here</TextBlock>
+
+
+                </Grid>
+            </Border>
+            <timeTableArrangingProgram:TimeTableGUI x:Name="TimeTableGui" HorizontalAlignment="Center">
+            </timeTableArrangingProgram:TimeTableGUI>
+            <Button DockPanel.Dock="Bottom" Margin="20"  Width="150" Height="50" FontSize="25" HorizontalAlignment="Center" Click="DoneButton_OnClick">DONE</Button>
+
+        </StackPanel>
+    
+
+</Window>

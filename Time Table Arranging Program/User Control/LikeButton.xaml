@@ -7,7 +7,7 @@
              xmlns:local="clr-namespace:Time_Table_Arranging_Program.User_Control"
              mc:Ignorable="d"              >
     <Grid>
-        <ToggleButton x:Name="ToggleButton"  Foreground="White" Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}" Click="ToggleButton_OnClick" ToolTip="Add this timetable to favorites">
+        <ToggleButton x:Name="ToggleButton" Width="45" Height="45" Foreground="DeepPink" Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}" Click="ToggleButton_OnClick" ToolTip="Add this timetable to favorites">
             <materialDesign:PackIcon Kind="Heart" Width="30" Height="30"/>
         </ToggleButton>
     </Grid>

@@ -20,7 +20,7 @@ namespace Time_Table_Arranging_Program.Class {
         public static readonly TimetableList NoSlotsIsChosen = new TimetableList("⟸ Please select your subjects");
 
         public static readonly TimetableList NoLikedTimetable =
-            new TimetableList("👀 Seems like you haven't like any timetable yet ...");
+            new TimetableList("👀 No Favorites Yet ! ");
 
         private readonly CyclicIterator _cyclicIterator = new CyclicIterator(0);
         private List<ITimetable> _timetables = new List<ITimetable>();
@@ -28,8 +28,8 @@ namespace Time_Table_Arranging_Program.Class {
         private TimetableList(string message) {
             Message = message;
         }
-
-        public TimetableList(List<List<Slot>> inputList) {
+        
+        public TimetableList(List<List<Slot>> inputList) {            
             if (inputList == null) throw new NullReferenceException("inputList should not be null");
             _timetables = new List<ITimetable>();
             foreach (List<Slot> x in inputList) {
@@ -136,5 +136,6 @@ namespace Time_Table_Arranging_Program.Class {
         public ITimetable GetCurrent() {
             return _timetables[_cyclicIterator.GetCurrent()];
         }
+      
     }
 }

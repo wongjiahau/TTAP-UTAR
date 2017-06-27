@@ -1064,3 +1064,98 @@ C:\Users\User\Desktop\Time Table Arranging Program v7.5\Time Table Arranging Pro
 C:\Users\User\Desktop\Time Table Arranging Program v7.5\Time Table Arranging Program\obj\Debug\MVVM_Framework\Views\CyclicIndexView.baml
 C:\Users\User\Desktop\Time Table Arranging Program v7.5\Time Table Arranging Program\obj\Debug\MVVM_Framework\Views\TimetableListView.g.cs
 C:\Users\User\Desktop\Time Table Arranging Program v7.5\Time Table Arranging Program\obj\Debug\MVVM_Framework\Views\TimetableListView.baml
+C:\Users\User\Desktop\TTAPv7.6\Time Table Arranging Program\bin\Debug\Time Table Arranging Program.exe.config
+C:\Users\User\Desktop\TTAPv7.6\Time Table Arranging Program\obj\Debug\Time Table Arranging Program.exe
+C:\Users\User\Desktop\TTAPv7.6\Time Table Arranging Program\obj\Debug\Time Table Arranging Program.pdb
+C:\Users\User\Desktop\TTAPv7.6\Time Table Arranging Program\bin\Debug\client_secret.json
+C:\Users\User\Desktop\TTAPv7.6\Time Table Arranging Program\bin\Debug\Time Table Arranging Program.exe
+C:\Users\User\Desktop\TTAPv7.6\Time Table Arranging Program\bin\Debug\Time Table Arranging Program.pdb
+C:\Users\User\Desktop\TTAPv7.6\Time Table Arranging Program\obj\Debug\MVVM_Framework\Views\CyclicIndexView.g.cs
+C:\Users\User\Desktop\TTAPv7.6\Time Table Arranging Program\obj\Debug\MVVM_Framework\Views\TimetableListView.g.cs
+C:\Users\User\Desktop\TTAPv7.6\Time Table Arranging Program\obj\Debug\Pages\Page_About.g.cs
+C:\Users\User\Desktop\TTAPv7.6\Time Table Arranging Program\obj\Debug\Pages\Page_AddSlot.g.cs
+C:\Users\User\Desktop\TTAPv7.6\Time Table Arranging Program\obj\Debug\Pages\Page_AddToGoogleCalendar.g.cs
+C:\Users\User\Desktop\TTAPv7.6\Time Table Arranging Program\obj\Debug\Pages\Page_CreateTimetable.g.cs
+C:\Users\User\Desktop\TTAPv7.6\Time Table Arranging Program\obj\Debug\Pages\Page_Intro.g.cs
+C:\Users\User\Desktop\TTAPv7.6\Time Table Arranging Program\obj\Debug\Pages\Page_Help.g.cs
+C:\Users\User\Desktop\TTAPv7.6\Time Table Arranging Program\obj\Debug\Pages\Page_ShowLikedSubject.g.cs
+C:\Users\User\Desktop\TTAPv7.6\Time Table Arranging Program\obj\Debug\User Control\EnhancedMessageBox.g.cs
+C:\Users\User\Desktop\TTAPv7.6\Time Table Arranging Program\obj\Debug\User Control\LikeButton.g.cs
+C:\Users\User\Desktop\TTAPv7.6\Time Table Arranging Program\obj\Debug\User Control\PromptUserForFeedbackControl.g.cs
+C:\Users\User\Desktop\TTAPv7.6\Time Table Arranging Program\obj\Debug\User Control\SelectSubjectPanel.g.cs
+C:\Users\User\Desktop\TTAPv7.6\Time Table Arranging Program\obj\Debug\User Control\Snackbar.g.cs
+C:\Users\User\Desktop\TTAPv7.6\Time Table Arranging Program\obj\Debug\User Control\TimeChooserDialog.g.cs
+C:\Users\User\Desktop\TTAPv7.6\Time Table Arranging Program\obj\Debug\User Control\TimetableDescriptionViewer.g.cs
+C:\Users\User\Desktop\TTAPv7.6\Time Table Arranging Program\obj\Debug\User Control\NumberBox.g.cs
+C:\Users\User\Desktop\TTAPv7.6\Time Table Arranging Program\obj\Debug\User Control\IndexViewer.g.cs
+C:\Users\User\Desktop\TTAPv7.6\Time Table Arranging Program\obj\Debug\User Control\SearchBox.g.cs
+C:\Users\User\Desktop\TTAPv7.6\Time Table Arranging Program\obj\Debug\User Control\TextboxWithInlineLabel.g.cs
+C:\Users\User\Desktop\TTAPv7.6\Time Table Arranging Program\obj\Debug\User Control\TimeChooserCircular\TimeChooserCircular.g.cs
+C:\Users\User\Desktop\TTAPv7.6\Time Table Arranging Program\obj\Debug\User Control\TimeChooserCircular\TimeChooserCircular_InnerPart.g.cs
+C:\Users\User\Desktop\TTAPv7.6\Time Table Arranging Program\obj\Debug\User Control\TimeChooserCircular\TimeChooser_InnerPart_Window.g.cs
+C:\Users\User\Desktop\TTAPv7.6\Time Table Arranging Program\obj\Debug\User Control\TimeChooserCircular\TimeHand.g.cs
+C:\Users\User\Desktop\TTAPv7.6\Time Table Arranging Program\obj\Debug\User Control\TimeChooserCircular\XorButton.g.cs
+C:\Users\User\Desktop\TTAPv7.6\Time Table Arranging Program\obj\Debug\User Control\TimetableDescriptionViewer2.g.cs
+C:\Users\User\Desktop\TTAPv7.6\Time Table Arranging Program\obj\Debug\User Control\TimetableViewer.g.cs
+C:\Users\User\Desktop\TTAPv7.6\Time Table Arranging Program\obj\Debug\Windows Control\AddRuleWindow_v2.g.cs
+C:\Users\User\Desktop\TTAPv7.6\Time Table Arranging Program\obj\Debug\User Control\CheckBoxWithListDownMenu.g.cs
+C:\Users\User\Desktop\TTAPv7.6\Time Table Arranging Program\obj\Debug\MainWindow.g.cs
+C:\Users\User\Desktop\TTAPv7.6\Time Table Arranging Program\obj\Debug\User Control\RuleSetter.g.cs
+C:\Users\User\Desktop\TTAPv7.6\Time Table Arranging Program\obj\Debug\Windows Control\ProgressWindow.g.cs
+C:\Users\User\Desktop\TTAPv7.6\Time Table Arranging Program\obj\Debug\User Control\TimeChooser.g.cs
+C:\Users\User\Desktop\TTAPv7.6\Time Table Arranging Program\obj\Debug\User Control\TimeTableGUI.g.cs
+C:\Users\User\Desktop\TTAPv7.6\Time Table Arranging Program\obj\Debug\Windows Control\SummaryWindow.g.cs
+C:\Users\User\Desktop\TTAPv7.6\Time Table Arranging Program\obj\Debug\Windows Control\Window_GetConstructionStringOfSlots.g.cs
+C:\Users\User\Desktop\TTAPv7.6\Time Table Arranging Program\obj\Debug\App.g.cs
+C:\Users\User\Desktop\TTAPv7.6\Time Table Arranging Program\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\User\Desktop\TTAPv7.6\Time Table Arranging Program\obj\Debug\Time Table Arranging Program_MarkupCompile.cache
+C:\Users\User\Desktop\TTAPv7.6\Time Table Arranging Program\obj\Debug\Time Table Arranging Program_MarkupCompile.lref
+C:\Users\User\Desktop\TTAPv7.6\Time Table Arranging Program\obj\Debug\App.baml
+C:\Users\User\Desktop\TTAPv7.6\Time Table Arranging Program\obj\Debug\MVVM_Framework\Views\CyclicIndexView.baml
+C:\Users\User\Desktop\TTAPv7.6\Time Table Arranging Program\obj\Debug\MVVM_Framework\Views\TimetableListView.baml
+C:\Users\User\Desktop\TTAPv7.6\Time Table Arranging Program\obj\Debug\Pages\Page_About.baml
+C:\Users\User\Desktop\TTAPv7.6\Time Table Arranging Program\obj\Debug\Pages\Page_AddSlot.baml
+C:\Users\User\Desktop\TTAPv7.6\Time Table Arranging Program\obj\Debug\Pages\Page_AddToGoogleCalendar.baml
+C:\Users\User\Desktop\TTAPv7.6\Time Table Arranging Program\obj\Debug\Pages\Page_CreateTimetable.baml
+C:\Users\User\Desktop\TTAPv7.6\Time Table Arranging Program\obj\Debug\Pages\Page_Intro.baml
+C:\Users\User\Desktop\TTAPv7.6\Time Table Arranging Program\obj\Debug\Pages\Page_Help.baml
+C:\Users\User\Desktop\TTAPv7.6\Time Table Arranging Program\obj\Debug\Pages\Page_ShowLikedSubject.baml
+C:\Users\User\Desktop\TTAPv7.6\Time Table Arranging Program\obj\Debug\User Control\EnhancedMessageBox.baml
+C:\Users\User\Desktop\TTAPv7.6\Time Table Arranging Program\obj\Debug\User Control\LikeButton.baml
+C:\Users\User\Desktop\TTAPv7.6\Time Table Arranging Program\obj\Debug\User Control\PromptUserForFeedbackControl.baml
+C:\Users\User\Desktop\TTAPv7.6\Time Table Arranging Program\obj\Debug\User Control\SelectSubjectPanel.baml
+C:\Users\User\Desktop\TTAPv7.6\Time Table Arranging Program\obj\Debug\User Control\Snackbar.baml
+C:\Users\User\Desktop\TTAPv7.6\Time Table Arranging Program\obj\Debug\User Control\TimeChooserDialog.baml
+C:\Users\User\Desktop\TTAPv7.6\Time Table Arranging Program\obj\Debug\User Control\TimetableDescriptionViewer.baml
+C:\Users\User\Desktop\TTAPv7.6\Time Table Arranging Program\obj\Debug\User Control\NumberBox.baml
+C:\Users\User\Desktop\TTAPv7.6\Time Table Arranging Program\obj\Debug\User Control\IndexViewer.baml
+C:\Users\User\Desktop\TTAPv7.6\Time Table Arranging Program\obj\Debug\User Control\SearchBox.baml
+C:\Users\User\Desktop\TTAPv7.6\Time Table Arranging Program\obj\Debug\User Control\TextboxWithInlineLabel.baml
+C:\Users\User\Desktop\TTAPv7.6\Time Table Arranging Program\obj\Debug\User Control\TimeChooserCircular\TimeChooserCircular.baml
+C:\Users\User\Desktop\TTAPv7.6\Time Table Arranging Program\obj\Debug\User Control\TimeChooserCircular\TimeChooserCircular_InnerPart.baml
+C:\Users\User\Desktop\TTAPv7.6\Time Table Arranging Program\obj\Debug\User Control\TimeChooserCircular\TimeChooser_InnerPart_Window.baml
+C:\Users\User\Desktop\TTAPv7.6\Time Table Arranging Program\obj\Debug\User Control\TimeChooserCircular\TimeHand.baml
+C:\Users\User\Desktop\TTAPv7.6\Time Table Arranging Program\obj\Debug\User Control\TimeChooserCircular\XorButton.baml
+C:\Users\User\Desktop\TTAPv7.6\Time Table Arranging Program\obj\Debug\User Control\TimetableDescriptionViewer2.baml
+C:\Users\User\Desktop\TTAPv7.6\Time Table Arranging Program\obj\Debug\User Control\TimetableViewer.baml
+C:\Users\User\Desktop\TTAPv7.6\Time Table Arranging Program\obj\Debug\Windows Control\AddRuleWindow_v2.baml
+C:\Users\User\Desktop\TTAPv7.6\Time Table Arranging Program\obj\Debug\User Control\CheckBoxWithListDownMenu.baml
+C:\Users\User\Desktop\TTAPv7.6\Time Table Arranging Program\obj\Debug\MainWindow.baml
+C:\Users\User\Desktop\TTAPv7.6\Time Table Arranging Program\obj\Debug\User Control\RuleSetter.baml
+C:\Users\User\Desktop\TTAPv7.6\Time Table Arranging Program\obj\Debug\Windows Control\ProgressWindow.baml
+C:\Users\User\Desktop\TTAPv7.6\Time Table Arranging Program\obj\Debug\User Control\TimeChooser.baml
+C:\Users\User\Desktop\TTAPv7.6\Time Table Arranging Program\obj\Debug\User Control\TimeTableGUI.baml
+C:\Users\User\Desktop\TTAPv7.6\Time Table Arranging Program\obj\Debug\Windows Control\SummaryWindow.baml
+C:\Users\User\Desktop\TTAPv7.6\Time Table Arranging Program\obj\Debug\Windows Control\Window_GetConstructionStringOfSlots.baml
+C:\Users\User\Desktop\TTAPv7.6\Time Table Arranging Program\obj\Debug\Time Table Arranging Program.g.resources
+C:\Users\User\Desktop\TTAPv7.6\Time Table Arranging Program\obj\Debug\Time_Table_Arranging_Program.Properties.Resources.resources
+C:\Users\User\Desktop\TTAPv7.6\Time Table Arranging Program\obj\Debug\Time Table Arranging Program.csproj.GenerateResource.Cache
+C:\Users\User\Desktop\TTAPv7.6\Time Table Arranging Program\obj\Debug\Pages\Window_StateSummary.g.cs
+C:\Users\User\Desktop\TTAPv7.6\Time Table Arranging Program\obj\Debug\Pages\Window_StateSummary.baml
+C:\Users\User\Desktop\TTAPv7.6\Time Table Arranging Program\obj\Debug\User Control\ConfirmationForExitPrompt.g.cs
+C:\Users\User\Desktop\TTAPv7.6\Time Table Arranging Program\obj\Debug\Windows Control\Windows_Settings.g.cs
+C:\Users\User\Desktop\TTAPv7.6\Time Table Arranging Program\obj\Debug\User Control\ConfirmationForExitPrompt.baml
+C:\Users\User\Desktop\TTAPv7.6\Time Table Arranging Program\obj\Debug\Windows Control\Windows_Settings.baml
+C:\Users\User\Desktop\TTAPv7.6\Time Table Arranging Program\obj\Debug\Time Table Arranging Program.csprojResolveAssemblyReference.cache
+C:\Users\User\Desktop\TTAPv7.6\Time Table Arranging Program\obj\Debug\Windows Control\MyMessageBox.g.cs
+C:\Users\User\Desktop\TTAPv7.6\Time Table Arranging Program\obj\Debug\Windows Control\MyMessageBox.baml
