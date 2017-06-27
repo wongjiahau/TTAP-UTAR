@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 namespace Time_Table_Arranging_Program.Class {
     class testing_for_revert {
-        
+        public testing_for_revert() {
+            
+        }
     }
 }
