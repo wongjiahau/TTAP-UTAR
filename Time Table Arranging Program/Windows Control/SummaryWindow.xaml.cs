@@ -23,6 +23,7 @@ namespace Time_Table_Arranging_Program.Windows_Control {
     public partial class SummaryWindow : Window {           
         private ITimetableList _timetableList;
         private CyclicIndex _cylicIndex;
+        private static int Shown = 0;
 
         public SummaryWindow(ITimetableList timetableList, CyclicIndex cyclicIndex) {
             InitializeComponent();
@@ -35,9 +36,11 @@ namespace Time_Table_Arranging_Program.Windows_Control {
         private void CylicIndex_CurrentValueChanged(object sender , EventArgs e) {
             DescriptionViewer.Update(_timetableList.ToList()[_cylicIndex.CurrentValue].ToList());
         }
-        
+
 
         public void ShowWindow() {
+            if (Shown + 1 > 1) return;
+            Shown++;            
             if (_timetableList.IsEmpty()) {
                 return;
             }
@@ -45,14 +48,12 @@ namespace Time_Table_Arranging_Program.Windows_Control {
             CylicIndex_CurrentValueChanged(null,null);                
         }
 
-        private void BackButton_OnClick(object sender, RoutedEventArgs e) {            
-            Hide();
+        private void BackButton_OnClick(object sender, RoutedEventArgs e) {
+            Close();
         }
 
         private void SummaryWindow_OnClosing(object sender, CancelEventArgs e) {
-            e.Cancel = true;
-            if (Visibility == Visibility.Hidden) return;            
-            Hide();
+            Shown--;            
         }
 
 
