@@ -44,21 +44,21 @@ namespace Time_Table_Arranging_Program.Windows_Control {
             }
 
             Show();
-            Global.MainWindow.Hide();
+            //Global.MainWindow.Hide();
             _currentIndex = 0;
             _maxIndex = _timetableList.ToList().Count - 1;
             DescriptionViewer.Update(_timetableList.ToList()[_currentIndex].ToList());
         }
 
         private void BackButton_OnClick(object sender, RoutedEventArgs e) {
-            Global.MainWindow.Show();
+            //Global.MainWindow.Show();
             Hide();
         }
 
         private void SummaryWindow_OnClosing(object sender, CancelEventArgs e) {
             e.Cancel = true;
             if (Visibility == Visibility.Hidden) return;
-            Global.MainWindow.Show();
+            //Global.MainWindow.Show();
             Hide();
         }
 
