@@ -247,9 +247,6 @@
     <Compile Include="Pages\Page_Help.xaml.cs">
       <DependentUpon>Page_Help.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Page_ShowLikedSubject.xaml.cs">
-      <DependentUpon>Page_ShowLikedSubject.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Pages\Window_StateSummary.xaml.cs">
       <DependentUpon>Window_StateSummary.xaml</DependentUpon>
     </Compile>
@@ -391,10 +388,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\Page_Help.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\Page_ShowLikedSubject.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

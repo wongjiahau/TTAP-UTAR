@@ -3,6 +3,7 @@
 #lol
 # User-specific files
 *.suo
+.suo
 *.user
 *.userosscache
 *.sln.docstates

@@ -16,7 +16,13 @@ namespace Time_Table_Arranging_Program.MVVM_Framework.ViewModels {
 
         public CyclicIndexVM() {}
 
-        public CyclicIndexVM(CyclicIndex model) : base(model) {}
+        public CyclicIndexVM(CyclicIndex model) : base(model) {
+            model.CurrentValueChanged += Model_CurrentValueChanged;
+        }
+
+        private void Model_CurrentValueChanged(object sender , EventArgs e) {
+            OnPropertyChanged("CurrentValue");
+        }
 
         public ICommand IncrementCommand {
             get
