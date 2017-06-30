@@ -18,7 +18,7 @@
     </Page.Resources>
     <Grid>
         <DockPanel>
-            <userControl:SelectSubjectPanel x:Name="SelectSubjectPanel" DockPanel.Dock="Left" SlotSelectionChanged="SelectSubjectPanel_OnSlotSelectionChanged" 
+            <userControl:SelectSubjectPanel   x:Name="SelectSubjectPanel" DockPanel.Dock="Left" SlotSelectionChanged="SelectSubjectPanel_OnSlotSelectionChanged" 
                                             Visibility="{Binding IsChecked, ElementName=ToggleViewButton, Converter={StaticResource VisibilityConverter}, ConverterParameter=1}"/>
             <DockPanel DockPanel.Dock="Right" MouseUp="RightPanel_OnMouseDown">
                 <DockPanel VerticalAlignment="Center">

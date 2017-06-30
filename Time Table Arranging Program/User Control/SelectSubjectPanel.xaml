@@ -7,7 +7,8 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" KeyDown="SelectSubjectPanel_OnKeyDown"   FocusManager.IsFocusScope="True" FocusManager.FocusedElement="{Binding ElementName=SearchBox}"
              >
-    <Expander x:Name="SubjectExpander" VerticalContentAlignment="Stretch"  ExpandDirection="Left" DockPanel.Dock="Left" VerticalAlignment="Stretch" IsExpanded="True">
+    
+    <Expander Style="{x:Null}" Padding="5" x:Name="SubjectExpander" VerticalContentAlignment="Stretch"  ExpandDirection="Right" DockPanel.Dock="Left" VerticalAlignment="Stretch" IsExpanded="True">
         <Expander.Header>
             <TextBlock Text="Select subjects" RenderTransformOrigin=".5,.5">
                 <TextBlock.LayoutTransform>
@@ -15,10 +16,10 @@
                 </TextBlock.LayoutTransform>
             </TextBlock>
         </Expander.Header>
+        <materialDesign:Card VerticalAlignment="Stretch">
         <DockPanel LastChildFill="True" >
-            <DockPanel LastChildFill="True"  DockPanel.Dock="Top">
-
-                <ToggleButton x:Name="ToggleViewButton" Visibility="Collapsed" Margin="5"  Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}" DockPanel.Dock="Left" HorizontalAlignment="Center"  ToolTip="Show selected subject only" Checked="ToggleViewButton_OnChecked" Unchecked="ToggleViewButton_OnUnchecked" IsEnabled="False">
+                <DockPanel LastChildFill="True"  DockPanel.Dock="Top">
+                    <ToggleButton x:Name="ToggleViewButton" Visibility="Collapsed" Margin="5"  Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}" DockPanel.Dock="Left" HorizontalAlignment="Center"  ToolTip="Show selected subject only" Checked="ToggleViewButton_OnChecked" Unchecked="ToggleViewButton_OnUnchecked" IsEnabled="False">
                     <materialDesign:PackIcon Kind="Eye" Height="20" Width="20"/>
                 </ToggleButton>
                 <local:SearchBox x:Name="SearchBox"  TextChanged="SearchBoxOnTextChanged" GotFocus="SearchBox_OnGotFocus"/>
@@ -55,6 +56,8 @@
             </Border>
 
         </DockPanel>
+    </materialDesign:Card>
     </Expander>
+   
 </UserControl>
 
