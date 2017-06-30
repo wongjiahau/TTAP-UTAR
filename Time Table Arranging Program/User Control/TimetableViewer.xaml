@@ -16,7 +16,7 @@
                 <ScrollViewer VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible" DockPanel.Dock="Bottom">
                     <Grid VerticalAlignment="Center">
                         <Label x:Name="InstructionLabel" x:FieldModifier="private" HorizontalAlignment="Center" VerticalAlignment="Center"
-                           FontSize="50" FontWeight="Bold" Content="⟸ Please select your subjects" />
+                           FontSize="50" FontWeight="Bold" Content="⟸ Search and select your subjects" />
                         <timeTableArrangingProgram:TimeTableGUI x:Name="TimeTableGui" Visibility="Collapsed" />
                     </Grid>
 
