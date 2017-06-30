@@ -20,12 +20,11 @@ namespace Time_Table_Arranging_Program.Windows_Control {
     /// <summary>
     /// Interaction logic for SummaryWindow.xaml
     /// </summary>
-    public partial class SummaryWindow : Window {
-        private static SummaryWindow _singleton;      
+    public partial class SummaryWindow : Window {           
         private ITimetableList _timetableList;
         private CyclicIndex _cylicIndex;
 
-        private SummaryWindow(ITimetableList timetableList, CyclicIndex cyclicIndex) {
+        public SummaryWindow(ITimetableList timetableList, CyclicIndex cyclicIndex) {
             InitializeComponent();
             _timetableList = timetableList;
             _cylicIndex = cyclicIndex;
@@ -36,10 +35,7 @@ namespace Time_Table_Arranging_Program.Windows_Control {
         private void CylicIndex_CurrentValueChanged(object sender , EventArgs e) {
             DescriptionViewer.Update(_timetableList.ToList()[_cylicIndex.CurrentValue].ToList());
         }
-
-        public static SummaryWindow GetSingletonInstance(ITimetableList timetableList, CyclicIndex cyclicIndex) {
-            return _singleton ?? (_singleton = new SummaryWindow(timetableList, cyclicIndex));
-        }
+        
 
         public void ShowWindow() {
             if (_timetableList.IsEmpty()) {

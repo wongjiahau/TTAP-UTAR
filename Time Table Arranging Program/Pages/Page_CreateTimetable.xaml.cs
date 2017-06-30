@@ -21,7 +21,7 @@ namespace Time_Table_Arranging_Program.Pages {
     public partial class Page_CreateTimetable : Page, IDirtyObserver<IOutputTimetableModel> {
         private static Page_CreateTimetable _singletonInstance;
         private readonly MutableObservable<ITimetable> _currentViewedTimetable = new ObservableTimetable(Timetable.Empty);
-        private readonly CyclicIndex _cyclicIndex;
+        private CyclicIndex _cyclicIndex;
 
         private readonly ObservableTimetableList _outputTimetables =
             new ObservableTimetableList(TimetableList.NoSlotsIsChosen);
@@ -67,7 +67,7 @@ namespace Time_Table_Arranging_Program.Pages {
 
         private void UpdateGUI(List<List<Slot>> result) {
             _raw = result;
-            var cyclicIndex = new CyclicIndex();
+            _cyclicIndex = new CyclicIndex();
             if (result == null || result.Count == 0) {
                 if (_inputSlots.NoSlotIsChosen()) {
                     _outputTimetables.SetState(TimetableList.NoSlotsIsChosen);
@@ -76,16 +76,16 @@ namespace Time_Table_Arranging_Program.Pages {
                     _outputTimetables.SetState(TimetableList.NoPossibleCombination);
                 }
                 ToolBoxPanel.Visibility = Visibility.Hidden;
-                cyclicIndex.Reset();
+                _cyclicIndex.Reset();
             }
             else {
                 _outputTimetables.SetState(new TimetableList(result));
                 ToolBoxPanel.Visibility = Visibility.Visible;
-                cyclicIndex.MaxValue = result.Count - 1;
-                cyclicIndex.CurrentValue = 0;
+                _cyclicIndex.MaxValue = result.Count - 1;
+                _cyclicIndex.CurrentValue = 0;
             }
-            TimetableViewer.Initialize(cyclicIndex);
-            CyclicIndexView.DataContext = new CyclicIndexVM(cyclicIndex);
+            TimetableViewer.Initialize(_cyclicIndex);
+            CyclicIndexView.DataContext = new CyclicIndexVM(_cyclicIndex);
         }
 
 
@@ -155,7 +155,7 @@ namespace Time_Table_Arranging_Program.Pages {
         }
 
         private void ShowSummaryButton_OnClick(object sender , RoutedEventArgs e) {
-            SummaryWindow.GetSingletonInstance(_outputTimetables.GetCurrentState(), _cyclicIndex).ShowWindow();
+            new SummaryWindow(_outputTimetables.GetCurrentState(), _cyclicIndex).ShowWindow();                        
         }
 
         private void AddToGoogleCalendarButton_OnClick(object sender , RoutedEventArgs e) {
