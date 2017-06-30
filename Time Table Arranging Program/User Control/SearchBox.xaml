@@ -18,8 +18,8 @@
                                 >
                 <materialDesign:PackIcon Kind="Magnify" Height="30" Width="30" Opacity=".56" />
             </Button>
-            <TextBox Grid.Column="1" Margin="5 0 0 0" Padding="0,0,20,0"            CaretBrush="Black"                           
-                             materialDesign:HintAssist.Hint="Search" x:Name="TextBox" FontSize="15" 
+            <TextBox Grid.Column="1"  Margin="5 0 0 0" Padding="0,0,20,0"            CaretBrush="Black"                           
+                             materialDesign:HintAssist.Hint="Search . . ." x:Name="TextBox" FontSize="15" 
                              materialDesign:TextFieldAssist.DecorationVisibility="Hidden" BorderThickness="0"
                               VerticalAlignment="Center" TextChanged="TextBox_OnTextChanged"/>
             <Button Grid.Column="1" Style="{DynamicResource MaterialDesignToolButton}" Height="40"

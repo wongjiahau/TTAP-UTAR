@@ -123,13 +123,12 @@ namespace Time_Table_Arranging_Program.Pages {
 
         private void TimetableViewer_OnViewChanged(object sender , EventArgs e) {
             _currentViewedTimetable.SetState(TimetableViewer.GetCurrentTimetable());
-            if (!TimetableViewer.JustBuilded())
-                SelectSubjectPanel.Collapse();
+            if (!TimetableViewer.JustBuilded()) ;
+            //SelectSubjectPanel.Collapse();
         }
 
         private void FavoriteButton_OnChecked(object sender , RoutedEventArgs e) {
-            TimetableViewer.GetCurrentTimetable().IsLiked = true;
-            SelectSubjectPanel.Collapse();
+            TimetableViewer.GetCurrentTimetable().IsLiked = true;            
         }
 
         private void FavoriteButton_OnUnchecked(object sender , RoutedEventArgs e) {
@@ -185,7 +184,7 @@ namespace Time_Table_Arranging_Program.Pages {
 
 
         private void RightPanel_OnMouseDown(object sender, MouseButtonEventArgs e) {
-            SelectSubjectPanel.Collapse();
+            
             
         }
 

@@ -91,7 +91,9 @@
 
 
         </Popup>
-        <Border x:Name="Border" BorderBrush="Gray" BorderThickness="0,0,0,1" Padding="2" Background="{Binding Background, RelativeSource={RelativeSource FindAncestor, AncestorType=Expander}}" MouseDown="Border_OnMouseDown" Cursor="Hand" >
+        <Border x:Name="Border" BorderBrush="Gray" BorderThickness="0,0,0,1" Padding="2" 
+                Background="WhiteSmoke"
+                MouseDown="Border_OnMouseDown" Cursor="Hand" >
             <DockPanel   HorizontalAlignment="Stretch">
                 <CheckBox Visibility="Visible" Margin="5,0,0,0" DockPanel.Dock="Left" x:Name="Checkbox" Checked="Checkbox_Checked" Unchecked="Checkbox_Checked" VerticalAlignment="Center"/>
                 <StackPanel DockPanel.Dock="Left">

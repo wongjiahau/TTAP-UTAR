@@ -17,9 +17,22 @@
         <iValueConverter:TooltipConverterForToggleButton x:Key="TooltipConverterForToggleButton"/>
     </Page.Resources>
     <Grid>
-        <DockPanel>
-            <userControl:SelectSubjectPanel   x:Name="SelectSubjectPanel" DockPanel.Dock="Left" SlotSelectionChanged="SelectSubjectPanel_OnSlotSelectionChanged" 
+        <materialDesign:DrawerHost IsLeftDrawerOpen="True">
+            <materialDesign:DrawerHost.LeftDrawerContent>
+                <userControl:SelectSubjectPanel   x:Name="SelectSubjectPanel" DockPanel.Dock="Left" SlotSelectionChanged="SelectSubjectPanel_OnSlotSelectionChanged" 
                                             Visibility="{Binding IsChecked, ElementName=ToggleViewButton, Converter={StaticResource VisibilityConverter}, ConverterParameter=1}"/>
+            </materialDesign:DrawerHost.LeftDrawerContent>
+        <Grid>
+            <Button HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10" 
+                    Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}"
+                    Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                    Height="40"
+                    >
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="Menu" Margin="0,0,5,0" Height="20" Width="20" VerticalAlignment="Center"></materialDesign:PackIcon>
+<Label VerticalAlignment="Center" Foreground="White">Select subjects</Label>
+                    </StackPanel>
+                </Button>
             <DockPanel DockPanel.Dock="Right" MouseUp="RightPanel_OnMouseDown">
                 <DockPanel VerticalAlignment="Center">
                     <Border x:Name="ToolBoxPanel" DockPanel.Dock="Bottom" VerticalAlignment="Top" Margin="1"  HorizontalAlignment="Center" >
@@ -61,59 +74,54 @@
                                         <TextBlock Margin="5,0,0,0" Text="Set time constraint" VerticalAlignment="Center" />
                                     </StackPanel>
                                 </Button>
-                                <Grid  
+                                    <Grid  
                           HorizontalAlignment="Right" VerticalAlignment="Bottom">
-                                    <Grid.Resources>
-                                        <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedButton}">
-                                            <Setter Property="Height" Value="55"></Setter>
+                                        <Grid.Resources>
+                                            <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedButton}">
+                                                <Setter Property="Height" Value="55"></Setter>
 
-                                            <Setter Property="Width" Value="70" />
-                                            <Setter Property="Foreground" Value="White" />
-                                            <Setter Property="Margin" Value="5,0,0,0"></Setter>
-                                        </Style>
-                                        <Style TargetType="materialDesign:PackIcon">
-                                            <Setter Property="Height" Value="35" />
-                                            <Setter Property="Width" Value="40" />
-                                        </Style>
-                                    </Grid.Resources>
+                                                <Setter Property="Width" Value="70" />
+                                                <Setter Property="Foreground" Value="White" />
+                                                <Setter Property="Margin" Value="5,0,0,0"></Setter>
+                                            </Style>
+                                            <Style TargetType="materialDesign:PackIcon">
+                                                <Setter Property="Height" Value="35" />
+                                                <Setter Property="Width" Value="40" />
+                                            </Style>
+                                        </Grid.Resources>
 
-                                    <StackPanel Orientation="Horizontal">
-                                        <Button x:Name="AddToGoogleCalenderButton"                                     
+                                        <StackPanel Orientation="Horizontal">
+                                            <Button x:Name="AddToGoogleCalenderButton"                                     
                                     ToolTip="Add this timetable to Google Calendar" Click="AddToGoogleCalendarButton_OnClick">
-                                            <!--Visibility="{Binding IsChecked, ElementName=ToggleViewButton, Converter={StaticResource VisibilityConverter}}"-->
+                                                <!--Visibility="{Binding IsChecked, ElementName=ToggleViewButton, Converter={StaticResource VisibilityConverter}}"-->
 
-                                            <materialDesign:PackIcon Kind="CalendarPlus" />
-                                        </Button>
-                                        <Button x:Name="ShowSummaryButton"
+                                                <materialDesign:PackIcon Kind="CalendarPlus" />
+                                            </Button>
+                                            <Button x:Name="ShowSummaryButton"
                             	Click="ShowSummaryButton_OnClick" ToolTip="Show summary" >
-                                            <!--Visibility="{Binding IsChecked, ElementName=ToggleViewButton, Converter={StaticResource VisibilityConverter}}"-->
-                                            <materialDesign:PackIcon Kind="ArrowRightBold" />
-                                        </Button>
-                                        <materialDesign:PopupBox PopupMode="Click" Visibility="Collapsed"  >
-                                            <materialDesign:PopupBox.ToggleContent>
-                                                <materialDesign:PackIcon Kind="DotsVertical" Foreground="White" />
-                                            </materialDesign:PopupBox.ToggleContent>
-                                            <StackPanel>
-                                                <Button Click="ShowSummaryButton_OnClick" Content="Show summary" />
-                                                <Button  Content="Add this timetable to Google Calendar" Click="AddToGoogleCalendarButton_OnClick" />
-
-                                            </StackPanel>
-                                        </materialDesign:PopupBox>
-                                    </StackPanel>
-
-                                </Grid>
-
-
-
-                            </StackPanel>
+                                                <!--Visibility="{Binding IsChecked, ElementName=ToggleViewButton, Converter={StaticResource VisibilityConverter}}"-->
+                                                <materialDesign:PackIcon Kind="ArrowRightBold" />
+                                            </Button>
+                                            <materialDesign:PopupBox PopupMode="Click" Visibility="Collapsed"  >
+                                                <materialDesign:PopupBox.ToggleContent>
+                                                    <materialDesign:PackIcon Kind="DotsVertical" Foreground="White" />
+                                                </materialDesign:PopupBox.ToggleContent>
+                                                <StackPanel>
+                                                    <Button Click="ShowSummaryButton_OnClick" Content="Show summary" />
+                                                    <Button  Content="Add this timetable to Google Calendar" Click="AddToGoogleCalendarButton_OnClick" />
+                                                </StackPanel>
+                                            </materialDesign:PopupBox>
+                                        </StackPanel>
+                                    </Grid>
+                                </StackPanel>
                         </Grid>
                     </Border>
-                    <userControl:TimetableViewer Height="480" VerticalAlignment="Bottom"     x:Name="TimetableViewer" Visibility="Visible" ViewChanged="TimetableViewer_OnViewChanged"/>
+                    <userControl:TimetableViewer Height="480" VerticalAlignment="Bottom" x:Name="TimetableViewer" Visibility="Visible" ViewChanged="TimetableViewer_OnViewChanged"/>
 
                 </DockPanel>
             </DockPanel>
 
-        </DockPanel>
-
+        </Grid>
+        </materialDesign:DrawerHost>
     </Grid>
 </Page>

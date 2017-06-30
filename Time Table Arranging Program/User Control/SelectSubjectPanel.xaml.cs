@@ -31,9 +31,7 @@ namespace Time_Table_Arranging_Program.User_Control {
             CheckerBoxStackPanel.Children.Clear();
         }
 
-        public void Collapse() {
-            SubjectExpander.IsExpanded = false;
-        }
+        
 
         public void CreateCheckBoxes(SlotList inputSlots) {
             var subjects = inputSlots.GetNamesOfAllSubjects();
