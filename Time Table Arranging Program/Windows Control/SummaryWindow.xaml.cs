@@ -13,52 +13,49 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Time_Table_Arranging_Program.Class;
+using Time_Table_Arranging_Program.MVVM_Framework.Models;
+using Time_Table_Arranging_Program.MVVM_Framework.ViewModels;
 
 namespace Time_Table_Arranging_Program.Windows_Control {
     /// <summary>
     /// Interaction logic for SummaryWindow.xaml
     /// </summary>
     public partial class SummaryWindow : Window {
-        private static SummaryWindow _singletonInstance;
-
-        private int _currentIndex;
-        private int _maxIndex;
-
+        private static SummaryWindow _singleton;      
         private ITimetableList _timetableList;
+        private CyclicIndex _cylicIndex;
 
-        private SummaryWindow() {
+        private SummaryWindow(ITimetableList timetableList, CyclicIndex cyclicIndex) {
             InitializeComponent();
+            _timetableList = timetableList;
+            _cylicIndex = cyclicIndex;
+            _cylicIndex.CurrentValueChanged += CylicIndex_CurrentValueChanged;
+            this.DataContext = new CyclicIndexVM(cyclicIndex);
         }
 
-        public static SummaryWindow GetSingletonInstance(ITimetableList timetableList) {
-            if (_singletonInstance == null) {
-                _singletonInstance = new SummaryWindow();
-            }
-            _singletonInstance._timetableList = timetableList;
-            return _singletonInstance;
+        private void CylicIndex_CurrentValueChanged(object sender , EventArgs e) {
+            DescriptionViewer.Update(_timetableList.ToList()[_cylicIndex.CurrentValue].ToList());
+        }
+
+        public static SummaryWindow GetSingletonInstance(ITimetableList timetableList, CyclicIndex cyclicIndex) {
+            return _singleton ?? (_singleton = new SummaryWindow(timetableList, cyclicIndex));
         }
 
         public void ShowWindow() {
             if (_timetableList.IsEmpty()) {
                 return;
             }
-
-            Show();
-            //Global.MainWindow.Hide();
-            _currentIndex = 0;
-            _maxIndex = _timetableList.ToList().Count - 1;
-            DescriptionViewer.Update(_timetableList.ToList()[_currentIndex].ToList());
+            Show();        
+            CylicIndex_CurrentValueChanged(null,null);                
         }
 
-        private void BackButton_OnClick(object sender, RoutedEventArgs e) {
-            //Global.MainWindow.Show();
+        private void BackButton_OnClick(object sender, RoutedEventArgs e) {            
             Hide();
         }
 
         private void SummaryWindow_OnClosing(object sender, CancelEventArgs e) {
             e.Cancel = true;
-            if (Visibility == Visibility.Hidden) return;
-            //Global.MainWindow.Show();
+            if (Visibility == Visibility.Hidden) return;            
             Hide();
         }
 
@@ -73,29 +70,6 @@ namespace Time_Table_Arranging_Program.Windows_Control {
                 MainBorder.Visibility = Visibility.Visible;
                 ToggleViewButton.Content = "Minimize";
             }
-        }
-
-
-        private void LeftButton_OnClick(object sender, RoutedEventArgs e) {
-            DecrementCurrentIndex();
-            DescriptionViewer.Update(_timetableList.ToList()[_currentIndex].ToList());
-        }
-
-        private void DecrementCurrentIndex() {
-            _currentIndex--;
-            if (_currentIndex < 0)
-                _currentIndex = _maxIndex;
-        }
-
-        private void RightButton_OnClick(object sender, RoutedEventArgs e) {
-            IncrementCurrentIndex();
-            DescriptionViewer.Update(_timetableList.ToList()[_currentIndex].ToList());
-        }
-
-        private void IncrementCurrentIndex() {
-            _currentIndex++;
-            if (_currentIndex > _maxIndex)
-                _currentIndex = 0;
-        }
+        }      
     }
 }

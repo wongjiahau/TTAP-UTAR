@@ -21,7 +21,7 @@ namespace Time_Table_Arranging_Program.Pages {
     public partial class Page_CreateTimetable : Page, IDirtyObserver<IOutputTimetableModel> {
         private static Page_CreateTimetable _singletonInstance;
         private readonly MutableObservable<ITimetable> _currentViewedTimetable = new ObservableTimetable(Timetable.Empty);
-        //private readonly CyclicIndex _cyclicIndex;
+        private readonly CyclicIndex _cyclicIndex;
 
         private readonly ObservableTimetableList _outputTimetables =
             new ObservableTimetableList(TimetableList.NoSlotsIsChosen);
@@ -41,8 +41,9 @@ namespace Time_Table_Arranging_Program.Pages {
             FavouriteButton.SetObservedThings(_outputTimetables);
             FavouriteButton.SetObservedThings(_currentViewedTimetable);
             TimetableViewer.SetObservedThings(_outputTimetables);
-            TimetableViewer.Initialize(new CyclicIndex());     
-            CyclicIndexView.DataContext = new CyclicIndexVM(new CyclicIndex());       
+            TimetableViewer.Initialize(new CyclicIndex());    
+            _cyclicIndex = new CyclicIndex(); 
+            CyclicIndexView.DataContext = new CyclicIndexVM(_cyclicIndex);       
             InitializeExtraComponents();
             ToolBoxPanel.Visibility = Visibility.Hidden;
         }
@@ -154,7 +155,7 @@ namespace Time_Table_Arranging_Program.Pages {
         }
 
         private void ShowSummaryButton_OnClick(object sender , RoutedEventArgs e) {
-            SummaryWindow.GetSingletonInstance(_outputTimetables.GetCurrentState()).ShowWindow();
+            SummaryWindow.GetSingletonInstance(_outputTimetables.GetCurrentState(), _cyclicIndex).ShowWindow();
         }
 
         private void AddToGoogleCalendarButton_OnClick(object sender , RoutedEventArgs e) {

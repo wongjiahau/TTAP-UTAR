@@ -6,19 +6,33 @@
         xmlns:local="clr-namespace:Time_Table_Arranging_Program.Windows_Control"
         xmlns:userControl="clr-namespace:Time_Table_Arranging_Program.User_Control"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:viewModels="clr-namespace:Time_Table_Arranging_Program.MVVM_Framework.ViewModels"
         mc:Ignorable="d"
-        Title="Summary" SizeToContent="WidthAndHeight"  Topmost="True" ResizeMode="NoResize" Closing="SummaryWindow_OnClosing" WindowStartupLocation="CenterScreen" >
+        Title="Note：This Window will alway stay on top." SizeToContent="WidthAndHeight"  Topmost="True" ResizeMode="NoResize" Closing="SummaryWindow_OnClosing" WindowStartupLocation="CenterScreen" >
+    <Window.DataContext>
+        <viewModels:CyclicIndexVM />
+    </Window.DataContext>
     <DockPanel>
         <DockPanel DockPanel.Dock="Top">
             <Button x:Name="BackButton" Content="Back" Click="BackButton_OnClick" DockPanel.Dock="Left" />
             <TextBlock Margin="10,0,0,0"  VerticalAlignment="Center" DockPanel.Dock="Left" FontSize="15" >Note : This Window will always stay on top.</TextBlock>
-            
-            <Button DockPanel.Dock="Right"  Style="{StaticResource MaterialDesignFlatButton}" Click="RightButton_OnClick">
-                <materialDesign:PackIcon Kind="ChevronRight" />
-            </Button>
-            <Button DockPanel.Dock="Right" Visibility="Visible" Style="{StaticResource MaterialDesignFlatButton}" Click="LeftButton_OnClick">
-                <materialDesign:PackIcon Kind="ChevronLeft" />
-            </Button>
+            <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+                <StackPanel.Resources>
+                    <Style TargetType="Label">
+                        <Setter Property="VerticalAlignment" Value="Center"></Setter>
+                        <Setter Property="FontFamily" Value="Consolas"></Setter>
+                    </Style>
+                </StackPanel.Resources>
+                <Button  Visibility="Visible" Style="{StaticResource MaterialDesignFlatButton}" Command="{Binding DecrementCommand}">
+                    <materialDesign:PackIcon Kind="ChevronLeft" />
+                </Button>
+                <Label x:Name="CurrentValueLabel" Content="{Binding CurrentValue}"></Label>
+                <Label>/</Label>
+                <Label x:Name="MaxValueLabel" Content="{Binding MaxValue}"></Label>
+                <Button Style="{StaticResource MaterialDesignFlatButton}" Command="{Binding IncrementCommand}">
+                    <materialDesign:PackIcon Kind="ChevronRight" />
+                </Button>
+            </StackPanel>
             <Button  DockPanel.Dock="Right" x:Name="ToggleViewButton" Style="{StaticResource MaterialDesignRaisedLightButton}" HorizontalAlignment="Right" Click="ToggleViewButton_OnClick">Minimize</Button>
         </DockPanel>
         <Border x:Name="MainBorder" BorderBrush="Black" BorderThickness="0">
@@ -28,10 +42,10 @@
                     <TextBlock x:Name="TipsLabel" DockPanel.Dock="Top" FontWeight="Bold" Margin="5,5,0,5" FontSize="20">You can use this to help you to bid timetable!</TextBlock>
                 </DockPanel>
                 <Grid >
-                    
-                   
+
+
                     <userControl:TimetableDescriptionViewer x:Name="DescriptionViewer" />
-                    
+
                 </Grid>
             </StackPanel>
         </Border>
