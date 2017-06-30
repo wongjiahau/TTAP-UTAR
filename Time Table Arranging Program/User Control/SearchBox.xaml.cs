@@ -45,5 +45,9 @@ namespace Time_Table_Arranging_Program.User_Control {
             Keyboard.Focus(TextBox);
             e.Handled = true;
         }
+
+        private void TextBox_OnKeyUp(object sender, KeyEventArgs e) {
+            if(e.Key == Key.Escape) TextBox.Clear();
+        }
     }
 }

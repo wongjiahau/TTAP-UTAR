@@ -21,10 +21,13 @@
             <TextBox Grid.Column="1"  Margin="5 0 0 0" Padding="0,0,20,0"            CaretBrush="Black"                           
                              materialDesign:HintAssist.Hint="Search . . ." x:Name="TextBox" FontSize="15" 
                              materialDesign:TextFieldAssist.DecorationVisibility="Hidden" BorderThickness="0"
-                              VerticalAlignment="Center" TextChanged="TextBox_OnTextChanged"/>
+                              VerticalAlignment="Center" TextChanged="TextBox_OnTextChanged"
+                     KeyUp="TextBox_OnKeyUp"
+                     />
+            
             <Button Grid.Column="1" Style="{DynamicResource MaterialDesignToolButton}" Height="40"
                     Width="40"
-                    x:Name="ClearButton" ToolTip="Clear text" Click="ClearButton_OnClick" HorizontalAlignment="Right" Visibility="Hidden">
+                    x:Name="ClearButton" ToolTip="Clear text [Esc]" Click="ClearButton_OnClick" HorizontalAlignment="Right" Visibility="Hidden">
                 <materialDesign:PackIcon Kind="Close" Height="30"
                     Width="30" Opacity="1"  />
             </Button>
