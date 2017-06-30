@@ -66,6 +66,10 @@ namespace Time_Table_Arranging_Program.Windows_Control {
                 MainBorder.Visibility = Visibility.Visible;
                 ToggleViewButton.Content = "Minimize";
             }
-        }      
+        }
+
+        private void OkButton_OnClick(object sender, RoutedEventArgs e) {
+            HintPanel.Visibility = Visibility.Collapsed;            
+        }
     }
 }

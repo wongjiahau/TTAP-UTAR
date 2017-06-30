@@ -8,46 +8,43 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:viewModels="clr-namespace:Time_Table_Arranging_Program.MVVM_Framework.ViewModels"
         mc:Ignorable="d"
-        Title="Note：This Window will alway stay on top." SizeToContent="WidthAndHeight"  Topmost="True" ResizeMode="NoResize" Closing="SummaryWindow_OnClosing" WindowStartupLocation="CenterScreen" >
+        Title="This Window will always stay on top!" SizeToContent="WidthAndHeight"  Topmost="True" ResizeMode="NoResize" Closing="SummaryWindow_OnClosing" WindowStartupLocation="CenterScreen" >
     <Window.DataContext>
         <viewModels:CyclicIndexVM />
     </Window.DataContext>
     <DockPanel>
+        <Grid DockPanel.Dock="Top" x:Name="HintPanel">
+            <materialDesign:Card Padding="10" Margin="5">
+                <DockPanel>
+                    <TextBlock x:Name="TipsLabel" DockPanel.Dock="Left" FontWeight="Bold"  FontSize="20">You can use this to help you to bid timetable!</TextBlock>
+                    <Button DockPanel.Dock="Right" Margin="5,0,0,0" Click="OkButton_OnClick">OK</Button>
+                </DockPanel>
+            </materialDesign:Card>
+        </Grid>
         <DockPanel DockPanel.Dock="Top">
             <Button x:Name="BackButton" Content="Back" Click="BackButton_OnClick" DockPanel.Dock="Left" />
-            <TextBlock Margin="10,0,0,0"  VerticalAlignment="Center" DockPanel.Dock="Left" FontSize="15" >Note : This Window will always stay on top.</TextBlock>
-            <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+            <Button  DockPanel.Dock="Right" x:Name="ToggleViewButton"  Style="{StaticResource MaterialDesignRaisedLightButton}" HorizontalAlignment="Right" Click="ToggleViewButton_OnClick">Minimize</Button>
+            <StackPanel DockPanel.Dock="Right" HorizontalAlignment="Center" Orientation="Horizontal">
                 <StackPanel.Resources>
                     <Style TargetType="Label">
                         <Setter Property="VerticalAlignment" Value="Center"></Setter>
                         <Setter Property="FontFamily" Value="Consolas"></Setter>
                     </Style>
                 </StackPanel.Resources>
-                <Button  Visibility="Visible" Style="{StaticResource MaterialDesignFlatButton}" Command="{Binding DecrementCommand}">
+                <Button  Visibility="Visible" ToolTip="Go to previous timetable" Style="{StaticResource MaterialDesignFlatButton}" Command="{Binding DecrementCommand}">
                     <materialDesign:PackIcon Kind="ChevronLeft" />
                 </Button>
                 <Label x:Name="CurrentValueLabel" Content="{Binding CurrentValue, UpdateSourceTrigger=PropertyChanged}"></Label>
                 <Label>/</Label>
                 <Label x:Name="MaxValueLabel" Content="{Binding MaxValue}"></Label>
-                <Button Style="{StaticResource MaterialDesignFlatButton}" Command="{Binding IncrementCommand}">
+                <Button ToolTip="Go to next timetable" Style="{StaticResource MaterialDesignFlatButton}" Command="{Binding IncrementCommand}">
                     <materialDesign:PackIcon Kind="ChevronRight" />
                 </Button>
             </StackPanel>
-            <Button  DockPanel.Dock="Right" x:Name="ToggleViewButton" Style="{StaticResource MaterialDesignRaisedLightButton}" HorizontalAlignment="Right" Click="ToggleViewButton_OnClick">Minimize</Button>
+
         </DockPanel>
         <Border x:Name="MainBorder" BorderBrush="Black" BorderThickness="0">
-            <StackPanel HorizontalAlignment="Stretch">
-                <DockPanel>
-
-                    <TextBlock x:Name="TipsLabel" DockPanel.Dock="Top" FontWeight="Bold" Margin="5,5,0,5" FontSize="20">You can use this to help you to bid timetable!</TextBlock>
-                </DockPanel>
-                <Grid >
-
-
-                    <userControl:TimetableDescriptionViewer x:Name="DescriptionViewer" />
-
-                </Grid>
-            </StackPanel>
+            <userControl:TimetableDescriptionViewer x:Name="DescriptionViewer" />
         </Border>
     </DockPanel>
 </Window>
