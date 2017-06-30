@@ -21,8 +21,9 @@ namespace Time_Table_Arranging_Program.User_Control {
             Closed += Popup_Closed;
             _timer = new DispatcherTimer();
             _timer.Interval = TimeSpan.FromSeconds(2);
-            AllowsTransparency = true;
-            Placement = PlacementMode.Mouse;
+            AllowsTransparency = true;            
+            Placement = PlacementMode.Bottom;
+            HorizontalAlignment = HorizontalAlignment.Center;
             PopupAnimation = PopupAnimation.Slide;
         }
 
