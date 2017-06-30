@@ -28,7 +28,11 @@ namespace Time_Table_Arranging_Program.Pages {
 
         private void RegenerateOutput() {
             //            var filteredSlot = Filterer.Filter(_inputSlots.ToArray() , _predicates);
-            var filteredTimetable = Filterer.Filter(_outputTimetables , Predicates);
+            var package = new TimetablesAndPredicates(_outputTimetables, Predicates);
+            var bg = CustomBackgroundWorker<TimetablesAndPredicates , List<List<Slot>>>.
+RunAndShowLoadingScreen(Filterer.Filter , package , "Filtering unsatisfactory timetables . . .");
+            var filteredTimetable = bg.GetResult();
+            //var filteredTimetable = Filterer.Filter(_outputTimetables , Predicates);
             TimeTableGui.RegenerateStateSummary(filteredTimetable , _factory);
         }
 

@@ -320,7 +320,7 @@ namespace Time_Table_Arranging_Program {
 
         public void RegenerateStateSummary(List<List<Slot>> outputTimetables , IStateElementFactory factory) {
             var bg = CustomBackgroundWorker<List<List<Slot>> , StateTable>.
-RunAndShowLoadingScreen(StateTable.Parse , outputTimetables , "Recalculating state table . . .");
+RunAndShowLoadingScreen(StateTable.Parse , outputTimetables , "Recalculating . . .");
             var stateTable = bg.GetResult();
             foreach (var cell in stateTable) {
                 int paddedRowIndex = cell.RowIndex * _eachDayHaveHowManyRow + _paddingDueToTimeRow;
