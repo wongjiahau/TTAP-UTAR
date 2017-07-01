@@ -14,6 +14,7 @@
                 <DockPanel>
                 <Button DockPanel.Dock="Right" Height="50"  Style="{StaticResource MaterialDesignFlatButton}"
                             Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
+                        ToolTip="Hide this panel"
                             >
                     <materialDesign:PackIcon Kind="ArrowLeft" Foreground="Black" Width="30" Height="30"></materialDesign:PackIcon>
                 </Button>
