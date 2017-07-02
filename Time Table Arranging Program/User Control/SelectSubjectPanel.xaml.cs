@@ -4,8 +4,10 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media.Animation;
 using System.Windows.Threading;
 using Time_Table_Arranging_Program.Class;
+using Time_Table_Arranging_Program.UserInterface;
 
 namespace Time_Table_Arranging_Program.User_Control {
     /// <summary>
@@ -74,15 +76,9 @@ namespace Time_Table_Arranging_Program.User_Control {
         }
 
         private void Update() {
-            if (UIDofSelectedSlots.Count == 0) {
-                ToggleViewButton.IsEnabled = false;
-                ToggleViewButton.IsChecked = false;
-            }
-            else {
-                ToggleViewButton.IsEnabled = true;
-            }
+            UpdateViewChangerVisibility();           
             SlotSelectionChanged(this, null);
-            ButtonBadge.Badge = GetNamesOfCheckedSubject().Length;
+            
             Dispatcher.BeginInvoke(
                 DispatcherPriority.Input,
                 new Action(delegate
@@ -90,6 +86,21 @@ namespace Time_Table_Arranging_Program.User_Control {
                     FocusManager.SetFocusedElement(this, SearchBox);
                     IInputElement focusedElement = FocusManager.GetFocusedElement(this);
                 }));
+        }
+
+        private void UpdateViewChangerVisibility() {            
+            DoubleAnimation da;
+            if (UIDofSelectedSlots.Count == 0) {
+                da = CustomAnimation.GetLeavingScreenAnimation(200, 0, false);
+                ViewChanger.Badge = null;
+                if (ViewChangerButton.Content.ToString() == "Show all subjects") return;
+            }
+            else {                
+                da = CustomAnimation.GetEnteringScreenAnimation(0, 200, false);                
+                ViewChanger.Badge = GetNamesOfCheckedSubject().Length;
+                if (ViewChanger.ActualWidth > 0) return;
+            }
+            ViewChanger.BeginAnimation(WidthProperty , da);
         }
 
         private void Box_CheckChanged(object sender, RoutedEventArgs e) {
@@ -105,28 +116,7 @@ namespace Time_Table_Arranging_Program.User_Control {
             e.Handled = true;
             Update();
         }
-
-        private void ToggleViewButton_OnChecked(object sender, RoutedEventArgs e) {
-            foreach (UIElement child in CheckerBoxStackPanel.Children) {
-                if (child is ICheckBoxWithListDownMenu) {
-                    child.Visibility = 
-                        (child as ICheckBoxWithListDownMenu).IsChecked ? 
-                        Visibility.Visible : 
-                        Visibility.Collapsed;
-                }
-            }
-            ToggleViewButton.ToolTip = "Show all subject";
-        }
-
-        private void ToggleViewButton_OnUnchecked(object sender, RoutedEventArgs e) {
-            foreach (UIElement child in CheckerBoxStackPanel.Children) {
-                if (child is ICheckBoxWithListDownMenu) {
-                    child.Visibility = Visibility.Visible;
-                }
-            }
-            ToggleViewButton.ToolTip = "Show selected subjects";
-        }
-
+     
         private void ViewChangerButton_OnClick(object sender, RoutedEventArgs e) {
             if (ViewChangerButton.Content.ToString() == "Show selected subjects") {
                 foreach (UIElement child in CheckerBoxStackPanel.Children) {
@@ -191,11 +181,7 @@ namespace Time_Table_Arranging_Program.User_Control {
                 }
             }
             return somethingFound;
-        }
-
-        private void SearchBox_OnGotFocus(object sender, RoutedEventArgs e) {
-            ToggleViewButton.IsChecked = false;
-        }
+        }      
 
         private void YesButton_OnClick(object sender, RoutedEventArgs e) {
             SearchBox.Text = _suggestedText;

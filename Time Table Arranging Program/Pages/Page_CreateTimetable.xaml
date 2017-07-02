@@ -17,7 +17,7 @@
         <iValueConverter:TooltipConverterForToggleButton x:Key="TooltipConverterForToggleButton"/>
     </Page.Resources>
     <Grid>
-        <materialDesign:DrawerHost IsLeftDrawerOpen="True">
+        <materialDesign:DrawerHost IsLeftDrawerOpen="False">
             <materialDesign:DrawerHost.LeftDrawerContent>
                 <userControl:SelectSubjectPanel   x:Name="SelectSubjectPanel" DockPanel.Dock="Left" SlotSelectionChanged="SelectSubjectPanel_OnSlotSelectionChanged" 
                                             Visibility="{Binding IsChecked, ElementName=ToggleViewButton, Converter={StaticResource VisibilityConverter}, ConverterParameter=1}"/>
@@ -69,7 +69,7 @@
                                         Style="{StaticResource MaterialDesignRaisedAccentButton}" 
                                         HorizontalAlignment="Right" ToolTip="Set what time you don't want to have class"                                            
                                             >
-                                        
+
                                         <StackPanel Orientation="Horizontal">
                                             <materialDesign:PackIcon Kind="Clock" Height="30" Width="30" />
                                             <TextBlock Margin="5,0,0,0" Text="Set time constraint" VerticalAlignment="Center" />
@@ -121,7 +121,6 @@
 
                     </DockPanel>
                 </DockPanel>
-
             </Grid>
         </materialDesign:DrawerHost>
     </Grid>
