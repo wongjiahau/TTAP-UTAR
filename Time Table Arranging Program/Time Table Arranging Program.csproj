@@ -580,6 +580,9 @@
     <EmbeddedResource Include="Images\greenbox.png" />
     <EmbeddedResource Include="Images\xcross.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Screenshots_utarict.PNG" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Fody.2.0.6\build\dotnet\Fody.targets" Condition="Exists('..\packages\Fody.2.0.6\build\dotnet\Fody.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
