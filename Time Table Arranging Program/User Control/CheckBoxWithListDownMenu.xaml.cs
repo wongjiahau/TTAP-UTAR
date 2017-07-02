@@ -53,6 +53,7 @@ namespace Time_Table_Arranging_Program {
                 }
                 else {
                     Border.Background = null;
+                    Border.Background = Brushes.WhiteSmoke;
                 }
             }
         }

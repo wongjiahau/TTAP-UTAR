@@ -7,6 +7,7 @@ namespace Time_Table_Arranging_Program.User_Control {
     ///     Interaction logic for SearchBox.xaml
     /// </summary>
     public partial class SearchBox : UserControl {
+        public event KeyEventHandler EnterKeyPressed;
         public SearchBox() {
             InitializeComponent();
         }
@@ -48,6 +49,9 @@ namespace Time_Table_Arranging_Program.User_Control {
 
         private void TextBox_OnKeyUp(object sender, KeyEventArgs e) {
             if(e.Key == Key.Escape) TextBox.Clear();
+            if (e.Key == Key.Enter) {
+                EnterKeyPressed?.Invoke(null,null);
+            }
         }
     }
 }

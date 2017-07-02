@@ -37,7 +37,7 @@
                         </Button>
                     </materialDesign:Badged>
                     <Border Background="White" DockPanel.Dock="Left" HorizontalAlignment="Stretch">
-                        <local:SearchBox x:Name="SearchBox"  TextChanged="SearchBoxOnTextChanged"/>
+                        <local:SearchBox x:Name="SearchBox" EnterKeyPressed="SearchBox_OnEnterKeyPressed" TextChanged="SearchBoxOnTextChanged"/>
                     </Border>
                 </DockPanel>
             </StackPanel>
@@ -57,8 +57,9 @@
                 </StackPanel>
                 <TextBlock x:Name="ErrorLabel" FontWeight="Bold" Visibility="Collapsed">No result found . . .</TextBlock>
             </Grid>
-
-            <Border BorderBrush="DarkGray"  BorderThickness="0.5" VerticalAlignment="Stretch" DockPanel.Dock="Bottom">
+            <TextBlock x:Name="HintLabel" Margin="10,5,5,5" xml:space="preserve" Visibility="Collapsed" DockPanel.Dock="Top">Press [Enter] to check the first subject in the list below.
+Press [Esc] to clear text of search box.</TextBlock>
+            <Border  BorderBrush="DarkGray"  BorderThickness="0.5" VerticalAlignment="Stretch" DockPanel.Dock="Bottom">
                 <ScrollViewer x:Name="SelectSubjectScrollViewer"  FlowDirection="LeftToRight"
                               VerticalScrollBarVisibility="Auto"
                               HorizontalScrollBarVisibility="Hidden"  ToolTipService.ShowOnDisabled="True" ToolTipService.InitialShowDelay="0">

@@ -143,13 +143,15 @@ namespace Time_Table_Arranging_Program.User_Control {
         }
 
         private void SearchBoxOnTextChanged(object sender, TextChangedEventArgs textChangedEventArgs) {
-            string searchedText = SearchBox.Text.ToLower();
+            string searchedText = SearchBox.Text.ToLower();            
             bool somethingFound = SearchForMatchingSubjectAndDisplayThem(searchedText);
             if (somethingFound) {
+                HintLabel.Visibility = Visibility.Visible;
                 FeedbackPanel.Visibility = Visibility.Collapsed;
                 ErrorLabel.Visibility = Visibility.Collapsed;
             }
             else {
+                HintLabel.Visibility =Visibility.Collapsed;
                 _suggestedText = LevenshteinDistance.GetClosestMatchingTerm(searchedText, _nameAndCodeOfAllSubjects);
                 if (_suggestedText == null) {
                     FeedbackPanel.Visibility = Visibility.Collapsed;
@@ -163,6 +165,7 @@ namespace Time_Table_Arranging_Program.User_Control {
                     SearchForMatchingSubjectAndDisplayThem(_suggestedText.ToLower());
                 }
             }
+            if (searchedText == "") HintLabel.Visibility = Visibility.Collapsed;
         }
 
         private bool SearchForMatchingSubjectAndDisplayThem(string searchedText) {
@@ -189,16 +192,20 @@ namespace Time_Table_Arranging_Program.User_Control {
         }
 
         private void SelectSubjectPanel_OnKeyDown(object sender, KeyEventArgs e) {
-            if (SearchBox.IsKeyboardFocused() || SearchBox.IsFocused) return;
-            //if (e.Key == Key.Back) {
-            //    string s = SearchBox.Text;
-            //    SearchBox.Text = s.Substring(0, s.Length - 1);
-            //    return;
-            //}
-            //SearchBox.Text += e.Key;
-            //SearchBox.TextBox.CaretIndex = 1;
-            FocusManager.SetFocusedElement(this, SearchBox);
-            // SearchBox.Focus();
+            if (SearchBox.IsKeyboardFocused() || SearchBox.IsFocused) return;           
+            FocusManager.SetFocusedElement(this, SearchBox);            
+        }
+
+        private void SearchBox_OnEnterKeyPressed(object sender, KeyEventArgs e) {
+            foreach (UIElement child in CheckerBoxStackPanel.Children) {
+                if (child is ICheckBoxWithListDownMenu) {
+                    if (child.Visibility == Visibility.Visible) {
+                        var target = child as ICheckBoxWithListDownMenu;
+                        target.IsChecked = !target.IsChecked;
+                        return;
+                    }                                                           
+                }
+            }
         }
     }
 }
