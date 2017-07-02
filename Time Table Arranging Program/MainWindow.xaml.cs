@@ -33,7 +33,7 @@ namespace Time_Table_Arranging_Program {
             Global.MainWindow = this;
             Global.Snackbar = Snackbar;
             DialogBox.Initialize(DialogHost , Title , Message , DialogButton);
-            MainFrame.Navigate(new Page_Intro());
+            MainFrame.Navigate(new Page_GettingStarted());
         }
 
         private void MainFrame_OnNavigating(object sender , NavigatingCancelEventArgs e) {

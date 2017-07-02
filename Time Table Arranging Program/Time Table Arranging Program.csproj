@@ -241,6 +241,9 @@
     <Compile Include="Pages\Page_CreateTimetable.xaml.cs">
       <DependentUpon>Page_CreateTimetable.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Page_GettingStarted.xaml.cs">
+      <DependentUpon>Page_GettingStarted.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Page_Intro.xaml.cs">
       <DependentUpon>Page_Intro.xaml</DependentUpon>
     </Compile>
@@ -380,6 +383,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\Page_CreateTimetable.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Page_GettingStarted.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

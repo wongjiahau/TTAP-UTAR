@@ -139,6 +139,7 @@ namespace Time_Table_Arranging_Program.User_Control {
                 ViewChangerButton.Content = "Show selected subjects";
                 SearchBox.Visibility = Visibility.Visible;
             }
+            UpdateViewChangerVisibility();
         }
 
         private void SearchBoxOnTextChanged(object sender, TextChangedEventArgs textChangedEventArgs) {

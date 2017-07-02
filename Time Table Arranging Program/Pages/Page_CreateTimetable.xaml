@@ -17,7 +17,7 @@
         <iValueConverter:TooltipConverterForToggleButton x:Key="TooltipConverterForToggleButton"/>
     </Page.Resources>
     <Grid>
-        <materialDesign:DrawerHost IsLeftDrawerOpen="False">
+        <materialDesign:DrawerHost IsLeftDrawerOpen="True">
             <materialDesign:DrawerHost.LeftDrawerContent>
                 <userControl:SelectSubjectPanel   x:Name="SelectSubjectPanel" DockPanel.Dock="Left" SlotSelectionChanged="SelectSubjectPanel_OnSlotSelectionChanged" 
                                             Visibility="{Binding IsChecked, ElementName=ToggleViewButton, Converter={StaticResource VisibilityConverter}, ConverterParameter=1}"/>
