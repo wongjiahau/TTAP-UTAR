@@ -22,22 +22,22 @@
                 <userControl:SelectSubjectPanel   x:Name="SelectSubjectPanel" DockPanel.Dock="Left" SlotSelectionChanged="SelectSubjectPanel_OnSlotSelectionChanged" 
                                             Visibility="{Binding IsChecked, ElementName=ToggleViewButton, Converter={StaticResource VisibilityConverter}, ConverterParameter=1}"/>
             </materialDesign:DrawerHost.LeftDrawerContent>
-        <Grid>
-            <Button HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10" 
+            <Grid>
+                <Button HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10" 
                     Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}"
                     Style="{StaticResource MaterialDesignRaisedDarkButton}"
                     Height="40"
                     >
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="Menu" Margin="0,0,5,0" Height="20" Width="20" VerticalAlignment="Center"></materialDesign:PackIcon>
-<Label VerticalAlignment="Center" Foreground="White">Select subjects</Label>
+                        <Label VerticalAlignment="Center" Foreground="White">Select subjects</Label>
                     </StackPanel>
                 </Button>
-            <DockPanel DockPanel.Dock="Right" MouseUp="RightPanel_OnMouseDown">
-                <DockPanel VerticalAlignment="Center">
-                    <Border x:Name="ToolBoxPanel" DockPanel.Dock="Bottom" VerticalAlignment="Top" Margin="1"  HorizontalAlignment="Center" >
-                        <Grid>
-                            <StackPanel Orientation="Horizontal">
+                <DockPanel DockPanel.Dock="Right" MouseUp="RightPanel_OnMouseDown">
+                    <DockPanel VerticalAlignment="Center">
+                        <Border x:Name="ToolBoxPanel" DockPanel.Dock="Bottom" VerticalAlignment="Top" Margin="1"  HorizontalAlignment="Center" >
+                            <Grid>
+                                <StackPanel Orientation="Horizontal">
                                     <Grid Visibility="Collapsed" VerticalAlignment="Bottom" Margin="0,0,5,0" HorizontalAlignment="Left">
                                         <materialDesign:Card>
                                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" >
@@ -63,26 +63,27 @@
                                         </materialDesign:Card>
                                     </Grid>
                                     <Button x:Name="SetTimeConstraintButton" 
-                            Visibility="Visible" Height="auto"
-                                VerticalAlignment="Stretch"
-                            FontSize="20"  Click="SetTimeConstraintButton_OnClick" 
-                            Style="{StaticResource MaterialDesignRaisedAccentButton}" 
-                            HorizontalAlignment="Right" ToolTip="Set what time you don't want to have class">
-                                    <StackPanel Orientation="Horizontal">
-                                        <materialDesign:PackIcon Kind="Clock" Height="30" Width="30" />
-                                        <TextBlock Margin="5,0,0,0" Text="Set time constraint" VerticalAlignment="Center" />
-                                    </StackPanel>
-                                </Button>
-                                    <views:CyclicIndexView Margin="10,0,5,0" x:Name="CyclicIndexView" HorizontalAlignment="Center" ></views:CyclicIndexView>
+                                        Visibility="Visible" Height="auto"
+                                        VerticalAlignment="Stretch"
+                                        FontSize="20"  Click="SetTimeConstraintButton_OnClick" 
+                                        Style="{StaticResource MaterialDesignRaisedAccentButton}" 
+                                        HorizontalAlignment="Right" ToolTip="Set what time you don't want to have class"                                            
+                                            >
+                                        
+                                        <StackPanel Orientation="Horizontal">
+                                            <materialDesign:PackIcon Kind="Clock" Height="30" Width="30" />
+                                            <TextBlock Margin="5,0,0,0" Text="Set time constraint" VerticalAlignment="Center" />
+                                        </StackPanel>
+                                    </Button>
+                                    <views:CyclicIndexView Margin="10,0,0,0" x:Name="CyclicIndexView" HorizontalAlignment="Center" ></views:CyclicIndexView>
                                     <Grid  
                           HorizontalAlignment="Right" VerticalAlignment="Bottom">
                                         <Grid.Resources>
                                             <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedButton}">
                                                 <Setter Property="Height" Value="55"></Setter>
-
                                                 <Setter Property="Width" Value="70" />
                                                 <Setter Property="Foreground" Value="White" />
-                                                <Setter Property="Margin" Value="5,0,0,0"></Setter>
+                                                <Setter Property="Margin" Value="10,0,0,0"></Setter>
                                             </Style>
                                             <Style TargetType="materialDesign:PackIcon">
                                                 <Setter Property="Height" Value="35" />
@@ -114,14 +115,14 @@
                                         </StackPanel>
                                     </Grid>
                                 </StackPanel>
-                        </Grid>
-                    </Border>
-                    <userControl:TimetableViewer Height="480" VerticalAlignment="Bottom" x:Name="TimetableViewer" Visibility="Visible" ViewChanged="TimetableViewer_OnViewChanged"/>
+                            </Grid>
+                        </Border>
+                        <userControl:TimetableViewer Height="480" VerticalAlignment="Bottom" x:Name="TimetableViewer" Visibility="Visible" ViewChanged="TimetableViewer_OnViewChanged"/>
 
+                    </DockPanel>
                 </DockPanel>
-            </DockPanel>
 
-        </Grid>
+            </Grid>
         </materialDesign:DrawerHost>
     </Grid>
 </Page>
