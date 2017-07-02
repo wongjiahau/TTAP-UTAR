@@ -82,6 +82,7 @@ namespace Time_Table_Arranging_Program.User_Control {
                 ToggleViewButton.IsEnabled = true;
             }
             SlotSelectionChanged(this, null);
+            ButtonBadge.Badge = GetNamesOfCheckedSubject().Length;
             Dispatcher.BeginInvoke(
                 DispatcherPriority.Input,
                 new Action(delegate

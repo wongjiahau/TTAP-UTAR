@@ -12,13 +12,13 @@
         <DockPanel LastChildFill="True" >
             <StackPanel DockPanel.Dock="Top">
                 <DockPanel>
-                <Button DockPanel.Dock="Right" Height="50"  Style="{StaticResource MaterialDesignFlatButton}"
+                    <Button DockPanel.Dock="Right" Height="50"  Style="{StaticResource MaterialDesignFlatButton}"
                             Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
                         ToolTip="Hide this panel"
                             >
-                    <materialDesign:PackIcon Kind="ArrowLeft" Foreground="Black" Width="30" Height="30"></materialDesign:PackIcon>
-                </Button>
-                <Label VerticalAlignment="Center" FontSize="30" Margin="5" HorizontalAlignment="Left" FontWeight="Bold">Search and select your subjects</Label>
+                        <materialDesign:PackIcon Kind="ArrowLeft" Foreground="Black" Width="30" Height="30"></materialDesign:PackIcon>
+                    </Button>
+                    <Label VerticalAlignment="Center" FontSize="30" Margin="5" HorizontalAlignment="Left" FontWeight="Bold">Search and select your subjects</Label>
                 </DockPanel>
                 <Separator></Separator>
                 <DockPanel LastChildFill="True"  DockPanel.Dock="Top">
@@ -26,7 +26,7 @@
                         <materialDesign:PackIcon Kind="Eye" Height="20" Width="20"/>
                     </ToggleButton>
 
-                    
+
                     <Border Background="White">
                         <local:SearchBox x:Name="SearchBox"  TextChanged="SearchBoxOnTextChanged" GotFocus="SearchBox_OnGotFocus"/>
                     </Border>
@@ -48,11 +48,16 @@
                 </StackPanel>
                 <TextBlock x:Name="ErrorLabel" FontWeight="Bold" Visibility="Collapsed">No result found . . .</TextBlock>
             </Grid>
-            <Button x:Name="ViewChangerButton" Margin="10" Height="50" VerticalAlignment="Bottom" Click="ViewChangerButton_OnClick" DockPanel.Dock="Bottom"
+            <materialDesign:Badged x:Name="ButtonBadge" DockPanel.Dock="Bottom" HorizontalAlignment="Center" HorizontalContentAlignment="Stretch"                                   
+                                   Margin="10"
+                                   Width="200"
+                                   >
+                <Button x:Name="ViewChangerButton" Height="50" VerticalAlignment="Bottom" Click="ViewChangerButton_OnClick" DockPanel.Dock="Bottom"
                         Style="{StaticResource MaterialDesignRaisedDarkButton}"
                         >
-                Show selected subjects
-            </Button>
+                    Show selected subjects
+                </Button>
+            </materialDesign:Badged>
             <Border BorderBrush="DarkGray"  BorderThickness="0.5" VerticalAlignment="Stretch" DockPanel.Dock="Bottom">
                 <ScrollViewer x:Name="SelectSubjectScrollViewer"  FlowDirection="LeftToRight"
                               VerticalScrollBarVisibility="Auto"

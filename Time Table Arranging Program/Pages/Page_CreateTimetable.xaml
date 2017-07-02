@@ -38,32 +38,31 @@
                     <Border x:Name="ToolBoxPanel" DockPanel.Dock="Bottom" VerticalAlignment="Top" Margin="1"  HorizontalAlignment="Center" >
                         <Grid>
                             <StackPanel Orientation="Horizontal">
-                                <Grid Visibility="Collapsed" VerticalAlignment="Bottom" Margin="0,0,5,0" HorizontalAlignment="Left">
-                                    <materialDesign:Card>
-                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" >
-                                            <userControl:LikeButton Margin="5"  x:Name="FavouriteButton"   IsEnabled="False" Checked="FavoriteButton_OnChecked" Unchecked="FavoriteButton_OnUnchecked"  />
-                                            <Grid VerticalAlignment="Center" Margin="5,0,0,0">
-                                                <StackPanel VerticalAlignment="Center">
-                                                    <RadioButton FontWeight="DemiBold" GroupName="a" IsChecked="True" Checked="ShowAllTimetable_Checked" Margin="2" Content="Show all timetables"/>
-                                                    <RadioButton FontWeight="DemiBold" GroupName="a" Margin="2,2,10,2" Checked="ShowFavoriteTimetable_Checked" Content="Show favorite timetables"/>
-                                                </StackPanel>
-                                                <StackPanel Visibility="Hidden"  Orientation="Horizontal" Margin="10" HorizontalAlignment="Left">
-                                                    <ComboBox x:Name="ViewSelector" materialDesign:ComboBoxAssist.ClassicMode="False"  FontSize="15" FontWeight="DemiBold" SelectionChanged="ViewSelector_OnSelectionChanged" SelectedIndex="{Binding IsChecked, Converter={StaticResource ComboBoxSelectionConverter}, ElementName=ToggleViewButton}">
-                                                        <ComboBoxItem IsSelected="True" Content="Show all timetable"/>
-                                                        <ComboBoxItem Content="Show favourite timetable"/>
-                                                    </ComboBox>
-                                                    <ToggleButton Visibility="Collapsed" x:Name="ToggleViewButton"  Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}" Margin="5"  IsChecked="False"
+                                    <Grid Visibility="Collapsed" VerticalAlignment="Bottom" Margin="0,0,5,0" HorizontalAlignment="Left">
+                                        <materialDesign:Card>
+                                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" >
+                                                <userControl:LikeButton Margin="5"  x:Name="FavouriteButton"   IsEnabled="False" Checked="FavoriteButton_OnChecked" Unchecked="FavoriteButton_OnUnchecked"  />
+                                                <Grid VerticalAlignment="Center" Margin="5,0,0,0">
+                                                    <StackPanel VerticalAlignment="Center">
+                                                        <RadioButton FontWeight="DemiBold" GroupName="a" IsChecked="True" Checked="ShowAllTimetable_Checked" Margin="2" Content="Show all timetables"/>
+                                                        <RadioButton FontWeight="DemiBold" GroupName="a" Margin="2,2,10,2" Checked="ShowFavoriteTimetable_Checked" Content="Show favorite timetables"/>
+                                                    </StackPanel>
+                                                    <StackPanel Visibility="Hidden"  Orientation="Horizontal" Margin="10" HorizontalAlignment="Left">
+                                                        <ComboBox x:Name="ViewSelector" materialDesign:ComboBoxAssist.ClassicMode="False"  FontSize="15" FontWeight="DemiBold" SelectionChanged="ViewSelector_OnSelectionChanged" SelectedIndex="{Binding IsChecked, Converter={StaticResource ComboBoxSelectionConverter}, ElementName=ToggleViewButton}">
+                                                            <ComboBoxItem IsSelected="True" Content="Show all timetable"/>
+                                                            <ComboBoxItem Content="Show favourite timetable"/>
+                                                        </ComboBox>
+                                                        <ToggleButton Visibility="Collapsed" x:Name="ToggleViewButton"  Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}" Margin="5"  IsChecked="False"
                                       ToolTip="{Binding IsChecked, ConverterParameter=Show all timetable\, Show favourite timetable, Converter={StaticResource TooltipConverterForToggleButton}, RelativeSource={RelativeSource Self}}"
                                       >
-                                                        <materialDesign:PackIcon Kind="Eye" VerticalAlignment="Center" Foreground="Black"  />
-                                                    </ToggleButton>
-                                                </StackPanel>
-                                            </Grid>
-                                        </StackPanel>
-                                    </materialDesign:Card>
-                                </Grid>
-                                
-                                <Button x:Name="SetTimeConstraintButton" 
+                                                            <materialDesign:PackIcon Kind="Eye" VerticalAlignment="Center" Foreground="Black"  />
+                                                        </ToggleButton>
+                                                    </StackPanel>
+                                                </Grid>
+                                            </StackPanel>
+                                        </materialDesign:Card>
+                                    </Grid>
+                                    <Button x:Name="SetTimeConstraintButton" 
                             Visibility="Visible" Height="auto"
                                 VerticalAlignment="Stretch"
                             FontSize="20"  Click="SetTimeConstraintButton_OnClick" 
