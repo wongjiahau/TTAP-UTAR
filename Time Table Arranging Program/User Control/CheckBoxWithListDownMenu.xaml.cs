@@ -49,11 +49,11 @@ namespace Time_Table_Arranging_Program {
             {
                 Checkbox.IsChecked = value;
                 if (value) {
-                    Border.Background = Brushes.AliceBlue;
+                    Border.Background = ColorDictionary.CheckedColor;
                 }
                 else {
                     Border.Background = null;
-                    Border.Background = Brushes.WhiteSmoke;
+                    Border.Background = ColorDictionary.UncheckedColor;
                 }
             }
         }
