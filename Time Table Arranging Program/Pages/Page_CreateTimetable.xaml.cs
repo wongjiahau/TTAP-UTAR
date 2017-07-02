@@ -46,6 +46,7 @@ namespace Time_Table_Arranging_Program.Pages {
             CyclicIndexView.DataContext = new CyclicIndexVM(_cyclicIndex);       
             InitializeExtraComponents();
             ToolBoxPanel.Visibility = Visibility.Hidden;
+            DrawerHost.IsLeftDrawerOpen = true;
         }
 
 
