@@ -64,6 +64,7 @@
                                     </Grid>
                                     <Button x:Name="SetTimeConstraintButton" 
                                         Visibility="Visible" Height="auto"
+                                            materialDesign:ShadowAssist.ShadowDepth="Depth4"
                                         VerticalAlignment="Stretch"
                                         FontSize="20"  Click="SetTimeConstraintButton_OnClick" 
                                         Style="{StaticResource MaterialDesignRaisedAccentButton}" 
@@ -99,9 +100,11 @@
                                                 <materialDesign:PackIcon Kind="CalendarPlus" />
                                             </Button>
                                             <Button x:Name="ShowSummaryButton"
-                            	Click="ShowSummaryButton_OnClick" ToolTip="Show summary" >
+                            	Click="ShowSummaryButton_OnClick"                                                     
+                                                    materialDesign:ShadowAssist.ShadowDepth="Depth3"
+                                                    ToolTip="Show summary" >
                                                 <!--Visibility="{Binding IsChecked, ElementName=ToggleViewButton, Converter={StaticResource VisibilityConverter}}"-->
-                                                <materialDesign:PackIcon Kind="ArrowRightBold" />
+                                                <materialDesign:PackIcon Kind="ViewList" />
                                             </Button>
                                             <materialDesign:PopupBox PopupMode="Click" Visibility="Collapsed"  >
                                                 <materialDesign:PopupBox.ToggleContent>
