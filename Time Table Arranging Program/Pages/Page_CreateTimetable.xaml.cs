@@ -171,7 +171,7 @@ namespace Time_Table_Arranging_Program.Pages {
                 TimetableViewer?.Initialize(ci);
                 if(CyclicIndexView!=null)
                 CyclicIndexView.DataContext = new CyclicIndexVM(ci);
-                Global.Snackbar.MessageQueue.Enqueue("Showing ALL timetables");
+               // Global.Snackbar.MessageQueue.Enqueue("Showing ALL timetables");
             }
             else {
                 var likedTimetable = _outputTimetables.GetLikedTimetableOnly();
@@ -179,7 +179,7 @@ namespace Time_Table_Arranging_Program.Pages {
                 var ci = new CyclicIndex(likedTimetable.Count - 1);
                 TimetableViewer?.Initialize(ci);
                 CyclicIndexView.DataContext = new CyclicIndexVM(ci);
-                Global.Snackbar.MessageQueue.Enqueue("Showing FAVORITE timetables");
+               // Global.Snackbar.MessageQueue.Enqueue("Showing FAVORITE timetables");
             }
         }
 
@@ -195,7 +195,7 @@ namespace Time_Table_Arranging_Program.Pages {
             var ci = new CyclicIndex(allTimetables.Count - 1);
             TimetableViewer?.Initialize(ci);
             if(CyclicIndexView!=null) CyclicIndexView.DataContext = new CyclicIndexVM(ci);            
-            Global.Snackbar.MessageQueue.Enqueue("Showing ALL timetables");
+            //Global.Snackbar.MessageQueue.Enqueue("Showing ALL timetables");
         }
 
         private void ShowFavoriteTimetable_Checked(object sender, RoutedEventArgs e) {
@@ -204,7 +204,7 @@ namespace Time_Table_Arranging_Program.Pages {
             var ci = new CyclicIndex(likedTimetable.Count - 1);
             TimetableViewer?.Initialize(ci);
             CyclicIndexView.DataContext = new CyclicIndexVM(ci);            
-            Global.Snackbar.MessageQueue.Enqueue("Showing FAVORITE timetables");
+            //Global.Snackbar.MessageQueue.Enqueue("Showing FAVORITE timetables");
         }
     }
 }
