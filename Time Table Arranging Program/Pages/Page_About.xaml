@@ -22,87 +22,90 @@
             <Setter Property="Width" Value="25" />
             <Setter Property="Height" Value="25" />
         </Style>
+        <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedDarkButton}"></Style>
     </Page.Resources>
     <ScrollViewer>
-    <StackPanel HorizontalAlignment="Center">
-        <materialDesign:Card Background="BlanchedAlmond">
-            <StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <materialDesign:PackIcon Kind="CodeTags"></materialDesign:PackIcon>
-                    <TextBlock FontWeight="Bold"><Run Text="Program written by"/></TextBlock>
-                    <TextBlock Text=" Wong Jia Hau"/>
-                    <TextBlock Text=" using " FontWeight="Bold"/>
-                    <TextBlock Text="C# WPF"/>
-                </StackPanel>
-                <Separator />
-                <StackPanel   Orientation="Horizontal">
-                    <materialDesign:PackIcon Margin="10" Kind="Whatsapp" />
-                    <TextBlock VerticalAlignment="Center" Text="011-16372171"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <materialDesign:PackIcon Margin="10"  Kind="Email" />
-                    <TextBlock Text="jiahau.wong@1utar.my" />
-                    <Button Margin="10,0,0,0" Click="CopyEmailButton_OnClick" Content="Copy email"/>
-                </StackPanel>
-                
+        <StackPanel HorizontalAlignment="Center">
+            <materialDesign:Card Background="BlanchedAlmond">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="CodeTags"></materialDesign:PackIcon>
+                        <TextBlock FontWeight="Bold"><Run Text="Program written by"/></TextBlock>
+                        <TextBlock Text=" Wong Jia Hau"/>
+                        <TextBlock Text=" using " FontWeight="Bold"/>
+                        <TextBlock Text="C# WPF"/>
+                    </StackPanel>
+                    <Separator />
+                    <StackPanel   Orientation="Horizontal">
+                        <materialDesign:PackIcon Margin="10" Kind="Whatsapp" />
+                        <TextBlock VerticalAlignment="Center" Text="011-16372171"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Margin="10"  Kind="Email" />
+                        <TextBlock Text="jiahau.wong@1utar.my" />
+                        <Button Margin="10,0,0,0" Click="CopyEmailButton_OnClick" Content="COPY" materialDesign:ShadowAssist.ShadowDepth="Depth0"/>
+                    </StackPanel>
 
 
-            </StackPanel>
-        </materialDesign:Card >
-        <materialDesign:Card Background="LightYellow">
-            <StackPanel Orientation="Horizontal">
-                <materialDesign:PackIcon Kind="MaterialUi"></materialDesign:PackIcon>
-                <TextBlock FontWeight="Bold" Text="Themes " />
-                <TextBlock Text="by " />
-                <TextBlock DockPanel.Dock="Bottom">
+
+                </StackPanel>
+            </materialDesign:Card >
+            <materialDesign:Card Background="LightYellow">
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon Kind="MaterialUi"></materialDesign:PackIcon>
+                    <TextBlock FontWeight="Bold" Text="Themes " />
+                    <TextBlock Text="by " />
+                    <TextBlock DockPanel.Dock="Bottom">
                 <Hyperlink NavigateUri="https://github.com/ButchersBoy/MaterialDesignInXamlToolkit"
                            RequestNavigate="Hyperlink_RequestNavigate">
                     Material Design in XAML Toolkit
                 </Hyperlink>
-                </TextBlock>
-            </StackPanel>
+                    </TextBlock>
+                </StackPanel>
 
-        </materialDesign:Card>
-        <materialDesign:Card Background="LightGreen" >
-            <StackPanel Orientation="Horizontal">
-                <materialDesign:PackIcon Kind="Calendar"></materialDesign:PackIcon>
-                <TextBlock Text="App Icon" FontWeight="Bold" />
-                <TextBlock Text="made by "/>
-                <TextBlock DockPanel.Dock="Bottom"><Hyperlink NavigateUri="http://www.flaticon.com/authors/madebyoliver"
+            </materialDesign:Card>
+            <materialDesign:Card Background="LightGreen" >
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon Kind="Calendar"></materialDesign:PackIcon>
+                    <TextBlock Text="App Icon" FontWeight="Bold" />
+                    <TextBlock Text="made by "/>
+                    <TextBlock DockPanel.Dock="Bottom"><Hyperlink NavigateUri="http://www.flaticon.com/authors/madebyoliver"
         				RequestNavigate="Hyperlink_RequestNavigate"><Run Text="Madebyoliver"/></Hyperlink></TextBlock>
-                <TextBlock Text=" from " />
-                <TextBlock DockPanel.Dock="Bottom"><Hyperlink NavigateUri="http://www.flaticon.com" RequestNavigate="Hyperlink_RequestNavigate"><Run Text="www.flaticon.com"/></Hyperlink></TextBlock>
-                <TextBlock Text=" is licensed by " />
-                <TextBlock DockPanel.Dock="Bottom"><Hyperlink NavigateUri="http://creativecommons.org/licenses/by/3.0/"
+                    <TextBlock Text=" from " />
+                    <TextBlock DockPanel.Dock="Bottom"><Hyperlink NavigateUri="http://www.flaticon.com" RequestNavigate="Hyperlink_RequestNavigate"><Run Text="www.flaticon.com"/></Hyperlink></TextBlock>
+                    <TextBlock Text=" is licensed by " />
+                    <TextBlock DockPanel.Dock="Bottom"><Hyperlink NavigateUri="http://creativecommons.org/licenses/by/3.0/"
         				RequestNavigate="Hyperlink_RequestNavigate"><Run Text="CC 3.0 BY"/></Hyperlink></TextBlock>
 
-            </StackPanel>
-        </materialDesign:Card>
-        <materialDesign:Card Background="LightCyan">
-            <StackPanel Orientation="Horizontal">
-                <materialDesign:PackIcon Kind="Download" />
-                <TextBlock  Text="This program can be downloaded from" />
-                <TextBlock DockPanel.Dock="Bottom"><Hyperlink NavigateUri="https://goo.gl/LzzjGX"
+                </StackPanel>
+            </materialDesign:Card>
+            <materialDesign:Card Background="LightCyan">
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon Kind="Download" />
+                    <TextBlock  Text="This program can be downloaded from" />
+                    <TextBlock DockPanel.Dock="Bottom"><Hyperlink NavigateUri="https://goo.gl/LzzjGX"
         				RequestNavigate="Hyperlink_RequestNavigate"><Run Text="https://goo.gl/LzzjGX"/></Hyperlink></TextBlock>
-            </StackPanel>
-        </materialDesign:Card>
-        <materialDesign:Card Background="LightPink">
-            <StackPanel Orientation="Horizontal">
-                <materialDesign:PackIcon Kind="GithubBox" />
-                <TextBlock  Text="Source code is available at GitHub via" />
-                <TextBlock DockPanel.Dock="Bottom"><Hyperlink NavigateUri="https://github.com/wongjiahau/TTAP-UTAR"
+                    <Button Margin="10,0,0,0" Click="CopyDownloadLinkButton_OnClick" Content="COPY" materialDesign:ShadowAssist.ShadowDepth="Depth0"/>
+                </StackPanel>
+            </materialDesign:Card>
+            <materialDesign:Card Background="LightPink">
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon Kind="GithubBox" />
+                    <TextBlock  Text="Source code is available at GitHub via" />
+                    <TextBlock DockPanel.Dock="Bottom"><Hyperlink NavigateUri="https://github.com/wongjiahau/TTAP-UTAR"
         				RequestNavigate="Hyperlink_RequestNavigate"><Run Text="https://github.com/wongjiahau/TTAP-UTAR"/></Hyperlink></TextBlock>
-            </StackPanel>
-        </materialDesign:Card>
-        <materialDesign:Card Background="Plum">
-            <StackPanel Orientation="Horizontal">
-                <materialDesign:PackIcon Kind="AccountMultiple"></materialDesign:PackIcon>
-                <TextBlock FontWeight="Bold" Text="Special thanks to" />
-                <TextBlock Text="Sean, Keli, Heng, Cheng Feng, QZ, Eric, Kelvin . . . and all of you for using TTAP!" />
-            </StackPanel>
-        </materialDesign:Card>
-        
-    </StackPanel>
+                    <Button Margin="10,0,0,0" Click="CopyGitHubLinkButton_OnClick" Content="COPY" materialDesign:ShadowAssist.ShadowDepth="Depth0"/>
+                </StackPanel>
+            </materialDesign:Card>
+            <materialDesign:Card Background="Plum">
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon Kind="AccountMultiple"></materialDesign:PackIcon>
+                    <TextBlock FontWeight="Bold" Text="Special thanks to" />
+                    <TextBlock Text="Sean, Keli, Heng, Cheng Feng, QZ, Eric, Kelvin . . . and all of you for using TTAP!" />
+                </StackPanel>
+            </materialDesign:Card>
+
+        </StackPanel>
     </ScrollViewer>
 </Page>
 

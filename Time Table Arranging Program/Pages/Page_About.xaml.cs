@@ -20,8 +20,9 @@ namespace Time_Table_Arranging_Program.Pages {
     /// Interaction logic for Page_About.xaml
     /// </summary>
     public partial class Page_About : Page {
-        private const string email = "jiahau.wong@1utar.my";
-
+        private const string Email = "jiahau.wong@1utar.my";
+        private const string DownloadLink = "goo.gl/LzzjGX";
+        private const string GitHubLink = "https://github.com/wongjiahau/TTAP-UTAR";
         public Page_About() {
             InitializeComponent();
         }
@@ -32,8 +33,21 @@ namespace Time_Table_Arranging_Program.Pages {
         }
 
         private void CopyEmailButton_OnClick(object sender, RoutedEventArgs e) {
-            Clipboard.SetDataObject(email);
-            AutoClosePopup.Show($"{email} is copied to clipboard!");
+           CopyToClipboard(Email);
+        }
+
+        private void CopyDownloadLinkButton_OnClick(object sender, RoutedEventArgs e) {
+           CopyToClipboard(DownloadLink);
+        }
+
+
+        private void CopyGitHubLinkButton_OnClick(object sender, RoutedEventArgs e) {
+            CopyToClipboard(GitHubLink);                        
+        }
+
+        private void CopyToClipboard(string x) {
+            Clipboard.SetDataObject(x);
+            AutoClosePopup.Show($"Copied '{x}' to clipboard!");
         }
     }
 }
