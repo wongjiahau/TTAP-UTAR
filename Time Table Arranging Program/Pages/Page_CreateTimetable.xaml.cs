@@ -75,6 +75,7 @@ namespace Time_Table_Arranging_Program.Pages {
                 }
                 else {
                     _outputTimetables.SetState(TimetableList.NoPossibleCombination);
+                    AutoClosePopup.Show("No possible timetable found.");
                 }
                 ToolBoxPanel.Visibility = Visibility.Hidden;
                 _cyclicIndex.Reset();
@@ -84,6 +85,7 @@ namespace Time_Table_Arranging_Program.Pages {
                 ToolBoxPanel.Visibility = Visibility.Visible;
                 _cyclicIndex.MaxValue = result.Count - 1;
                 _cyclicIndex.CurrentValue = 0;
+                AutoClosePopup.Show(result.Count + " possible timetables found.");
             }
             TimetableViewer.Initialize(_cyclicIndex);
             CyclicIndexView.DataContext = new CyclicIndexVM(_cyclicIndex);
