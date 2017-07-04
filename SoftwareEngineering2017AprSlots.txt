@@ -1,9 +1,4 @@
 
- 
-Home		
-   Log Out  	
- 
-Welcome, WONG JIA HAU (15UEB00181)   User Guide
 
  Course Timetable Preview
 
@@ -157,6 +152,6 @@ UKMM1043 - BASIC ECONOMICS, ACCOUNTING AND MANAGEMENT [3.00]
 
 Page Loaded In 31 miliseconds
 
-Copyright © 2017, Universiti Tunku Abdul Rahman. All rights reserved. 
+Copyright Â© 2017, Universiti Tunku Abdul Rahman. All rights reserved. 
 Info Optimized for Internet Explorer 5.0 and above. Best viewed with 1024 x 768 pixels.
 Terms of Usage
