@@ -28,44 +28,9 @@
                                     >
                             <materialDesign:PackIcon Kind="ArrowRightBold"  Height="30" Width="30"/>
                         </Button>
-                        <materialDesign:PopupBox IsPopupOpen="False" DockPanel.Dock="Right" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False">
-                            <StackPanel Orientation="Vertical">
-                                <StackPanel.Resources>
-                                    <Style TargetType="StackPanel">
-                                        <Setter Property="Orientation" Value="Horizontal"></Setter>
-                                    </Style>
-                                    <Style TargetType="Label">
-                                        <Setter Property="VerticalAlignment" Value="Center"></Setter>
-                                    </Style>
-                                    <Style TargetType="materialDesign:PackIcon">
-                                        <Setter Property="VerticalAlignment" Value="Center"></Setter>
-                                        <Setter Property="Margin" Value="5"></Setter>
-                                        <Setter Property="Width" Value="20"></Setter>
-                                        <Setter Property="Height" Value="20"></Setter>
-                                    </Style>
-
-                                </StackPanel.Resources>
-                                <Button x:Name="SettingButton" Click="SettingButton_OnClick">
-                                    <StackPanel>
-                                        <materialDesign:PackIcon Kind="Settings"></materialDesign:PackIcon>
-                                        <Label>Settings</Label>
-                                    </StackPanel>
-                                </Button>
-                                <Button x:Name="AboutButton"  Click="AboutButton_Click">
-                                    <StackPanel>
-                                        <materialDesign:PackIcon Kind="Information"></materialDesign:PackIcon>
-                                        <Label>About</Label>
-                                    </StackPanel>
-                                </Button>
-                                <Button Click="FeedbackButton_OnClick">
-                                    <StackPanel>
-                                        <materialDesign:PackIcon Kind="Message"></materialDesign:PackIcon>
-                                        <Label>Feedback</Label>
-                                    </StackPanel>
-                                </Button>
-                                <Button x:Name="HelpButton" Visibility="Collapsed" Content="HELP" Click="HelpButton_Click" />
-                            </StackPanel>
-                        </materialDesign:PopupBox>
+                        <Button Style="{StaticResource MaterialDesignFlatButton}" Foreground="White" DockPanel.Dock="Right" Click="ExtraMenuButton_OnClick">
+                            <materialDesign:PackIcon Kind="Menu"></materialDesign:PackIcon>
+                        </Button>
                         <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22">Timetable Arranging Program ( TTAP )</TextBlock>
                     </DockPanel>
                 </materialDesign:ColorZone>
@@ -89,12 +54,6 @@
                 </materialDesign:Card>
 
                 <ContentPresenter />
-                <!--<Button x:Name="BackButton"
-                        Content="Back"
-                        Command="{x:Static NavigationCommands.BrowseBack}"
-                        IsEnabled="{TemplateBinding CanGoBack}"
-                       />-->
-
             </DockPanel>
         </ControlTemplate>
     </Window.Resources>
@@ -108,7 +67,58 @@
                 </StackPanel>
             </Border>
         </materialDesign:DialogHost.DialogContent>
+        <materialDesign:DrawerHost x:Name="DrawerHost" IsRightDrawerOpen="False">
+            <materialDesign:DrawerHost.RightDrawerContent>
+                <StackPanel Orientation="Vertical">
+                    <StackPanel.Resources>
+                        <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignFlatButton}">
+                            <Setter Property="Height" Value="54"></Setter>
+                            <Setter Property="FontSize" Value="20"></Setter>
+                            <Setter Property="Padding" Value="5"></Setter>
+                            <Setter Property="Foreground" Value="Black"></Setter>
+                            <Setter Property="HorizontalAlignment" Value="Stretch"></Setter>
+                            <Setter Property="HorizontalContentAlignment" Value="Left"></Setter>
+                            <Setter Property="Command" Value="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"></Setter>
+                        </Style>
+                        <Style TargetType="StackPanel">
+                            <Setter Property="Orientation" Value="Horizontal"></Setter>
+                        </Style>
+                        <Style TargetType="Label">
+                            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+                            <Setter Property="Margin" Value="0,0,10,0"></Setter>
+                        </Style>
+                        <Style TargetType="materialDesign:PackIcon">
+                            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+                            <Setter Property="Margin" Value="10"></Setter>
+                            <Setter Property="Width" Value="25"></Setter>
+                            <Setter Property="Height" Value="25"></Setter>
+                            <Setter Property="Foreground" Value="Black"></Setter>
+                        </Style>
 
+
+                    </StackPanel.Resources>
+                    <Button  Click="SettingButton_OnClick">
+                        <StackPanel>
+                            <materialDesign:PackIcon Kind="Settings"></materialDesign:PackIcon>
+                            <Label>Settings</Label>
+                        </StackPanel>
+                    </Button>
+                    <Separator></Separator>
+                    <Button  Click="AboutButton_Click">
+                        <StackPanel>
+                            <materialDesign:PackIcon Kind="Information"></materialDesign:PackIcon>
+                            <Label>About TTAP</Label>
+                        </StackPanel>
+                    </Button>
+                    <Button Click="FeedbackButton_OnClick">
+                        <StackPanel>
+                            <materialDesign:PackIcon Kind="Message"></materialDesign:PackIcon>
+                            <Label>Feedback</Label>
+                        </StackPanel>
+                    </Button>
+                    <Button Visibility="Collapsed" Content="HELP" Click="HelpButton_Click" />
+                </StackPanel>
+            </materialDesign:DrawerHost.RightDrawerContent>
         <DockPanel LastChildFill="True">
             <Grid>
                 <Frame x:Name="MainFrame" Template="{DynamicResource ControlTemplateForNavigator}"
@@ -118,5 +128,6 @@
 
 
         </DockPanel>
+        </materialDesign:DrawerHost>
     </materialDesign:DialogHost>
 </Window>

@@ -84,7 +84,7 @@ namespace Time_Table_Arranging_Program {
             e.Handled = true;
         }
 
-        private void AboutButton_Click(object sender , RoutedEventArgs e) {
+        private void AboutButton_Click(object sender , RoutedEventArgs e) {            
             MainFrame.Navigate(new Page_About());
         }
 
@@ -173,6 +173,10 @@ namespace Time_Table_Arranging_Program {
                         break;
                 }
             }
+        }
+
+        private void ExtraMenuButton_OnClick(object sender, RoutedEventArgs e) {
+            DrawerHost.IsRightDrawerOpen = true;
         }
     }
 }
