@@ -147,6 +147,7 @@ namespace Time_Table_Arranging_Program {
         private void SettingButton_OnClick(object sender , RoutedEventArgs e) {
             var p = Windows_Settings.GetInstance();
             p.ShowDialog();
+            if (p.ApplyClicked == false) return;
             foreach (var setting in p.Settings) {
                 switch (setting.Description) {
                     case SearchForCombinationByConsideringWeekNumber:

@@ -15,7 +15,17 @@
             <materialDesign:PackIcon Kind="Settings" Width="30" Height="30" VerticalAlignment="Center"></materialDesign:PackIcon>
         <Label  FontWeight="Bold"  VerticalAlignment="Center" FontSize="30" HorizontalAlignment="Center">Settings</Label>
         </StackPanel>
-        <Button DockPanel.Dock="Bottom" Click="DoneButton_OnClick" Margin="20" HorizontalAlignment="Center">DONE</Button>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" DockPanel.Dock="Bottom" Margin="20">
+            <StackPanel.Resources>
+                <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignFlatButton}">
+                    <Setter Property="Width" Value="85"></Setter>
+                </Style>
+                
+            </StackPanel.Resources>
+            <Button Click="CancelButton_OnClick" Margin="0,0,10,0">CANCEL</Button>
+        <Button  Click="ApplyButton_OnClick" HorizontalAlignment="Center">APPLY</Button>
+            
+        </StackPanel>
         <materialDesign:Card VerticalAlignment="Stretch" Margin="10" Padding="10">
             <StackPanel >
                 <DockPanel HorizontalAlignment="Stretch" >
