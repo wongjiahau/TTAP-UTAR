@@ -73,6 +73,7 @@
                                             <GridViewColumn Header="Time" DisplayMemberBinding="{Binding TimePeriod}" />
                                             <GridViewColumn Header="Day" DisplayMemberBinding="{Binding Day}" />
                                             <GridViewColumn Header="Week"  DisplayMemberBinding="{Binding WeekNumber}" />
+                                            <GridViewColumn Header="Venue" DisplayMemberBinding="{Binding Venue}"></GridViewColumn>
                                         </GridView>
                                     </ListView.View>
                                     <ListView.ItemContainerStyle>
