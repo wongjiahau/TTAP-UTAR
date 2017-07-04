@@ -63,7 +63,7 @@ namespace Time_Table_Arranging_Program {
             set
             {
                 SubjectNameLabel.Content = "\u2629" + value[0].SubjectName;
-                SubjectCode = value[0].Code;
+                SubjectCode = $"{value[0].Code} [{value[0].SubjectName.GetInitial()}]";
                 ListView.ItemsSource = value;
                 foreach (var item in ListView.ItemsSource) {
                     ((Slot) item).IsSelected = true;
