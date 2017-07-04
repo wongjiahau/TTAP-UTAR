@@ -1,11 +1,3 @@
-1501196 970716-12-5659
- 
-
- 
-Home		
-   Log Out  	
- 
-Welcome, HENG AIK KEE (15UEB01196)   User Guide
 
  Course Timetable Preview
 
@@ -263,7 +255,7 @@ Mon	02:00 PM - 05:00 PM	3.0	2,8	KB731
 
 Page Loaded In 202 miliseconds
 
-Copyright © 2017, Universiti Tunku Abdul Rahman. All rights reserved. 
+Copyright Â© 2017, Universiti Tunku Abdul Rahman. All rights reserved. 
 Info Optimized for Internet Explorer 5.0 and above. Best viewed with 1024 x 768 pixels.
 Terms of Usage
 
@@ -476,6 +468,6 @@ UKMM1043 - BASIC ECONOMICS, ACCOUNTING AND MANAGEMENT [3.00]
 
 Page Loaded In 343 miliseconds
 
-Copyright © 2017, Universiti Tunku Abdul Rahman. All rights reserved. 
+Copyright Â© 2017, Universiti Tunku Abdul Rahman. All rights reserved. 
 Info Optimized for Internet Explorer 5.0 and above. Best viewed with 1024 x 768 pixels.
 Terms of Usage
