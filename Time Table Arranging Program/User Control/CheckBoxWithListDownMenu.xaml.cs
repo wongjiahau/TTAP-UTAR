@@ -4,7 +4,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
-using System.Windows.Media;
 using MaterialDesignThemes.Wpf;
 using Time_Table_Arranging_Program.Class;
 using Time_Table_Arranging_Program.UserInterface;
@@ -30,8 +29,6 @@ namespace Time_Table_Arranging_Program {
 
     public partial class CheckBoxWithListDownMenu : UserControl, ICheckBoxWithListDownMenu {
         private double _listviewOriginalHeight;
-
-        private Brush _originalColor;
 
         public CheckBoxWithListDownMenu() {
             InitializeComponent();
@@ -132,7 +129,7 @@ namespace Time_Table_Arranging_Program {
             else {
                 ChooseSlotButton.Visibility = Visibility.Hidden;
                 //SubjectNameHighlightTextBlock.FontWeight = FontWeights.DemiBold;
-                Border.Background = _originalColor; // ColorDictionary.UncheckedColor;
+                Border.Background =  ColorDictionary.UncheckedColor;
             }
         }
 
@@ -174,17 +171,16 @@ namespace Time_Table_Arranging_Program {
             ListViewPopup.HorizontalOffset = 0;
         }
 
-        private void CheckBoxWithListDownMenu_OnMouseEnter(object sender, MouseEventArgs e) {
-            if (_originalColor == null) _originalColor = Border.Background;
+        private void CheckBoxWithListDownMenu_OnMouseEnter(object sender, MouseEventArgs e) {            
             Border.Background = ColorDictionary.MouseOverColor;
         }
 
         private void CheckBoxWithListDownMenu_OnMouseLeave(object sender, MouseEventArgs e) {
+
             Border.Background =
                 Checkbox.IsChecked.Value
                     ? ColorDictionary.CheckedColor
-                    : _originalColor;
-            //: ColorDictionary.UncheckedColor;
+                    : ColorDictionary.UncheckedColor;
         }
 
 
