@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows.Media;
@@ -81,6 +82,11 @@ namespace Time_Table_Arranging_Program {
         public static Color Lighter(this Color c) {
             return Color.FromArgb(c.A ,
                 (byte)(c.R * 1.25) , (byte)(c.G * 1.25) , (byte)(c.B * 1.25));
+        }
+
+        public static void WaitForSeconds(double seconds) {
+            var s = Stopwatch.StartNew();
+            while (s.ElapsedMilliseconds / 1000.0 < seconds) ;
         }
     }
 }
