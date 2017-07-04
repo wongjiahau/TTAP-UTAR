@@ -10,7 +10,7 @@
       xmlns:timeTableArrangingProgram="clr-namespace:Time_Table_Arranging_Program"
       xmlns:views="clr-namespace:Time_Table_Arranging_Program.MVVM_Framework.Views"
       mc:Ignorable="d"
-      Title="Page_SelectSubject" Loaded="Page_SelectSubject_OnLoaded" >
+      Title="Page_SelectSubject">
     <Page.Resources>
         <iValueConverter:ComboBoxSelectionConverter x:Key="ComboBoxSelectionConverter" />
         <iValueConverter:VisibilityConverter x:Key="VisibilityConverter"></iValueConverter:VisibilityConverter>
@@ -33,7 +33,7 @@
                         <Label VerticalAlignment="Center" Foreground="White">Select subjects</Label>
                     </StackPanel>
                 </Button>
-                <DockPanel DockPanel.Dock="Right" MouseUp="RightPanel_OnMouseDown">
+                <DockPanel DockPanel.Dock="Right">
                     <DockPanel VerticalAlignment="Center">
                         <Border x:Name="ToolBoxPanel" DockPanel.Dock="Bottom" VerticalAlignment="Top" Margin="1"  HorizontalAlignment="Center" >
                             <Grid>

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -18,8 +20,7 @@ namespace Time_Table_Arranging_Program.Pages {
     /// <summary>
     ///     Interaction logic for Page_SelectSubject.xaml
     /// </summary>
-    public partial class Page_CreateTimetable : Page, IDirtyObserver<IOutputTimetableModel> {
-        private static Page_CreateTimetable _singletonInstance;
+    public partial class Page_CreateTimetable : Page, IDirtyObserver<IOutputTimetableModel>, IPageWithLoadedFunction {
         private readonly MutableObservable<ITimetable> _currentViewedTimetable = new ObservableTimetable(Timetable.Empty);
         private CyclicIndex _cyclicIndex;
 
@@ -32,7 +33,7 @@ namespace Time_Table_Arranging_Program.Pages {
 
         private MutableObservable<IOutputTimetableModel> _timetableList;
         private int _uidOfLastSlot = -1;
-        private Func<Slot[], List<List<Slot>>>  _permutator;
+        private readonly Func<Slot[], List<List<Slot>>>  _permutator;
 
         public Page_CreateTimetable(SlotList inputSlots, Func<Slot[], List<List<Slot>>> permutator) {                        
             _inputSlots = inputSlots;
@@ -46,7 +47,7 @@ namespace Time_Table_Arranging_Program.Pages {
             CyclicIndexView.DataContext = new CyclicIndexVM(_cyclicIndex);       
             InitializeExtraComponents();
             ToolBoxPanel.Visibility = Visibility.Hidden;
-            DrawerHost.IsLeftDrawerOpen = true;
+            
         }
 
 
@@ -89,27 +90,9 @@ namespace Time_Table_Arranging_Program.Pages {
             }
             TimetableViewer.Initialize(_cyclicIndex);
             CyclicIndexView.DataContext = new CyclicIndexVM(_cyclicIndex);
-        }
+        }      
 
-
-        private void Page_SelectSubject_OnLoaded(object sender , RoutedEventArgs e) {
-            bool inputSlotsHasChanged = _inputSlots.Last().UID != _uidOfLastSlot;
-            if (inputSlotsHasChanged) {
-                SelectSubjectPanel.Clear();
-                if (_inputSlots.Count == 0) {
-                    // UpdateGUI(_inputSlots.GetSlotsOf(SelectSubjectPanel.UIDofSelectedSlots));
-                }
-                else
-                    InitializeExtraComponents();
-            }
-
-            _uidOfLastSlot = _inputSlots.Last().UID;
-
-            //while (NavigationService?.CanGoBack == true) {
-            //    NavigationService?.RemoveBackEntry();
-            //}
-        }
-
+        
         private List<List<Slot>> _raw;
         private void SetTimeConstraintButton_OnClick(object sender , RoutedEventArgs e) {
             if (_windowStateSummary == null)
@@ -183,13 +166,7 @@ namespace Time_Table_Arranging_Program.Pages {
                 CyclicIndexView.DataContext = new CyclicIndexVM(ci);
                // Global.Snackbar.MessageQueue.Enqueue("Showing FAVORITE timetables");
             }
-        }
-
-
-        private void RightPanel_OnMouseDown(object sender, MouseButtonEventArgs e) {
-            
-            
-        }
+        }        
 
         private void ShowAllTimetable_Checked(object sender, RoutedEventArgs e) {
             var allTimetables = _outputTimetables.GetPreviousState();
@@ -207,6 +184,10 @@ namespace Time_Table_Arranging_Program.Pages {
             TimetableViewer?.Initialize(ci);
             CyclicIndexView.DataContext = new CyclicIndexVM(ci);            
             //Global.Snackbar.MessageQueue.Enqueue("Showing FAVORITE timetables");
+        }
+
+        public void ExecuteLoadedFunction() {           
+            DrawerHost.IsLeftDrawerOpen = true;
         }
     }
 }

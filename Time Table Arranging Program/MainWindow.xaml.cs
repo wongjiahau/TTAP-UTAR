@@ -8,6 +8,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Navigation;
 using Time_Table_Arranging_Program.Class;
 using Time_Table_Arranging_Program.Class.SlotGeneralizer;
+using Time_Table_Arranging_Program.Interfaces;
 using Time_Table_Arranging_Program.Pages;
 using Time_Table_Arranging_Program.User_Control;
 using Time_Table_Arranging_Program.UserInterface;
@@ -48,6 +49,11 @@ namespace Time_Table_Arranging_Program {
             else if (e.NavigationMode == NavigationMode.Back) {
                 ta.From = new Thickness(0 , 0 , ActualWidth / 3 , 0);
             }
+            ta.Completed += (o, args) =>
+            {
+                var p = e.Content as IPageWithLoadedFunction;
+                p?.ExecuteLoadedFunction();
+            };
             (e.Content as Page)?.BeginAnimation(MarginProperty , ta);
         }
 
