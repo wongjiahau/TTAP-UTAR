@@ -1,10 +1,4 @@
 
- 
-Home		
-   Log Out  	
- 
-Welcome, LOW KE LI (15UKB04769)   User Guide
-
  Course Timetable Preview
 
 	Course Timetable Preview		My Course Registration	
@@ -233,7 +227,7 @@ No	Course code	Course Description
 
 Page Loaded In 125 miliseconds
 
-Copyright © 2017, Universiti Tunku Abdul Rahman. All rights reserved. 
+Copyright Â© 2017, Universiti Tunku Abdul Rahman. All rights reserved. 
 Info Optimized for Internet Explorer 5.0 and above. Best viewed with 1024 x 768 pixels.
 Terms of Usage
 
@@ -458,6 +452,6 @@ No	Course code	Course Description
 
 Page Loaded In 140 miliseconds
 
-Copyright © 2017, Universiti Tunku Abdul Rahman. All rights reserved. 
+Copyright Â© 2017, Universiti Tunku Abdul Rahman. All rights reserved. 
 Info Optimized for Internet Explorer 5.0 and above. Best viewed with 1024 x 768 pixels.
 Terms of Usage
