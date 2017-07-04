@@ -94,16 +94,14 @@ namespace Time_Table_Arranging_Program.Pages {
 
         
         private List<List<Slot>> _raw;
-        private void SetTimeConstraintButton_OnClick(object sender , RoutedEventArgs e) {
+        private void SetTimeConstraintButton_OnClick(object sender , RoutedEventArgs e) {            
             if (_windowStateSummary == null)
-                _windowStateSummary = new Window_StateSummary(_inputSlots.GetSlotsOf(SelectSubjectPanel.UIDofSelectedSlots).ToList() , _raw);
+                _windowStateSummary = new Window_StateSummary(_inputSlots.GetSlotsOf(SelectSubjectPanel.UIDofSelectedSlots).ToList() , _raw);                        
             _windowStateSummary.ShowDialog();
             if (_windowStateSummary.UserClickedDone) { 
                 _predicates = _windowStateSummary.Predicates;
                 UpdateGUI(RunPermutation(_inputSlots.GetSlotsOf(SelectSubjectPanel.UIDofSelectedSlots)));
-            }
-            //_predicates = AddRuleWindow_v2.ShowWindow();
-            //UpdateGUI(_inputSlots.GetSlotsOf(SelectSubjectPanel.UIDofSelectedSlots));
+            }                        
         }
 
 
