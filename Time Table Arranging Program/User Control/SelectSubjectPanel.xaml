@@ -57,8 +57,8 @@
                 </StackPanel>
                 <TextBlock x:Name="ErrorLabel" FontWeight="Bold" Visibility="Collapsed">No result found . . .</TextBlock>
             </Grid>
-            <TextBlock x:Name="HintLabel" Margin="10,5,5,5" xml:space="preserve" Visibility="Collapsed" DockPanel.Dock="Top">Press [ENTER] to check the first subject in the list below.
-Press [ESC] to clear text of search box.</TextBlock>
+            <TextBlock x:Name="HintLabel" Margin="10,5,5,5" xml:space="preserve" Visibility="Collapsed" DockPanel.Dock="Top">Press ENTER to check the first subject in the list below.
+Press ESC to clear text of search box.</TextBlock>
             <Border  BorderBrush="DarkGray"  BorderThickness="0.5" VerticalAlignment="Stretch" DockPanel.Dock="Bottom">
                 <ScrollViewer x:Name="SelectSubjectScrollViewer"  FlowDirection="LeftToRight"
                               VerticalScrollBarVisibility="Auto"
