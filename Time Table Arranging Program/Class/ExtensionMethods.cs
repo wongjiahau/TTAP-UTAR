@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows.Media;
+using HtmlAgilityPack;
 
 namespace Time_Table_Arranging_Program {
     public static class ExtensionMethods {
@@ -87,6 +88,16 @@ namespace Time_Table_Arranging_Program {
         public static void WaitForSeconds(double seconds) {
             var s = Stopwatch.StartNew();
             while (s.ElapsedMilliseconds / 1000.0 < seconds) ;
+        }
+
+        public static string RemoveTags(string html) {                        
+                string result = "";
+                var htmlDocument = new HtmlDocument();
+                htmlDocument.LoadHtml(html);
+                foreach (HtmlNode node in htmlDocument.DocumentNode.SelectNodes("//text()")) {
+                    result += node.InnerText;
+                }
+                return result;            
         }
     }
 }

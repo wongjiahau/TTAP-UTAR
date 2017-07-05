@@ -96,18 +96,9 @@ namespace Time_Table_Arranging_Program.Pages {
         private string LoadPlainText() {
             dynamic doc = Browser.Document;
             var htmlText = doc.documentElement.InnerHtml;
-            return ConvertHtmlToPlainText(htmlText);
+            return htmlText.RemoveTags();
         }
-
-        private string ConvertHtmlToPlainText(string htmlText) {
-            string result = "";
-            var htmlDocument = new HtmlDocument();
-            htmlDocument.LoadHtml(htmlText);
-            foreach (HtmlNode node in htmlDocument.DocumentNode.SelectNodes("//text()")) {
-                result += node.InnerText;
-            }
-            return result;
-        }
+       
 
         private void AddSlotManuallyButton_OnClick(object sender , RoutedEventArgs e) {
             NavigationService.Navigate(new Page_AddSlot());
