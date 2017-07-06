@@ -56,7 +56,7 @@ namespace Time_Table_Arranging_Program {
         }
 
         public List<Slot> SlotList {
-            get { return (List<Slot>) ListView.ItemsSource; }
+            get => (List<Slot>) ListView.ItemsSource;
             set
             {
                 SubjectNameLabel.Content = "\u2629" + value[0].SubjectName;
@@ -74,13 +74,13 @@ namespace Time_Table_Arranging_Program {
         }
 
         public string SubjectName {
-            get { return SubjectNameHighlightTextBlock.Text; }
-            set { SubjectNameHighlightTextBlock.Text = value; }
+            get => SubjectNameHighlightTextBlock.Text;
+            set => SubjectNameHighlightTextBlock.Text = value;
         }
 
         public string SubjectCode {
-            get { return SubjectCodeHighlightTextBlock.Text; }
-            set { SubjectCodeHighlightTextBlock.Text = value; }
+            get => SubjectCodeHighlightTextBlock.Text;
+            set => SubjectCodeHighlightTextBlock.Text = value;
         }
 
 
@@ -88,7 +88,7 @@ namespace Time_Table_Arranging_Program {
         public HashSet<int> UIDofSelectedSlots { get; set; }
 
         public string HighlightText {
-            get { return SubjectNameHighlightTextBlock.HighlightedText; }
+            get => SubjectNameHighlightTextBlock.HighlightedText;
 
             set
             {
@@ -122,13 +122,11 @@ namespace Time_Table_Arranging_Program {
         private void Checkbox_Checked(object sender, RoutedEventArgs e) {
             Checked?.Invoke(this, e);
             if (Checkbox.IsChecked.Value) {
-                ChooseSlotButton.Visibility = Visibility.Visible;
-                //SubjectNameHighlightTextBlock.FontWeight = FontWeights.Bold;
+                ChooseSlotButton.Visibility = Visibility.Visible;                
                 Border.Background = ColorDictionary.CheckedColor;
             }
             else {
-                ChooseSlotButton.Visibility = Visibility.Hidden;
-                //SubjectNameHighlightTextBlock.FontWeight = FontWeights.DemiBold;
+                ChooseSlotButton.Visibility = Visibility.Hidden;                
                 Border.Background =  ColorDictionary.UncheckedColor;
             }
         }
@@ -176,7 +174,6 @@ namespace Time_Table_Arranging_Program {
         }
 
         private void CheckBoxWithListDownMenu_OnMouseLeave(object sender, MouseEventArgs e) {
-
             Border.Background =
                 Checkbox.IsChecked.Value
                     ? ColorDictionary.CheckedColor
