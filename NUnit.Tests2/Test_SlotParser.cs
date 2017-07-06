@@ -1,5 +1,10 @@
-﻿using NUnit.Framework;
+﻿using System;
+
+using System.IO;
+using System.Linq;
+using NUnit.Framework;
 using Time_Table_Arranging_Program.Class.TokenParser;
+using Time_Table_Arranging_Program.Model;
 
 namespace NUnit.Tests2 {
     [TestFixture]
@@ -12,6 +17,83 @@ namespace NUnit.Tests2 {
             var result = tp.Parse(input);
             Assert.IsTrue(result.Count == 4);
 
+        }
+
+        public static string TestFilePath() {
+            var desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\";
+            string path =
+                desktopPath + @"TTAPv7.7\NUnit.Tests2\TestFiles\CopiedTextFromSampleHTML.txt";
+            return path;
+        }
+        [Test]
+        public void Test_SlotParser_2() {
+            string text = File.ReadAllText(TestFilePath());
+            var result = new SlotParser().Parse(text);
+            int expectedCount = 130;
+            Assert.AreEqual(expectedCount, result.Count);            
+        }
+
+        [Test]
+        public void Test_SlotParser_3() {
+            string text = File.ReadAllText(TestFilePath());
+            var result = new SlotParser().Parse(text);
+            var subjects = SubjectModel.Parse(result);
+            int expectedCount = 39; // counted by eyes
+
+            var c = CodesOfListedSubjects();
+            Console.WriteLine("Code not foundd : ");
+            foreach (var code in c) {
+                if(subjects.All(x=> x.Code != code))
+                    Console.WriteLine(code);
+            }
+                                   
+            Assert.AreEqual(expectedCount , subjects.Count);
+        }
+
+        private static string[] CodesOfListedSubjects() {
+            string[] codesOfListedSubjects = new[]
+            {
+                "MPU3113",
+                "MPU3123",
+                "MPU3143",
+                "MPU3173",
+                "MPU32013",
+                "MPU32033",
+                "MPU34012",
+                "MPU34022",
+                "MPU34042",
+                "MPU34062",
+                "MPU34072",
+                "UALB1003",
+                "UALE1083",
+                "UALF1003",
+                "UALJ2013",
+                "UALL1063",
+                "UALL3033",
+                "UBMM1013",
+                "UECS1004",
+                "UECS1013",
+                "UECS1044",
+                "UECS1313",
+                "UECS2033",
+                "UECS2083",
+                "UECS2103",
+                "UECS2333",
+                "UECS2363",
+                "UECS2373",
+                "UECS3203",
+                "UECS3253",
+                "UECS3263",
+                "UECS3273",
+                "UECS3583",
+                "UECS3596",
+                "UEEN2013",
+                "UEEN3123",
+                "UJLL1093",
+                "UKMM1011",
+                "UKMM1043",
+            };
+            return codesOfListedSubjects;
         }
     }
 }

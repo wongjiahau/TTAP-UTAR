@@ -20,7 +20,8 @@ namespace NUnit.Tests2 {
             string htmlText = File.ReadAllText(path);
             string plain = ExtensionMethods.RemoveTags(htmlText);
             var actual = new SlotParser().Parse(plain);
-            int expected = new SlotParser().Parse(File.ReadAllText(desktopPath + @"TTAPv7.7\NUnit.Tests2\TestFiles\SoftwareEngineering2017AprSlots.txt")).Count;
+
+            int expected = new SlotParser().Parse(File.ReadAllText(Test_SlotParser.TestFilePath())).Count;
             Console.WriteLine("Actual count is " + actual.Count);
             Console.WriteLine("Expected count is " + expected);
             Assert.True(actual.Count == expected);
