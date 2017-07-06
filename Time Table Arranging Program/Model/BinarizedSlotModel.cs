@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Time_Table_Arranging_Program.Class;
 
 namespace Time_Table_Arranging_Program.Model {
-    public class BinarizeSlotModel : IIntersectionCheckable<BinarizeSlotModel> {
+    public class BinarizedSlotModel : IIntersectionCheckable<BinarizedSlotModel> {
         private int _day;
         private int _timePeriod;
         private int _weekNumber;
@@ -16,7 +16,7 @@ namespace Time_Table_Arranging_Program.Model {
         public string Code => _code;
         public string Type => _type;
         public int Number => _number;
-        public BinarizeSlotModel(Slot s) {
+        public BinarizedSlotModel(Slot s) {
             _day = s.Day.ToBinary();
             _timePeriod = s.TimePeriod.ToBinary();
             _weekNumber = s.WeekNumber.ToBinary();
@@ -25,7 +25,7 @@ namespace Time_Table_Arranging_Program.Model {
             _number = int.Parse(s.Number);
         }
 
-        public bool IntersectWith(BinarizeSlotModel other) {
+        public bool IntersectWith(BinarizedSlotModel other) {
             if (_code == other._code && _type == other._type && _number != other._number) return true;
             if ((_day & other._day) == 0) return false;
             if((_timePeriod & other._timePeriod)==0) return false;
