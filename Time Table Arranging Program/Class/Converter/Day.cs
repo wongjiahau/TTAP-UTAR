@@ -6,7 +6,10 @@ using Time_Table_Arranging_Program.Class.Helper;
 using Time_Table_Arranging_Program.Interfaces;
 
 namespace Time_Table_Arranging_Program.Class.Converter {
-    public interface IDay : IEquatable<IDay>, IToConstructionString, IConvertibleToBinary {
+    public interface IDay : 
+        IEquatable<IDay>, 
+        IToConstructionString, 
+        IConvertibleToBinary{
         string StringValue { get; set; }
         int IntValue { get; set; }
         DayOfWeek ToDayOfWeek();
