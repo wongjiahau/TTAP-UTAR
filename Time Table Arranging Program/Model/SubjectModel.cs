@@ -9,6 +9,12 @@ namespace Time_Table_Arranging_Program.Model
 {
     public class SubjectModel
     {
+        public SubjectModel()
+        {
+            Name = "Testing Subject 123";
+            Code = "MPU329999";
+            Slots = NUnit.Tests2.TestData.GetSlotRange(3,9);
+        }
         public SubjectModel(string name, string code, int creditHour, List<Slot> slots)
         {
             Name = name;
