@@ -47,6 +47,7 @@ namespace Time_Table_Arranging_Program.Model
                 var v = entry.Value[0];
                 result.Add(new SubjectModel(v.SubjectName, v.Code, 0, entry.Value));                
             }
+            result = result.OrderBy(o => o.Name).ToList();
             return result;
         }
     }
