@@ -18,7 +18,7 @@ namespace Time_Table_Arranging_Program.Model
         public SubjectModel(string name, string code, int creditHour, List<Slot> slots)
         {
             Name = name;
-            Code = code;
+            Code = code + " [" + name.GetInitial() + "]";
             CreditHour = creditHour;
             Slots = slots;
         }
