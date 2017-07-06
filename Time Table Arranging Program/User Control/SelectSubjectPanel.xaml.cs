@@ -41,10 +41,10 @@ namespace Time_Table_Arranging_Program.User_Control {
             var codes = inputSlots.GetCodesOfAllSubjects();
             _nameAndCodeOfAllSubjects = subjects.Concat(codes).ToArray();
             var subjectModels = SubjectModel.Parse(inputSlots);
-            foreach(var subject in subjectModels)
-            {
-                var box = new CheckBoxWithListDownMenu() { DataContext = subject };
-                CheckerBoxStackPanel.Children.Add((CheckBoxWithListDownMenu)box);
+            foreach(var subject in subjectModels) {
+                var box = new CheckBoxWithListDownMenu();
+                box.SetDataContext(subject);
+                CheckerBoxStackPanel.Children.Add(box);
                 box.Checked += Box_CheckChanged;                
                 box.ListViewCheckBox_Checked += Box_ListViewCheckBox_Checked;
             }       

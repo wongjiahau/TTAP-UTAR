@@ -16,7 +16,6 @@ namespace Time_Table_Arranging_Program {
     /// </summary>
     public interface ICheckBoxWithListDownMenu {
         bool IsChecked { get; set; }
-        List<Slot> SlotList { get; set; }
         FontWeight FontWeight { set; }
         string SubjectName { get; set; }
         string SubjectCode { get; set; }
@@ -53,20 +52,6 @@ namespace Time_Table_Arranging_Program {
                 else {
                     Border.Background = null;
                     Border.Background = ColorDictionary.UncheckedColor;
-                }
-            }
-        }
-
-        public List<Slot> SlotList {
-            get => (List<Slot>) ListView.ItemsSource;
-            set
-            {
-                SubjectNameLabel.Content = "\u2629" + value[0].SubjectName;
-                SubjectCode = $"{value[0].Code} [{value[0].SubjectName.GetInitial()}]";
-                ListView.ItemsSource = value;
-                foreach (var item in ListView.ItemsSource) {
-                    ((Slot) item).IsSelected = true;
-                    UIDofSelectedSlots.Add(((Slot) item).UID);
                 }
             }
         }
@@ -256,6 +241,10 @@ namespace Time_Table_Arranging_Program {
 
         public void SetDataContext(SubjectModel dataContext) {
             this.DataContext = dataContext;
+            foreach (var item in dataContext.Slots) {
+                item.IsSelected = true;
+                UIDofSelectedSlots.Add(item.UID);
+            }
         }
     }
 }
