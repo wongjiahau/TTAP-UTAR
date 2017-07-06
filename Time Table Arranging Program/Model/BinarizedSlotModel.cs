@@ -29,7 +29,7 @@ namespace Time_Table_Arranging_Program.Model {
             if (_code == other._code && _type == other._type && _number != other._number) return true;
             if ((_day & other._day) == 0) return false;
             if((_timePeriod & other._timePeriod)==0) return false;
-            return (_weekNumber & other._weekNumber) > 0;
+            return (_weekNumber & other._weekNumber) != 0;
 
         }
 

@@ -13,18 +13,20 @@ namespace Time_Table_Arranging_Program.Model
         public SubjectModel()
         {
             Name = "Testing Subject 123";
-            Code = "MPU329999";
+            CodeAndNameInitials = "MPU329999";
             Slots = TestData.GetSlotRange(3,9);
         }
         public SubjectModel(string name, string code, int creditHour, List<Slot> slots)
         {
             Name = name;
-            Code = code + " [" + name.GetInitial() + "]";
+            Code = code;
+            CodeAndNameInitials = code + " [" + name.GetInitial() + "]";
             CreditHour = creditHour;
             Slots = slots;
         }
 
         public string Name { get; private set; }
+        public string CodeAndNameInitials { get; private set; }
         public string Code { get; private set; }
         public int CreditHour { get; private set; }
 

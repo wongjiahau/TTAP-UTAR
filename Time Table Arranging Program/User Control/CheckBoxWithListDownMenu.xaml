@@ -104,7 +104,7 @@
                 <StackPanel DockPanel.Dock="Left">
                     <local:HighlightTextBlock FontSize="14"  DockPanel.Dock="Left" x:Name="SubjectNameHighlightTextBlock" Text="{Binding Name}" Margin="5"
                                       Cursor="Hand" VerticalAlignment="Center" FontWeight="DemiBold"  />
-                    <local:HighlightTextBlock x:Name="SubjectCodeHighlightTextBlock" VerticalAlignment="Center" Text="{Binding Code}" Margin="15,0,0,5" />
+                    <local:HighlightTextBlock x:Name="SubjectCodeHighlightTextBlock" VerticalAlignment="Center" Text="{Binding CodeAndNameInitials}" Margin="15,0,0,5" />
                 </StackPanel>
                 <Button x:Name="ChooseSlotButton"  Style="{StaticResource MaterialDesignFlatButton}" Margin="5" FontSize="11" DockPanel.Dock="Right" VerticalAlignment="Center" Visibility="Hidden"                        
                     Click="ChooseSlotButton_Click" ToolTip="Choose specific slots" HorizontalAlignment="Right">
