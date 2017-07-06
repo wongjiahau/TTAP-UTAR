@@ -7,6 +7,7 @@ using System.Windows.Input;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
 using Time_Table_Arranging_Program.Class;
+using Time_Table_Arranging_Program.Model;
 using Time_Table_Arranging_Program.UserInterface;
 
 namespace Time_Table_Arranging_Program.User_Control {
@@ -39,27 +40,14 @@ namespace Time_Table_Arranging_Program.User_Control {
             var subjects = inputSlots.GetNamesOfAllSubjects();
             var codes = inputSlots.GetCodesOfAllSubjects();
             _nameAndCodeOfAllSubjects = subjects.Concat(codes).ToArray();
-            var subjectModels = new Class.SubjectParser.SubjectModelParser().Parse(inputSlots);
+            var subjectModels = SubjectModel.Parse(inputSlots);
             foreach(var subject in subjectModels)
             {
                 var box = new CheckBoxWithListDownMenu() { DataContext = subject };
                 CheckerBoxStackPanel.Children.Add((CheckBoxWithListDownMenu)box);
                 box.Checked += Box_CheckChanged;                
                 box.ListViewCheckBox_Checked += Box_ListViewCheckBox_Checked;
-            }
-            //for (var i = 0; i < subjects.Length; i++) {
-            //    ICheckBoxWithListDownMenu box = new CheckBoxWithListDownMenu();
-            //    box.SubjectName = subjects[i];
-            //    box.SubjectCode = codes[i];
-            //    if (inputSlots.SelectedSubjectNames.Any(s => s == subjects[i])) {
-            //        box.IsChecked = true;
-            //        box.FontWeight = FontWeights.Bold;
-            //    }
-            //    box.Checked += Box_CheckChanged;
-            //    box.SlotList = inputSlots.GetSlotsOf(subjects[i]);
-            //    box.ListViewCheckBox_Checked += Box_ListViewCheckBox_Checked;
-            //    CheckerBoxStackPanel.Children.Add((CheckBoxWithListDownMenu) box);
-            //}
+            }       
             _anyCheckBoxs =
                 new List<ICheckBoxWithListDownMenu>(CheckerBoxStackPanel.Children.OfType<ICheckBoxWithListDownMenu>());
         }

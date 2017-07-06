@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using NUnit.Tests2;
 using Time_Table_Arranging_Program.Class;
 
 namespace Time_Table_Arranging_Program.Model
@@ -13,7 +14,7 @@ namespace Time_Table_Arranging_Program.Model
         {
             Name = "Testing Subject 123";
             Code = "MPU329999";
-            Slots = NUnit.Tests2.TestData.GetSlotRange(3,9);
+            Slots = TestData.GetSlotRange(3,9);
         }
         public SubjectModel(string name, string code, int creditHour, List<Slot> slots)
         {
@@ -28,5 +29,25 @@ namespace Time_Table_Arranging_Program.Model
         public int CreditHour { get; private set; }
 
         public List<Slot> Slots { get; private set; }
+
+        public static List<SubjectModel> Parse(List<Slot> slots)
+        {
+            var result = new List<SubjectModel>();
+            var dic = new Dictionary<string, List<Slot>>();
+            foreach (Slot s in slots)
+            {
+                if (!dic.ContainsKey(s.Code))
+                {
+                    dic.Add(s.Code, new List<Slot>());
+                }
+                dic[s.Code].Add(s);
+            }
+            foreach (KeyValuePair<string, List<Slot>> entry in dic)
+            {
+                var v = entry.Value[0];
+                result.Add(new SubjectModel(v.SubjectName, v.Code, 0, entry.Value));                
+            }
+            return result;
+        }
     }
 }
