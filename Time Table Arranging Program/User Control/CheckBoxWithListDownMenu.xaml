@@ -67,9 +67,9 @@
                                 <ListView x:Name="ListView" DockPanel.Dock="Bottom" Margin="4" 
                                           ItemsSource="{Binding Slots}"
                                           >
-                                    <ListView.DataContext>
+                                    <!--<ListView.DataContext>
                                         <class:Slot />
-                                    </ListView.DataContext>
+                                    </ListView.DataContext>-->
                                     <ListView.View>
                                         <GridView>
                                             <GridViewColumn CellTemplate="{StaticResource FirstCell}" />
