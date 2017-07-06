@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Linq;
 using Time_Table_Arranging_Program;
 using Time_Table_Arranging_Program.Class;
+using Time_Table_Arranging_Program.Model;
 
 namespace NUnit.Tests2 {
     [TestFixture]
@@ -29,6 +30,32 @@ namespace NUnit.Tests2 {
             timer.Stop();
             Console.WriteLine("Combination count : " + result.Count);
             Console.WriteLine("Elapsed time : " + timer.Elapsed.TotalSeconds + " s");
+            Assert.True(result.Count == expectedCount);
+        }
+
+        [Test]
+        public void Test_PermutateV4_Runv2_WithConsideringWeekNumber_ForBinarizedSlot() {
+            int expectedCount = 616872;
+            var raw = new List<Slot>();
+            raw.AddRange(TestData.GetSlotsByName(TestData.Subjects.Hydrology));
+            raw.AddRange(TestData.GetSlotsByName(TestData.Subjects.StructuralAnalysisII));
+            raw.AddRange(TestData.GetSlotsByName(TestData.Subjects.HighwayAndTransportation));
+            raw.AddRange(TestData.GetSlotsByName(TestData.Subjects.FluidMechanicsII));
+            raw.AddRange(TestData.GetSlotsByName(TestData.Subjects.IntroductionToBuildingServices));
+            var input = new List<BinarizedSlotModel>();
+            for (int i = 0 ; i < raw.Count ; i++) {
+                input.Add(new BinarizedSlotModel(raw[i]));
+            }
+            var timer = Stopwatch.StartNew();
+            var result = new List<List<BinarizedSlotModel>>();
+            int loopCount = 5;
+            for (int i = 0 ; i < loopCount ; i++) {
+                result = PermutatorForBinarizedSlot.Run_v2_WithConsideringWeekNumber(input.ToArray());
+            }
+            timer.Stop();
+            double averageElapsedSeconds = timer.Elapsed.TotalSeconds / loopCount;
+            Console.WriteLine("Combination count : " + result.Count);
+            Console.WriteLine("Elapsed time : " + averageElapsedSeconds + " s");
             Assert.True(result.Count == expectedCount);
         }
 

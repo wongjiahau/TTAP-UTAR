@@ -205,12 +205,12 @@ namespace Time_Table_Arranging_Program {
     }
 
     public static class PermutatorForBinarizedSlot {        
-        public static List<List<BinarizeSlotModel>> Run_v2_WithConsideringWeekNumber(BinarizeSlotModel[] input) {
+        public static List<List<BinarizedSlotModel>> Run_v2_WithConsideringWeekNumber(BinarizedSlotModel[] input) {
             if (input == null || input.Length == 0) return null;
-            var result = new List<List<BinarizeSlotModel>>();
+            var result = new List<List<BinarizedSlotModel>>();
             var partitioned = Partitionize(input);
             var indices = GenerateIndices(partitioned);
-            var prototype = new List<BinarizeSlotModel>(partitioned.Count);
+            var prototype = new List<BinarizedSlotModel>(partitioned.Count);
 
             var crashedIndexList = new List<KeyValuePair[]>();
             while (true) {
@@ -225,7 +225,7 @@ namespace Time_Table_Arranging_Program {
                     }
                     prototype.Add(current);
                 }
-                result.Add(new List<BinarizeSlotModel>(prototype));
+                result.Add(new List<BinarizedSlotModel>(prototype));
                 here:
                 do {
                     indices = Increment(indices);
@@ -273,7 +273,7 @@ namespace Time_Table_Arranging_Program {
             return result;
         }
 
-        public static List<List<T>> Partitionize<T>(T[] input) where T : BinarizeSlotModel {
+        public static List<List<T>> Partitionize<T>(T[] input) where T : BinarizedSlotModel {
             var result = new List<List<T>>();
             var column = new List<T>();
             var copy = input.ToList();
