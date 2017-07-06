@@ -175,6 +175,7 @@
     <Compile Include="Class\testing_for_revert.cs" />
     <Compile Include="Interfaces\INeedDataContext.cs" />
     <Compile Include="Interfaces\IPageWithLoadedFunction.cs" />
+    <Compile Include="Interfaces\ToBinary.cs" />
     <Compile Include="IValueConverter\TooltipConverterForToggleButton.cs" />
     <Compile Include="Model\BinarizeSlotModel.cs" />
     <Compile Include="Model\SubjectModel.cs" />

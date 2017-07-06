@@ -5,7 +5,7 @@ using Time_Table_Arranging_Program.Class.Helper;
 using Time_Table_Arranging_Program.Interfaces;
 
 namespace Time_Table_Arranging_Program.Class.Converter {
-    public interface IWeekNumber : IToConstructionString {
+    public interface IWeekNumber : IToConstructionString, IConvertibleToBinary {
         void Clear();
         int Max();
     }
@@ -104,6 +104,10 @@ namespace Time_Table_Arranging_Program.Class.Converter {
             }
 
             return result;
+        }
+
+        public int ToBinary() {
+            return _weekNumberInBinary;
         }
     }
 

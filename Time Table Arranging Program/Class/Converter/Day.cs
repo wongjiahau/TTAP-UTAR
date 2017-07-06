@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Time_Table_Arranging_Program.Class.Helper;
 using Time_Table_Arranging_Program.Interfaces;
 
 namespace Time_Table_Arranging_Program.Class.Converter {
-    public interface IDay : IEquatable<IDay>, IToConstructionString {
+    public interface IDay : IEquatable<IDay>, IToConstructionString, IConvertibleToBinary {
         string StringValue { get; set; }
         int IntValue { get; set; }
         DayOfWeek ToDayOfWeek();
@@ -141,6 +143,21 @@ namespace Time_Table_Arranging_Program.Class.Converter {
 
         public override string ToString() {
             return StringValue;
+        }
+
+        public int ToBinary() {
+            var bitArray = new BitArray(7);
+            int intValueInZeroBasedIndex = _intValue - 1;
+            for (int i = 0; i < 7; i++) {
+                if (i == intValueInZeroBasedIndex) {
+                    bitArray[i] = true;
+                }
+                else {
+                    bitArray[i] = false;
+                }
+            }
+            return bitArray.ToInt();
+
         }
     }
 }

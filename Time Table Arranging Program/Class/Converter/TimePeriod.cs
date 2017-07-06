@@ -4,7 +4,7 @@ using Time_Table_Arranging_Program.Class.Helper;
 using Time_Table_Arranging_Program.Interfaces;
 
 namespace Time_Table_Arranging_Program.Class.Converter {
-    public interface ITimePeriod : IToConstructionString {
+    public interface ITimePeriod : IToConstructionString, IConvertibleToBinary {
         Time StartTime { get; set; }
         Time EndTime { get; set; }
     }
@@ -80,6 +80,10 @@ namespace Time_Table_Arranging_Program.Class.Converter {
 
         protected override string StringValue() {
             return $" {StartTime} - {EndTime}";
+        }
+
+        public int ToBinary() {
+            throw new NotImplementedException();
         }
     }
 }
