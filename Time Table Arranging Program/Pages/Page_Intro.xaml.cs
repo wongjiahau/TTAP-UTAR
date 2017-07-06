@@ -51,6 +51,9 @@ namespace Time_Table_Arranging_Program.Pages {
             }
             if (currentUrl.Contains(CourseTimetablePreviewUrl) == false) {
                 _currentPage = 1;
+                dynamic doc = Browser.Document;
+                string htmlText = doc.documentElement.InnerHtml;
+                if (htmlText.Contains("No record found")) return;
                 Browser.Navigate(CourseTimetablePreviewUrl);
                 return;
             }
