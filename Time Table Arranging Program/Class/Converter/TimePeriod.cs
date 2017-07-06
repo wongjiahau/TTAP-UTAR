@@ -41,7 +41,7 @@ namespace Time_Table_Arranging_Program.Class.Converter {
         }
 
         private int _dataInBinary;
-        public int DataInBinary() {
+        public int ToBinary() {
             return _dataInBinary;
         }
 
@@ -82,8 +82,5 @@ namespace Time_Table_Arranging_Program.Class.Converter {
             return $" {StartTime} - {EndTime}";
         }
 
-        public int ToBinary() {
-            throw new NotImplementedException();
-        }
     }
 }

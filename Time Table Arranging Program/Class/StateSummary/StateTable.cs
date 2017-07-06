@@ -42,7 +42,7 @@ namespace Time_Table_Arranging_Program.Class.StateSummary {
                 for (int j = 0; j < o[i].Count; j++) {
                     var slot = o[i][j];
                     int day = slot.Day.IntValue;
-                    int timeperiodInBinary = slot.TimePeriod.DataInBinary();
+                    int timeperiodInBinary = slot.TimePeriod.ToBinary();
                     states[day][0] &= timeperiodInBinary;
                     states[day][1] |= timeperiodInBinary;
                 }
