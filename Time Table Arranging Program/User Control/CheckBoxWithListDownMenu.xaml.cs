@@ -6,6 +6,8 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using MaterialDesignThemes.Wpf;
 using Time_Table_Arranging_Program.Class;
+using Time_Table_Arranging_Program.Interfaces;
+using Time_Table_Arranging_Program.Model;
 using Time_Table_Arranging_Program.UserInterface;
 
 namespace Time_Table_Arranging_Program {
@@ -27,7 +29,7 @@ namespace Time_Table_Arranging_Program {
         event RoutedEventHandler ListViewCheckBox_Checked;
     }
 
-    public partial class CheckBoxWithListDownMenu : UserControl, ICheckBoxWithListDownMenu {
+    public partial class CheckBoxWithListDownMenu : UserControl, ICheckBoxWithListDownMenu, INeedDataContext<SubjectModel> {
         private double _listviewOriginalHeight;
 
         public CheckBoxWithListDownMenu() {
@@ -249,6 +251,11 @@ namespace Time_Table_Arranging_Program {
             ListView.ItemsSource = null;
             ListView.ItemsSource = temp;
             ListViewCheckBox_Checked?.Invoke(this, null);
+        }
+
+
+        public void SetDataContext(SubjectModel dataContext) {
+            this.DataContext = dataContext;
         }
     }
 }
