@@ -50,7 +50,6 @@ namespace Time_Table_Arranging_Program.Class {
         public string SubjectName { get; set; }
         public string Number { get; set; }
         public string Type { get; set; }
-
         public Day Day {
             get { return (Day)_day; }
             set { _day = value; }

@@ -176,6 +176,7 @@
     <Compile Include="Interfaces\INeedDataContext.cs" />
     <Compile Include="Interfaces\IPageWithLoadedFunction.cs" />
     <Compile Include="IValueConverter\TooltipConverterForToggleButton.cs" />
+    <Compile Include="Model\BinarizeSlotModel.cs" />
     <Compile Include="Model\SubjectModel.cs" />
     <Compile Include="MVVM_Framework\Models\TimetableList_2.cs" />
     <Compile Include="MVVM_Framework\ObservableObject.cs" />
