@@ -54,8 +54,7 @@
                                     </Button>
 
                                     <Label x:Name="SubjectNameLabel" HorizontalAlignment="Stretch" FontWeight="Bold"
-                                       Background="White"  Cursor="SizeAll" >
-                                        test
+                                       Background="White"  Cursor="SizeAll" Content="{Binding Name}">
                                     </Label>
                                 </DockPanel>
                             </Border>

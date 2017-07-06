@@ -20,7 +20,7 @@ namespace Time_Table_Arranging_Program.Class {
         }
 
         public Slot(int uid , string code , string subjectName , string number , string type , Day day , string venue ,
-                    TimePeriod timePeriod , WeekNumber weekNumber , bool isSelected) {
+            TimePeriod timePeriod , WeekNumber weekNumber) {
             UID = uid;
             Code = code;
             SubjectName = subjectName;
@@ -29,8 +29,8 @@ namespace Time_Table_Arranging_Program.Class {
             Day = day;
             Venue = venue;
             TimePeriod = timePeriod;
-            WeekNumber = weekNumber;
-            IsSelected = isSelected;
+            WeekNumber = weekNumber;                        
+            IsSelected = true;
         }
 
         public Slot(Slot s) {
