@@ -32,7 +32,6 @@ namespace Time_Table_Arranging_Program.Pages {
         private List<Predicate<Slot>> _predicates = new List<Predicate<Slot>>();
 
         private MutableObservable<IOutputTimetableModel> _timetableList;
-        private int _uidOfLastSlot = -1;
         private readonly Func<Slot[], List<List<Slot>>>  _permutator;
 
         public Page_CreateTimetable(SlotList inputSlots, Func<Slot[], List<List<Slot>>> permutator) {                        
@@ -61,8 +60,8 @@ namespace Time_Table_Arranging_Program.Pages {
         }
         
         private void InitializeExtraComponents() {
-            SelectSubjectPanel.CreateCheckBoxes(_inputSlots);
-            //            SelectSubjectPanel.CreateCheckBoxes(GetAvailableSubjects(Global.inputSlots) , Global.selectedSubject);
+            var subjectList = SubjectModel.Parse(_inputSlots);
+            SelectSubjectPanel.SetDataContext(subjectList);            
             FavouriteButton.CheckedMessage = "Added this timetable to favorites ";
             FavouriteButton.UncheckedMessage = "Removed this timetable from favorites";
         }

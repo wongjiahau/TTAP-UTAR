@@ -7,6 +7,7 @@ using System.Windows.Input;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
 using Time_Table_Arranging_Program.Class;
+using Time_Table_Arranging_Program.Interfaces;
 using Time_Table_Arranging_Program.Model;
 using Time_Table_Arranging_Program.UserInterface;
 
@@ -14,10 +15,10 @@ namespace Time_Table_Arranging_Program.User_Control {
     /// <summary>
     /// Interaction logic for SelectSubjectPanel.xaml
     /// </summary>
-    public partial class SelectSubjectPanel : UserControl {
+    public partial class SelectSubjectPanel : UserControl, INeedDataContext<List<SubjectModel>> {
         private List<ICheckBoxWithListDownMenu> _anyCheckBoxs;
 
-        private string[] _nameAndCodeOfAllSubjects;
+        private List<string> _nameAndCodeOfAllSubjects;
 
         private string _suggestedText = "";
 
@@ -36,21 +37,7 @@ namespace Time_Table_Arranging_Program.User_Control {
 
         
 
-        public void CreateCheckBoxes(SlotList inputSlots) {
-            var subjects = inputSlots.GetNamesOfAllSubjects();
-            var codes = inputSlots.GetCodesOfAllSubjects();
-            _nameAndCodeOfAllSubjects = subjects.Concat(codes).ToArray();
-            var subjectModels = SubjectModel.Parse(inputSlots);
-            foreach(var subject in subjectModels) {
-                var box = new CheckBoxWithListDownMenu();
-                box.SetDataContext(subject);
-                CheckerBoxStackPanel.Children.Add(box);
-                box.Checked += Box_CheckChanged;                
-                box.ListViewCheckBox_Checked += Box_ListViewCheckBox_Checked;
-            }       
-            _anyCheckBoxs =
-                new List<ICheckBoxWithListDownMenu>(CheckerBoxStackPanel.Children.OfType<ICheckBoxWithListDownMenu>());
-        }
+     
 
         public string[] GetNamesOfCheckedSubject() {
             var checkedSubject = new List<string>();
@@ -68,6 +55,20 @@ namespace Time_Table_Arranging_Program.User_Control {
             foreach (var uid in c.UIDofDeselectedSlots) {
                 UIDofSelectedSlots.Remove(uid);
             }
+            Update();
+        }
+
+        private void Box_CheckChanged(object sender, RoutedEventArgs e) {
+            var x = sender as ICheckBoxWithListDownMenu;
+            if (x.IsChecked) {
+                x.FontWeight = FontWeights.Bold;
+                UIDofSelectedSlots.UnionWith(x.UIDofSelectedSlots);
+            }
+            else {
+                x.FontWeight = FontWeights.Normal;
+                UIDofSelectedSlots.ExceptWith(x.UIDofSelectedSlots.Union(x.UIDofDeselectedSlots));
+            }
+            e.Handled = true;
             Update();
         }
 
@@ -99,20 +100,6 @@ namespace Time_Table_Arranging_Program.User_Control {
             ViewChanger.BeginAnimation(WidthProperty , da);
         }
 
-        private void Box_CheckChanged(object sender, RoutedEventArgs e) {
-            var x = sender as ICheckBoxWithListDownMenu;
-            if (x.IsChecked) {
-                x.FontWeight = FontWeights.Bold;
-                UIDofSelectedSlots.UnionWith(x.UIDofSelectedSlots);
-            }
-            else {
-                x.FontWeight = FontWeights.Normal;
-                UIDofSelectedSlots.ExceptWith(x.UIDofSelectedSlots.Union(x.UIDofDeselectedSlots));
-            }
-            e.Handled = true;
-            Update();
-        }
-     
         private void ViewChangerButton_OnClick(object sender, RoutedEventArgs e) {
             if (ViewChangerButton.Content.ToString() == "Show selected subjects") {
                 foreach (UIElement child in CheckerBoxStackPanel.Children) {
@@ -148,7 +135,7 @@ namespace Time_Table_Arranging_Program.User_Control {
             }
             else {
                 HintLabel.Visibility =Visibility.Collapsed;
-                _suggestedText = LevenshteinDistance.GetClosestMatchingTerm(searchedText, _nameAndCodeOfAllSubjects);
+                _suggestedText = LevenshteinDistance.GetClosestMatchingTerm(searchedText, _nameAndCodeOfAllSubjects.ToArray());
                 if (_suggestedText == null) {
                     FeedbackPanel.Visibility = Visibility.Collapsed;
                     ErrorLabel.Text = "No result found . . .";
@@ -202,6 +189,23 @@ namespace Time_Table_Arranging_Program.User_Control {
                     }                                                           
                 }
             }
+        }
+
+        public void SetDataContext(List<SubjectModel> dataContext) {
+            var subjectModels = dataContext;
+            _nameAndCodeOfAllSubjects = new List<string>();
+            foreach (var subject in subjectModels) {     
+                _nameAndCodeOfAllSubjects.Add(subject.Name);
+                _nameAndCodeOfAllSubjects.Add(subject.Code);
+                var box = new CheckBoxWithListDownMenu();
+                box.SetDataContext(subject);
+                CheckerBoxStackPanel.Children.Add(box);
+                box.Checked += Box_CheckChanged;
+                box.ListViewCheckBox_Checked += Box_ListViewCheckBox_Checked;
+            }
+            _anyCheckBoxs =
+                new List<ICheckBoxWithListDownMenu>(CheckerBoxStackPanel.Children.OfType<ICheckBoxWithListDownMenu>());
+
         }
     }
 }
