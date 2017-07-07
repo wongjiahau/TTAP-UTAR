@@ -61,6 +61,7 @@ Press ESC to clear text of search box.</TextBlock>
                             Click="DoneButton_OnClick"
                             Margin="15"
                             Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                            Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
                             >DONE</Button>
                 </StackPanel>
             </materialDesign:ColorZone>
