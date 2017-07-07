@@ -16,6 +16,16 @@ namespace Time_Table_Arranging_Program.Model {
         public string Code => _code;
         public string Type => _type;
         public int Number => _number;
+        public int Day {
+            get => _day;
+            set => _day = value;
+        }
+
+        public int TimePeriod {
+            get => _timePeriod;
+            set => _timePeriod = value;
+        }
+
         public BinarizedSlotModel(Slot s) {
             _day = s.Day.ToBinary();
             _timePeriod = s.TimePeriod.ToBinary();
