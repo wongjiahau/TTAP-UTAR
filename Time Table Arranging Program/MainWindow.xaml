@@ -29,7 +29,7 @@
                             <materialDesign:PackIcon Kind="ArrowRightBold"  Height="30" Width="30"/>
                         </Button>
                         <Button Style="{StaticResource MaterialDesignFlatButton}" Foreground="White" DockPanel.Dock="Right" Click="ExtraMenuButton_OnClick">
-                            <materialDesign:PackIcon Kind="Menu"></materialDesign:PackIcon>
+                            <materialDesign:PackIcon Height="25" Width="25" Kind="DotsVertical"></materialDesign:PackIcon>
                         </Button>
                         <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22">Timetable Arranging Program ( TTAP )</TextBlock>
                     </DockPanel>
