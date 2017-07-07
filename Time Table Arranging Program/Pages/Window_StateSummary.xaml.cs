@@ -27,12 +27,11 @@ namespace Time_Table_Arranging_Program.Pages {
         }
 
         private void RegenerateOutput() {
-            //            var filteredSlot = Filterer.Filter(_inputSlots.ToArray() , _predicates);
-            var package = new TimetablesAndPredicates(_outputTimetables, Predicates);
+            var package = new TimetablesAndPredicates(_outputTimetables , Predicates);
             var bg = CustomBackgroundWorker<TimetablesAndPredicates , List<List<Slot>>>.
-RunAndShowLoadingScreen(Filterer.Filter , package , "Filtering unsatisfactory timetables . . .");
+            RunAndShowLoadingScreen(Filterer.Filter , package ,
+                "Filtering unsatisfactory timetables . . .");
             var filteredTimetable = bg.GetResult();
-            //var filteredTimetable = Filterer.Filter(_outputTimetables , Predicates);
             TimeTableGui.RegenerateStateSummary(filteredTimetable , _factory);
         }
 
@@ -46,27 +45,27 @@ RunAndShowLoadingScreen(Filterer.Filter , package , "Filtering unsatisfactory ti
         }
 
         public List<Predicate<Slot>> Predicates => _predicates;
-        public bool UserClickedDone { get; private set; }= false;
+        public bool UserClickedDone { get; private set; } = false;
         private void DoneButton_OnClick(object sender , RoutedEventArgs e) {
             UserClickedDone = true;
             this.Hide();
         }
 
-        private void BackButton_OnClick(object sender, RoutedEventArgs e) {
-            UserClickedDone = false;           
-            this.Hide();            
+        private void BackButton_OnClick(object sender , RoutedEventArgs e) {
+            UserClickedDone = false;
+            this.Hide();
         }
 
 
-        private void Window_StateSummary_OnLoaded(object sender, RoutedEventArgs e) {
+        private void Window_StateSummary_OnLoaded(object sender , RoutedEventArgs e) {
             UserClickedDone = false;
         }
 
-        private void HelpButton_OnClick(object sender, RoutedEventArgs e) {
+        private void HelpButton_OnClick(object sender , RoutedEventArgs e) {
             MyMessageBox.ShowOk(
-                "How it works?",
+                "How it works?" ,
                 "It works by searching through all the possible combination and check for which time period definitely have class and vice versa."
-               
+
                 );
             //DialogHost.IsOpen = true;                            
         }

@@ -62,6 +62,7 @@ namespace Time_Table_Arranging_Program.Pages {
         private void InitializeExtraComponents() {
             var subjectList = SubjectModel.Parse(_inputSlots);
             SelectSubjectPanel.SetDataContext(subjectList);            
+            SelectSubjectPanel.SetDrawerHost(this.DrawerHost);
             FavouriteButton.CheckedMessage = "Added this timetable to favorites ";
             FavouriteButton.UncheckedMessage = "Removed this timetable from favorites";
         }
@@ -85,7 +86,7 @@ namespace Time_Table_Arranging_Program.Pages {
                 ToolBoxPanel.Visibility = Visibility.Visible;
                 _cyclicIndex.MaxValue = result.Count - 1;
                 _cyclicIndex.CurrentValue = 0;
-                AutoClosePopup.Show(result.Count + " possible timetables found.");
+                //AutoClosePopup.Show(result.Count + " possible timetables found.");
             }
             TimetableViewer.Initialize(_cyclicIndex);
             CyclicIndexView.DataContext = new CyclicIndexVM(_cyclicIndex);

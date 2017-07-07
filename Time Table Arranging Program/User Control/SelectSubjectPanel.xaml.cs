@@ -6,6 +6,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
+using MaterialDesignThemes.Wpf;
 using Time_Table_Arranging_Program.Class;
 using Time_Table_Arranging_Program.Interfaces;
 using Time_Table_Arranging_Program.Model;
@@ -24,7 +25,11 @@ namespace Time_Table_Arranging_Program.User_Control {
         private string _suggestedText = "";
 
         public SelectSubjectPanel() {
-            InitializeComponent();
+             InitializeComponent();
+        }
+        public void SetDrawerHost(DrawerHost drawerHost) {
+            _drawerHost = drawerHost;
+           
         }
 
         public HashSet<int> UIDofSelectedSlots { get; } = new HashSet<int>();
@@ -68,7 +73,7 @@ namespace Time_Table_Arranging_Program.User_Control {
         }
 
         private void Update() {
-            UpdateViewChangerVisibility();           
+            UpdateBottomPanelVisibility();           
             SlotSelectionChanged(this, null);
             
             Dispatcher.BeginInvoke(
@@ -80,19 +85,19 @@ namespace Time_Table_Arranging_Program.User_Control {
                 }));
         }
 
-        private void UpdateViewChangerVisibility() {            
+        private void UpdateBottomPanelVisibility() {            
             DoubleAnimation da;
             if (UIDofSelectedSlots.Count == 0) {
-                da = CustomAnimation.GetLeavingScreenAnimation(200, 0, false);
+                da = CustomAnimation.GetLeavingScreenAnimation(70, 0, false);
                 ViewChanger.Badge = null;
                 if (ViewChangerButton.Content.ToString() == "Show all subjects") return;
             }
             else {                
-                da = CustomAnimation.GetEnteringScreenAnimation(0, 200, false);                
+                da = CustomAnimation.GetEnteringScreenAnimation(0, 70, false);                
                 ViewChanger.Badge = GetNamesOfCheckedSubject().Length;
-                if (ViewChanger.ActualWidth > 0) return;
+                if (BottomPanel .ActualHeight > 0) return;
             }
-            ViewChanger.BeginAnimation(WidthProperty , da);
+            BottomPanel.BeginAnimation(HeightProperty , da);
         }
 
         private void ViewChangerButton_OnClick(object sender, RoutedEventArgs e) {
@@ -117,7 +122,7 @@ namespace Time_Table_Arranging_Program.User_Control {
                 ViewChangerButton.Content = "Show selected subjects";
                 SearchBox.Visibility = Visible;
             }
-            UpdateViewChangerVisibility();
+            UpdateBottomPanelVisibility();
         }
 
         private void SearchBoxOnTextChanged(object sender, TextChangedEventArgs textChangedEventArgs) {
@@ -202,5 +207,12 @@ namespace Time_Table_Arranging_Program.User_Control {
                 new List<ICheckBoxWithListDownMenu>(CheckerBoxStackPanel.Children.OfType<ICheckBoxWithListDownMenu>());
 
         }
+
+        private void DoneButton_OnClick(object sender, RoutedEventArgs e) {
+            DrawerHost d = this._drawerHost;
+            d.IsLeftDrawerOpen = false;
+        }
+
+        private DrawerHost _drawerHost;
     }
 }
