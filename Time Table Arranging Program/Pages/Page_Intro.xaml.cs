@@ -43,24 +43,25 @@ namespace Time_Table_Arranging_Program.Pages {
             Browser.Navigate(LoginPageUrl);
         }
 
-        private void Browser_OnLoadCompleted(object sender , NavigationEventArgs e) {
+        private bool _browsingToCourseTimetablePreview = false;
+        private void Browser_OnLoadCompleted(object sender , NavigationEventArgs e) {            
+            Browser .InvokeScript("execScript", "document.documentElement.style.overflow ='hidden'", "JavaScript");
             RefreshButton.IsEnabled = true;
             string currentUrl = Browser.Source.ToString();
-            if (currentUrl == LoginPageUrl || currentUrl == LoginFailedUrl || currentUrl == EndUrl) {
+            if (currentUrl == LoginPageUrl) return;
+            //if(currentUrl == LoginSuccessUrl) 
+            if(currentUrl == LoginFailedUrl) Browser.Navigate(LoginPageUrl);
+                        
+            if (currentUrl == LoginPageUrl || currentUrl == LoginFailedUrl || currentUrl == EndUrl) {                
                 return;
             }
             if (currentUrl.Contains(CourseTimetablePreviewUrl) == false) {
                 _currentPage = 1;
-                dynamic doc = Browser.Document;
-                string htmlText = doc.documentElement.InnerHtml;
-                if (htmlText.Contains("No record found")) return;
-                Browser.Navigate(CourseTimetablePreviewUrl);
+                if (_browsingToCourseTimetablePreview == false) {
+                    Browser.Navigate(CourseTimetablePreviewUrl);                    
+                }
                 return;
-            }
-            if (currentUrl.Contains(CourseTimetablePreviewUrl) == false) {
-                Browser.Navigate(LoginPageUrl);
-                return;
-            }
+            }           
             Browser.Visibility = Visibility.Hidden;
             string plainText = LoadPlainText();
             var bg = CustomBackgroundWorker<string , List<Slot>>.RunAndShowLoadingScreen(
