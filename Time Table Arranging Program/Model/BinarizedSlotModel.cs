@@ -43,6 +43,8 @@ namespace Time_Table_Arranging_Program.Model {
 
         }
 
-
+        public override string ToString() {
+            return $"{Code} [{Type}-{Number}]";
+        }
     }
 }
