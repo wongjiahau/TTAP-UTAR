@@ -29,8 +29,16 @@ namespace Time_Table_Arranging_Program.Model
         public string CodeAndNameInitials { get; private set; }
         public string Code { get; private set; }
         public int CreditHour { get; private set; }
-
         public List<Slot> Slots { get; private set; }
+
+        public List<Slot> GetSelectedSlots() {
+            var result = new List<Slot>();
+            for (int i = 0; i < Slots.Count; i++) {
+                if(Slots[i].IsSelected)
+                    result.Add(Slots[i]);
+            }
+            return result;
+        }
 
         public static List<SubjectModel> Parse(List<Slot> slots)
         {

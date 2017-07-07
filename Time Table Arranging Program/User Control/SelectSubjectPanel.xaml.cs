@@ -10,6 +10,7 @@ using Time_Table_Arranging_Program.Class;
 using Time_Table_Arranging_Program.Interfaces;
 using Time_Table_Arranging_Program.Model;
 using Time_Table_Arranging_Program.UserInterface;
+using static System.Windows.Visibility;
 
 namespace Time_Table_Arranging_Program.User_Control {
     /// <summary>
@@ -26,19 +27,13 @@ namespace Time_Table_Arranging_Program.User_Control {
             InitializeComponent();
         }
 
-
         public HashSet<int> UIDofSelectedSlots { get; } = new HashSet<int>();
         public event EventHandler SlotSelectionChanged;
-
 
         public void Clear() {
             CheckerBoxStackPanel.Children.Clear();
         }
-
-        
-
-     
-
+            
         public string[] GetNamesOfCheckedSubject() {
             var checkedSubject = new List<string>();
             foreach (var box in _anyCheckBoxs) {
@@ -106,21 +101,21 @@ namespace Time_Table_Arranging_Program.User_Control {
                     if (child is ICheckBoxWithListDownMenu) {
                         child.Visibility =
                             (child as ICheckBoxWithListDownMenu).IsChecked
-                                ? Visibility.Visible
-                                : Visibility.Collapsed;
+                                ? Visible
+                                : Collapsed;
                     }
                 }
                 ViewChangerButton.Content = "Show all subjects";
-                SearchBox.Visibility = Visibility.Collapsed;
+                SearchBox.Visibility = Collapsed;
             }
             else {
                 foreach (UIElement child in CheckerBoxStackPanel.Children) {
                     if (child is ICheckBoxWithListDownMenu) {
-                        child.Visibility = Visibility.Visible;
+                        child.Visibility = Visible;
                     }
                 }
                 ViewChangerButton.Content = "Show selected subjects";
-                SearchBox.Visibility = Visibility.Visible;
+                SearchBox.Visibility = Visible;
             }
             UpdateViewChangerVisibility();
         }
@@ -129,26 +124,26 @@ namespace Time_Table_Arranging_Program.User_Control {
             string searchedText = SearchBox.Text.ToLower();            
             bool somethingFound = SearchForMatchingSubjectAndDisplayThem(searchedText);
             if (somethingFound) {
-                HintLabel.Visibility = Visibility.Visible;
-                FeedbackPanel.Visibility = Visibility.Collapsed;
-                ErrorLabel.Visibility = Visibility.Collapsed;
+                HintLabel.Visibility = Visible;
+                FeedbackPanel.Visibility = Collapsed;
+                ErrorLabel.Visibility = Collapsed;
             }
             else {
-                HintLabel.Visibility =Visibility.Collapsed;
+                HintLabel.Visibility =Collapsed;
                 _suggestedText = LevenshteinDistance.GetClosestMatchingTerm(searchedText, _nameAndCodeOfAllSubjects.ToArray());
                 if (_suggestedText == null) {
-                    FeedbackPanel.Visibility = Visibility.Collapsed;
+                    FeedbackPanel.Visibility = Collapsed;
                     ErrorLabel.Text = "No result found . . .";
-                    ErrorLabel.Visibility = Visibility.Visible;
+                    ErrorLabel.Visibility = Visible;
                 }
                 else {
-                    ErrorLabel.Visibility = Visibility.Collapsed;
-                    FeedbackPanel.Visibility = Visibility.Visible;
+                    ErrorLabel.Visibility = Collapsed;
+                    FeedbackPanel.Visibility = Visible;
                     SuggestedTextLabel.Text = _suggestedText.Beautify();
                     SearchForMatchingSubjectAndDisplayThem(_suggestedText.ToLower());
                 }
             }
-            if (searchedText == "") HintLabel.Visibility = Visibility.Collapsed;
+            if (searchedText == "") HintLabel.Visibility = Collapsed;
         }
 
         private bool SearchForMatchingSubjectAndDisplayThem(string searchedText) {
@@ -159,11 +154,11 @@ namespace Time_Table_Arranging_Program.User_Control {
                     string comparedString = target.SubjectName.ToLower() + target.SubjectCode.ToLower();
                     if (comparedString.Contains(searchedText)) {
                         somethingFound = true;
-                        child.Visibility = Visibility.Visible;
+                        child.Visibility = Visible;
                         (child as ICheckBoxWithListDownMenu).HighlightText = searchedText;
                     }
                     else {
-                        child.Visibility = Visibility.Collapsed;
+                        child.Visibility = Collapsed;
                     }
                 }
             }
@@ -182,7 +177,7 @@ namespace Time_Table_Arranging_Program.User_Control {
         private void SearchBox_OnEnterKeyPressed(object sender, KeyEventArgs e) {
             foreach (UIElement child in CheckerBoxStackPanel.Children) {
                 if (child is ICheckBoxWithListDownMenu) {
-                    if (child.Visibility == Visibility.Visible) {
+                    if (child.Visibility == Visible) {
                         var target = child as ICheckBoxWithListDownMenu;
                         target.IsChecked = !target.IsChecked;
                         return;
