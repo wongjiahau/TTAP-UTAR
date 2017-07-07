@@ -7,35 +7,16 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" KeyDown="SelectSubjectPanel_OnKeyDown"   FocusManager.IsFocusScope="True" FocusManager.FocusedElement="{Binding ElementName=SearchBox}"
              >
-
     <materialDesign:Card VerticalAlignment="Stretch">
         <DockPanel LastChildFill="True" >
             <StackPanel DockPanel.Dock="Top">
                 <DockPanel>
-                    <Button DockPanel.Dock="Right" Height="50"  Style="{StaticResource MaterialDesignFlatButton}"
-                            Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
-                        ToolTip="Hide this panel"
-                            >
-                        <materialDesign:PackIcon Kind="ArrowLeft" Foreground="Black" Width="30" Height="30"></materialDesign:PackIcon>
-                    </Button>
-                    <Label VerticalAlignment="Center" FontSize="30" Margin="5" HorizontalAlignment="Left" FontWeight="Bold">Search and select your subjects</Label>
+                    <Label VerticalAlignment="Center" FontSize="30" Margin="5" HorizontalAlignment="Center" FontWeight="Bold">
+                        Search &amp; select your subjects</Label>
                 </DockPanel>
                 <Separator></Separator>
                 <DockPanel LastChildFill="True"  DockPanel.Dock="Top">
-                    <materialDesign:Badged x:Name="ViewChanger" DockPanel.Dock="Right" HorizontalAlignment="Right" HorizontalContentAlignment="Stretch"                                   
-                                   Margin="0,10,10,10"                                   
-                                   Width="0"
-                                   Height="40"                                           
-                                   >
-                        <Button x:Name="ViewChangerButton" 
-                                Height="40" 
-                                VerticalAlignment="Center" 
-                                Click="ViewChangerButton_OnClick"
-                        Style="{StaticResource MaterialDesignRaisedDarkButton}"
-                        >
-                            Show selected subjects
-                        </Button>
-                    </materialDesign:Badged>
+
                     <Border Background="White" DockPanel.Dock="Left" HorizontalAlignment="Stretch">
                         <local:SearchBox x:Name="SearchBox" EnterKeyPressed="SearchBox_OnEnterKeyPressed" TextChanged="SearchBoxOnTextChanged"/>
                     </Border>
@@ -59,17 +40,41 @@
             </Grid>
             <TextBlock x:Name="HintLabel" Margin="10,5,5,5" xml:space="preserve" Visibility="Collapsed" DockPanel.Dock="Top">Press ENTER to check the first subject in the list below.
 Press ESC to clear text of search box.</TextBlock>
-            <Border  BorderBrush="DarkGray"  BorderThickness="0.5" VerticalAlignment="Stretch" DockPanel.Dock="Bottom">
+            <materialDesign:ColorZone Mode="Light" materialDesign:ShadowAssist.ShadowDepth="Depth2" Height="0" x:Name="BottomPanel" DockPanel.Dock="Bottom">
+                <StackPanel  Orientation="Horizontal" HorizontalAlignment="Right" >
+                    <materialDesign:Badged x:Name="ViewChanger" DockPanel.Dock="Right" HorizontalAlignment="Right" HorizontalContentAlignment="Stretch"                                   
+                                       Margin="0"                                   
+                                       Width="200"
+                                       Height="40"                                           
+                                       VerticalAlignment="Center"
+                >
+                        <Button x:Name="ViewChangerButton" 
+                            Height="40" 
+                            VerticalAlignment="Center" 
+                            Click="ViewChangerButton_OnClick"
+                            Style="{StaticResource MaterialDesignRaisedButton}"
+                    >
+                            Show selected subjects
+                        </Button>
+                    </materialDesign:Badged>
+                    <Button Height="40" 
+                            Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}" 
+                            Margin="15"
+                            Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                            >DONE</Button>
+                </StackPanel>
+            </materialDesign:ColorZone>
+            <Border  BorderBrush="DarkGray"   BorderThickness="0.5" VerticalAlignment="Stretch" DockPanel.Dock="Bottom">
                 <ScrollViewer x:Name="SelectSubjectScrollViewer"  FlowDirection="LeftToRight"
-                              VerticalScrollBarVisibility="Auto"
+                              VerticalScrollBarVisibility="Visible"
                               HorizontalScrollBarVisibility="Hidden"  ToolTipService.ShowOnDisabled="True" ToolTipService.InitialShowDelay="0">
 
                     <StackPanel FlowDirection="LeftToRight" Name="CheckerBoxStackPanel" HorizontalAlignment="Stretch"
                                 VerticalAlignment="Top"
-                                CanVerticallyScroll="True" Margin="1" />
+                                CanVerticallyScroll="True" Margin="1">
+                    </StackPanel>
                 </ScrollViewer>
             </Border>
-
         </DockPanel>
     </materialDesign:Card>
 
