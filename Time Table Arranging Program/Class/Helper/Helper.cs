@@ -1,7 +1,13 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+
 
 namespace Time_Table_Arranging_Program.Class.Helper {
     public static class Helper {
@@ -30,6 +36,31 @@ namespace Time_Table_Arranging_Program.Class.Helper {
             bitArray.CopyTo(array , 0);
             return array[0];
 
+        }
+
+        public static RenderTargetBitmap GetImage(UserControl view) {
+            view.Width = 100;
+            Size size = new Size((int)view.ActualWidth , (int)view.ActualHeight);
+            if (size.IsEmpty)
+                return null;
+
+            RenderTargetBitmap result = new RenderTargetBitmap((int)size.Width , (int)size.Height , 96 , 96 , PixelFormats.Pbgra32);
+
+            DrawingVisual drawingvisual = new DrawingVisual();
+            using (DrawingContext context = drawingvisual.RenderOpen()) {
+                context.DrawRectangle(new VisualBrush(view) , null , new Rect(new Point() , size));
+                context.Close();
+            }
+
+            result.Render(drawingvisual);
+            return result;
+        }
+
+        public static void SaveAsPng(RenderTargetBitmap src , Stream outputStream) {
+            PngBitmapEncoder encoder = new PngBitmapEncoder();
+            encoder.Frames.Add(BitmapFrame.Create(src));
+
+            encoder.Save(outputStream);
         }
     }
 }
