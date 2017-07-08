@@ -31,6 +31,22 @@ namespace Time_Table_Arranging_Program.User_Control {
                 c.GoToNextColor();
             }
         }
+        public void GenerateAsImage(List<Slot> slots) {
+            SubjectDescGrid.Children.Clear();
+            IColorGenerator c = new ColorGenerator();
+            var gridRowIndex = 0;
+            var subjects = Subject.GroupIntoSubjects(slots);
+            foreach (Subject s in subjects) {
+                SubjectDescGrid.RowDefinitions.Add(new RowDefinition());
+                AddGridChildren(GetLabel(c , s.Code) , 0 , gridRowIndex);
+                AddGridChildren(GetSubjectNameLabel(s.Name , c, false) , 1 , gridRowIndex);
+                AddGridChildren(GetLabel(c , s.Lecture) , 2 , gridRowIndex);
+                AddGridChildren(GetLabel(c , s.Tutorial) , 3 , gridRowIndex);
+                AddGridChildren(GetLabel(c , s.Practical) , 4 , gridRowIndex);                
+                gridRowIndex++;
+                c.GoToNextColor();
+            }
+        }
 
         private Button GetCopyButton(string codeToBeCopied) {
             var button = new Button {
@@ -69,14 +85,15 @@ namespace Time_Table_Arranging_Program.User_Control {
             Grid.SetRow(child , rowIndex);
         }
 
-        private Border GetSubjectNameLabel(string subjectName , IColorGenerator c) {
+        private Border GetSubjectNameLabel(string subjectName , IColorGenerator c, bool truncate = true) {
             var textblock = new TextBlock {
-                Text = subjectName.TruncateRight(30) ,
+                Text = subjectName,
                 Margin = new Thickness(2) ,
                 TextAlignment = TextAlignment.Center ,
                 FontWeight = FontWeights.DemiBold ,
                 VerticalAlignment = VerticalAlignment.Center
             };
+            if (truncate) textblock.Text = subjectName.TruncateRight(30);
             var border = new Border {
                 BorderThickness = new Thickness(1) ,
                 BorderBrush = Brushes.Black ,

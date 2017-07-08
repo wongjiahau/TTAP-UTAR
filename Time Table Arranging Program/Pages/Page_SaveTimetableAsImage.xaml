@@ -1,0 +1,22 @@
+﻿<Page x:Class="Time_Table_Arranging_Program.Pages.Page_SaveTimetableAsImage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Time_Table_Arranging_Program.Pages"
+      xmlns:ttap="clr-namespace:Time_Table_Arranging_Program"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:userControl="clr-namespace:Time_Table_Arranging_Program.User_Control"
+      mc:Ignorable="d" >
+
+    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+        <Label FontSize="25" FontWeight="Bold">Save the following image? </Label>
+        <materialDesign:Card>
+            <userControl:TimetableGUI_Full x:Name="TimeTableGui"></userControl:TimetableGUI_Full>
+        </materialDesign:Card>
+        <Button   Click="SaveImageButton_OnClick" HorizontalAlignment="Center" Margin="0,10,0,0" Height="40" Style="{StaticResource MaterialDesignRaisedAccentButton}">
+            SAVE
+        </Button>
+    </StackPanel>
+</Page>
+

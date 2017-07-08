@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,8 +15,10 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using HtmlAgilityPack;
 using Time_Table_Arranging_Program.Class;
+using Time_Table_Arranging_Program.Class.Helper;
 using Time_Table_Arranging_Program.Class.SlotGeneralizer;
 using Time_Table_Arranging_Program.Class.TokenParser;
+using Time_Table_Arranging_Program.User_Control;
 
 namespace Time_Table_Arranging_Program.Pages {
     /// <summary>
@@ -116,6 +119,10 @@ namespace Time_Table_Arranging_Program.Pages {
             DialogHost.IsOpen = false;
             Browser.Navigate(LoginPageUrl);
             Browser.Visibility = Visibility.Visible;
+        }
+
+        private void PrintButton_OnClick(object sender, RoutedEventArgs e) {
+           
         }
     }
 }
