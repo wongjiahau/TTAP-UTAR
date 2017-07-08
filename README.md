@@ -10,3 +10,4 @@ By - Wong Jia Hau
 3. Browse through list of possible timetables
 3. Bid aider to ease the process of bidding 
 4. Add to Google Calendar
+5. Save timetable as image (.png)
