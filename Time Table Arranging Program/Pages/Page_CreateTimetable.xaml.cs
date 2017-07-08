@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using Microsoft.Win32;
 using Time_Table_Arranging_Program.Class;
+using Time_Table_Arranging_Program.Class.Helper;
 using Time_Table_Arranging_Program.Interfaces;
 using Time_Table_Arranging_Program.Model;
 using Time_Table_Arranging_Program.MVVM_Framework.Models;
@@ -181,6 +185,13 @@ namespace Time_Table_Arranging_Program.Pages {
 
         public void ExecuteLoadedFunction() {           
             DrawerHost.IsLeftDrawerOpen = true;
+        }
+
+        private void PrintAsPng_OnClick(object sender, RoutedEventArgs e) {
+            this.NavigationService.Navigate(
+            new Page_SaveTimetableAsImage(TimetableViewer.GetCurrentTimetable())
+            );
+            
         }
     }
 }

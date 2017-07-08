@@ -8,7 +8,7 @@ namespace Time_Table_Arranging_Program.Class.SlotGeneralizer {
             var generalized = new List<Slot>();
             foreach (Slot s in slots) {
                 var toBeAdded = s.GetDuplicate();
-               toBeAdded.WeekNumber = new NullWeekNumber();
+               //toBeAdded.WeekNumber = new NullWeekNumber();
                 generalized.Add(toBeAdded);
             }
 

@@ -100,6 +100,12 @@
 
                                                 <materialDesign:PackIcon Kind="CalendarPlus" />
                                             </Button>
+                                            <Button x:Name="PrintAsPng"                                     
+                                                    ToolTip="Save this timetable as an image" Click="PrintAsPng_OnClick">
+                                                <!--Visibility="{Binding IsChecked, ElementName=ToggleViewButton, Converter={StaticResource VisibilityConverter}}"-->
+
+                                                <materialDesign:PackIcon Kind="Image" />
+                                            </Button>
                                             <Button x:Name="ShowSummaryButton"
                             	Click="ShowSummaryButton_OnClick"                                                     
                                                     materialDesign:ShadowAssist.ShadowDepth="Depth3"

@@ -15,10 +15,10 @@
         <Grid x:Name="SubjectDescGrid">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
+                <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition />
                 <ColumnDefinition />
                 <ColumnDefinition />
-                    <ColumnDefinition />
                 </Grid.ColumnDefinitions>
         </Grid>
     </StackPanel>

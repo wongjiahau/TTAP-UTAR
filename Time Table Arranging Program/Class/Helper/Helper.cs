@@ -39,13 +39,13 @@ namespace Time_Table_Arranging_Program.Class.Helper {
         }
 
         public static RenderTargetBitmap GetImage(UserControl view) {
-            view.Width = 100;
-            Size size = new Size((int)view.ActualWidth , (int)view.ActualHeight);
+            int qualityFactor = 10;
+            int dotsPerInch = 96; 
+            Size size = new Size((int)view.ActualWidth * qualityFactor, (int)view.ActualHeight * qualityFactor);
             if (size.IsEmpty)
                 return null;
-
-            RenderTargetBitmap result = new RenderTargetBitmap((int)size.Width , (int)size.Height , 96 , 96 , PixelFormats.Pbgra32);
-
+            
+            RenderTargetBitmap result = new RenderTargetBitmap((int)size.Width , (int)size.Height, dotsPerInch , dotsPerInch , PixelFormats.Pbgra32);
             DrawingVisual drawingvisual = new DrawingVisual();
             using (DrawingContext context = drawingvisual.RenderOpen()) {
                 context.DrawRectangle(new VisualBrush(view) , null , new Rect(new Point() , size));
@@ -56,11 +56,14 @@ namespace Time_Table_Arranging_Program.Class.Helper {
             return result;
         }
 
-        public static void SaveAsPng(RenderTargetBitmap src , Stream outputStream) {
+   
+
+        public static void SaveAsPng(RenderTargetBitmap src , string targetPath) {
+            Stream outputStream = File.Create(targetPath);
             PngBitmapEncoder encoder = new PngBitmapEncoder();
             encoder.Frames.Add(BitmapFrame.Create(src));
-
             encoder.Save(outputStream);
+            outputStream.Close();
         }
     }
 }
