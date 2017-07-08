@@ -25,7 +25,7 @@
             <Grid>
                 <Button HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10" 
                     Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}"
-                    Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                    Style="{StaticResource MaterialDesignRaisedButton}"
                     Height="40"
                     >
                     <StackPanel Orientation="Horizontal">
