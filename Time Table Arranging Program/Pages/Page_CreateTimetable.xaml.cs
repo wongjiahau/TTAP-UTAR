@@ -1,18 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
 using Time_Table_Arranging_Program.Class;
-using Time_Table_Arranging_Program.Class.SlotGeneralizer;
 using Time_Table_Arranging_Program.Interfaces;
 using Time_Table_Arranging_Program.Model;
 using Time_Table_Arranging_Program.MVVM_Framework.Models;
 using Time_Table_Arranging_Program.MVVM_Framework.ViewModels;
-using Time_Table_Arranging_Program.MVVM_Framework.Views;
 using Time_Table_Arranging_Program.User_Control;
 using Time_Table_Arranging_Program.Windows_Control;
 
@@ -64,7 +59,7 @@ namespace Time_Table_Arranging_Program.Pages {
             SelectSubjectPanel.SetDataContext(subjectList);            
             SelectSubjectPanel.SetDrawerHost(this.DrawerHost);
             FavouriteButton.CheckedMessage = "Added this timetable to favorites ";
-            FavouriteButton.UncheckedMessage = "Removed this timetable from favorites";
+            FavouriteButton.UncheckedMessage = "Removed this timetable from favorites";            
         }
 
         private void UpdateGUI(List<List<Slot>> result) {

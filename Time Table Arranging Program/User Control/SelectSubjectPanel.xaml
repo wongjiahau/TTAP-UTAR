@@ -40,7 +40,7 @@
             </Grid>
             <TextBlock x:Name="HintLabel" Margin="10,5,5,5" xml:space="preserve" Visibility="Collapsed" DockPanel.Dock="Top">Press ENTER to check the first subject in the list below.
 Press ESC to clear text of search box.</TextBlock>
-            <materialDesign:ColorZone Mode="Light" materialDesign:ShadowAssist.ShadowDepth="Depth2" Height="0" x:Name="BottomPanel" DockPanel.Dock="Bottom">
+            <materialDesign:ColorZone Mode="Light" materialDesign:ShadowAssist.ShadowDepth="Depth3" Height="0" x:Name="BottomPanel" DockPanel.Dock="Bottom">
                 <StackPanel  Orientation="Horizontal" HorizontalAlignment="Right" >
                     <materialDesign:Badged x:Name="ViewChanger" DockPanel.Dock="Right" HorizontalAlignment="Right" HorizontalContentAlignment="Stretch"                                   
                                        Margin="0"                                   
@@ -60,7 +60,7 @@ Press ESC to clear text of search box.</TextBlock>
                     <Button Height="40"                             
                             Click="DoneButton_OnClick"
                             Margin="15"
-                            Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                            Style="{StaticResource MaterialDesignRaisedAccentButton}"
                             Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
                             >DONE</Button>
                 </StackPanel>

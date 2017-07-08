@@ -19,7 +19,7 @@
                 <materialDesign:PackIcon Kind="Magnify" Height="30" Width="30" Opacity=".56" />
             </Button>
             <TextBox Grid.Column="1"  Margin="5 0 0 0" Padding="0,0,20,0"            CaretBrush="Black"                           
-                             materialDesign:HintAssist.Hint="Search . . . (e.g. MPU3113/Hubungan Etnik/HE)" x:Name="TextBox" FontSize="15" 
+                             materialDesign:HintAssist.Hint="Search . . . ( e.g. MPU3113 / Hubungan Etnik / [HE] )" x:Name="TextBox" FontSize="15" 
                              materialDesign:TextFieldAssist.DecorationVisibility="Hidden" BorderThickness="0"
                               VerticalAlignment="Center" TextChanged="TextBox_OnTextChanged"
                      KeyUp="TextBox_OnKeyUp"

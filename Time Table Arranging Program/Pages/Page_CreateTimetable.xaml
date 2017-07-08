@@ -63,6 +63,7 @@
                                         </materialDesign:Card>
                                     </Grid>
                                     <Button x:Name="SetTimeConstraintButton" 
+                                            Foreground="Black"
                                         Visibility="Visible" Height="auto"
                                             materialDesign:ShadowAssist.ShadowDepth="Depth4"
                                         VerticalAlignment="Stretch"
