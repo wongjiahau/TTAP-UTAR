@@ -155,7 +155,7 @@ namespace Time_Table_Arranging_Program.Class.StateSummary {
 
         public Predicate<Slot> ConstraintPredicate => BetweenPredicate;
         public override string ToString() {
-            return $"Click me if you don't have to have class from {_startTime}-{_startTime.Add(Time.CreateTime_24HourFormat(0,30))} on {_day}";
+            return $"Click me if you don't want to have class from {_startTime}-{_startTime.Add(Time.CreateTime_24HourFormat(0,30))} on {_day}";
         }
     }
 }
