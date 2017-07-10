@@ -6,12 +6,12 @@ using Time_Table_Arranging_Program.Class.Converter;
 using Time_Table_Arranging_Program.Class.Helper;
 
 namespace Time_Table_Arranging_Program.Class.StateSummary {
-    public interface IStateTable : IEnumerable<IStateCell>{
+    public interface IStateTable : IEnumerable<IStateCell> {
         void Add(IndexedSlot s);
         bool ClashesWithCurrentState(IndexedSlot s);
         void Reset();
         string Draw(int maxCount);
-    }  
+    }
 
     public class StateTable : IStateTable {
         private List<IStateCell> _stateCells = new List<IStateCell>();
@@ -19,9 +19,12 @@ namespace Time_Table_Arranging_Program.Class.StateSummary {
         public static StateTable Parse(List<List<Slot>> x) {
             return new StateTable(x);
         }
-        public StateTable(List<List<Slot>> outputTimetables) : this() {  
-            if(outputTimetables == null) outputTimetables = new List<List<Slot>>();          
-            StateCell.MaxValue =  outputTimetables.Count;
+
+        private StateTable(List<List<Slot>> outputTimetables) : this() {
+            NewAlgorithmUsingBinary(outputTimetables);
+            return;
+            if (outputTimetables == null) outputTimetables = new List<List<Slot>>();
+            StateCell.MaxValue = outputTimetables.Count;
             var r = outputTimetables;
             for (int i = 0 ; i < r.Count ; i++) {
                 for (int j = 0 ; j < r[i].Count ; j++) {
@@ -29,43 +32,46 @@ namespace Time_Table_Arranging_Program.Class.StateSummary {
                 }
             }
         }
-
-        [Obsolete("Incomplete")]
-        private void NewAlgorithmUsingBinary(List<List<Slot>> outputTimetables ) {
-            Dictionary<int,long[]> states =  new Dictionary<int, long[]>();
-            for (int i = 1; i <= 7; i++) {
-             states.Add(i, new long[2] {0b1111_1111_1111_1111_1111_1111_1111_1111,0});   
+        
+        private void NewAlgorithmUsingBinary(List<List<Slot>> outputTimetables) {
+            Dictionary<int , int[]> states = new Dictionary<int , int[]>();
+            for (int i = 0 ; i < 7 ; i++) {
+                states.Add(i , new int[2] { Convert.ToInt32("11111111111111111111111111111111" , 2) , 0 });
                 //1st array means AND-ed value, 2nd array means OR-ed value
                 //1st cell is 32-bit of TRUE
                 //2nd cell is 32-bit of FALSE
             }
             var o = outputTimetables;
-            for (int i = 0; i < o.Count; i++) {
-                for (int j = 0; j < o[i].Count; j++) {
+            for (int i = 0 ; i < o.Count ; i++) {
+                int[] result = new[] { 0 , 0 , 0 , 0 , 0 , 0 , 0 };
+                for (int j = 0 ; j < o[i].Count ; j++) {
                     var slot = o[i][j];
-                    int day = slot.Day.IntValue;
+                    int day = slot.Day.IntValue - 1;
                     int timeperiodInBinary = slot.TimePeriod.ToBinary();
-                    states[day][0] &= timeperiodInBinary;
-                    states[day][1] |= timeperiodInBinary;
+                    result[day] |= timeperiodInBinary;
                 }
+                for (int j = 0 ; j < 7 ; j++) {
+                    states[j][0] &= result[j];
+                    states[j][1] |= result[j];
+                }
+
             }
             _stateCells = new List<IStateCell>();
             int length = 32;
-            for (int i = 1; i <= 7; i++) {
+            for (int i = 0 ; i < 7 ; i++) {
                 var and_value = states[i][0].ToBitArray();
                 var or_value = states[i][1].ToBitArray();
-                var xor_value = and_value.Xor(or_value);
-                for (int j = 0; j < length; j++) {
-                    if(and_value[i]==true) _stateCells.Add(new StateCell(j, i-1, CellState.DefinitelyOccupied));
-                    else if(or_value[i]==false) _stateCells.Add(new StateCell(j,i-1, CellState.DefinitelyUnoccupied));
-                    else _stateCells.Add(new StateCell(j,i-1, CellState.MaybeUnoccupied));                    
+                for (int j = 0 ; j < length ; j++) {
+                    if (and_value[j] == true) _stateCells.Add(new StateCell(i  , j , CellState.DefinitelyOccupied));
+                    else if (or_value[j] == false) _stateCells.Add(new StateCell(i  , j , CellState.DefinitelyUnoccupied));
+                    else _stateCells.Add(new StateCell(i  , j , CellState.MaybeUnoccupied));
                 }
 
             }
         }
 
         private StateTable() {
-            Reset();
+            //Reset();
         }
 
         public void Add(IndexedSlot s) {
@@ -88,12 +94,12 @@ namespace Time_Table_Arranging_Program.Class.StateSummary {
             const int maxNumberOfColumns = StateRow.MaxNumberOfColumn;
             for (int i = 0 ; i < numberOfDays ; i++) {
                 Day day = Day.GetDay(i + 1);
-                Time time = Time.CreateTime_24HourFormat(7,0);
+                Time time = Time.CreateTime_24HourFormat(7 , 0);
                 for (int j = 0 ; j < maxNumberOfColumns ; j++) {
-                    _stateCells.Add(new StateCell(i , j, day, time));
-                    time = (Time)time.Add(Time.CreateTime_24HourFormat(0, 30));
+                    _stateCells.Add(new StateCell(i , j , day , time));
+                    time = (Time)time.Add(Time.CreateTime_24HourFormat(0 , 30));
                 }
-            }                               
+            }
 
 
         }
@@ -119,12 +125,13 @@ namespace Time_Table_Arranging_Program.Class.StateSummary {
         CellState State { get; }
         Predicate<Slot> ConstraintPredicate { get; }
 
+        CellState GetState();
     }
 
     public enum CellState { DefinitelyOccupied, MaybeUnoccupied, DefinitelyUnoccupied }
 
     public class StateCell : IStateCell {
-        public StateCell(int rowIndex, int columnIndex, CellState state) {
+        public StateCell(int rowIndex , int columnIndex , CellState state) {
             RowIndex = rowIndex;
             ColumnIndex = columnIndex;
             State = state;
@@ -155,21 +162,25 @@ namespace Time_Table_Arranging_Program.Class.StateSummary {
 
         private CellState _state;
         public CellState State {
-            get
-            {
-                if (_state != null) return _state;
-                if (CellValue >= MaxValue) return CellState.DefinitelyOccupied;
-                else if (CellValue > 0) return CellState.MaybeUnoccupied;
-                else if (CellValue == 0) return CellState.DefinitelyUnoccupied;
-                else throw new Exception("Cell value should not be negative");
+            get {
+                return _state;
             }
-            set { _state = value; }
+            private set { _state = value; }
 
         }
 
         public Predicate<Slot> ConstraintPredicate => BetweenPredicate;
+        public CellState GetState() {
+            if (CellValue >= MaxValue) return CellState.DefinitelyOccupied;
+            else if (CellValue > 0) return CellState.MaybeUnoccupied;
+            else if (CellValue == 0) return CellState.DefinitelyUnoccupied;
+            else throw new Exception("Cell value should not be negative");
+
+        }
+
         public override string ToString() {
-            return $"Click me if you don't want to have class from {_startTime}-{_startTime.Add(Time.CreateTime_24HourFormat(0,30))} on {_day}";
+            return "";
+            return $"Click me if you don't want to have class from {_startTime}-{_startTime.Add(Time.CreateTime_24HourFormat(0 , 30))} on {_day}";
         }
     }
 }

@@ -17,13 +17,7 @@ namespace NUnit.Tests2 {
             int result = i.ToInt();
             Console.WriteLine("result is " + result);
             Assert.True(result == 13);
-
-
-
-
-        }
-
-  
+        }  
 
         [Test]
         public void Test_ToBitArray_1() {
