@@ -30,7 +30,7 @@ namespace Time_Table_Arranging_Program {
 
     public partial class CheckBoxWithListDownMenu : UserControl, ICheckBoxWithListDownMenu, INeedDataContext<SubjectModel> {
         private double _listviewOriginalHeight;
-
+        private SubjectModel _subjectModel;
         public CheckBoxWithListDownMenu() {
             InitializeComponent();
             UIDofDeselectedSlots = new HashSet<int>();
@@ -42,10 +42,10 @@ namespace Time_Table_Arranging_Program {
         public event RoutedEventHandler ListViewCheckBox_Checked;
 
         public bool IsChecked {
-            get { return Checkbox.IsChecked == true; }
+            get { return _subjectModel.IsSelected == true; }
             set
             {
-                Checkbox.IsChecked = value;
+                _subjectModel.IsSelected = value;                
                 if (value) {
                     Border.Background = ColorDictionary.CheckedColor;
                 }
@@ -69,7 +69,6 @@ namespace Time_Table_Arranging_Program {
             get => SubjectCodeHighlightTextBlock.Text;
             set => SubjectCodeHighlightTextBlock.Text = value;
         }
-
 
         public HashSet<int> UIDofDeselectedSlots { get; set; }
         public HashSet<int> UIDofSelectedSlots { get; set; }
@@ -169,7 +168,7 @@ namespace Time_Table_Arranging_Program {
 
 
         private void Border_OnMouseDown(object sender, MouseButtonEventArgs e) {
-            Checkbox.IsChecked = !Checkbox.IsChecked.Value;
+            _subjectModel.IsSelected = !_subjectModel.IsSelected;            
         }
 
         private void ListViewItemCheckBox_Checked(object sender, RoutedEventArgs e) {
@@ -240,6 +239,7 @@ namespace Time_Table_Arranging_Program {
 
 
         public void SetDataContext(SubjectModel dataContext) {
+            _subjectModel = dataContext;
             this.DataContext = dataContext;
             foreach (var item in dataContext.Slots) {
                 item.IsSelected = true;

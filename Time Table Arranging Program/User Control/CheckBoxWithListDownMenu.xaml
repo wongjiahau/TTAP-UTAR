@@ -100,7 +100,7 @@
                 Background="WhiteSmoke"
                 MouseDown="Border_OnMouseDown" Cursor="Hand" >
             <DockPanel   HorizontalAlignment="Stretch">
-                <CheckBox Visibility="Visible" Margin="5,0,0,0" DockPanel.Dock="Left" x:Name="Checkbox" Checked="Checkbox_Checked" Unchecked="Checkbox_Checked" VerticalAlignment="Center"/>
+                <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Visibility="Visible" Margin="5,0,0,0" DockPanel.Dock="Left" x:Name="Checkbox" Checked="Checkbox_Checked" Unchecked="Checkbox_Checked" VerticalAlignment="Center"/>
                 <StackPanel DockPanel.Dock="Left">
                     <local:HighlightTextBlock FontSize="14"  DockPanel.Dock="Left" x:Name="SubjectNameHighlightTextBlock" Text="{Binding Name}" Margin="5"
                                       Cursor="Hand" VerticalAlignment="Center" FontWeight="DemiBold"  />

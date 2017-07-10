@@ -5,16 +5,17 @@ using System.Text;
 using System.Threading.Tasks;
 using NUnit.Tests2;
 using Time_Table_Arranging_Program.Class;
+using Time_Table_Arranging_Program.Class.AbstractClass;
 
 namespace Time_Table_Arranging_Program.Model
 {
-    public class SubjectModel
+    public class SubjectModel : ObservableObject
     {
         public SubjectModel()
         {
             Name = "Testing Subject 123";
             CodeAndNameInitials = "MPU329999";
-            Slots = TestData.GetSlotRange(3,9);
+            Slots = TestData.GetSlotRange(3,9);            
         }
         public SubjectModel(string name, string code, int creditHour, List<Slot> slots)
         {
@@ -25,10 +26,18 @@ namespace Time_Table_Arranging_Program.Model
             Slots = slots;
         }
 
-        public string Name { get; private set; }
+        public string Name { get; }
         public string CodeAndNameInitials { get; private set; }
-        public string Code { get; private set; }
-        public int CreditHour { get; private set; }
+        public string Code { get; }
+        public int CreditHour  {get; private set;}
+
+        private bool _isSelected;
+
+        public bool IsSelected {
+            get { return _isSelected; }
+            set { SetProperty(ref _isSelected, value); }
+        }
+
         public List<Slot> Slots { get; private set; }
 
         public List<Slot> GetSelectedSlots() {
