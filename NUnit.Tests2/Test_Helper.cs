@@ -23,16 +23,16 @@ namespace NUnit.Tests2 {
 
         }
 
+  
+
         [Test]
-        public void Test_ConvertToBitArray_1() {
-            var input1 = new List<int> { 1 , 2 , 3 , 4 , 5 };
-            int actual = Helper.ToBitArray(input1).ToInt();
-            int expected = Convert.ToInt32("11111" , 2);
-            Assert.True(actual == expected);
-
-
-
-
+        public void Test_ToBitArray_1() {
+            int input = Convert.ToInt32("1100",2);
+            var result = input.ToBitArray();
+            var expected = new List<bool>() { false,false,true,true};
+            for (int i = 0; i < 4; i++) {
+               Assert.IsTrue(result[i]== expected[i]);
+            }
         }
     }
 }
