@@ -28,6 +28,15 @@ namespace Time_Table_Arranging_Program.Class.Helper {
                          .ToArray(); // Convert IEnumerable from select to Array
             return new BitArray(bits);
         }
+
+        public static BitArray ToBitArray(this long x) {
+            string s = Convert.ToString(x , 2); //Convert to binary in a string
+
+            int[] bits = s.PadLeft(8 , '0') // Add 0's from left
+                .Select(c => int.Parse(c.ToString())) // convert each char to int
+                .ToArray(); // Convert IEnumerable from select to Array
+            return new BitArray(bits);
+        }
         public static int ToInt(this BitArray bitArray) {
             if (bitArray.Length > 32)
                 throw new ArgumentException("Argument length shall be at most 32 bits.");

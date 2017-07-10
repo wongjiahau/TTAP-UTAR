@@ -32,10 +32,12 @@ namespace Time_Table_Arranging_Program.Class.StateSummary {
 
         [Obsolete("Incomplete")]
         private void NewAlgorithmUsingBinary(List<List<Slot>> outputTimetables ) {
-            Dictionary<int,int[]> states =  new Dictionary<int, int[]>();
+            Dictionary<int,long[]> states =  new Dictionary<int, long[]>();
             for (int i = 1; i <= 7; i++) {
-             states.Add(1, new int[2] {1,0});   
+             states.Add(i, new long[2] {0b1111_1111_1111_1111_1111_1111_1111_1111,0});   
                 //1st array means AND-ed value, 2nd array means OR-ed value
+                //1st cell is 32-bit of TRUE
+                //2nd cell is 32-bit of FALSE
             }
             var o = outputTimetables;
             for (int i = 0; i < o.Count; i++) {
@@ -54,7 +56,9 @@ namespace Time_Table_Arranging_Program.Class.StateSummary {
                 var or_value = states[i][1].ToBitArray();
                 var xor_value = and_value.Xor(or_value);
                 for (int j = 0; j < length; j++) {
-                    
+                    if(and_value[i]==true) _stateCells.Add(new StateCell(j, i-1, CellState.DefinitelyOccupied));
+                    else if(or_value[i]==false) _stateCells.Add(new StateCell(j,i-1, CellState.DefinitelyUnoccupied));
+                    else _stateCells.Add(new StateCell(j,i-1, CellState.MaybeUnoccupied));                    
                 }
 
             }
@@ -120,6 +124,12 @@ namespace Time_Table_Arranging_Program.Class.StateSummary {
     public enum CellState { DefinitelyOccupied, MaybeUnoccupied, DefinitelyUnoccupied }
 
     public class StateCell : IStateCell {
+        public StateCell(int rowIndex, int columnIndex, CellState state) {
+            RowIndex = rowIndex;
+            ColumnIndex = columnIndex;
+            State = state;
+
+        }
         public StateCell(int rowIndex , int columnIndex , Day day , Time startTime) {
             RowIndex = rowIndex;
             ColumnIndex = columnIndex;
@@ -143,13 +153,17 @@ namespace Time_Table_Arranging_Program.Class.StateSummary {
         public int ColumnIndex { get; private set; }
         public int CellValue { get; set; } = 0;
 
+        private CellState _state;
         public CellState State {
-            get {
+            get
+            {
+                if (_state != null) return _state;
                 if (CellValue >= MaxValue) return CellState.DefinitelyOccupied;
                 else if (CellValue > 0) return CellState.MaybeUnoccupied;
                 else if (CellValue == 0) return CellState.DefinitelyUnoccupied;
                 else throw new Exception("Cell value should not be negative");
             }
+            set { _state = value; }
 
         }
 
