@@ -71,8 +71,8 @@ namespace Time_Table_Arranging_Program {
             var result = "";
             foreach (var t in tokens) {
                 result += t + " ";
-            }
-            return result.Substring(0 , result.Length - 1);
+            }            
+            return result.Substring(0 , result.Length - 1).TrimStart(' ').TrimEnd(' ');
         }
 
         public static Color Darker(this Color c) {

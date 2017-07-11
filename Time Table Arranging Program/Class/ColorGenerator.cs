@@ -15,7 +15,7 @@ namespace Time_Table_Arranging_Program {
             Colors.Orange,
             Colors.Yellow,
             Colors.LightGreen,
-            Colors.LightBlue,            
+            Colors.LightBlue,                          
             Colors.MediumPurple,
             Colors.GreenYellow,
             Colors.MediumVioletRed,
