@@ -17,11 +17,54 @@
         <iValueConverter:TooltipConverterForToggleButton x:Key="TooltipConverterForToggleButton"/>
     </Page.Resources>
     <Grid>
-        <materialDesign:DrawerHost x:Name="DrawerHost" IsLeftDrawerOpen="False">
+        <materialDesign:DrawerHost x:Name="DrawerHost" IsLeftDrawerOpen="False" IsBottomDrawerOpen="False">
             <materialDesign:DrawerHost.LeftDrawerContent>
                 <userControl:SelectSubjectPanel   x:Name="SelectSubjectPanel" DockPanel.Dock="Left" SlotSelectionChanged="SelectSubjectPanel_OnSlotSelectionChanged" 
                                             Visibility="{Binding IsChecked, ElementName=ToggleViewButton, Converter={StaticResource VisibilityConverter}, ConverterParameter=1}"/>
             </materialDesign:DrawerHost.LeftDrawerContent>
+            <materialDesign:DrawerHost.BottomDrawerContent>
+                <StackPanel HorizontalAlignment="Center">
+                    <StackPanel.Resources>
+                        <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignFlatButton}">
+                            <Setter Property="Height" Value="40"></Setter>
+                        </Style>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+                        </Style>
+                        <Style TargetType="materialDesign:PackIcon">
+                            <Setter Property="Height" Value="20"></Setter>
+                            <Setter Property="Width" Value="20"></Setter>
+                            <Setter Property="Margin" Value="0,0,10,0"></Setter>
+                        </Style>
+                        <Style TargetType="StackPanel">
+                            <Setter Property="Orientation" Value="Horizontal"></Setter>
+                        </Style>
+                    </StackPanel.Resources>
+                    <Label FontSize="20" FontWeight="Bold">Save this time table as . . .</Label>
+                    <Button Click="SaveAsPicture_OnClick">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Image"></materialDesign:PackIcon>
+                            <TextBlock>Picture (*.png)</TextBlock>
+                        </StackPanel>
+                    </Button>
+                    <Button Click="SaveAsNotepadFile_OnClick">
+                        <StackPanel>
+                            <materialDesign:PackIcon Kind="NoteText"></materialDesign:PackIcon>
+                            <TextBlock>Notepad file (*.txt)</TextBlock>
+                        </StackPanel>
+                        </Button>
+                    <Button Click="SaveToGoogleCalendarButton_OnClick">
+                        <StackPanel>
+                            <materialDesign:PackIcon Kind="Calendar"></materialDesign:PackIcon>
+                            <TextBlock>Google Calendar</TextBlock>
+                        </StackPanel>
+                        </Button>
+
+                </StackPanel>
+            </materialDesign:DrawerHost.BottomDrawerContent>
+
+
+
             <Grid>
                 <Button HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10" 
                     Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}"
@@ -94,14 +137,17 @@
                                         </Grid.Resources>
 
                                         <StackPanel Orientation="Horizontal">
-                                            <Button x:Name="AddToGoogleCalenderButton"                                     
-                                    ToolTip="Add this timetable to Google Calendar" Click="AddToGoogleCalendarButton_OnClick">
+                                            <Button Click="SaveButton_OnClick" ToolTip="Save this timetable as . . .">
+                                                <materialDesign:PackIcon Kind="ContentSave"></materialDesign:PackIcon>
+                                            </Button>
+                                            <Button x:Name="AddToGoogleCalenderButton"  Visibility="Collapsed"                                   
+                                    ToolTip="Add this timetable to Google Calendar" Click="SaveToGoogleCalendarButton_OnClick">
                                                 <!--Visibility="{Binding IsChecked, ElementName=ToggleViewButton, Converter={StaticResource VisibilityConverter}}"-->
 
                                                 <materialDesign:PackIcon Kind="CalendarPlus" />
                                             </Button>
-                                            <Button x:Name="PrintAsPng"                                     
-                                                    ToolTip="Save this timetable as an image" Click="PrintAsPng_OnClick">
+                                            <Button x:Name="PrintAsPng"  Visibility="Collapsed"                                   
+                                                    ToolTip="Save this timetable as an image" Click="SaveAsPicture_OnClick">
                                                 <!--Visibility="{Binding IsChecked, ElementName=ToggleViewButton, Converter={StaticResource VisibilityConverter}}"-->
 
                                                 <materialDesign:PackIcon Kind="Image" />
@@ -119,7 +165,7 @@
                                                 </materialDesign:PopupBox.ToggleContent>
                                                 <StackPanel>
                                                     <Button Click="ShowSummaryButton_OnClick" Content="Show summary" />
-                                                    <Button  Content="Add this timetable to Google Calendar" Click="AddToGoogleCalendarButton_OnClick" />
+                                                    <Button  Content="Add this timetable to Google Calendar" Click="SaveToGoogleCalendarButton_OnClick" />
                                                 </StackPanel>
                                             </materialDesign:PopupBox>
                                         </StackPanel>
@@ -132,6 +178,8 @@
                     </DockPanel>
                 </DockPanel>
             </Grid>
+
         </materialDesign:DrawerHost>
+
     </Grid>
 </Page>

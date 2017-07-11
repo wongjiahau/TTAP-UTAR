@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Forms.VisualStyles;
 using Microsoft.Win32;
 using Time_Table_Arranging_Program.Class;
 using Time_Table_Arranging_Program.Class.Helper;
@@ -140,7 +141,7 @@ namespace Time_Table_Arranging_Program.Pages {
             new SummaryWindow(_outputTimetables.GetCurrentState(), _cyclicIndex).ShowWindow();                        
         }
 
-        private void AddToGoogleCalendarButton_OnClick(object sender , RoutedEventArgs e) {
+        private void SaveToGoogleCalendarButton_OnClick(object sender , RoutedEventArgs e) {
             NavigationService.Navigate(new Page_AddToGoogleCalendar(TimetableViewer.GetCurrentTimetable() ,
                 Global.TimetableStartDate));
         }
@@ -187,11 +188,32 @@ namespace Time_Table_Arranging_Program.Pages {
             DrawerHost.IsLeftDrawerOpen = true;
         }
 
-        private void PrintAsPng_OnClick(object sender, RoutedEventArgs e) {
+        private void SaveAsPicture_OnClick(object sender, RoutedEventArgs e) {
             this.NavigationService.Navigate(
             new Page_SaveTimetableAsImage(TimetableViewer.GetCurrentTimetable())
             );
             
+        }
+
+        private void SaveButton_OnClick(object sender, RoutedEventArgs e) {
+            DrawerHost.IsBottomDrawerOpen = true;
+        }
+
+        private void SaveAsNotepadFile_OnClick(object sender, RoutedEventArgs e) {
+            var p = new SaveFileDialog()
+            {
+                Filter = "Notepad file (*.txt)|*.txt" ,
+                FileName = "MyTimetableSummary.txt"
+            };
+            if (p.ShowDialog() == false) return;
+            var slots = TimetableViewer.GetCurrentTimetable().ToList();
+            var subjects = SubjectSummaryModel.GroupIntoSubjects(slots);
+            string result = "";
+            foreach (var s in subjects) {
+                result += s.ToString() + "\r\n\r\n";
+            }
+            File.WriteAllText(p.FileName, result);
+            Global.Snackbar.MessageQueue.Enqueue("File saved at " + p.FileName, "OPEN", () => { Process.Start(p.FileName); });
         }
     }
 }
