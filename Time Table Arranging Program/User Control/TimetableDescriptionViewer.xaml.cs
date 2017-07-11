@@ -19,8 +19,8 @@ namespace Time_Table_Arranging_Program.User_Control {
             SubjectDescGrid.Children.Clear();
             IColorGenerator c = new ColorGenerator();
             var gridRowIndex = 0;
-            var subjects = Subject.GroupIntoSubjects(slots);
-            foreach (Subject s in subjects) {
+            var subjects = SubjectSummaryModel.GroupIntoSubjects(slots);
+            foreach (SubjectSummaryModel s in subjects) {
                 SubjectDescGrid.RowDefinitions.Add(new RowDefinition());
                 AddGridChildren(GetSubjectNameLabel(s.Name , c) , 0 , gridRowIndex);
                 AddGridChildren(GetLabel(c , s.Lecture) , 1 , gridRowIndex);
@@ -35,8 +35,8 @@ namespace Time_Table_Arranging_Program.User_Control {
             SubjectDescGrid.Children.Clear();
             IColorGenerator c = new ColorGenerator();
             var gridRowIndex = 0;
-            var subjects = Subject.GroupIntoSubjects(slots);
-            foreach (Subject s in subjects) {
+            var subjects = SubjectSummaryModel.GroupIntoSubjects(slots);
+            foreach (SubjectSummaryModel s in subjects) {
                 SubjectDescGrid.RowDefinitions.Add(new RowDefinition());
                 AddGridChildren(GetLabel(c , s.Code) , 0 , gridRowIndex);
                 AddGridChildren(GetSubjectNameLabel(s.Name , c, false) , 1 , gridRowIndex);
@@ -114,13 +114,13 @@ namespace Time_Table_Arranging_Program.User_Control {
         }
     }
 
-    public class Subject {
+    public class SubjectSummaryModel {
         public string Name { get; set; }
         public string Code { get; set; }
         public string Lecture { get; set; }
         public string Tutorial { get; set; }
         public string Practical { get; set; }
-        public Subject(List<Slot> slots) {            
+        public SubjectSummaryModel(List<Slot> slots) {            
             Name = slots[0].SubjectName;
             Code = slots[0].Code;
             Lecture = "-";
@@ -134,8 +134,8 @@ namespace Time_Table_Arranging_Program.User_Control {
                 }
             }
         }
-        public static List<Subject> GroupIntoSubjects(List<Slot> slots) {
-            var result = new List<Subject>();
+        public static List<SubjectSummaryModel> GroupIntoSubjects(List<Slot> slots) {
+            var result = new List<SubjectSummaryModel>();
             var dic = new Dictionary<string , List<Slot>>();
             foreach (Slot s in slots) {
                 if (!dic.ContainsKey(s.Code)) {
@@ -144,7 +144,7 @@ namespace Time_Table_Arranging_Program.User_Control {
                 dic[s.Code].Add(s);
             }
             foreach (KeyValuePair<string , List<Slot>> entry in dic) {
-                result.Add(new Subject(entry.Value));
+                result.Add(new SubjectSummaryModel(entry.Value));
             }
             return result;
 

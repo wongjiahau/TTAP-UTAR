@@ -12,12 +12,12 @@ namespace NUnit.Tests2 {
             input.Add(TestData.GetSlot(231));
             input.Add(TestData.GetSlot(237));
             input.Add(TestData.GetSlot(263));
-            var result = new Subject(input);
+            var result = new SubjectSummaryModel(input);
             var r = result;
             Assert.True(
-                r.Lecture == "L1" &&
-                r.Tutorial == "T5" &&
-                r.Practical == "P6"
+                r.Lecture == "L-1" &&
+                r.Tutorial == "T-5" &&
+                r.Practical == "P-6"
                 );
 
         }

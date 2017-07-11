@@ -20,10 +20,14 @@ namespace NUnit.Tests2 {
             var result = tp.Parse(input);
             var expected = new List<Slot>()
             {
-          new Slot(1,"MPU3113","HUBUNGAN ETNIK (FOR LOCAL STUDENTS)".Beautify(), "1", "L",Day.Monday, "KB521", new TimePeriod(Time.CreateTime_24HourFormat(9,00), Time.CreateTime_24HourFormat(12,00)),new WeekNumber(new List<int>(){1,2,3,4,5,6,7,8,9,10,11,12,13,14})  )
+          new Slot(1,"MPU3113","HUBUNGAN ETNIK (FOR LOCAL STUDENTS)".Beautify(), "1", "L",Day.Monday, "KB521", new TimePeriod(Time.CreateTime_24HourFormat(9,00), Time.CreateTime_24HourFormat(12,00)),new WeekNumber(new List<int>(){1,2,3,4,5,6,7,8,9,10,11,12,13,14})  ),
+                new Slot(2,"MPU3113","HUBUNGAN ETNIK (FOR LOCAL STUDENTS)".Beautify(), "2", "L",Day.Monday, "KB521", new TimePeriod(Time.CreateTime_24HourFormat(14,00), Time.CreateTime_24HourFormat(17,00)),new WeekNumber(new List<int>(){1,2,3,4,5,6,7,8,9,10,11,12,13,14})  ),
+                new Slot(2,"MPU3113","HUBUNGAN ETNIK (FOR LOCAL STUDENTS)".Beautify(), "3", "L",Day.Tuesday, "KB520", new TimePeriod(Time.CreateTime_24HourFormat(14,00), Time.CreateTime_24HourFormat(17,00)),new WeekNumber(new List<int>(){1,2,3,4,5,6,7,8,9,10,11,12,13,14})  )
             };
             Assert.IsTrue(result.Count == 4);
             Assert.IsTrue(result[0].Equals(expected[0]));
+            Assert.IsTrue(result[1].Equals(expected[1]));
+            Assert.IsTrue(result[2].Equals(expected[2]));
 
         }
 
@@ -117,3 +121,4 @@ namespace NUnit.Tests2 {
         }
     }
 }
+
