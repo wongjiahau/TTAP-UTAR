@@ -24,7 +24,7 @@
                         <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" Margin="0,20,0,0">
                         <Button x:Name="CancelButton" Margin="10,0,10,0" Style="{StaticResource MaterialDesignFlatButton}" Click="CancelButton_OnClick">CANCEL</Button>
 
-                            <Button x:Name="AddButton" Visibility="Visible" Click="Dialog_AddButton_OnClick">ADD</Button>
+                            <Button x:Name="AddButton" Visibility="Visible" Click="Dialog_AddButton_OnClick" Style="{StaticResource MaterialDesignRaisedAccentButton}">ADD</Button>
                         </StackPanel>
                     </Grid>
                 </StackPanel>

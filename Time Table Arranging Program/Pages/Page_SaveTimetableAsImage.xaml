@@ -14,8 +14,11 @@
             <materialDesign:Card>
                 <userControl:TimetableGUI_Full x:Name="TimeTableGui"></userControl:TimetableGUI_Full>
             </materialDesign:Card>
-            <Button Click="SaveImageButton_OnClick" HorizontalAlignment="Right" Margin="10" Height="50" Width="150" FontSize="25" Style="{StaticResource MaterialDesignRaisedAccentButton}">
-                SAVE
+            <Button Click="SaveImageButton_OnClick" HorizontalAlignment="Right" Margin="10" Height="50" Width="150" FontSize="20" Style="{StaticResource MaterialDesignRaisedAccentButton}">
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon VerticalAlignment="Center" Height="25" Width="25" Margin="5" Kind="ContentSave"></materialDesign:PackIcon>
+                    <Label VerticalAlignment="Center">SAVE</Label>
+                </StackPanel>
             </Button>
         </StackPanel>
     </ScrollViewer>
