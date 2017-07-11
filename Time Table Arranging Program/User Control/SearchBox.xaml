@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Time_Table_Arranging_Program.User_Control"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" GotFocus="SearchBox_OnGotFocus">
-    <materialDesign:Card Margin="5">
+    <materialDesign:Card Margin="5" materialDesign:ShadowAssist.ShadowDepth="Depth4">
     <Border Background="White" CornerRadius="3" >
         <Grid>
             <Grid.ColumnDefinitions>
