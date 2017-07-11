@@ -149,5 +149,10 @@ namespace Time_Table_Arranging_Program.User_Control {
             return result;
 
         }
+
+        public override string ToString() {
+            return $"{Code}\r\n{Name}" + "\r\n" +
+                   $"{Lecture}  {Tutorial}  {Practical}";
+        }
     }
 }
