@@ -102,30 +102,37 @@ namespace Time_Table_Arranging_Program.User_Control {
 
         private void ViewChangerButton_OnClick(object sender, RoutedEventArgs e) {
             if (ViewChangerButton.Content.ToString() == "Show selected subjects") {
-                foreach (UIElement child in CheckerBoxStackPanel.Children) {
-                    if (child is ICheckBoxWithListDownMenu) {
-                        child.Visibility =
-                            (child as ICheckBoxWithListDownMenu).IsChecked
-                                ? Visible
-                                : Collapsed;
-                    }
-                }
-                ViewChangerButton.Content = "Show all subjects";
-                SearchBox.Visibility = Collapsed;
+                ShowSelectedSubjects();
             }
             else {
-                foreach (UIElement child in CheckerBoxStackPanel.Children) {
-                    if (child is ICheckBoxWithListDownMenu) {
-                        child.Visibility = Visible;
-                    }
-                }
-                ViewChangerButton.Content = "Show selected subjects";
-                SearchBox.Visibility = Visible;
+                ShowAllSubjects();
             }
             UpdateBottomPanelVisibility();
         }
 
+        private void ShowAllSubjects() {
+            foreach (UIElement child in CheckerBoxStackPanel.Children) {
+                if (child is ICheckBoxWithListDownMenu) {
+                    child.Visibility = Visible;
+                }
+            }
+            ViewChangerButton.Content = "Show selected subjects";
+        }
+
+        private void ShowSelectedSubjects() {
+            foreach (UIElement child in CheckerBoxStackPanel.Children) {
+                if (child is ICheckBoxWithListDownMenu) {
+                    child.Visibility =
+                        (child as ICheckBoxWithListDownMenu).IsChecked
+                            ? Visible
+                            : Collapsed;
+                }
+            }
+            ViewChangerButton.Content = "Show all subjects";
+        }
+
         private void SearchBoxOnTextChanged(object sender, TextChangedEventArgs textChangedEventArgs) {
+            ShowAllSubjects();
             string searchedText = SearchBox.Text.ToLower();            
             bool somethingFound = SearchForMatchingSubjectAndDisplayThem(searchedText);
             if (somethingFound) {
