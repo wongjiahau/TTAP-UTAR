@@ -62,7 +62,12 @@ Press ESC to clear text of search box.</TextBlock>
                             Margin="15"
                             Style="{StaticResource MaterialDesignRaisedAccentButton}"
                             Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
-                            >DONE</Button>
+                            >
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon VerticalAlignment="Center" Height="25" Width="25" Margin="5" Kind="Check"></materialDesign:PackIcon>
+                            <Label VerticalAlignment="Center" FontWeight="Bold">DONE</Label>
+                        </StackPanel>
+                    </Button>
                 </StackPanel>
             </materialDesign:ColorZone>
             <Border  BorderBrush="DarkGray"   BorderThickness="0.5" VerticalAlignment="Stretch" DockPanel.Dock="Bottom">
