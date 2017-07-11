@@ -98,11 +98,14 @@ namespace Time_Table_Arranging_Program.Class {
         public bool Equals(Slot b) {
             return
                 SubjectName == b.SubjectName &&
+                Code == b.Code &&
                 Number == b.Number &&
                 Type == b.Type &&
+                Venue == b.Venue &&
                 Day.Equals(b.Day) &&
                 StartTime.Equals(b.StartTime) &&
-                EndTime.Equals(b.EndTime);
+                EndTime.Equals(b.EndTime) &&
+                WeekNumber.Equals(b.WeekNumber);
         }
 
         public int GetUid() {
