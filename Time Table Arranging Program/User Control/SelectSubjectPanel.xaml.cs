@@ -218,6 +218,7 @@ namespace Time_Table_Arranging_Program.User_Control {
         private void DoneButton_OnClick(object sender, RoutedEventArgs e) {
             DrawerHost d = this._drawerHost;
             d.IsLeftDrawerOpen = false;
+            Global.Snackbar.MessageQueue.Enqueue("Click 'Set time constraint' button.");
         }
 
         private DrawerHost _drawerHost;
