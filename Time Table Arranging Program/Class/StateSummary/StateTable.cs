@@ -25,6 +25,7 @@ namespace Time_Table_Arranging_Program.Class.StateSummary {
                 //2nd cell is 32-bit of FALSE
             }
             var o = outputTimetables;
+            if (o == null) return new List<IStateCell>();
             for (int i = 0 ; i < o.Count ; i++) {
                 int[] result = new[] { 0 , 0 , 0 , 0 , 0 , 0 , 0 };
                 for (int j = 0 ; j < o[i].Count ; j++) {
@@ -37,7 +38,6 @@ namespace Time_Table_Arranging_Program.Class.StateSummary {
                     states[j][0] &= result[j];
                     states[j][1] |= result[j];
                 }
-
             }
             var stateCells = new List<IStateCell>();
             int length = 32;
