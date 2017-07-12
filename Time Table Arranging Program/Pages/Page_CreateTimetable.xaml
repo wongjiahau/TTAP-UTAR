@@ -23,8 +23,8 @@
                                             Visibility="{Binding IsChecked, ElementName=ToggleViewButton, Converter={StaticResource VisibilityConverter}, ConverterParameter=1}"/>
             </materialDesign:DrawerHost.LeftDrawerContent>
             <materialDesign:DrawerHost.BottomDrawerContent>
-                <StackPanel HorizontalAlignment="Center" Margin="0" Orientation="Horizontal">
-                    <StackPanel.Resources>
+                <Grid>
+                    <Grid.Resources>
                         <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignFlatButton}">
                             <Setter Property="Height" Value="50"></Setter>
                             <Setter Property="HorizontalAlignment" Value="Stretch"></Setter>
@@ -42,7 +42,9 @@
                         <Style TargetType="StackPanel">
                             <Setter Property="Orientation" Value="Horizontal"></Setter>
                         </Style>
-                    </StackPanel.Resources>
+                    </Grid.Resources>
+                    <StackPanel HorizontalAlignment="Center" Margin="0" Orientation="Horizontal">
+               
                     <Label FontSize="20" VerticalAlignment="Center" FontWeight="Bold">Save this time table as . . .</Label>
                     <Button Click="SaveAsPicture_OnClick">
                         <StackPanel Orientation="Horizontal">
@@ -64,6 +66,13 @@
                         </Button>
 
                 </StackPanel>
+                    <Button HorizontalAlignment="Right" 
+                            Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand }"
+                            CommandParameter="{x:Static Dock.Bottom}"
+                            ToolTip="Hide this drawer"
+                            >
+                        <materialDesign:PackIcon Foreground="Black" Margin="0" Kind="ArrowDownBold"></materialDesign:PackIcon></Button>
+                </Grid>
             </materialDesign:DrawerHost.BottomDrawerContent>
 
 
