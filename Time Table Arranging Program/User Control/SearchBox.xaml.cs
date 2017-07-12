@@ -8,6 +8,7 @@ namespace Time_Table_Arranging_Program.User_Control {
     /// </summary>
     public partial class SearchBox : UserControl {
         public event KeyEventHandler EnterKeyPressed;
+        public event KeyEventHandler OnKeyPressed;
         public SearchBox() {
             InitializeComponent();
         }
@@ -48,6 +49,7 @@ namespace Time_Table_Arranging_Program.User_Control {
         }
 
         private void TextBox_OnKeyUp(object sender, KeyEventArgs e) {
+            OnKeyPressed?.Invoke(this,e);
             if(e.Key == Key.Escape) TextBox.Clear();
             if (e.Key == Key.Enter) {
                 EnterKeyPressed?.Invoke(null,null);
