@@ -7,6 +7,9 @@
       xmlns:local="clr-namespace:Time_Table_Arranging_Program.Pages"
       mc:Ignorable="d"       
       Title="Page_About">
+    <Page.DataContext>
+        <local:NameList></local:NameList>
+    </Page.DataContext>
     <Page.Resources>
         <Style TargetType="materialDesign:Card">
             <Setter Property="Margin" Value="10,10,10,0" />
@@ -33,7 +36,7 @@
                         <TextBlock FontWeight="Bold"><Run Text="Program written by"/></TextBlock>
                         <TextBlock Text=" Wong Jia Hau"/>
                         <TextBlock Text=" using " FontWeight="Bold"/>
-                        <TextBlock Text="C# WPF"/>
+                        <TextBlock Text="C# WPF.NET"/>
                     </StackPanel>
                     <Separator />
                     <StackPanel   Orientation="Horizontal">
@@ -100,15 +103,17 @@
             <materialDesign:Card Background="Plum">
                 <StackPanel Orientation="Horizontal">
                     <materialDesign:PackIcon Kind="AccountMultiple"></materialDesign:PackIcon>
-                    <TextBlock FontWeight="Bold" Text="Special thanks to" />
-                    <TextBlock Text="Sean, Keli, Heng, Cheng Feng, QZ, Eric, Kelvin . . . and all of you for using TTAP!" />
+                    <TextBlock FontWeight="Bold" Text="Special thanks to : " />
+                    <ComboBox ItemsSource="{Binding Names}">
+                    </ComboBox>
                 </StackPanel>
             </materialDesign:Card>
             <materialDesign:Card Background="LightGray">
                 <StackPanel Orientation="Horizontal">
                     <materialDesign:PackIcon Kind="ScaleBalance"></materialDesign:PackIcon>
                     <TextBlock FontWeight="Bold" Text="License : " />
-                    <TextBlock VerticalAlignment="Center">GNU Affero General Public License v3.0</TextBlock>
+                    <TextBlock DockPanel.Dock="Bottom"><Hyperlink NavigateUri="https://www.gnu.org/licenses/agpl-3.0-standalone.html"
+                                                                  RequestNavigate="Hyperlink_RequestNavigate"><Run Text="GNU Affero General Public License v3.0"/></Hyperlink></TextBlock>
                 </StackPanel>
             </materialDesign:Card>
             <Label Margin="5"></Label>

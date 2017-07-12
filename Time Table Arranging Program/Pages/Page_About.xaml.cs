@@ -25,6 +25,7 @@ namespace Time_Table_Arranging_Program.Pages {
         private const string GitHubLink = "https://github.com/wongjiahau/TTAP-UTAR";
         public Page_About() {
             InitializeComponent();
+            this.DataContext = new NameList();
         }
 
         private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e) {
@@ -49,5 +50,14 @@ namespace Time_Table_Arranging_Program.Pages {
             Clipboard.SetDataObject(x);
             AutoClosePopup.Show($"Copied '{x}' to clipboard!");
         }
+    }
+
+    public class NameList {
+        public NameList() {
+            string raw =
+                "Sean(Initiator), Keli, Heng, Cheng Feng, QZ, Eric, Kelvin, Guo Ren, Jun Yan, Shu Ming, Yau Yau, Kexin, Chee Kong, Ming Siew, You!";
+            Names = raw.Split(',').ToList();
+        }
+        public List<string> Names { get; set; }
     }
 }

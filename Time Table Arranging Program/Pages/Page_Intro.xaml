@@ -27,7 +27,7 @@
                 <Label VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" FontWeight="Bold">Please log in to your account.</Label>
             </Grid>
             <Button Margin="20" Style="{StaticResource MaterialDesignFlatButton}" Click="AddSlotManuallyButton_OnClick" DockPanel.Dock="Bottom" HorizontalAlignment="Center">I want to add slots manually</Button>
-            <materialDesign:Card Width="400" Height="600" Margin="5" HorizontalAlignment="Center" VerticalAlignment="Stretch">
+            <materialDesign:Card Width="400" Height="450" Margin="5" HorizontalAlignment="Center" VerticalAlignment="Stretch">
                 <WebBrowser Visibility="Collapsed" HorizontalAlignment="Center" Margin="5" LoadCompleted="Browser_OnLoadCompleted" Name="Browser"                                                        
                             OverridesDefaultStyle="False"
                             ScrollViewer.CanContentScroll="False"
