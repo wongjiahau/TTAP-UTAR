@@ -194,6 +194,14 @@ namespace Time_Table_Arranging_Program.Pages {
 
         private void SaveAsPicture_OnClick(object sender , RoutedEventArgs e) {
             DrawerHost.IsBottomDrawerOpen = false;
+            var p = new Window()
+            {
+                SizeToContent = SizeToContent.WidthAndHeight,
+                Content = new Page_SaveTimetableAsImage(TimetableViewer.GetCurrentTimetable())
+            };
+            p.Show();
+            p.Close();
+            return;
             this.NavigationService.Navigate(
             new Page_SaveTimetableAsImage(TimetableViewer.GetCurrentTimetable())
             );
@@ -206,7 +214,7 @@ namespace Time_Table_Arranging_Program.Pages {
             var subjects = SubjectSummaryModel.GroupIntoSubjects(slots);
             var p = new SaveFileDialog() {
                 Filter = "Notepad file (*.txt)|*.txt" ,
-                FileName = "MyTimetableSummary.txt"
+                FileName = "MyTimetableSummary"
             };
             if (p.ShowDialog() == false) return;
             string result = "";

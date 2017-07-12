@@ -31,7 +31,7 @@ namespace Time_Table_Arranging_Program.Pages {
         }
 
         private void SaveImageButton_OnClick(object sender , RoutedEventArgs e) {
-            var saveDialog = new SaveFileDialog() { Filter = "Image file (*.png)|*.png" , FileName = "MyTimetable.png" };
+            var saveDialog = new SaveFileDialog() { Filter = "Image file (*.png)|*.png" , FileName = "MyTimetable" };
             if (saveDialog.ShowDialog() == false) return;
             try {
                 var bitmap = Helper.GetImage(this.TimeTableGui);
@@ -51,8 +51,7 @@ namespace Time_Table_Arranging_Program.Pages {
         }
 
         private void Page_SaveTimetableAsImage_OnLoaded(object sender, RoutedEventArgs e) {
-            SaveImageButton_OnClick(null , null);
-            NavigationService.GoBack();
+            SaveImageButton_OnClick(null , null);            
         }
     }
 }
