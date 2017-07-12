@@ -82,7 +82,7 @@
             <materialDesign:Card Background="LightCyan">
                 <StackPanel Orientation="Horizontal">
                     <materialDesign:PackIcon Kind="Download" />
-                    <TextBlock  Text="This program can be downloaded from" />
+                    <TextBlock  Text="Download link : " FontWeight="Bold" />
                     <TextBlock DockPanel.Dock="Bottom"><Hyperlink NavigateUri="https://goo.gl/LzzjGX"
         				RequestNavigate="Hyperlink_RequestNavigate"><Run Text="https://goo.gl/LzzjGX"/></Hyperlink></TextBlock>
                     <Button Margin="10,0,0,0" Click="CopyDownloadLinkButton_OnClick" Content="COPY" materialDesign:ShadowAssist.ShadowDepth="Depth0"/>
@@ -91,7 +91,7 @@
             <materialDesign:Card Background="LightPink">
                 <StackPanel Orientation="Horizontal">
                     <materialDesign:PackIcon Kind="GithubBox" />
-                    <TextBlock  Text="Source code is available at GitHub via" />
+                    <TextBlock FontWeight="Bold" Text="GitHub : " />
                     <TextBlock DockPanel.Dock="Bottom"><Hyperlink NavigateUri="https://github.com/wongjiahau/TTAP-UTAR"
         				RequestNavigate="Hyperlink_RequestNavigate"><Run Text="https://github.com/wongjiahau/TTAP-UTAR"/></Hyperlink></TextBlock>
                     <Button Margin="10,0,0,0" Click="CopyGitHubLinkButton_OnClick" Content="COPY" materialDesign:ShadowAssist.ShadowDepth="Depth0"/>
@@ -104,7 +104,14 @@
                     <TextBlock Text="Sean, Keli, Heng, Cheng Feng, QZ, Eric, Kelvin . . . and all of you for using TTAP!" />
                 </StackPanel>
             </materialDesign:Card>
-
+            <materialDesign:Card Background="LightGray">
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon Kind="ScaleBalance"></materialDesign:PackIcon>
+                    <TextBlock FontWeight="Bold" Text="License : " />
+                    <TextBlock VerticalAlignment="Center">GNU Affero General Public License v3.0</TextBlock>
+                </StackPanel>
+            </materialDesign:Card>
+            <Label Margin="5"></Label>
         </StackPanel>
     </ScrollViewer>
 </Page>
