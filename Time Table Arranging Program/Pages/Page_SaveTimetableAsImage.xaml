@@ -7,7 +7,7 @@
       xmlns:ttap="clr-namespace:Time_Table_Arranging_Program"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       xmlns:userControl="clr-namespace:Time_Table_Arranging_Program.User_Control"
-      mc:Ignorable="d" >
+      mc:Ignorable="d" Loaded="Page_SaveTimetableAsImage_OnLoaded" >
     <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
             <Label FontSize="25" FontWeight="Bold">Save the following image?</Label>

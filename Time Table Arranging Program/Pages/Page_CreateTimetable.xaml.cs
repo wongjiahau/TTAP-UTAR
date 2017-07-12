@@ -32,21 +32,21 @@ namespace Time_Table_Arranging_Program.Pages {
         private List<Predicate<Slot>> _predicates = new List<Predicate<Slot>>();
 
         private MutableObservable<IOutputTimetableModel> _timetableList;
-        private readonly Func<Slot[], List<List<Slot>>>  _permutator;
+        private readonly Func<Slot[] , List<List<Slot>>> _permutator;
 
-        public Page_CreateTimetable(SlotList inputSlots, Func<Slot[], List<List<Slot>>> permutator) {                        
+        public Page_CreateTimetable(SlotList inputSlots , Func<Slot[] , List<List<Slot>>> permutator) {
             _inputSlots = inputSlots;
             _permutator = permutator;
             InitializeComponent();
             FavouriteButton.SetObservedThings(_outputTimetables);
             FavouriteButton.SetObservedThings(_currentViewedTimetable);
             TimetableViewer.SetObservedThings(_outputTimetables);
-            TimetableViewer.Initialize(new CyclicIndex());    
-            _cyclicIndex = new CyclicIndex(); 
-            CyclicIndexView.DataContext = new CyclicIndexVM(_cyclicIndex);       
+            TimetableViewer.Initialize(new CyclicIndex());
+            _cyclicIndex = new CyclicIndex();
+            CyclicIndexView.DataContext = new CyclicIndexVM(_cyclicIndex);
             InitializeExtraComponents();
             ToolBoxPanel.Visibility = Visibility.Hidden;
-            
+
         }
 
 
@@ -58,13 +58,13 @@ namespace Time_Table_Arranging_Program.Pages {
         public void Update() {
             _timetableList.GetCurrentState();
         }
-        
+
         private void InitializeExtraComponents() {
             var subjectList = SubjectModel.Parse(_inputSlots);
-            SelectSubjectPanel.SetDataContext(subjectList);            
+            SelectSubjectPanel.SetDataContext(subjectList);
             SelectSubjectPanel.SetDrawerHost(this.DrawerHost);
             FavouriteButton.CheckedMessage = "Added this timetable to favorites ";
-            FavouriteButton.UncheckedMessage = "Removed this timetable from favorites";            
+            FavouriteButton.UncheckedMessage = "Removed this timetable from favorites";
         }
 
         private void UpdateGUI(List<List<Slot>> result) {
@@ -90,18 +90,18 @@ namespace Time_Table_Arranging_Program.Pages {
             }
             TimetableViewer.Initialize(_cyclicIndex);
             CyclicIndexView.DataContext = new CyclicIndexVM(_cyclicIndex);
-        }      
+        }
 
-        
+
         private List<List<Slot>> _raw;
-        private void SetTimeConstraintButton_OnClick(object sender , RoutedEventArgs e) {            
+        private void SetTimeConstraintButton_OnClick(object sender , RoutedEventArgs e) {
             if (_windowStateSummary == null)
-                _windowStateSummary = new Window_StateSummary(_inputSlots.GetSlotsOf(SelectSubjectPanel.UIDofSelectedSlots).ToList() , _raw);                        
+                _windowStateSummary = new Window_StateSummary(_inputSlots.GetSlotsOf(SelectSubjectPanel.UIDofSelectedSlots).ToList() , _raw);
             _windowStateSummary.ShowDialog();
-            if (_windowStateSummary.UserClickedDone) { 
+            if (_windowStateSummary.UserClickedDone) {
                 _predicates = _windowStateSummary.Predicates;
                 UpdateGUI(RunPermutation(_inputSlots.GetSlotsOf(SelectSubjectPanel.UIDofSelectedSlots)));
-            }                        
+            }
         }
 
 
@@ -112,7 +112,7 @@ namespace Time_Table_Arranging_Program.Pages {
         }
 
         private void FavoriteButton_OnChecked(object sender , RoutedEventArgs e) {
-            TimetableViewer.GetCurrentTimetable().IsLiked = true;            
+            TimetableViewer.GetCurrentTimetable().IsLiked = true;
         }
 
         private void FavoriteButton_OnUnchecked(object sender , RoutedEventArgs e) {
@@ -138,7 +138,7 @@ namespace Time_Table_Arranging_Program.Pages {
         }
 
         private void ShowSummaryButton_OnClick(object sender , RoutedEventArgs e) {
-            new SummaryWindow(_outputTimetables.GetCurrentState(), _cyclicIndex).ShowWindow();                        
+            new SummaryWindow(_outputTimetables.GetCurrentState() , _cyclicIndex).ShowWindow();
         }
 
         private void SaveToGoogleCalendarButton_OnClick(object sender , RoutedEventArgs e) {
@@ -152,9 +152,9 @@ namespace Time_Table_Arranging_Program.Pages {
                 _outputTimetables?.SetState(allTimetables);
                 var ci = new CyclicIndex(allTimetables.Count - 1);
                 TimetableViewer?.Initialize(ci);
-                if(CyclicIndexView!=null)
-                CyclicIndexView.DataContext = new CyclicIndexVM(ci);
-               // Global.Snackbar.MessageQueue.Enqueue("Showing ALL timetables");
+                if (CyclicIndexView != null)
+                    CyclicIndexView.DataContext = new CyclicIndexVM(ci);
+                // Global.Snackbar.MessageQueue.Enqueue("Showing ALL timetables");
             }
             else {
                 var likedTimetable = _outputTimetables.GetLikedTimetableOnly();
@@ -162,58 +162,66 @@ namespace Time_Table_Arranging_Program.Pages {
                 var ci = new CyclicIndex(likedTimetable.Count - 1);
                 TimetableViewer?.Initialize(ci);
                 CyclicIndexView.DataContext = new CyclicIndexVM(ci);
-               // Global.Snackbar.MessageQueue.Enqueue("Showing FAVORITE timetables");
+                // Global.Snackbar.MessageQueue.Enqueue("Showing FAVORITE timetables");
             }
-        }        
+        }
 
-        private void ShowAllTimetable_Checked(object sender, RoutedEventArgs e) {
+        private void ShowAllTimetable_Checked(object sender , RoutedEventArgs e) {
             var allTimetables = _outputTimetables.GetPreviousState();
             _outputTimetables?.SetState(allTimetables);
             var ci = new CyclicIndex(allTimetables.Count - 1);
             TimetableViewer?.Initialize(ci);
-            if(CyclicIndexView!=null) CyclicIndexView.DataContext = new CyclicIndexVM(ci);            
+            if (CyclicIndexView != null) CyclicIndexView.DataContext = new CyclicIndexVM(ci);
             //Global.Snackbar.MessageQueue.Enqueue("Showing ALL timetables");
         }
 
-        private void ShowFavoriteTimetable_Checked(object sender, RoutedEventArgs e) {
+        private void ShowFavoriteTimetable_Checked(object sender , RoutedEventArgs e) {
             var likedTimetable = _outputTimetables.GetLikedTimetableOnly();
             _outputTimetables?.SetState(likedTimetable);
             var ci = new CyclicIndex(likedTimetable.Count - 1);
             TimetableViewer?.Initialize(ci);
-            CyclicIndexView.DataContext = new CyclicIndexVM(ci);            
+            CyclicIndexView.DataContext = new CyclicIndexVM(ci);
             //Global.Snackbar.MessageQueue.Enqueue("Showing FAVORITE timetables");
         }
 
-        public void ExecuteLoadedFunction() {           
-            DrawerHost.IsLeftDrawerOpen = true;
+        private bool _leftDrawerIsOpened = false;
+        public void ExecuteLoadedFunction() {
+            if (!_leftDrawerIsOpened) {
+                DrawerHost.IsLeftDrawerOpen = true;
+                _leftDrawerIsOpened = true;
+            }
         }
 
-        private void SaveAsPicture_OnClick(object sender, RoutedEventArgs e) {
+        private void SaveAsPicture_OnClick(object sender , RoutedEventArgs e) {
+            DrawerHost.IsBottomDrawerOpen = false;
             this.NavigationService.Navigate(
             new Page_SaveTimetableAsImage(TimetableViewer.GetCurrentTimetable())
             );
-            
-        }
 
-        private void SaveButton_OnClick(object sender, RoutedEventArgs e) {
-            DrawerHost.IsBottomDrawerOpen = true;
         }
-
-        private void SaveAsNotepadFile_OnClick(object sender, RoutedEventArgs e) {
-            var p = new SaveFileDialog()
-            {
+    
+        private void SaveAsNotepadFile_OnClick(object sender , RoutedEventArgs e) {
+            DrawerHost.IsBottomDrawerOpen = false;
+            var slots = TimetableViewer.GetCurrentTimetable().ToList();
+            var subjects = SubjectSummaryModel.GroupIntoSubjects(slots);
+            var p = new SaveFileDialog() {
                 Filter = "Notepad file (*.txt)|*.txt" ,
                 FileName = "MyTimetableSummary.txt"
             };
             if (p.ShowDialog() == false) return;
-            var slots = TimetableViewer.GetCurrentTimetable().ToList();
-            var subjects = SubjectSummaryModel.GroupIntoSubjects(slots);
             string result = "";
             foreach (var s in subjects) {
                 result += s.ToString() + "\r\n\r\n";
             }
-            File.WriteAllText(p.FileName, result);
-            Global.Snackbar.MessageQueue.Enqueue("File saved at " + p.FileName, "OPEN", () => { Process.Start(p.FileName); });
+            try {
+                File.WriteAllText(p.FileName , result);
+                Global.Snackbar.MessageQueue.Enqueue("File saved at " + p.FileName , "OPEN" ,
+                    () => { Process.Start(p.FileName); });
+            }
+            catch (Exception ex) {
+                Global.Snackbar.MessageQueue.Enqueue("Failed to save file." , "SHOW DETAILS" , 
+                    () => {MessageBox.Show(ex.Message);});
+            }
         }
     }
 }

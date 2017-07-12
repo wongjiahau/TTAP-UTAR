@@ -70,7 +70,8 @@
 
             <Grid>
                 <Button HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10" 
-                    Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}"
+                    Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand }"
+                        CommandParameter="{x:Static Dock.Left}"
                     Style="{StaticResource MaterialDesignRaisedButton}"
                     Height="40"
                     >
@@ -110,8 +111,7 @@
                                     </Grid>
                                     <Button x:Name="SetTimeConstraintButton" 
                                             Foreground="Black"
-                                        Visibility="Visible" Height="auto"
-                                            materialDesign:ShadowAssist.ShadowDepth="Depth4"
+                                        Visibility="Visible" Height="auto"                                            
                                         VerticalAlignment="Stretch"
                                         FontSize="20"  Click="SetTimeConstraintButton_OnClick" 
                                         Style="{StaticResource MaterialDesignRaisedAccentButton}" 
@@ -140,7 +140,10 @@
                                         </Grid.Resources>
 
                                         <StackPanel Orientation="Horizontal">
-                                            <Button Click="SaveButton_OnClick" ToolTip="Save this timetable as . . .">
+                                            <Button 
+                                                    Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand }"
+                                                    CommandParameter="{x:Static Dock.Bottom}"
+                                                    ToolTip="Save this timetable as . . .">
                                                 <materialDesign:PackIcon Kind="ContentSave"></materialDesign:PackIcon>
                                             </Button>
                                             <Button x:Name="AddToGoogleCalenderButton"  Visibility="Collapsed"                                   
@@ -156,8 +159,7 @@
                                                 <materialDesign:PackIcon Kind="Image" />
                                             </Button>
                                             <Button x:Name="ShowSummaryButton"
-                            	Click="ShowSummaryButton_OnClick"                                                     
-                                                    materialDesign:ShadowAssist.ShadowDepth="Depth3"
+                            	Click="ShowSummaryButton_OnClick"                                                                                                         
                                                     ToolTip="Show summary" >
                                                 <!--Visibility="{Binding IsChecked, ElementName=ToggleViewButton, Converter={StaticResource VisibilityConverter}}"-->
                                                 <materialDesign:PackIcon Kind="ViewList" />

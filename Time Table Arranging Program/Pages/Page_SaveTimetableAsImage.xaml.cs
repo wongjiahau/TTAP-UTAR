@@ -27,6 +27,7 @@ namespace Time_Table_Arranging_Program.Pages {
         public Page_SaveTimetableAsImage(ITimetable input) {
             InitializeComponent();
             TimeTableGui.GenerateGUI(input);
+            
         }
 
         private void SaveImageButton_OnClick(object sender , RoutedEventArgs e) {
@@ -43,9 +44,15 @@ namespace Time_Table_Arranging_Program.Pages {
             }
 
             catch (Exception ex) {
-                Global.Snackbar.MessageQueue.Enqueue("Failed to save file.");
+                Global.Snackbar.MessageQueue.Enqueue("Failed to save file." , "SHOW DETAILS" ,
+                    () => { MessageBox.Show(ex.Message); });
             }
 
+        }
+
+        private void Page_SaveTimetableAsImage_OnLoaded(object sender, RoutedEventArgs e) {
+            SaveImageButton_OnClick(null , null);
+            NavigationService.GoBack();
         }
     }
 }
