@@ -74,7 +74,7 @@
     <Compile Include="Test_Slot.cs" />
     <Compile Include="Test_SlotGeneralizer.cs" />
     <Compile Include="Test_SlotIndex.cs" />
-    <Compile Include="Test_StartTimeEndTimeParser.cs" />
+    <Compile Include="Test_StartDateEndDateParser.cs" />
     <Compile Include="Test_StateTable.cs" />
     <Compile Include="Test_TimetableRow.cs" />
     <Compile Include="Test_Token.cs" />
