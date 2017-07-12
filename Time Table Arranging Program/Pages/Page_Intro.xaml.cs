@@ -111,17 +111,13 @@ namespace Time_Table_Arranging_Program.Pages {
         }
 
         private void RefreshButton_OnClick(object sender , RoutedEventArgs e) {
-            Browser.Refresh();
+            Browser.Navigate(LoginPageUrl);
         }
 
         private void GotItButton_OnClick(object sender , RoutedEventArgs e) {
             DialogHost.IsOpen = false;
             Browser.Navigate(LoginPageUrl);
             Browser.Visibility = Visibility.Visible;
-        }
-
-        private void PrintButton_OnClick(object sender, RoutedEventArgs e) {
-           
         }
     }
 }

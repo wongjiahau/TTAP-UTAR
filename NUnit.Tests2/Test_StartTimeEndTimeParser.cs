@@ -1,5 +1,7 @@
 ﻿using NUnit.Framework;
 using System;
+using System.IO;
+using Time_Table_Arranging_Program;
 using Time_Table_Arranging_Program.Class;
 
 namespace NUnit.Tests2 {
@@ -13,6 +15,20 @@ namespace NUnit.Tests2 {
             var parser = new StartDateEndDateParser(input);
             Assert.True(parser.GetStartDate() == new DateTime(2017 , 5 , 29 , 0 , 0 , 0));
             Assert.True(parser.GetEndDate() == new DateTime(2017 , 9 , 3 , 0 , 0 , 0));
+        }
+
+        [Test]
+        public void Test_2() {
+            var desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\";
+            string path =
+                desktopPath + @"TTAPv7.7\NUnit.Tests2\TestFiles\Sample HTML.txt";
+            string htmlText = File.ReadAllText(path);
+            string plain = ExtensionMethods.RemoveTags(htmlText);
+            var parser = new StartDateEndDateParser(plain);
+            Assert.True(parser.GetStartDate() == new DateTime(2017 , 5 , 29 , 0 , 0 , 0));
+            Assert.True(parser.GetEndDate() == new DateTime(2017 , 9 , 3 , 0 , 0 , 0));
+
+
         }
     }
 }

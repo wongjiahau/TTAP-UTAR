@@ -45,7 +45,7 @@
                     </Grid.Resources>
                     <StackPanel HorizontalAlignment="Center" Margin="0" Orientation="Horizontal">
                
-                    <Label FontSize="20" VerticalAlignment="Center" FontWeight="Bold">Save this time table as . . .</Label>
+                    <Label FontSize="20" VerticalAlignment="Center" FontWeight="Bold">Save this timetable as . . .</Label>
                     <Button Click="SaveAsPicture_OnClick">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="Image"></materialDesign:PackIcon>

@@ -25,7 +25,6 @@ namespace NUnit.Tests2 {
             Console.WriteLine("Actual count is " + actual.Count);
             Console.WriteLine("Expected count is " + expected);
             Assert.True(actual.Count == expected);
-
         }
     }
 }
