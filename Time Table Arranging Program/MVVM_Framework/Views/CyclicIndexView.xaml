@@ -67,7 +67,7 @@
                 <Button x:Name="NextButton" ToolTip="Go to next timetable [Right Arrow]" Command="{Binding IncrementCommand}">
                     <materialDesign:PackIcon Kind="ChevronRight" />
                 </Button>
-                <Button x:Name="RandomButton" Visibility="Visible" DockPanel.Dock="Right" ToolTip="Get random timetable [R]" Command="{Binding ToRandomCommand}">
+                <Button x:Name="RandomButton" Visibility="Collapsed" DockPanel.Dock="Right" ToolTip="Get random timetable [R]" Command="{Binding ToRandomCommand}">
                     <materialDesign:PackIcon Kind="Dice5" />
                 </Button>
             </StackPanel>

@@ -82,7 +82,6 @@ namespace Time_Table_Arranging_Program.Pages {
                 return;
             }
 
-
             _dateOfMondayOfWeekOne = DatePicker.SelectedDate.Value;
             OpenDialogHost(_dateOfMondayOfWeekOne);
         }

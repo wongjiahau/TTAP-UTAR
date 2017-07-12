@@ -142,6 +142,7 @@ namespace Time_Table_Arranging_Program.Pages {
         }
 
         private void SaveToGoogleCalendarButton_OnClick(object sender , RoutedEventArgs e) {
+            DrawerHost.IsBottomDrawerOpen = false;
             NavigationService.Navigate(new Page_AddToGoogleCalendar(TimetableViewer.GetCurrentTimetable() ,
                 Global.TimetableStartDate));
         }
