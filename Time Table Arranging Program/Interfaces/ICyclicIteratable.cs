@@ -71,6 +71,45 @@ namespace Time_Table_Arranging_Program.Interfaces {
         public int Counts { get; }
     }
 
+    public class CyclicIteratableList<T> : ICyclicIteratable<T> {
+        private CyclicIterator _iterator;
+        private List<T> _list;
+
+        public CyclicIteratableList(List<T> list) {
+            _list = list;
+            _iterator =new CyclicIterator(list.Count);
+        }
+        public T GetCurrent() {
+            return _list[_iterator.GetCurrent()];
+        }
+
+        public int Counts => _list.Count;
+        public void GoToNext() {
+            _iterator.GoToNext();
+        }
+
+        public void GoToPrevious() {
+            _iterator.GoToPrevious();
+        }
+
+        public void GoToRandom() {
+            _iterator.GoToRandom();
+        }
+
+        public void GoTo(int index) {
+            _iterator.GoTo(index);
+        }
+
+        public int MaxIndex() {
+            return _iterator.MaxIndex();
+        }
+
+        public int CurrentIndex() {
+            return _iterator.GetCurrent();
+        }
+    }
+
+
     //[Obsolete]
     //public class InfiniteIteratable<TParent, TChild> : IInfiniteIteratable where TParent : ICollection<TChild>, IIndexable<TChild> {
     //    private TParent _content;
