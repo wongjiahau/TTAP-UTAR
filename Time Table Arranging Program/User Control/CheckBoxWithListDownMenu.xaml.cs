@@ -26,6 +26,8 @@ namespace Time_Table_Arranging_Program {
         HashSet<int> UIDofSelectedSlots { get; set; }
         event RoutedEventHandler Checked;
         event RoutedEventHandler ListViewCheckBox_Checked;
+        void Highlight();
+        void Dehighlight();
     }
 
     public partial class CheckBoxWithListDownMenu : UserControl, ICheckBoxWithListDownMenu, INeedDataContext<SubjectModel> {
@@ -47,6 +49,19 @@ namespace Time_Table_Arranging_Program {
         }
         public event RoutedEventHandler Checked;
         public event RoutedEventHandler ListViewCheckBox_Checked;
+        private static CheckBoxWithListDownMenu _ownerOfCurrentFocus;
+        public void Highlight() {
+            _ownerOfCurrentFocus?.Dehighlight();
+            _ownerOfCurrentFocus = this;
+            Border.Background = ColorDictionary.MouseOverColor;
+        }
+
+        public void Dehighlight() {
+            Border.Background =
+                Checkbox.IsChecked.Value
+                    ? ColorDictionary.CheckedColor
+                    : ColorDictionary.UncheckedColor;
+        }
 
         public bool IsChecked {
             get { return _subjectModel.IsSelected == true; }
@@ -54,11 +69,14 @@ namespace Time_Table_Arranging_Program {
                 _subjectModel.IsSelected = value;
                 if (value) {
                     Border.Background = ColorDictionary.CheckedColor;
+                    ChooseSlotButton.Visibility = Visibility.Visible;
                 }
                 else {
+                    ChooseSlotButton.Visibility = Visibility.Hidden;
                     Border.Background = null;
-                    Border.Background = ColorDictionary.UncheckedColor;
+                    Border.Background = ColorDictionary.MouseOverColor;
                 }
+                Checked?.Invoke(this,null);
             }
         }
 
@@ -87,7 +105,22 @@ namespace Time_Table_Arranging_Program {
                 SubjectCodeHighlightTextBlock.HighlightedText = value;
             }
         }
+        
+     
+        private void CheckBoxWithListDownMenu_OnMouseEnter(object sender , MouseEventArgs e) {
+            Highlight();
+        }
 
+        private void CheckBoxWithListDownMenu_OnMouseLeave(object sender , MouseEventArgs e) {
+            Dehighlight();
+        }
+
+
+        private void Border_OnMouseDown(object sender , MouseButtonEventArgs e) {
+            this.IsChecked = !IsChecked;            
+        }
+
+        #region ListDownMenu
         private void InitializeDraggablePopup() {
             var thumb = new Thumb {
                 Width = 0 ,
@@ -106,40 +139,6 @@ namespace Time_Table_Arranging_Program {
                 ListViewPopup.VerticalOffset += e.VerticalChange;
             };
         }
-
-        private void Checkbox_Checked(object sender , RoutedEventArgs e) {
-            Checked?.Invoke(this , e);
-            if (Checkbox.IsChecked.Value) {
-                ChooseSlotButton.Visibility = Visibility.Visible;
-                Border.Background = ColorDictionary.CheckedColor;
-            }
-            else {
-                ChooseSlotButton.Visibility = Visibility.Hidden;
-                Border.Background = ColorDictionary.UncheckedColor;
-            }
-        }
-
-        
-
-        
-
-        private void CheckBoxWithListDownMenu_OnMouseEnter(object sender , MouseEventArgs e) {
-            Border.Background = ColorDictionary.MouseOverColor;
-        }
-
-        private void CheckBoxWithListDownMenu_OnMouseLeave(object sender , MouseEventArgs e) {
-            Border.Background =
-                Checkbox.IsChecked.Value
-                    ? ColorDictionary.CheckedColor
-                    : ColorDictionary.UncheckedColor;
-        }
-
-
-        private void Border_OnMouseDown(object sender , MouseButtonEventArgs e) {
-            _subjectModel.IsSelected = !_subjectModel.IsSelected;
-        }
-
-        #region ListDownMenu
         private void ChooseSlotButton_Click(object sender , RoutedEventArgs e) {
             ListViewPopup.IsOpen = !ListViewPopup.IsOpen;
         }
@@ -245,6 +244,6 @@ namespace Time_Table_Arranging_Program {
 
         #endregion
 
-        
+
     }
 }

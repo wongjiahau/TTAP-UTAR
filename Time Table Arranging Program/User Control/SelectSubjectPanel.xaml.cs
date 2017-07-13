@@ -68,7 +68,7 @@ namespace Time_Table_Arranging_Program.User_Control {
                 x.FontWeight = FontWeights.Normal;
                 UIDofSelectedSlots.ExceptWith(x.UIDofSelectedSlots.Union(x.UIDofDeselectedSlots));
             }
-            e.Handled = true;
+            //e.Handled = true;
             Update();
         }
 
@@ -160,6 +160,7 @@ namespace Time_Table_Arranging_Program.User_Control {
 
         private bool SearchForMatchingSubjectAndDisplayThem(string searchedText) {
             bool somethingFound = false;
+            var found = new List<ICheckBoxWithListDownMenu>();
             foreach (UIElement child in CheckerBoxStackPanel.Children) {
                 if (child is ICheckBoxWithListDownMenu) {
                     var target = child as ICheckBoxWithListDownMenu;
@@ -167,6 +168,7 @@ namespace Time_Table_Arranging_Program.User_Control {
                     if (comparedString.Contains(searchedText)) {
                         somethingFound = true;
                         child.Visibility = Visible;
+                        found.Add(target);
                         (child as ICheckBoxWithListDownMenu).HighlightText = searchedText;
                     }
                     else {
@@ -174,6 +176,8 @@ namespace Time_Table_Arranging_Program.User_Control {
                     }
                 }
             }
+            _iteratableList = new CyclicIteratableList<ICheckBoxWithListDownMenu>(found);
+            _iteratableList.GoToPrevious();
             return somethingFound;
         }      
 
@@ -186,18 +190,9 @@ namespace Time_Table_Arranging_Program.User_Control {
             FocusManager.SetFocusedElement(this, SearchBox);            
         }
 
-        private void SearchBox_OnEnterKeyPressed(object sender, KeyEventArgs e) {
-            foreach (UIElement child in CheckerBoxStackPanel.Children) {
-                if (child is ICheckBoxWithListDownMenu) {
-                    if (child.Visibility == Visible) {
-                        var target = child as ICheckBoxWithListDownMenu;
-                        target.IsChecked = !target.IsChecked;
-                        return;
-                    }                                                           
-                }
-            }
-        }
+     
 
+        private CyclicIteratableList<ICheckBoxWithListDownMenu> _iteratableList;
         public void SetDataContext(List<SubjectModel> dataContext) {
             var subjectModels = dataContext;
             _nameAndCodeOfAllSubjects = new List<string>();
@@ -212,7 +207,8 @@ namespace Time_Table_Arranging_Program.User_Control {
             }
             _anyCheckBoxs =
                 new List<ICheckBoxWithListDownMenu>(CheckerBoxStackPanel.Children.OfType<ICheckBoxWithListDownMenu>());
-
+            _iteratableList = new CyclicIteratableList<ICheckBoxWithListDownMenu>(_anyCheckBoxs);
+            _iteratableList.GoToPrevious();
         }
 
         private void DoneButton_OnClick(object sender, RoutedEventArgs e) {
@@ -222,5 +218,24 @@ namespace Time_Table_Arranging_Program.User_Control {
         }
 
         private DrawerHost _drawerHost;
+
+        private void SearchBox_OnOnKeyPressed(object sender, KeyEventArgs e) {
+            switch (e.Key) {
+                case Key.Up:
+                    _iteratableList.GetCurrent().Dehighlight();
+                    _iteratableList.GoToPrevious();
+                    _iteratableList.GetCurrent().Highlight();
+                    break;
+                case Key.Down:
+                    _iteratableList.GetCurrent().Dehighlight();
+                    _iteratableList.GoToNext();
+                    _iteratableList.GetCurrent().Highlight();
+                    break;
+                case Key.Enter:
+                    _iteratableList.GetCurrent().IsChecked = !_iteratableList.GetCurrent().IsChecked;
+                    break;
+                default: break;
+            }
+        }
     }
 }

@@ -18,7 +18,7 @@
                 <DockPanel LastChildFill="True"  DockPanel.Dock="Top">
 
                     <Border Background="White" DockPanel.Dock="Left" HorizontalAlignment="Stretch">
-                        <local:SearchBox x:Name="SearchBox" EnterKeyPressed="SearchBox_OnEnterKeyPressed" TextChanged="SearchBoxOnTextChanged"/>
+                        <local:SearchBox x:Name="SearchBox"  TextChanged="SearchBoxOnTextChanged" OnKeyPressed="SearchBox_OnOnKeyPressed"/>
                     </Border>
                 </DockPanel>
             </StackPanel>
