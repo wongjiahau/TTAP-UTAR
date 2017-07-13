@@ -190,6 +190,8 @@ namespace Time_Table_Arranging_Program.Pages {
             if (!_leftDrawerIsOpened) {
                 DrawerHost.IsLeftDrawerOpen = true;
                 _leftDrawerIsOpened = true;
+                SelectSubjectPanel.Focus();
+                SelectSubjectPanel.FocusSearchBox();
             }
         }
 
