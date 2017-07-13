@@ -23,6 +23,7 @@
                     </Border>
                 </DockPanel>
             </StackPanel>
+            <TextBlock x:Name="HintLabel" Margin="10,5,5,5" xml:space="preserve" Visibility="Collapsed" DockPanel.Dock="Top">Press ESC to clear text of search box.</TextBlock>
             <Grid DockPanel.Dock="Top">
                 <Grid.Resources>
                     <Style TargetType="TextBlock">
@@ -39,7 +40,7 @@
                 </StackPanel>
                 <TextBlock x:Name="ErrorLabel" FontWeight="Bold" Visibility="Collapsed">No result found . . .</TextBlock>
             </Grid>
-            <TextBlock x:Name="HintLabel" Margin="10,5,5,5" xml:space="preserve" Visibility="Collapsed" DockPanel.Dock="Top">Press ESC to clear text of search box.</TextBlock>
+            
 
             <materialDesign:ColorZone Mode="Light" materialDesign:ShadowAssist.ShadowDepth="Depth3" Height="0" x:Name="BottomPanel" DockPanel.Dock="Bottom">
                 <StackPanel  Orientation="Horizontal" HorizontalAlignment="Right" >
