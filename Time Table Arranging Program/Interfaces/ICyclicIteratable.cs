@@ -80,6 +80,7 @@ namespace Time_Table_Arranging_Program.Interfaces {
             _iterator =new CyclicIterator(list.Count-1);
         }
         public T GetCurrent() {
+            if (_iterator.MaxIndex() == 0) return default(T);
             return _list[_iterator.GetCurrent()];
         }
 
