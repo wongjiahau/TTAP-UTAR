@@ -31,6 +31,7 @@ namespace Time_Table_Arranging_Program.Windows_Control {
             _cylicIndex = cyclicIndex;
             _cylicIndex.CurrentValueChanged += CylicIndex_CurrentValueChanged;
             this.DataContext = new CyclicIndexVM(cyclicIndex);
+            if(HintIsShownBefore) HintPanel.Visibility = Visibility.Collapsed;
         }
 
         private void CylicIndex_CurrentValueChanged(object sender , EventArgs e) {
@@ -69,8 +70,10 @@ namespace Time_Table_Arranging_Program.Windows_Control {
             }
         }
 
+        private static bool HintIsShownBefore = false;
         private void OkButton_OnClick(object sender, RoutedEventArgs e) {
-            HintPanel.Visibility = Visibility.Collapsed;            
+            HintPanel.Visibility = Visibility.Collapsed;
+            HintIsShownBefore = true;
         }
     }
 }
