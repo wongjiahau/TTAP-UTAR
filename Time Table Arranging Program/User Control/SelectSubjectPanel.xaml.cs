@@ -179,7 +179,7 @@ namespace Time_Table_Arranging_Program.User_Control {
                 }
             }
             _iteratableList = new CyclicIteratableList<ICheckBoxWithListDownMenu>(found);
-            _iteratableList.GetCurrent().Highlight();
+            _iteratableList.GetCurrent()?.Highlight();
             return somethingFound;
         }
 
@@ -226,6 +226,7 @@ namespace Time_Table_Arranging_Program.User_Control {
                 case Key.Left:
                     _iteratableList.GoToPrevious();
                     var current1 = (CheckBoxWithListDownMenu)_iteratableList.GetCurrent();
+                    if (current1 == null) return;
                     current1.Highlight();
                     if (_iteratableList.AtLast()) ScrollViewer.ScrollToBottom();
                     else if (!current1.IsVisibleToUser(ScrollViewer))ScrollViewer.PageUp();
@@ -234,6 +235,7 @@ namespace Time_Table_Arranging_Program.User_Control {
                 case Key.Right:
                     _iteratableList.GoToNext();
                     var current = (CheckBoxWithListDownMenu)_iteratableList.GetCurrent();
+                    if (current == null) return;
                     current.Highlight();
                     if(_iteratableList.AtFirst()) ScrollViewer.ScrollToHome();
                     else if (!current.IsVisibleToUser(ScrollViewer))ScrollViewer.PageDown();

@@ -65,5 +65,18 @@ namespace NUnit.Tests2 {
             Assert.IsTrue(input.AtLast());
         }
 
+        [Test]
+        public void Test_InputHasNoElements_NumericTypes() {
+            var input = new CyclicIteratableList<int>(new List<int>() { });
+            Assert.IsTrue(input.GetCurrent()==0);    
+        }
+
+        [Test]
+        public void Test_InputHasNoElements_ReferenceTypes() {
+            var input = new CyclicIteratableList<object>(new List<object>() { });
+            Assert.IsTrue(input.GetCurrent() == null);
+        }
+
+
     }
 }
