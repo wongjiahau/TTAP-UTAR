@@ -139,13 +139,11 @@ namespace Time_Table_Arranging_Program.User_Control {
             ShowAllSubjects();
             string searchedText = SearchBox.Text.ToLower();
             bool somethingFound = SearchForMatchingSubjectAndDisplayThem(searchedText);
-            if (somethingFound) {
-                HintLabel.Visibility = Visible;
+            if (somethingFound) {                
                 FeedbackPanel.Visibility = Collapsed;
                 ErrorLabel.Visibility = Collapsed;
             }
-            else {
-                HintLabel.Visibility = Collapsed;
+            else {                
                 _suggestedText = LevenshteinDistance.GetClosestMatchingTerm(searchedText , _nameAndCodeOfAllSubjects.ToArray());
                 if (_suggestedText == null) {
                     FeedbackPanel.Visibility = Collapsed;
@@ -158,8 +156,7 @@ namespace Time_Table_Arranging_Program.User_Control {
                     SuggestedTextLabel.Text = _suggestedText.Beautify();
                     SearchForMatchingSubjectAndDisplayThem(_suggestedText.ToLower());
                 }
-            }
-            if (searchedText == "") HintLabel.Visibility = Collapsed;
+            }            
         }
 
         private bool SearchForMatchingSubjectAndDisplayThem(string searchedText) {

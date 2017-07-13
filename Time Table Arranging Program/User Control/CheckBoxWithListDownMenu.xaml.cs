@@ -65,6 +65,8 @@ namespace Time_Table_Arranging_Program {
         public bool IsChecked {
             get { return _subjectModel.IsSelected == true; }
             set {
+                _ownerOfCurrentFocus?.Dehighlight();
+                _ownerOfCurrentFocus = this;
                 _subjectModel.IsSelected = value;
                 if (value) {
                     Border.Background = ColorDictionary.CheckedColor;
