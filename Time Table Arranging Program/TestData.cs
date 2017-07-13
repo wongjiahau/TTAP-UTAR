@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
-using Time_Table_Arranging_Program;
 using Time_Table_Arranging_Program.Class;
 using Time_Table_Arranging_Program.Class.Converter;
 
-namespace NUnit.Tests2 {
+namespace Time_Table_Arranging_Program {
     public static class TestData {
-        private static readonly List<Slot> TestSlots = new List<Slot>
+        public static readonly List<Slot> TestSlots = new List<Slot>
         {
             new Slot(3, "MPU3113", " Hubungan Etnik (for Local Students)", "1", "L", Day.Parse("Mon"), "KB521",
                 new TimePeriod(Time.CreateTime_24HourFormat(9, 0), Time.CreateTime_24HourFormat(12, 0)),

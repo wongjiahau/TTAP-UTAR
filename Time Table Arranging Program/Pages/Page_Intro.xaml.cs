@@ -119,5 +119,14 @@ namespace Time_Table_Arranging_Program.Pages {
             Browser.Navigate(LoginPageUrl);
             Browser.Visibility = Visibility.Visible;
         }
+
+        private void LoadTestDataButton_OnClick(object sender, RoutedEventArgs e) {
+            Global.InputSlotList.AddRange(TestData.TestSlots); 
+            NavigationService.Navigate(
+                Global.Factory
+                    .Generate_Page_CreateTimetable_with_GeneralizedSlots
+                    (Global.InputSlotList));
+
+        }
     }
 }

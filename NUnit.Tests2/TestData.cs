@@ -6,7 +6,7 @@ using static NUnit.Tests2.TestData.Subjects;
 
 namespace NUnit.Tests2 {
     public static class TestData {
-        public readonly static List<Slot> TestSlots = new List<Slot>()
+        public static readonly List<Slot> TestSlots = new List<Slot>()
         {
          new Slot(3,"MPU3113", " Hubungan Etnik (for Local Students)", "1", "L", Day.Parse("Mon"), "KB521", new TimePeriod(Time.CreateTime_24HourFormat(9,0),Time.CreateTime_24HourFormat(12,0)), WeekNumber.Parse("1-14")),
 new Slot(5,"MPU3113", " Hubungan Etnik (for Local Students)", "2", "L", Day.Parse("Mon"), "KB521", new TimePeriod(Time.CreateTime_24HourFormat(14,0),Time.CreateTime_24HourFormat(17,0)), WeekNumber.Parse("1-14")),
@@ -362,10 +362,11 @@ new Slot(703,"UKMM1043", " Basic Economics, Accounting And Management", "7", "T"
 
        };
 
+
         public static Slot GetSlot(int uid) {
             return TestSlots.Find(x => x.UID == uid);
         }
-
+        
         public static List<Slot> GetSlotRange(int fromUid , int toUid) {
             return TestSlots.FindAll(x => x.UID >= fromUid && x.UID <= toUid);
         }
