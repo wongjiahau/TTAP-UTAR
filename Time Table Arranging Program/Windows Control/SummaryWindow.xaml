@@ -17,7 +17,7 @@
             <materialDesign:Card materialDesign:ShadowAssist.ShadowDepth="Depth5" Padding="10" Margin="5">
                 <DockPanel>
                     <TextBlock x:Name="TipsLabel" DockPanel.Dock="Left" FontWeight="Bold"  FontSize="20">You can use this to help you to bid timetable!</TextBlock>
-                    <Button DockPanel.Dock="Right" Margin="5,0,0,0" Click="OkButton_OnClick">OK</Button>
+                    <Button DockPanel.Dock="Right" HorizontalAlignment="Center" Margin="5,0,0,0" Click="OkButton_OnClick">OK</Button>
                 </DockPanel>
             </materialDesign:Card>
         </Grid>
