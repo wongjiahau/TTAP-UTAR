@@ -77,7 +77,7 @@ namespace Time_Table_Arranging_Program {
                     Border.Background = null;
                     Border.Background = ColorDictionary.GotFocusedColor;
                 }
-                Checked?.Invoke(this,null);
+                
             }
         }
 
@@ -246,5 +246,9 @@ namespace Time_Table_Arranging_Program {
         #endregion
 
 
+        private void CheckBox_CheckChanged(object sender, RoutedEventArgs e) {
+            this.IsChecked = (sender as CheckBox).IsChecked.Value;
+            Checked?.Invoke(this , null);
+        }
     }
 }
