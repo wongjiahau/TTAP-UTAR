@@ -26,7 +26,7 @@ namespace Time_Table_Arranging_Program {
         HashSet<int> UIDofSelectedSlots { get; set; }
         event RoutedEventHandler Checked;
         event RoutedEventHandler ListViewCheckBox_Checked;
-        void Highlight();        
+        void Highlight();
     }
 
     public partial class CheckBoxWithListDownMenu : UserControl, ICheckBoxWithListDownMenu, INeedDataContext<SubjectModel> {
@@ -77,7 +77,7 @@ namespace Time_Table_Arranging_Program {
                     Border.Background = null;
                     Border.Background = ColorDictionary.GotFocusedColor;
                 }
-                
+
             }
         }
 
@@ -106,8 +106,8 @@ namespace Time_Table_Arranging_Program {
                 SubjectCodeHighlightTextBlock.HighlightedText = value;
             }
         }
-        
-     
+
+
         private void CheckBoxWithListDownMenu_OnMouseEnter(object sender , MouseEventArgs e) {
             Highlight();
         }
@@ -118,7 +118,12 @@ namespace Time_Table_Arranging_Program {
 
 
         private void Border_OnMouseDown(object sender , MouseButtonEventArgs e) {
-            this.IsChecked = !IsChecked;            
+            this.IsChecked = !IsChecked;
+        }
+
+        private void CheckBox_CheckChanged(object sender , RoutedEventArgs e) {
+            this.IsChecked = (sender as CheckBox).IsChecked.Value;
+            Checked?.Invoke(this , null);
         }
 
         #region ListDownMenu
@@ -246,9 +251,6 @@ namespace Time_Table_Arranging_Program {
         #endregion
 
 
-        private void CheckBox_CheckChanged(object sender, RoutedEventArgs e) {
-            this.IsChecked = (sender as CheckBox).IsChecked.Value;
-            Checked?.Invoke(this , null);
-        }
+
     }
 }
