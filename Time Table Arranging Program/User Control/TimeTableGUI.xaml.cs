@@ -284,7 +284,7 @@ namespace Time_Table_Arranging_Program {
       
 
         private string GetTooltip(Slot s) {
-            return $"{s.SubjectName}\n{s.Code}";
+            return $"{s.SubjectName}\n{s.Code}\n({s.Type}{s.Number})";
         }
 
         private string GetInfo(Slot s) {
