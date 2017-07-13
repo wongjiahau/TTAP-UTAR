@@ -29,7 +29,7 @@ namespace Time_Table_Arranging_Program {
         public static class Factory {
             public static Page_CreateTimetable Generate_Page_CreateTimetable_with_GeneralizedSlots(SlotList slotList) {
                 var generalized = new SlotList();
-                generalized.AddRange(new SlotGeneralizer().GeneralizeAll(slotList));
+                generalized.AddRange(new SlotGeneralizer().GeneralizeAll(slotList));                
                 return new Page_CreateTimetable(
                     generalized ,
                     Permutator.Run_v2_withoutConsideringWeekNumber
@@ -43,6 +43,10 @@ namespace Time_Table_Arranging_Program {
                );
 
             }
+        }
+
+        public static class Condition {
+            public static bool NoSlotIsGeneralized  = false;
         }
     }
 

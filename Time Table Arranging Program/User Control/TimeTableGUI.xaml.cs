@@ -292,9 +292,12 @@ namespace Time_Table_Arranging_Program {
 
         private string GetPartialInfo(Slot s) {
             string result = "";
-            result += $" {s.SubjectName.GetInitial()}\n{s.Type} ( {s.Number} )";            
-            if(Windows_Settings.SearchByConsideringWeekNumber.IsChecked)
-                result+=$"\n{s.WeekNumber}";
+            result += $" {s.SubjectName.GetInitial()} ({s.Type}{s.Number})";
+            if (Windows_Settings.SearchByConsideringWeekNumber.IsChecked ||
+                !s.Number.Contains("/"))
+                result += $"\n{s.WeekNumber}\n{s.Venue}";
+            else
+                result += "\n-\n-";            
             return result;
         }
 
