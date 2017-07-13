@@ -178,7 +178,7 @@ namespace Time_Table_Arranging_Program.User_Control {
                 }
             }
             _iteratableList = new CyclicIteratableList<ICheckBoxWithListDownMenu>(found);
-            _iteratableList.GoToPrevious();
+            _iteratableList.GetCurrent().Highlight();
             return somethingFound;
         }
 
@@ -208,8 +208,7 @@ namespace Time_Table_Arranging_Program.User_Control {
             }
             _anyCheckBoxs =
                 new List<ICheckBoxWithListDownMenu>(CheckerBoxStackPanel.Children.OfType<ICheckBoxWithListDownMenu>());
-            _iteratableList = new CyclicIteratableList<ICheckBoxWithListDownMenu>(_anyCheckBoxs);
-            _iteratableList.GoToPrevious();
+            _iteratableList = new CyclicIteratableList<ICheckBoxWithListDownMenu>(_anyCheckBoxs);            
         }
 
         private void DoneButton_OnClick(object sender , RoutedEventArgs e) {
@@ -222,14 +221,16 @@ namespace Time_Table_Arranging_Program.User_Control {
 
         private void SearchBox_OnOnKeyPressed(object sender , KeyEventArgs e) {
             switch (e.Key) {
-                case Key.Up:                    
+                case Key.Up:
+                case Key.Left:
                     _iteratableList.GoToPrevious();
                     var current1 = (CheckBoxWithListDownMenu)_iteratableList.GetCurrent();
                     current1.Highlight();
                     if (_iteratableList.AtLast()) ScrollViewer.ScrollToBottom();
                     else if (!current1.IsVisibleToUser(ScrollViewer))ScrollViewer.PageUp();
                     break;
-                case Key.Down:                    
+                case Key.Down:
+                case Key.Right:
                     _iteratableList.GoToNext();
                     var current = (CheckBoxWithListDownMenu)_iteratableList.GetCurrent();
                     current.Highlight();
