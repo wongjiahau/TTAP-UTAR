@@ -12,13 +12,14 @@
             <Border Padding="20">
                 <StackPanel>
                     <TextBlock MaxWidth="400" TextWrapping="Wrap" FontWeight="Bold" FontSize="20">Do you want to add this timetable to your Google Calendar?</TextBlock>
-                    <TextBlock Margin="0,10,0,0" FontSize="15" Text="Date of Monday of Week One = " />
+                    <TextBlock Margin="0,10,0,0" FontSize="15" Text="Please make sure the date below represents the "/>
+                    <TextBlock FontSize="15">Date of Monday of Week One : </TextBlock>
                     <StackPanel Orientation="Horizontal">
                   <TextBlock x:Name="DateTextBlock" VerticalAlignment="Center" Margin="0,10,0,0" FontSize="20" FontWeight="DemiBold" Text="123" />
                         <Button x:Name="RepickDateButton" Click="RepickDateButton_OnClick" Style="{StaticResource MaterialDesignRaisedLightButton}" Content="Repick date" Margin="10" />
                     </StackPanel>
 
-                    <TextBlock Margin="0,10,0,0">Please note that this action CANNOT be undone.</TextBlock>
+                    <TextBlock Margin="0,10,0,0">*Warning : that this action cannot be undone.</TextBlock>
                     <Grid>
                     <ProgressBar x:Name="ProgressBar"  Margin="0,20,0,0" Visibility="Hidden" IsIndeterminate="True" />
                         <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" Margin="0,20,0,0">
