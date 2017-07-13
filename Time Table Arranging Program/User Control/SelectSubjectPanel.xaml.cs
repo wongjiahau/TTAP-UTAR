@@ -241,7 +241,9 @@ namespace Time_Table_Arranging_Program.User_Control {
                     else if (!current.IsVisibleToUser(ScrollViewer))ScrollViewer.PageDown();
                     break;
                 case Key.Enter:
-                    _iteratableList.GetCurrent().IsChecked = !_iteratableList.GetCurrent().IsChecked;
+                    var current2 = (CheckBoxWithListDownMenu)_iteratableList.GetCurrent();
+                    if (current2 == null) return;
+                    current2.IsChecked = !_iteratableList.GetCurrent().IsChecked;
                     break;
                 default: break;
             }
