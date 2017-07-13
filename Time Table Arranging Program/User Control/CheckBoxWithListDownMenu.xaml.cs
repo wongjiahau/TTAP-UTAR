@@ -53,7 +53,7 @@ namespace Time_Table_Arranging_Program {
         public void Highlight() {
             _ownerOfCurrentFocus?.Dehighlight();
             _ownerOfCurrentFocus = this;
-            Border.Background = ColorDictionary.MouseOverColor;
+            Border.Background = ColorDictionary.GotFocusedColor;
         }
 
         public void Dehighlight() {
@@ -74,7 +74,7 @@ namespace Time_Table_Arranging_Program {
                 else {
                     ChooseSlotButton.Visibility = Visibility.Hidden;
                     Border.Background = null;
-                    Border.Background = ColorDictionary.MouseOverColor;
+                    Border.Background = ColorDictionary.GotFocusedColor;
                 }
                 Checked?.Invoke(this,null);
             }
