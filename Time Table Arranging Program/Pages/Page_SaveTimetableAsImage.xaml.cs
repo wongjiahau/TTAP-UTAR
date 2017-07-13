@@ -34,11 +34,10 @@ namespace Time_Table_Arranging_Program.Pages {
             var saveDialog = new SaveFileDialog() { Filter = "Image file (*.png)|*.png" , FileName = "MyTimetable" };
             if (saveDialog.ShowDialog() == false) return;
             try {
-                var bitmap = Helper.GetImage(this.TimeTableGui);
-                //var bg = CustomBackgroundWorker<RenderTargetBitmap , string>.RunAndShowLoadingScreen(
-                //    Helper.SaveAsPng ,
-                //bitmap , saveDialog.FileName , "Saving file . . .");
-                Helper.SaveAsPng(bitmap, saveDialog.FileName);
+                using (new WaitCursor()) {
+                    var bitmap = Helper.GetImage(this.TimeTableGui);
+                    Helper.SaveAsPng(bitmap, saveDialog.FileName);
+                }
                 Global.Snackbar.MessageQueue.Enqueue("File saved at " + saveDialog.FileName, "OPEN",
                     () => { Process.Start(saveDialog.FileName); });
             }
