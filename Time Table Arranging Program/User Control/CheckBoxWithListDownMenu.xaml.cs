@@ -26,8 +26,7 @@ namespace Time_Table_Arranging_Program {
         HashSet<int> UIDofSelectedSlots { get; set; }
         event RoutedEventHandler Checked;
         event RoutedEventHandler ListViewCheckBox_Checked;
-        void Highlight();
-        void Dehighlight();
+        void Highlight();        
     }
 
     public partial class CheckBoxWithListDownMenu : UserControl, ICheckBoxWithListDownMenu, INeedDataContext<SubjectModel> {
@@ -56,7 +55,7 @@ namespace Time_Table_Arranging_Program {
             Border.Background = ColorDictionary.GotFocusedColor;
         }
 
-        public void Dehighlight() {
+        private void Dehighlight() {
             Border.Background =
                 Checkbox.IsChecked.Value
                     ? ColorDictionary.CheckedColor

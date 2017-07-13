@@ -53,5 +53,17 @@ namespace NUnit.Tests2 {
             Assert.IsTrue(input.CurrentIndex() == 0);
         }
 
+        [Test]
+        public void Test_AtFirst() {
+            var input = new CyclicIteratableList<int>(new List<int>() { 1 , 2 , 3 });            
+            Assert.IsTrue(input.AtFirst());
+        }
+        [Test]
+        public void Test_AtLast() {
+            var input = new CyclicIteratableList<int>(new List<int>() { 1 , 2 , 3 });
+            input.GoToPrevious();            
+            Assert.IsTrue(input.AtLast());
+        }
+
     }
 }

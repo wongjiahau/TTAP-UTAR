@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:Time_Table_Arranging_Program.User_Control"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" KeyDown="SelectSubjectPanel_OnKeyDown"   FocusManager.IsFocusScope="True" FocusManager.FocusedElement="{Binding ElementName=SearchBox}"
+           
              >
     <materialDesign:Card VerticalAlignment="Stretch">
         <DockPanel LastChildFill="True" >
@@ -71,7 +72,7 @@ Press ESC to clear text of search box.</TextBlock>
                 </StackPanel>
             </materialDesign:ColorZone>
             <Border  BorderBrush="DarkGray"   BorderThickness="0.5" VerticalAlignment="Stretch" DockPanel.Dock="Bottom">
-                <ScrollViewer x:Name="SelectSubjectScrollViewer"  FlowDirection="LeftToRight"
+                <ScrollViewer x:Name="ScrollViewer"  FlowDirection="LeftToRight"
                               VerticalScrollBarVisibility="Visible"
                               HorizontalScrollBarVisibility="Hidden"  ToolTipService.ShowOnDisabled="True" ToolTipService.InitialShowDelay="0">
 

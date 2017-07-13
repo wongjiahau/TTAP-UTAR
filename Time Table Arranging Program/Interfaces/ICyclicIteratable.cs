@@ -107,6 +107,14 @@ namespace Time_Table_Arranging_Program.Interfaces {
         public int CurrentIndex() {
             return _iterator.GetCurrent();
         }
+
+        public bool AtLast() {
+            return _iterator.CurrentIndex() == _iterator.MaxIndex();
+        }
+
+        public bool AtFirst() {
+            return _iterator.CurrentIndex() == 0;
+        }
     }
 
 

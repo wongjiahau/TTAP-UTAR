@@ -8,6 +8,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Threading;
 using MaterialDesignThemes.Wpf;
 using Time_Table_Arranging_Program.Class;
+using Time_Table_Arranging_Program.Class.Helper;
 using Time_Table_Arranging_Program.Interfaces;
 using Time_Table_Arranging_Program.Model;
 using Time_Table_Arranging_Program.UserInterface;
@@ -25,11 +26,11 @@ namespace Time_Table_Arranging_Program.User_Control {
         private string _suggestedText = "";
 
         public SelectSubjectPanel() {
-             InitializeComponent();
+            InitializeComponent();            
         }
         public void SetDrawerHost(DrawerHost drawerHost) {
             _drawerHost = drawerHost;
-           
+
         }
 
         public HashSet<int> UIDofSelectedSlots { get; } = new HashSet<int>();
@@ -38,7 +39,7 @@ namespace Time_Table_Arranging_Program.User_Control {
         public void Clear() {
             CheckerBoxStackPanel.Children.Clear();
         }
-            
+
         public string[] GetNamesOfCheckedSubject() {
             var checkedSubject = new List<string>();
             foreach (var box in _anyCheckBoxs) {
@@ -47,8 +48,8 @@ namespace Time_Table_Arranging_Program.User_Control {
             return checkedSubject.ToArray();
         }
 
-        private void Box_ListViewCheckBox_Checked(object sender, RoutedEventArgs e) {
-            var c = (ICheckBoxWithListDownMenu) sender;
+        private void Box_ListViewCheckBox_Checked(object sender , RoutedEventArgs e) {
+            var c = (ICheckBoxWithListDownMenu)sender;
             foreach (var uid in c.UIDofSelectedSlots) {
                 UIDofSelectedSlots.Add(uid);
             }
@@ -58,7 +59,7 @@ namespace Time_Table_Arranging_Program.User_Control {
             Update();
         }
 
-        private void Box_CheckChanged(object sender, RoutedEventArgs e) {
+        private void Box_CheckChanged(object sender , RoutedEventArgs e) {
             var x = sender as ICheckBoxWithListDownMenu;
             if (x.IsChecked) {
                 x.FontWeight = FontWeights.Bold;
@@ -73,34 +74,37 @@ namespace Time_Table_Arranging_Program.User_Control {
         }
 
         private void Update() {
-            UpdateBottomPanelVisibility();           
-            SlotSelectionChanged(this, null);
-            
-            Dispatcher.BeginInvoke(
-                DispatcherPriority.Input,
-                new Action(delegate
-                {
-                    FocusManager.SetFocusedElement(this, SearchBox);
-                    IInputElement focusedElement = FocusManager.GetFocusedElement(this);
-                }));
+            UpdateBottomPanelVisibility();
+            SlotSelectionChanged(this , null);
+            FocusSearchBox();
         }
 
-        private void UpdateBottomPanelVisibility() {            
+        public void FocusSearchBox() {
+            Dispatcher.BeginInvoke(
+                DispatcherPriority.Input ,
+                new Action(delegate {
+                    FocusManager.SetFocusedElement(this , SearchBox);
+                    IInputElement focusedElement = FocusManager.GetFocusedElement(this);
+                }));
+
+        }
+
+        private void UpdateBottomPanelVisibility() {
             DoubleAnimation da;
             if (UIDofSelectedSlots.Count == 0) {
-                da = CustomAnimation.GetLeavingScreenAnimation(70, 0, false);
+                da = CustomAnimation.GetLeavingScreenAnimation(70 , 0 , false);
                 ViewChanger.Badge = null;
                 if (ViewChangerButton.Content.ToString() == "Show all subjects") return;
             }
-            else {                
-                da = CustomAnimation.GetEnteringScreenAnimation(0, 70, false);                
+            else {
+                da = CustomAnimation.GetEnteringScreenAnimation(0 , 70 , false);
                 ViewChanger.Badge = GetNamesOfCheckedSubject().Length;
-                if (BottomPanel .ActualHeight > 0) return;
+                if (BottomPanel.ActualHeight > 0) return;
             }
             BottomPanel.BeginAnimation(HeightProperty , da);
         }
 
-        private void ViewChangerButton_OnClick(object sender, RoutedEventArgs e) {
+        private void ViewChangerButton_OnClick(object sender , RoutedEventArgs e) {
             if (ViewChangerButton.Content.ToString() == "Show selected subjects") {
                 ShowSelectedSubjects();
             }
@@ -131,9 +135,9 @@ namespace Time_Table_Arranging_Program.User_Control {
             ViewChangerButton.Content = "Show all subjects";
         }
 
-        private void SearchBoxOnTextChanged(object sender, TextChangedEventArgs textChangedEventArgs) {
+        private void SearchBoxOnTextChanged(object sender , TextChangedEventArgs textChangedEventArgs) {
             ShowAllSubjects();
-            string searchedText = SearchBox.Text.ToLower();            
+            string searchedText = SearchBox.Text.ToLower();
             bool somethingFound = SearchForMatchingSubjectAndDisplayThem(searchedText);
             if (somethingFound) {
                 HintLabel.Visibility = Visible;
@@ -141,8 +145,8 @@ namespace Time_Table_Arranging_Program.User_Control {
                 ErrorLabel.Visibility = Collapsed;
             }
             else {
-                HintLabel.Visibility =Collapsed;
-                _suggestedText = LevenshteinDistance.GetClosestMatchingTerm(searchedText, _nameAndCodeOfAllSubjects.ToArray());
+                HintLabel.Visibility = Collapsed;
+                _suggestedText = LevenshteinDistance.GetClosestMatchingTerm(searchedText , _nameAndCodeOfAllSubjects.ToArray());
                 if (_suggestedText == null) {
                     FeedbackPanel.Visibility = Collapsed;
                     ErrorLabel.Text = "No result found . . .";
@@ -179,24 +183,24 @@ namespace Time_Table_Arranging_Program.User_Control {
             _iteratableList = new CyclicIteratableList<ICheckBoxWithListDownMenu>(found);
             _iteratableList.GoToPrevious();
             return somethingFound;
-        }      
+        }
 
-        private void YesButton_OnClick(object sender, RoutedEventArgs e) {
+        private void YesButton_OnClick(object sender , RoutedEventArgs e) {
             SearchBox.Text = _suggestedText;
         }
 
-        private void SelectSubjectPanel_OnKeyDown(object sender, KeyEventArgs e) {
-            if (SearchBox.IsKeyboardFocused() || SearchBox.IsFocused) return;           
-            FocusManager.SetFocusedElement(this, SearchBox);            
+        private void SelectSubjectPanel_OnKeyDown(object sender , KeyEventArgs e) {
+            if (SearchBox.IsKeyboardFocused() || SearchBox.IsFocused) return;
+            FocusManager.SetFocusedElement(this , SearchBox);
         }
 
-     
+
 
         private CyclicIteratableList<ICheckBoxWithListDownMenu> _iteratableList;
         public void SetDataContext(List<SubjectModel> dataContext) {
             var subjectModels = dataContext;
             _nameAndCodeOfAllSubjects = new List<string>();
-            foreach (var subject in subjectModels) {     
+            foreach (var subject in subjectModels) {
                 _nameAndCodeOfAllSubjects.Add(subject.Name);
                 _nameAndCodeOfAllSubjects.Add(subject.Code);
                 var box = new CheckBoxWithListDownMenu();
@@ -211,7 +215,7 @@ namespace Time_Table_Arranging_Program.User_Control {
             _iteratableList.GoToPrevious();
         }
 
-        private void DoneButton_OnClick(object sender, RoutedEventArgs e) {
+        private void DoneButton_OnClick(object sender , RoutedEventArgs e) {
             DrawerHost d = this._drawerHost;
             d.IsLeftDrawerOpen = false;
             Global.Snackbar.MessageQueue.Enqueue("Click 'Set time constraint' button.");
@@ -219,17 +223,21 @@ namespace Time_Table_Arranging_Program.User_Control {
 
         private DrawerHost _drawerHost;
 
-        private void SearchBox_OnOnKeyPressed(object sender, KeyEventArgs e) {
+        private void SearchBox_OnOnKeyPressed(object sender , KeyEventArgs e) {
             switch (e.Key) {
-                case Key.Up:
-                    _iteratableList.GetCurrent().Dehighlight();
+                case Key.Up:                    
                     _iteratableList.GoToPrevious();
-                    _iteratableList.GetCurrent().Highlight();
+                    var current1 = (CheckBoxWithListDownMenu)_iteratableList.GetCurrent();
+                    current1.Highlight();
+                    if (_iteratableList.AtLast()) ScrollViewer.ScrollToBottom();
+                    else if (!current1.IsVisibleToUser(ScrollViewer))ScrollViewer.PageUp();
                     break;
-                case Key.Down:
-                    _iteratableList.GetCurrent().Dehighlight();
+                case Key.Down:                    
                     _iteratableList.GoToNext();
-                    _iteratableList.GetCurrent().Highlight();
+                    var current = (CheckBoxWithListDownMenu)_iteratableList.GetCurrent();
+                    current.Highlight();
+                    if(_iteratableList.AtFirst()) ScrollViewer.ScrollToHome();
+                    else if (!current.IsVisibleToUser(ScrollViewer))ScrollViewer.PageDown();
                     break;
                 case Key.Enter:
                     _iteratableList.GetCurrent().IsChecked = !_iteratableList.GetCurrent().IsChecked;

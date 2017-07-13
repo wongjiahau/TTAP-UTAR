@@ -68,5 +68,18 @@ namespace Time_Table_Arranging_Program.Class.Helper {
             encoder.Save(outputStream);
             outputStream.Close();
         }
+        /// <summary>
+        /// To check if an element if visible to the user within a certain container
+        /// Refer StackOverflow : "In WPF, how can I determine whether a control is visible to the user?"
+        /// </summary>
+        /// <param name="element"></param>
+        /// <param name="container"></param>
+        /// <returns></returns>
+        public static bool IsVisibleToUser(this FrameworkElement element, FrameworkElement container) {
+            if (!element.IsVisible) return false;
+            Rect bounds = element.TransformToAncestor(container).TransformBounds(new Rect(0.0, 0.0, element.ActualWidth, element.ActualHeight));
+            Rect rect = new Rect(0.0,0.0,container.ActualWidth, container.ActualHeight);
+            return rect.Contains(bounds.TopLeft) || rect.Contains(bounds.BottomRight);
+        }
     }
 }
