@@ -187,12 +187,12 @@ namespace Time_Table_Arranging_Program {
             _occupiedIndex = new Dictionary<int , HashSet<int>>();
         }
 
-        public void GenerateGui(ITimetable timetable, bool getPartialInfoOnly = true) {
+        public void GenerateGui(ITimetable timetable) {
             var slots = timetable.ToList();
             ClearGui();
             slots.Sort();
             NoOfSelectedSubjectLabel.Content = GetSubjectCount(slots);
-            GenerateTimetableView(slots, getPartialInfoOnly);
+            GenerateTimetableView(slots);
             DescriptionViewer.Update(slots);
         }
 
@@ -207,12 +207,12 @@ namespace Time_Table_Arranging_Program {
             return count;
         }
 
-        private void GenerateTimetableView(List<Slot> slots, bool getPartialInfoOnly = true) {
+        private void GenerateTimetableView(List<Slot> slots) {
             var previousSubjectName = slots[0].SubjectName;
             IColorGenerator c = new ColorGenerator();
             foreach (var s in slots) {
                 if (s.SubjectName != previousSubjectName) c.GoToNextColor();
-                var box = GenerateBox(s , c, getPartialInfoOnly);
+                var box = GenerateBox(s , c);
                 var colIndex = GetColumnIndex(s.StartTime);
                 var rowIndex = GetRowIndex(s.Day);
                 var columnSpan = GetColumnSpan(s.EndTime.Minus(s.StartTime));
@@ -253,14 +253,14 @@ namespace Time_Table_Arranging_Program {
         }
 
 
-        private Border GenerateBox(Slot s , IColorGenerator c, bool getPartialInfoOnly = true) {
+        private Border GenerateBox(Slot s , IColorGenerator c) {
             var textblock = new TextBlock {                
                 Margin = new Thickness(2) ,
                 TextAlignment = TextAlignment.Center ,
                 FontWeight = FontWeights.DemiBold ,
                 VerticalAlignment = VerticalAlignment.Center
             };
-            textblock.Text = getPartialInfoOnly ? GetPartialInfo(s) : GetFullInfo(s);
+            textblock.Text =  GetInfo(s);
             var border = new Border {
                 BorderThickness = new Thickness(0.75) ,
                 BorderBrush = Brushes.Black ,
@@ -281,16 +281,13 @@ namespace Time_Table_Arranging_Program {
             };
             return border;
         }
-
-        private string GetFullInfo(Slot s) {
-            return $"{s.SubjectName.GetInitial()} ({s.Type}{s.Number})\n{s.Venue}\n{s.WeekNumber}";
-        }
+      
 
         private string GetTooltip(Slot s) {
             return $"{s.SubjectName}\n{s.Code}";
         }
 
-        private string GetPartialInfo(Slot s) {
+        private string GetInfo(Slot s) {
             string result = "";
             result += $" {s.SubjectName.GetInitial()} ({s.Type}{s.Number})";
             if (Windows_Settings.SearchByConsideringWeekNumber.IsChecked ||

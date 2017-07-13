@@ -24,7 +24,7 @@ namespace Time_Table_Arranging_Program.User_Control {
         }
 
         public void GenerateGUI(ITimetable timetable) {
-            this.TimeTableGui.GenerateGui(timetable,false);
+            this.TimeTableGui.GenerateGui(timetable);
             this.TimetableDescriptionViewer.GenerateAsImage(timetable.ToList());
         }
     }
