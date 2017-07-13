@@ -66,6 +66,7 @@
     <Compile Include="Test_Class_Time.cs" />
     <Compile Include="Test_Class_TimePeriod.cs" />
     <Compile Include="Test_Class_WeekNumber.cs" />
+    <Compile Include="Test_CyclicIteratableList.cs" />
     <Compile Include="Test_Day.cs" />
     <Compile Include="Test_Filterer.cs" />
     <Compile Include="Test_Helper.cs" />

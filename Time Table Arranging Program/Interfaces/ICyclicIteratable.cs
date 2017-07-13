@@ -77,7 +77,7 @@ namespace Time_Table_Arranging_Program.Interfaces {
 
         public CyclicIteratableList(List<T> list) {
             _list = list;
-            _iterator =new CyclicIterator(list.Count);
+            _iterator =new CyclicIterator(list.Count-1);
         }
         public T GetCurrent() {
             return _list[_iterator.GetCurrent()];
