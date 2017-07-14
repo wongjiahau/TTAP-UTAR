@@ -1,14 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Threading;
 using MaterialDesignThemes.Wpf;
+using Time_Table_Arranging_Program.MVVM_Framework;
 
 namespace Time_Table_Arranging_Program.User_Control {
     public class AutoClosePopup : Popup {
@@ -20,8 +23,8 @@ namespace Time_Table_Arranging_Program.User_Control {
             Opened += Popup_Opened;
             Closed += Popup_Closed;
             _timer = new DispatcherTimer();
-            _timer.Interval = TimeSpan.FromSeconds(2);
-            AllowsTransparency = true;            
+            _timer.Interval = TimeSpan.FromSeconds(10);
+            AllowsTransparency = true;
             Placement = PlacementMode.Bottom;
             HorizontalAlignment = HorizontalAlignment.Center;
             PopupAnimation = PopupAnimation.Slide;
@@ -31,19 +34,29 @@ namespace Time_Table_Arranging_Program.User_Control {
             if (_singleton == null) {
                 _singleton = new AutoClosePopup();
             }
-            var border = new Border
-            {
-                CornerRadius = new CornerRadius(5),
-                Padding = new Thickness(5),
-                Margin = new Thickness(5),
-                Background = Brushes.Black,
-                Child = new Label
-                {
-                    Content = message,
-                    FontSize = 15,
-                    Foreground = Brushes.White,
-                    FontWeight = FontWeights.DemiBold
+            var border = new Border {
+                CornerRadius = new CornerRadius(5) ,
+                Padding = new Thickness(5) ,
+                Margin = new Thickness(5) ,
+                Background = Brushes.Black ,
+                Child = new StackPanel() {
+                    Orientation = Orientation.Horizontal,
+                    Children = {
+                        new Label
+                        {
+                            Content = message,
+                            FontSize = 15,
+                            Foreground = Brushes.White,
+                            FontWeight = FontWeights.DemiBold
+                        },
+                        new Button
+                        {
+                            Content = "OK",                                
+                            Command = new RelayCommand(()=> { _singleton.IsOpen = false; })
+                        }
+                    }
                 }
+
             };
             _singleton.Child = border;
             _singleton._timer.Stop();
@@ -51,17 +64,16 @@ namespace Time_Table_Arranging_Program.User_Control {
             _singleton.IsOpen = true;
         }
 
-        private void Popup_Opened(object sender, EventArgs e) {
+        private void Popup_Opened(object sender , EventArgs e) {
             _timer.Start();
-            _timer.Tick += delegate
-            {
+            _timer.Tick += delegate {
                 IsOpen = false;
                 _timer.Stop();
             };
         }
 
-        private void Popup_Closed(object sender, EventArgs e) {
+        private void Popup_Closed(object sender , EventArgs e) {
             _timer.IsEnabled = false;
         }
-    }
+    }   
 }
