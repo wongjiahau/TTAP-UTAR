@@ -18,47 +18,64 @@ namespace Time_Table_Arranging_Program.User_Control {
         private static AutoClosePopup _singleton;
 
         private readonly DispatcherTimer _timer;
+        private Label _label;
 
+        public string Message {
+            get { return (string)_label.Content; }
+            set { _label.Content = value; }
+        }
         private AutoClosePopup() {
             Opened += Popup_Opened;
             Closed += Popup_Closed;
             _timer = new DispatcherTimer();
-            _timer.Interval = TimeSpan.FromSeconds(10);
+            _timer.Interval = TimeSpan.FromSeconds(5);
             AllowsTransparency = true;
-            Placement = PlacementMode.Bottom;
+            PlacementTarget = Global.MainWindow;
+            Placement = PlacementMode.Center;
+            VerticalOffset = - (Global.MainWindow.ActualHeight / 2 - 90);
             HorizontalAlignment = HorizontalAlignment.Center;
             PopupAnimation = PopupAnimation.Slide;
+            InitializeLabel();
+            InitializeChild();
+
         }
 
-        public static void Show(string message) {
-            if (_singleton == null) {
-                _singleton = new AutoClosePopup();
-            }
+        private void InitializeLabel() {
+            _label = new Label {
+                Content = "" ,
+                FontSize = 15 ,
+                Foreground = Brushes.White ,
+                FontWeight = FontWeights.DemiBold
+            };
+        }
+
+        private void InitializeChild() {
             var border = new Border {
                 CornerRadius = new CornerRadius(5) ,
                 Padding = new Thickness(5) ,
                 Margin = new Thickness(5) ,
                 Background = Brushes.Black ,
                 Child = new StackPanel() {
-                    Orientation = Orientation.Horizontal,
+                    Orientation = Orientation.Horizontal ,
                     Children = {
-                        new Label
-                        {
-                            Content = message,
-                            FontSize = 15,
-                            Foreground = Brushes.White,
-                            FontWeight = FontWeights.DemiBold
-                        },
+                        _label,
                         new Button
                         {
-                            Content = "OK",                                
+                            Content = "OK",
                             Command = new RelayCommand(()=> { _singleton.IsOpen = false; })
                         }
                     }
                 }
 
             };
-            _singleton.Child = border;
+            this.Child = border;
+        }
+
+        public static void Show(string message) {
+            if (_singleton == null) {
+                _singleton = new AutoClosePopup();
+            }
+            _singleton.Message = message;
             _singleton._timer.Stop();
             _singleton.IsOpen = false;
             _singleton.IsOpen = true;
@@ -75,5 +92,5 @@ namespace Time_Table_Arranging_Program.User_Control {
         private void Popup_Closed(object sender , EventArgs e) {
             _timer.IsEnabled = false;
         }
-    }   
+    }
 }
