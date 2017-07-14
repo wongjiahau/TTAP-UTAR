@@ -55,7 +55,7 @@ namespace Time_Table_Arranging_Program.Pages {
     public class NameList {
         public NameList() {
             string raw =
-                "Sean(Initiator), Keli, Heng, Cheng Feng, QZ, Eric, Kelvin, Guo Ren, Jun Yan, Shu Ming, Yau Yau, Kexin, Chee Kong, Ming Siew, You!";
+                "Sean(Initiator), Mummy, Daddy, Wei Wei, Yau Yau, Keli, Heng, Cheng Feng, QZ, Eric, Kelvin, Guo Ren, Jun Yan, Shu Ming, Kexin, Chee Kong, Ming Siew, You!";
             Names = raw.Split(',').ToList();
         }
         public List<string> Names { get; set; }
