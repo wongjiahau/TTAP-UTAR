@@ -2,6 +2,9 @@
 Timetable Arranging Program - UTAR 
 By - Wong Jia Hau
 
+## Objective
+To help UTAR students to arrange timetable easily.
+
 ## Features
 1. Load slots by logging in the course registration website
 2. Choose subjects
