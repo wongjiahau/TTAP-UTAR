@@ -78,11 +78,16 @@ namespace Time_Table_Arranging_Program.User_Control {
             if (_singleton == null) {
                 _singleton = new NotificationBar();
             }
+            
             _singleton.Initialize(message , actionContent , actionHandler , closePopupAfterActionButtonClicked);            
             _singleton.IsOpen = false;
             _singleton.IsOpen = true;
+            AutoCloseNotificationBar.Hide();
         }
 
+        public static void Hide() {
+           if(_singleton!=null)  _singleton.IsOpen = false;
+        }
    
 
     }
@@ -106,6 +111,11 @@ namespace Time_Table_Arranging_Program.User_Control {
             _singleton._timer.Stop();
             _singleton.IsOpen = false;
             _singleton.IsOpen = true;
+            NotificationBar.Hide();
+        }
+
+        public new static void Hide() {
+             if(_singleton !=null)_singleton.IsOpen = false;
         }
 
         private void Popup_Opened(object sender , EventArgs e) {
