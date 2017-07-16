@@ -74,13 +74,14 @@ namespace Time_Table_Arranging_Program.Pages {
             if (result == null || result.Count == 0) {
                 if (_inputSlots.NoSlotIsChosen()) {
                     _outputTimetables.SetState(TimetableList.NoSlotsIsChosen);
+                    AutoClosePopup.Show("No subject selected.");
                 }
                 else {
                     _outputTimetables.SetState(TimetableList.NoPossibleCombination);
                     AutoClosePopup.Show("No possible timetable found.", "Tell me why", ()=>
                         {
                             DialogBox.ShowDialog("Why no possible combination?", new ClashFinder(_subjectModels, _permutator).Message);
-                        });
+                        }, false);
                 }
                 ToolBoxPanel.Visibility = Visibility.Hidden;
                 _cyclicIndex.Reset();

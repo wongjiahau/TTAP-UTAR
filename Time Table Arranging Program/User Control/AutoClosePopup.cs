@@ -34,11 +34,17 @@ namespace Time_Table_Arranging_Program.User_Control {
             this.Child = GetBorder();
         }
 
-        private void Initialize(string message, string actionContent, Action actionHandler) {
+        private void Initialize(string message, string actionContent, Action actionHandler, bool closePopupAfterActionButtonClicked = true) {
             Action defaultAction = () => { this.IsOpen = false; };
             Action resultAction;
             if (actionHandler == null) resultAction = defaultAction;
-            else resultAction = (Action) Delegate.Combine(new List<Action>() {defaultAction, actionHandler}.ToArray());
+            else {
+                if(closePopupAfterActionButtonClicked)
+                resultAction = (Action) Delegate.Combine(new List<Action>() {defaultAction, actionHandler}.ToArray());
+                else {
+                    resultAction = actionHandler;
+                }
+            }
             _label.Content = message;
             _button.Content = actionContent;
             _button.Command = new RelayCommand(resultAction);
@@ -71,11 +77,11 @@ namespace Time_Table_Arranging_Program.User_Control {
             };            
         }
 
-        public static void Show(string message , string actionContent = "OK", Action actionHandler = null) {
+        public static void Show(string message , string actionContent = "OK", Action actionHandler = null, bool closePopupAfterActionButtonClicked=true) {
             if (_singleton == null) {
                 _singleton = new AutoClosePopup();
             }            
-            _singleton.Initialize(message, actionContent, actionHandler);
+            _singleton.Initialize(message, actionContent, actionHandler, closePopupAfterActionButtonClicked);
             _singleton._timer.Stop();
             _singleton.IsOpen = false;
             _singleton.IsOpen = true;
