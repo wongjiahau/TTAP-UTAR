@@ -59,9 +59,10 @@ namespace Time_Table_Arranging_Program.Pages {
             _timetableList.GetCurrentState();
         }
 
+        private List<SubjectModel> _subjectModels;
         private void InitializeExtraComponents() {
-            var subjectList = SubjectModel.Parse(_inputSlots);
-            SelectSubjectPanel.SetDataContext(subjectList);
+            _subjectModels = SubjectModel.Parse(_inputSlots);
+            SelectSubjectPanel.SetDataContext(_subjectModels);
             SelectSubjectPanel.SetDrawerHost(this.DrawerHost);
             FavouriteButton.CheckedMessage = "Added this timetable to favorites ";
             FavouriteButton.UncheckedMessage = "Removed this timetable from favorites";
@@ -76,7 +77,10 @@ namespace Time_Table_Arranging_Program.Pages {
                 }
                 else {
                     _outputTimetables.SetState(TimetableList.NoPossibleCombination);
-                    AutoClosePopup.Show("No possible timetable found.");
+                    AutoClosePopup.Show("No possible timetable found.", "Tell me why", ()=>
+                        {
+                            DialogBox.ShowDialog("Why no possible combination?", new ClashFinder(_subjectModels, _permutator).Message);
+                        });
                 }
                 ToolBoxPanel.Visibility = Visibility.Hidden;
                 _cyclicIndex.Reset();
