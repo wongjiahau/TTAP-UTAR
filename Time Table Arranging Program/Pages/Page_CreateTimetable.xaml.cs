@@ -74,11 +74,11 @@ namespace Time_Table_Arranging_Program.Pages {
             if (result == null || result.Count == 0) {
                 if (_inputSlots.NoSlotIsChosen()) {
                     _outputTimetables.SetState(TimetableList.NoSlotsIsChosen);
-                    AutoClosePopup.Show("No subject selected.");
+                    AutoCloseNotificationBar.Show("No subject selected.");
                 }
                 else {
                     _outputTimetables.SetState(TimetableList.NoPossibleCombination);
-                    AutoClosePopup.Show("No possible timetable found.", "Tell me why", ()=>
+                    NotificationBar.Show("No possible timetable found.", "Tell me why", ()=>
                         {
                             DialogBox.ShowDialog("Why no possible combination?", new ClashFinder(_subjectModels, _permutator).Message);
                         }, false);
@@ -91,7 +91,7 @@ namespace Time_Table_Arranging_Program.Pages {
                 ToolBoxPanel.Visibility = Visibility.Visible;
                 _cyclicIndex.MaxValue = result.Count - 1;
                 _cyclicIndex.CurrentValue = 0;
-                AutoClosePopup.Show(result.Count + " possible timetables found.");
+                AutoCloseNotificationBar.Show(result.Count + " possible timetables found.");
             }
             TimetableViewer.Initialize(_cyclicIndex);
             CyclicIndexView.DataContext = new CyclicIndexVM(_cyclicIndex);

@@ -267,7 +267,7 @@
     <Compile Include="Settings.cs" />
     <Compile Include="TestData.cs" />
     <Compile Include="TrashFile.cs" />
-    <Compile Include="User Control\AutoClosePopup.cs" />
+    <Compile Include="User Control\AutoCloseNotificationBar.cs" />
     <Compile Include="MVVM_Framework\Models\CyclicIndex.cs" />
     <Compile Include="User Control\ConfirmationForExitPrompt.xaml.cs">
       <DependentUpon>ConfirmationForExitPrompt.xaml</DependentUpon>

@@ -58,7 +58,7 @@ namespace Time_Table_Arranging_Program.User_Control {
             };
             button.Click += (sender , args) => {
                 Clipboard.SetDataObject(codeToBeCopied);
-                AutoClosePopup.Show($"{codeToBeCopied} is copied to clipboard!");
+                AutoCloseNotificationBar.Show($"{codeToBeCopied} is copied to clipboard!");
                 button.Background = Brushes.DarkCyan;
             };
 

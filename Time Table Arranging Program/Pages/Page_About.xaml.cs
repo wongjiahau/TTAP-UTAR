@@ -48,7 +48,7 @@ namespace Time_Table_Arranging_Program.Pages {
 
         private void CopyToClipboard(string x) {
             Clipboard.SetDataObject(x);
-            AutoClosePopup.Show($"Copied '{x}' to clipboard!");
+            AutoCloseNotificationBar.Show($"Copied '{x}' to clipboard!");
         }
     }
 

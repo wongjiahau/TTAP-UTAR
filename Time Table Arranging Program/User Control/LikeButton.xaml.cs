@@ -53,12 +53,12 @@ namespace Time_Table_Arranging_Program.User_Control {
 
         private void ToggleButton_OnClick(object sender, RoutedEventArgs e) {
             if (ToggleButton.IsChecked.Value) {
-                AutoClosePopup.Show(CheckedMessage);
+                AutoCloseNotificationBar.Show(CheckedMessage);
                 Checked?.Invoke(this, null);
                 ToggleButton.ToolTip = CheckedTooltip;
             }
             else {
-                AutoClosePopup.Show(UncheckedMessage);
+                AutoCloseNotificationBar.Show(UncheckedMessage);
                 Unchecked?.Invoke(this, null);
                 ToggleButton.ToolTip = UncheckedTooltip;
             }

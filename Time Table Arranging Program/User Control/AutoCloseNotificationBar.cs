@@ -15,14 +15,9 @@ using MaterialDesignThemes.Wpf;
 using Time_Table_Arranging_Program.MVVM_Framework;
 
 namespace Time_Table_Arranging_Program.User_Control {
-    public class AutoClosePopup : Popup {
-        private static AutoClosePopup _singleton;
-
-        private readonly DispatcherTimer _timer;        
-        private AutoClosePopup() {
-            _timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(10) };
-            Opened += Popup_Opened;
-            Closed += Popup_Closed;
+    public class NotificationBar : Popup {
+        private static NotificationBar _singleton;                
+        protected NotificationBar() {                                    
             AllowsTransparency = true;
             PlacementTarget = Global.MainWindow;
             Placement = PlacementMode.Center;
@@ -34,14 +29,16 @@ namespace Time_Table_Arranging_Program.User_Control {
             this.Child = GetBorder();
         }
 
-        private void Initialize(string message, string actionContent, Action actionHandler, bool closePopupAfterActionButtonClicked = true) {
+        protected void Initialize(string message , string actionContent , Action actionHandler , bool closePopupAfterActionButtonClicked = true) {
             Action defaultAction = () => { this.IsOpen = false; };
             Action resultAction;
             if (actionHandler == null) resultAction = defaultAction;
             else {
-                if(closePopupAfterActionButtonClicked)
-                resultAction = (Action) Delegate.Combine(new List<Action>() {defaultAction, actionHandler}.ToArray());
-                else {
+                if (closePopupAfterActionButtonClicked) {
+                    resultAction =
+                        (Action)Delegate.Combine(new List<Action>() { defaultAction , actionHandler }.ToArray());
+                }
+                else {                    
                     resultAction = actionHandler;
                 }
             }
@@ -51,7 +48,7 @@ namespace Time_Table_Arranging_Program.User_Control {
         }
 
         private Label GetLabel() {
-            return new Label {                
+            return new Label {
                 FontSize = 15 ,
                 Foreground = Brushes.White ,
                 FontWeight = FontWeights.DemiBold
@@ -59,8 +56,8 @@ namespace Time_Table_Arranging_Program.User_Control {
         }
 
 
-        private Label _label;
-        private Button _button;
+        private readonly Label _label;
+        private readonly Button _button;
         private Border GetBorder() {
             return new Border {
                 CornerRadius = new CornerRadius(5) ,
@@ -74,14 +71,38 @@ namespace Time_Table_Arranging_Program.User_Control {
                         _button
                     }
                 }
-            };            
+            };
         }
 
-        public static void Show(string message , string actionContent = "OK", Action actionHandler = null, bool closePopupAfterActionButtonClicked=true) {
+        public static void Show(string message , string actionContent = "OK" , Action actionHandler = null , bool closePopupAfterActionButtonClicked = true) {
             if (_singleton == null) {
-                _singleton = new AutoClosePopup();
-            }            
-            _singleton.Initialize(message, actionContent, actionHandler, closePopupAfterActionButtonClicked);
+                _singleton = new NotificationBar();
+            }
+            _singleton.Initialize(message , actionContent , actionHandler , closePopupAfterActionButtonClicked);            
+            _singleton.IsOpen = false;
+            _singleton.IsOpen = true;
+        }
+
+   
+
+    }
+
+    public class AutoCloseNotificationBar : NotificationBar {
+        private static AutoCloseNotificationBar _singleton;
+        private const int ShowPopupDuration = 3;//seconds
+        private readonly DispatcherTimer _timer;
+        private AutoCloseNotificationBar() {
+            _timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(ShowPopupDuration) };
+            Opened += Popup_Opened;
+            Closed += Popup_Closed;
+            AllowsTransparency = true;
+        }
+               
+        public new static void Show(string message , string actionContent = "OK" , Action actionHandler = null , bool closePopupAfterActionButtonClicked = true) {
+            if (_singleton == null) {
+                _singleton = new AutoCloseNotificationBar();
+            }
+            _singleton.Initialize(message , actionContent , actionHandler , closePopupAfterActionButtonClicked);
             _singleton._timer.Stop();
             _singleton.IsOpen = false;
             _singleton.IsOpen = true;
@@ -89,10 +110,12 @@ namespace Time_Table_Arranging_Program.User_Control {
 
         private void Popup_Opened(object sender , EventArgs e) {
             _timer.Start();
-            _timer.Tick += delegate {
-                IsOpen = false;
-                _timer.Stop();
-            };
+            _timer.Tick += Timer_Tick;
+        }
+
+        private void Timer_Tick(object sender , EventArgs e) {
+            IsOpen = false;
+            _timer.Stop();
         }
 
         private void Popup_Closed(object sender , EventArgs e) {
