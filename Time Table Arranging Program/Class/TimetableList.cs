@@ -16,7 +16,7 @@ namespace Time_Table_Arranging_Program.Class {
     }
 
     public class TimetableList : ITimetableList {
-        public static readonly TimetableList NoPossibleCombination = new TimetableList("No possible combination :(");
+        public static readonly TimetableList NoPossibleCombination = new TimetableList("No possible timetable found :(");
         public static readonly TimetableList NoSlotsIsChosen = new TimetableList("⟸ Search and select your subjects");
 
         public static readonly TimetableList NoLikedTimetable =
