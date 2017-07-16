@@ -42,7 +42,7 @@ namespace Time_Table_Arranging_Program.Pages {
                 for (int j = 0; j < _subjectStateList.Count; j++) {
                     if (i == j) continue;
                     if (_subjectStateList[i].ClashesWith(_subjectStateList[j])) {
-                        Message = $"[{_subjectStateList[i].SubjectName}] clashes with [{_subjectStateList[j].SubjectName}]";
+                        Message = $"Because\n--{_subjectStateList[i].SubjectName}\nclashes with\n--{_subjectStateList[j].SubjectName}";
                         return;
                     }
                 }
