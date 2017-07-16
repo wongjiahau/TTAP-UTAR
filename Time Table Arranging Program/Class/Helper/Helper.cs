@@ -59,7 +59,13 @@ namespace Time_Table_Arranging_Program.Class.Helper {
             return result;
         }
 
-   
+        public static string Reverse(this string s) {
+            char[] charArray = s.ToCharArray();
+            Array.Reverse(charArray);
+            return new string(charArray);
+        }
+
+
 
         public static void SaveAsPng(RenderTargetBitmap src , string targetPath) {
             Stream outputStream = File.Create(targetPath);

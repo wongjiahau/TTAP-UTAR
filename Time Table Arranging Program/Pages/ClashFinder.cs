@@ -28,21 +28,21 @@ namespace Time_Table_Arranging_Program.Pages {
         }
     }
 
-    [Obsolete("Untested")]
+    
     public class ClashFinder {
-        private List<SubjectModelWithState> _modelWithStates = new List<SubjectModelWithState>();
+        private List<SubjectModelWithState> _subjectStateList = new List<SubjectModelWithState>();
         public ClashFinder(List<SubjectModel> subjectModels, Func<Slot[],List<List<Slot>>> permutator) {
             var selectedSubjects = subjectModels.FindAll(x => x.IsSelected);
             for (var i = 0; i < selectedSubjects.Count; i++) {
                 SubjectModel s = selectedSubjects[i];
-                int[] stateOfEachDay = GetSubjectState(permutator(s.GetSelectedSlots().ToArray()));
-                _modelWithStates.Add(new SubjectModelWithState(s.Name, stateOfEachDay));
+                int[] subjectState = GetSubjectState(permutator(s.GetSelectedSlots().ToArray()));
+                _subjectStateList.Add(new SubjectModelWithState(s.Name, subjectState));
             }
-            for (int i = 0; i < _modelWithStates.Count; i++) {
-                for (int j = 0; j < _modelWithStates.Count; j++) {
+            for (int i = 0; i < _subjectStateList.Count; i++) {
+                for (int j = 0; j < _subjectStateList.Count; j++) {
                     if (i == j) continue;
-                    if (_modelWithStates[i].ClashesWith(_modelWithStates[j])) {
-                        Message = $"[{_modelWithStates[i].SubjectName}] clashes with [{_modelWithStates[j].SubjectName}]";
+                    if (_subjectStateList[i].ClashesWith(_subjectStateList[j])) {
+                        Message = $"[{_subjectStateList[i].SubjectName}] clashes with [{_subjectStateList[j].SubjectName}]";
                         return;
                     }
                 }
@@ -50,7 +50,7 @@ namespace Time_Table_Arranging_Program.Pages {
             Message = $"Sorry... the reason is too complicated to be explained.";
         }
 
-        public int[] GetSubjectState(List<List<Slot>> outputTimetables) {
+        public static int[] GetSubjectState(List<List<Slot>> outputTimetables) {
             var finalResult = new int[7] {-1, -1, -1, -1, -1, -1, -1}; 
             for (var i = 0; i < outputTimetables.Count; i++) {
                 var timetable = outputTimetables[i];
@@ -63,7 +63,7 @@ namespace Time_Table_Arranging_Program.Pages {
 
         }
 
-        public int[] GetTimetableState(List<Slot> timetable) {
+        public static int[] GetTimetableState(List<Slot> timetable) {
             var result = new int[7] { 0 , 0 , 0 , 0 , 0 , 0 , 0 };
             for (var j = 0 ; j < timetable.Count ; j++) {
                 var slot = timetable[j];
