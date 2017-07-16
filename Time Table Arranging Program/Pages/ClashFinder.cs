@@ -47,7 +47,7 @@ namespace Time_Table_Arranging_Program.Pages {
                     }
                 }
             }
-            Message = $"Sorry, I can't find the reason why . . .";
+            Message = $"Sorry... the reason is too complicated to be explained.";
         }
 
         public int[] GetSubjectState(List<List<Slot>> outputTimetables) {
