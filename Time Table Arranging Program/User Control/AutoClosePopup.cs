@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -17,40 +18,45 @@ namespace Time_Table_Arranging_Program.User_Control {
     public class AutoClosePopup : Popup {
         private static AutoClosePopup _singleton;
 
-        private readonly DispatcherTimer _timer;
-        private Label _label;
-
-        public string Message {
-            get { return (string)_label.Content; }
-            set { _label.Content = value; }
-        }
+        private readonly DispatcherTimer _timer;        
         private AutoClosePopup() {
+            _timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(5) };
             Opened += Popup_Opened;
             Closed += Popup_Closed;
-            _timer = new DispatcherTimer();
-            _timer.Interval = TimeSpan.FromSeconds(5);
             AllowsTransparency = true;
             PlacementTarget = Global.MainWindow;
             Placement = PlacementMode.Center;
-            VerticalOffset = - (Global.MainWindow.ActualHeight / 2 - 90);
+            VerticalOffset = -(Global.MainWindow.ActualHeight / 2 - 90);
             HorizontalAlignment = HorizontalAlignment.Center;
             PopupAnimation = PopupAnimation.Slide;
-            InitializeLabel();
-            InitializeChild();
-
+            this._label = GetLabel();
+            this._button = new Button();
+            this.Child = GetBorder();
         }
 
-        private void InitializeLabel() {
-            _label = new Label {
-                Content = "" ,
+        private void Initialize(string message, string actionContent, Action actionHandler) {
+            Action defaultAction = () => { this.IsOpen = false; };
+            Action resultAction;
+            if (actionHandler == null) resultAction = defaultAction;
+            else resultAction = (Action) Delegate.Combine(new List<Action>() {defaultAction, actionHandler}.ToArray());
+            _label.Content = message;
+            _button.Content = actionContent;
+            _button.Command = new RelayCommand(resultAction);
+        }
+
+        private Label GetLabel() {
+            return new Label {                
                 FontSize = 15 ,
                 Foreground = Brushes.White ,
                 FontWeight = FontWeights.DemiBold
             };
         }
 
-        private void InitializeChild() {
-            var border = new Border {
+
+        private Label _label;
+        private Button _button;
+        private Border GetBorder() {
+            return new Border {
                 CornerRadius = new CornerRadius(5) ,
                 Padding = new Thickness(5) ,
                 Margin = new Thickness(5) ,
@@ -59,23 +65,17 @@ namespace Time_Table_Arranging_Program.User_Control {
                     Orientation = Orientation.Horizontal ,
                     Children = {
                         _label,
-                        new Button
-                        {
-                            Content = "OK",
-                            Command = new RelayCommand(()=> { _singleton.IsOpen = false; })
-                        }
+                        _button
                     }
                 }
-
-            };
-            this.Child = border;
+            };            
         }
 
-        public static void Show(string message) {
+        public static void Show(string message , string actionContent = "OK", Action actionHandler = null) {
             if (_singleton == null) {
                 _singleton = new AutoClosePopup();
-            }
-            _singleton.Message = message;
+            }            
+            _singleton.Initialize(message, actionContent, actionHandler);
             _singleton._timer.Stop();
             _singleton.IsOpen = false;
             _singleton.IsOpen = true;
