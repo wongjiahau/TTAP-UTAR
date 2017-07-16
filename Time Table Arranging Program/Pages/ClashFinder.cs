@@ -28,14 +28,14 @@ namespace Time_Table_Arranging_Program.Pages {
         }
     }
 
-    [Obsolete("Incomplete")]
+    [Obsolete("Untested")]
     public class ClashFinder {
         private List<SubjectModelWithState> _modelWithStates = new List<SubjectModelWithState>();
         public ClashFinder(List<SubjectModel> subjectModels, Func<Slot[],List<List<Slot>>> permutator) {
             var selectedSubjects = subjectModels.FindAll(x => x.IsSelected);
             for (var i = 0; i < selectedSubjects.Count; i++) {
                 SubjectModel s = selectedSubjects[i];
-                int[] stateOfEachDay = GetStateOfEachDay(permutator(s.GetSelectedSlots().ToArray()));
+                int[] stateOfEachDay = GetSubjectState(permutator(s.GetSelectedSlots().ToArray()));
                 _modelWithStates.Add(new SubjectModelWithState(s.Name, stateOfEachDay));
             }
             for (int i = 0; i < _modelWithStates.Count; i++) {
@@ -50,21 +50,26 @@ namespace Time_Table_Arranging_Program.Pages {
             Message = $"Sorry, I can't find the reason why . . .";
         }
 
-        private int[] GetStateOfEachDay(List<List<Slot>> outputTimetables) {
+        public int[] GetSubjectState(List<List<Slot>> outputTimetables) {
             var finalResult = new int[7] {-1, -1, -1, -1, -1, -1, -1}; 
             for (var i = 0; i < outputTimetables.Count; i++) {
                 var timetable = outputTimetables[i];
-                var result = new int[7] {0, 0, 0, 0, 0, 0, 0};
-                for (var j = 0; j < timetable.Count; j++) {
-                    var slot = timetable[j];
-                    result[slot.Day.IntValue - 1] |= slot.TimePeriod.ToBinary();
-                }
+                var stateOfThisTimetable = GetTimetableState(timetable);               
                 for (int k = 0; k < Day.NumberOfDaysPerWeek; k++) {
-                    finalResult[k] &= result[k];
+                    finalResult[k] &= stateOfThisTimetable[k];
                 }
             }
             return finalResult;
 
+        }
+
+        public int[] GetTimetableState(List<Slot> timetable) {
+            var result = new int[7] { 0 , 0 , 0 , 0 , 0 , 0 , 0 };
+            for (var j = 0 ; j < timetable.Count ; j++) {
+                var slot = timetable[j];
+                result[slot.Day.IntValue - 1] |= slot.TimePeriod.ToBinary();
+            }
+            return result;
         }
 
         public string Message { private set; get; }
