@@ -25,7 +25,7 @@ namespace Time_Table_Arranging_Program.User_Control {
             HorizontalAlignment = HorizontalAlignment.Center;
             PopupAnimation = PopupAnimation.Slide;
             this._label = GetLabel();
-            this._button = new Button();
+            this._button = new Button(){Style = Application.Current.FindResource("MaterialDesignRaisedAccentButton") as Style };
             this.Child = GetBorder();
         }
 
