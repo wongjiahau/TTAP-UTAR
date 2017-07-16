@@ -38,8 +38,16 @@ namespace Time_Table_Arranging_Program.Pages {
                 int[] stateOfEachDay = GetStateOfEachDay(permutator(s.GetSelectedSlots().ToArray()));
                 _modelWithStates.Add(new SubjectModelWithState(s.Name, stateOfEachDay));
             }
-            if (_modelWithStates[0].ClashesWith(_modelWithStates[1]))
-                Message = $"[{_modelWithStates[0].SubjectName}] clashes with [{_modelWithStates[1].SubjectName}]";
+            for (int i = 0; i < _modelWithStates.Count; i++) {
+                for (int j = 0; j < _modelWithStates.Count; j++) {
+                    if (i == j) continue;
+                    if (_modelWithStates[i].ClashesWith(_modelWithStates[j])) {
+                        Message = $"[{_modelWithStates[i].SubjectName}] clashes with [{_modelWithStates[j].SubjectName}]";
+                        return;
+                    }
+                }
+            }
+            Message = $"Sorry, I can't find the reason why . . .";
         }
 
         private int[] GetStateOfEachDay(List<List<Slot>> outputTimetables) {

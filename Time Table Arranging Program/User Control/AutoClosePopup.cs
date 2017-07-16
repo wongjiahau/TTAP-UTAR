@@ -20,7 +20,7 @@ namespace Time_Table_Arranging_Program.User_Control {
 
         private readonly DispatcherTimer _timer;        
         private AutoClosePopup() {
-            _timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(5) };
+            _timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(10) };
             Opened += Popup_Opened;
             Closed += Popup_Closed;
             AllowsTransparency = true;
