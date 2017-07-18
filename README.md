@@ -16,3 +16,5 @@ To help UTAR students to arrange timetable easily.
 8. Save timetable as image (.png)
 9. Report reasons of clashes ('Why no possible combination')
 
+## Tutorial 
+![How to use TTAP?](https://github.com/wongjiahau/TTAP-UTAR/blob/master/TTAP_Tutorial.gif)
