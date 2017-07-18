@@ -104,10 +104,10 @@
                         </StackPanel>
                     </Button>
                     <Separator></Separator>
-                    <Button  Click="AboutButton_Click">
+                    <Button Click="HelpButton_Click">
                         <StackPanel>
-                            <materialDesign:PackIcon Kind="Information"></materialDesign:PackIcon>
-                            <Label>About TTAP</Label>
+                            <materialDesign:PackIcon Kind="CommentQuestionOutline"></materialDesign:PackIcon>
+                            <Label>Help</Label>
                         </StackPanel>
                     </Button>
                     <Button Click="FeedbackButton_OnClick">
@@ -116,7 +116,12 @@
                             <Label>Feedback</Label>
                         </StackPanel>
                     </Button>
-                    <Button Visibility="Collapsed" Content="HELP" Click="HelpButton_Click" />
+                    <Button  Click="AboutButton_Click">
+                        <StackPanel>
+                            <materialDesign:PackIcon Kind="Information"></materialDesign:PackIcon>
+                            <Label>About TTAP</Label>
+                        </StackPanel>
+                    </Button>
                 </StackPanel>
             </materialDesign:DrawerHost.RightDrawerContent>
         <DockPanel LastChildFill="True">
