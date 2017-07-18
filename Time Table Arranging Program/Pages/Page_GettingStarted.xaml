@@ -6,12 +6,14 @@
       xmlns:local="clr-namespace:Time_Table_Arranging_Program.Pages"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d"       
-      Title="Page_GettingStarted">
-    <DockPanel>
-        <Label DockPanel.Dock="Top" HorizontalAlignment="Center" FontSize="30" FontWeight="Bold">If you are using computer lab in UTAR . . .</Label>
-        <materialDesign:Card DockPanel.Dock="Top" HorizontalAlignment="Center">
-            <Image DockPanel.Dock="Top" Height="500" Source="../Images/Screenshots_utarict.PNG"></Image>
-        </materialDesign:Card>
-        <Button DockPanel.Dock="Bottom" Height="50" Width="100" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center" Margin="10" Click="GotItButton_Click">Got it!</Button>
-    </DockPanel>
+      Title="Page_GettingStarted" Loaded="Page_OnLoaded">
+    <ScrollViewer>
+        <DockPanel>
+            <Label DockPanel.Dock="Top" HorizontalAlignment="Center" FontSize="30" FontWeight="Bold">If you are using computer lab in UTAR . . .</Label>
+            <materialDesign:Card DockPanel.Dock="Top" HorizontalAlignment="Center">
+                <Image DockPanel.Dock="Top" Height="500" Source="../Images/Screenshots_utarict.PNG"></Image>
+            </materialDesign:Card>
+            <Button DockPanel.Dock="Bottom"  Height="50" Width="100" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center" Margin="10" Click="GotItButton_Click">Got it!</Button>
+        </DockPanel>
+    </ScrollViewer>
 </Page>
