@@ -16,3 +16,10 @@ To help UTAR students to arrange timetable easily.
 8. Save timetable as image (.png)
 9. Report reasons of clashes ('Why no possible combination')
 
+## Tutorial (5 steps)
+1. Log in to your account. 
+2. Select your subjects.
+3. Set time constraint.
+4. Browse through possible timetables.
+5. Save your favourite timetable.
+![How to use TTAP?](https://github.com/wongjiahau/TTAP-UTAR/blob/master/TTAP_Tutorial_v2.gif)
