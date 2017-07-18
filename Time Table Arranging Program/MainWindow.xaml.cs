@@ -80,7 +80,7 @@ namespace Time_Table_Arranging_Program {
         private void HelpButton_Click(object sender , RoutedEventArgs e) {
             Process.Start(
                 new ProcessStartInfo(
-                    "https://docs.google.com/presentation/d/1XvdPWeCndWbrfmXBtGR5ZTHIUeXaI_Qx16EFVxdJ8JQ/edit?usp=sharing"));
+                    "https://raw.githubusercontent.com/wongjiahau/TTAP-UTAR/master/TTAP_Tutorial_v2.gif"));
             e.Handled = true;
         }
 
