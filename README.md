@@ -22,4 +22,4 @@ To help UTAR students to arrange timetable easily.
 3. Set time constraint.
 4. Browse through possible timetables.
 5. Save your favourite timetable.
-![How to use TTAP?](https://github.com/wongjiahau/TTAP-UTAR/blob/master/TTAP_Tutorial.gif)
+![How to use TTAP?](https://github.com/wongjiahau/TTAP-UTAR/blob/master/TTAP_Tutorial_v2.gif)
