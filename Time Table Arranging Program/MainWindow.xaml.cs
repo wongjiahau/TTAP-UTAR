@@ -21,7 +21,7 @@ namespace Time_Table_Arranging_Program {
     ///     Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window {
-        private const string FeedbackFontUrl = "https://goo.gl/forms/qKdc6EVGbxspoTaS2";
+        private const string FeedbackFormUrl = "https://goo.gl/forms/qKdc6EVGbxspoTaS2";
         private readonly List<string> _previousInputString = new List<string>();
 
         public MainWindow() {
@@ -104,7 +104,7 @@ namespace Time_Table_Arranging_Program {
         }
 
         private void FeedbackButton_OnClick(object sender , RoutedEventArgs e) {
-            Process.Start(new ProcessStartInfo(FeedbackFontUrl));
+            Process.Start(new ProcessStartInfo(FeedbackFormUrl));
         }
 
         private void SaveSlot_OnClick(object sender , RoutedEventArgs e) {
