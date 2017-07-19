@@ -38,6 +38,10 @@ namespace Time_Table_Arranging_Program {
         }
 
         private void MainFrame_OnNavigating(object sender , NavigatingCancelEventArgs e) {
+            if (e.Content.GetType() == (sender as Frame).Content?.GetType()) {                 
+                e.Cancel = true;
+                return;
+            }
             var ta = new ThicknessAnimation {
                 Duration = CustomAnimation.FullScreenAnimationDuration ,
                 DecelerationRatio = CustomAnimation.DecelerationConstant ,
@@ -135,7 +139,6 @@ namespace Time_Table_Arranging_Program {
                 //DialogBox.ShowDialog();
             }
         }
-
 
         private void LoadSlots_OnClick(object sender , RoutedEventArgs e) {
             var dialog = new OpenFileDialog();
