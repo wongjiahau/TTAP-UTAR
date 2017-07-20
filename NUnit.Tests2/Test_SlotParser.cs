@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using NUnit.Framework;
 using Time_Table_Arranging_Program;
 using Time_Table_Arranging_Program.Class;
@@ -13,11 +14,10 @@ namespace NUnit.Tests2 {
     [TestFixture]
     public class Test_SlotParser {
         private List<SubjectModel> Input() {
-            var text = File.ReadAllText(TestFilePath());
-            var result = new SlotParser().Parse(text);
+            string raw = Helper.RawStringOfTestFile("CopiedTextFromSampleHTML.txt");
+            var result = new SlotParser().Parse(raw);
             var subjects = SubjectModel.Parse(result);
             return subjects;
-
         }
         [Test]
         public void Test_SlotParser_0() {
@@ -49,13 +49,6 @@ namespace NUnit.Tests2 {
 
         }
 
-        public static string TestFilePath() {
-            var desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\";
-            string path =
-                desktopPath + @"TTAPv7.7\NUnit.Tests2\TestFiles\CopiedTextFromSampleHTML.txt";
-            return path;
-        }
-
         private class CodeAndCount {
             public string Code;
             public int SlotCount;
@@ -83,7 +76,7 @@ namespace NUnit.Tests2 {
         }
 
         [Test]
-        public void Test_SlotParser_5(){
+        public void Test_SlotParser_5() {
             //the following expected result is obtained using pure eye sight
             List<CodeAndCount> CodeOfRelevantSubjectsAndTheirCorrespondingSlotCount = new List<CodeAndCount>();
             var a = CodeOfRelevantSubjectsAndTheirCorrespondingSlotCount;
@@ -94,7 +87,7 @@ namespace NUnit.Tests2 {
             a.Add(new CodeAndCount("MPU32013" , 1));
             a.Add(new CodeAndCount("MPU32033" , 7));
             a.Add(new CodeAndCount("MPU34012" , 1));
-            a.Add(new CodeAndCount("MPU34012" , 1));                        
+            a.Add(new CodeAndCount("MPU34012" , 1));
             a.Add(new CodeAndCount("MPU34072" , 1));
             a.Add(new CodeAndCount("UALB1003" , 6));
             a.Add(new CodeAndCount("UALE1083" , 6));
@@ -131,13 +124,13 @@ namespace NUnit.Tests2 {
                 foreach (var s in subjects) {
                     if (s.Code == c.Code) {
                         somethingFound = true;
-                        if(s.Slots.Count!=c.SlotCount) 
+                        if (s.Slots.Count != c.SlotCount)
                             Assert.Fail($"Expect {c.Code} have {c.SlotCount} slots but actual is {s.Slots.Count} slots");
                         break;
                     }
                 }
-                if(!somethingFound) Assert.Fail($"{c.Code} is not found!");
-            }                
+                if (!somethingFound) Assert.Fail($"{c.Code} is not found!");
+            }
         }
         private static string[] CodesOfListedSubjects() {
             string[] codesOfListedSubjects = new[]

@@ -57,6 +57,7 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helper.cs" />
     <Compile Include="Sandbox_Testing.cs" />
     <Compile Include="TestClass_PermutateV4.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -98,15 +99,16 @@
     <Content Include="TestFiles\Accounting2017AprSlots.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <EmbeddedResource Include="TestFiles\CopiedTextFromSampleHTML.txt" />
     <Content Include="TestFiles\MechanicalEngineering2017AprSlots.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="TestFiles\MechanicalEngineering2017JanSlots.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestFiles\Sample HTML.txt">
+    <EmbeddedResource Include="TestFiles\Sample HTML.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    </EmbeddedResource>
     <Content Include="TestFiles\SoftwareEngineering2017AprSlots.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
