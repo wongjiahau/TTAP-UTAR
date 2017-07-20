@@ -11,7 +11,7 @@
         <DockPanel>
             <Label DockPanel.Dock="Top" HorizontalAlignment="Center" FontSize="30" FontWeight="Bold">If you are using computer lab in UTAR . . .</Label>
             <materialDesign:Card DockPanel.Dock="Top" HorizontalAlignment="Center">
-                <Image DockPanel.Dock="Top" Height="500" Source="../Images/Screenshots_utarict.PNG"></Image>
+                <Image DockPanel.Dock="Top" Height="500" Source="../Images/Screenshots_utarict.PNG" />
             </materialDesign:Card>
             <Button DockPanel.Dock="Bottom"  Height="50" Width="100" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center" Margin="10" Click="GotItButton_Click">Got it!</Button>
         </DockPanel>

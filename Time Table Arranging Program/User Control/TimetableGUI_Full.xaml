@@ -8,8 +8,8 @@
              mc:Ignorable="d" 
             >
     <StackPanel HorizontalAlignment="Center">
-        <timeTableArrangingProgram:TimeTableGUI x:Name="TimeTableGui"></timeTableArrangingProgram:TimeTableGUI>
-        <local:TimetableDescriptionViewer HorizontalAlignment="Center" x:Name="TimetableDescriptionViewer"></local:TimetableDescriptionViewer>
+        <timeTableArrangingProgram:TimeTableGUI x:Name="TimeTableGui" />
+        <local:TimetableDescriptionViewer HorizontalAlignment="Center" x:Name="TimetableDescriptionViewer" />
     </StackPanel>
 </UserControl>
 

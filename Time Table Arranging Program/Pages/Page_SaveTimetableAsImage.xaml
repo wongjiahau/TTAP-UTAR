@@ -12,11 +12,11 @@
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
             <Label FontSize="25" FontWeight="Bold">Save the following image?</Label>
             <materialDesign:Card>
-                <userControl:TimetableGUI_Full x:Name="TimeTableGui"></userControl:TimetableGUI_Full>
+                <userControl:TimetableGUI_Full x:Name="TimeTableGui" />
             </materialDesign:Card>
             <Button Click="SaveImageButton_OnClick" HorizontalAlignment="Right" Margin="10" Height="50" Width="150" FontSize="20" Style="{StaticResource MaterialDesignRaisedAccentButton}">
                 <StackPanel Orientation="Horizontal">
-                    <materialDesign:PackIcon VerticalAlignment="Center" Height="25" Width="25" Margin="5" Kind="ContentSave"></materialDesign:PackIcon>
+                    <materialDesign:PackIcon VerticalAlignment="Center" Height="25" Width="25" Margin="5" Kind="ContentSave" />
                     <Label VerticalAlignment="Center">SAVE</Label>
                 </StackPanel>
             </Button>

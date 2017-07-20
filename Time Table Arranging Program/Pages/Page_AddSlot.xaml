@@ -44,7 +44,7 @@
                         </ListView.ContextMenu>
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn Header="UID" DisplayMemberBinding="{Binding UID}"></GridViewColumn>
+                                <GridViewColumn Header="UID" DisplayMemberBinding="{Binding UID}" />
                                 <GridViewColumn Header="Name" DisplayMemberBinding="{Binding SubjectName}" />
                                 <GridViewColumn Header="Code" DisplayMemberBinding="{Binding Code}" />
                                 <GridViewColumn Header="Type" DisplayMemberBinding="{Binding Type}" />

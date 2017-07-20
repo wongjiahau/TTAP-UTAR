@@ -9,7 +9,7 @@
     <Border Padding="20">
         <StackPanel>
             <TextBlock x:Name="Title" Margin="10,0,10,0" FontSize="30" FontWeight="Bold">Quit TTAP?</TextBlock>
-            <TextBlock x:Name="Message" Visibility="Collapsed" Margin="10" FontSize="20" MinWidth="300" MaxWidth="{Binding Path=ActualWidth, ElementName=Title }" TextWrapping="Wrap"></TextBlock>
+            <TextBlock x:Name="Message" Visibility="Collapsed" Margin="10" FontSize="20" MinWidth="300" MaxWidth="{Binding Path=ActualWidth, ElementName=Title }" TextWrapping="Wrap" />
             <Border Margin="10">
                 <Grid >
                     <Button x:Name="CancelButton" Click="CancelButton_OnClick" Style="{StaticResource MaterialDesignFlatButton}" HorizontalAlignment="Left" >Cancel</Button>

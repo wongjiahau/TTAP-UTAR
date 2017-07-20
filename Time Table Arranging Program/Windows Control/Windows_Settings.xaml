@@ -8,17 +8,17 @@
         mc:Ignorable="d"
         Title="Windows_Settings" WindowStartupLocation="CenterScreen" WindowStyle="None" Height="300" Width="450" Closing="Windows_Settings_OnClosing">
     <Window.Resources>
-        <local:Settings x:Key="Setting1" Description="SearchForCombinationByConsideringWeekNumber" IsChecked="False"></local:Settings>
+        <local:Settings x:Key="Setting1" Description="SearchForCombinationByConsideringWeekNumber" IsChecked="False" />
     </Window.Resources>
     <DockPanel>
         <StackPanel Margin="0,15,0,0" HorizontalAlignment="Center" Orientation="Horizontal" DockPanel.Dock="Top">
-            <materialDesign:PackIcon Kind="Settings" Width="30" Height="30" VerticalAlignment="Center"></materialDesign:PackIcon>
-        <Label  FontWeight="Bold"  VerticalAlignment="Center" FontSize="30" HorizontalAlignment="Center">Settings</Label>
+            <materialDesign:PackIcon Kind="Settings" Width="30" Height="30" VerticalAlignment="Center" />
+            <Label  FontWeight="Bold"  VerticalAlignment="Center" FontSize="30" HorizontalAlignment="Center">Settings</Label>
         </StackPanel>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" DockPanel.Dock="Bottom" Margin="20">
             <StackPanel.Resources>
                 <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignFlatButton}">
-                    <Setter Property="Width" Value="85"></Setter>
+                    <Setter Property="Width" Value="85" />
                 </Style>
                 
             </StackPanel.Resources>
@@ -30,7 +30,7 @@
             <StackPanel >
                 <DockPanel HorizontalAlignment="Stretch" >
                     <Label DockPanel.Dock="Left" FontWeight="DemiBold" HorizontalAlignment="Left">1. Search for combination by considering week number</Label>
-                    <ToggleButton DockPanel.Dock="Right" HorizontalAlignment="Right" x:Name="Setting_1_Button"   IsChecked="{Binding Source={StaticResource Setting1}, Path=IsChecked}"></ToggleButton>
+                    <ToggleButton DockPanel.Dock="Right" HorizontalAlignment="Right" x:Name="Setting_1_Button"   IsChecked="{Binding Source={StaticResource Setting1}, Path=IsChecked}" />
                 </DockPanel>
             </StackPanel>
         </materialDesign:Card>

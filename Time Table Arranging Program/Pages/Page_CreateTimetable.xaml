@@ -13,7 +13,7 @@
       Title="Page_SelectSubject">
     <Page.Resources>
         <iValueConverter:ComboBoxSelectionConverter x:Key="ComboBoxSelectionConverter" />
-        <iValueConverter:VisibilityConverter x:Key="VisibilityConverter"></iValueConverter:VisibilityConverter>
+        <iValueConverter:VisibilityConverter x:Key="VisibilityConverter" />
         <iValueConverter:TooltipConverterForToggleButton x:Key="TooltipConverterForToggleButton"/>
     </Page.Resources>
     <Grid>
@@ -26,21 +26,21 @@
                 <Grid>
                     <Grid.Resources>
                         <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignFlatButton}">
-                            <Setter Property="Height" Value="50"></Setter>
-                            <Setter Property="HorizontalAlignment" Value="Stretch"></Setter>
-                            <Setter Property="HorizontalContentAlignment" Value="Left"></Setter>
-                            <Setter Property="Margin" Value="10,0,0,0"></Setter>
+                            <Setter Property="Height" Value="50" />
+                            <Setter Property="HorizontalAlignment" Value="Stretch" />
+                            <Setter Property="HorizontalContentAlignment" Value="Left" />
+                            <Setter Property="Margin" Value="10,0,0,0" />
                         </Style>
                         <Style TargetType="TextBlock">
-                            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+                            <Setter Property="VerticalAlignment" Value="Center" />
                         </Style>
                         <Style TargetType="materialDesign:PackIcon">
-                            <Setter Property="Height" Value="20"></Setter>
-                            <Setter Property="Width" Value="20"></Setter>
-                            <Setter Property="Margin" Value="0,0,10,0"></Setter>
+                            <Setter Property="Height" Value="20" />
+                            <Setter Property="Width" Value="20" />
+                            <Setter Property="Margin" Value="0,0,10,0" />
                         </Style>
                         <Style TargetType="StackPanel">
-                            <Setter Property="Orientation" Value="Horizontal"></Setter>
+                            <Setter Property="Orientation" Value="Horizontal" />
                         </Style>
                     </Grid.Resources>
                     <StackPanel HorizontalAlignment="Center" Margin="0" Orientation="Horizontal">
@@ -48,19 +48,19 @@
                     <Label FontSize="20" VerticalAlignment="Center" FontWeight="Bold">Save this timetable as . . .</Label>
                     <Button Click="SaveAsPicture_OnClick">
                         <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="Image"></materialDesign:PackIcon>
+                            <materialDesign:PackIcon Kind="Image" />
                             <TextBlock>Picture (*.png)</TextBlock>
                         </StackPanel>
                     </Button>
                     <Button Click="SaveAsNotepadFile_OnClick">
                         <StackPanel>
-                            <materialDesign:PackIcon Kind="NoteText"></materialDesign:PackIcon>
+                            <materialDesign:PackIcon Kind="NoteText" />
                             <TextBlock>Notepad file (*.txt)</TextBlock>
                         </StackPanel>
                         </Button>
                     <Button Click="SaveToGoogleCalendarButton_OnClick">
                         <StackPanel>
-                            <materialDesign:PackIcon Kind="Calendar"></materialDesign:PackIcon>
+                            <materialDesign:PackIcon Kind="Calendar" />
                             <TextBlock>Google Calendar</TextBlock>
                         </StackPanel>
                         </Button>
@@ -71,7 +71,8 @@
                             CommandParameter="{x:Static Dock.Bottom}"
                             ToolTip="Hide this drawer"
                             >
-                        <materialDesign:PackIcon Foreground="Black" Margin="0" Kind="ArrowDownBold"></materialDesign:PackIcon></Button>
+                        <materialDesign:PackIcon Foreground="Black" Margin="0" Kind="ArrowDownBold" />
+                    </Button>
                 </Grid>
             </materialDesign:DrawerHost.BottomDrawerContent>
 
@@ -85,7 +86,7 @@
                     Height="40"
                     >
                     <StackPanel Orientation="Horizontal">
-                        <materialDesign:PackIcon Kind="Menu" Margin="0,0,5,0" Height="20" Width="20" VerticalAlignment="Center"></materialDesign:PackIcon>
+                        <materialDesign:PackIcon Kind="Menu" Margin="0,0,5,0" Height="20" Width="20" VerticalAlignment="Center" />
                         <Label VerticalAlignment="Center" Foreground="White">Select subjects</Label>
                     </StackPanel>
                 </Button>
@@ -132,15 +133,15 @@
                                             <TextBlock Margin="5,0,0,0" Text="Set time constraint" VerticalAlignment="Center" />
                                         </StackPanel>
                                     </Button>
-                                    <views:CyclicIndexView Margin="10,0,0,0" x:Name="CyclicIndexView" HorizontalAlignment="Center" ></views:CyclicIndexView>
+                                    <views:CyclicIndexView Margin="10,0,0,0" x:Name="CyclicIndexView" HorizontalAlignment="Center" />
                                     <Grid  
                           HorizontalAlignment="Right" VerticalAlignment="Bottom">
                                         <Grid.Resources>
                                             <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedButton}">
-                                                <Setter Property="Height" Value="55"></Setter>
+                                                <Setter Property="Height" Value="55" />
                                                 <Setter Property="Width" Value="70" />
                                                 <Setter Property="Foreground" Value="White" />
-                                                <Setter Property="Margin" Value="10,0,0,0"></Setter>
+                                                <Setter Property="Margin" Value="10,0,0,0" />
                                             </Style>
                                             <Style TargetType="materialDesign:PackIcon">
                                                 <Setter Property="Height" Value="35" />
@@ -153,7 +154,7 @@
                                                     Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand }"
                                                     CommandParameter="{x:Static Dock.Bottom}"
                                                     ToolTip="Save this timetable as . . .">
-                                                <materialDesign:PackIcon Kind="ContentSave"></materialDesign:PackIcon>
+                                                <materialDesign:PackIcon Kind="ContentSave" />
                                             </Button>
                                             <Button x:Name="AddToGoogleCalenderButton"  Visibility="Collapsed"                                   
                                     ToolTip="Add this timetable to Google Calendar" Click="SaveToGoogleCalendarButton_OnClick">

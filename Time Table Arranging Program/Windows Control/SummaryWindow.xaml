@@ -27,16 +27,16 @@
             <StackPanel DockPanel.Dock="Right" HorizontalAlignment="Center" Orientation="Horizontal">
                 <StackPanel.Resources>
                     <Style TargetType="Label">
-                        <Setter Property="VerticalAlignment" Value="Center"></Setter>
-                        <Setter Property="FontFamily" Value="Consolas"></Setter>
+                        <Setter Property="VerticalAlignment" Value="Center" />
+                        <Setter Property="FontFamily" Value="Consolas" />
                     </Style>
                 </StackPanel.Resources>
                 <Button  Visibility="Visible" ToolTip="Go to previous timetable" Style="{StaticResource MaterialDesignFlatButton}" Command="{Binding DecrementCommand}">
                     <materialDesign:PackIcon Kind="ChevronLeft" />
                 </Button>
-                <Label x:Name="CurrentValueLabel" Content="{Binding CurrentValue, UpdateSourceTrigger=PropertyChanged}"></Label>
+                <Label x:Name="CurrentValueLabel" Content="{Binding CurrentValue, UpdateSourceTrigger=PropertyChanged}" />
                 <Label>/</Label>
-                <Label x:Name="MaxValueLabel" Content="{Binding MaxValue}"></Label>
+                <Label x:Name="MaxValueLabel" Content="{Binding MaxValue}" />
                 <Button ToolTip="Go to next timetable" Style="{StaticResource MaterialDesignFlatButton}" Command="{Binding IncrementCommand}">
                     <materialDesign:PackIcon Kind="ChevronRight" />
                 </Button>

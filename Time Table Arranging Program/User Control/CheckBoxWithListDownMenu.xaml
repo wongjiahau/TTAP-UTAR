@@ -18,7 +18,7 @@
         </DataTemplate>
     </UserControl.Resources>
     <UserControl.DataContext>
-        <Model:SubjectModel></Model:SubjectModel>
+        <Model:SubjectModel />
     </UserControl.DataContext>
     <DockPanel  LastChildFill="True" >
         <Popup x:Name="ListViewPopup" StaysOpen="True" PopupAnimation="Scroll" AllowsTransparency="True"
@@ -54,8 +54,7 @@
                                     </Button>
 
                                     <Label x:Name="SubjectNameLabel" HorizontalAlignment="Stretch" FontWeight="Bold"
-                                       Background="White"  Cursor="SizeAll" Content="{Binding Name}">
-                                    </Label>
+                                       Background="White"  Cursor="SizeAll" Content="{Binding Name}" />
                                 </DockPanel>
                             </Border>
                             <Button x:Name="ToggleCheckButton" Content="Untick all slots" Width="auto" DockPanel.Dock="Bottom"
@@ -77,7 +76,7 @@
                                             <GridViewColumn Header="Time" DisplayMemberBinding="{Binding TimePeriod}" />
                                             <GridViewColumn Header="Day" DisplayMemberBinding="{Binding Day}" />
                                             <GridViewColumn Header="Week"  DisplayMemberBinding="{Binding WeekNumber}" />
-                                            <GridViewColumn Header="Venue" DisplayMemberBinding="{Binding Venue}"></GridViewColumn>
+                                            <GridViewColumn Header="Venue" DisplayMemberBinding="{Binding Venue}" />
                                         </GridView>
                                     </ListView.View>
                                     <ListView.ItemContainerStyle>
