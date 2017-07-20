@@ -18,11 +18,8 @@ namespace NUnit.Tests2 {
         }
 
         [Test]
-        public void Test_2() {
-            var desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\";
-            string path =
-                desktopPath + @"TTAPv7.7\NUnit.Tests2\TestFiles\Sample HTML.txt";
-            string htmlText = File.ReadAllText(path);
+        public void Test_2() {  
+            string htmlText = Helper.RawStringOfTestFile("Sample HTML.txt");
             string plain = ExtensionMethods.RemoveTags(htmlText);
             var parser = new StartDateEndDateParser(plain);
             Assert.True(parser.GetStartDate() == new DateTime(2017 , 5 , 29 , 0 , 0 , 0));
