@@ -21,7 +21,7 @@ namespace Time_Table_Arranging_Program {
     ///     Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window {
-        private const string FeedbackFontUrl = "https://goo.gl/forms/qKdc6EVGbxspoTaS2";
+        private const string FeedbackFormUrl = "https://goo.gl/forms/qKdc6EVGbxspoTaS2";
         private readonly List<string> _previousInputString = new List<string>();
 
         public MainWindow() {
@@ -38,6 +38,10 @@ namespace Time_Table_Arranging_Program {
         }
 
         private void MainFrame_OnNavigating(object sender , NavigatingCancelEventArgs e) {
+            if (e.Content.GetType() == (sender as Frame).Content?.GetType()) {                 
+                e.Cancel = true;
+                return;
+            }
             var ta = new ThicknessAnimation {
                 Duration = CustomAnimation.FullScreenAnimationDuration ,
                 DecelerationRatio = CustomAnimation.DecelerationConstant ,
@@ -100,7 +104,7 @@ namespace Time_Table_Arranging_Program {
         }
 
         private void FeedbackButton_OnClick(object sender , RoutedEventArgs e) {
-            Process.Start(new ProcessStartInfo(FeedbackFontUrl));
+            Process.Start(new ProcessStartInfo(FeedbackFormUrl));
         }
 
         private void SaveSlot_OnClick(object sender , RoutedEventArgs e) {
@@ -135,7 +139,6 @@ namespace Time_Table_Arranging_Program {
                 //DialogBox.ShowDialog();
             }
         }
-
 
         private void LoadSlots_OnClick(object sender , RoutedEventArgs e) {
             var dialog = new OpenFileDialog();

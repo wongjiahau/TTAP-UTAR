@@ -21,7 +21,7 @@ namespace Time_Table_Arranging_Program.Pages {
     /// </summary>
     public partial class Page_About : Page {
         private const string Email = "jiahau.wong@1utar.my";
-        private const string DownloadLink = "goo.gl/LzzjGX";
+        private const string DownloadLink = "https://goo.gl/5XBxHV";
         private const string GitHubLink = "https://github.com/wongjiahau/TTAP-UTAR";
         public Page_About() {
             InitializeComponent();

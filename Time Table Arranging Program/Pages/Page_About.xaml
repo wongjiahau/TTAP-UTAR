@@ -86,8 +86,8 @@
                 <StackPanel Orientation="Horizontal">
                     <materialDesign:PackIcon Kind="Download" />
                     <TextBlock  Text="Download link : " FontWeight="Bold" />
-                    <TextBlock DockPanel.Dock="Bottom"><Hyperlink NavigateUri="https://goo.gl/LzzjGX"
-        				RequestNavigate="Hyperlink_RequestNavigate"><Run Text="https://goo.gl/LzzjGX"/></Hyperlink></TextBlock>
+                    <TextBlock DockPanel.Dock="Bottom"><Hyperlink NavigateUri="https://goo.gl/5XBxHV"
+        				RequestNavigate="Hyperlink_RequestNavigate"><Run Text="https://goo.gl/5XBxHV"/></Hyperlink></TextBlock>
                     <Button Margin="10,0,0,0" Click="CopyDownloadLinkButton_OnClick" Content="COPY" materialDesign:ShadowAssist.ShadowDepth="Depth0"/>
                 </StackPanel>
             </materialDesign:Card>
