@@ -12,6 +12,13 @@ using Time_Table_Arranging_Program.Model;
 namespace NUnit.Tests2 {
     [TestFixture]
     public class Test_SlotParser {
+        private List<SubjectModel> Input() {
+            var text = File.ReadAllText(TestFilePath());
+            var result = new SlotParser().Parse(text);
+            var subjects = SubjectModel.Parse(result);
+            return subjects;
+
+        }
         [Test]
         public void Test_SlotParser_0() {
             string input =
@@ -49,31 +56,89 @@ namespace NUnit.Tests2 {
             return path;
         }
 
-        [Test]
-        public void Test_SlotParser_2() {
-            string text = File.ReadAllText(TestFilePath());
-            var result = new SlotParser().Parse(text);
-            int expectedCount = 130;
-            Assert.AreEqual(expectedCount , result.Count);
+        private class CodeAndCount {
+            public string Code;
+            public int SlotCount;
+
+            public CodeAndCount(string code , int slotCount) {
+                Code = code;
+                SlotCount = slotCount;
+            }
         }
 
         [Test]
         public void Test_SlotParser_3() {
-            string text = File.ReadAllText(TestFilePath());
-            var result = new SlotParser().Parse(text);
-            var subjects = SubjectModel.Parse(result);
-            int expectedCount = 39; // counted by eyes
-
-            var c = CodesOfListedSubjects();
-            Console.WriteLine("Code not foundd : ");
-            foreach (var code in c) {
-                if (subjects.All(x => x.Code != code))
-                    Console.WriteLine(code);
-            }
-
+            var subjects = Input();
+            int numberOfIrrelevantSubjects = 3; //e.g. Study tours
+            int expectedCount = 39 - numberOfIrrelevantSubjects; // counted by eyes
             Assert.AreEqual(expectedCount , subjects.Count);
         }
 
+        [Test]
+        public void Test_SlotParser_4() {
+            var input = Input();
+            var c = CodesOfListedSubjects();
+            string[] CodeOfIrrelevantSujects = new string[] { "MPU34042" , "MPU34062" , "UECS3596" };
+            Assert.IsTrue(!input.Any(x => CodeOfIrrelevantSujects.Any(y => y == x.Code)));
+        }
+
+        [Test]
+        public void Test_SlotParser_5(){
+            //the following expected result is obtained using pure eye sight
+            List<CodeAndCount> CodeOfRelevantSubjectsAndTheirCorrespondingSlotCount = new List<CodeAndCount>();
+            var a = CodeOfRelevantSubjectsAndTheirCorrespondingSlotCount;
+            a.Add(new CodeAndCount("MPU3113" , 4));
+            a.Add(new CodeAndCount("MPU3123" , 4));
+            a.Add(new CodeAndCount("MPU3143" , 1));
+            a.Add(new CodeAndCount("MPU3173" , 1));
+            a.Add(new CodeAndCount("MPU32013" , 1));
+            a.Add(new CodeAndCount("MPU32033" , 7));
+            a.Add(new CodeAndCount("MPU34012" , 1));
+            a.Add(new CodeAndCount("MPU34012" , 1));                        
+            a.Add(new CodeAndCount("MPU34072" , 1));
+            a.Add(new CodeAndCount("UALB1003" , 6));
+            a.Add(new CodeAndCount("UALE1083" , 6));
+            a.Add(new CodeAndCount("UALF1003" , 6));
+            a.Add(new CodeAndCount("UALJ2013" , 3));
+            a.Add(new CodeAndCount("UALL1063" , 3));
+            a.Add(new CodeAndCount("UALL3033" , 3));
+            a.Add(new CodeAndCount("UBMM1013" , 5));
+            a.Add(new CodeAndCount("UECS1004" , 3));
+            a.Add(new CodeAndCount("UECS1013" , 5));
+            a.Add(new CodeAndCount("UECS1044" , 3));
+            a.Add(new CodeAndCount("UECS1313" , 4));
+            a.Add(new CodeAndCount("UECS2033" , 5));
+            a.Add(new CodeAndCount("UECS2083" , 4));
+            a.Add(new CodeAndCount("UECS2103" , 5));
+            a.Add(new CodeAndCount("UECS2333" , 5));
+            a.Add(new CodeAndCount("UECS2363" , 4));
+            a.Add(new CodeAndCount("UECS2373" , 3));
+            a.Add(new CodeAndCount("UECS3203" , 3));
+            a.Add(new CodeAndCount("UECS3253" , 3));
+            a.Add(new CodeAndCount("UECS3263" , 3));
+            a.Add(new CodeAndCount("UECS3273" , 3));
+            a.Add(new CodeAndCount("UECS3583" , 1));
+            a.Add(new CodeAndCount("UEEN2013" , 5));
+            a.Add(new CodeAndCount("UEEN3123" , 3));
+            a.Add(new CodeAndCount("UJLL1093" , 3));
+            a.Add(new CodeAndCount("UKMM1011" , 3));
+            a.Add(new CodeAndCount("UKMM1043" , 8));
+
+
+            var subjects = Input();
+            foreach (var c in CodeOfRelevantSubjectsAndTheirCorrespondingSlotCount) {
+                bool somethingFound = false;
+                foreach (var s in subjects) {
+                    if (s.Code == c.Code) {
+                        somethingFound = true;
+                        if(s.Slots.Count!=c.SlotCount) 
+                            Assert.Fail($"Expect {c.Code} have {c.SlotCount} slots but actual is {s.Slots.Count} slots");
+                        break;
+                    }
+                }
+                if(!somethingFound) Assert.Fail($"{c.Code} is not found!");
+            }                
+        }
         private static string[] CodesOfListedSubjects() {
             string[] codesOfListedSubjects = new[]
             {

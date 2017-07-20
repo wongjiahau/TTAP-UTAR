@@ -50,13 +50,7 @@ namespace NUnit.Tests2 {
             var a = new SlotIndex(0 , 2 , 2);
             var b = new SlotIndex(0 , 1 , 2);
             Assert.True(a.IntersectWith(b));
-        }
-        [Test]
-        public void Test_SlotIndex_IntersectionCheck_3() {
-            var a = new SlotIndex(0 , 0 , 2);
-            var b = new SlotIndex(0 , 1 , 2);
-            Assert.True(a.IntersectWith(b));
-        }
+        }      
 
         [Test]
         public void Test_SlotIndex_IntersectionCheck_4() {
