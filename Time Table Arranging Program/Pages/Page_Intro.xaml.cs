@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -36,7 +37,8 @@ namespace Time_Table_Arranging_Program.Pages {
         private const string EndUrl = "https://www.google.com/";
 
         private int _currentPage = 1;
-
+        private const int NavigationCountUpperLimit = 3;
+        private int _navigationCount = 0;
         public Page_Intro() {
             InitializeComponent();
         }
@@ -54,22 +56,29 @@ namespace Time_Table_Arranging_Program.Pages {
             //if (currentUrl == LoginPageUrl) return;
             //if(currentUrl == LoginSuccessUrl) 
             //if(currentUrl == LoginFailedUrl) Browser.Navigate(LoginPageUrl);                        
-            if (currentUrl == LoginPageUrl || currentUrl == LoginFailedUrl || currentUrl == EndUrl) {                
+            if (currentUrl == LoginPageUrl || currentUrl == LoginFailedUrl || currentUrl == EndUrl) {
+                _navigationCount = 0;
                 return;
             }
             if (currentUrl.Contains(CourseTimetablePreviewUrl) == false) {
                 _currentPage = 1;
                 if (_browsingToCourseTimetablePreview == false) {
-                    Browser.Navigate(CourseTimetablePreviewUrl);                    
+                    if (_navigationCount < NavigationCountUpperLimit) {
+                        Browser.Navigate(CourseTimetablePreviewUrl);
+                        _navigationCount++;
+                    }
+                    else {
+                        Browser.Navigate(LoginPageUrl);                                                                                                
+                        Global.Snackbar.MessageQueue.Enqueue("No record found, please try again.");
+                    }
                 }
                 return;
             }           
             Browser.Visibility = Visibility.Hidden;
-            string plainText = LoadPlainText();
+            string plainText = GetPlainTextOfHtml(Browser);
             var bg = CustomBackgroundWorker<string , List<Slot>>.RunAndShowLoadingScreen(
                 new SlotParser().Parse , plainText , "Loading slots . . .");
             TryGetStartDateAndEndDate(plainText);
-
             Global.InputSlotList.AddRange(bg.GetResult());
             if (CanGoToPage(_currentPage + 1)) {
                 Browser.InvokeScript("changePage" , _currentPage + 1);
@@ -99,8 +108,8 @@ namespace Time_Table_Arranging_Program.Pages {
             return htmlText.Contains($"javascript:changePage(\'{pageNumber}\')");
         }
 
-        private string LoadPlainText() {
-            dynamic doc = Browser.Document;
+        public static string GetPlainTextOfHtml(WebBrowser b) {
+            dynamic doc = b.Document;
             var htmlText = doc.documentElement.InnerHtml;
             return htmlText.RemoveTags();
         }
