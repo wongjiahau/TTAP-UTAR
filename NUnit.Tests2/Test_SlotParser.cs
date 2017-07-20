@@ -13,12 +13,17 @@ using Time_Table_Arranging_Program.Model;
 namespace NUnit.Tests2 {
     [TestFixture]
     public class Test_SlotParser {
-        private List<SubjectModel> Input() {
-            string raw = Helper.RawStringOfTestFile("CopiedTextFromSampleHTML.txt");
+        private static object[] _stringInputs =
+        {
+            ExtensionMethods.RemoveTags(Helper.RawStringOfTestFile("Sample HTML.txt")),
+            Helper.RawStringOfTestFile("CopiedTextFromSampleHTML.txt")
+        };
+        private List<SubjectModel> GetInput(string raw) {                        
             var result = new SlotParser().Parse(raw);
             var subjects = SubjectModel.Parse(result);
             return subjects;
         }
+
         [Test]
         public void Test_SlotParser_0() {
             string input =
@@ -59,24 +64,24 @@ namespace NUnit.Tests2 {
             }
         }
 
-        [Test]
-        public void Test_SlotParser_3() {
-            var subjects = Input();
+        [Test, TestCaseSource("_stringInputs")]
+        public void Test_SlotParser_3(string input) {
+            var subjects = GetInput(input);
             int numberOfIrrelevantSubjects = 3; //e.g. Study tours
             int expectedCount = 39 - numberOfIrrelevantSubjects; // counted by eyes
             Assert.AreEqual(expectedCount , subjects.Count);
         }
 
-        [Test]
-        public void Test_SlotParser_4() {
-            var input = Input();
+        [Test, TestCaseSource("_stringInputs")]
+        public void Test_SlotParser_4(string input) {
+            var result = GetInput(input);
             var c = CodesOfListedSubjects();
             string[] CodeOfIrrelevantSujects = new string[] { "MPU34042" , "MPU34062" , "UECS3596" };
-            Assert.IsTrue(!input.Any(x => CodeOfIrrelevantSujects.Any(y => y == x.Code)));
+            Assert.IsTrue(!result.Any(x => CodeOfIrrelevantSujects.Any(y => y == x.Code)));
         }
 
-        [Test]
-        public void Test_SlotParser_5() {
+        [Test, TestCaseSource("_stringInputs")]
+        public void Test_SlotParser_5(string input) {
             //the following expected result is obtained using pure eye sight
             List<CodeAndCount> CodeOfRelevantSubjectsAndTheirCorrespondingSlotCount = new List<CodeAndCount>();
             var a = CodeOfRelevantSubjectsAndTheirCorrespondingSlotCount;
@@ -118,7 +123,7 @@ namespace NUnit.Tests2 {
             a.Add(new CodeAndCount("UKMM1043" , 8));
 
 
-            var subjects = Input();
+            var subjects = GetInput(input);
             foreach (var c in CodeOfRelevantSubjectsAndTheirCorrespondingSlotCount) {
                 bool somethingFound = false;
                 foreach (var s in subjects) {
