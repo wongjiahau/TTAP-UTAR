@@ -109,6 +109,7 @@
     <EmbeddedResource Include="TestFiles\Sample HTML.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
+    <EmbeddedResource Include="TestFiles\Sample HTML.html" />
     <Content Include="TestFiles\SoftwareEngineering2017AprSlots.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
