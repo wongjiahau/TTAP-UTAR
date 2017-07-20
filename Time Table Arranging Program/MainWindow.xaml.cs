@@ -181,5 +181,12 @@ namespace Time_Table_Arranging_Program {
         private void ExtraMenuButton_OnClick(object sender, RoutedEventArgs e) {
             DrawerHost.IsRightDrawerOpen = true;
         }
+
+        private void ReportBug_Click(object sender, RoutedEventArgs e) {
+            Process.Start(
+                new ProcessStartInfo(
+                    "https://goo.gl/forms/4PJupNgRTEyGGTCN2"));
+
+        }
     }
 }

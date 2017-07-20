@@ -29,7 +29,7 @@
                             <materialDesign:PackIcon Kind="ArrowRightBold"  Height="30" Width="30"/>
                         </Button>
                         <Button Style="{StaticResource MaterialDesignFlatButton}" Foreground="White" DockPanel.Dock="Right" Click="ExtraMenuButton_OnClick">
-                            <materialDesign:PackIcon Height="25" Width="25" Kind="DotsVertical"></materialDesign:PackIcon>
+                            <materialDesign:PackIcon Height="25" Width="25" Kind="DotsVertical" />
                         </Button>
                         <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22">Timetable Arranging Program ( TTAP )</TextBlock>
                     </DockPanel>
@@ -72,67 +72,72 @@
                 <StackPanel Orientation="Vertical">
                     <StackPanel.Resources>
                         <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignFlatButton}">
-                            <Setter Property="Height" Value="54"></Setter>
-                            <Setter Property="FontSize" Value="20"></Setter>
-                            <Setter Property="Padding" Value="5"></Setter>
-                            <Setter Property="Foreground" Value="Black"></Setter>
-                            <Setter Property="HorizontalAlignment" Value="Stretch"></Setter>
-                            <Setter Property="HorizontalContentAlignment" Value="Left"></Setter>
-                            <Setter Property="Command" Value="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"></Setter>
+                            <Setter Property="Height" Value="54" />
+                            <Setter Property="FontSize" Value="20" />
+                            <Setter Property="Padding" Value="5" />
+                            <Setter Property="Foreground" Value="Black" />
+                            <Setter Property="HorizontalAlignment" Value="Stretch" />
+                            <Setter Property="HorizontalContentAlignment" Value="Left" />
+                            <Setter Property="Command" Value="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}" />
                         </Style>
                         <Style TargetType="StackPanel">
-                            <Setter Property="Orientation" Value="Horizontal"></Setter>
+                            <Setter Property="Orientation" Value="Horizontal" />
                         </Style>
                         <Style TargetType="Label">
-                            <Setter Property="VerticalAlignment" Value="Center"></Setter>
-                            <Setter Property="Margin" Value="0,0,10,0"></Setter>
+                            <Setter Property="VerticalAlignment" Value="Center" />
+                            <Setter Property="Margin" Value="0,0,10,0" />
                         </Style>
                         <Style TargetType="materialDesign:PackIcon">
-                            <Setter Property="VerticalAlignment" Value="Center"></Setter>
-                            <Setter Property="Margin" Value="10"></Setter>
-                            <Setter Property="Width" Value="25"></Setter>
-                            <Setter Property="Height" Value="25"></Setter>
-                            <Setter Property="Foreground" Value="Black"></Setter>
+                            <Setter Property="VerticalAlignment" Value="Center" />
+                            <Setter Property="Margin" Value="10" />
+                            <Setter Property="Width" Value="25" />
+                            <Setter Property="Height" Value="25" />
+                            <Setter Property="Foreground" Value="Black" />
                         </Style>
 
 
                     </StackPanel.Resources>
                     <Button  Click="SettingButton_OnClick">
                         <StackPanel>
-                            <materialDesign:PackIcon Kind="Settings"></materialDesign:PackIcon>
+                            <materialDesign:PackIcon Kind="Settings" />
                             <Label>Settings</Label>
                         </StackPanel>
                     </Button>
-                    <Separator></Separator>
                     <Button Click="HelpButton_Click">
                         <StackPanel>
-                            <materialDesign:PackIcon Kind="CommentQuestionOutline"></materialDesign:PackIcon>
+                            <materialDesign:PackIcon Kind="CommentQuestionOutline" />
                             <Label>Help</Label>
                         </StackPanel>
                     </Button>
                     <Button Click="FeedbackButton_OnClick">
                         <StackPanel>
-                            <materialDesign:PackIcon Kind="Message"></materialDesign:PackIcon>
+                            <materialDesign:PackIcon Kind="Message" />
                             <Label>Feedback</Label>
+                        </StackPanel>
+                    </Button>
+                    <Button  Click="ReportBug_Click">
+                        <StackPanel>
+                            <materialDesign:PackIcon Kind="Bug" />
+                            <Label>Report a bug</Label>
                         </StackPanel>
                     </Button>
                     <Button  Click="AboutButton_Click">
                         <StackPanel>
-                            <materialDesign:PackIcon Kind="Information"></materialDesign:PackIcon>
+                            <materialDesign:PackIcon Kind="Information" />
                             <Label>About TTAP</Label>
                         </StackPanel>
                     </Button>
                 </StackPanel>
             </materialDesign:DrawerHost.RightDrawerContent>
-        <DockPanel LastChildFill="True">
-            <Grid>
-                <Frame x:Name="MainFrame" Template="{DynamicResource ControlTemplateForNavigator}"
+            <DockPanel LastChildFill="True">
+                <Grid>
+                    <Frame x:Name="MainFrame" Template="{DynamicResource ControlTemplateForNavigator}"
            Navigating="MainFrame_OnNavigating" />
-                <materialDesign:Snackbar x:Name="Snackbar"  MessageQueue="{materialDesign:MessageQueue}" />
-            </Grid>
+                    <materialDesign:Snackbar x:Name="Snackbar"  MessageQueue="{materialDesign:MessageQueue}" />
+                </Grid>
 
 
-        </DockPanel>
+            </DockPanel>
         </materialDesign:DrawerHost>
     </materialDesign:DialogHost>
 </Window>
