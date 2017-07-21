@@ -171,6 +171,8 @@
     <Compile Include="Class\Helper\Helper.cs" />
     <Compile Include="Class\Helper\WaitCursor.cs" />
     <Compile Include="Class\IndexedSlot.cs" />
+    <Compile Include="Class\Parser\TokenFinder.cs" />
+    <Compile Include="Class\Parser\StudentIdFinder.cs" />
     <Compile Include="Class\SlotGeneralizer\SlotGeneralizer.cs" />
     <Compile Include="Class\StateSummary\StateTable.cs" />
     <Compile Include="Class\testing_for_revert.cs" />
@@ -199,7 +201,7 @@
     <Compile Include="Class\ObservableTimetable.cs" />
     <Compile Include="Class\ObservableTimetableList.cs" />
     <Compile Include="Class\SlotList.cs" />
-    <Compile Include="Class\StartDateEndDateParser.cs" />
+    <Compile Include="Class\Parser\StartDateEndDateFinder.cs" />
     <Compile Include="Class\Timetable.cs" />
     <Compile Include="Class\TimetableList.cs" />
     <Compile Include="Class\Timetable_Obsolete.cs" />

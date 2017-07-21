@@ -96,7 +96,7 @@ namespace Time_Table_Arranging_Program.Pages {
 
         private void GetStartDateAndEndDate(string input) {
             try {
-                var parser = new StartDateEndDateParser(input);
+                var parser = new StartDateEndDateFinder(input);
                 Global.TimetableStartDate = parser.GetStartDate();
                 Global.TimetableEndDate = parser.GetEndDate();
             }
