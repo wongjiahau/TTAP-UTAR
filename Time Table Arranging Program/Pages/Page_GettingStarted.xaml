@@ -8,8 +8,8 @@
       mc:Ignorable="d"       
       Title="Page_GettingStarted" Loaded="Page_OnLoaded">
     <ScrollViewer>
-        <DockPanel>
-            <Label DockPanel.Dock="Top" HorizontalAlignment="Center" FontSize="30" FontWeight="Bold">If you are using computer lab in UTAR . . .</Label>
+        <DockPanel VerticalAlignment="Center">
+            <Label DockPanel.Dock="Top" Margin="10" HorizontalAlignment="Center" FontSize="30" FontWeight="Bold">If you are using computer lab in UTAR . . .</Label>
             <materialDesign:Card DockPanel.Dock="Top" HorizontalAlignment="Center">
                 <Image DockPanel.Dock="Top" Height="500" Source="../Images/Screenshots_utarict.PNG" />
             </materialDesign:Card>
