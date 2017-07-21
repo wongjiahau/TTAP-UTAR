@@ -352,6 +352,9 @@
     <Compile Include="User Control\RuleSetter.xaml.cs">
       <DependentUpon>RuleSetter.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows Control\DialogBox.xaml.cs">
+      <DependentUpon>DialogBox.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows Control\MyMessageBox.xaml.cs">
       <DependentUpon>MyMessageBox.xaml</DependentUpon>
     </Compile>
@@ -522,6 +525,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="User Control\RuleSetter.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows Control\DialogBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

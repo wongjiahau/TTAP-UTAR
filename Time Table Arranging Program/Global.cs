@@ -50,7 +50,8 @@ namespace Time_Table_Arranging_Program {
         }
     }
 
-    public static class DialogBox {
+    [Obsolete("",true)]
+    public static class DialogBox_Old {
         private static DialogHost _dialogHost;
         private static TextBlock _titleBlock;
         private static TextBlock _messageBlock;

@@ -11,6 +11,7 @@ using Time_Table_Arranging_Program.Class;
 using Time_Table_Arranging_Program.Class.SlotGeneralizer;
 using Time_Table_Arranging_Program.Class.TokenParser;
 using Time_Table_Arranging_Program.UserInterface;
+using Time_Table_Arranging_Program.Windows_Control;
 
 namespace Time_Table_Arranging_Program.Pages {
     /// <summary>
@@ -33,7 +34,7 @@ namespace Time_Table_Arranging_Program.Pages {
 
         private void MenuItemDelete_Click(object sender , RoutedEventArgs e) {
             if (InputSlotsListView.SelectedIndex == -1) {
-                DialogBox.ShowDialog("Hey..." , "You selected nothing to be deleted.");
+                DialogBox.Show("Hey..." , "You selected nothing to be deleted.", "OK");
                 return;
             }
             DeleteSelectedItem();
@@ -73,7 +74,7 @@ namespace Time_Table_Arranging_Program.Pages {
         private void AddSlotButton_Click(object sender , RoutedEventArgs e) {
             var input = Clipboard.GetText();
             if (_previousInputString.Any(s => s.Contains(input))) {
-                DialogBox.ShowDialog("Erm..." , "The content you copied is already added to the program just now.");
+                DialogBox.Show("Erm..." , "The content you copied is already added to the program just now.");
                 return;
             }
             var previousCount = Global.InputSlotList.Count;
@@ -81,7 +82,7 @@ namespace Time_Table_Arranging_Program.Pages {
                 (new SlotParser().Parse , input , "Loading time slots . . .");
             Global.InputSlotList.AddRange(bg.GetResult());
             if (Global.InputSlotList.Count == previousCount) {
-                DialogBox.ShowDialog("Please use GOOGLE CHROME" ,
+                DialogBox.Show("Please use GOOGLE CHROME" ,
                     "Unable to load data, please make sure you copied the correct content from the course registration website using Google Chrome.");
                 return;
             }

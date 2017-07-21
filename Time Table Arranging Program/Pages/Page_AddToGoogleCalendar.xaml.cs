@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Controls;
 using Time_Table_Arranging_Program.Class;
 using Time_Table_Arranging_Program.Class.GoogleCalendarApi;
+using Time_Table_Arranging_Program.Windows_Control;
 
 namespace Time_Table_Arranging_Program.Pages {
     /// <summary>
@@ -49,14 +50,14 @@ namespace Time_Table_Arranging_Program.Pages {
         private void _worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e) {
             if (e.Error != null) {
                 if (_counter == 1) {
-                    DialogBox.ShowDialog("Something went wrong. . .", e.Error.Message);
+                    DialogBox.Show("Oops . . .","Something went wrong. . .", e.Error.Message);
                     return;
                 }
                 _counter++;
                 _worker.RunWorkerAsync();
             }
             else {
-                DialogBox.ShowDialog("Congratulations!",
+                DialogBox.Show("Congratulations!",
                     "The timetable had been successfully added to your Google Calendar.");
                 NavigationService.GoBack();
             }
@@ -75,7 +76,7 @@ namespace Time_Table_Arranging_Program.Pages {
         private void DatePicker_OnCalendarClosed(object sender, RoutedEventArgs e) {
             if (DatePicker.SelectedDate == null) return;
             if (DatePicker.SelectedDate.Value.DayOfWeek != DayOfWeek.Monday) {
-                DialogBox.ShowDialog("Something is not right . . .", "The date you picked is not a Monday.",
+                DialogBox.Show("Something is not right . . .", "The date you picked is not a Monday.",
                     "Repick date");
                 DatePicker.IsDropDownOpen = false;
                 DatePicker.IsDropDownOpen = true;

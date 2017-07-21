@@ -1,6 +1,8 @@
-﻿using System.Runtime.InteropServices;
+﻿using System.Diagnostics;
+using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Threading;
+using Time_Table_Arranging_Program.Windows_Control;
 
 namespace Time_Table_Arranging_Program {
     /// <summary>
@@ -12,7 +14,12 @@ namespace Time_Table_Arranging_Program {
         }
 
         private void OnUnhandledExeption(object sender, DispatcherUnhandledExceptionEventArgs e) {
-            MessageBox.Show("Sorry there is an error . . .");
+            DialogBox.Show("🐛......", "You have encountered a bug!", "Nevermind", "Report it!");
+            if (DialogBox.Result == DialogBox.ResultEnum.RightButtonClicked) {
+                Process.Start(
+                    new ProcessStartInfo(
+                        "https://goo.gl/forms/4PJupNgRTEyGGTCN2"));
+            }
             e.Handled = true;
         }
 

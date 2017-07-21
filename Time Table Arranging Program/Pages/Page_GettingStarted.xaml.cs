@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Time_Table_Arranging_Program.Windows_Control;
 
 namespace Time_Table_Arranging_Program.Pages {
     /// <summary>
@@ -29,9 +30,9 @@ namespace Time_Table_Arranging_Program.Pages {
         }
 
         private void Page_OnLoaded(object sender, RoutedEventArgs e) {            
-            var result = MessageBox.Show("Do you want to watch tutorial of TTAP?" , "" , MessageBoxButton.YesNo);
+            DialogBox.Show("Hello there!", "Do you want to watch tutorial of TTAP?" , "Nope" , "Yes");
             this.Visibility = Visibility.Visible;
-            if (result == MessageBoxResult.Yes)
+            if (DialogBox.Result == DialogBox.ResultEnum.RightButtonClicked)
                 Process.Start(
                     new ProcessStartInfo(
                         "https://raw.githubusercontent.com/wongjiahau/TTAP-UTAR/master/TTAP_Tutorial_v2.gif"));

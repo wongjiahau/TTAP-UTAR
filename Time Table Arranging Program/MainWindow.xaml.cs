@@ -1,4 +1,5 @@
-﻿using Microsoft.Win32;
+﻿using System;
+using Microsoft.Win32;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -33,8 +34,8 @@ namespace Time_Table_Arranging_Program {
             InitializeComponent();
             Global.MainWindow = this;
             Global.Snackbar = Snackbar;
-            DialogBox.Initialize(DialogHost , Title , Message , DialogButton);
-            MainFrame.Navigate(new Page_GettingStarted());
+            //DialogBox_Old.Initialize(DialogHost , Title , Message , DialogButton);
+            MainFrame.Navigate(new Page_GettingStarted());            
         }
 
         private void MainFrame_OnNavigating(object sender , NavigatingCancelEventArgs e) {
@@ -65,8 +66,8 @@ namespace Time_Table_Arranging_Program {
         private void MainWindow_OnClosing(object sender , CancelEventArgs e) {
             e.Cancel = true;
             if (_exitConfirmed) return;
-            var result = MessageBox.Show("Quit TTAP?" , "" , MessageBoxButton.YesNo);
-            if (result == MessageBoxResult.No) {
+            DialogBox.Show("Quit TTAP?" , "Note : Quiting will cause you to lose your current progress." , "Cancel","Quit");
+            if (DialogBox.Result == DialogBox.ResultEnum.LeftButtonClicked) {
                 return;
             }
             else {
