@@ -12,10 +12,11 @@ namespace Time_Table_Arranging_Program.Class.TokenParser {
             foreach (var t in tokens) {
                 result.Add(new Token(t));
             }
+            result.RemoveAll(s => s.Value() == string.Empty);
             return result.ToArray();
         }
 
-        private static string FilterOutNonPrintingChar(string input) {
+        public static string FilterOutNonPrintingChar(string input) {
             string result = " ";
             foreach (char c in input) {
                 if ((c >= 0 && c <= 31) || c == 127) {
