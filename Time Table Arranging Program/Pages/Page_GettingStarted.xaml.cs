@@ -30,7 +30,7 @@ namespace Time_Table_Arranging_Program.Pages {
         }
 
         private void Page_OnLoaded(object sender, RoutedEventArgs e) {            
-            DialogBox.Show("Hello there!", "Do you want to watch tutorial of TTAP?" , "Nope" , "Yes");
+            DialogBox.Show("Hello there!", "Do you want to watch tutorial of TTAP?" , "Nope" , "Watch");
             this.Visibility = Visibility.Visible;
             if (DialogBox.Result == DialogBox.ResultEnum.RightButtonClicked)
                 Process.Start(
