@@ -32,6 +32,10 @@ namespace Time_Table_Arranging_Program.Pages {
             RunAndShowLoadingScreen(Filterer.Filter , package ,
                 "Filtering unsatisfactory timetables . . .");
             var filteredTimetable = bg.GetResult();
+            int removedCount = _outputTimetables.Count - filteredTimetable.Count;
+            int remainingCount = _outputTimetables.Count - removedCount;
+            Label1.Content = $"Removed {removedCount} unsatisfactory timetables.";
+            Label2.Content = $"{remainingCount} timetables remaining.";
             TimeTableGui.RegenerateStateSummary(filteredTimetable , _factory);
         }
 
