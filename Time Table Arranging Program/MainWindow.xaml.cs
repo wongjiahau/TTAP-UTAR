@@ -14,7 +14,7 @@ using Time_Table_Arranging_Program.Pages;
 using Time_Table_Arranging_Program.User_Control;
 using Time_Table_Arranging_Program.UserInterface;
 using Time_Table_Arranging_Program.Windows_Control;
-using static Time_Table_Arranging_Program.Windows_Control.Settings.SettingDescription;
+using static Time_Table_Arranging_Program.Windows_Control.Setting.SettingDescription;
 using Settings = Time_Table_Arranging_Program.Properties.Settings;
 
 namespace Time_Table_Arranging_Program {
@@ -35,13 +35,15 @@ namespace Time_Table_Arranging_Program {
             Global.MainWindow = this;
             Global.Snackbar = Snackbar;
             //DialogBox_Old.Initialize(DialogHost , Title , Message , DialogButton);
-            MainFrame.Navigate(new Page_GettingStarted());            
+            MainFrame.Navigate(new Page_GettingStarted());
         }
 
         private void MainFrame_OnNavigating(object sender , NavigatingCancelEventArgs e) {
-            if (e.Content.GetType() == (sender as Frame).Content?.GetType()) {                 
-                e.Cancel = true;
-                return;
+            if (e.Content.GetType() == (sender as Frame).Content?.GetType()) {
+                if (e.Content.GetType() != typeof(Page_CreateTimetable)) {
+                    e.Cancel = true;
+                    return;
+                }
             }
             var ta = new ThicknessAnimation {
                 Duration = CustomAnimation.FullScreenAnimationDuration ,
@@ -54,8 +56,7 @@ namespace Time_Table_Arranging_Program {
             else if (e.NavigationMode == NavigationMode.Back) {
                 ta.From = new Thickness(0 , 0 , ActualWidth / 3 , 0);
             }
-            ta.Completed += (o, args) =>
-            {
+            ta.Completed += (o , args) => {
                 var p = e.Content as IPageWithLoadedFunction;
                 p?.ExecuteLoadedFunction();
             };
@@ -66,7 +67,7 @@ namespace Time_Table_Arranging_Program {
         private void MainWindow_OnClosing(object sender , CancelEventArgs e) {
             e.Cancel = true;
             if (_exitConfirmed) return;
-            DialogBox.Show("Quit TTAP?" , "Note : Quiting will cause you to lose your current progress." , "Cancel","Quit");
+            DialogBox.Show("Quit TTAP?" , "Note : Quiting will cause you to lose your current progress." , "Cancel" , "Quit");
             if (DialogBox.Result == DialogBox.ResultEnum.LeftButtonClicked) {
                 return;
             }
@@ -89,7 +90,7 @@ namespace Time_Table_Arranging_Program {
             e.Handled = true;
         }
 
-        private void AboutButton_Click(object sender , RoutedEventArgs e) {            
+        private void AboutButton_Click(object sender , RoutedEventArgs e) {
             MainFrame.Navigate(new Page_About());
         }
 
@@ -147,10 +148,8 @@ namespace Time_Table_Arranging_Program {
             if (dialog.ShowDialog() == true) {
                 var os = new ObjectSerializer();
                 Global.InputSlotList = os.DeSerializeObject<SlotList>(dialog.FileName);
-                MainFrame.Navigate(
-                                Global.Factory
-                                    .Generate_Page_CreateTimetable_with_GeneralizedSlots
-                                    (Global.InputSlotList));
+                MainFrame.Navigate(Page_CreateTimetable.GetInstance(Global.Settings.SearchByConsideringWeekNumber ,
+                    Global.Settings.GeneralizeSlot));
             }
         }
 
@@ -158,32 +157,15 @@ namespace Time_Table_Arranging_Program {
             var p = Windows_Settings.GetInstance();
             p.ShowDialog();
             if (p.ApplyClicked == false) return;
-            foreach (var setting in p.Settings) {
-                switch (setting.Description) {
-                    case SearchForCombinationByConsideringWeekNumber:
-                        if (setting.IsChecked) {
-                            MainFrame.Navigate(
-                                Global.Factory.
-                                Generate_Page_CreateTimetable_with_UngeneralizedSlots(
-                                    Global.InputSlotList));
-                        }
-                        else {
-                            MainFrame.Navigate(
-                                Global.Factory
-                                    .Generate_Page_CreateTimetable_with_GeneralizedSlots
-                                    (Global.InputSlotList));                              
-                        }
-
-                        break;
-                }
-            }
+            MainFrame.Navigate(Page_CreateTimetable.GetInstance(Global.Settings.SearchByConsideringWeekNumber ,
+                Global.Settings.GeneralizeSlot));
         }
 
-        private void ExtraMenuButton_OnClick(object sender, RoutedEventArgs e) {
+        private void ExtraMenuButton_OnClick(object sender , RoutedEventArgs e) {
             DrawerHost.IsRightDrawerOpen = true;
         }
 
-        private void ReportBug_Click(object sender, RoutedEventArgs e) {
+        private void ReportBug_Click(object sender , RoutedEventArgs e) {
             Process.Start(
                 new ProcessStartInfo(
                     "https://goo.gl/forms/4PJupNgRTEyGGTCN2"));

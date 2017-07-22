@@ -144,10 +144,8 @@ namespace Time_Table_Arranging_Program.Pages {
 
 
         private void CreateTimetableButton_Click(object sender , RoutedEventArgs e) {
-            NavigationService.Navigate(
-                                Global.Factory
-                                    .Generate_Page_CreateTimetable_with_GeneralizedSlots
-                                    (Global.InputSlotList));
+            NavigationService.Navigate(Page_CreateTimetable.GetInstance(Global.Settings.SearchByConsideringWeekNumber,
+                Global.Settings.GeneralizeSlot));   
         }
     }
 }

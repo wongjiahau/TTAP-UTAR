@@ -13,7 +13,7 @@ namespace NUnit.Tests2 {
         public void Test_SlotGeneralizer_1() {
             var a = new Slot(1 , "xxx" , "name" , "2" , "T" , Day.Monday , "KB102" , new TimePeriod(Time.CreateTime_24HourFormat(8 , 0) , Time.CreateTime_24HourFormat(10 , 0)) , new WeekNumber(new List<int>() { 1 , 2 , 3 }));
             var b = new Slot(2 , "xxx" , "name" , "3" , "T" , Day.Monday , "KB104" , new TimePeriod(Time.CreateTime_24HourFormat(8 , 0) , Time.CreateTime_24HourFormat(10 , 0)) , new WeekNumber(new List<int>() { 1 , 2 , 3 }));
-            var result = new SlotGeneralizer().GeneralizeAll(new List<Slot>() { a , b , });
+            var result = new SlotGeneralizer().Generalize(new List<Slot>() { a , b , });
             Assert.True(result.Count == 1);
             Assert.True(result[0].Number == "2/3");
 
@@ -23,7 +23,7 @@ namespace NUnit.Tests2 {
         public void Test_SlotGeneralizer_2() {
             var a = new Slot(1 , "xxx" , "name" , "2" , "T" , Day.Monday , "KB102" , new TimePeriod(Time.CreateTime_24HourFormat(8 , 0) , Time.CreateTime_24HourFormat(10 , 0)) , new WeekNumber(new List<int>() { 1 , 2 , 3 }));
             var b = new Slot(2 , "xxx" , "name" , "3" , "L" , Day.Monday , "KB104" , new TimePeriod(Time.CreateTime_24HourFormat(8 , 0) , Time.CreateTime_24HourFormat(10 , 0)) , new WeekNumber(new List<int>() { 1 , 2 , 3 }));
-            var result = new SlotGeneralizer().GeneralizeAll(new List<Slot>() { a , b , });
+            var result = new SlotGeneralizer().Generalize(new List<Slot>() { a , b , });
             Assert.True(result.Count == 2);
         }
 
@@ -54,7 +54,7 @@ namespace NUnit.Tests2 {
             input.AddRange(TestData.GetSlotsByName(TestData.Subjects.HighwayAndTransportation));
             input.AddRange(TestData.GetSlotsByName(TestData.Subjects.FluidMechanicsII));
             input.AddRange(TestData.GetSlotsByName(TestData.Subjects.IntroductionToBuildingServices));
-            var result = new SlotGeneralizer().GeneralizeAll(input);
+            var result = new SlotGeneralizer().Generalize(input);
             Console.WriteLine("Result's count is " + result.Count);
             Console.WriteLine("input's count is " + input.Count);
         }

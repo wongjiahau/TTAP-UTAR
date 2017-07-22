@@ -10,14 +10,15 @@ namespace Time_Table_Arranging_Program.Windows_Control {
         private Windows_Settings() {
             InitializeComponent();
             InitializeSettings();
-
+            ItemsControl_Settings.ItemsSource = Settings;
         }
 
-        public static Settings SearchByConsideringWeekNumber { private set; get; } = new Settings(Windows_Control.Settings.SettingDescription.SearchForCombinationByConsideringWeekNumber , false);
         private void InitializeSettings() {
-            Settings = new List<Settings>();
-            SearchByConsideringWeekNumber = (Settings)this.Resources["Setting1"];
-            Settings.Add(SearchByConsideringWeekNumber);
+            Settings = new List<Setting>
+            {
+                Global.Settings.SearchByConsideringWeekNumber,
+                Global.Settings.GeneralizeSlot
+            };
         }
 
         private static Windows_Settings _singleton;
@@ -27,7 +28,7 @@ namespace Time_Table_Arranging_Program.Windows_Control {
             _singleton.ApplyClicked = false;
             return _singleton;
         }
-        public List<Settings> Settings { private set; get; }
+        public List<Setting> Settings { private set; get; }
         public bool ApplyClicked { get; private set; } = false;
 
         private void ApplyButton_OnClick(object sender , RoutedEventArgs e) {
@@ -48,20 +49,25 @@ namespace Time_Table_Arranging_Program.Windows_Control {
 
     }
 
-    public class Settings {
+    public class Setting {
         public enum SettingDescription {
-            SearchForCombinationByConsideringWeekNumber
+            SearchByConsideringWeekNumber,
+            GeneralizedSlot
         }
 
-        public Settings() {
+        public Setting() {
 
         }
-        public Settings(SettingDescription desc , bool isChecked) {
+        public Setting(SettingDescription desc , string label, string explanation, bool isChecked) {
             Description = desc;
+            Label = label;
+            Explanation = explanation;
             IsChecked = isChecked;
         }
         public bool IsChecked { get; set; }
-        public SettingDescription Description { get; set; }
+        public string Label { get; private set; }
+        public string Explanation { get; private set; }
+        public SettingDescription Description { get; private set; }
     }
 
 

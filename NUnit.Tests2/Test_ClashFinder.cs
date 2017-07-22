@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
 using Time_Table_Arranging_Program;
+using Time_Table_Arranging_Program.Class;
 using Time_Table_Arranging_Program.Class.Converter;
 using Time_Table_Arranging_Program.Class.Helper;
 using Time_Table_Arranging_Program.Pages;

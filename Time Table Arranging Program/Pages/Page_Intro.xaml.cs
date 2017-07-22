@@ -88,9 +88,8 @@ namespace Time_Table_Arranging_Program.Pages {
             else {
                 Browser.Navigate(EndUrl);
                 NavigationService.Navigate(
-                                Global.Factory
-                                    .Generate_Page_CreateTimetable_with_GeneralizedSlots
-                                    (Global.InputSlotList));
+                    Page_CreateTimetable.GetInstance(Global.Settings.SearchByConsideringWeekNumber ,
+                        Global.Settings.GeneralizeSlot));
             }
         }
 
@@ -133,9 +132,8 @@ namespace Time_Table_Arranging_Program.Pages {
         private void LoadTestDataButton_OnClick(object sender, RoutedEventArgs e) {
             Global.InputSlotList.AddRange(TestData.TestSlots); 
             NavigationService.Navigate(
-                Global.Factory
-                    .Generate_Page_CreateTimetable_with_GeneralizedSlots
-                    (Global.InputSlotList));
+                Page_CreateTimetable.GetInstance(Global.Settings.SearchByConsideringWeekNumber ,
+                    Global.Settings.GeneralizeSlot));
 
         }
     }

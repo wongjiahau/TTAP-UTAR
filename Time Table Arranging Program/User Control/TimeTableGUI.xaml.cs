@@ -290,7 +290,7 @@ namespace Time_Table_Arranging_Program {
         private string GetInfo(Slot s) {
             string result = "";
             result += $" {s.SubjectName.GetInitial()} ({s.Type}{s.Number})";
-            if (Windows_Settings.SearchByConsideringWeekNumber.IsChecked ||
+            if (Global.Settings.SearchByConsideringWeekNumber.IsChecked ||
                 !s.Number.Contains("/"))
                 result += $"\n{s.WeekNumber}\n{s.Venue}";
             else

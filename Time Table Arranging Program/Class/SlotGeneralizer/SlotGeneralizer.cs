@@ -3,12 +3,16 @@ using System.Linq;
 using Time_Table_Arranging_Program.Class.Converter;
 
 namespace Time_Table_Arranging_Program.Class.SlotGeneralizer {
-    public class SlotGeneralizer {
-        public List<Slot> GeneralizeAll(List<Slot> slots) {
+    public interface ISlotGeneralizer {
+        List<Slot> Generalize(List<Slot> slots);
+
+    }
+    public class SlotGeneralizer : ISlotGeneralizer {
+        public List<Slot> Generalize(List<Slot> slots) {
             var generalized = new List<Slot>();
             foreach (Slot s in slots) {
                 var toBeAdded = s.GetDuplicate();
-               //toBeAdded.WeekNumber = new NullWeekNumber();
+                //toBeAdded.WeekNumber = new NullWeekNumber();
                 generalized.Add(toBeAdded);
             }
 
@@ -54,6 +58,15 @@ namespace Time_Table_Arranging_Program.Class.SlotGeneralizer {
                 dic[s.Code].Add(s);
             }
             return dic.Values.ToList();
+        }
+    }
+
+    /// <summary>
+    /// This generalizer will basically do nothing
+    /// </summary>
+    public class NullGeneralizer : ISlotGeneralizer {
+        public List<Slot> Generalize(List<Slot> slots) {
+            return slots;
         }
     }
 }

@@ -11,11 +11,6 @@ using Time_Table_Arranging_Program.Model;
 namespace NUnit.Tests2 {
     [TestFixture]
     public class TestClass_PermutateV4 {
-        private static readonly List<Slot> _testData = new List<Slot>
-        {
-            new Slot {SubjectName = "English", Type = "L", Number = ""}
-        };
-
         [Test]
         public void Test_PermutateV4_Runv2_WithConsideringWeekNumber() {
             int expectedCount = 616872;

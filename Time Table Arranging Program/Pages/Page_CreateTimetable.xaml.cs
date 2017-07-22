@@ -9,6 +9,7 @@ using System.Windows.Forms.VisualStyles;
 using Microsoft.Win32;
 using Time_Table_Arranging_Program.Class;
 using Time_Table_Arranging_Program.Class.Helper;
+using Time_Table_Arranging_Program.Class.SlotGeneralizer;
 using Time_Table_Arranging_Program.Interfaces;
 using Time_Table_Arranging_Program.Model;
 using Time_Table_Arranging_Program.MVVM_Framework.Models;
@@ -21,6 +22,18 @@ namespace Time_Table_Arranging_Program.Pages {
     ///     Interaction logic for Page_SelectSubject.xaml
     /// </summary>
     public partial class Page_CreateTimetable : Page, IDirtyObserver<IOutputTimetableModel>, IPageWithLoadedFunction {
+        public static Page_CreateTimetable GetInstance(Setting searchByConsideringWeekNumber,
+                                                       Setting generalizeSlot) {
+            ISlotGeneralizer generalizer = generalizeSlot.IsChecked
+                ? (ISlotGeneralizer)new SlotGeneralizer()
+                : new NullGeneralizer();
+            var permutator = searchByConsideringWeekNumber.IsChecked
+                ? (Func<Slot[], List<List<Slot>>>) Permutator.Run_v2_WithConsideringWeekNumber
+                : Permutator.Run_v2_withoutConsideringWeekNumber;
+            var result = new SlotList();
+            result.AddRange(generalizer.Generalize(Global.InputSlotList).ToArray());
+            return new Page_CreateTimetable(result, permutator);
+        }
         private readonly MutableObservable<ITimetable> _currentViewedTimetable = new ObservableTimetable(Timetable.Empty);
         private CyclicIndex _cyclicIndex;
 
@@ -32,9 +45,9 @@ namespace Time_Table_Arranging_Program.Pages {
         private List<Predicate<Slot>> _predicates = new List<Predicate<Slot>>();
 
         private MutableObservable<IOutputTimetableModel> _timetableList;
-        private readonly Func<Slot[] , List<List<Slot>>> _permutator;
+        private readonly Func<Slot[],List<List<Slot>>> _permutator;
 
-        public Page_CreateTimetable(SlotList inputSlots , Func<Slot[] , List<List<Slot>>> permutator) {
+        private Page_CreateTimetable(SlotList inputSlots , Func<Slot[],List<List<Slot>>> permutator) {
             _inputSlots = inputSlots;
             _permutator = permutator;
             InitializeComponent();

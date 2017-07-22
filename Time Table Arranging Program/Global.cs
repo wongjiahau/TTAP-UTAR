@@ -17,6 +17,19 @@ namespace Time_Table_Arranging_Program {
         public static DateTime TimetableEndDate;
         public static SlotList InputSlotList = new SlotList();
 
+        public static class Settings {
+            public static Setting SearchByConsideringWeekNumber { private set; get; } =
+                new Setting(Windows_Control.Setting.SettingDescription.SearchByConsideringWeekNumber ,
+                    "Search for timetable by considering week number" ,
+                    "Turning this on will allow you to have the chance of getting timetable that contains overlapping timeslots, however this may cause the program to run slower" ,
+                    false);
+
+            public static Setting GeneralizeSlot { private set; get; } =
+                new Setting(Windows_Control.Setting.SettingDescription.GeneralizedSlot ,
+                    "Generalize slots" ,
+                    "It means to generalize slots that share the same Day, Time, Name and Type as one slot" ,
+                    true);
+        }
         public static class State {
             public static bool FileIsSavedBefore = false;
             public static string LastSavedFileName = "";
@@ -25,25 +38,7 @@ namespace Time_Table_Arranging_Program {
         public static class Constant {
             public const int MinTime = 7;
         }
-
-        public static class Factory {
-            public static Page_CreateTimetable Generate_Page_CreateTimetable_with_GeneralizedSlots(SlotList slotList) {
-                var generalized = new SlotList();
-                generalized.AddRange(new SlotGeneralizer().GeneralizeAll(slotList));                
-                return new Page_CreateTimetable(
-                    generalized ,
-                    Permutator.Run_v2_withoutConsideringWeekNumber
-                );
-            }
-
-            public static Page_CreateTimetable Generate_Page_CreateTimetable_with_UngeneralizedSlots(SlotList slotList) {
-               return new Page_CreateTimetable(
-                    slotList , 
-                    Permutator.Run_v2_WithConsideringWeekNumber
-               );
-
-            }
-        }
+       
 
         public static class Condition {
             public static bool NoSlotIsGeneralized  = false;

@@ -31,11 +31,11 @@ namespace Time_Table_Arranging_Program.Pages {
     
     public class ClashFinder {
         private List<SubjectModelWithState> _subjectStateList = new List<SubjectModelWithState>();
-        public ClashFinder(List<SubjectModel> subjectModels, Func<Slot[],List<List<Slot>>> permutator) {
+        public ClashFinder(List<SubjectModel> subjectModels, Func<Slot[], List<List<Slot>>> permutator) {
             var selectedSubjects = subjectModels.FindAll(x => x.IsSelected);
             for (var i = 0; i < selectedSubjects.Count; i++) {
                 SubjectModel s = selectedSubjects[i];
-                int[] subjectState = GetSubjectState(permutator(s.GetSelectedSlots().ToArray()));
+                int[] subjectState = GetSubjectState(permutator( s.GetSelectedSlots().ToArray()));
                 _subjectStateList.Add(new SubjectModelWithState(s.Name, subjectState));
             }
             for (int i = 0; i < _subjectStateList.Count; i++) {

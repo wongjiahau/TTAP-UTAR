@@ -74,6 +74,7 @@
     <Compile Include="Test_Helper.cs" />
     <Compile Include="Test_Indices.cs" />
     <Compile Include="Test_ParsingHtml.cs" />
+    <Compile Include="Test_Permutator.cs" />
     <Compile Include="Test_Slot.cs" />
     <Compile Include="Test_SlotGeneralizer.cs" />
     <Compile Include="Test_SlotIndex.cs" />

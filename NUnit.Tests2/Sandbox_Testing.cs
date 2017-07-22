@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using Time_Table_Arranging_Program;
+using Time_Table_Arranging_Program.Class;
 using Time_Table_Arranging_Program.Class.SlotGeneralizer;
 
 namespace NUnit.Tests2 {
@@ -22,7 +23,7 @@ namespace NUnit.Tests2 {
         [Test]
         public void SandboxTest_2() {
             var list = TestData.TestSlots;
-            var result = new SlotGeneralizer().GeneralizeAll(list);
+            var result = new SlotGeneralizer().Generalize(list);
             for (int i = 0 ; i < result.Count ; i++) {
                 Console.WriteLine(result[i].ToString());
             }

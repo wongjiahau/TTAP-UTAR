@@ -1,6 +1,6 @@
 ﻿using NUnit.Framework;
 using Time_Table_Arranging_Program.Class;
-using static Time_Table_Arranging_Program.Permutator;
+using static Time_Table_Arranging_Program.Class.Permutator;
 
 namespace NUnit.Tests2 {
     [TestFixture]
