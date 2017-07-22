@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Time_Table_Arranging_Program.Windows_Control"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="Windows_Settings" WindowStartupLocation="CenterScreen" WindowStyle="None" Height="300" Width="450" Closing="Windows_Settings_OnClosing">
+        Title="Windows_Settings" WindowStartupLocation="CenterScreen" WindowStyle="None" SizeToContent="WidthAndHeight" Closing="Windows_Settings_OnClosing">
     <DockPanel>
         <StackPanel Margin="0,15,0,0" HorizontalAlignment="Center" Orientation="Horizontal" DockPanel.Dock="Top">
             <materialDesign:PackIcon Kind="Settings" Width="30" Height="30" VerticalAlignment="Center" />
@@ -21,7 +21,6 @@
             </StackPanel.Resources>
             <Button Click="CancelButton_OnClick" Margin="0,0,10,0">CANCEL</Button>
             <Button  Click="ApplyButton_OnClick" HorizontalAlignment="Center">APPLY</Button>
-
         </StackPanel>
         <materialDesign:Card VerticalAlignment="Stretch" Margin="10">
             <Grid>
@@ -34,14 +33,10 @@
                             <Border BorderThickness="0,0,0,1" BorderBrush="DarkGray">
                                 <DockPanel HorizontalAlignment="Stretch" Margin="10" >
                                     <Label DockPanel.Dock="Left" Content="{Binding Label}" FontWeight="DemiBold" HorizontalAlignment="Left"></Label>
-                                    <Grid>
-                                        <Button>
-                                            <materialDesign:PackIcon Kind="HelpCircle"></materialDesign:PackIcon>
-                                        </Button>
-                                        <Popup>
-                                            <Label Content="{Binding Explanation}"></Label>
-                                        </Popup>
-                                    </Grid>
+                                    <Label></Label>
+                                    <materialDesign:PopupBox DockPanel.Dock="Right" HorizontalAlignment="Right">
+                                        <Button Content="{Binding Explanation}"></Button>
+                                    </materialDesign:PopupBox>
                                     <ToggleButton DockPanel.Dock="Right" HorizontalAlignment="Right"   IsChecked="{Binding IsChecked}" />
                                 </DockPanel>
                             </Border>

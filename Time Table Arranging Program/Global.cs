@@ -27,7 +27,7 @@ namespace Time_Table_Arranging_Program {
             public static Setting GeneralizeSlot { private set; get; } =
                 new Setting(Windows_Control.Setting.SettingDescription.GeneralizedSlot ,
                     "Generalize slots" ,
-                    "It means to generalize slots that share the same Day, Time, Name and Type as one slot" ,
+                    "It means to generalize slots that share the same Day, same Time, same Name and same Type as one slot" ,
                     true);
         }
         public static class State {
