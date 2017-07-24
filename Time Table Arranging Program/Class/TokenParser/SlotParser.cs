@@ -21,8 +21,10 @@ namespace Time_Table_Arranging_Program.Class.TokenParser {
                     if (TryParseDay(ts , ref resultSlot)) goto here;
                     if (TryParseStartTime(ts , ref resultSlot)) goto here;
                     if (TryParseEndTime(ts , ref resultSlot)) goto here;
-                    if (TryParseWeekAndVenue(ts , ref resultSlot)) goto here;
-                    if (TryParseLecturerName(ts , ref resultSlot)) {
+                    if (TryParseWeekAndVenue(ts , ref resultSlot)) {
+                        ts.GoToNextToken();
+                        if (resultSlot.Venue != "-" && !resultSlot.WeekNumber.IsNull()) ts.GoToNextToken();
+                        TryParseLecturerName(ts , ref resultSlot);
                         if (resultSlot.SubjectName == null) goto here;
                         resultSlot.SubjectName = resultSlot.SubjectName.Beautify();
                         if (finalResult.Any(s => s.Equals(resultSlot))) {

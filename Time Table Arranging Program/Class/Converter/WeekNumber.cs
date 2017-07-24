@@ -109,6 +109,10 @@ namespace Time_Table_Arranging_Program.Class.Converter {
         public int ToBinary() {
             return _weekNumberInBinary;
         }
+
+        public bool IsNull() {
+            return _weekNumberInBinary == 0;
+        }
     }
 
     public class NullWeekNumber : WeekNumber {
