@@ -80,7 +80,11 @@ namespace Time_Table_Arranging_Program.Pages {
             var previousCount = Global.InputSlotList.Count;
             var bg = CustomBackgroundWorker<string , List<Slot>>.RunAndShowLoadingScreen
                 (new SlotParser().Parse , input , "Loading time slots . . .");
-            Global.InputSlotList.AddRange(bg.GetResult());
+            if (bg.GetResult() != null)
+                Global.InputSlotList.AddRange(bg.GetResult());
+            else {
+                Global.Snackbar.MessageQueue.Enqueue("You have cancelled the operation.");
+            }
             if (Global.InputSlotList.Count == previousCount) {
                 DialogBox.Show("Please use GOOGLE CHROME" ,
                     "Unable to load data, please make sure you copied the correct content from the course registration website using Google Chrome.");

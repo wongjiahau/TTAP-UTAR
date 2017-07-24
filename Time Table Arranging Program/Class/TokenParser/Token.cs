@@ -55,8 +55,8 @@ namespace Time_Table_Arranging_Program.Class.TokenParser {
         }
 
         public bool IsPossiblySubjectCode() {
-            if (_value == "") return false;
-            return char.IsLetter(_value.First()) && char.IsDigit(_value.Last());
+            if (_value == "") return false;            
+            return _value.Contains("]") && char.IsDigit(_value.Last());
         }
 
         public bool IsPossiblyVenuValue() {

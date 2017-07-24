@@ -73,6 +73,7 @@
     <Compile Include="Test_Filterer.cs" />
     <Compile Include="Test_Helper.cs" />
     <Compile Include="Test_Indices.cs" />
+    <Compile Include="Test_ParsingFGO.cs" />
     <Compile Include="Test_ParsingHtml.cs" />
     <Compile Include="Test_Permutator.cs" />
     <Compile Include="Test_Slot.cs" />

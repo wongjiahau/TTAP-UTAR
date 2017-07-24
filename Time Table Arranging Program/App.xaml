@@ -4,8 +4,7 @@
              xmlns:local="clr-namespace:Time_Table_Arranging_Program"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              StartupUri="MainWindow.xaml"
-
-             DispatcherUnhandledException="Application_DispatcherUnhandledException">
+             >
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

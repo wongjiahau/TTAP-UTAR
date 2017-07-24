@@ -19,7 +19,7 @@ namespace Time_Table_Arranging_Program.Class.TokenParser {
                 if (TryParseStartTime(ts, ref resultSlot)) goto here;
                 if (TryParseEndTime(ts, ref resultSlot)) goto here;
                 if (TryParseWeekAndVenue(ts, ref resultSlot)) {
-                    resultSlot.SubjectName = resultSlot.SubjectName.Beautify();
+                    resultSlot.SubjectName = resultSlot.SubjectName.Beautify();                    
                     if (finalResult.Any(s => s.Equals(resultSlot))) {
                         /*do nothing*/
                     }
@@ -46,7 +46,7 @@ namespace Time_Table_Arranging_Program.Class.TokenParser {
 
         private bool TryParseSubjectCode(ITokenStream ts, ref Slot resultSlot) {
             if (ts.CurrentToken().IsPossiblySubjectCode() && ts.NextToken().Value() == "-") {
-                resultSlot.Code = ts.CurrentToken().Value();
+                resultSlot.Code = ts.CurrentToken().Value().Split(']')[1];
                 return true;
             }
             return false;
