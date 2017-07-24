@@ -36,28 +36,25 @@ namespace Time_Table_Arranging_Program.Class.TokenParser {
         }
 
         private bool TryParseLecturerName(ITokenStream ts , ref Slot resultSlot) {
-            if (!ts.CurrentToken().IsPossiblyLecturerName()) return false;
-            var lecturer1Name = GetLecturerName(ts.CurrentToken().Value());
-            resultSlot.LecturerName = lecturer1Name;
-            while (ts.NextToken().IsPossiblyLecturerName()) {
-                var lecturer2Name = GetLecturerName(ts.NextToken().Value());
-                resultSlot.LecturerName += ", " + lecturer2Name;
-                ts.GoToNextToken();                
+            if (ts.CurrentToken().IsPossiblyLecturerName()) {
+                var lecturer1Name = GetLecturerName(ts.CurrentToken().Value());
+                resultSlot.LecturerName = lecturer1Name;
+                while (ts.NextToken().IsPossiblyLecturerName()) {
+                    var lecturer2Name = GetLecturerName(ts.NextToken().Value());
+                    resultSlot.LecturerName += ", " + lecturer2Name;
+                    ts.GoToNextToken();
+                }
+                return true;                                
             }
-            return true;
-
-            string GetLecturerName(string s)
-            {
-                //s shall be in the format of 99999(Iqmal), 99999 = id, Iqmal = name
-                const int idPart = 0;
-                const int namePart = 1;
-                return s.Split('(')[namePart]
-                    .Replace(")" , "")
-                    .Replace("," , "");
-            }
-
-
-
+            return false;
+            string GetLecturerName(string s) {
+                    //s shall be in the format of 99999(Iqmal), 99999 = id, Iqmal = name
+                    const int idPart = 0;
+                    const int namePart = 1;
+                    return s.Split('(')[namePart]
+                        .Replace(")", "")
+                        .Replace(",", "");
+                }
         }
 
         private bool TryParseWeekAndVenue(ITokenStream ts , ref Slot resultSlot) {
