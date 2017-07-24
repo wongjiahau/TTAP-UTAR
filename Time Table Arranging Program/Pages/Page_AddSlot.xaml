@@ -63,7 +63,7 @@
                             <Button x:Name="AddSlotButton" Content="Add slots"  FontSize="20" Height="40" Click="AddSlotButton_Click" />
                         </materialDesign:Badged>
 
-                        <Button x:Name="ResetButton" IsEnabled="False" Style="{StaticResource MaterialDesignRaisedLightButton}" Content=" Reset" Click="ResetButton_Click" />
+                        <Button x:Name="ResetButton" IsEnabled="True" Style="{StaticResource MaterialDesignRaisedLightButton}" Content=" Reset" Click="ResetButton_Click" />
                     </StackPanel>
                 </Grid>
             </Border>
