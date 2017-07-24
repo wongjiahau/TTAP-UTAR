@@ -103,6 +103,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <EmbeddedResource Include="TestFiles\CopiedTextFromSampleHTML.txt" />
+    <EmbeddedResource Include="TestFiles\FGOHtmlText.txt" />
     <Content Include="TestFiles\MechanicalEngineering2017AprSlots.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

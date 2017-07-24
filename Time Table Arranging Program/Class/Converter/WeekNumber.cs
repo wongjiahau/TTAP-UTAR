@@ -13,7 +13,7 @@ namespace Time_Table_Arranging_Program.Class.Converter {
     [Serializable]
     public class WeekNumber : ConvertibleToString, IWeekNumber, IEquatable<IWeekNumber>,
         IIntersectionCheckable<WeekNumber> {
-        private List<int> _weekNumberList;
+        protected List<int> _weekNumberList;
         public int _weekNumberInBinary; //0101 means week 2 and week 4
 
 
@@ -112,6 +112,10 @@ namespace Time_Table_Arranging_Program.Class.Converter {
     }
 
     public class NullWeekNumber : WeekNumber {
+        public NullWeekNumber() {
+            _weekNumberInBinary = 0;
+            _weekNumberList = new List<int>();
+        }
         protected override string StringValue() {
             return "-";
         }

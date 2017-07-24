@@ -21,6 +21,7 @@ namespace NUnit.Tests2 {
 
         [Test]
         public void SandBox_Test_2() {
+            Assert.Pass();
             var input =
                 "Barred List by week 5th/12th [by Hour: 0]MPU33203 - INTRODUCTION TO LAW AND MALAYSIAN LEGAL SYSTEM - [View All] [168]\r\n52\tL\t1\t180\tWed\t04:00 PM - 07:00 PM\t3.0\t1-14\tKB209\t14252(Iqmal), 16169(ChanYE)\t\r\n168\r\n12\r\n53\tT\t1\t30\tThu\t01:00 PM - 02:30 PM\t1.5\t3,5,7,9,11,13\tKB314\t14252(Iqmal), 16169(ChanYE)\t\r\n30\r\n0\r\n54\tT\t2\t30\tThu\t01:00 PM - 02:30 PM\t1.5\t2,4,6,8,10,12\tKB314\t14252(Iqmal), 16169(ChanYE)\t\r\n30\r\n0\r\n55\tT\t3\t30\tThu\t02:30 PM - 04:00 PM\t1.5\t3,5,7,9,11,13\tKB314\t14252(Iqmal), 16169(ChanYE)\t\r\n28\r\n2\r\n56\tT\t4\t30\tThu\t02:30 PM - 04:00 PM\t1.5\t2,4,6,8,10,12\tKB314\t14252(Iqmal), 16169(ChanYE)\t\r\n29\r\n1\r\n57\tT\t5\t30\tFri\t11:00 AM - 12:30 PM\t1.5\t3,5,7,9,11,13\tKB320\t14252(Iqmal), 16169(ChanYE)\t\r\n29\r\n1\r\n58\tT\t6\t30\tFri\t11:00 AM - 12:30 PM\t1.5\t2,4,6,8,10,12\tKB320\t14252(Iqmal), 16169(ChanYE)\t\r\n22\r\n8";
             var tokens = Tokenizer.Tokenize(input);
@@ -29,5 +30,15 @@ namespace NUnit.Tests2 {
             }
         }
 
+        [Test]
+        public void SandBox_Test_3() {
+            Assert.Pass();
+            var input = Helper.RawStringOfTestFile("FGOHtmlText.txt");
+            var tokens = Tokenizer.Tokenize(input);
+            for (var i = 0; i < tokens.Length; i++) {
+                var t = tokens[i];
+                Console.WriteLine($@"[{i}] = {t.Value()}");
+            }
+        }
     }
 }

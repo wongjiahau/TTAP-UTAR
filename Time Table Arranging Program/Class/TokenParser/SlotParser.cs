@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Time_Table_Arranging_Program.Class.Converter;
+using Time_Table_Arranging_Program.Windows_Control;
 
 namespace Time_Table_Arranging_Program.Class.TokenParser {
     public class SlotParser {
@@ -10,27 +12,33 @@ namespace Time_Table_Arranging_Program.Class.TokenParser {
             var isReadingSubjectName = false;
             var resultSlot = new Slot();
             while (true) {
-                if (ts.IsAtLastToken()) break;
-                if (TryParseSubjectCode(ts , ref resultSlot)) goto here;
-                if (TryParseSubjectName(ts , ref resultSlot , ref isReadingSubjectName)) goto here;
-                if (TryParseSlotNumber(ts , ref resultSlot)) goto here;
-                if (TryParseSlotType(ts , ref resultSlot)) goto here;
-                if (TryParseDay(ts , ref resultSlot)) goto here;
-                if (TryParseStartTime(ts , ref resultSlot)) goto here;
-                if (TryParseEndTime(ts , ref resultSlot)) goto here;
-                if (TryParseWeekAndVenue(ts , ref resultSlot)) goto here;
-                if (TryParseLecturerName(ts , ref resultSlot)) {
-                    resultSlot.SubjectName = resultSlot.SubjectName.Beautify();
-                    if (finalResult.Any(s => s.Equals(resultSlot))) {
-                        /*do nothing*/
+                try {
+                    if (ts.IsAtLastToken()) break;
+                    if (TryParseSubjectCode(ts , ref resultSlot)) goto here;
+                    if (TryParseSubjectName(ts , ref resultSlot , ref isReadingSubjectName)) goto here;
+                    if (TryParseSlotNumber(ts , ref resultSlot)) goto here;
+                    if (TryParseSlotType(ts , ref resultSlot)) goto here;
+                    if (TryParseDay(ts , ref resultSlot)) goto here;
+                    if (TryParseStartTime(ts , ref resultSlot)) goto here;
+                    if (TryParseEndTime(ts , ref resultSlot)) goto here;
+                    if (TryParseWeekAndVenue(ts , ref resultSlot)) goto here;
+                    if (TryParseLecturerName(ts , ref resultSlot)) {
+                        if (resultSlot.SubjectName == null) goto here;
+                        resultSlot.SubjectName = resultSlot.SubjectName.Beautify();
+                        if (finalResult.Any(s => s.Equals(resultSlot))) {
+                            /*do nothing*/
+                        }
+                        else {
+                            finalResult.Add(resultSlot.GetDuplicate());
+                            resultSlot.WeekNumber.Clear();
+                        }
                     }
-                    else {
-                        finalResult.Add(resultSlot.GetDuplicate());
-                        resultSlot.WeekNumber.Clear();
-                    }
+                    here:
+                    ts.GoToNextToken();
                 }
-                here:
-                ts.GoToNextToken();
+                catch (Exception e) {
+                    DialogBox.Show("Error" , e.Message + "at token " + ts.CurrentIndex);
+                }
             }
             return finalResult;
         }
@@ -60,11 +68,40 @@ namespace Time_Table_Arranging_Program.Class.TokenParser {
 
         private bool TryParseWeekAndVenue(ITokenStream ts , ref Slot resultSlot) {
             if (!ts.PreviousToken().IsPositiveNumberThatContainDecimalPoint()) return false;
-            if (!ts.NextToken().IsPossiblyLecturerName() && !ts.NextToken().IsPossiblyVenueValue()) return false;
-            resultSlot.WeekNumber = WeekNumber.Parse(ts.CurrentToken().Value());
-            resultSlot.Venue = ts.NextToken().IsPossiblyVenueValue() ? ts.NextToken().Value() : "-";
-            return true;
+            if (VenueAndWeekNumberExist(ts)) {
+                resultSlot.WeekNumber = WeekNumber.Parse(ts.CurrentToken().Value());
+                resultSlot.Venue = ts.NextToken().Value();
+                return true;
+            }
+            if (WeekNumberDoesNotExist(ts)) {
+                resultSlot.WeekNumber = new NullWeekNumber();
+                resultSlot.Venue = ts.CurrentToken().Value();
+                return true;
+            }
+            if (VenueDoesNotExist(ts)) {
+                resultSlot.WeekNumber = WeekNumber.Parse(ts.CurrentToken().Value());
+                resultSlot.Venue = "-";
+                return true;
+            }
+            //else if both week number and venue does not exist? (will not include code for this first, since not encountered yet)
+            return false;
+            bool VenueDoesNotExist(ITokenStream tokenSteam)
+            {
+                return tokenSteam.PreviousToken().IsPositiveNumberThatContainDecimalPoint() &&
+                       tokenSteam.NextToken().IsPossiblyLecturerName();
+            }
+            bool WeekNumberDoesNotExist(ITokenStream tokenStream)
+            {
+                return tokenStream.CurrentToken().IsPossiblyVenueValue();
+            }
+            bool VenueAndWeekNumberExist(ITokenStream tokenStream)
+            {
+                return tokenStream.NextToken().IsPossiblyVenueValue();
+            }
+
         }
+
+
 
         private bool TryParseSubjectCode(ITokenStream ts , ref Slot resultSlot) {
             if (ts.CurrentToken().IsPossiblySubjectCode() && ts.NextToken().Value() == "-") {

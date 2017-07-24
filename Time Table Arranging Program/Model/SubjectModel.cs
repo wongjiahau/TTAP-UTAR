@@ -12,6 +12,7 @@ namespace Time_Table_Arranging_Program.Model
     {
         public SubjectModel()
         {
+            //sample data
             Name = "Testing Subject 123";
             CodeAndNameInitials = "MPU329999";
             Slots = TestData.GetSlotRange(3,9);

@@ -78,15 +78,15 @@ namespace Time_Table_Arranging_Program.Pages {
                 return;
             }
             var previousCount = Global.InputSlotList.Count;
-            var bg = CustomBackgroundWorker<string , List<Slot>>.RunAndShowLoadingScreen
-                (new SlotParser().Parse , input , "Loading time slots . . .");
-            if (bg.GetResult() != null)                
-                Global.InputSlotList.AddRange(bg.GetResult());
-            else {
-                Global.Snackbar.MessageQueue.Enqueue("You have cancelled the operation.");
-            }
+            //var bg = CustomBackgroundWorker<string , List<Slot>>.RunAndShowLoadingScreen
+            //    (new SlotParser().Parse , input , "Loading time slots . . .");
+            //if (bg.GetResult() != null)                
+            //    Global.InputSlotList.AddRange(bg.GetResult());
+            //else {
+            //    Global.Snackbar.MessageQueue.Enqueue("You have cancelled the operation.");
+            //}
             
-            //Global.InputSlotList.AddRange(new SlotParser().Parse(input));
+            Global.InputSlotList.AddRange(new SlotParser().Parse(input));
             if (Global.InputSlotList.Count == previousCount) {
                 DialogBox.Show("Please use GOOGLE CHROME" ,
                     "Unable to load data, please make sure you copied the correct content from the course registration website using Google Chrome.");
