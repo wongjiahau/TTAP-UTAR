@@ -9,7 +9,7 @@ namespace Time_Table_Arranging_Program.Class.TokenParser {
         bool IsSlotType();
         bool IsDay();
         bool IsPossiblySubjectCode();
-        bool IsPossiblyVenuValue();
+        bool IsPossiblyVenueValue();
         string Value();
         bool IsPossiblyLecturerName();
     }
@@ -60,7 +60,7 @@ namespace Time_Table_Arranging_Program.Class.TokenParser {
             return _value.Contains("]") && char.IsDigit(_value.Last());
         }
 
-        public bool IsPossiblyVenuValue() {
+        public bool IsPossiblyVenueValue() {
             if (_value.Length == 0) return false;
             if (char.ToLower(_value[0]) == 'k' && char.IsLetterOrDigit(_value.Last())) return true;
             return false;

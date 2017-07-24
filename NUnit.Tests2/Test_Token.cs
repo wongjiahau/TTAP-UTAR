@@ -57,7 +57,7 @@ namespace NUnit.Tests2 {
         [TestCase("KA302A" , ExpectedResult = true)]
         [TestCase("b1" , ExpectedResult = false)]
         public bool Test_Token_IsPossiblyVenueValue(string s) {
-            return new Token(s).IsPossiblyVenuValue();
+            return new Token(s).IsPossiblyVenueValue();
         }
 
         [TestCase("abc" , ExpectedResult = "abc")]

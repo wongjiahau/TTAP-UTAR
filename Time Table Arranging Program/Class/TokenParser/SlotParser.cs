@@ -44,27 +44,27 @@ namespace Time_Table_Arranging_Program.Class.TokenParser {
                     resultSlot.LecturerName += ", " + lecturer2Name;
                     ts.GoToNextToken();
                 }
-                return true;                                
+                return true;
             }
             return false;
-            string GetLecturerName(string s) {
-                    //s shall be in the format of 99999(Iqmal), 99999 = id, Iqmal = name
-                    const int idPart = 0;
-                    const int namePart = 1;
-                    return s.Split('(')[namePart]
-                        .Replace(")", "")
-                        .Replace(",", "");
-                }
+            string GetLecturerName(string s)
+            {
+                //s shall be in the format of 99999(Iqmal), 99999 = id, Iqmal = name
+                const int idPart = 0;
+                const int namePart = 1;
+                return s.Split('(')[namePart]
+                    .Replace(")" , "")
+                    .Replace("," , "");
+            }
         }
 
         private bool TryParseWeekAndVenue(ITokenStream ts , ref Slot resultSlot) {
-            if (!ts.PreviousToken().IsPositiveNumberThatContainDecimalPoint() || !ts.NextToken().IsPossiblyVenuValue())
-                return false;
+            if (!ts.PreviousToken().IsPositiveNumberThatContainDecimalPoint()) return false;
+            if (!ts.NextToken().IsPossiblyLecturerName() && !ts.NextToken().IsPossiblyVenueValue()) return false;
             resultSlot.WeekNumber = WeekNumber.Parse(ts.CurrentToken().Value());
-            resultSlot.Venue = ts.NextToken().Value();
+            resultSlot.Venue = ts.NextToken().IsPossiblyVenueValue() ? ts.NextToken().Value() : "-";
             return true;
         }
-
 
         private bool TryParseSubjectCode(ITokenStream ts , ref Slot resultSlot) {
             if (ts.CurrentToken().IsPossiblySubjectCode() && ts.NextToken().Value() == "-") {
