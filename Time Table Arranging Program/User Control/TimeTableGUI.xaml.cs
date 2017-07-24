@@ -208,10 +208,10 @@ namespace Time_Table_Arranging_Program {
         }
 
         private void GenerateTimetableView(List<Slot> slots) {
-            var previousSubjectName = slots[0].SubjectName;
+            var previousSubjectCode = slots[0].Code;
             IColorGenerator c = new ColorGenerator();
             foreach (var s in slots) {
-                if (s.SubjectName != previousSubjectName) c.GoToNextColor();
+                if (s.Code != previousSubjectCode) c.GoToNextColor();
                 var box = GenerateBox(s , c);
                 var colIndex = GetColumnIndex(s.StartTime);
                 var rowIndex = GetRowIndex(s.Day);
@@ -222,7 +222,7 @@ namespace Time_Table_Arranging_Program {
                 AddToGrid(box , colIndex , rowIndex , columnSpan);
 
                 UpdateOccupiedIndex(rowIndex , colIndex , columnSpan);
-                previousSubjectName = s.SubjectName;
+                previousSubjectCode = s.Code;
             }
         }
 

@@ -11,20 +11,20 @@ namespace Time_Table_Arranging_Program.Class.TokenParser {
             var finalResult = new List<Slot>();
             var isReadingSubjectName = false;
             var resultSlot = new Slot();
-            while (true) {
-                try {
+            try {
+                while (true) {
                     if (ts.IsAtLastToken()) break;
-                    if (TryParseSubjectCode(ts , ref resultSlot)) goto here;
-                    if (TryParseSubjectName(ts , ref resultSlot , ref isReadingSubjectName)) goto here;
-                    if (TryParseSlotNumber(ts , ref resultSlot)) goto here;
-                    if (TryParseSlotType(ts , ref resultSlot)) goto here;
-                    if (TryParseDay(ts , ref resultSlot)) goto here;
-                    if (TryParseStartTime(ts , ref resultSlot)) goto here;
-                    if (TryParseEndTime(ts , ref resultSlot)) goto here;
-                    if (TryParseWeekAndVenue(ts , ref resultSlot)) {
+                    if (TryParseSubjectCode(ts, ref resultSlot)) goto here;
+                    if (TryParseSubjectName(ts, ref resultSlot, ref isReadingSubjectName)) goto here;
+                    if (TryParseSlotNumber(ts, ref resultSlot)) goto here;
+                    if (TryParseSlotType(ts, ref resultSlot)) goto here;
+                    if (TryParseDay(ts, ref resultSlot)) goto here;
+                    if (TryParseStartTime(ts, ref resultSlot)) goto here;
+                    if (TryParseEndTime(ts, ref resultSlot)) goto here;
+                    if (TryParseWeekAndVenue(ts, ref resultSlot)) {
                         ts.GoToNextToken();
                         if (resultSlot.Venue != "-" && !resultSlot.WeekNumber.IsNull()) ts.GoToNextToken();
-                        TryParseLecturerName(ts , ref resultSlot);
+                        TryParseLecturerName(ts, ref resultSlot);
                         if (resultSlot.SubjectName == null) goto here;
                         resultSlot.SubjectName = resultSlot.SubjectName.Beautify();
                         if (finalResult.Any(s => s.Equals(resultSlot))) {
@@ -38,10 +38,10 @@ namespace Time_Table_Arranging_Program.Class.TokenParser {
                     here:
                     ts.GoToNextToken();
                 }
-                catch (Exception e) {
-                    DialogBox.Show("Error" , e.Message + "at token " + ts.CurrentIndex);
-                }
             }
+            catch (Exception e) {
+                DialogBox.Show("Error", e.Message + "at token " + ts.CurrentIndex);
+            }        
             return finalResult;
         }
 
