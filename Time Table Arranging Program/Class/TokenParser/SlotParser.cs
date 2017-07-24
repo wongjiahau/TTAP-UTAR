@@ -39,20 +39,25 @@ namespace Time_Table_Arranging_Program.Class.TokenParser {
             if (!ts.CurrentToken().IsPossiblyLecturerName()) return false;
             var lecturer1Name = GetLecturerName(ts.CurrentToken().Value());
             resultSlot.LecturerName = lecturer1Name;
-            if (!ts.NextToken().IsPossiblyLecturerName()) return true;
-            var lecturer2Name = GetLecturerName(ts.NextToken().Value());
-            resultSlot.LecturerName += ", " + lecturer2Name;
-            ts.GoToNextToken();
+            while (ts.NextToken().IsPossiblyLecturerName()) {
+                var lecturer2Name = GetLecturerName(ts.NextToken().Value());
+                resultSlot.LecturerName += ", " + lecturer2Name;
+                ts.GoToNextToken();                
+            }
             return true;
 
             string GetLecturerName(string s)
-            { //s shall be in the format of 99999(Iqmal), 99999 = id, Iqmal = name
+            {
+                //s shall be in the format of 99999(Iqmal), 99999 = id, Iqmal = name
                 const int idPart = 0;
                 const int namePart = 1;
                 return s.Split('(')[namePart]
                     .Replace(")" , "")
                     .Replace("," , "");
             }
+
+
+
         }
 
         private bool TryParseWeekAndVenue(ITokenStream ts , ref Slot resultSlot) {
