@@ -14,7 +14,11 @@ namespace Time_Table_Arranging_Program.Model
         {
             Name = "Testing Subject 123";
             CodeAndNameInitials = "MPU329999";
-            Slots = TestData.GetSlotRange(3,9);            
+            Slots = TestData.GetSlotRange(3,9);
+            Slots[0].LecturerName = "Sheela";
+            Slots[1].LecturerName = "WongYC";
+            Slots[2].LecturerName = "WongYC";
+            Slots[3].LecturerName = "Adi, Adlan";
         }
         public SubjectModel(string name, string code, int creditHour, List<Slot> slots)
         {
