@@ -18,21 +18,30 @@ namespace Time_Table_Arranging_Program.Class.TokenParser {
                 if (TryParseDay(ts, ref resultSlot)) goto here;
                 if (TryParseStartTime(ts, ref resultSlot)) goto here;
                 if (TryParseEndTime(ts, ref resultSlot)) goto here;
-                if (TryParseWeekAndVenue(ts, ref resultSlot)) {
+                if (TryParseWeekAndVenue(ts , ref resultSlot)) goto here;
+                if(TryParseLecturerName(ts,ref resultSlot)){
                     resultSlot.SubjectName = resultSlot.SubjectName.Beautify();                    
                     if (finalResult.Any(s => s.Equals(resultSlot))) {
                         /*do nothing*/
                     }
                     else {
                         finalResult.Add(resultSlot.GetDuplicate());
+                        resultSlot.WeekNumber.Clear();
                     }
                 }
-
                 here:
-                ts.GoToNextToken();
-                resultSlot.WeekNumber.Clear();
+                ts.GoToNextToken();                
             }
             return finalResult;
+        }
+
+        private bool TryParseLecturerName(ITokenStream ts, ref Slot resultSlot) {
+            if (ts.CurrentToken().IsPossiblyLecturerName()) {
+                var lecturerName =   ts.CurrentToken().Value();
+                resultSlot.LecturerName =  lecturerName.Split('(')[1].Replace(")", "");
+                return true;
+            }
+            return false;
         }
 
         private bool TryParseWeekAndVenue(ITokenStream ts, ref Slot resultSlot) {

@@ -11,6 +11,7 @@ namespace Time_Table_Arranging_Program.Class.TokenParser {
         bool IsPossiblySubjectCode();
         bool IsPossiblyVenuValue();
         string Value();
+        bool IsPossiblyLecturerName();
     }
 
     public class Token : IToken {
@@ -67,6 +68,15 @@ namespace Time_Table_Arranging_Program.Class.TokenParser {
 
         public string Value() {
             return _value;
+        }
+
+        public bool IsPossiblyLecturerName() {
+            var tokens = _value.Split('(');
+            if (tokens.Length != 2) return false;
+            if (!tokens[0].IsInteger()) return false;
+            if (tokens[1].Last() != ')') return false;
+            if (tokens[1].Any(char.IsDigit)) return false;
+            return true;
         }
     }
 

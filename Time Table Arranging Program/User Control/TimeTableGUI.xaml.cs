@@ -254,13 +254,13 @@ namespace Time_Table_Arranging_Program {
 
 
         private Border GenerateBox(Slot s , IColorGenerator c) {
-            var textblock = new TextBlock {                
+            var textblock = new TextBlock {
                 Margin = new Thickness(2) ,
                 TextAlignment = TextAlignment.Center ,
                 FontWeight = FontWeights.DemiBold ,
                 VerticalAlignment = VerticalAlignment.Center
             };
-            textblock.Text =  GetInfo(s);
+            textblock.Text = GetInfo(s);
             var border = new Border {
                 BorderThickness = new Thickness(0.75) ,
                 BorderBrush = Brushes.Black ,
@@ -281,7 +281,7 @@ namespace Time_Table_Arranging_Program {
             };
             return border;
         }
-      
+
 
         private string GetTooltip(Slot s) {
             return $"{s.SubjectName}\n{s.Code}\n({s.Type}{s.Number})";
@@ -292,9 +292,10 @@ namespace Time_Table_Arranging_Program {
             result += $" {s.SubjectName.GetInitial()} ({s.Type}{s.Number})";
             if (Global.Settings.SearchByConsideringWeekNumber.IsChecked ||
                 !s.Number.Contains("/"))
-                result += $"\n{s.WeekNumber}\n{s.Venue}";
+                result += $"\n{s.Venue}[{s.WeekNumber}]";
             else
-                result += "\n-\n-";            
+                result += "\n-";
+            result += '\n' + s.LecturerName;
             return result;
         }
 

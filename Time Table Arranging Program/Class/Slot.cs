@@ -73,6 +73,7 @@ namespace Time_Table_Arranging_Program.Class {
         public WeekNumber WeekNumber { get; set; }
 
         public bool IsSelected { get; set; }
+        public string LecturerName { get; set; }
 
         public int CompareTo(Slot obj) {
             var s = obj;
@@ -91,6 +92,7 @@ namespace Time_Table_Arranging_Program.Class {
             s.TimePeriod = TimePeriod.GetDuplicate();
             s.WeekNumber = new WeekNumber(WeekNumber);
             s.IsSelected = IsSelected;
+            s.LecturerName = LecturerName;
             return s;
         }
 
