@@ -1,0 +1,11 @@
+﻿<UserControl x:Class="Time_Table_Arranging_Program.Pages.WelcomeToTTAP"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Time_Table_Arranging_Program.Pages"
+             mc:Ignorable="d" >
+    <StackPanel HorizontalAlignment="Center">
+        <TextBlock Style="{StaticResource  MaterialDesignDisplay4TextBlock}">Welcome to TTAP.</TextBlock>
+    </StackPanel>
+</UserControl>

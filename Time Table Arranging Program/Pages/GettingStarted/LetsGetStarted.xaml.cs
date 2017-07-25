@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,18 +12,22 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Time_Table_Arranging_Program.Pages.Page_GettingStarted;
 
-namespace Time_Table_Arranging_Program.Pages.GettingStarted {
+namespace Time_Table_Arranging_Program.Pages.GettingStarted
+{
     /// <summary>
-    /// Interaction logic for DoYouWantToWatchTTAPTutorial.xaml
+    /// Interaction logic for LetsGetStarted.xaml
     /// </summary>
-    public partial class DoYouWantToWatchTTAPTutorial : UserControl {
-        public DoYouWantToWatchTTAPTutorial() {
+    public partial class LetsGetStarted : UserControl
+    {        
+        public LetsGetStarted()
+        {
             InitializeComponent();
         }
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e) {
-            Process.Start(new ProcessStartInfo(MainWindow.HelpGifUrl));
+            Global.MainFrame.Navigate(new Page_Intro());
         }
     }
 }

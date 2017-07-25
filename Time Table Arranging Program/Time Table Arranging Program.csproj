@@ -229,6 +229,7 @@
     <Compile Include="Model\SlotListModel.cs" />
     <Compile Include="MVVM_Framework\RelayCommand.cs" />
     <Compile Include="MVVM_Framework\ViewModelBase.cs" />
+    <Compile Include="MVVM_Framework\ViewModels\BoundedIndexVM.cs" />
     <Compile Include="MVVM_Framework\ViewModels\TimetableListVM.cs" />
     <Compile Include="MVVM_Framework\ViewModels\TimetableVM.cs" />
     <Compile Include="MVVM_Framework\Views\CyclicIndexView.xaml.cs">
@@ -241,6 +242,9 @@
     <Compile Include="Pages\ClashFinder.cs" />
     <Compile Include="Pages\GettingStarted\DoYouWantToWatchTTAPTutorial.xaml.cs">
       <DependentUpon>DoYouWantToWatchTTAPTutorial.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\GettingStarted\LetsGetStarted.xaml.cs">
+      <DependentUpon>LetsGetStarted.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Page_About.xaml.cs">
       <DependentUpon>Page_About.xaml</DependentUpon>
@@ -268,6 +272,9 @@
     </Compile>
     <Compile Include="Pages\Page_SaveTimetableAsImage.xaml.cs">
       <DependentUpon>Page_SaveTimetableAsImage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\WelcomeToTTAP.xaml.cs">
+      <DependentUpon>WelcomeToTTAP.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Window_StateSummary.xaml.cs">
       <DependentUpon>Window_StateSummary.xaml</DependentUpon>
@@ -399,6 +406,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\GettingStarted\LetsGetStarted.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\Page_About.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -432,6 +443,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\Page_SaveTimetableAsImage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\WelcomeToTTAP.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -638,7 +653,7 @@
   <ItemGroup>
     <Folder Include="Class\SubjectParser\" />
     <Folder Include="MiscFiles\" />
-  </ItemGroup>  
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Fody.2.0.6\build\dotnet\Fody.targets" Condition="Exists('..\packages\Fody.2.0.6\build\dotnet\Fody.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

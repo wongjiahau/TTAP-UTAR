@@ -32,7 +32,7 @@ namespace Time_Table_Arranging_Program.MVVM_Framework.Models {
                 else {
                     result = value;
                 }
-                SetProperty(ref _currentValue, result);
+                SetProperty(ref _currentValue, result);                                    
                 CurrentValueChanged?.Invoke(this, null);
             }
         }
