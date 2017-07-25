@@ -239,6 +239,9 @@
     </Compile>
     <Compile Include="IValueConverter\ComboBoxSelectionConverter.cs" />
     <Compile Include="Pages\ClashFinder.cs" />
+    <Compile Include="Pages\GettingStarted\DoYouWantToWatchTTAPTutorial.xaml.cs">
+      <DependentUpon>DoYouWantToWatchTTAPTutorial.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Page_About.xaml.cs">
       <DependentUpon>Page_About.xaml</DependentUpon>
     </Compile>
@@ -251,7 +254,10 @@
     <Compile Include="Pages\Page_CreateTimetable.xaml.cs">
       <DependentUpon>Page_CreateTimetable.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Page_GettingStarted.xaml.cs">
+    <Compile Include="Pages\GettingStarted\IfYouAreUsingComputerLabInUtar.xaml.cs">
+      <DependentUpon>IfYouAreUsingComputerLabInUtar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\GettingStarted\Page_GettingStarted.xaml.cs">
       <DependentUpon>Page_GettingStarted.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Page_Intro.xaml.cs">
@@ -389,6 +395,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\GettingStarted\DoYouWantToWatchTTAPTutorial.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\Page_About.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -405,7 +415,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\Page_GettingStarted.xaml">
+    <Page Include="Pages\GettingStarted\IfYouAreUsingComputerLabInUtar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\GettingStarted\Page_GettingStarted.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -624,7 +638,7 @@
   <ItemGroup>
     <Folder Include="Class\SubjectParser\" />
     <Folder Include="MiscFiles\" />
-  </ItemGroup>
+  </ItemGroup>  
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Fody.2.0.6\build\dotnet\Fody.targets" Condition="Exists('..\packages\Fody.2.0.6\build\dotnet\Fody.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

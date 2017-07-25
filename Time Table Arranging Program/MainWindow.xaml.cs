@@ -11,6 +11,7 @@ using Time_Table_Arranging_Program.Class;
 using Time_Table_Arranging_Program.Class.SlotGeneralizer;
 using Time_Table_Arranging_Program.Interfaces;
 using Time_Table_Arranging_Program.Pages;
+using Time_Table_Arranging_Program.Pages.Page_GettingStarted;
 using Time_Table_Arranging_Program.User_Control;
 using Time_Table_Arranging_Program.UserInterface;
 using Time_Table_Arranging_Program.Windows_Control;
