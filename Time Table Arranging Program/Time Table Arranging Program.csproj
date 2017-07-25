@@ -261,11 +261,11 @@
     <Compile Include="Pages\GettingStarted\IfYouAreUsingComputerLabInUtar.xaml.cs">
       <DependentUpon>IfYouAreUsingComputerLabInUtar.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\GettingStarted\Page_GettingStarted.xaml.cs">
-      <DependentUpon>Page_GettingStarted.xaml</DependentUpon>
+    <Compile Include="Pages\GettingStarted\Page_Introduction.xaml.cs">
+      <DependentUpon>Page_Introduction.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Page_Intro.xaml.cs">
-      <DependentUpon>Page_Intro.xaml</DependentUpon>
+    <Compile Include="Pages\Page_Login.xaml.cs">
+      <DependentUpon>Page_Login.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Page_Help.xaml.cs">
       <DependentUpon>Page_Help.xaml</DependentUpon>
@@ -430,11 +430,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\GettingStarted\Page_GettingStarted.xaml">
+    <Page Include="Pages\GettingStarted\Page_Introduction.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\Page_Intro.xaml">
+    <Page Include="Pages\Page_Login.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

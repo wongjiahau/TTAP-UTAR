@@ -1,4 +1,4 @@
-﻿<Page x:Class="Time_Table_Arranging_Program.Pages.Page_GettingStarted.Page_GettingStarted"
+﻿<Page x:Class="Time_Table_Arranging_Program.Pages.Page_GettingStarted.Page_Introduction"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 

@@ -26,7 +26,7 @@ namespace Time_Table_Arranging_Program.Pages {
     /// <summary>
     /// Interaction logic for Page_First.xaml
     /// </summary>
-    public partial class Page_Intro : Page {
+    public partial class Page_Login : Page {
         private const string LoginPageUrl = "https://unitreg.utar.edu.my/portal/courseRegStu/login.jsp";
 
         private const string LoginFailedUrl =
@@ -40,7 +40,7 @@ namespace Time_Table_Arranging_Program.Pages {
         private int _currentPage = 1;
         private const int NavigationCountUpperLimit = 3;
         private int _navigationCount = 0;
-        public Page_Intro() {
+        public Page_Login() {
             InitializeComponent();
         }
 

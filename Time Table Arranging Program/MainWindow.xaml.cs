@@ -40,7 +40,7 @@ namespace Time_Table_Arranging_Program {
             Global.MainFrame = MainFrame;
             Global.Snackbar = Snackbar;
             //DialogBox_Old.Initialize(DialogHost , Title , Message , DialogButton);
-            MainFrame.Navigate(new Page_GettingStarted());
+            MainFrame.Navigate(new Page_Introduction());
         }
 
         private void MainFrame_OnNavigating(object sender , NavigatingCancelEventArgs e) {

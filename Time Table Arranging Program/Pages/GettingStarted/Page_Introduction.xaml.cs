@@ -14,7 +14,7 @@ namespace Time_Table_Arranging_Program.Pages.Page_GettingStarted {
     /// <summary>
     /// Interaction logic for Page_GettingStarted.xaml
     /// </summary>
-    public partial class Page_GettingStarted : Page {
+    public partial class Page_Introduction : Page {
         private readonly CyclicIndex _cyclicIndex;
         private readonly List<Type> _pages = new List<Type>()
         {
@@ -23,12 +23,8 @@ namespace Time_Table_Arranging_Program.Pages.Page_GettingStarted {
             typeof(IfYouAreUsingComputerLabInUtar),
             typeof(LetsGetStarted)                       
         };
-
-        public ICommand GoToLoginPageCommand { get { return new RelayCommand(() => {
-            NavigationService.Navigate(new Page_Intro());
-        });} }
-
-        public Page_GettingStarted() {
+      
+        public Page_Introduction() {
             InitializeComponent();
             _cyclicIndex = new CyclicIndex(_pages.Count - 1);
             _cyclicIndex.CurrentValueChanged += CyclicIndexOnCurrentValueChanged;
@@ -43,7 +39,7 @@ namespace Time_Table_Arranging_Program.Pages.Page_GettingStarted {
         }
 
         private void SkipButton_OnClick(object sender , RoutedEventArgs e) {
-            NavigationService.Navigate(new Page_Intro());
+            NavigationService.Navigate(new Page_Login());
         }
     }
 }

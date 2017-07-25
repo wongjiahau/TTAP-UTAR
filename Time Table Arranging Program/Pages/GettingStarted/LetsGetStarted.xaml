@@ -6,11 +6,9 @@
              xmlns:local="clr-namespace:Time_Table_Arranging_Program.Pages.GettingStarted"
              xmlns:pageGettingStarted="clr-namespace:Time_Table_Arranging_Program.Pages.Page_GettingStarted"
              mc:Ignorable="d">
-    <UserControl.DataContext>
-        <pageGettingStarted:Page_GettingStarted></pageGettingStarted:Page_GettingStarted>
-    </UserControl.DataContext>
     <StackPanel HorizontalAlignment="Center">
         <TextBlock Style="{StaticResource  MaterialDesignDisplay4TextBlock}">Let's get started.</TextBlock>
         <Button Click="ButtonBase_OnClick" FontSize="20" HorizontalAlignment="Center" Height="60" Width="100" Style="{StaticResource MaterialDesignRaisedButton}" Margin="0 10 10 10" >GO</Button>
     </StackPanel>
 </UserControl>
+

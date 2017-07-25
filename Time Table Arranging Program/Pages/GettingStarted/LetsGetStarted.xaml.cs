@@ -27,7 +27,7 @@ namespace Time_Table_Arranging_Program.Pages.GettingStarted
         }
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e) {
-            Global.MainFrame.Navigate(new Page_Intro());
+            Global.MainFrame.Navigate(new Page_Login());
         }
     }
 }
