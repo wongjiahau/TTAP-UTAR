@@ -4,8 +4,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Time_Table_Arranging_Program.Pages"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" >
-    <StackPanel HorizontalAlignment="Center">
+    <materialDesign:Card Padding="40"  HorizontalAlignment="Center">
         <TextBlock Style="{StaticResource  MaterialDesignDisplay4TextBlock}">Welcome to TTAP.</TextBlock>
-    </StackPanel>
+    </materialDesign:Card>
 </UserControl>

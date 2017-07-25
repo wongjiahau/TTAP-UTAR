@@ -273,7 +273,7 @@
     <Compile Include="Pages\Page_SaveTimetableAsImage.xaml.cs">
       <DependentUpon>Page_SaveTimetableAsImage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\WelcomeToTTAP.xaml.cs">
+    <Compile Include="Pages\GettingStarted\WelcomeToTTAP.xaml.cs">
       <DependentUpon>WelcomeToTTAP.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Window_StateSummary.xaml.cs">
@@ -446,7 +446,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\WelcomeToTTAP.xaml">
+    <Page Include="Pages\GettingStarted\WelcomeToTTAP.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
