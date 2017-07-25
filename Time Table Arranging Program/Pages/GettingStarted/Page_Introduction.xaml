@@ -39,6 +39,16 @@
                     <Setter Property="VerticalAlignment" Value="Center"></Setter>
                     <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
                     <Setter Property="Margin" Value="15"></Setter>
+                    <Setter Property="OpeningEffect">
+                        <Setter.Value>
+                            <materialDesign:TransitionEffect Kind="ExpandIn"></materialDesign:TransitionEffect>
+                        </Setter.Value>
+                    </Setter>       
+                    <Setter Property="BackwardWipe">
+                        <Setter.Value>
+                            <materialDesign:CircleWipe></materialDesign:CircleWipe>
+                        </Setter.Value>
+                    </Setter>
                 </Style>
             </DockPanel.Resources>
             <Button Command="{Binding DecrementCommand}" IsEnabled="{Binding DecrementIsEnabled}"  DockPanel.Dock="Left">
