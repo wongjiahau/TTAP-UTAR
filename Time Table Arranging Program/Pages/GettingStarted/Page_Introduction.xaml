@@ -6,6 +6,8 @@
       xmlns:local="clr-namespace:Time_Table_Arranging_Program.Pages"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       xmlns:viewModels="clr-namespace:Time_Table_Arranging_Program.MVVM_Framework.ViewModels"
+      xmlns:gettingStarted="clr-namespace:Time_Table_Arranging_Program.Pages.GettingStarted"
+      xmlns:pageGettingStarted="clr-namespace:Time_Table_Arranging_Program.Pages.Page_GettingStarted"
       mc:Ignorable="d"       
       Title="Page_GettingStarted" VerticalAlignment="Stretch">
     <Page.DataContext>
@@ -20,33 +22,65 @@
     </Page.InputBindings>
     <Grid>
         <DockPanel>
-        <DockPanel.Resources>
-            <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignFloatingActionAccentButton}">
-                <Setter Property="VerticalAlignment" Value="Stretch"></Setter>
-                <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
-                <Setter Property="Margin" Value="30"></Setter>
-                <!--<Setter Property="Height" Value="{Binding Height, RelativeSource={RelativeSource Mode=FindAncestor, 
+            <DockPanel.Resources>
+                <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignFloatingActionAccentButton}">
+                    <Setter Property="VerticalAlignment" Value="Stretch"></Setter>
+                    <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+                    <Setter Property="Margin" Value="30"></Setter>
+                    <!--<Setter Property="Height" Value="{Binding Height, RelativeSource={RelativeSource Mode=FindAncestor, 
                         AncestorType={x:Type Page}}}"></Setter>-->
-            </Style>
-            <Style TargetType="materialDesign:PackIcon">
-                <Setter Property="Height" Value="40"></Setter>
-                <Setter Property="Width" Value="40"></Setter>
-                
-            </Style>
-        </DockPanel.Resources>
-        <Button Command="{Binding DecrementCommand}" IsEnabled="{Binding DecrementIsEnabled}"  DockPanel.Dock="Left">
-            <materialDesign:PackIcon Kind="ChevronLeft" />
-        </Button>
-        <Button Command="{Binding IncrementCommand}" IsEnabled="{Binding IncrementIsEnabled}" DockPanel.Dock="Right">
-            <materialDesign:PackIcon Kind="ChevronRight"></materialDesign:PackIcon>
-        </Button>
-        <ScrollViewer x:Name="ScrollViewer" VerticalAlignment="Center" VerticalScrollBarVisibility="Auto" VerticalContentAlignment="Center">
+                </Style>
+                <Style TargetType="materialDesign:PackIcon">
+                    <Setter Property="Height" Value="40"></Setter>
+                    <Setter Property="Width" Value="40"></Setter>
 
-        </ScrollViewer>
-    </DockPanel>
+                </Style>
+                <Style TargetType="materialDesign:TransitionerSlide">
+                    <Setter Property="VerticalAlignment" Value="Center"></Setter>
+                    <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+                    <Setter Property="Margin" Value="15"></Setter>
+                    <Setter Property="OpeningEffect">
+                        <Setter.Value>
+                            <materialDesign:TransitionEffect Kind="ExpandIn"></materialDesign:TransitionEffect>
+                        </Setter.Value>
+                    </Setter>       
+                    <Setter Property="BackwardWipe">
+                        <Setter.Value>
+                            <materialDesign:CircleWipe></materialDesign:CircleWipe>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </DockPanel.Resources>
+            <Button Command="{Binding DecrementCommand}" IsEnabled="{Binding DecrementIsEnabled}"  DockPanel.Dock="Left">
+                <materialDesign:PackIcon Kind="ChevronLeft" />
+            </Button>
+            <Button Command="{Binding IncrementCommand}" IsEnabled="{Binding IncrementIsEnabled}"  DockPanel.Dock="Right">
+                <materialDesign:PackIcon Kind="ChevronRight"></materialDesign:PackIcon>
+            </Button>
+
+            <materialDesign:Transitioner VerticalAlignment="Center"  VerticalContentAlignment="Center"  x:Name="Transitioner"  SelectedIndex="0" AutoApplyTransitionOrigins="True">
+               
+                <materialDesign:TransitionerSlide OpeningEffect="{materialDesign:TransitionEffect FadeIn}">
+                    <local:WelcomeToTTAP></local:WelcomeToTTAP>
+                </materialDesign:TransitionerSlide>
+                <materialDesign:TransitionerSlide>
+                    <gettingStarted:DoYouWantToWatchTTAPTutorial></gettingStarted:DoYouWantToWatchTTAPTutorial>
+                </materialDesign:TransitionerSlide>
+                <materialDesign:TransitionerSlide>
+                    <pageGettingStarted:IfYouAreUsingComputerLabInUtar></pageGettingStarted:IfYouAreUsingComputerLabInUtar>
+                </materialDesign:TransitionerSlide>
+                <materialDesign:TransitionerSlide>
+                    <gettingStarted:LetsGetStarted></gettingStarted:LetsGetStarted>
+                </materialDesign:TransitionerSlide>
+            </materialDesign:Transitioner>
+        </DockPanel>
         <Button Style="{StaticResource MaterialDesignFlatButton}" Click="SkipButton_OnClick" HorizontalAlignment="Right" Height="40" Width="100" VerticalAlignment="Bottom" Margin="10">SKIP</Button>
     </Grid>
 </Page>
+
+
+
+
 
 
 

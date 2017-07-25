@@ -4,11 +4,14 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Time_Table_Arranging_Program.Pages.GettingStarted"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" >
-    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-        <TextBlock HorizontalAlignment="Center" Style="{StaticResource  MaterialDesignDisplay2TextBlock}">Do you want to watch tutorial of TTAP?</TextBlock>
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button FontSize="20" Height="60" Style="{StaticResource MaterialDesignRaisedButton}" Click="ButtonBase_OnClick" Margin="10 10 10 10">WATCH</Button>
+    <materialDesign:Card Padding="40">
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+            <TextBlock HorizontalAlignment="Center" Style="{StaticResource  MaterialDesignDisplay2TextBlock}">Do you want to watch tutorial of TTAP?</TextBlock>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button FontSize="20" Height="60" Style="{StaticResource MaterialDesignRaisedButton}" Click="ButtonBase_OnClick" Margin="10 10 10 0">WATCH</Button>
+            </StackPanel>
         </StackPanel>
-    </StackPanel>
+    </materialDesign:Card>
 </UserControl>

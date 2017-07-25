@@ -30,12 +30,11 @@ namespace Time_Table_Arranging_Program.Pages.Page_GettingStarted {
             _cyclicIndex.CurrentValueChanged += CyclicIndexOnCurrentValueChanged;
             var cyclicIndexVm = new BoundedIndexVM(_cyclicIndex);
             this.DataContext = cyclicIndexVm;
-            ScrollViewer.Content = Activator.CreateInstance(_pages[0]);
+            
         }
 
-        private void CyclicIndexOnCurrentValueChanged(object sender , EventArgs eventArgs) {
-            var pageToGo = Activator.CreateInstance(_pages[_cyclicIndex.CurrentValue]);
-            ScrollViewer.Content = pageToGo;
+        private void CyclicIndexOnCurrentValueChanged(object sender , EventArgs eventArgs) {            
+            Transitioner.SelectedIndex = _cyclicIndex.CurrentValue;
         }
 
         private void SkipButton_OnClick(object sender , RoutedEventArgs e) {
