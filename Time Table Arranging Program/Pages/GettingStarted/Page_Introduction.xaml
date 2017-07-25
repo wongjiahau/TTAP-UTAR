@@ -11,6 +11,13 @@
     <Page.DataContext>
         <viewModels:BoundedIndexVM></viewModels:BoundedIndexVM>
     </Page.DataContext>
+    <Page.InputBindings>
+        <KeyBinding Command="{Binding IncrementCommand}" Key="Right" />
+        <KeyBinding Command="{Binding IncrementCommand}" Key="Down" />
+        <KeyBinding Command="{Binding DecrementCommand}" Key="Left" />
+        <KeyBinding Command="{Binding DecrementCommand}" Key="Up" />
+        <KeyBinding Command="{Binding IncrementCommand}" Key="Space"></KeyBinding>
+    </Page.InputBindings>
     <Grid>
         <DockPanel>
         <DockPanel.Resources>
@@ -27,10 +34,10 @@
                 
             </Style>
         </DockPanel.Resources>
-        <Button Command="{Binding DecrementCommand}" IsEnabled="{Binding DecrementButtonIsEnabled}"  DockPanel.Dock="Left">
+        <Button Command="{Binding DecrementCommand}" IsEnabled="{Binding DecrementIsEnabled}"  DockPanel.Dock="Left">
             <materialDesign:PackIcon Kind="ChevronLeft" />
         </Button>
-        <Button Command="{Binding IncrementCommand}" IsEnabled="{Binding IncrementButtonIsEnabled}" DockPanel.Dock="Right">
+        <Button Command="{Binding IncrementCommand}" IsEnabled="{Binding IncrementIsEnabled}" DockPanel.Dock="Right">
             <materialDesign:PackIcon Kind="ChevronRight"></materialDesign:PackIcon>
         </Button>
         <ScrollViewer x:Name="ScrollViewer" VerticalAlignment="Center" VerticalScrollBarVisibility="Auto" VerticalContentAlignment="Center">

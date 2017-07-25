@@ -7,21 +7,20 @@ using System.Windows.Input;
 using Time_Table_Arranging_Program.MVVM_Framework.Models;
 using Time_Table_Arranging_Program.Pages;
 
-namespace Time_Table_Arranging_Program.MVVM_Framework.ViewModels
-{
+namespace Time_Table_Arranging_Program.MVVM_Framework.ViewModels {
     public class BoundedIndexVM : ViewModelBase<CyclicIndex> {
 
         private ICommand _decrementCommand;
         private ICommand _incrementCommand;
 
         public BoundedIndexVM() {
-            
+
         }
         public BoundedIndexVM(CyclicIndex model) : base(model) {
             model.CurrentValueChanged += Model_CurrentValueChanged;
         }
 
-        private void Model_CurrentValueChanged(object sender, EventArgs e) {
+        private void Model_CurrentValueChanged(object sender , EventArgs e) {
             OnPropertyChanged("CurrentValue");
         }
 
@@ -29,7 +28,9 @@ namespace Time_Table_Arranging_Program.MVVM_Framework.ViewModels
             get {
                 return
                     _incrementCommand ??
-                    (_incrementCommand = new RelayCommand(() => { CurrentValue++; }));
+                    (_incrementCommand = new RelayCommand(() => {
+                        if (IncrementIsEnabled) CurrentValue++;
+                    }));
             }
         }
 
@@ -37,25 +38,27 @@ namespace Time_Table_Arranging_Program.MVVM_Framework.ViewModels
             get {
                 return
                     _decrementCommand ??
-                    (_decrementCommand = new RelayCommand(() => { CurrentValue--; }));
+                    (_decrementCommand = new RelayCommand(() => {
+                       if(DecrementIsEnabled) CurrentValue--;
+                    }));
             }
         }
 
 
-        public bool DecrementButtonIsEnabled => Model.CurrentValue > 0;
-        public bool IncrementButtonIsEnabled => Model.CurrentValue < Model.MaxValue;
-            
-        
+        public bool DecrementIsEnabled => Model.CurrentValue > 0;
+        public bool IncrementIsEnabled => Model.CurrentValue < Model.MaxValue;
+
+
 
         public int CurrentValue {
             get { return Model?.CurrentValue ?? 0; }
             set {
                 Model.CurrentValue = value;
                 OnPropertyChanged();
-                OnPropertyChanged("DecrementButtonIsEnabled");
-                OnPropertyChanged("IncrementButtonIsEnabled");
+                OnPropertyChanged(nameof(DecrementIsEnabled));
+                OnPropertyChanged(nameof(IncrementIsEnabled));
             }
-            
+
         }
     }
 }

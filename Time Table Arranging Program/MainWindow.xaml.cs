@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media.Animation;
 using System.Windows.Navigation;
 using Time_Table_Arranging_Program.Class;
@@ -38,9 +39,9 @@ namespace Time_Table_Arranging_Program {
             InitializeComponent();
             Global.MainWindow = this;
             Global.MainFrame = MainFrame;
-            Global.Snackbar = Snackbar;
-            //DialogBox_Old.Initialize(DialogHost , Title , Message , DialogButton);
-            MainFrame.Navigate(new Page_Introduction());
+            Global.Snackbar = Snackbar;            
+            var firstPage = new Page_Introduction();
+            MainFrame.Navigate(firstPage);                                    
         }
 
         private void MainFrame_OnNavigating(object sender , NavigatingCancelEventArgs e) {
