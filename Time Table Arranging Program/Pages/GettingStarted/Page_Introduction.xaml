@@ -19,6 +19,7 @@
         <KeyBinding Command="{Binding DecrementCommand}" Key="Left" />
         <KeyBinding Command="{Binding DecrementCommand}" Key="Up" />
         <KeyBinding Command="{Binding IncrementCommand}" Key="Space"></KeyBinding>
+        <MouseBinding Command="{Binding IncrementCommand}" MouseAction="LeftClick"></MouseBinding>
     </Page.InputBindings>
     <Grid>
         <DockPanel>
