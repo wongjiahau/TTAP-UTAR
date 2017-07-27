@@ -5,14 +5,13 @@ using Time_Table_Arranging_Program.Interfaces;
 
 namespace Time_Table_Arranging_Program.Class {
     public class Slot : IEquatable<Slot>, IComparable<Slot>, IIntersectionCheckable<Slot>, IDuplicable<Slot>, IHashable,
-        IToConstructionString {
-        private static int _nextUid;
+        IToConstructionString {        
 
         private IDay _day;
 
         public Slot() {
             WeekNumber = new WeekNumber(new List<int>());
-            UID = _nextUid++;
+            UID = -1;
             IsSelected = false;
             StartTime = Time.CreateTime_24HourFormat(0 , 0);
             EndTime = Time.CreateTime_24HourFormat(0 , 0);
@@ -82,7 +81,7 @@ namespace Time_Table_Arranging_Program.Class {
 
         public Slot GetDuplicate() {
             var s = new Slot();
-            s.UID = _nextUid++;
+            s.UID = UID;
             s.Code = Code;
             s.SubjectName = SubjectName;
             s.Number = Number;
@@ -99,6 +98,7 @@ namespace Time_Table_Arranging_Program.Class {
 
         public bool Equals(Slot b) {
             return
+                UID == b.UID &&
                 SubjectName == b.SubjectName &&
                 Code == b.Code &&
                 Number == b.Number &&

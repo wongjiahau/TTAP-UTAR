@@ -16,8 +16,8 @@ namespace Time_Table_Arranging_Program.Class.TokenParser {
                     if (ts.IsAtLastToken()) break;
                     if (TryParseSubjectCode(ts, ref resultSlot)) goto here;
                     if (TryParseSubjectName(ts, ref resultSlot, ref isReadingSubjectName)) goto here;
-                    if (TryParseSlotNumber(ts, ref resultSlot)) goto here;
-                    if (TryParseSlotType(ts, ref resultSlot)) goto here;
+                    if (TryParseSlotTypeAndUID(ts , ref resultSlot)) goto here;
+                    if (TryParseSlotNumber(ts, ref resultSlot)) goto here;                    
                     if (TryParseDay(ts, ref resultSlot)) goto here;
                     if (TryParseStartTime(ts, ref resultSlot)) goto here;
                     if (TryParseEndTime(ts, ref resultSlot)) goto here;
@@ -137,9 +137,10 @@ namespace Time_Table_Arranging_Program.Class.TokenParser {
             return false;
         }
 
-        private bool TryParseSlotType(ITokenStream ts , ref Slot resultSlot) {
+        private bool TryParseSlotTypeAndUID(ITokenStream ts , ref Slot resultSlot) {
             if (ts.CurrentToken().IsSlotType()) {
                 resultSlot.Type = ts.CurrentToken().Value();
+                resultSlot.UID = int.Parse(ts.PreviousToken().Value());
                 return true;
             }
             return false;
