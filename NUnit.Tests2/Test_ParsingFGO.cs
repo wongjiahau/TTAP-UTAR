@@ -69,7 +69,7 @@ namespace NUnit.Tests2 {
         [Test]
         public void Test_SlotParser_Part1OfTestFile() {
             var input = Helper.RawStringOfTestFile("FGOHtmlText.txt");
-            input = input.Split(new string[] { "<STOP>" } , StringSplitOptions.None)[0];
+            input = input.Split(new string[] { "[STOP1]" } , StringSplitOptions.None)[0];
             int lastUid = 477;
             var result = new SlotParser().Parse(input);
             var uidList = new Dictionary<int , bool>();

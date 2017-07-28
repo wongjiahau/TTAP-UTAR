@@ -56,6 +56,7 @@ namespace Time_Table_Arranging_Program.Pages {
                 var s = input[i];
                 InputSlotsListView.Items.Add(
                     new Slot {
+                        UID = s.UID,
                         SubjectName = s.SubjectName ,
                         Code = s.Code ,
                         Day = s.Day ,

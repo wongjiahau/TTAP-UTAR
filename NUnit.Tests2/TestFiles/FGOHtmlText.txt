@@ -98,6 +98,7 @@ Barred List by week 5th/12th [by Hour: 0]MPU32033 - ENGLISH FOR PROFESSIONALS - 
 21	T	6	24	Thu	04:00 PM - 06:00 PM	2.0	1-14	KB524	13079(Thinusha)	
 23
 1
+[STOP1]
 Barred List by week 5th/12th [by Hour: 0]MPU32043 - ENGLISH FOR ENGINEERING - [View All] [153]
 22	L	1	49	Mon	12:00 PM - 02:00 PM	2.0	1-14	KB324	15077(Maxwell)	
 32
