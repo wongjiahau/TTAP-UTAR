@@ -16,18 +16,20 @@ namespace NUnit.Tests2
         public void Test_HtmlSlotParser_1()
         {
             bool check = false;
+            //directly read from the file(Must edit the path value)
             string path = @"C:\Users\yihan\Desktop\Sample HTML.txt";
-            //string input = Helper.RawStringOfTestFile("Sample HTML.txt");
 
             var doc = new HtmlDocument();
             doc.Load(path);
 
+            //get the subject table
             HtmlNodeCollection nodes = doc.DocumentNode.SelectNodes("//div[@id='overviewSector']/table");
 
             foreach (HtmlNode table in nodes)
             {
                 foreach (HtmlNode row in table.SelectNodes("tr"))
                 {
+                    //skip one row for the table header
                     if (check == false)
                     {
                         check = true;
@@ -45,6 +47,7 @@ namespace NUnit.Tests2
 
                         foreach (HtmlNode cell in cells)
                         {
+                            //display item
                             Console.WriteLine(cell.InnerText);
                         }
                     }
