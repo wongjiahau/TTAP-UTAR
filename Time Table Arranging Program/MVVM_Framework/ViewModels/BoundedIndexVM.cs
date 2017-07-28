@@ -45,8 +45,8 @@ namespace Time_Table_Arranging_Program.MVVM_Framework.ViewModels {
         }
 
 
-        public bool DecrementIsEnabled => Model?.CurrentValue > 0;
-        public bool IncrementIsEnabled => Model?.CurrentValue < Model?.MaxValue;
+        public bool DecrementIsEnabled => Model.CurrentValue > 0;
+        public bool IncrementIsEnabled => Model.CurrentValue < Model.MaxValue;
 
 
 

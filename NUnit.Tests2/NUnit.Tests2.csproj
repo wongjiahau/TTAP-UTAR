@@ -72,6 +72,7 @@
     <Compile Include="Test_Day.cs" />
     <Compile Include="Test_Filterer.cs" />
     <Compile Include="Test_Helper.cs" />
+    <Compile Include="Test_HtmlSlotParser.cs" />
     <Compile Include="Test_Indices.cs" />
     <Compile Include="Test_ParsingHtml.cs" />
     <Compile Include="Test_Permutator.cs" />
