@@ -82,7 +82,17 @@ namespace NUnit.Tests2 {
 
         [Test, TestCaseSource("_stringInputs")]
         public void Test_SlotParser_5(string input) {
+            var result = new SlotParser().Parse(input);
+            TestForResultCorrectness(result);
+
+
+        }
+
+        public static void TestForResultCorrectness(List<Slot> result) {
+            // this is the slot result from Sample HTML.txt
             //the following expected result is obtained using pure eye sight
+
+            var subjects = SubjectModel.Parse(result);
             List<CodeAndCount> CodeOfRelevantSubjectsAndTheirCorrespondingSlotCount = new List<CodeAndCount>();
             var a = CodeOfRelevantSubjectsAndTheirCorrespondingSlotCount;
             a.Add(new CodeAndCount("MPU3113" , 4));
@@ -121,9 +131,7 @@ namespace NUnit.Tests2 {
             a.Add(new CodeAndCount("UJLL1093" , 3));
             a.Add(new CodeAndCount("UKMM1011" , 3));
             a.Add(new CodeAndCount("UKMM1043" , 8));
-
-
-            var subjects = GetInput(input);
+            
             foreach (var c in CodeOfRelevantSubjectsAndTheirCorrespondingSlotCount) {
                 bool somethingFound = false;
                 foreach (var s in subjects) {

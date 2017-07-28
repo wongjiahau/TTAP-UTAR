@@ -3,6 +3,7 @@ using Microsoft.Win32;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -10,6 +11,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Navigation;
 using Time_Table_Arranging_Program.Class;
 using Time_Table_Arranging_Program.Class.SlotGeneralizer;
+using Time_Table_Arranging_Program.Class.TokenParser;
 using Time_Table_Arranging_Program.Interfaces;
 using Time_Table_Arranging_Program.Pages;
 using Time_Table_Arranging_Program.Pages.Page_GettingStarted;
@@ -41,7 +43,9 @@ namespace Time_Table_Arranging_Program {
             Global.MainFrame = MainFrame;
             Global.Snackbar = Snackbar;            
             var firstPage = new Page_Introduction();
-            MainFrame.Navigate(firstPage);                                    
+            MainFrame.Navigate(firstPage);
+            //new HtmlSlotParser().Parse(File.ReadAllText(
+            //    @"C:\Users\User\Desktop\TTAPv7.7\NUnit.Tests2\TestFiles\CopiedTextFromSampleHTML.txt"));
         }
 
         private void MainFrame_OnNavigating(object sender , NavigatingCancelEventArgs e) {

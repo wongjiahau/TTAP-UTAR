@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System;
+using NUnit.Framework;
 using Time_Table_Arranging_Program;
 
 namespace NUnit.Tests2 {
@@ -119,6 +120,67 @@ namespace NUnit.Tests2 {
         public void Test_Time_FactoryMethod_3() {
             var t = Time.CreateTime_12HourFormat(1 , 00 , false);
             Assert.True(t.Hour == 1);
+        }
+
+        [Test]
+        public void Test_Time_Parse_1() {
+            string input = "9:00 AM";
+            var expected = Time.CreateTime_24HourFormat(9, 0);
+            var actual = Time.Parse(input);
+            Assert.IsTrue(expected.Equals(actual));
+        }
+
+        
+        
+
+        [Test]
+        public void Test_Time_Parse_2() {
+            string input = "1:00 PM";
+            var expected = Time.CreateTime_24HourFormat(13 , 0);
+            var actual = Time.Parse(input);
+            Assert.IsTrue(expected.Equals(actual));
+        }
+
+        [Test]
+        public void Test_Time_Parse_3() {
+            string input = "1:30 PM";
+            var expected = Time.CreateTime_24HourFormat(13 , 30);
+            var actual = Time.Parse(input);
+            Assert.IsTrue(expected.Equals(actual));
+        }
+
+        [Test]
+        public void Test_Time_Parse_4() {
+            string input = "12:00 PM";
+            var expected = Time.CreateTime_24HourFormat(12 , 0);
+            var actual = Time.Parse(input);
+            Assert.IsTrue(expected.Equals(actual));
+        }
+
+        [Test]
+        public void Test_Time_Parse_5() {
+            string input = "12:00 AM";
+            var expected = Time.CreateTime_24HourFormat(0 , 0);
+            var actual = Time.Parse(input);
+            Assert.IsTrue(expected.Equals(actual));
+        }
+
+        [Test]
+        public void Test_Time_Minus_1() {
+            var input1 = Time.CreateTime_24HourFormat(12, 0);
+            var input2 = Time.CreateTime_24HourFormat(9, 0);
+            var actual = input1.Minus(input2);
+            var expected = new TimeSpan(0,3,0,0);
+            Assert.AreEqual(expected,actual);
+        }
+
+        [Test]
+        public void Test_Time_Minus_2() {
+            var input1 = Time.CreateTime_24HourFormat(12 , 0);
+            var input2 = Time.CreateTime_24HourFormat(9 , 30);
+            var actual = input1.Minus(input2);
+            var expected = new TimeSpan(0 , 2 , 30 , 0);
+            Assert.AreEqual(expected , actual);
         }
     }
 }

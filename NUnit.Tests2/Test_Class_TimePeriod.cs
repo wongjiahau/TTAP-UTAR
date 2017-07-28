@@ -103,7 +103,23 @@ namespace NUnit.Tests2 {
             int originalValue = Convert.ToInt32("0" , 2);
             originalValue |= input1;
             Assert.AreEqual(originalValue , input1);
-
         }
+
+        [Test]
+        public void Test_TimePeriod_Parse_1() {
+            var input = "09:00 AM - 12:00 PM";
+            var expected = new TimePeriod(Time.CreateTime_24HourFormat(9,0), Time.CreateTime_24HourFormat(12,0));
+            var actual = TimePeriod.Parse(input);
+            Assert.IsTrue(expected.Equals(actual));
+        }
+
+        [Test]
+        public void Test_TimePeriod_Parse_2() {
+            var input = "08:30 AM - 1:00 PM";
+            var expected = new TimePeriod(Time.CreateTime_24HourFormat(8 , 30) , Time.CreateTime_24HourFormat(13 , 0));
+            var actual = TimePeriod.Parse(input);
+            Assert.IsTrue(expected.Equals(actual));
+        }
+
     }
 }

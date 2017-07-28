@@ -147,7 +147,7 @@ namespace Time_Table_Arranging_Program.Class {
 
         public string ToFullString() {
             return
-                $"{Code} [{SubjectName}] {Type}{Number} {Day} {Venue} {TimePeriod} {WeekNumber}";
+                $"({UID}) {Code} [{SubjectName}] {Type}{Number} {Day} {Venue} {TimePeriod} {WeekNumber}";
        
         }
     }

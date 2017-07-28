@@ -177,6 +177,7 @@
     <Compile Include="Class\SlotGeneralizer\SlotGeneralizer.cs" />
     <Compile Include="Class\StateSummary\StateTable.cs" />
     <Compile Include="Class\testing_for_revert.cs" />
+    <Compile Include="Class\TokenParser\HtmlSlotParser.cs" />
     <Compile Include="Interfaces\INeedDataContext.cs" />
     <Compile Include="Interfaces\IPageWithLoadedFunction.cs" />
     <Compile Include="Interfaces\ToBinary.cs" />

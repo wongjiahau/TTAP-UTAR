@@ -10,7 +10,7 @@ namespace Time_Table_Arranging_Program {
     /// </summary>
     public partial class App : Application {
         public App() {
-            DispatcherUnhandledException += OnUnhandledExeption;
+          DispatcherUnhandledException += OnUnhandledExeption;
         }
 
         private void OnUnhandledExeption(object sender, DispatcherUnhandledExceptionEventArgs e) {
