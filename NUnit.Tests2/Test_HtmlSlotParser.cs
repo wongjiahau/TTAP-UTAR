@@ -5,22 +5,51 @@ using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
 using Time_Table_Arranging_Program.Class;
+using HtmlAgilityPack;
 
-
-namespace NUnit.Tests2 {
+namespace NUnit.Tests2
+{
     [TestFixture]
-   public class Test_HtmlSlotParser {
+    public class Test_HtmlSlotParser
+    {
         [Test]
-        public void Test_HtmlSlotParser_1() {
-            string input = Helper.RawStringOfTestFile("Sample HTML.txt");
-            /// var result = new HtmlSlotParser.Parse(input)
-            var result = new List<Slot>();
-            result.AddRange(TestData.GetSlotsByName(TestData.Subjects.AdvancedStructuralSteelDesign));
-            foreach (var slot in result) {
-                Console.WriteLine(slot.ToFullString());
+        public void Test_HtmlSlotParser_1()
+        {
+            bool check = false;
+            string path = @"C:\Users\yihan\Desktop\Sample HTML.txt";
+            //string input = Helper.RawStringOfTestFile("Sample HTML.txt");
+
+            var doc = new HtmlDocument();
+            doc.Load(path);
+
+            HtmlNodeCollection nodes = doc.DocumentNode.SelectNodes("//div[@id='overviewSector']/table");
+
+            foreach (HtmlNode table in nodes)
+            {
+                foreach (HtmlNode row in table.SelectNodes("tr"))
+                {
+                    if (check == false)
+                    {
+                        check = true;
+                        continue;
+                    }
+                    else
+                    {
+
+                        HtmlNodeCollection cells = row.SelectNodes("th|td");
+
+                        if (cells == null)
+                        {
+                            continue;
+                        }
+
+                        foreach (HtmlNode cell in cells)
+                        {
+                            Console.WriteLine(cell.InnerText);
+                        }
+                    }
+                }
             }
-
-
         }
     }
 }
