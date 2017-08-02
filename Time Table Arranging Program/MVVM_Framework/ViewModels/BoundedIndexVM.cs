@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Time_Table_Arranging_Program.MVVM_Framework.Models;
 using Time_Table_Arranging_Program.Pages;
-
+//fongshaoqun
 namespace Time_Table_Arranging_Program.MVVM_Framework.ViewModels {
     public class BoundedIndexVM : ViewModelBase<CyclicIndex> {
 
