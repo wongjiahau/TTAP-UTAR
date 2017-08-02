@@ -19,7 +19,7 @@ namespace Time_Table_Arranging_Program.MVVM_Framework.ViewModels {
         public BoundedIndexVM(CyclicIndex model) : base(model) {
             model.CurrentValueChanged += Model_CurrentValueChanged;
         }
-
+        //Hello
         private void Model_CurrentValueChanged(object sender , EventArgs e) {
             OnPropertyChanged("CurrentValue");
         }
@@ -45,8 +45,8 @@ namespace Time_Table_Arranging_Program.MVVM_Framework.ViewModels {
         }
 
 
-        public bool DecrementIsEnabled => Model.CurrentValue > 0;
-        public bool IncrementIsEnabled => Model.CurrentValue < Model.MaxValue;
+        public bool DecrementIsEnabled => Model?.CurrentValue > 0;
+        public bool IncrementIsEnabled => Model?.CurrentValue < Model?.MaxValue;
 
 
 
