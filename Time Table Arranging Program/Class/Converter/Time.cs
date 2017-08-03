@@ -123,6 +123,6 @@ namespace Time_Table_Arranging_Program {
 
         protected override string StringValue() {
             return To12HourFormat(true);
-        }
+        }  
     }
 }

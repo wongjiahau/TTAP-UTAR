@@ -72,6 +72,7 @@
     <Compile Include="Test_Day.cs" />
     <Compile Include="Test_Filterer.cs" />
     <Compile Include="Test_Helper.cs" />
+    <Compile Include="Test_HtmlSlotParser.cs" />
     <Compile Include="Test_Indices.cs" />
     <Compile Include="Test_ParsingFGO.cs" />
     <Compile Include="Test_ParsingHtml.cs" />
@@ -104,6 +105,9 @@
     </Content>
     <EmbeddedResource Include="TestFiles\CopiedTextFromSampleHTML.txt" />
     <EmbeddedResource Include="TestFiles\FGOHtmlText.txt" />
+    <EmbeddedResource Include="TestFiles\FGO.html">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <Content Include="TestFiles\MechanicalEngineering2017AprSlots.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

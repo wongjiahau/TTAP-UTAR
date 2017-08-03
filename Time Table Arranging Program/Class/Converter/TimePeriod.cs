@@ -82,5 +82,14 @@ namespace Time_Table_Arranging_Program.Class.Converter {
             return $" {StartTime} - {EndTime}";
         }
 
+        public static TimePeriod Parse(string data) {
+                var tokens = data.Split('-');
+                var startTime = tokens[0].Trim();
+                var endTime = tokens[1].Trim();
+                var result = new TimePeriod();
+                result.StartTime = Time.Parse(startTime);
+                result.EndTime = Time.Parse(endTime);
+                return result;
+        }
     }
 }

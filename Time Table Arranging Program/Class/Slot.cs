@@ -5,7 +5,7 @@ using Time_Table_Arranging_Program.Interfaces;
 
 namespace Time_Table_Arranging_Program.Class {
     public class Slot : IEquatable<Slot>, IComparable<Slot>, IIntersectionCheckable<Slot>, IDuplicable<Slot>, IHashable,
-        IToConstructionString {        
+        IToConstructionString {
 
         private IDay _day;
 
@@ -28,7 +28,7 @@ namespace Time_Table_Arranging_Program.Class {
             Day = day;
             Venue = venue;
             TimePeriod = timePeriod;
-            WeekNumber = weekNumber;                        
+            WeekNumber = weekNumber;
             IsSelected = true;
         }
 
@@ -116,7 +116,7 @@ namespace Time_Table_Arranging_Program.Class {
 
         public bool IntersectWith(Slot other) {
             if (Code == other.Code && Type == other.Type && Number != other.Number) return true;
-            if (!Day.Equals(other.Day)) return false;            
+            if (!Day.Equals(other.Day)) return false;
             if (!TimePeriod.IntersectWith(other.TimePeriod)) return false;
             return WeekNumber.IntersectWith(other.WeekNumber);
         }
@@ -145,6 +145,21 @@ namespace Time_Table_Arranging_Program.Class {
                 EndTime.Equals(b.EndTime) &&
                 WeekNumber.Equals(b.WeekNumber)
                 ;
+        }
+
+        public string ToFullString() {
+            return
+                $"{Code} " +
+                $"{SubjectName} " +
+                $"[{UID}] " +
+                $"{Type}-" +
+                $"{Number} " +
+                $"({Day}) " +
+                $"{TimePeriod} " +
+                $"{WeekNumber} " +
+                $"{Venue} " +
+                $"{LecturerName} ";
+
         }
     }
 }
