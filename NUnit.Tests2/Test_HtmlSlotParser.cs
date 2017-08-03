@@ -31,6 +31,14 @@ namespace NUnit.Tests2 {
         }
 
         [Test]
+        public void Test_HtmlSlotParser_GrepLecturerName() {
+            string input = "07005(LooJL), 09066(TanYQ)";
+            var expected = "LooJL, TanYQ";
+            var actual = HtmlSlotParser_FGO.GrepLecturerName(input);
+            Assert.AreEqual(expected,actual);
+        }
+
+        [Test]
         public void Test_HtmlSlotParser_2() {
             string input = Helper.RawStringOfTestFile("FGO.html");
             var result = new HtmlSlotParser_FGO().Parse(input);

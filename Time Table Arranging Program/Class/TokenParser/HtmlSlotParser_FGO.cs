@@ -67,14 +67,13 @@ namespace Time_Table_Arranging_Program.Class.TokenParser {
                                 break;
                             case 6: /*not storing this data*/ break; //credit hour
                             case 7:          
-                                if(data == "") slot.WeekNumber = new NullWeekNumber(); 
-                                else slot.WeekNumber = WeekNumber.Parse(data);
+                                slot.WeekNumber = data == "" ? new NullWeekNumber() : WeekNumber.Parse(data);
                                 break;
                             case 8:
-                                slot.Venue = data;
+                                slot.Venue = data == "" ? "Unassigned venue" : data;
                                 break;
                             case 9:
-                                slot.LecturerName = data;
+                                slot.LecturerName = data == "" ? "Unassigned lecturer" : GrepLecturerName(data);
                                 break;
                             case 10: break; //Reg (I'm not sure what does it mean)
                             case 11: break; //Available
@@ -87,6 +86,17 @@ namespace Time_Table_Arranging_Program.Class.TokenParser {
                 }
             }
 
+            return result;
+        }
+
+        public static string GrepLecturerName(string s) {
+            var tokens = s.Split(',');
+            string result = "";
+            for (var i = 0; i < tokens.Length; i++) {
+                var t = tokens[i];
+                result += t.Split('(')[1].Trim().Replace(")", "");
+                if (i != tokens.Length - 1) result += ", ";
+            }
             return result;
         }
 
