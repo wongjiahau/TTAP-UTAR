@@ -7,7 +7,7 @@ using HtmlAgilityPack;
 using Time_Table_Arranging_Program.Class.Converter;
 
 namespace Time_Table_Arranging_Program.Class.TokenParser {
-    public class HtmlSlotParser {
+    public class HtmlSlotParser_FGO {
         public List<Slot> Parse(string html) {
             var result = new List<Slot>();
             bool firstRowIsSkipped = false;
