@@ -42,8 +42,9 @@ namespace Time_Table_Arranging_Program.Class.TokenParser {
                         int offset = 0;
                         if (row.GetAttributeValue("id", "").Contains("subRow")) {
                             offset = 4;
+                            slot.UID = result.Last().UID;
                             slot.Type = result.Last().Type;
-                            slot.Number = result.Last().Number;
+                            slot.Number = result.Last().Number;                            
                         } 
                         string data = cells[k].InnerText;
                         switch (k + offset) {
