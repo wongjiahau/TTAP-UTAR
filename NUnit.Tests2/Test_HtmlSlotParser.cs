@@ -15,6 +15,21 @@ namespace NUnit.Tests2 {
             string input = Helper.RawStringOfTestFile("Sample HTML.txt");
             var result = new HtmlSlotParser().Parse(input);
             Test_SlotParser.TestForResultCorrectness(result);         
-        }       
+        }
+
+        [Test]
+        public void Test_HtmlSlotParser_2() {
+            string input = Helper.RawStringOfTestFile("Sample HTML.txt");
+            var result = new HtmlSlotParser().Parse(input);
+            var expectedUids = new HashSet<int>();
+            for (int i = 1; i <= 130; i++) {
+                expectedUids.Add(i);
+            }
+            var actualUids = new HashSet<int>();
+            for (int i = 0; i < result.Count; i++) {
+                actualUids.Add(result[i].UID);
+            }
+            Assert.IsTrue(expectedUids.SetEquals(actualUids));
+        }
     }
 }
