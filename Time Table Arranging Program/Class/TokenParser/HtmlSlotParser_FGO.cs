@@ -16,7 +16,7 @@ namespace Time_Table_Arranging_Program.Class.TokenParser {
             var doc = new HtmlDocument();
             doc.LoadHtml(html);
             //get the subject table
-            HtmlNodeCollection nodes = doc.DocumentNode.SelectNodes("//div[@id='overviewSector']/table");
+            HtmlNodeCollection nodes = doc.DocumentNode.SelectNodes("//div[@id='withClass']/table/tbody");
             foreach (HtmlNode table in nodes) {
                 foreach (HtmlNode row in table.SelectNodes("tr")) {
                     if (firstRowIsSkipped == false) {  //skip one row for the table header
@@ -27,7 +27,7 @@ namespace Time_Table_Arranging_Program.Class.TokenParser {
                     if (cells == null) {
                         continue;
                     }
-                    if (cells.Count == 1) {
+                    if (row.GetAttributeValue("class", "") == "normalTbl-sub3header"){
                         var tokens = cells[0].InnerText.Split('-');
                         currentSubjectCode = tokens[0].Trim();
                         currentSubjectName = tokens[1].Split('[')[0].Trim().Beautify();

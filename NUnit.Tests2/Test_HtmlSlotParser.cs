@@ -13,12 +13,17 @@ namespace NUnit.Tests2 {
         [Test]
         public void Test_HtmlSlotParser_ListDownResult() {
             string input = Helper.RawStringOfTestFile("FGO.html");
+            var result = new HtmlSlotParser_FGO().Parse(input);
+            foreach (var slot in result) {
+                Console.WriteLine(slot.ToFullString());
+            }
+
         }
 
         [Test]
         public void Test_HtmlSlotParser_2() {
             string input = Helper.RawStringOfTestFile("FGO.html");
-            var result = new HtmlSlotParser().Parse(input);
+            var result = new HtmlSlotParser_FGO().Parse(input);
             var expectedUids = new HashSet<int>();
             for (int i = 1 ; i <= 130 ; i++) {
                 expectedUids.Add(i);
@@ -33,7 +38,7 @@ namespace NUnit.Tests2 {
         [Test]
         public void Test_HtmlSlotParser_3() {
             string input = Helper.RawStringOfTestFile("FGO.html");
-            var actual = new HtmlSlotParser().Parse(input);
+            var actual = new HtmlSlotParser_FGO().Parse(input);
             var expected = new List<Slot>() { };
             for (int i = 0 ; i < expected.Count ; i++) {
                 if (expected[i].Equals(actual[i])) { }
