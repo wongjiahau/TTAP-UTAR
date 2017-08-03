@@ -22,7 +22,6 @@ namespace NUnit.Tests2 {
 
         [Test]
         public void Test_HtmlSlotParser_GrepSubjectCodeAndName() {
-
             string input =
                 "Barred List by week 5th/12th [by Hour: 0]MPU3113 - HUBUNGAN ETNIK (FOR LOCAL STUDENTS) - [View All] [437]";
             var expected = (code:"MPU3113", subjectName: "HUBUNGAN ETNIK (FOR LOCAL STUDENTS)".Beautify());
@@ -36,7 +35,8 @@ namespace NUnit.Tests2 {
             string input = Helper.RawStringOfTestFile("FGO.html");
             var result = new HtmlSlotParser_FGO().Parse(input);
             var expectedUids = new HashSet<int>();
-            for (int i = 1 ; i <= 130 ; i++) {
+            int lastUid = 1660;
+            for (int i = 1 ; i <= lastUid ; i++) {
                 expectedUids.Add(i);
             }
             var actualUids = new HashSet<int>();
@@ -44,35 +44,6 @@ namespace NUnit.Tests2 {
                 actualUids.Add(result[i].UID);
             }
             Assert.IsTrue(expectedUids.SetEquals(actualUids));
-        }
-
-        [Test]
-        public void Test_HtmlSlotParser_3() {
-            string input = Helper.RawStringOfTestFile("FGO.html");
-            var actual = new HtmlSlotParser_FGO().Parse(input);
-            var expected = new List<Slot>() { };
-            for (int i = 0 ; i < expected.Count ; i++) {
-                if (expected[i].Equals(actual[i])) { }
-                else {
-                    Console.WriteLine("Error occur at Slot with UID of " + expected[i].UID);
-                    Console.WriteLine("Expected is : ");
-                    Console.WriteLine(expected[i].ToFullString());
-                    Console.WriteLine("\n");
-                    Console.WriteLine("Actual is : ");
-                    Console.WriteLine(actual[i].ToFullString());
-                    Console.WriteLine("--------------------------------------------");
-                    Assert.Fail();
-                }
-            }
-
-            Dictionary<int , Slot> GetDictionary(List<Slot> list)
-            {
-                var result = new Dictionary<int , Slot>();
-                foreach (var slot in list) {
-                    result.Add(slot.UID , slot);
-                }
-                return result;
-            }
-        }
+        }       
     }
 }
