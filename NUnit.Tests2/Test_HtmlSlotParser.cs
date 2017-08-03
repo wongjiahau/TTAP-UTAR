@@ -21,6 +21,17 @@ namespace NUnit.Tests2 {
         }
 
         [Test]
+        public void Test_HtmlSlotParser_GrepSubjectCodeAndName() {
+
+            string input =
+                "Barred List by week 5th/12th [by Hour: 0]MPU3113 - HUBUNGAN ETNIK (FOR LOCAL STUDENTS) - [View All] [437]";
+            var expected = (code:"MPU3113", subjectName: "HUBUNGAN ETNIK (FOR LOCAL STUDENTS)".Beautify());
+            var actual = HtmlSlotParser_FGO.GrepSubjectCodeAndName(input);
+            Assert.AreEqual(expected.code,actual.code);
+            Assert.AreEqual(expected.subjectName, actual.subjectName);
+        }
+
+        [Test]
         public void Test_HtmlSlotParser_2() {
             string input = Helper.RawStringOfTestFile("FGO.html");
             var result = new HtmlSlotParser_FGO().Parse(input);

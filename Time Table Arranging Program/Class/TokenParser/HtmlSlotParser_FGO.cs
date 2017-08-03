@@ -19,7 +19,8 @@ namespace Time_Table_Arranging_Program.Class.TokenParser {
             HtmlNodeCollection nodes = doc.DocumentNode.SelectNodes("//div[@id='withClass']/table/tbody");
             foreach (HtmlNode table in nodes) {
                 foreach (HtmlNode row in table.SelectNodes("tr")) {
-                    if (firstRowIsSkipped == false) {  //skip one row for the table header
+                    if (firstRowIsSkipped == false) {
+                        //skip one row for the table header
                         firstRowIsSkipped = true;
                         continue;
                     }
@@ -27,10 +28,9 @@ namespace Time_Table_Arranging_Program.Class.TokenParser {
                     if (cells == null) {
                         continue;
                     }
-                    if (row.GetAttributeValue("class", "") == "normalTbl-sub3header"){
-                        var tokens = cells[0].InnerText.Split('-');
-                        currentSubjectCode = tokens[0].Trim();
-                        currentSubjectName = tokens[1].Split('[')[0].Trim().Beautify();
+                    if (cells[0].GetAttributeValue("class" , "") == "normalTbl-sub3header") {
+                        (currentSubjectCode, currentSubjectName) =
+                            GrepSubjectCodeAndName(cells[0].InnerText);
                         continue;
                     }
                     var slot = new Slot {
@@ -41,30 +41,62 @@ namespace Time_Table_Arranging_Program.Class.TokenParser {
                         int offset = 0;
                         if (row.GetAttributeValue("id" , "").Contains("subRow")) {
                             offset = 4;
-                            slot.UID = result.Last().UID;
-                            slot.Type = result.Last().Type;
-                            slot.Number = result.Last().Number;
+                            var previousSlot = result.Last();
+                            slot.UID = previousSlot.UID;
+                            slot.Number = previousSlot.Number;
+                            slot.Type = previousSlot.Type;
+                            slot.LecturerName = previousSlot.LecturerName;
                         }
-                        string data = cells[k].InnerText;
+                        string data = cells[k].InnerText.Trim();
                         switch (k + offset) {
                             case 0:
                                 if (data.IsInteger()) slot.UID = int.Parse(data);
                                 break;
-                            case 1: slot.Type = data; break;
-                            case 2: slot.Number = data; break;
+                            case 1:
+                                slot.Type = data;
+                                break;
+                            case 2:
+                                slot.Number = data;
+                                break;
                             case 3: /*not storing this data*/ break; //class size
-                            case 4: slot.Day = Day.Parse(data); break;
-                            case 5: slot.TimePeriod = TimePeriod.Parse(data); break;
+                            case 4:
+                                slot.Day = Day.Parse(data);
+                                break;
+                            case 5:
+                                slot.TimePeriod = TimePeriod.Parse(data);
+                                break;
                             case 6: /*not storing this data*/ break; //credit hour
-                            case 7: slot.WeekNumber = WeekNumber.Parse(data); break;
-                            case 8: slot.Venue = data; break;
-                            case 9: /*not storing this data*/ break; //remark
+                            case 7:          
+                                if(data == "") slot.WeekNumber = new NullWeekNumber(); 
+                                else slot.WeekNumber = WeekNumber.Parse(data);
+                                break;
+                            case 8:
+                                slot.Venue = data;
+                                break;
+                            case 9:
+                                slot.LecturerName = data;
+                                break;
+                            case 10: break; //Reg (I'm not sure what does it mean)
+                            case 11: break; //Available
+                            case 12: break; //Reserve
+                            case 13: break; //Remark
                         }
+
                     }
                     result.Add(slot);
                 }
             }
+
             return result;
+        }
+
+        public static (string code, string subjectName) GrepSubjectCodeAndName(string s) {
+            //input example : Barred List by week 5th/12th [by Hour: 0]MPU3113 - HUBUNGAN ETNIK (FOR LOCAL STUDENTS) - [View All] [437]            
+            var tokens = s.Split('-');
+            string code, subjectName;
+            code = tokens[0].Split(']')[1].Trim();
+            subjectName = tokens[1].Trim().Beautify();
+            return (code, subjectName);
         }
     }
 }
