@@ -3,14 +3,18 @@ using Microsoft.Win32;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media.Animation;
 using System.Windows.Navigation;
 using Time_Table_Arranging_Program.Class;
 using Time_Table_Arranging_Program.Class.SlotGeneralizer;
+using Time_Table_Arranging_Program.Class.TokenParser;
 using Time_Table_Arranging_Program.Interfaces;
 using Time_Table_Arranging_Program.Pages;
+using Time_Table_Arranging_Program.Pages.Page_GettingStarted;
 using Time_Table_Arranging_Program.User_Control;
 using Time_Table_Arranging_Program.UserInterface;
 using Time_Table_Arranging_Program.Windows_Control;
@@ -22,7 +26,10 @@ namespace Time_Table_Arranging_Program {
     ///     Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window {
-        private const string FeedbackFormUrl = "https://goo.gl/forms/qKdc6EVGbxspoTaS2";
+        public const string FeedbackFormUrl = "https://goo.gl/forms/qKdc6EVGbxspoTaS2";
+        public const string ReportBugUrl = "https://goo.gl/forms/4PJupNgRTEyGGTCN2";
+        public const string HelpGifUrl =
+            "https://raw.githubusercontent.com/wongjiahau/TTAP-UTAR/master/TTAP_Tutorial_v2.gif";
         private readonly List<string> _previousInputString = new List<string>();
 
         public MainWindow() {
@@ -33,9 +40,12 @@ namespace Time_Table_Arranging_Program {
 
             InitializeComponent();
             Global.MainWindow = this;
-            Global.Snackbar = Snackbar;
-            //DialogBox_Old.Initialize(DialogHost , Title , Message , DialogButton);
-            MainFrame.Navigate(new Page_GettingStarted());
+            Global.MainFrame = MainFrame;
+            Global.Snackbar = Snackbar;            
+            var firstPage = new Page_Introduction();
+            MainFrame.Navigate(firstPage);
+            //new HtmlSlotParser().Parse(File.ReadAllText(
+            //    @"C:\Users\User\Desktop\TTAPv7.7\NUnit.Tests2\TestFiles\CopiedTextFromSampleHTML.txt"));
         }
 
         private void MainFrame_OnNavigating(object sender , NavigatingCancelEventArgs e) {
@@ -84,9 +94,7 @@ namespace Time_Table_Arranging_Program {
         }
 
         private void HelpButton_Click(object sender , RoutedEventArgs e) {
-            Process.Start(
-                new ProcessStartInfo(
-                    "https://raw.githubusercontent.com/wongjiahau/TTAP-UTAR/master/TTAP_Tutorial_v2.gif"));
+            Process.Start(new ProcessStartInfo(HelpGifUrl));
             e.Handled = true;
         }
 
@@ -166,10 +174,7 @@ namespace Time_Table_Arranging_Program {
         }
 
         private void ReportBug_Click(object sender , RoutedEventArgs e) {
-            Process.Start(
-                new ProcessStartInfo(
-                    "https://goo.gl/forms/4PJupNgRTEyGGTCN2"));
-
+            Process.Start(new ProcessStartInfo(ReportBugUrl));
         }
     }
 }

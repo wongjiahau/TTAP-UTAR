@@ -10,7 +10,7 @@ namespace Time_Table_Arranging_Program.Class.Converter {
     }
 
     [Serializable]
-    public class TimePeriod : ConvertibleToString, ITimePeriod, IDuplicable<TimePeriod>, IIntersectionCheckable<TimePeriod> {
+    public class TimePeriod : ConvertibleToString, ITimePeriod, IDuplicable<TimePeriod>, IIntersectionCheckable<TimePeriod>, IEquatable<TimePeriod> {
         public TimePeriod() {
             StartTime = Time.CreateTime_24HourFormat(0 , 0);
             EndTime = Time.CreateTime_24HourFormat(0 , 0);
@@ -83,13 +83,30 @@ namespace Time_Table_Arranging_Program.Class.Converter {
         }
 
         public static TimePeriod Parse(string data) {
-                var tokens = data.Split('-');
-                var startTime = tokens[0].Trim();
-                var endTime = tokens[1].Trim();
-                var result = new TimePeriod();
-                result.StartTime = Time.Parse(startTime);
-                result.EndTime = Time.Parse(endTime);
-                return result;
+            var tokens = data.Split('-');
+            var startTime = tokens[0].Trim();
+            var endTime = tokens[1].Trim();
+            var result = new TimePeriod();
+            result.StartTime = Time.Parse(startTime);
+            result.EndTime = Time.Parse(endTime);
+            return result;
         }
+
+
+        public bool Equals(TimePeriod other) {
+            if (ReferenceEquals(null, other)) return false;
+            if (ReferenceEquals(this, other)) return true;
+            return _dataInBinary == other._dataInBinary &&
+                   _startTime.Equals(other._startTime) &&
+                   _endTime.Equals(other._endTime);                                
+        }
+
+        public override bool Equals(object obj) {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != this.GetType()) return false;
+            return Equals((TimePeriod) obj);
+        }
+     
     }
 }

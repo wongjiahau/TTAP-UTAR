@@ -230,6 +230,7 @@
     <Compile Include="Model\SlotListModel.cs" />
     <Compile Include="MVVM_Framework\RelayCommand.cs" />
     <Compile Include="MVVM_Framework\ViewModelBase.cs" />
+    <Compile Include="MVVM_Framework\ViewModels\BoundedIndexVM.cs" />
     <Compile Include="MVVM_Framework\ViewModels\TimetableListVM.cs" />
     <Compile Include="MVVM_Framework\ViewModels\TimetableVM.cs" />
     <Compile Include="MVVM_Framework\Views\CyclicIndexView.xaml.cs">
@@ -240,6 +241,12 @@
     </Compile>
     <Compile Include="IValueConverter\ComboBoxSelectionConverter.cs" />
     <Compile Include="Pages\ClashFinder.cs" />
+    <Compile Include="Pages\GettingStarted\DoYouWantToWatchTTAPTutorial.xaml.cs">
+      <DependentUpon>DoYouWantToWatchTTAPTutorial.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\GettingStarted\LetsGetStarted.xaml.cs">
+      <DependentUpon>LetsGetStarted.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Page_About.xaml.cs">
       <DependentUpon>Page_About.xaml</DependentUpon>
     </Compile>
@@ -252,17 +259,23 @@
     <Compile Include="Pages\Page_CreateTimetable.xaml.cs">
       <DependentUpon>Page_CreateTimetable.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Page_GettingStarted.xaml.cs">
-      <DependentUpon>Page_GettingStarted.xaml</DependentUpon>
+    <Compile Include="Pages\GettingStarted\IfYouAreUsingComputerLabInUtar.xaml.cs">
+      <DependentUpon>IfYouAreUsingComputerLabInUtar.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Page_Intro.xaml.cs">
-      <DependentUpon>Page_Intro.xaml</DependentUpon>
+    <Compile Include="Pages\GettingStarted\Page_Introduction.xaml.cs">
+      <DependentUpon>Page_Introduction.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Page_Login.xaml.cs">
+      <DependentUpon>Page_Login.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Page_Help.xaml.cs">
       <DependentUpon>Page_Help.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Page_SaveTimetableAsImage.xaml.cs">
       <DependentUpon>Page_SaveTimetableAsImage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\GettingStarted\WelcomeToTTAP.xaml.cs">
+      <DependentUpon>WelcomeToTTAP.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Window_StateSummary.xaml.cs">
       <DependentUpon>Window_StateSummary.xaml</DependentUpon>
@@ -390,6 +403,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\GettingStarted\DoYouWantToWatchTTAPTutorial.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\GettingStarted\LetsGetStarted.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\Page_About.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -406,11 +427,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\Page_GettingStarted.xaml">
+    <Page Include="Pages\GettingStarted\IfYouAreUsingComputerLabInUtar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\Page_Intro.xaml">
+    <Page Include="Pages\GettingStarted\Page_Introduction.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Page_Login.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -419,6 +444,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\Page_SaveTimetableAsImage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\GettingStarted\WelcomeToTTAP.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

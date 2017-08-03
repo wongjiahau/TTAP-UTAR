@@ -39,6 +39,21 @@ namespace NUnit.Tests2 {
         }
 
         [Test]
+        public void Test_SlotIndex_3() {
+            var s = new Slot() {
+                Day = Day.Tuesday ,
+                StartTime = Time.CreateTime_24HourFormat(9 , 0) ,
+                EndTime = Time.CreateTime_24HourFormat(12 , 0)
+
+            }; ;
+            var expected = new SlotIndex(1 , 4 , 6);
+            var actual = new SlotIndex(s.Day , s.StartTime , s.EndTime.Minus(s.StartTime));
+            Console.WriteLine(expected.ToString());
+            Console.WriteLine(actual.ToString());
+            Assert.True(expected.Equals(actual));
+        }
+
+        [Test]
         public void Test_SlotIndex_IntersectionCheck_1() {
             var a = new SlotIndex(0 , 1 , 2);
             var b = new SlotIndex(0 , 1 , 2);

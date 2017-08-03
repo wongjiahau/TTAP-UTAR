@@ -123,6 +123,19 @@ namespace Time_Table_Arranging_Program {
 
         protected override string StringValue() {
             return To12HourFormat(true);
-        }  
+        }
+
+        public static Time Parse(string input) {
+            var result = new Time();
+            var tokens = input.Split(' ');
+            string time = tokens[0].Trim();
+            string amOrPm = tokens[1].Trim().ToLower();
+            var timeTokens = time.Split(':');
+            result.Hour = int.Parse(timeTokens[0]);
+            result.Minute = int.Parse(timeTokens[1]);
+            if (amOrPm == "pm" && result.Hour!=12) result.Hour += 12;
+            if (amOrPm == "am" && result.Hour == 12) result.Hour = 0;
+            return result;
+        }
     }
 }

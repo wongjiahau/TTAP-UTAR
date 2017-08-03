@@ -12,6 +12,7 @@ namespace Time_Table_Arranging_Program {
     public static class Global {        
         public static int MaxTime = 23;
         public static Window MainWindow;
+        public static Frame MainFrame;
         public static Snackbar Snackbar;
         public static DateTime TimetableStartDate;
         public static DateTime TimetableEndDate;
