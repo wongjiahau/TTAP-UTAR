@@ -8,6 +8,7 @@ using System.Windows.Input;
 using System.Windows.Navigation;
 using System.Windows.Threading;
 using Time_Table_Arranging_Program.Class;
+using Time_Table_Arranging_Program.Class.Helper;
 using Time_Table_Arranging_Program.Class.SlotGeneralizer;
 using Time_Table_Arranging_Program.Class.TokenParser;
 using Time_Table_Arranging_Program.UserInterface;
@@ -64,7 +65,9 @@ namespace Time_Table_Arranging_Program.Pages {
                         EndTime = s.EndTime ,
                         Type = s.Type ,
                         Number = s.Number ,
-                        WeekNumber = s.WeekNumber
+                        WeekNumber = s.WeekNumber,
+                        Venue = s.Venue,
+                        LecturerName = s.LecturerName
                     });
             }
             Dispatcher.Invoke(new Action(() => { AnimateHiddenContent(true); }) , DispatcherPriority.ContextIdle , null);
@@ -73,42 +76,14 @@ namespace Time_Table_Arranging_Program.Pages {
 
 
         private void AddSlotButton_Click(object sender , RoutedEventArgs e) {
-            var input = Clipboard.GetText();
-            if (_previousInputString.Any(s => s.Contains(input))) {
-                DialogBox.Show("Erm..." , "The content you copied is already added to the program just now.");
-                return;
-            }
-            var previousCount = Global.InputSlotList.Count;
-            //var bg = CustomBackgroundWorker<string , List<Slot>>.RunAndShowLoadingScreen
-            //    (new SlotParser().Parse , input , "Loading time slots . . .");
-            //if (bg.GetResult() != null)                
-            //    Global.InputSlotList.AddRange(bg.GetResult());
-            //else {
-            //    Global.Snackbar.MessageQueue.Enqueue("You have cancelled the operation.");
-            //}
-            
-            Global.InputSlotList.AddRange(new SlotParser().Parse(input));
-            if (Global.InputSlotList.Count == previousCount) {
-                DialogBox.Show("Please use GOOGLE CHROME" ,
-                    "Unable to load data, please make sure you copied the correct content from the course registration website using Google Chrome.");
-                return;
-            }
-            NOAS_Label.Content = Global.InputSlotList.Count;
-            _previousInputString.Add(input);
+            string input = Helper.RawStringOfTestFile("FGO.html");
+            var bg = CustomBackgroundWorker<string, List<Slot>>.RunAndShowLoadingScreen(new HtmlSlotParser_FGO().Parse,
+                input, "Loading slots . . .");
+            Global.InputSlotList.AddRange(bg.GetResult());           
+            NOAS_Label.Content = Global.InputSlotList.Count;            
             UpdateListView(Global.InputSlotList);
             CountingBadge.Badge = Global.InputSlotList.Count;
-            Global.MaxTime = FindMaxTime(Global.InputSlotList);
-            GetStartDateAndEndDate(input);
-            //new Window_GetConstructionStringOfSlots(Database.inputSlots).Show();
-        }
-
-        private void GetStartDateAndEndDate(string input) {
-            try {
-                var parser = new StartDateEndDateFinder(input);
-                Global.TimetableStartDate = parser.GetStartDate();
-                Global.TimetableEndDate = parser.GetEndDate();
-            }
-            catch { }
+            Global.MaxTime = FindMaxTime(Global.InputSlotList);                        
         }
 
         private int FindMaxTime(List<Slot> inputSlots) {

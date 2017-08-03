@@ -42,7 +42,7 @@ namespace Time_Table_Arranging_Program {
             Global.MainWindow = this;
             Global.MainFrame = MainFrame;
             Global.Snackbar = Snackbar;            
-            var firstPage = new Page_Introduction();
+            var firstPage = new Page_AddSlot();
             MainFrame.Navigate(firstPage);
             //new HtmlSlotParser().Parse(File.ReadAllText(
             //    @"C:\Users\User\Desktop\TTAPv7.7\NUnit.Tests2\TestFiles\CopiedTextFromSampleHTML.txt"));

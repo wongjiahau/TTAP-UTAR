@@ -658,6 +658,11 @@
     <Folder Include="Class\SubjectParser\" />
     <Folder Include="MiscFiles\" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="TestFiles\FGO.html">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Fody.2.0.6\build\dotnet\Fody.targets" Condition="Exists('..\packages\Fody.2.0.6\build\dotnet\Fody.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
