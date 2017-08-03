@@ -46,7 +46,7 @@ namespace Time_Table_Arranging_Program.Class.TokenParser {
                             slot.Type = result.Last().Type;
                             slot.Number = result.Last().Number;                            
                         } 
-                        string data = cells[k].InnerText;
+                        string data = cells[k].InnerText.Trim();
                         switch (k + offset) {
                             case 0:
                                 if (data.IsInteger()) slot.UID = int.Parse(data);                                 
