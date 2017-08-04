@@ -65,7 +65,7 @@
                                    BadgeColorZoneMode="PrimaryDark">
                             <Button x:Name="AddSlotButton" Content="Add test slots"  FontSize="20" Height="40" Click="AddSlotButton_Click" />
                         </materialDesign:Badged>
-
+                        <Button Margin="0,10,0,10" x:Name="LoadHtmlButton" Content="Load HTML" Click="LoadHtmlButton_OnClick"></Button>
                         <Button x:Name="ResetButton" IsEnabled="True" Style="{StaticResource MaterialDesignRaisedLightButton}" Content=" Reset" Click="ResetButton_Click" />
                     </StackPanel>
                 </Grid>

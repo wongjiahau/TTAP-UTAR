@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Navigation;
 using System.Windows.Threading;
+using Microsoft.Win32;
 using Time_Table_Arranging_Program.Class;
 using Time_Table_Arranging_Program.Class.Helper;
 using Time_Table_Arranging_Program.Class.SlotGeneralizer;
@@ -77,13 +79,18 @@ namespace Time_Table_Arranging_Program.Pages {
 
         private void AddSlotButton_Click(object sender , RoutedEventArgs e) {
             string input = Helper.RawStringOfTestFile("FGO.html");
-            var bg = CustomBackgroundWorker<string, List<Slot>>.RunAndShowLoadingScreen(new HtmlSlotParser_FGO().Parse,
+            UpdateGui(input);
+        }
+
+        private void UpdateGui(string input) {
+                        var bg = CustomBackgroundWorker<string, List<Slot>>.RunAndShowLoadingScreen(new HtmlSlotParser_FGO().Parse,
                 input, "Loading slots . . .");
             Global.InputSlotList.AddRange(bg.GetResult());           
             NOAS_Label.Content = Global.InputSlotList.Count;            
             UpdateListView(Global.InputSlotList);
             CountingBadge.Badge = Global.InputSlotList.Count;
             Global.MaxTime = FindMaxTime(Global.InputSlotList);                        
+
         }
 
         private int FindMaxTime(List<Slot> inputSlots) {
@@ -127,6 +134,15 @@ namespace Time_Table_Arranging_Program.Pages {
         private void CreateTimetableButton_Click(object sender , RoutedEventArgs e) {
             NavigationService.Navigate(Page_CreateTimetable.GetInstance(Global.Settings.SearchByConsideringWeekNumber,
                 Global.Settings.GeneralizeSlot));   
+        }
+
+        private void LoadHtmlButton_OnClick(object sender, RoutedEventArgs e) {
+            var dialog = new OpenFileDialog();
+            dialog.Filter = "HTML file (*.html)|*.html";
+            if (dialog.ShowDialog() == true) {
+                string input = File.ReadAllText(dialog.FileName);
+                UpdateGui(input);
+            }
         }
     }
 }
