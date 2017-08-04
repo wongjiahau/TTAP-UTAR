@@ -136,5 +136,9 @@ namespace Time_Table_Arranging_Program.Pages {
                     Global.Settings.GeneralizeSlot));
 
         }
+
+        private void LoginButton_OnClick(object sender, RoutedEventArgs e) {
+            MessageBox.Show("Not implemented yet");
+        }
     }
 }
