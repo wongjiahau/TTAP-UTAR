@@ -7,7 +7,7 @@
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       xmlns:userControl="clr-namespace:Time_Table_Arranging_Program.User_Control"
       mc:Ignorable="d"       
-      Title="Page_First" Loaded="Page_First_OnLoaded">
+      Title="Page_First"  Loaded="Page_First_OnLoaded">
     <materialDesign:DialogHost x:Name="DialogHost" IsOpen="False">
         <materialDesign:DialogHost.DialogContent>
             <StackPanel>
@@ -19,7 +19,7 @@
             <DockPanel LastChildFill="True" VerticalAlignment="Center">
                 <Label DockPanel.Dock="Top" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" FontWeight="DemiBold">Please log in to your account.</Label>
                 
-                <StackPanel DockPanel.Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <StackPanel Visibility="Collapsed" DockPanel.Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Center">
                     <TextBox x:Name="UserNameBox" HorizontalAlignment="Center" Width="200" materialDesign:HintAssist.Hint="Student-ID (e.g. 1507693)" 
                          Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
                     <PasswordBox
@@ -38,7 +38,7 @@
                         </StackPanel>
                     </Button>
                 </StackPanel>
-                <materialDesign:Card Visibility="Collapsed" Width="400" Height="450" Margin="5" HorizontalAlignment="Center" VerticalAlignment="Stretch">
+                <materialDesign:Card Visibility="Visible" Width="400" Height="450" Margin="5" HorizontalAlignment="Center" VerticalAlignment="Stretch">
                     <WebBrowser Visibility="Collapsed" HorizontalAlignment="Center" Margin="5" LoadCompleted="Browser_OnLoadCompleted" Name="Browser"                                                        
                             OverridesDefaultStyle="False"
                             ScrollViewer.CanContentScroll="False"
