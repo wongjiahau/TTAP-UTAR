@@ -50,7 +50,7 @@
 
             </DockPanel>
             <StackPanel HorizontalAlignment="Right" VerticalAlignment="Bottom" Orientation="Horizontal" >
-                <Button Margin="10" Style="{StaticResource MaterialDesignFlatButton}" Click="AddSlotManuallyButton_OnClick" DockPanel.Dock="Bottom" HorizontalAlignment="Center">Add slots manually</Button>
+                <Button Visibility="Collapsed" Margin="10" Style="{StaticResource MaterialDesignFlatButton}" Click="AddSlotManuallyButton_OnClick" DockPanel.Dock="Bottom" HorizontalAlignment="Center">Add slots manually</Button>
                 <Button Margin="0,10,10,10" Style="{StaticResource MaterialDesignFlatButton}" Click="LoadTestDataButton_OnClick">Load test data</Button>
             </StackPanel>
         </Grid>
