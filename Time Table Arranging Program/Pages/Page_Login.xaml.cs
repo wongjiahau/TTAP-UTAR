@@ -88,6 +88,15 @@ namespace Time_Table_Arranging_Program.Pages {
             }
             else {
                 Browser.Navigate(EndUrl);
+                if (Global.InputSlotList.Count == 0) {
+                    DialogBox.Show("No data available." , "Do you want to try TTAP by loading test data instead?" ,
+                        "Nope" , "Load test data");
+                    if (DialogBox.Result == DialogBox.ResultEnum.RightButtonClicked) {
+                        LoadTestDataButton_OnClick(null , null);
+                    }
+                    return;
+                }
+
                 NavigationService.Navigate(
                     Page_CreateTimetable.GetInstance(Global.Settings.SearchByConsideringWeekNumber ,
                         Global.Settings.GeneralizeSlot));

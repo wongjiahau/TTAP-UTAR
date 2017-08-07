@@ -21,6 +21,7 @@ namespace Time_Table_Arranging_Program {
                         "https://goo.gl/forms/4PJupNgRTEyGGTCN2"));
             }
             e.Handled = true;
+            Application.Current.Shutdown();
         }
 
         private void Application_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e) {

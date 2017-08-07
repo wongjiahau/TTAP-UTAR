@@ -17,6 +17,7 @@ namespace Time_Table_Arranging_Program.Class.TokenParser {
             doc.LoadHtml(html);
             //get the subject table
             HtmlNodeCollection nodes = doc.DocumentNode.SelectNodes("//div[@id='overviewSector']/table");
+            if (nodes == null) return result;
             foreach (HtmlNode table in nodes) {
                 HtmlNodeCollection tableNodes = 
                     table.SelectNodes("tr") ?? 
