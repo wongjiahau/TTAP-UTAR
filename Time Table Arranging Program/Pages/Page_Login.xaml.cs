@@ -32,8 +32,8 @@ namespace Time_Table_Arranging_Program.Pages {
         private const string LoginFailedUrl =
             "https://unitreg.utar.edu.my/portal/courseRegStu/login.jsp?message=invalidSecurity";
 
-        private const string CourseTimetablePreviewUrl =
-            "https://unitreg.utar.edu.my/portal/courseRegStu/schedule/masterSchedule.jsp";
+        private const string CourseTimetablePreviewUrl = "http://localhost/ttap_testdata/";
+            //"https://unitreg.utar.edu.my/portal/courseRegStu/schedule/masterSchedule.jsp";
 
         private const string EndUrl = "https://www.google.com/";
 
@@ -46,7 +46,8 @@ namespace Time_Table_Arranging_Program.Pages {
 
         private void Page_First_OnLoaded(object sender , RoutedEventArgs e) {
             GotItButton_OnClick(null , null);
-            Browser.Navigate(LoginPageUrl);
+            Browser.Navigate("http://localhost/ttap_testdata/");
+            //Browser.Navigate(LoginPageUrl);
         }
 
         private bool _browsingToCourseTimetablePreview = false;
@@ -76,10 +77,9 @@ namespace Time_Table_Arranging_Program.Pages {
                 return;
             }
             Browser.Visibility = Visibility.Hidden;
-
             string html = GetHtml(Browser);
             var bg = CustomBackgroundWorker<string , List<Slot>>.RunAndShowLoadingScreen(
-               new HtmlSlotParser().Parse , html , "Loading slots . . .");
+       new HtmlSlotParser().Parse , html , "Loading slots . . .");
             //    TryGetStartDateAndEndDate(plainText);
             Global.InputSlotList.AddRange(bg.GetResult());
             if (CanGoToPage(_currentPage + 1)) {
