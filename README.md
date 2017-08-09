@@ -16,6 +16,7 @@ To help UTAR students to arrange timetable easily.
 8. Save timetable as image (.png)
 9. Report reasons of clashes ('Why no possible combination')
 
+## How To Use?
 ### Step 1: Login 
 
 (a) Enter your Student ID ( The number below the barcode in your ID card).
@@ -27,6 +28,20 @@ To help UTAR students to arrange timetable easily.
 (d) Refresh button : To refresh the course registration server when the login time and Captcha have time out.
 
 ![login page m](https://user-images.githubusercontent.com/29939372/29081570-81a2fe0a-7c95-11e7-8868-3733230d04b9.png)
+
+
+### Step 2: Select Subjects
+
+(a) Search for the subjects you like to register in search column.
+
+(b) Select the the subjects you like to register in listbox. 
+
+(c) You can just preview the subject you have selected by pressing the "show selected subjects" button.
+
+(d) After you have confirmed the subjects you want to be register, press the "done" button to proceed to next step.
+
+
+![select subject](https://user-images.githubusercontent.com/29939372/29110855-b21e3c54-7d1a-11e7-8302-2a9bf9d2b470.png)
 
 
 ## Tutorial (5 steps)
