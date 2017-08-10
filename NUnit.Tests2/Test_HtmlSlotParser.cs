@@ -105,6 +105,7 @@ namespace NUnit.Tests2 {
 				new Slot(48,"UALJ2013", "INTRODUCTION TO JAPANESE".Beautify(), "1", "T", Day.Wednesday,"KB318", new TimePeriod(Time.CreateTime_24HourFormat(10,00), Time.CreateTime_24HourFormat(11,00)),new WeekNumber(new List<int>(){1,2,3,4,5,6,7,8,9,10,11,12,13,14})  ),
 				new Slot(49,"UALJ2013", "INTRODUCTION TO JAPANESE".Beautify(), "2", "T", Day.Wednesday,"KB318", new TimePeriod(Time.CreateTime_24HourFormat(11,00), Time.CreateTime_24HourFormat(12,00)),new WeekNumber(new List<int>(){1,2,3,4,5,6,7,8,9,10,11,12,13,14})  ),
 				new Slot(50,"UALL1063", "ORAL COMMUNICATION AND INTERPERSONAL SKILLS".Beautify(), "1", "L", Day.Tuesday,"KB301", new TimePeriod(Time.CreateTime_24HourFormat(16,00), Time.CreateTime_24HourFormat(18,00)),new WeekNumber(new List<int>(){1,2,3,4,5,6,7,8,9,10,11,12,13,14})  ),
+				//choo ( 51-60)
 			};
 
 			for (int i = 0; i < expected.Count; i++) {
