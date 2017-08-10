@@ -85,9 +85,17 @@ namespace NUnit.Tests2 {
 				new Slot(28,"MPU34072", "ART, CRAFT, AND DESIGN".Beautify(), "1", "L", Day.Monday,"KB322", new TimePeriod(Time.CreateTime_24HourFormat(14,00), Time.CreateTime_24HourFormat(16,00)),new WeekNumber(new List<int>(){1,2,3,4,5,6,7,8,9,10,11,12,13,14})  ),
 				new Slot(29,"UALB1003", "INTRODUCTION TO GERMAN LANGUAGE".Beautify(), "1", "L", Day.Monday,"KB322", new TimePeriod(Time.CreateTime_24HourFormat(17,00), Time.CreateTime_24HourFormat(19,00)),new WeekNumber(new List<int>(){1,2,3,4,5,6,7,8,9,10,11,12,13,14})  ),
 				new Slot(30,"UALB1003", "INTRODUCTION TO GERMAN LANGUAGE".Beautify(), "2", "L", Day.Wednesday,"KB323", new TimePeriod(Time.CreateTime_24HourFormat(17,00), Time.CreateTime_24HourFormat(19,00)),new WeekNumber(new List<int>(){1,2,3,4,5,6,7,8,9,10,11,12,13,14})  ),
-
-
-                new Slot(41,"UALF1003", "INTRODUCTION TO FRENCH".Beautify(), "1", "L", Day.Monday,"KB324", new TimePeriod(Time.CreateTime_24HourFormat(8,00), Time.CreateTime_24HourFormat(10,00)),new WeekNumber(new List<int>(){1,2,3,4,5,6,7,8,9,10,11,12,13,14})  ),
+				new Slot(31,"UALB1003", "INTRODUCTION TO GERMAN LANGUAGE".Beautify(), "1", "T", Day.Tuesday,"KB318", new TimePeriod(Time.CreateTime_24HourFormat(17,00), Time.CreateTime_24HourFormat(18,00)),new WeekNumber(new List<int>(){1,2,3,4,5,6,7,8,9,10,11,12,13,14})  ),
+				new Slot(32,"UALB1003", "INTRODUCTION TO GERMAN LANGUAGE".Beautify(), "2", "T", Day.Tuesday,"KB318", new TimePeriod(Time.CreateTime_24HourFormat(18,00), Time.CreateTime_24HourFormat(19,00)),new WeekNumber(new List<int>(){1,2,3,4,5,6,7,8,9,10,11,12,13,14})  ),
+				new Slot(33,"UALB1003", "INTRODUCTION TO GERMAN LANGUAGE".Beautify(), "3", "T", Day.Thursday,"KB318", new TimePeriod(Time.CreateTime_24HourFormat(17,00), Time.CreateTime_24HourFormat(18,00)),new WeekNumber(new List<int>(){1,2,3,4,5,6,7,8,9,10,11,12,13,14})  ),
+				new Slot(34,"UALB1003", "INTRODUCTION TO GERMAN LANGUAGE".Beautify(), "4", "T", Day.Thursday,"KB318", new TimePeriod(Time.CreateTime_24HourFormat(18,00), Time.CreateTime_24HourFormat(19,00)),new WeekNumber(new List<int>(){1,2,3,4,5,6,7,8,9,10,11,12,13,14})  ),
+				new Slot(35, "UALE1083", "BASIC PROFESSIONAL WRITING".Beautify(), "1", "L", Day.Wednesday , "KB520", new TimePeriod(Time.CreateTime_24HourFormat(08,00), Time.CreateTime_24HourFormat(10,00)),new WeekNumber(new List<int>(){1,2,3,4,5,6,7,8,9,10,11,12,13,14}) ),
+				new Slot(36, "UALE1083", "BASIC PROFESSIONAL WRITING".Beautify(), "2", "L", Day.Friday , "KB301", new TimePeriod(Time.CreateTime_24HourFormat(10,30), Time.CreateTime_24HourFormat(12,30)),new WeekNumber(new List<int>(){1,2,3,4,5,6,7,8,9,10,11,12,13,14}) ),
+				new Slot(37, "UALE1083", "BASIC PROFESSIONAL WRITING".Beautify(), "1", "T", Day.Wednesday , "KB325", new TimePeriod(Time.CreateTime_24HourFormat(12,00), Time.CreateTime_24HourFormat(13,00)),new WeekNumber(new List<int>(){1,2,3,4,5,6,7,8,9,10,11,12,13,14}) ),
+				new Slot(38, "UALE1083", "BASIC PROFESSIONAL WRITING".Beautify(), "2", "T", Day.Friday , "KB325", new TimePeriod(Time.CreateTime_24HourFormat(14,30), Time.CreateTime_24HourFormat(15,30)),new WeekNumber(new List<int>(){1,2,3,4,5,6,7,8,9,10,11,12,13,14}) ),
+				new Slot(39, "UALE1083", "BASIC PROFESSIONAL WRITING".Beautify(), "3", "T", Day.Friday , "KB325", new TimePeriod(Time.CreateTime_24HourFormat(15,30), Time.CreateTime_24HourFormat(16,30)),new WeekNumber(new List<int>(){1,2,3,4,5,6,7,8,9,10,11,12,13,14}) ),
+				new Slot(40, "UALE1083", "BASIC PROFESSIONAL WRITING".Beautify(), "4", "T", Day.Wednesday , "KB325", new TimePeriod(Time.CreateTime_24HourFormat(11,00), Time.CreateTime_24HourFormat(12,00)),new WeekNumber(new List<int>(){1,2,3,4,5,6,7,8,9,10,11,12,13,14}) ),
+				new Slot(41,"UALF1003", "INTRODUCTION TO FRENCH".Beautify(), "1", "L", Day.Monday,"KB324", new TimePeriod(Time.CreateTime_24HourFormat(8,00), Time.CreateTime_24HourFormat(10,00)),new WeekNumber(new List<int>(){1,2,3,4,5,6,7,8,9,10,11,12,13,14})  ),        
 				new Slot(42,"UALF1003", "INTRODUCTION TO FRENCH".Beautify(), "2", "L", Day.Tuesday,"KB323", new TimePeriod(Time.CreateTime_24HourFormat(9,00), Time.CreateTime_24HourFormat(11,00)),new WeekNumber(new List<int>(){1,2,3,4,5,6,7,8,9,10,11,12,13,14})  ),
 				new Slot(43,"UALF1003", "INTRODUCTION TO FRENCH".Beautify(), "1", "T", Day.Monday,"KB318", new TimePeriod(Time.CreateTime_24HourFormat(10,00), Time.CreateTime_24HourFormat(11,00)),new WeekNumber(new List<int>(){1,2,3,4,5,6,7,8,9,10,11,12,13,14})  ),
 				new Slot(44,"UALF1003", "INTRODUCTION TO FRENCH".Beautify(), "2", "T", Day.Monday,"KB318", new TimePeriod(Time.CreateTime_24HourFormat(11,00), Time.CreateTime_24HourFormat(12,00)),new WeekNumber(new List<int>(){1,2,3,4,5,6,7,8,9,10,11,12,13,14})  ),
@@ -97,6 +105,7 @@ namespace NUnit.Tests2 {
 				new Slot(48,"UALJ2013", "INTRODUCTION TO JAPANESE".Beautify(), "1", "T", Day.Wednesday,"KB318", new TimePeriod(Time.CreateTime_24HourFormat(10,00), Time.CreateTime_24HourFormat(11,00)),new WeekNumber(new List<int>(){1,2,3,4,5,6,7,8,9,10,11,12,13,14})  ),
 				new Slot(49,"UALJ2013", "INTRODUCTION TO JAPANESE".Beautify(), "2", "T", Day.Wednesday,"KB318", new TimePeriod(Time.CreateTime_24HourFormat(11,00), Time.CreateTime_24HourFormat(12,00)),new WeekNumber(new List<int>(){1,2,3,4,5,6,7,8,9,10,11,12,13,14})  ),
 				new Slot(50,"UALL1063", "ORAL COMMUNICATION AND INTERPERSONAL SKILLS".Beautify(), "1", "L", Day.Tuesday,"KB301", new TimePeriod(Time.CreateTime_24HourFormat(16,00), Time.CreateTime_24HourFormat(18,00)),new WeekNumber(new List<int>(){1,2,3,4,5,6,7,8,9,10,11,12,13,14})  ),
+				//choo ( 51-60)
 			};
 
 			for (int i = 0; i < expected.Count; i++) {
