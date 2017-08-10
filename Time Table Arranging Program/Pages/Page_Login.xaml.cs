@@ -50,8 +50,8 @@ namespace Time_Table_Arranging_Program.Pages {
         }
 
         private bool _browsingToCourseTimetablePreview = false;
-        private void Browser_OnLoadCompleted(object sender , NavigationEventArgs e) {            
-            Browser .InvokeScript("execScript", "document.documentElement.style.overflow ='hidden'", "JavaScript");
+        private void Browser_OnLoadCompleted(object sender , NavigationEventArgs e) {
+            Browser.InvokeScript("execScript" , "document.documentElement.style.overflow ='hidden'" , "JavaScript");
             RefreshButton.IsEnabled = true;
             string currentUrl = Browser.Source.ToString();
             //if (currentUrl == LoginPageUrl) return;
@@ -69,17 +69,18 @@ namespace Time_Table_Arranging_Program.Pages {
                         _navigationCount++;
                     }
                     else {
-                        Browser.Navigate(LoginPageUrl);                                                                                                
+                        Browser.Navigate(LoginPageUrl);
                         Global.Snackbar.MessageQueue.Enqueue("No record found, please try again.");
                     }
                 }
                 return;
-            }           
+            }
             Browser.Visibility = Visibility.Hidden;
-            string plainText = GetPlainTextOfHtml(Browser);
+
+            string html = GetHtml(Browser);
             var bg = CustomBackgroundWorker<string , List<Slot>>.RunAndShowLoadingScreen(
-                new SlotParser().Parse , plainText , "Loading slots . . .");
-            TryGetStartDateAndEndDate(plainText);
+               new HtmlSlotParser().Parse , html , "Loading slots . . .");
+            //    TryGetStartDateAndEndDate(plainText);
             Global.InputSlotList.AddRange(bg.GetResult());
             if (CanGoToPage(_currentPage + 1)) {
                 Browser.InvokeScript("changePage" , _currentPage + 1);
@@ -87,10 +88,25 @@ namespace Time_Table_Arranging_Program.Pages {
             }
             else {
                 Browser.Navigate(EndUrl);
+                if (Global.InputSlotList.Count == 0) {
+                    DialogBox.Show("No data available." , "Do you want to try TTAP by loading test data instead?" ,
+                        "Nope" , "Load test data");
+                    if (DialogBox.Result == DialogBox.ResultEnum.RightButtonClicked) {
+                        LoadTestDataButton_OnClick(null , null);
+                    }
+                    return;
+                }
+
                 NavigationService.Navigate(
                     Page_CreateTimetable.GetInstance(Global.Settings.SearchByConsideringWeekNumber ,
                         Global.Settings.GeneralizeSlot));
             }
+        }
+
+        private string GetHtml(WebBrowser b) {
+            dynamic doc = b.Document;
+            var htmlText = doc.documentElement.InnerHtml;
+            return htmlText;
         }
 
         private void TryGetStartDateAndEndDate(string input) {
@@ -113,7 +129,7 @@ namespace Time_Table_Arranging_Program.Pages {
             var htmlText = doc.documentElement.InnerHtml;
             return htmlText.RemoveTags();
         }
-       
+
 
         private void AddSlotManuallyButton_OnClick(object sender , RoutedEventArgs e) {
             NavigationService.Navigate(new Page_AddSlot());
@@ -129,12 +145,16 @@ namespace Time_Table_Arranging_Program.Pages {
             Browser.Visibility = Visibility.Visible;
         }
 
-        private void LoadTestDataButton_OnClick(object sender, RoutedEventArgs e) {
-            Global.InputSlotList.AddRange(TestData.TestSlots); 
+        private void LoadTestDataButton_OnClick(object sender , RoutedEventArgs e) {
+            Global.InputSlotList.AddRange(TestData.TestSlots);
             NavigationService.Navigate(
                 Page_CreateTimetable.GetInstance(Global.Settings.SearchByConsideringWeekNumber ,
                     Global.Settings.GeneralizeSlot));
 
+        }
+
+        private void LoginButton_OnClick(object sender , RoutedEventArgs e) {
+            MessageBox.Show("Not implemented yet");
         }
     }
 }

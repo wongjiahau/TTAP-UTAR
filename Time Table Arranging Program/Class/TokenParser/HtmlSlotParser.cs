@@ -10,20 +10,24 @@ namespace Time_Table_Arranging_Program.Class.TokenParser {
     public class HtmlSlotParser {
         public List<Slot> Parse(string html) {
             var result = new List<Slot>();
-            bool firstRowIsSkipped = false;            
+            bool firstRowIsSkipped = false;
             string currentSubjectCode = "";
             string currentSubjectName = "";
             var doc = new HtmlDocument();
             doc.LoadHtml(html);
             //get the subject table
             HtmlNodeCollection nodes = doc.DocumentNode.SelectNodes("//div[@id='overviewSector']/table");
+            if (nodes == null) return result;
             foreach (HtmlNode table in nodes) {
-                foreach (HtmlNode row in table.SelectNodes("tr")) {
+                HtmlNodeCollection tableNodes = 
+                    table.SelectNodes("tr") ?? 
+                    table.SelectNodes("tbody")[0].SelectNodes("tr");
+                foreach (HtmlNode row in tableNodes) {
                     if (firstRowIsSkipped == false) {  //skip one row for the table header
                         firstRowIsSkipped = true;
                         continue;
                     }
-                    HtmlNodeCollection cells = row.SelectNodes("th|td");
+                    HtmlNodeCollection cells = row.SelectNodes("th|td"); //select table header or table data
                     if (cells == null) {
                         continue;
                     }
@@ -33,15 +37,22 @@ namespace Time_Table_Arranging_Program.Class.TokenParser {
                         currentSubjectName = tokens[1].Split('[')[0].Trim().Beautify();
                         continue;
                     }
-                    var slot = new Slot();
-                    slot.Code = currentSubjectCode;
-                    slot.SubjectName = currentSubjectName;
+                    var slot = new Slot {
+                        Code = currentSubjectCode ,
+                        SubjectName = currentSubjectName
+                    };
                     for (var k = 0 ; k < cells.Count ; k++) {
-                        string data = cells[k].InnerText;
-                        switch (k) {
+                        int offset = 0;
+                        if (row.GetAttributeValue("id" , "").Contains("subRow")) {
+                            offset = 4;
+                            slot.UID = result.Last().UID;
+                            slot.Type = result.Last().Type;
+                            slot.Number = result.Last().Number;
+                        }
+                        string data = cells[k].InnerText.Trim();
+                        switch (k + offset) {
                             case 0:
                                 if (data.IsInteger()) slot.UID = int.Parse(data);
-                                else k = 4; //straight away to to parse Day 
                                 break;
                             case 1: slot.Type = data; break;
                             case 2: slot.Number = data; break;

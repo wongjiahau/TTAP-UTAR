@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Time_Table_Arranging_Program.MVVM_Framework.Models;
 using Time_Table_Arranging_Program.Pages;
-//fongshaoqun
+
 namespace Time_Table_Arranging_Program.MVVM_Framework.ViewModels {
     public class BoundedIndexVM : ViewModelBase<CyclicIndex> {
 
@@ -19,7 +19,7 @@ namespace Time_Table_Arranging_Program.MVVM_Framework.ViewModels {
         public BoundedIndexVM(CyclicIndex model) : base(model) {
             model.CurrentValueChanged += Model_CurrentValueChanged;
         }
-        //Hello
+
         private void Model_CurrentValueChanged(object sender , EventArgs e) {
             OnPropertyChanged("CurrentValue");
         }
