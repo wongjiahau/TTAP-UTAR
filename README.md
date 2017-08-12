@@ -22,25 +22,29 @@ To help UTAR students to arrange timetable easily.
 
 ![login page m](https://user-images.githubusercontent.com/29939372/29081570-81a2fe0a-7c95-11e7-8868-3733230d04b9.png)
 
-(a) Enter your Student ID ( The number below the barcode in your ID card).
+**(a)** Enter your Student ID ( The number below the barcode in your ID card).
 
-(b) Enter your password (Your IC number with hypen included).
+**(b)** Enter your password (Your IC number with hypen included).
 
-(c) Click and enter the Captcha correctly as displayed and then click the login button below.
+**(c)** Click and enter the Captcha correctly as displayed and then click the login button below.
 
-(d) Refresh button : To refresh the course registration server when the login time and Captcha have time out.
+**(d)** Refresh button : To refresh the course registration server when the login time and Captcha have time out.
+
+_____________________________________________________________________________________________
 
 ### Step 2: Select Subjects
 
 ![select subject](https://user-images.githubusercontent.com/29939372/29110855-b21e3c54-7d1a-11e7-8302-2a9bf9d2b470.png)
 
-(a) Search for the subjects you like to register in search column.
+**(a)** Search for the subjects you like to register in search column.
 
-(b) Select the the subjects you like to register in listbox. 
+**(b)** Select the the subjects you like to register in listbox. 
 
-(c) You can just preview the subject you have selected by pressing the "show selected subjects" button.
+**(c)** You can just preview the subject you have selected by pressing the "show selected subjects" button.
 
-(d) After you have confirmed the subjects you want to be register, press the "done" button to proceed to next step.
+**(d)** After you have confirmed the subjects you want to be register, press the "done" button to proceed to next step.
+
+_____________________________________________________________________________________________
 
 ### Step 3: Set Time Constraint
 
@@ -53,6 +57,13 @@ To help UTAR students to arrange timetable easily.
 **(c)** For example, you do not like to have classes after 5.00pm and no classes on Friday, so you click all the slotboxes after 5.00pm and all slotboxes on Friday.
 
 (However, some subjects are only offerd only one available lecture time for selection, so the time constraint is unavoidable eventhough you do not wish to have classes on that time.)
+
+![tt](https://user-images.githubusercontent.com/29939372/29176259-e9735fd2-7e1d-11e7-8193-2e1f2495bab5.gif)
+
+**(d)** After you have done selected the time contraint, the possible combination of timetable should be lesser which will possible help you to narrow down the timetable selection that suits your preferences.
+______________________________________________________________________________________________
+
+### Step 4: Save the timetable
 
 
 ## Tutorial (5 steps)
