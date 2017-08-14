@@ -35,7 +35,6 @@ namespace Time_Table_Arranging_Program.Pages {
         private const string CourseTimetablePreviewUrl =
             "https://unitreg.utar.edu.my/portal/courseRegStu/schedule/masterSchedule.jsp";
 
-        private const string EndUrl = "https://www.google.com/";
 
         private int _currentPage = 1;
         private const int NavigationCountUpperLimit = 3;
@@ -57,7 +56,7 @@ namespace Time_Table_Arranging_Program.Pages {
             //if (currentUrl == LoginPageUrl) return;
             //if(currentUrl == LoginSuccessUrl) 
             //if(currentUrl == LoginFailedUrl) Browser.Navigate(LoginPageUrl);                        
-            if (currentUrl == LoginPageUrl || currentUrl == LoginFailedUrl || currentUrl == EndUrl) {
+            if (currentUrl == LoginPageUrl || currentUrl == LoginFailedUrl ) {
                 _navigationCount = 0;
                 return;
             }
@@ -75,7 +74,6 @@ namespace Time_Table_Arranging_Program.Pages {
                 }
                 return;
             }
-            Browser.Visibility = Visibility.Hidden;
 
             string html = GetHtml(Browser);
             var bg = CustomBackgroundWorker<string , List<Slot>>.RunAndShowLoadingScreen(
@@ -87,10 +85,8 @@ namespace Time_Table_Arranging_Program.Pages {
                 _currentPage++;
             }
             else {
-                Browser.Navigate(EndUrl);
                 if (Global.InputSlotList.Count == 0) {
-                    DialogBox.Show("No data available." , "Do you want to try TTAP by loading test data instead?" ,
-                        "Nope" , "Load test data");
+                    DialogBox.Show("No data available." , "", "OK");
                     if (DialogBox.Result == DialogBox.ResultEnum.RightButtonClicked) {
                         LoadTestDataButton_OnClick(null , null);
                     }
