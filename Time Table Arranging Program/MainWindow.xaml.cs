@@ -30,6 +30,8 @@ namespace Time_Table_Arranging_Program {
         public const string ReportBugUrl = "https://goo.gl/forms/4PJupNgRTEyGGTCN2";
         public const string HelpGifUrl =
             "https://raw.githubusercontent.com/wongjiahau/TTAP-UTAR/master/TTAP_Tutorial_v2.gif";
+        public const string ReadMeUrl =
+            "https://github.com/wongjiahau/TTAP-UTAR/blob/master/README.md";
         private readonly List<string> _previousInputString = new List<string>();
 
         public MainWindow() {
@@ -94,7 +96,7 @@ namespace Time_Table_Arranging_Program {
         }
 
         private void HelpButton_Click(object sender , RoutedEventArgs e) {
-            Process.Start(new ProcessStartInfo(HelpGifUrl));
+            Process.Start(new ProcessStartInfo(ReadMeUrl));
             e.Handled = true;
         }
 

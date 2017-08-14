@@ -24,7 +24,7 @@ namespace Time_Table_Arranging_Program.Pages.GettingStarted {
         }
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e) {
-            Process.Start(new ProcessStartInfo(MainWindow.HelpGifUrl));
+            Process.Start(new ProcessStartInfo(MainWindow.ReadMeUrl));
         }
     }
 }
