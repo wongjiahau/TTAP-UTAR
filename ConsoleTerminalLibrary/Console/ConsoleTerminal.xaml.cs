@@ -13,20 +13,33 @@ namespace EmbeddedConsole.Console {
             InitializeComponent();
         }
 
-        private void ConsoleTerminal_OnLoaded(object sender, RoutedEventArgs e) {
+        private ConsoleTerminalModel _model;
+        public void Initialize(ConsoleTerminalModel consoleTerminalModel) {
+            _model = consoleTerminalModel;
+        }
+
+        private void ConsoleTerminal_OnLoaded(object sender , RoutedEventArgs e) {
             InputBlock.Focus();
         }
 
-        private void InputBlock_OnKeyDown(object sender, KeyEventArgs e) {
-            var dc = this.DataContext as ConsoleTerminalModel;
-            if (e.Key == Key.Enter) {
-                if (dc != null) {
-                    dc.ConsoleInput = InputBlock.Text;
-                    dc.RunCommand();
-                }
-                InputBlock.Focus();
-                Scroller.ScrollToBottom();
+        private void InputBlock_OnKeyDown(object sender , KeyEventArgs e) {
+            string input = InputBlock.Text;
+            switch (e.Key) {
+                case Key.Enter:
+                    _model.ExecuteCommand(input);
+                    break;
+                case Key.Tab:
+                    _model.ShowMatchingCommand(input);
+                    break;
+                case Key.Up:
+                    _model.GoToPreviousCommand();
+                    break;
+                case Key.Down:
+                    _model.GoToNextCommand();
+                    break;
             }
+            InputBlock.Focus();
+            Scroller.ScrollToBottom();
         }
     }
 }

@@ -3,12 +3,15 @@
 namespace ConsoleTerminalLibrary.Console {
     public interface IConsoleCommand {
         string Execute();
+        object Commandee { get; }
+        string Keyword { get; }
+        string Help { get; }
     }
 
     public abstract class ConsoleCommandBase : IConsoleCommand {
-        protected object Commandee;
-        protected string Keyword;
-        protected string Help;
+        public object Commandee { get; private set; }
+        public string Keyword { get; private set; }
+        public string Help { get; private set; }
         protected ConsoleCommandBase(object target, object commandee, string keyword, string help) {
             Commandee = commandee;
             Keyword = keyword;
