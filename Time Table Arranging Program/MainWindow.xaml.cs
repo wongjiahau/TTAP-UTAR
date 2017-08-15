@@ -9,9 +9,11 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
 using System.Windows.Navigation;
+using ConsoleTerminalLibrary.Console;
 using Time_Table_Arranging_Program.Class;
 using Time_Table_Arranging_Program.Class.SlotGeneralizer;
 using Time_Table_Arranging_Program.Class.TokenParser;
+using Time_Table_Arranging_Program.ConsoleCommands;
 using Time_Table_Arranging_Program.Interfaces;
 using Time_Table_Arranging_Program.Pages;
 using Time_Table_Arranging_Program.Pages.Page_GettingStarted;
@@ -43,9 +45,10 @@ namespace Time_Table_Arranging_Program {
             InitializeComponent();
             Global.MainWindow = this;
             Global.MainFrame = MainFrame;
-            Global.Snackbar = Snackbar;            
+            Global.Snackbar = Snackbar;
             var firstPage = new WelcomeToTTAP();
             MainFrame.Navigate(firstPage);
+            ConsoleTerminal.Initialize(new ConsoleTerminalModel(new List<IConsoleCommand>(){ new LoadTestDataCommand(this) }));
             //new HtmlSlotParser().Parse(File.ReadAllText(
             //    @"C:\Users\User\Desktop\TTAPv7.7\NUnit.Tests2\TestFiles\CopiedTextFromSampleHTML.txt"));
         }
@@ -177,6 +180,13 @@ namespace Time_Table_Arranging_Program {
 
         private void ReportBug_Click(object sender , RoutedEventArgs e) {
             Process.Start(new ProcessStartInfo(ReportBugUrl));
+        }
+
+        public void LoadTestData() {
+            Global.InputSlotList.AddRange(TestData.TestSlots);
+            MainFrame.Navigate(
+                Page_CreateTimetable.GetInstance(Global.Settings.SearchByConsideringWeekNumber ,
+                    Global.Settings.GeneralizeSlot));
         }
     }
 }
