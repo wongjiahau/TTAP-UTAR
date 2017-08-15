@@ -46,7 +46,7 @@ namespace Time_Table_Arranging_Program {
             Global.MainWindow = this;
             Global.MainFrame = MainFrame;
             Global.Snackbar = Snackbar;
-            var firstPage = new WelcomeToTTAP();
+            var firstPage = new Page_Introduction();
             MainFrame.Navigate(firstPage);
             ConsoleTerminal.Initialize(new ConsoleTerminalModel(new List<IConsoleCommand>(){ new LoadTestDataCommand(this) }));
             //new HtmlSlotParser().Parse(File.ReadAllText(
