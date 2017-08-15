@@ -45,9 +45,16 @@ namespace ConsoleTerminalLibrary.Console {
         }
 
         public void ExecuteCommand(string input) {
-            _inputHistory.Add(_consoleInput);
-            if (input.Last() == '?') {
+            _inputHistory.RemoveAll(x=> x=="");
+            _inputHistory.Add(input);
+            _inputHistory.Add("");
+            _inputHistory.GoToLast();
+            if (input!="" && input.Last() == '?') {
                 ShowHelp(input);
+                return;
+            }
+            if (input == "") {
+                ConsoleOutput.Add("");
                 return;
             }
             var command = _commandList.Find(x => x.Keyword == input);
@@ -60,7 +67,7 @@ namespace ConsoleTerminalLibrary.Console {
             ConsoleInput = "";
         }
 
-        private void ShowHelp(string input) {
+        private void ShowHelp(string input) {           
             Assert.IsTrue(input.Last() == '?');
             input = input.TrimEnd('?');
             var command = _commandList.Find(x => x.Keyword == input);
@@ -74,6 +81,7 @@ namespace ConsoleTerminalLibrary.Console {
         }
 
         public void ShowMatchingCommand(string input) {
+            if (input == "") return;
             var matched = _commandList.FindAll(x => x.Keyword == input);
             if (matched.Count == 0) {
                 ConsoleOutput.Add($"No matching command starts with '{input}'");
