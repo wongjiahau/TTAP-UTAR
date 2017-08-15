@@ -24,30 +24,33 @@ namespace EmbeddedConsole.Console {
         }
 
         private void InputBlock_OnKeyDown(object sender , KeyEventArgs e) {
+
+        }
+
+        private void InputBlock_OnPreviewKeyDown(object sender , KeyEventArgs e) {
             string input = InputBlock.Text;
-            
             switch (e.Key) {
                 case Key.Enter:
+                    e.Handled = true;
                     _model.ExecuteCommand(input);
                     break;
                 case Key.Tab:
+                    e.Handled = true;
                     _model.ShowMatchingCommand(input);
                     break;
                 case Key.Up:
+                    e.Handled = true;
                     _model.GoToPreviousCommand();
                     break;
                 case Key.Down:
+                    e.Handled = true;
                     _model.GoToNextCommand();
                     break;
             }
-            
+
             InputBlock.Focus();
             Keyboard.Focus(InputBlock);
             Scroller.ScrollToBottom();
-        }
-
-        private void InputBlock_OnPreviewKeyDown(object sender, KeyEventArgs e) {
-            throw new System.NotImplementedException();
         }
     }
 }

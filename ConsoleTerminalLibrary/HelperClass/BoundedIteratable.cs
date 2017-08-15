@@ -10,6 +10,7 @@ namespace ConsoleTerminalLibrary.HelperClass {
         void GoToNext();
         T GetCurrent();
         void Add(T newItem);
+        void RemoveAll(Predicate<T> predicate);
         void GoToFirst();
         void GoToLast();
     }
@@ -32,6 +33,11 @@ namespace ConsoleTerminalLibrary.HelperClass {
 
         public void Add(T newItem) {
             _items.Add(newItem);
+        }
+
+        public void RemoveAll(Predicate<T> predicate) {
+            if (_items.Count > 0)
+                _items.RemoveAll(predicate);
         }
 
         public void GoToFirst() {
