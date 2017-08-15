@@ -12,7 +12,6 @@ using System.Windows.Navigation;
 using Time_Table_Arranging_Program.Class;
 using Time_Table_Arranging_Program.Class.SlotGeneralizer;
 using Time_Table_Arranging_Program.Class.TokenParser;
-using Time_Table_Arranging_Program.Console;
 using Time_Table_Arranging_Program.Interfaces;
 using Time_Table_Arranging_Program.Pages;
 using Time_Table_Arranging_Program.Pages.Page_GettingStarted;
@@ -45,7 +44,7 @@ namespace Time_Table_Arranging_Program {
             Global.MainWindow = this;
             Global.MainFrame = MainFrame;
             Global.Snackbar = Snackbar;            
-            var firstPage = new ConsoleTerminal(){DataContext = new ConsoleContent()};
+            var firstPage = new WelcomeToTTAP();
             MainFrame.Navigate(firstPage);
             //new HtmlSlotParser().Parse(File.ReadAllText(
             //    @"C:\Users\User\Desktop\TTAPv7.7\NUnit.Tests2\TestFiles\CopiedTextFromSampleHTML.txt"));
