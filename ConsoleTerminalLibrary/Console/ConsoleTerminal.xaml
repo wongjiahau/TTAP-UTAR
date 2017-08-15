@@ -29,7 +29,7 @@
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
-                <TextBox BorderThickness="0"  FontSize="15" Style="{x:Null}" KeyDown="InputBlock_OnKeyDown" Text="{Binding ConsoleInput, Mode=TwoWay}" Background="Black" Foreground="White" FontFamily="Consolas" Name="InputBlock" BorderBrush="{x:Null}" SelectionBrush="{x:Null}" />
+                <TextBox BorderThickness="0" PreviewKeyDown="InputBlock_OnPreviewKeyDown" FontSize="15" Style="{x:Null}" KeyDown="InputBlock_OnKeyDown" Text="{Binding ConsoleInput, Mode=TwoWay}" Background="Black" Foreground="White" FontFamily="Consolas" Name="InputBlock" BorderBrush="{x:Null}" SelectionBrush="{x:Null}" />
             </StackPanel>
         </ScrollViewer>
     </Grid>

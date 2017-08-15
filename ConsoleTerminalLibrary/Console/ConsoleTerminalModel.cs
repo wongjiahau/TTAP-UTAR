@@ -10,8 +10,12 @@ namespace ConsoleTerminalLibrary.Console {
     public class ConsoleTerminalModel : INotifyPropertyChanged {
         private string _consoleInput = string.Empty;
         private ObservableCollection<string> _consoleOutput = new ObservableCollection<string>() { "Console Emulation Sample..." };
-        private readonly List<IConsoleCommand> _commandList;
-        private IBoundedIteratable<string> _inputHistory = new BoundedIteratable<string>();
+        private readonly List<IConsoleCommand> _commandList = new List<IConsoleCommand>();
+        private readonly IBoundedIteratable<string> _inputHistory = new BoundedIteratable<string>();
+
+        public ConsoleTerminalModel() {
+            
+        }
         public ConsoleTerminalModel(List<IConsoleCommand> commandList) {
             _commandList = commandList;
         }
@@ -53,6 +57,7 @@ namespace ConsoleTerminalLibrary.Console {
             else {
                 ConsoleOutput.Add(command.Execute());
             }
+            ConsoleInput = "";
         }
 
         private void ShowHelp(string input) {
