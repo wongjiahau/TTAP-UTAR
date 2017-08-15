@@ -1,13 +1,19 @@
-﻿namespace ConsoleTerminalLibrary.Console {
+﻿using System.Net;
+
+namespace ConsoleTerminalLibrary.Console {
     public interface IConsoleCommand {
-        void Execute();
+        string Execute();
     }
 
     public abstract class ConsoleCommandBase : IConsoleCommand {
-        protected object _target;
-        protected ConsoleCommandBase(object target) {
-            _target = target;
+        protected object Commandee;
+        protected string Keyword;
+        protected string Help;
+        protected ConsoleCommandBase(object target, object commandee, string keyword, string help) {
+            Commandee = commandee;
+            Keyword = keyword;
+            Help = help;
         }
-        public abstract void Execute();
+        public abstract string Execute();
     }
 }
