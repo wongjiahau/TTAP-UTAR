@@ -12,7 +12,7 @@ namespace ConsoleTerminalLibrary.Console {
         public object Commandee { get; private set; }
         public string Keyword { get; private set; }
         public string Help { get; private set; }
-        protected ConsoleCommandBase(object target, object commandee, string keyword, string help) {
+        protected ConsoleCommandBase(object commandee , string keyword , string help) {
             Commandee = commandee;
             Keyword = keyword;
             Help = help;
