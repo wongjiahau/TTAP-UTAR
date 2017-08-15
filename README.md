@@ -64,12 +64,45 @@ ________________________________________________________________________________
 
 ### Step 4: Save the timetable
 
+![111](https://user-images.githubusercontent.com/29939372/29328673-f295ba9a-8225-11e7-8b56-4f7f46d177c7.png)
 
-## Tutorial (5 steps)
+**First, Click this button.**
+
+![save timetable](https://user-images.githubusercontent.com/29939372/29328740-29634498-8226-11e7-99e3-faff125347c1.png)
+
+**Next, you are given 3 way to save your timetable:**
+
+**(a)**  Save as Picture (\*.png).
+
+**(b)**  Save as Notepad File (\*.txt).
+
+**(c)**  Save in Google Calander. 
+
+______________________________________________________________________________________________
+
+### Extra Tips
+
+![12](https://user-images.githubusercontent.com/29939372/29329353-37ddebe8-8228-11e7-82d3-553fcd557e1b.png)
+
+**\*If you want to bid for your timetable effectively and with efficiency, you can click the "3 bar button" to enable the "always on top window" that has the timetable data you chose early and the "copy subject code function" to let you bid with productivity and flashing speed.**
+
+---------------------------------------------------------------------------------------------
+
+## Tutorial (.Gif)
 1. Log in to your account. 
 2. Select your subjects.
 3. Set time constraint.
 4. Browse through possible timetables.
 5. Save your favourite timetable.
 ![How to use TTAP?](https://github.com/wongjiahau/TTAP-UTAR/blob/master/TTAP_Tutorial_v2.gif)
+
+## Please Rate Us
+
+![10](https://user-images.githubusercontent.com/29939372/29329753-7d559314-8229-11e7-8da7-d1d32147df0d.PNG)
+
+**After using this TTAP application, please rate us before you close the application.
+Your Rating will help us to improve and making the application to reach more users.
+Your feedback is always our motivation to continue our development.**
+
+# Thank You
 
