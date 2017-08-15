@@ -49,12 +49,9 @@ namespace ConsoleTerminalLibrary.Console {
             _inputHistory.Add(input);
             _inputHistory.Add("");
             _inputHistory.GoToLast();
+            ConsoleOutput.Add(input);
             if (input != "" && input.Last() == '?') {
                 ShowHelp(input);
-                return;
-            }
-            if (input == "") {
-                ConsoleOutput.Add("");
                 return;
             }
             var command = _commandList.Find(x => x.Keyword == input);
@@ -62,8 +59,7 @@ namespace ConsoleTerminalLibrary.Console {
                 ConsoleOutput.Add($"'{input}' is not a recognizable command.");
             }
             else {
-                ConsoleOutput.Add(input);
-                ConsoleOutput.Add(command.Execute());
+                ConsoleOutput.Add($"{command.Execute()}");
             }
             ConsoleInput = "";
         }
