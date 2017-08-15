@@ -178,11 +178,6 @@
     <Compile Include="Class\StateSummary\StateTable.cs" />
     <Compile Include="Class\testing_for_revert.cs" />
     <Compile Include="Class\TokenParser\HtmlSlotParser.cs" />
-    <Compile Include="Console\ConsoleCommand.cs" />
-    <Compile Include="Console\ConsoleContent.cs" />
-    <Compile Include="Console\ConsoleTerminal.xaml.cs">
-      <DependentUpon>ConsoleTerminal.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Interfaces\INeedDataContext.cs" />
     <Compile Include="Interfaces\IPageWithLoadedFunction.cs" />
     <Compile Include="Interfaces\ToBinary.cs" />
@@ -400,10 +395,6 @@
     <Compile Include="Windows Control\Window_GetConstructionStringOfSlots.xaml.cs">
       <DependentUpon>Window_GetConstructionStringOfSlots.xaml</DependentUpon>
     </Compile>
-    <Page Include="Console\ConsoleTerminal.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="MVVM_Framework\Views\CyclicIndexView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -2,8 +2,8 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 
-namespace Time_Table_Arranging_Program.Console {
-    public class ConsoleContent : INotifyPropertyChanged {
+namespace ConsoleTerminalLibrary.Console {
+    public class ConsoleTerminalModel : INotifyPropertyChanged {
         private string _consoleInput = string.Empty;
         private ObservableCollection<string> _consoleOutput = new ObservableCollection<string>() { "Console Emulation Sample..." };
 
