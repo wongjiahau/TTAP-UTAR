@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Time Table Arranging Progra
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NUnit.Tests2", "NUnit.Tests2\NUnit.Tests2.csproj", "{8EDF4429-251A-416D-BB68-93F227191BCF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleTerminalLibrary", "ConsoleTerminalLibrary\ConsoleTerminalLibrary.csproj", "{E45E716A-B210-4293-AC75-89D41AAB9E05}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,14 @@ Global
 		{8EDF4429-251A-416D-BB68-93F227191BCF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8EDF4429-251A-416D-BB68-93F227191BCF}.Release|x64.ActiveCfg = Release|Any CPU
 		{8EDF4429-251A-416D-BB68-93F227191BCF}.Release|x64.Build.0 = Release|Any CPU
+		{E45E716A-B210-4293-AC75-89D41AAB9E05}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E45E716A-B210-4293-AC75-89D41AAB9E05}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E45E716A-B210-4293-AC75-89D41AAB9E05}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{E45E716A-B210-4293-AC75-89D41AAB9E05}.Debug|x64.Build.0 = Debug|Any CPU
+		{E45E716A-B210-4293-AC75-89D41AAB9E05}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E45E716A-B210-4293-AC75-89D41AAB9E05}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E45E716A-B210-4293-AC75-89D41AAB9E05}.Release|x64.ActiveCfg = Release|Any CPU
+		{E45E716A-B210-4293-AC75-89D41AAB9E05}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
