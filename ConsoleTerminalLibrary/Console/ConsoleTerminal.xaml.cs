@@ -16,6 +16,7 @@ namespace EmbeddedConsole.Console {
         private ConsoleTerminalModel _model;
         public void Initialize(ConsoleTerminalModel consoleTerminalModel) {
             _model = consoleTerminalModel;
+            this.DataContext = _model;
         }
 
         private void ConsoleTerminal_OnLoaded(object sender , RoutedEventArgs e) {
@@ -24,6 +25,7 @@ namespace EmbeddedConsole.Console {
 
         private void InputBlock_OnKeyDown(object sender , KeyEventArgs e) {
             string input = InputBlock.Text;
+            
             switch (e.Key) {
                 case Key.Enter:
                     _model.ExecuteCommand(input);
@@ -38,8 +40,14 @@ namespace EmbeddedConsole.Console {
                     _model.GoToNextCommand();
                     break;
             }
+            
             InputBlock.Focus();
+            Keyboard.Focus(InputBlock);
             Scroller.ScrollToBottom();
+        }
+
+        private void InputBlock_OnPreviewKeyDown(object sender, KeyEventArgs e) {
+            throw new System.NotImplementedException();
         }
     }
 }

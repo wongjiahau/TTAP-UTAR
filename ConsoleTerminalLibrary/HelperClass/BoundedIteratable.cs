@@ -15,7 +15,7 @@ namespace ConsoleTerminalLibrary.HelperClass {
     }
     public class BoundedIteratable<T> : IBoundedIteratable<T> {
         private int _counter = 0;
-        private List<T> _items;
+        private readonly List<T> _items = new List<T>();
         public void GoToPrevious() {
             if (_counter == 0) return;
             _counter--;
