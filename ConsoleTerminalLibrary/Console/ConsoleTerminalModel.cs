@@ -12,12 +12,18 @@ namespace ConsoleTerminalLibrary.Console {
     public class ConsoleTerminalModel : INotifyPropertyChanged {
         private string _consoleInput = string.Empty;
         private ObservableCollection<string> _consoleOutput = new ObservableCollection<string>() { "Console Emulation Sample..." };
-        private readonly List<IConsoleCommand> _commandList = new List<IConsoleCommand>();
+        private readonly List<IConsoleCommand> _commandList;
         private readonly IBoundedIteratable<string> _inputHistory = new BoundedIteratable<string>();
 
         public ConsoleTerminalModel() {
             //Adding built in command
-            _commandList.Add(new HelpCommand(_commandList));
+            _commandList = new List<IConsoleCommand>();
+            _commandList.AddRange(
+                new List<IConsoleCommand>()
+                {
+                    new HelpCommand(_commandList),
+                    new ClearScreenCommand(_consoleOutput)
+                });
         }
         public ConsoleTerminalModel(List<IConsoleCommand> commandList) : this() {
             _commandList.AddRange(commandList);
