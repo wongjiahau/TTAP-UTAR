@@ -48,9 +48,11 @@ namespace Time_Table_Arranging_Program {
             Global.Snackbar = Snackbar;
             var firstPage = new Page_Introduction();
             MainFrame.Navigate(firstPage);
-            ConsoleTerminal.Initialize(new ConsoleTerminalModel(new List<IConsoleCommand>(){ new LoadTestDataCommand(this) }));
-            //new HtmlSlotParser().Parse(File.ReadAllText(
-            //    @"C:\Users\User\Desktop\TTAPv7.7\NUnit.Tests2\TestFiles\CopiedTextFromSampleHTML.txt"));
+            ConsoleTerminal.Initialize(new ConsoleTerminalModel(new List<IConsoleCommand>()
+            {
+                new LoadTestDataCommand(this),
+                new HideConsoleCommand(DrawerHost)
+            }));
         }
 
         private void MainFrame_OnNavigating(object sender , NavigatingCancelEventArgs e) {
