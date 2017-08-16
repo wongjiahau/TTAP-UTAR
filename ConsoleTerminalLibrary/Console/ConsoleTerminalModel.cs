@@ -23,7 +23,8 @@ namespace ConsoleTerminalLibrary.Console {
                 {
                     new HelpCommand(_commandList),
                     new ClearScreenCommand(_consoleOutput),
-                    new CopyToClipboardCommand(null)
+                    new CopyToClipboardCommand(null),
+                    new HistoryCommand(_inputHistory.ToList())
                 });
         }
         public ConsoleTerminalModel(List<IConsoleCommand> commandList) : this() {

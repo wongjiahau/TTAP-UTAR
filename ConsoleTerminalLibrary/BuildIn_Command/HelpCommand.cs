@@ -16,6 +16,7 @@ namespace ConsoleTerminalLibrary.BuildIn_Command {
             var commandList = Commandee as List<IConsoleCommand>;
             Assert.IsTrue(commandList!=null);
             string result = "Available commands :\n";
+            commandList = commandList.OrderBy(x=> x.Keyword()).ToList();
             foreach (IConsoleCommand t in commandList) {
                 result += "\t" + t.Keyword() + "\n";
             }
