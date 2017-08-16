@@ -13,6 +13,7 @@ namespace ConsoleTerminalLibrary.HelperClass {
         void RemoveAll(Predicate<T> predicate);
         void GoToFirst();
         void GoToLast();
+        List<T> ToList();
     }
     public class BoundedIteratable<T> : IBoundedIteratable<T> {
         private int _counter = 0;
@@ -46,6 +47,10 @@ namespace ConsoleTerminalLibrary.HelperClass {
 
         public void GoToLast() {
             _counter = _items.Count - 1;
+        }
+
+        public List<T> ToList() {
+            return _items;
         }
     }
 }
