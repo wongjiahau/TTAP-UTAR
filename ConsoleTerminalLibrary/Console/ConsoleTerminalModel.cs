@@ -53,6 +53,7 @@ namespace ConsoleTerminalLibrary.Console {
             _inputHistory.Add("");
             _inputHistory.GoToLast();
             ConsoleOutput.Add(input);
+            if (input == "") return;
             if (input != "" && input.Last() == '?') {
                 ShowHelp(input);
                 return;
