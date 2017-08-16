@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ConsoleTerminalLibrary.Console;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ConsoleTerminalLibrary.BuildIn_Command {
     public class ClearScreenCommand : ConsoleCommandBase {
@@ -12,7 +14,10 @@ namespace ConsoleTerminalLibrary.BuildIn_Command {
         }
 
         public override string Execute() {
-            throw new NotImplementedException();
+            var output = Commandee as ObservableCollection<string>;
+            Assert.IsTrue(output!=null);
+            output.Clear();
+            return "";
         }
 
         public override string Keyword() {
