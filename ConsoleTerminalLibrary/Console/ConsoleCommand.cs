@@ -20,4 +20,13 @@ namespace ConsoleTerminalLibrary.Console {
         public abstract string Help();
         public abstract string[] Options();
     }
+
+    public abstract class CommandWithArgument : ConsoleCommandBase {
+        public CommandWithArgument(object commandee) : base(commandee) { }
+        public sealed override string Execute() {
+            throw new NotImplementedException();
+        }
+
+        public abstract string Execute(string s);
+    }
 }

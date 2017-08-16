@@ -22,7 +22,8 @@ namespace ConsoleTerminalLibrary.Console {
                 new List<IConsoleCommand>()
                 {
                     new HelpCommand(_commandList),
-                    new ClearScreenCommand(_consoleOutput)
+                    new ClearScreenCommand(_consoleOutput),
+                    new CopyToClipboardCommand(null)
                 });
         }
         public ConsoleTerminalModel(List<IConsoleCommand> commandList) : this() {
@@ -64,13 +65,21 @@ namespace ConsoleTerminalLibrary.Console {
                 ShowHelp(input);
                 return;
             }
-            var command = _commandList.Find(x => x.Keyword() == input);
-            if (command == null) {
-                ConsoleOutput.Add($"'{input}' is not a recognizable command.");
-            }
-            else {
-                ConsoleOutput.Add($"{command.Execute()}");
-            }
+            string commandKeyword = input.Split(' ')[0];
+            var command = _commandList.Find(x => x.Keyword() == commandKeyword);
+            if (command != null)
+                if (command is CommandWithArgument) {
+                    if (input.Split(' ').Length != 2) {
+                        ConsoleOutput.Add($"'{input}' must be invoked with one argument.");
+                    }
+                    else {
+                        ConsoleOutput.Add((command as CommandWithArgument).Execute(input.Split(' ')[1]));
+                    }
+                }
+                else {
+                    ConsoleOutput.Add($"{command.Execute()}");
+                }
+            else ConsoleOutput.Add($"'{input}' is not a recognizable command.");
             ConsoleInput = "";
         }
 
@@ -99,7 +108,7 @@ namespace ConsoleTerminalLibrary.Console {
             else {
                 ConsoleOutput.Add("Matching commands : ");
                 foreach (var consoleCommand in matched) {
-                    ConsoleOutput.Add("\t" + consoleCommand);
+                    ConsoleOutput.Add("\t" + consoleCommand.Keyword());
                 }
             }
         }

@@ -52,5 +52,9 @@ namespace EmbeddedConsole.Console {
             Keyboard.Focus(InputBlock);
             Scroller.ScrollToBottom();
         }
+
+        private void ConsoleTerminal_OnMouseUp(object sender, MouseButtonEventArgs e) {
+            InputBlock.Focus();
+        }
     }
 }

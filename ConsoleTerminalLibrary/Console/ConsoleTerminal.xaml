@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:console="clr-namespace:ConsoleTerminalLibrary.Console"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300" Loaded="ConsoleTerminal_OnLoaded">
+             d:DesignHeight="300" d:DesignWidth="300" Loaded="ConsoleTerminal_OnLoaded" MouseUp="ConsoleTerminal_OnMouseUp">
     <UserControl.DataContext>
         <console:ConsoleTerminalModel></console:ConsoleTerminalModel>
     </UserControl.DataContext>
