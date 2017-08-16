@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Linq;
 using ConsoleTerminalLibrary.BuildIn_Command;
 using ConsoleTerminalLibrary.HelperClass;
+
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ConsoleTerminalLibrary.Console {
@@ -56,7 +57,7 @@ namespace ConsoleTerminalLibrary.Console {
                 ShowHelp(input);
                 return;
             }
-            var command = _commandList.Find(x => x.Keyword == input);
+            var command = _commandList.Find(x => x.Keyword() == input);
             if (command == null) {
                 ConsoleOutput.Add($"'{input}' is not a recognizable command.");
             }
@@ -69,24 +70,24 @@ namespace ConsoleTerminalLibrary.Console {
         private void ShowHelp(string input) {
             Assert.IsTrue(input.Last() == '?');
             input = input.TrimEnd('?');
-            var command = _commandList.Find(x => x.Keyword == input);
+            var command = _commandList.Find(x => x.Keyword() == input);
             if (command == null) {
                 ConsoleOutput.Add($"'{input}' is not a recognizable command.");
             }
             else {
-                ConsoleOutput.Add(command.Help);
+                ConsoleOutput.Add(command.Help());
             }
 
         }
 
         public void ShowMatchingCommand(string input) {
             if (input == "") return;
-            var matched = _commandList.FindAll(x => x.Keyword.StartsWith(input));
+            var matched = _commandList.FindAll(x => x.Keyword().StartsWith(input));
             if (matched.Count == 0) {
                 ConsoleOutput.Add($"No matching command starts with '{input}'");
             }
             else if (matched.Count == 1) {
-                ConsoleInput = matched[0].Keyword;
+                ConsoleInput = matched[0].Keyword();
             }
             else {
                 ConsoleOutput.Add("Matching commands : ");
