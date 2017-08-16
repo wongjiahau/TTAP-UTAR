@@ -53,6 +53,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Compile Include="BuildIn_Command\ClearScreenCommand.cs" />
+    <Compile Include="BuildIn_Command\HelpCommand.cs" />
     <Compile Include="Console\ConsoleCommand.cs" />
     <Compile Include="Console\ConsoleTerminalModel.cs" />
     <Compile Include="Console\ConsoleTerminal.xaml.cs">

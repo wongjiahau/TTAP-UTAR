@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using ConsoleTerminalLibrary.BuildIn_Command;
 using ConsoleTerminalLibrary.HelperClass;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -14,10 +15,11 @@ namespace ConsoleTerminalLibrary.Console {
         private readonly IBoundedIteratable<string> _inputHistory = new BoundedIteratable<string>();
 
         public ConsoleTerminalModel() {
-
+            //Adding built in command
+            _commandList.Add(new HelpCommand(_commandList));
         }
-        public ConsoleTerminalModel(List<IConsoleCommand> commandList) {
-            _commandList = commandList;
+        public ConsoleTerminalModel(List<IConsoleCommand> commandList) : this() {
+            _commandList.AddRange(commandList);
         }
         public string ConsoleInput {
             get {
