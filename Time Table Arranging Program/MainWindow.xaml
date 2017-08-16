@@ -32,7 +32,10 @@
                         <Button Style="{StaticResource MaterialDesignFlatButton}" Foreground="White" DockPanel.Dock="Right" Click="ExtraMenuButton_OnClick">
                             <materialDesign:PackIcon Height="25" Width="25" Kind="DotsVertical" />
                         </Button>
-                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22">Timetable Arranging Program ( TTAP )</TextBlock>
+                        <Grid HorizontalAlignment="Center">
+                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22">Timetable Arranging Program ( TTAP )</TextBlock>
+                            <Button HorizontalAlignment="Center"  Style="{StaticResource MaterialDesignFlatButton}" Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}" CommandParameter="{x:Static Dock.Bottom}"></Button>
+                        </Grid>
                     </DockPanel>
                 </materialDesign:ColorZone>
                 <materialDesign:Card DockPanel.Dock="Top" HorizontalAlignment="Stretch">
@@ -136,9 +139,9 @@
             <DockPanel LastChildFill="True">
                 <Grid>
                     <Frame x:Name="MainFrame" Template="{DynamicResource ControlTemplateForNavigator}"
-           Navigating="MainFrame_OnNavigating" />
+           Navigating="MainFrame_OnNavigating" >
+                    </Frame>
                     <materialDesign:Snackbar x:Name="Snackbar"  MessageQueue="{materialDesign:MessageQueue}" />
-                    <Button HorizontalAlignment="Right" Content="{materialDesign:PackIcon Console}" Foreground="WhiteSmoke" VerticalAlignment="Bottom" Style="{StaticResource MaterialDesignFlatButton}" Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}" CommandParameter="{x:Static Dock.Bottom}"></Button>
                 </Grid>
 
 
