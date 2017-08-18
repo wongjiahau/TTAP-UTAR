@@ -181,6 +181,7 @@
     <Compile Include="ConsoleCommands\HideConsoleCommand.cs" />
     <Compile Include="ConsoleCommands\LoadDataFromTestServerCommand.cs" />
     <Compile Include="ConsoleCommands\LoadTestDataCommand.cs" />
+    <Compile Include="ConsoleCommands\ResetDataCommand.cs" />
     <Compile Include="Interfaces\INeedDataContext.cs" />
     <Compile Include="Interfaces\IPageWithLoadedFunction.cs" />
     <Compile Include="Interfaces\ToBinary.cs" />

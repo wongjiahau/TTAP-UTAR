@@ -52,7 +52,8 @@ namespace Time_Table_Arranging_Program {
             {
                 new LoadTestDataCommand(this),
                 new HideConsoleCommand(DrawerHost),
-                new LoadDataFromTestServerCommand(this)
+                new LoadDataFromTestServerCommand(this),
+                new ResetDataCommand(Global.InputSlotList)
             }));
         }
 
