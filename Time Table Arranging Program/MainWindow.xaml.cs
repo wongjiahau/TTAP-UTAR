@@ -51,7 +51,8 @@ namespace Time_Table_Arranging_Program {
             ConsoleTerminal.Initialize(new ConsoleTerminalModel(new List<IConsoleCommand>()
             {
                 new LoadTestDataCommand(this),
-                new HideConsoleCommand(DrawerHost)
+                new HideConsoleCommand(DrawerHost),
+                new LoadDataFromTestServerCommand(this)
             }));
         }
 
@@ -189,6 +190,11 @@ namespace Time_Table_Arranging_Program {
             MainFrame.Navigate(
                 Page_CreateTimetable.GetInstance(Global.Settings.SearchByConsideringWeekNumber ,
                     Global.Settings.GeneralizeSlot));
+        }
+
+        public void LoadDataFromTestServer() {
+            var page_login = new Page_Login(true);
+            MainFrame.Navigate(page_login);
         }
     }
 }

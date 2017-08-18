@@ -35,6 +35,7 @@ namespace Time_Table_Arranging_Program.Pages {
         private const string CourseTimetablePreviewUrl =
             "https://unitreg.utar.edu.my/portal/courseRegStu/schedule/masterSchedule.jsp";
 
+        private const string TestServerUrl = "http://localhost/ttap_testdata/";
 
         private int _currentPage = 1;
         private const int NavigationCountUpperLimit = 3;
@@ -43,20 +44,28 @@ namespace Time_Table_Arranging_Program.Pages {
             InitializeComponent();
         }
 
+        private bool _loadDataFromTestServer;
+        public Page_Login(bool loadDataFromTestServer) :this(){
+            _loadDataFromTestServer = loadDataFromTestServer;
+        }
+
         private void Page_First_OnLoaded(object sender , RoutedEventArgs e) {
             GotItButton_OnClick(null , null);
+            if (_loadDataFromTestServer) {
+                Browser.Navigate(TestServerUrl);
+                return;
+            }
             Browser.Navigate(LoginPageUrl);
         }
 
         private bool _browsingToCourseTimetablePreview = false;
+
         private void Browser_OnLoadCompleted(object sender , NavigationEventArgs e) {
             Browser.InvokeScript("execScript" , "document.documentElement.style.overflow ='hidden'" , "JavaScript");
             RefreshButton.IsEnabled = true;
             string currentUrl = Browser.Source.ToString();
-            //if (currentUrl == LoginPageUrl) return;
-            //if(currentUrl == LoginSuccessUrl) 
-            //if(currentUrl == LoginFailedUrl) Browser.Navigate(LoginPageUrl);                        
-            if (currentUrl == LoginPageUrl || currentUrl == LoginFailedUrl ) {
+            if (currentUrl.Contains(TestServerUrl)) goto here;
+            if (currentUrl == LoginPageUrl || currentUrl == LoginFailedUrl) {
                 _navigationCount = 0;
                 return;
             }
@@ -75,6 +84,7 @@ namespace Time_Table_Arranging_Program.Pages {
                 return;
             }
 
+            here:
             string html = GetHtml(Browser);
             var bg = CustomBackgroundWorker<string , List<Slot>>.RunAndShowLoadingScreen(
                new HtmlSlotParser().Parse , html , "Loading slots . . .");
@@ -86,7 +96,7 @@ namespace Time_Table_Arranging_Program.Pages {
             }
             else {
                 if (Global.InputSlotList.Count == 0) {
-                    DialogBox.Show("No data available." , "", "OK");
+                    DialogBox.Show("No data available." , "" , "OK");
                     if (DialogBox.Result == DialogBox.ResultEnum.RightButtonClicked) {
                         LoadTestDataButton_OnClick(null , null);
                     }
@@ -152,5 +162,7 @@ namespace Time_Table_Arranging_Program.Pages {
         private void LoginButton_OnClick(object sender , RoutedEventArgs e) {
             MessageBox.Show("Not implemented yet");
         }
+
+
     }
 }
