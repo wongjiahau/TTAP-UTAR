@@ -18,6 +18,10 @@ namespace Time_Table_Arranging_Program {
         public static DateTime TimetableEndDate;
         public static SlotList InputSlotList = new SlotList();
 
+        public static class Toggles {
+            public static ToggableObject SaveLoadedHtmlToggle = new ToggableObject(false);
+        }
+
         public static class Settings {
             public static Setting SearchByConsideringWeekNumber { private set; get; } =
                 new Setting(Windows_Control.Setting.SettingDescription.SearchByConsideringWeekNumber ,

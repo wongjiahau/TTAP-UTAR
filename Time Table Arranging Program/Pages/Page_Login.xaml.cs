@@ -15,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using HtmlAgilityPack;
+using Microsoft.Win32;
 using Time_Table_Arranging_Program.Class;
 using Time_Table_Arranging_Program.Class.Helper;
 using Time_Table_Arranging_Program.Class.SlotGeneralizer;
@@ -45,7 +46,7 @@ namespace Time_Table_Arranging_Program.Pages {
         }
 
         private bool _loadDataFromTestServer;
-        public Page_Login(bool loadDataFromTestServer) :this(){
+        public Page_Login(bool loadDataFromTestServer) : this() {
             _loadDataFromTestServer = loadDataFromTestServer;
         }
 
@@ -86,6 +87,7 @@ namespace Time_Table_Arranging_Program.Pages {
 
             here:
             string html = GetHtml(Browser);
+            if (Global.Toggles.SaveLoadedHtmlToggle.IsToggledOn) SaveToFile(html);
             var bg = CustomBackgroundWorker<string , List<Slot>>.RunAndShowLoadingScreen(
                new HtmlSlotParser().Parse , html , "Loading slots . . .");
             //    TryGetStartDateAndEndDate(plainText);
@@ -106,6 +108,16 @@ namespace Time_Table_Arranging_Program.Pages {
                 NavigationService.Navigate(
                     Page_CreateTimetable.GetInstance(Global.Settings.SearchByConsideringWeekNumber ,
                         Global.Settings.GeneralizeSlot));
+            }
+        }
+
+        private void SaveToFile(string html) {
+            var saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "Text file (*.html)|*.html";
+            saveFileDialog.FileName = "SampleHtmlData";
+            if (saveFileDialog.ShowDialog() == true) {
+                File.WriteAllText(saveFileDialog.FileName , html);
+                Global.Snackbar.MessageQueue.Enqueue("File saved.");
             }
         }
 
