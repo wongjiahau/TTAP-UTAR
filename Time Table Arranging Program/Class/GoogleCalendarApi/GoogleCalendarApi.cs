@@ -16,7 +16,7 @@ using Time_Table_Arranging_Program.Class.Converter;
 
 
 namespace Time_Table_Arranging_Program.Class.GoogleCalendarApi {
-    public class GoogleCalendarApi {
+    public static class GoogleCalendarApi {
         private static DateTime _dateOfMondayOfWeekOne;
 
         private static CalendarService GetRequestService() {
@@ -35,7 +35,7 @@ namespace Time_Table_Arranging_Program.Class.GoogleCalendarApi {
                     "user" ,
                     CancellationToken.None ,
                     new FileDataStore(credPath , true)).Result;
-                MessageBox.Show(@"Credential file saved to: " + credPath);
+                //MessageBox.Show(@"Credential file saved to: " + credPath);
             }
             var service = new CalendarService(new BaseClientService.Initializer {
                 HttpClientInitializer = credential ,

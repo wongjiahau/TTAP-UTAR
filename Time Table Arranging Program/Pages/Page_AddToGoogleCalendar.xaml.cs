@@ -78,7 +78,6 @@ namespace Time_Table_Arranging_Program.Pages {
             if (DatePicker.SelectedDate.Value.DayOfWeek != DayOfWeek.Monday) {
                 DialogBox.Show("Something is not right . . .", "The date you picked is not a Monday.",
                     "Repick date");
-                DatePicker.IsDropDownOpen = false;
                 DatePicker.IsDropDownOpen = true;
                 return;
             }
@@ -96,6 +95,19 @@ namespace Time_Table_Arranging_Program.Pages {
         private void CancelButton_OnClick(object sender, RoutedEventArgs e) {
             DialogHost.IsOpen = false;
             NavigationService.GoBack();
+        }
+
+        private void DatePicker_OnCalendarOpened(object sender, RoutedEventArgs e) {
+            DatePicker.DisplayDateStart = DateTime.Now;
+            DatePicker.DisplayDateEnd = DateTime.Now + TimeSpan.FromDays(100);
+            var minDate = DatePicker.DisplayDateStart ?? DateTime.MinValue;
+            var maxDate = DatePicker.DisplayDateEnd ?? DateTime.MaxValue;
+
+            for (var d = minDate ; d <= maxDate && DateTime.MaxValue > d ; d = d.AddDays(1)) {
+                if (d.DayOfWeek != DayOfWeek.Monday) {
+                    DatePicker.BlackoutDates.Add(new CalendarDateRange(d));
+                }
+            }
         }
     }
 }
