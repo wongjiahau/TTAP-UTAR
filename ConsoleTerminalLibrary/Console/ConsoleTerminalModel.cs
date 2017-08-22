@@ -11,7 +11,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace ConsoleTerminalLibrary.Console {
     public class ConsoleTerminalModel : INotifyPropertyChanged {
         private string _consoleInput = string.Empty;
-        private ObservableCollection<string> _consoleOutput = new ObservableCollection<string>() { "Type 'help' to list available commands." };
+        private ObservableCollection<string> _consoleOutput = new ObservableCollection<string>() { "Type '/help' to list available commands." };
         private readonly List<IConsoleCommand> _commandList;
         private readonly IBoundedIteratable<string> _inputHistory = new BoundedIteratable<string>();
 
@@ -23,7 +23,7 @@ namespace ConsoleTerminalLibrary.Console {
                 {
                     new HelpCommand(_commandList),
                     new ClearScreenCommand(_consoleOutput),
-                    new CopyToClipboardCommand(null),
+                    //new CopyToClipboardCommand(null),
                     new HistoryCommand(_inputHistory.ToList())
                 });
         }

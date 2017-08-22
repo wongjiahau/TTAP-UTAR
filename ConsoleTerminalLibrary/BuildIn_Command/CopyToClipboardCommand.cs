@@ -21,7 +21,7 @@ namespace ConsoleTerminalLibrary.BuildIn_Command {
         }
 
         public override string Keyword() {
-            return "copy-to-clipboard";
+            return "/copy-to-clipboard";
         }
 
         public override string Help() {

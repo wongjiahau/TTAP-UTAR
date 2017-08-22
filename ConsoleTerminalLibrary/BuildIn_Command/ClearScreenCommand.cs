@@ -21,7 +21,7 @@ namespace ConsoleTerminalLibrary.BuildIn_Command {
         }
 
         public override string Keyword() {
-            return "clear";
+            return "/clear";
         }
 
         public override string Help() {

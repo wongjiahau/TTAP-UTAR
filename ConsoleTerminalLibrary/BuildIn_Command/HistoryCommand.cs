@@ -17,7 +17,7 @@ namespace ConsoleTerminalLibrary.BuildIn_Command {
         }
 
         public override string Keyword() {
-            return "history";
+            return "/history";
         }
 
         public override string Help() {
