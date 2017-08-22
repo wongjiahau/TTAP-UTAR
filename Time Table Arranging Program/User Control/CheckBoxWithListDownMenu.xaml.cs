@@ -10,7 +10,7 @@ using Time_Table_Arranging_Program.Interfaces;
 using Time_Table_Arranging_Program.Model;
 using Time_Table_Arranging_Program.UserInterface;
 
-namespace Time_Table_Arranging_Program {
+namespace Time_Table_Arranging_Program.User_Control {
     /// <summary>
     ///     Interaction logic for CheckBoxWithListDownMenu.xaml
     /// </summary>
@@ -38,10 +38,10 @@ namespace Time_Table_Arranging_Program {
             UIDofSelectedSlots = new HashSet<int>();
             InitializeDraggablePopup();
         }
-        public void SetDataContext(SubjectModel dataContext) {
-            _subjectModel = dataContext;
-            this.DataContext = dataContext;
-            foreach (var item in dataContext.Slots) {
+        public void SetDataContext(SubjectModel subjectModel) {
+            _subjectModel = subjectModel;
+            this.DataContext = subjectModel;
+            foreach (var item in subjectModel.Slots) {
                 item.IsSelected = true;
                 UIDofSelectedSlots.Add(item.UID);
             }

@@ -195,8 +195,8 @@ namespace Time_Table_Arranging_Program.User_Control {
 
 
         private CyclicIteratableList<ICheckBoxWithListDownMenu> _iteratableList;
-        public void SetDataContext(List<SubjectModel> dataContext) {
-            var subjectModels = dataContext;
+        public void SetDataContext(List<SubjectModel> subjectModel) {
+            var subjectModels = subjectModel;
             _nameAndCodeOfAllSubjects = new List<string>();
             foreach (var subject in subjectModels) {
                 _nameAndCodeOfAllSubjects.Add(subject.Name);
