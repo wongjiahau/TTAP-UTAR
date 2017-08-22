@@ -32,9 +32,11 @@ namespace Time_Table_Arranging_Program.User_Control {
             }
         }
         public void GenerateAsImage(List<Slot> slots) {
-            SubjectDescGrid.Children.Clear();
+            for (int i = 5; i < SubjectDescGrid.Children.Count; i++) {
+                SubjectDescGrid.Children.RemoveAt(i);
+            }
             IColorGenerator c = new ColorGenerator();
-            var gridRowIndex = 0;
+            var gridRowIndex = 1;
             var subjects = SubjectSummaryModel.GroupIntoSubjects(slots);
             foreach (SubjectSummaryModel s in subjects) {
                 SubjectDescGrid.RowDefinitions.Add(new RowDefinition());
