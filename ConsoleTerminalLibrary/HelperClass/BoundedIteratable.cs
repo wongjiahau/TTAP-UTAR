@@ -14,6 +14,8 @@ namespace ConsoleTerminalLibrary.HelperClass {
         void GoToFirst();
         void GoToLast();
         List<T> ToList();
+        bool IsEmpty();
+
     }
     public class BoundedIteratable<T> : IBoundedIteratable<T> {
         private int _counter = 0;
@@ -51,6 +53,10 @@ namespace ConsoleTerminalLibrary.HelperClass {
 
         public List<T> ToList() {
             return _items;
+        }
+
+        public bool IsEmpty() {
+            return _items.Count == 0;
         }
     }
 }
