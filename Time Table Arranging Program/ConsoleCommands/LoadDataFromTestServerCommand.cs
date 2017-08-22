@@ -23,7 +23,7 @@ namespace Time_Table_Arranging_Program.ConsoleCommands {
         }
 
         public override string Keyword() {
-            return "load-data-from-test-server";
+            return "get-data-from-test-server";
         }
 
         public override string Help() {
