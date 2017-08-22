@@ -36,6 +36,7 @@ namespace Time_Table_Arranging_Program.Class.TokenParser {
                         currentSubjectCode = tokens[0].Trim();
                         if (tokens.Length > 1)
                             currentSubjectName = tokens[1].Split('[')[0].Trim().Beautify();
+                        currentSubjectName = currentSubjectName.Replace("&amp;", "&");
                         continue;
                     }
                     var slot = new Slot {
