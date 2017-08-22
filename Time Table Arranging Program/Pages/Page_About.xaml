@@ -29,7 +29,29 @@
     </Page.Resources>
     <ScrollViewer>
         <StackPanel HorizontalAlignment="Center">
-            <materialDesign:Card Background="BlanchedAlmond">
+            <materialDesign:Card Padding="0">
+                <Expander HorizontalAlignment="Stretch" IsExpanded="True">
+                    <Expander.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Alert" />
+                            <TextBlock FontWeight="Bold">DISCLAIMER</TextBlock>
+                        </StackPanel>
+                    </Expander.Header>
+                    <StackPanel
+                    Margin="24,8,24,16"
+                    Orientation="Vertical"
+                    TextBlock.Foreground="{DynamicResource MaterialDesignBody}">
+                        <TextBlock
+                        Opacity="0.8"
+                        Text="TTAP is only a prototype software to assist students in finding the optimal timetable arrangement. 
+                            UTAR or the author will not be liable for any issues arising from the use of this software."
+                        TextWrapping="Wrap" 
+                            MaxWidth="650"
+                            />
+                    </StackPanel>
+                </Expander>
+            </materialDesign:Card>
+            <materialDesign:Card x:Name="FirstCard" Background="BlanchedAlmond">
                 <StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="CodeTags" />
