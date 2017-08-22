@@ -15,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using HtmlAgilityPack;
+using Microsoft.Win32;
 using Time_Table_Arranging_Program.Class;
 using Time_Table_Arranging_Program.Class.Helper;
 using Time_Table_Arranging_Program.Class.SlotGeneralizer;
@@ -35,6 +36,7 @@ namespace Time_Table_Arranging_Program.Pages {
         private const string CourseTimetablePreviewUrl =
             "https://unitreg.utar.edu.my/portal/courseRegStu/schedule/masterSchedule.jsp";
 
+        private const string TestServerUrl = "http://localhost/ttap_testdata/";
 
         private int _currentPage = 1;
         private const int NavigationCountUpperLimit = 3;
@@ -43,20 +45,28 @@ namespace Time_Table_Arranging_Program.Pages {
             InitializeComponent();
         }
 
+        private bool _loadDataFromTestServer;
+        public Page_Login(bool loadDataFromTestServer) : this() {
+            _loadDataFromTestServer = loadDataFromTestServer;
+        }
+
         private void Page_First_OnLoaded(object sender , RoutedEventArgs e) {
             GotItButton_OnClick(null , null);
+            if (_loadDataFromTestServer) {
+                Browser.Navigate(TestServerUrl);
+                return;
+            }
             Browser.Navigate(LoginPageUrl);
         }
 
         private bool _browsingToCourseTimetablePreview = false;
+
         private void Browser_OnLoadCompleted(object sender , NavigationEventArgs e) {
             Browser.InvokeScript("execScript" , "document.documentElement.style.overflow ='hidden'" , "JavaScript");
             RefreshButton.IsEnabled = true;
             string currentUrl = Browser.Source.ToString();
-            //if (currentUrl == LoginPageUrl) return;
-            //if(currentUrl == LoginSuccessUrl) 
-            //if(currentUrl == LoginFailedUrl) Browser.Navigate(LoginPageUrl);                        
-            if (currentUrl == LoginPageUrl || currentUrl == LoginFailedUrl ) {
+            if (currentUrl.Contains(TestServerUrl)) goto here;
+            if (currentUrl == LoginPageUrl || currentUrl == LoginFailedUrl) {
                 _navigationCount = 0;
                 return;
             }
@@ -75,7 +85,9 @@ namespace Time_Table_Arranging_Program.Pages {
                 return;
             }
 
+            here:
             string html = GetHtml(Browser);
+            if (Global.Toggles.SaveLoadedHtmlToggle.IsToggledOn) SaveToFile(html);
             var bg = CustomBackgroundWorker<string , List<Slot>>.RunAndShowLoadingScreen(
                new HtmlSlotParser().Parse , html , "Loading slots . . .");
             //    TryGetStartDateAndEndDate(plainText);
@@ -86,7 +98,7 @@ namespace Time_Table_Arranging_Program.Pages {
             }
             else {
                 if (Global.InputSlotList.Count == 0) {
-                    DialogBox.Show("No data available." , "", "OK");
+                    DialogBox.Show("No data available." , "" , "OK");
                     if (DialogBox.Result == DialogBox.ResultEnum.RightButtonClicked) {
                         LoadTestDataButton_OnClick(null , null);
                     }
@@ -96,6 +108,16 @@ namespace Time_Table_Arranging_Program.Pages {
                 NavigationService.Navigate(
                     Page_CreateTimetable.GetInstance(Global.Settings.SearchByConsideringWeekNumber ,
                         Global.Settings.GeneralizeSlot));
+            }
+        }
+
+        private void SaveToFile(string html) {
+            var saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "Text file (*.html)|*.html";
+            saveFileDialog.FileName = "SampleHtmlData";
+            if (saveFileDialog.ShowDialog() == true) {
+                File.WriteAllText(saveFileDialog.FileName , html);
+                Global.Snackbar.MessageQueue.Enqueue("File saved.");
             }
         }
 
@@ -152,5 +174,7 @@ namespace Time_Table_Arranging_Program.Pages {
         private void LoginButton_OnClick(object sender , RoutedEventArgs e) {
             MessageBox.Show("Not implemented yet");
         }
+
+
     }
 }
