@@ -51,8 +51,6 @@ namespace Time_Table_Arranging_Program.Pages {
             _inputSlots = inputSlots;
             _permutator = permutator;
             InitializeComponent();
-            FavouriteButton.SetObservedThings(_outputTimetables);
-            FavouriteButton.SetObservedThings(_currentViewedTimetable);
             TimetableViewer.SetObservedThings(_outputTimetables);
             TimetableViewer.Initialize(new CyclicIndex());
             _cyclicIndex = new CyclicIndex();
@@ -77,8 +75,6 @@ namespace Time_Table_Arranging_Program.Pages {
             _subjectModels = SubjectModel.Parse(_inputSlots);
             SelectSubjectPanel.SetDataContext(_subjectModels);
             SelectSubjectPanel.SetDrawerHost(this.DrawerHost);
-            FavouriteButton.CheckedMessage = "Added this timetable to favorites ";
-            FavouriteButton.UncheckedMessage = "Removed this timetable from favorites";
         }
 
         private void UpdateGUI(List<List<Slot>> result) {
@@ -165,25 +161,6 @@ namespace Time_Table_Arranging_Program.Pages {
                 Global.TimetableStartDate));
         }
 
-        private void ViewSelector_OnSelectionChanged(object sender , SelectionChangedEventArgs e) {
-            if (ViewSelector.SelectedIndex == 0) {
-                var allTimetables = _outputTimetables.GetPreviousState();
-                _outputTimetables?.SetState(allTimetables);
-                var ci = new CyclicIndex(allTimetables.Count - 1);
-                TimetableViewer?.Initialize(ci);
-                if (CyclicIndexView != null)
-                    CyclicIndexView.DataContext = new CyclicIndexVM(ci);
-                // Global.Snackbar.MessageQueue.Enqueue("Showing ALL timetables");
-            }
-            else {
-                var likedTimetable = _outputTimetables.GetLikedTimetableOnly();
-                _outputTimetables?.SetState(likedTimetable);
-                var ci = new CyclicIndex(likedTimetable.Count - 1);
-                TimetableViewer?.Initialize(ci);
-                CyclicIndexView.DataContext = new CyclicIndexVM(ci);
-                // Global.Snackbar.MessageQueue.Enqueue("Showing FAVORITE timetables");
-            }
-        }
 
         private void ShowAllTimetable_Checked(object sender , RoutedEventArgs e) {
             var allTimetables = _outputTimetables.GetPreviousState();
@@ -191,7 +168,6 @@ namespace Time_Table_Arranging_Program.Pages {
             var ci = new CyclicIndex(allTimetables.Count - 1);
             TimetableViewer?.Initialize(ci);
             if (CyclicIndexView != null) CyclicIndexView.DataContext = new CyclicIndexVM(ci);
-            //Global.Snackbar.MessageQueue.Enqueue("Showing ALL timetables");
         }
 
         private void ShowFavoriteTimetable_Checked(object sender , RoutedEventArgs e) {
@@ -200,7 +176,6 @@ namespace Time_Table_Arranging_Program.Pages {
             var ci = new CyclicIndex(likedTimetable.Count - 1);
             TimetableViewer?.Initialize(ci);
             CyclicIndexView.DataContext = new CyclicIndexVM(ci);
-            //Global.Snackbar.MessageQueue.Enqueue("Showing FAVORITE timetables");
         }
 
         private bool _leftDrawerIsOpened = false;
@@ -222,11 +197,6 @@ namespace Time_Table_Arranging_Program.Pages {
             };
             p.Show();
             p.Close();
-            return;
-            this.NavigationService.Navigate(
-            new Page_SaveTimetableAsImage(TimetableViewer.GetCurrentTimetable())
-            );
-
         }
     
         private void SaveAsNotepadFile_OnClick(object sender , RoutedEventArgs e) {
