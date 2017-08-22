@@ -177,7 +177,13 @@
     <Compile Include="Class\SlotGeneralizer\SlotGeneralizer.cs" />
     <Compile Include="Class\StateSummary\StateTable.cs" />
     <Compile Include="Class\testing_for_revert.cs" />
+    <Compile Include="Class\ToggableObject.cs" />
     <Compile Include="Class\TokenParser\HtmlSlotParser.cs" />
+    <Compile Include="ConsoleCommands\HideConsoleCommand.cs" />
+    <Compile Include="ConsoleCommands\LoadDataFromTestServerCommand.cs" />
+    <Compile Include="ConsoleCommands\LoadTestDataCommand.cs" />
+    <Compile Include="ConsoleCommands\ResetDataCommand.cs" />
+    <Compile Include="ConsoleCommands\SaveLoadedHtmlCommand.cs" />
     <Compile Include="Interfaces\INeedDataContext.cs" />
     <Compile Include="Interfaces\IPageWithLoadedFunction.cs" />
     <Compile Include="Interfaces\ToBinary.cs" />
@@ -654,6 +660,12 @@
   <ItemGroup>
     <Folder Include="Class\SubjectParser\" />
     <Folder Include="MiscFiles\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ConsoleTerminalLibrary\ConsoleTerminalLibrary.csproj">
+      <Project>{E45E716A-B210-4293-AC75-89D41AAB9E05}</Project>
+      <Name>ConsoleTerminalLibrary</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Fody.2.0.6\build\dotnet\Fody.targets" Condition="Exists('..\packages\Fody.2.0.6\build\dotnet\Fody.targets')" />
