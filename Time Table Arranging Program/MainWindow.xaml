@@ -34,7 +34,7 @@
                         </Button>
                         <Grid HorizontalAlignment="Center">
                             <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22">Timetable Arranging Program ( TTAP )</TextBlock>
-                            <Button HorizontalAlignment="Center"  Style="{StaticResource MaterialDesignFlatButton}" Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}" CommandParameter="{x:Static Dock.Bottom}"></Button>
+                            <Button Opacity="0" Cursor="Arrow" HorizontalAlignment="Center" Style="{StaticResource MaterialDesignFlatButton}" Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}" CommandParameter="{x:Static Dock.Bottom}"></Button>
                         </Grid>
                     </DockPanel>
                 </materialDesign:ColorZone>
