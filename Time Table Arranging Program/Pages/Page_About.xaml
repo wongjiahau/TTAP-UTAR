@@ -34,16 +34,16 @@
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="CodeTags" />
                         <TextBlock FontWeight="Bold"><Run Text="Program written by"/></TextBlock>
-                        <TextBlock Text=" Wong Jia Hau"/>
+                        <TextBlock Text="Aries &amp; Gemini"/>
                         <TextBlock Text=" using " FontWeight="Bold"/>
                         <TextBlock Text="C# WPF.NET"/>
                     </StackPanel>
-                    <Separator />
-                    <StackPanel   Orientation="Horizontal">
+                    <Separator Visibility="Collapsed"  />
+                    <StackPanel Visibility="Collapsed"   Orientation="Horizontal">
                         <materialDesign:PackIcon Margin="10" Kind="Whatsapp" />
                         <TextBlock VerticalAlignment="Center" Text="011-16372171"/>
                     </StackPanel>
-                    <StackPanel Orientation="Horizontal">
+                    <StackPanel Visibility="Collapsed" Orientation="Horizontal">
                         <materialDesign:PackIcon Margin="10"  Kind="Email" />
                         <TextBlock Text="jiahau.wong@1utar.my" />
                         <Button Margin="10,0,0,0" Click="CopyEmailButton_OnClick" Content="COPY" materialDesign:ShadowAssist.ShadowDepth="Depth0"/>
