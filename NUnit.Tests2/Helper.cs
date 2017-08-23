@@ -8,10 +8,15 @@ using System.Threading.Tasks;
 
 namespace NUnit.Tests2 {
     public static class Helper {
-        public static string RawStringOfTestFile(string fileName) {
-            string parentDirectory = "NUnit.Tests2.TestFiles.";
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <param name="nameSpace">Must end with a period</param>
+        /// <returns></returns>
+        public static string RawStringOfTestFile(string fileName , string nameSpace = "NUnit.Tests2.TestFiles.") {
             var assembly = Assembly.GetExecutingAssembly();
-            var resourceName = parentDirectory + fileName;
+            var resourceName = nameSpace + fileName;
             using (Stream stream = assembly.GetManifestResourceStream(resourceName))
             using (StreamReader reader = new StreamReader(stream)) {
                 return reader.ReadToEnd();
