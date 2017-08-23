@@ -9,6 +9,21 @@ using Time_Table_Arranging_Program.Class.Converter;
 namespace Time_Table_Arranging_Program.Class.TokenParser {
     public class HtmlSlotParser {
         public List<Slot> Parse(string html) {
+            var raw = ParseAll(html);
+            var filtered = FilterOutUnwantedSlots(raw);
+            return filtered;
+        }
+
+        private List<Slot> FilterOutUnwantedSlots(List<Slot> raw) {
+            var result = new List<Slot>();
+            foreach (Slot s in raw) {
+                if(!s.Code.Contains("COURSE WITHOUT CLASS"))
+                    result.Add(s);
+            }
+            return result;
+        }
+
+        private List<Slot> ParseAll(string html) {
             var result = new List<Slot>();
             bool firstRowIsSkipped = false;
             string currentSubjectCode = "";
@@ -71,6 +86,7 @@ namespace Time_Table_Arranging_Program.Class.TokenParser {
                 }
             }
             return result;
+            
         }
     }
 }
