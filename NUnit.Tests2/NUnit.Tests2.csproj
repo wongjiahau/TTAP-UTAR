@@ -120,6 +120,8 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TestFiles\Sample HTML.html" />
     <EmbeddedResource Include="TestFiles\SampleHTML_FromLocalTestServer.txt" />
+    <EmbeddedResource Include="TestFiles\SampleData-FAM-2017-2ndSem.html" />
+    <EmbeddedResource Include="TestFiles\SampleData-FCI-2017-2ndSem.html" />
     <Content Include="TestFiles\SoftwareEngineering2017AprSlots.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
