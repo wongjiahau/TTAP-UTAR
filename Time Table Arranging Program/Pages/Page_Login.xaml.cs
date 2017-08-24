@@ -39,17 +39,18 @@ namespace Time_Table_Arranging_Program.Pages {
         private const string CourseTimetablePreviewUrl =
             "https://unitreg.utar.edu.my/portal/courseRegStu/schedule/masterSchedule.jsp";
 
-        //variable to store studentID, password, and captcha
-        private string StudentIdInput, PasswordInput, CaptchaInput;
-
+        private string _studentIdInput;
+        private string _passwordInput;
+        private string _captchaInput;
         private int _currentPage = 1;
         private const int NavigationCountUpperLimit = 3;
         private int _navigationCount = 0;
+
         public Page_Login() {
             InitializeComponent();
         }
 
-        private void Page_First_OnLoaded(object sender , RoutedEventArgs e) {
+        private void Page_Login_OnLoaded(object sender , RoutedEventArgs e) {
             GotItButton_OnClick(null , null);
             Browser.Navigate(LoginPageUrl);
         }
@@ -62,7 +63,7 @@ namespace Time_Table_Arranging_Program.Pages {
             if (currentUrl == LoginFailedUrl ||
                 (currentUrl == LoginPageUrl && PasswordBox.Password.Length > 0)
                 ) {
-                //display error and refresh page when error
+                //display error and ert a newline after current cursor without entering INSERT efresh page when error
                 MessageBox.Show("Please make sure information are valid!");
                 this.NavigationService.Refresh();
             }
@@ -130,17 +131,7 @@ namespace Time_Table_Arranging_Program.Pages {
             return htmlText.Contains($"javascript:changePage(\'{pageNumber}\')");
         }
 
-        public static string GetPlainTextOfHtml(WebBrowser b) {
-            dynamic doc = b.Document;
-            var htmlText = doc.documentElement.InnerHtml;
-            return htmlText.RemoveTags();
-        }
-
-
-        private void AddSlotManuallyButton_OnClick(object sender , RoutedEventArgs e) {
-            NavigationService.Navigate(new Page_AddSlot());
-        }
-
+        #region EventHandlers
         private void ResetButton_OnClick(object sender , RoutedEventArgs e) {
             UserNameBox.Text = "";
             PasswordBox.Password = "";
@@ -166,26 +157,26 @@ namespace Time_Table_Arranging_Program.Pages {
             KapchaBrowser.InvokeScript("execScript" , "document.body.style.overflow ='hidden'" , "JavaScript");
         }
 
-        //get input and press login
         private void LoginButton_OnClick(object sender , RoutedEventArgs e) {
-            StudentIdInput = UserNameBox.Text;
-            PasswordInput = PasswordBox.Password;
-            CaptchaInput = CaptchaBox.Text;
+            _studentIdInput = UserNameBox.Text;
+            _passwordInput = PasswordBox.Password;
+            _captchaInput = CaptchaBox.Text;
             Browser.InvokeScript("execScript" ,
-                "document.getElementsByName('reqFregkey')[0].value='" + StudentIdInput + "'" , "JavaScript");
+                "document.getElementsByName('reqFregkey')[0].value='" + _studentIdInput + "'" , "JavaScript");
             Browser.InvokeScript("execScript" ,
-                "document.getElementsByName('reqPassword')[0].value='" + PasswordInput + "'" , "JavaScript");
+                "document.getElementsByName('reqPassword')[0].value='" + _passwordInput + "'" , "JavaScript");
             Browser.InvokeScript("execScript" ,
-                "document.getElementsByName('kaptchafield')[0].value='" + CaptchaInput + "'" , "JavaScript");
+                "document.getElementsByName('kaptchafield')[0].value='" + _captchaInput + "'" , "JavaScript");
             Browser.InvokeScript("execScript" ,
                 "document.getElementsByName('_submit')[0].click()" , "JavaScript");
 
         }
 
-
         private void CaptchaBox_OnKeyUp(object sender , KeyEventArgs e) {
             if (e.Key == Key.Enter)
                 LoginButton_OnClick(null , null);
         }
+        #endregion
+
     }
 }
