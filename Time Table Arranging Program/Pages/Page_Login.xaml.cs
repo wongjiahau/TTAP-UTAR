@@ -22,6 +22,7 @@ using Time_Table_Arranging_Program.Class.SlotGeneralizer;
 using Time_Table_Arranging_Program.Class.TokenParser;
 using Time_Table_Arranging_Program.User_Control;
 using Time_Table_Arranging_Program.Windows_Control;
+using KeyEventArgs = System.Windows.Input.KeyEventArgs;
 using MessageBox = System.Windows.MessageBox;
 using WebBrowser = System.Windows.Controls.WebBrowser;
 
@@ -52,23 +53,20 @@ namespace Time_Table_Arranging_Program.Pages {
             GotItButton_OnClick(null , null);
             Browser.Navigate(LoginPageUrl);
         }
-        
+
         private bool _browsingToCourseTimetablePreview = false;
         private void Browser_OnLoadCompleted(object sender , NavigationEventArgs e) {
-            //Navigate to page on Kaptcha Image
             KapchaBrowser.Navigate("https://unitreg.utar.edu.my/portal/Kaptcha.jpg");
             RefreshButton.IsEnabled = true;
             string currentUrl = Browser.Source.ToString();
-            //if (currentUrl == LoginPageUrl) return;
-            //if(currentUrl == LoginSuccessUrl) 
-            if (currentUrl == LoginFailedUrl)
-            {
+            if (currentUrl == LoginFailedUrl ||
+                (currentUrl == LoginPageUrl && PasswordBox.Password.Length > 0)
+                ) {
                 //display error and refresh page when error
                 MessageBox.Show("Please make sure information are valid!");
                 this.NavigationService.Refresh();
-            }                   
-            if (currentUrl == LoginPageUrl || currentUrl == LoginFailedUrl )
-            {
+            }
+            if (currentUrl == LoginPageUrl || currentUrl == LoginFailedUrl) {
                 _navigationCount = 0;
                 return;
             }
@@ -98,7 +96,7 @@ namespace Time_Table_Arranging_Program.Pages {
             }
             else {
                 if (Global.InputSlotList.Count == 0) {
-                    DialogBox.Show("No data available." , "", "OK");
+                    DialogBox.Show("No data available." , "" , "OK");
                     if (DialogBox.Result == DialogBox.ResultEnum.RightButtonClicked) {
                         LoadTestDataButton_OnClick(null , null);
                     }
@@ -161,28 +159,30 @@ namespace Time_Table_Arranging_Program.Pages {
 
         }
 
-        private void KapchaBrowser_OnLoadCompleted(object sender, NavigationEventArgs e)
-        {
-            KapchaBrowser.InvokeScript("execScript", "document.documentElement.style.overflow ='hidden'", "JavaScript");
+        private void KapchaBrowser_OnLoadCompleted(object sender , NavigationEventArgs e) {
+            KapchaBrowser.InvokeScript("execScript" , "document.body.style.overflow ='hidden'" , "JavaScript");
         }
 
         //get input and press login
-        private void LoginButton_OnClick(object sender, RoutedEventArgs e)
-        {
+        private void LoginButton_OnClick(object sender , RoutedEventArgs e) {
             StudentIdInput = UserNameBox.Text;
             PasswordInput = PasswordBox.Password;
             CaptchaInput = CaptchaBox.Text;
-            Browser.InvokeScript("execScript",
-                "document.getElementsByName('reqFregkey')[0].value='" + StudentIdInput + "'", "JavaScript");
-            Browser.InvokeScript("execScript",
-                "document.getElementsByName('reqPassword')[0].value='" + PasswordInput + "'", "JavaScript");
-            Browser.InvokeScript("execScript",
-                "document.getElementsByName('kaptchafield')[0].value='" + CaptchaInput + "'", "JavaScript");
-            Browser.InvokeScript("execScript",
-                "document.getElementsByName('_submit')[0].click()", "JavaScript");
+            Browser.InvokeScript("execScript" ,
+                "document.getElementsByName('reqFregkey')[0].value='" + StudentIdInput + "'" , "JavaScript");
+            Browser.InvokeScript("execScript" ,
+                "document.getElementsByName('reqPassword')[0].value='" + PasswordInput + "'" , "JavaScript");
+            Browser.InvokeScript("execScript" ,
+                "document.getElementsByName('kaptchafield')[0].value='" + CaptchaInput + "'" , "JavaScript");
+            Browser.InvokeScript("execScript" ,
+                "document.getElementsByName('_submit')[0].click()" , "JavaScript");
 
         }
 
-        
+
+        private void CaptchaBox_OnKeyUp(object sender , KeyEventArgs e) {
+            if (e.Key == Key.Enter)
+                LoginButton_OnClick(null , null);
+        }
     }
 }

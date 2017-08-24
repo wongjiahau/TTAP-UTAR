@@ -45,18 +45,20 @@
                              Margin="0 12 0 0" Width="300" FontSize="20"
                              materialDesign:HintAssist.Hint="Password (e.g. 960813-14-5677)"
                              Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" />
-                        <TextBox x:Name="CaptchaBox" Margin="0 12 0 0" HorizontalAlignment="Center" FontSize="20" Width="{Binding ElementName=PasswordBox, Path=Width}" materialDesign:HintAssist.Hint="Enter captcha" 
+                        <Grid>
+                            <TextBox x:Name="CaptchaBox" VerticalAlignment="Top" KeyUp="CaptchaBox_OnKeyUp" Margin="0 12 0 0" HorizontalAlignment="Center" FontSize="20" Width="{Binding ElementName=PasswordBox, Path=Width}" materialDesign:HintAssist.Hint="Enter captcha" 
                              Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
-                        <Border Width="200" Height="100">
-                            <WebBrowser Visibility="Visible" HorizontalAlignment="Center" Margin="5" LoadCompleted="KapchaBrowser_OnLoadCompleted" Name="KapchaBrowser"                                                        
+                            <Border HorizontalAlignment="Right" Width="150" Height="60">
+                                <WebBrowser Visibility="Visible" HorizontalAlignment="Center" Margin="5" LoadCompleted="KapchaBrowser_OnLoadCompleted" Name="KapchaBrowser"                                                        
                                     OverridesDefaultStyle="False"
                                     ScrollViewer.CanContentScroll="False"
                                     ScrollViewer.HorizontalScrollBarVisibility="Hidden" 
                                     ScrollViewer.VerticalScrollBarVisibility="Hidden" />
-                        </Border>
-                        <Button Margin="0 12 0 0" Width="200" Click="LoginButton_OnClick">LOGIN</Button>
+                            </Border>
+                        </Grid>
+                        <Button Margin="0 20 0 0" Width="200" FontSize="20" FontWeight="Bold" Height="50" Click="LoginButton_OnClick">LOGIN</Button>
                     </StackPanel>
-                    <Button x:Name="RefreshButton"  Width="200" HorizontalAlignment="Center" IsEnabled="True" Margin="0 12 0 12" DockPanel.Dock="Bottom" VerticalAlignment="Top" ToolTip="Refresh" Style="{StaticResource MaterialDesignFlatButton}" Click="RefreshButton_OnClick" >
+                    <Button x:Name="RefreshButton"  FontSize="15" Width="200" HorizontalAlignment="Center" IsEnabled="True" Margin="0 12 0 12" DockPanel.Dock="Bottom" VerticalAlignment="Top" ToolTip="Refresh" Style="{StaticResource MaterialDesignFlatButton}" Click="RefreshButton_OnClick" >
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="Refresh" VerticalAlignment="Center" />
                             <TextBlock Margin="5,0,0,0">REFRESH</TextBlock>
