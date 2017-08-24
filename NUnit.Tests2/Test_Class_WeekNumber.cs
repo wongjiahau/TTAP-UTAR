@@ -37,6 +37,16 @@ namespace NUnit.Tests2 {
         }
 
         [Test]
+        public void Test_WeekNumber_ClashesWith_5()
+        {
+            var input1 = "1-7";
+            var input2 = "7-14";
+            var actual1 = WeekNumber.Parse(input1);
+            var actual2 = WeekNumber.Parse(input2);
+            Assert.True(actual1.IntersectWith(actual2));
+        }
+
+        [Test]
         public void Test_WeekNumber_Parse_1() {
             var input = "3,5,7,9,11,13";
             var expected = new WeekNumber(new List<int> { 3 , 5 , 7 , 9 , 11 , 13 });
@@ -69,6 +79,15 @@ namespace NUnit.Tests2 {
         }
 
         [Test]
+        public void Test_WeekNumber_Parse_5()
+        {
+            var input = "1-3,4,5,11-14";
+            var expected = new WeekNumber(new List<int> { 1, 2, 3, 4, 5, 11, 12, 13, 14 });
+            var actual = WeekNumber.Parse(input);
+            Assert.True(expected.Equals(actual));
+        }
+
+        [Test]
         public void Test_WeekNumber_ToString_0() {
             var x = new WeekNumber(new List<int> { 1 , 3 , 5 });
             Assert.AreEqual("1,3,5" , x.ToString());
@@ -96,6 +115,13 @@ namespace NUnit.Tests2 {
         public void Test_WeekNumber_ToString_4() {
             var x = new WeekNumber(new List<int> { 1 , 4 , 5 , 6 , 8 , 9 , 10 });
             Assert.AreEqual(x.ToString() , "1,4-6,8-10");
+        }
+
+        [Test]
+        public void Test_WeekNumber_ToString_5()
+        {
+            var x = new WeekNumber(new List<int> {1, 2, 3, 4, 8, 11, 12, 13, 14});
+            Assert.AreEqual(x.ToString(), "1-4,8,11-14");
         }
     }
 }
