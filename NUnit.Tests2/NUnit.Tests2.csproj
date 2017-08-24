@@ -66,6 +66,8 @@
     <Compile Include="TestClass_PermutateV4.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestData.cs" />
+    <Compile Include="TestSuite_HtmlSlotParser\TestHtmlSlotParser_SampleData-FAM-2017-2ndSem.cs" />
+    <Compile Include="TestSuite_HtmlSlotParser\TestHtmlSlotParser_SampleData-FCI-2017-2ndSem.cs" />
     <Compile Include="TestSuite_HtmlSlotParser\Test_HtmlSlotParserBase.cs" />
     <Compile Include="TestSuite_HtmlSlotParser\TestHtmlSlotParser_SampleHtml.cs" />
     <Compile Include="TestSuite_HtmlSlotParser\TestHtmlSlotParser_MainFrame.cs" />

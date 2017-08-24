@@ -8,9 +8,9 @@ using Time_Table_Arranging_Program.Class;
 using Time_Table_Arranging_Program.Class.Converter;
 
 namespace NUnit.Tests2.TestSuite_HtmlSlotParser {
-    public class TestHtmlSlotParser_SampleHtml : Test_HtmlSlotParserBase{
-        public TestHtmlSlotParser_SampleHtml() : base("Sample HTML.txt") { }
-        protected override List<Slot> GenerateExpectedSlots() {
+	public class TestHtmlSlotParser_SampleHtml : Test_HtmlSlotParserBase{
+		public TestHtmlSlotParser_SampleHtml() : base("Sample HTML.txt") { }
+		protected override List<Slot> GenerateExpectedSlots() {
 			return new List<Slot>()
 			{
 				new Slot(1, "MPU3113", "HUBUNGAN ETNIK (FOR LOCAL STUDENTS)".Beautify(), "1", "L", Day.Monday, "KB521",new TimePeriod(Time.CreateTime_24HourFormat(9, 00), Time.CreateTime_24HourFormat(12, 00)),new WeekNumber(new List<int>() {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14})),
@@ -148,6 +148,6 @@ namespace NUnit.Tests2.TestSuite_HtmlSlotParser {
 				new Slot(129,"UKMM1043", "BASIC ECONOMICS, ACCOUNTING AND MANAGEMENT".Beautify(), "6", "T", Day.Friday,"KB318", new TimePeriod(Time.CreateTime_24HourFormat(14,30), Time.CreateTime_24HourFormat(16,00)),new WeekNumber(new List<int>(){1,2,3,4,5,6,7,8,9,10,11,12,13,14})  ),
 				new Slot(130,"UKMM1043", "BASIC ECONOMICS, ACCOUNTING AND MANAGEMENT".Beautify(), "7", "T", Day.Friday,"KB318", new TimePeriod(Time.CreateTime_24HourFormat(16,00), Time.CreateTime_24HourFormat(17,30)),new WeekNumber(new List<int>(){1,2,3,4,5,6,7,8,9,10,11,12,13,14})  ),
 			};
-        }
-    }
+		}
+	}
 }
