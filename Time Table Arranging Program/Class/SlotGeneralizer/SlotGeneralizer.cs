@@ -9,34 +9,34 @@ namespace Time_Table_Arranging_Program.Class.SlotGeneralizer {
     }
     public class SlotGeneralizer : ISlotGeneralizer {
         public List<Slot> Generalize(List<Slot> slots) {
-            var result = new List<Slot>();
             var shouldNotBeGeneralized = GetSlotsThatShouldNotBeGeneralized(slots);
-            var shallBeGenerazlied = SetDifference(slots, shouldNotBeGeneralized);
-            var generalized = new List<Slot>();
+            var shallBeGenerazlied = SetDifference(slots , shouldNotBeGeneralized);
+            var duplicate = new List<Slot>();
             foreach (Slot s in shallBeGenerazlied) {
-                var toBeAdded = s.GetDuplicate();
-                generalized.Add(toBeAdded);
+                duplicate.Add(s.GetDuplicate());
             }
-            var dic = new Dictionary<string , Slot>();
-            for (int i = 0 ; i < generalized.Count ; i++) {
-                var s = generalized[i];
+            var generalized = new Dictionary<string , Slot>();
+            for (int i = 0 ; i < duplicate.Count ; i++) {
+                var s = duplicate[i];
                 string key = $"{s.Day}{s.Code}{s.Type}{s.TimePeriod}";
-                if (!dic.ContainsKey(key)) {
-                    dic.Add(key , s);
+                if (!generalized.ContainsKey(key)) {
+                    generalized.Add(key , s);
                 }
                 else {
-                    dic[key].Number += $"/{s.Number}";
+                    generalized[key].Number += $"/{s.Number}";
 
                 }
             }
-            return dic.Values.ToList();
+            var result = generalized.Values.ToList();
+            result.AddRange(shouldNotBeGeneralized);
+            return result;
         }
 
-        public List<Slot> SetDifference(List<Slot> setA, List<Slot> setB) { //A-B
+        public List<Slot> SetDifference(List<Slot> setA , List<Slot> setB) { //A-B
             var result = new List<Slot>();
             foreach (var x in setA) {
                 foreach (var y in setB) {
-                    if (x.UID == y.UID) goto here;
+                    if (x.OID == y.OID) goto here;
                 }
                 result.Add(x);
                 here:
@@ -59,7 +59,7 @@ namespace Time_Table_Arranging_Program.Class.SlotGeneralizer {
             foreach (var key in dic.Keys) {
                 if (dic[key].Count > 1) {
                     result.AddRange(dic[key]);
-                } 
+                }
             }
             return result;
         }
