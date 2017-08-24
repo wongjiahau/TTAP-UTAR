@@ -9,6 +9,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -22,6 +23,9 @@ using Time_Table_Arranging_Program.Class.SlotGeneralizer;
 using Time_Table_Arranging_Program.Class.TokenParser;
 using Time_Table_Arranging_Program.User_Control;
 using Time_Table_Arranging_Program.Windows_Control;
+using KeyEventArgs = System.Windows.Input.KeyEventArgs;
+using MessageBox = System.Windows.MessageBox;
+using WebBrowser = System.Windows.Controls.WebBrowser;
 
 namespace Time_Table_Arranging_Program.Pages {
     /// <summary>
@@ -36,11 +40,15 @@ namespace Time_Table_Arranging_Program.Pages {
         private const string CourseTimetablePreviewUrl =
             "https://unitreg.utar.edu.my/portal/courseRegStu/schedule/masterSchedule.jsp";
 
+        private string _studentIdInput;
+        private string _passwordInput;
+        private string _captchaInput;
         private const string TestServerUrl = "http://localhost/ttap_testdata/";
 
         private int _currentPage = 1;
         private const int NavigationCountUpperLimit = 3;
         private int _navigationCount = 0;
+
         public Page_Login() {
             InitializeComponent();
         }
@@ -50,7 +58,7 @@ namespace Time_Table_Arranging_Program.Pages {
             _loadDataFromTestServer = loadDataFromTestServer;
         }
 
-        private void Page_First_OnLoaded(object sender , RoutedEventArgs e) {
+        private void Page_Login_OnLoaded(object sender , RoutedEventArgs e) {
             GotItButton_OnClick(null , null);
             if (_loadDataFromTestServer) {
                 Browser.Navigate(TestServerUrl);
@@ -62,10 +70,17 @@ namespace Time_Table_Arranging_Program.Pages {
         private bool _browsingToCourseTimetablePreview = false;
 
         private void Browser_OnLoadCompleted(object sender , NavigationEventArgs e) {
-            Browser.InvokeScript("execScript" , "document.documentElement.style.overflow ='hidden'" , "JavaScript");
-            RefreshButton.IsEnabled = true;
+            KapchaBrowser.Navigate("https://unitreg.utar.edu.my/portal/Kaptcha.jpg");
+            ResetButton.IsEnabled = true;
             string currentUrl = Browser.Source.ToString();
             if (currentUrl.Contains(TestServerUrl)) goto here;
+            if (currentUrl == LoginFailedUrl ||
+                (currentUrl == LoginPageUrl && PasswordBox.Password.Length > 0)
+                ) {
+                //display error and ert a newline after current cursor without entering INSERT efresh page when error
+                MessageBox.Show("Please make sure information are valid!");
+                this.NavigationService.Refresh();
+            }
             if (currentUrl == LoginPageUrl || currentUrl == LoginFailedUrl) {
                 _navigationCount = 0;
                 return;
@@ -88,6 +103,7 @@ namespace Time_Table_Arranging_Program.Pages {
             here:
             string html = GetHtml(Browser);
             if (Global.Toggles.SaveLoadedHtmlToggle.IsToggledOn) SaveToFile(html);
+            ProgressBar.Visibility = Visibility.Visible;
             var bg = CustomBackgroundWorker<string , List<Slot>>.RunAndShowLoadingScreen(
                new HtmlSlotParser().Parse , html , "Loading slots . . .");
             //    TryGetStartDateAndEndDate(plainText);
@@ -142,18 +158,11 @@ namespace Time_Table_Arranging_Program.Pages {
             return htmlText.Contains($"javascript:changePage(\'{pageNumber}\')");
         }
 
-        public static string GetPlainTextOfHtml(WebBrowser b) {
-            dynamic doc = b.Document;
-            var htmlText = doc.documentElement.InnerHtml;
-            return htmlText.RemoveTags();
-        }
-
-
-        private void AddSlotManuallyButton_OnClick(object sender , RoutedEventArgs e) {
-            NavigationService.Navigate(new Page_AddSlot());
-        }
-
-        private void RefreshButton_OnClick(object sender , RoutedEventArgs e) {
+        #region EventHandlers
+        private void ResetButton_OnClick(object sender , RoutedEventArgs e) {
+            UserNameBox.Text = "";
+            PasswordBox.Password = "";
+            CaptchaBox.Text = "";
             Browser.Navigate(LoginPageUrl);
         }
 
@@ -171,10 +180,30 @@ namespace Time_Table_Arranging_Program.Pages {
 
         }
 
-        private void LoginButton_OnClick(object sender , RoutedEventArgs e) {
-            MessageBox.Show("Not implemented yet");
+        private void KapchaBrowser_OnLoadCompleted(object sender , NavigationEventArgs e) {
+            KapchaBrowser.InvokeScript("execScript" , "document.body.style.overflow ='hidden'" , "JavaScript");
         }
 
+        private void LoginButton_OnClick(object sender , RoutedEventArgs e) {
+            _studentIdInput = UserNameBox.Text;
+            _passwordInput = PasswordBox.Password;
+            _captchaInput = CaptchaBox.Text;
+            Browser.InvokeScript("execScript" ,
+                "document.getElementsByName('reqFregkey')[0].value='" + _studentIdInput + "'" , "JavaScript");
+            Browser.InvokeScript("execScript" ,
+                "document.getElementsByName('reqPassword')[0].value='" + _passwordInput + "'" , "JavaScript");
+            Browser.InvokeScript("execScript" ,
+                "document.getElementsByName('kaptchafield')[0].value='" + _captchaInput + "'" , "JavaScript");
+            Browser.InvokeScript("execScript" ,
+                "document.getElementsByName('_submit')[0].click()" , "JavaScript");
+
+        }
+
+        private void CaptchaBox_OnKeyUp(object sender , KeyEventArgs e) {
+            if (e.Key == Key.Enter)
+                LoginButton_OnClick(null , null);
+        }
+        #endregion
 
     }
 }
