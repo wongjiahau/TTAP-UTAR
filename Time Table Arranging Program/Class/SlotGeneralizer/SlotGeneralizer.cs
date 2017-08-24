@@ -32,10 +32,10 @@ namespace Time_Table_Arranging_Program.Class.SlotGeneralizer {
             return dic.Values.ToList();
         }
 
-        private List<Slot> SetDifference(List<Slot> slots, List<Slot> shouldNotBeGeneralized) {
+        public List<Slot> SetDifference(List<Slot> setA, List<Slot> setB) { //A-B
             var result = new List<Slot>();
-            foreach (var x in slots) {
-                foreach (var y in shouldNotBeGeneralized) {
+            foreach (var x in setA) {
+                foreach (var y in setB) {
                     if (x.UID == y.UID) goto here;
                 }
                 result.Add(x);
@@ -45,7 +45,7 @@ namespace Time_Table_Arranging_Program.Class.SlotGeneralizer {
             return result;
         }
 
-        private List<Slot> GetSlotsThatShouldNotBeGeneralized(List<Slot> slots) {
+        public List<Slot> GetSlotsThatShouldNotBeGeneralized(List<Slot> slots) {
             var dic = new Dictionary<string , List<Slot>>();
             for (int i = 0 ; i < slots.Count ; i++) {
                 var s = slots[i];

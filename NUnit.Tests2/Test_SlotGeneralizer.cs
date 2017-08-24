@@ -41,6 +41,53 @@ namespace NUnit.Tests2 {
         }
 
         [Test]
+        public void Test_SlotGeneralizer_SetDifference() {
+            var setA = new List<Slot>()
+            {
+                new Slot() {UID = 1},
+                new Slot() {UID = 2},
+                new Slot() {UID = 3},
+                new Slot() {UID = 4},
+                new Slot() {UID = 5},
+                new Slot() {UID = 6}
+            };
+            var setB = new List<Slot>()
+            {
+                new Slot() {UID = 1},
+                new Slot() {UID = 2},
+                new Slot() {UID = 3},
+            };
+            var expected = new List<Slot>()
+            {
+                new Slot() {UID = 4},
+                new Slot() {UID = 5},
+                new Slot() {UID = 6}
+            };
+            var actual = new SlotGeneralizer().SetDifference(setA, setB);
+            Assert.AreEqual(expected, actual);
+        }
+
+        [Test]
+        public void Test_GetSlotsThatShouldNotBeGeneralized() {
+            var a = new Slot(1 , "xxx" , "name" , "1" , "L" , Day.Monday , "KB102" , new TimePeriod(Time.CreateTime_24HourFormat(8 , 0) , Time.CreateTime_24HourFormat(11 , 0)) , new WeekNumber(new List<int>() { 1 , 2 , 3 }));
+            var b = new Slot(2 , "xxx" , "name" , "1" , "L" , Day.Tuesday , "KB102" , new TimePeriod(Time.CreateTime_24HourFormat(14 , 0) , Time.CreateTime_24HourFormat(17 , 0)) , new WeekNumber(new List<int>() { 1 , 2 , 3 }));
+            var c = new Slot(3 , "xxx" , "name" , "2" , "L" , Day.Monday , "KB102" , new TimePeriod(Time.CreateTime_24HourFormat(14 , 0) , Time.CreateTime_24HourFormat(17 , 0)) , new WeekNumber(new List<int>() { 1 , 2 , 3 }));
+            var d = new Slot(4 , "xxx" , "name" , "2" , "L" , Day.Tuesday , "KB102" , new TimePeriod(Time.CreateTime_24HourFormat(8 , 0) , Time.CreateTime_24HourFormat(11 , 0)) , new WeekNumber(new List<int>() { 1 , 2 , 3 }));
+            var e = new Slot(5 , "xxx" , "name" , "3" , "L" , Day.Tuesday , "KB102" , new TimePeriod(Time.CreateTime_24HourFormat(8 , 0) , Time.CreateTime_24HourFormat(11 , 0)) , new WeekNumber(new List<int>() { 1 , 2 , 3 }));
+            var f = new Slot(6 , "xxx" , "name" , "3" , "L" , Day.Thursday , "KB102" , new TimePeriod(Time.CreateTime_24HourFormat(14 , 0) , Time.CreateTime_24HourFormat(17 , 0)) , new WeekNumber(new List<int>() { 1 , 2 , 3 }));
+            var g = new Slot(1 , "xxx" , "name" , "1" , "T" , Day.Monday , "KB102" , new TimePeriod(Time.CreateTime_24HourFormat(8 , 0) , Time.CreateTime_24HourFormat(11 , 0)) , new WeekNumber(new List<int>() { 1 , 2 , 3 }));
+            var h = new Slot(2 , "xxx" , "name" , "2" , "T" , Day.Tuesday , "KB102" , new TimePeriod(Time.CreateTime_24HourFormat(14 , 0) , Time.CreateTime_24HourFormat(17 , 0)) , new WeekNumber(new List<int>() { 1 , 2 , 3 }));
+            var i = new Slot(3 , "xxx" , "name" , "3" , "T" , Day.Monday , "KB102" , new TimePeriod(Time.CreateTime_24HourFormat(14 , 0) , Time.CreateTime_24HourFormat(17 , 0)) , new WeekNumber(new List<int>() { 1 , 2 , 3 }));
+            var j = new Slot(4 , "xxx" , "name" , "4" , "T" , Day.Tuesday , "KB102" , new TimePeriod(Time.CreateTime_24HourFormat(8 , 0) , Time.CreateTime_24HourFormat(11 , 0)) , new WeekNumber(new List<int>() { 1 , 2 , 3 }));
+            var k = new Slot(5 , "xxx" , "name" , "5" , "T" , Day.Tuesday , "KB102" , new TimePeriod(Time.CreateTime_24HourFormat(8 , 0) , Time.CreateTime_24HourFormat(11 , 0)) , new WeekNumber(new List<int>() { 1 , 2 , 3 }));
+            var l = new Slot(6 , "xxx" , "name" , "6" , "T" , Day.Thursday , "KB102" , new TimePeriod(Time.CreateTime_24HourFormat(14 , 0) , Time.CreateTime_24HourFormat(17 , 0)) , new WeekNumber(new List<int>() { 1 , 2 , 3 }));
+            var input = new List<Slot>() {a, b, c, d, e, f, g, h, i, j, k, l};
+            var expected = new List<Slot>() {a, b, c, d, e, f};
+            var actual = new SlotGeneralizer().GetSlotsThatShouldNotBeGeneralized(input);
+            Assert.AreEqual(expected, actual);
+            
+        }
+        [Test]
         public void Test_SlotGeneralizer_PartitionBySubject_1() {
             var input = TestData.GetSlotsByName(TestData.Subjects.HubunganEtnik);
             input.AddRange(TestData.GetSlotsByName(TestData.Subjects.FluidMechanicsII));
