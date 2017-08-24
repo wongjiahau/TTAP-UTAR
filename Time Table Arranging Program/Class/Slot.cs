@@ -47,7 +47,7 @@ namespace Time_Table_Arranging_Program.Class {
             WeekNumber = s.WeekNumber;
             IsSelected = s.IsSelected;
         }
-        public int OID { get; set; } //OID is unique for each object
+        public int OID { get; } //OID is unique for each object
         public int UID { get; set; } //public setters of UID is for serialization purpose only!
         public string Code { get; set; }
         public string SubjectName { get; set; }
@@ -84,7 +84,7 @@ namespace Time_Table_Arranging_Program.Class {
 
         public Slot GetDuplicate() {
             var s = new Slot();
-            s.OID = _nextOid++;
+            s.UID = UID;
             s.Code = Code;
             s.SubjectName = SubjectName;
             s.Number = Number;
@@ -100,6 +100,7 @@ namespace Time_Table_Arranging_Program.Class {
 
         public bool Equals(Slot b) {
             return
+                UID == b.UID &&
                 SubjectName == b.SubjectName &&
                 Code == b.Code &&
                 Number == b.Number &&
