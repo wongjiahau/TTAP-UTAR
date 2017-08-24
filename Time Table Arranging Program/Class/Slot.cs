@@ -6,13 +6,13 @@ using Time_Table_Arranging_Program.Interfaces;
 namespace Time_Table_Arranging_Program.Class {
     public class Slot : IEquatable<Slot>, IComparable<Slot>, IIntersectionCheckable<Slot>, IDuplicable<Slot>, IHashable,
         IToConstructionString {
-        private static int _nextUid;
+        private static int _nextOid;
 
         private IDay _day;
 
         public Slot() {
             WeekNumber = new WeekNumber(new List<int>());
-            UID = _nextUid++;
+            OID = _nextOid++;
             IsSelected = false;
             StartTime = Time.CreateTime_24HourFormat(0 , 0);
             EndTime = Time.CreateTime_24HourFormat(0 , 0);
@@ -21,6 +21,7 @@ namespace Time_Table_Arranging_Program.Class {
 
         public Slot(int uid , string code , string subjectName , string number , string type , Day day , string venue ,
             TimePeriod timePeriod , WeekNumber weekNumber) {
+            OID = _nextOid++;
             UID = uid;
             Code = code;
             SubjectName = subjectName;
@@ -34,6 +35,7 @@ namespace Time_Table_Arranging_Program.Class {
         }
 
         public Slot(Slot s) {
+            OID = _nextOid++;
             UID = s.UID;
             Code = s.Code;
             SubjectName = s.SubjectName;
@@ -45,6 +47,7 @@ namespace Time_Table_Arranging_Program.Class {
             WeekNumber = s.WeekNumber;
             IsSelected = s.IsSelected;
         }
+        public int OID { get; set; } //OID is unique for each object
         public int UID { get; set; } //public setters of UID is for serialization purpose only!
         public string Code { get; set; }
         public string SubjectName { get; set; }
@@ -81,7 +84,7 @@ namespace Time_Table_Arranging_Program.Class {
 
         public Slot GetDuplicate() {
             var s = new Slot();
-            s.UID = _nextUid++;
+            s.OID = _nextOid++;
             s.Code = Code;
             s.SubjectName = SubjectName;
             s.Number = Number;
