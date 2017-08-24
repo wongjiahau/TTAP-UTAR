@@ -57,7 +57,7 @@ namespace Time_Table_Arranging_Program.Pages {
         private bool _browsingToCourseTimetablePreview = false;
         private void Browser_OnLoadCompleted(object sender , NavigationEventArgs e) {
             KapchaBrowser.Navigate("https://unitreg.utar.edu.my/portal/Kaptcha.jpg");
-            RefreshButton.IsEnabled = true;
+            ResetButton.IsEnabled = true;
             string currentUrl = Browser.Source.ToString();
             if (currentUrl == LoginFailedUrl ||
                 (currentUrl == LoginPageUrl && PasswordBox.Password.Length > 0)
@@ -141,7 +141,10 @@ namespace Time_Table_Arranging_Program.Pages {
             NavigationService.Navigate(new Page_AddSlot());
         }
 
-        private void RefreshButton_OnClick(object sender , RoutedEventArgs e) {
+        private void ResetButton_OnClick(object sender , RoutedEventArgs e) {
+            UserNameBox.Text = "";
+            PasswordBox.Password = "";
+            CaptchaBox.Text = "";
             Browser.Navigate(LoginPageUrl);
         }
 

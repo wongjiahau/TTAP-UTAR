@@ -58,10 +58,10 @@
                         </Grid>
                         <Button Margin="0 20 0 0" Width="200" FontSize="20" FontWeight="Bold" Height="50" Click="LoginButton_OnClick">LOGIN</Button>
                     </StackPanel>
-                    <Button x:Name="RefreshButton"  FontSize="15" Width="200" HorizontalAlignment="Center" IsEnabled="True" Margin="0 12 0 12" DockPanel.Dock="Bottom" VerticalAlignment="Top" ToolTip="Refresh" Style="{StaticResource MaterialDesignFlatButton}" Click="RefreshButton_OnClick" >
+                    <Button x:Name="ResetButton"  FontSize="15" Width="200" HorizontalAlignment="Center" IsEnabled="True" Margin="0 12 0 12" DockPanel.Dock="Bottom" VerticalAlignment="Top" ToolTip="Refresh" Style="{StaticResource MaterialDesignFlatButton}" Click="ResetButton_OnClick" >
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="Refresh" VerticalAlignment="Center" />
-                            <TextBlock Margin="5,0,0,0">REFRESH</TextBlock>
+                            <TextBlock Margin="5,0,0,0">RESET</TextBlock>
                         </StackPanel>
                     </Button>
                 </StackPanel>
