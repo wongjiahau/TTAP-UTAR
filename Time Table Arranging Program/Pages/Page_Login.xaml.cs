@@ -57,7 +57,6 @@ namespace Time_Table_Arranging_Program.Pages {
         private void Browser_OnLoadCompleted(object sender , NavigationEventArgs e) {
             //Navigate to page on Kaptcha Image
             KapchaBrowser.Navigate("https://unitreg.utar.edu.my/portal/Kaptcha.jpg");
-            Browser.InvokeScript("execScript" , "document.documentElement.style.overflow ='hidden'" , "JavaScript");
             RefreshButton.IsEnabled = true;
             string currentUrl = Browser.Source.ToString();
             //if (currentUrl == LoginPageUrl) return;
