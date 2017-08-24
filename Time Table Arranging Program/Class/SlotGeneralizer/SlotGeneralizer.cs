@@ -9,13 +9,14 @@ namespace Time_Table_Arranging_Program.Class.SlotGeneralizer {
     }
     public class SlotGeneralizer : ISlotGeneralizer {
         public List<Slot> Generalize(List<Slot> slots) {
+            var result = new List<Slot>();
+            var shouldNotBeGeneralized = GetSlotsThatShouldNotBeGeneralized(slots);
+            var shallBeGenerazlied = SetDifference(slots, shouldNotBeGeneralized);
             var generalized = new List<Slot>();
-            foreach (Slot s in slots) {
+            foreach (Slot s in shallBeGenerazlied) {
                 var toBeAdded = s.GetDuplicate();
-                //toBeAdded.WeekNumber = new NullWeekNumber();
                 generalized.Add(toBeAdded);
             }
-
             var dic = new Dictionary<string , Slot>();
             for (int i = 0 ; i < generalized.Count ; i++) {
                 var s = generalized[i];
@@ -29,7 +30,38 @@ namespace Time_Table_Arranging_Program.Class.SlotGeneralizer {
                 }
             }
             return dic.Values.ToList();
+        }
 
+        private List<Slot> SetDifference(List<Slot> slots, List<Slot> shouldNotBeGeneralized) {
+            var result = new List<Slot>();
+            foreach (var x in slots) {
+                foreach (var y in shouldNotBeGeneralized) {
+                    if (x.UID == y.UID) goto here;
+                }
+                result.Add(x);
+                here:
+                ;
+            }
+            return result;
+        }
+
+        private List<Slot> GetSlotsThatShouldNotBeGeneralized(List<Slot> slots) {
+            var dic = new Dictionary<string , List<Slot>>();
+            for (int i = 0 ; i < slots.Count ; i++) {
+                var s = slots[i];
+                string key = $"{s.Code}{s.Type}{s.Number}";
+                if (!dic.ContainsKey(key)) {
+                    dic.Add(key , new List<Slot>());
+                }
+                dic[key].Add(s);
+            }
+            var result = new List<Slot>();
+            foreach (var key in dic.Keys) {
+                if (dic[key].Count > 1) {
+                    result.AddRange(dic[key]);
+                } 
+            }
+            return result;
         }
 
         public IEnumerable<Slot> GeneralizeBySubject(List<Slot> slots) {

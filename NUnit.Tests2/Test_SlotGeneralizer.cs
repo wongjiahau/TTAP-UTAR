@@ -28,6 +28,19 @@ namespace NUnit.Tests2 {
         }
 
         [Test]
+        public void Test_SlotGeneralizer_ShouldNotGeneralizeSlotsWithRelatives() {
+            var a = new Slot(1 , "xxx" , "name" , "1" , "L" , Day.Monday , "KB102" , new TimePeriod(Time.CreateTime_24HourFormat(8 , 0) , Time.CreateTime_24HourFormat(11 , 0)) , new WeekNumber(new List<int>() { 1 , 2 , 3 }));
+            var b = new Slot(2 , "xxx" , "name" , "1" , "L" , Day.Tuesday , "KB102" , new TimePeriod(Time.CreateTime_24HourFormat(14 , 0) , Time.CreateTime_24HourFormat(17 , 0)) , new WeekNumber(new List<int>() { 1 , 2 , 3 }));
+            var c = new Slot(3 , "xxx" , "name" , "2" , "L" , Day.Monday , "KB102" , new TimePeriod(Time.CreateTime_24HourFormat(14 , 0) , Time.CreateTime_24HourFormat(17 , 0)) , new WeekNumber(new List<int>() { 1 , 2 , 3 }));
+            var d = new Slot(4 , "xxx" , "name" , "2" , "L" , Day.Tuesday , "KB102" , new TimePeriod(Time.CreateTime_24HourFormat(8 , 0) , Time.CreateTime_24HourFormat(11 , 0)) , new WeekNumber(new List<int>() { 1 , 2 , 3 }));
+            var e = new Slot(5 , "xxx" , "name" , "3" , "L" , Day.Tuesday , "KB102" , new TimePeriod(Time.CreateTime_24HourFormat(8 , 0) , Time.CreateTime_24HourFormat(11 , 0)) , new WeekNumber(new List<int>() { 1 , 2 , 3 }));
+            var f = new Slot(6 , "xxx" , "name" , "3" , "L" , Day.Thursday , "KB102" , new TimePeriod(Time.CreateTime_24HourFormat(14 , 0) , Time.CreateTime_24HourFormat(17 , 0)) , new WeekNumber(new List<int>() { 1 , 2 , 3 }));
+            var result = new SlotGeneralizer().Generalize(new List<Slot>() { a , b , c , d , e , f });
+            Assert.AreEqual(6 , result.Count);
+
+        }
+
+        [Test]
         public void Test_SlotGeneralizer_PartitionBySubject_1() {
             var input = TestData.GetSlotsByName(TestData.Subjects.HubunganEtnik);
             input.AddRange(TestData.GetSlotsByName(TestData.Subjects.FluidMechanicsII));
