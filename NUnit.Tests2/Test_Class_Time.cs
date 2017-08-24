@@ -35,6 +35,14 @@ namespace NUnit.Tests2 {
         }
 
         [Test]
+        public void Test_Time_Equality_5()
+        {
+            var input1 = Time.CreateTime_12HourFormat(12, 00, false);
+            var input2 = Time.CreateTime_24HourFormat(0, 0);
+            Assert.True(input1.Equals(input2));
+        }
+
+        [Test]
         public void Test_Time_LessThan_1() {
             var input1 = Time.CreateTime_24HourFormat(10 , 0);
             var input2 = Time.CreateTime_24HourFormat(11 , 0);
@@ -70,6 +78,14 @@ namespace NUnit.Tests2 {
         }
 
         [Test]
+        public void Test_Time_LessThan_6()
+        {
+            var input1 = Time.CreateTime_12HourFormat(12, 00, false);
+            var input2 = Time.CreateTime_24HourFormat(0, 0);
+            Assert.False(input1.LessThan(input2));
+        }
+
+        [Test]
         public void Test_Time_MoreThan_1() {
             var input1 = Time.CreateTime_24HourFormat(10 , 0);
             var input2 = Time.CreateTime_24HourFormat(9 , 0);
@@ -101,6 +117,14 @@ namespace NUnit.Tests2 {
         public void Test_Time_MoreThan_5() {
             var input1 = Time.CreateTime_24HourFormat(9 , 0);
             var input2 = Time.CreateTime_24HourFormat(9 , 0);
+            Assert.False(input1.MoreThan(input2));
+        }
+
+        [Test]
+        public void Test_Time_MoreThan_6()
+        {
+            var input1 = Time.CreateTime_12HourFormat(12, 00, false);
+            var input2 = Time.CreateTime_24HourFormat(0, 0);
             Assert.False(input1.MoreThan(input2));
         }
 
@@ -181,6 +205,25 @@ namespace NUnit.Tests2 {
             var actual = input1.Minus(input2);
             var expected = new TimeSpan(0 , 2 , 30 , 0);
             Assert.AreEqual(expected , actual);
+        }
+
+        [Test]
+        public void Test_Time_Minus_3() {
+            var input1 = Time.CreateTime_24HourFormat(18 , 0);
+            var input2 = Time.CreateTime_24HourFormat(9 , 30);
+            var actual = input1.Minus(input2);
+            var expected = new TimeSpan(0 , 8 , 30 , 0);
+            Assert.AreEqual(expected , actual);
+        }
+
+        [Test]
+        public void Test_Time_Minus_4()
+        {
+            var input1 = Time.CreateTime_24HourFormat(0, 0);
+            var input2 = Time.CreateTime_24HourFormat(0, 0);
+            var actual = input1.Minus(input2);
+            var expected = new TimeSpan(0, 0, 0, 0);
+            Assert.AreEqual(expected, actual);
         }
     }
 }

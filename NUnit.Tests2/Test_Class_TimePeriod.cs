@@ -50,6 +50,34 @@ namespace NUnit.Tests2 {
         }
 
         [Test]
+        public void Test_TimePeriod_Intersection_7()
+        {
+            var input1 = new TimePeriod(Time.CreateTime_24HourFormat(8, 0), Time.CreateTime_24HourFormat(10, 0));
+            var input2 = new TimePeriod(Time.CreateTime_24HourFormat(10, 00), Time.CreateTime_24HourFormat(12, 0));
+            Assert.False(input1.IntersectWith(input2));
+        }
+
+        [Test]
+        public void Test_TimePeriod_Intersection_8()
+        {
+            var time1 = "08:30 AM - 1:00 PM";
+            var time2 = "1:00 PM - 2:00 PM";
+            var input1 = TimePeriod.Parse(time1);
+            var input2 = TimePeriod.Parse(time2);
+            Assert.False(input1.IntersectWith(input2));
+        }
+
+        [Test]
+        public void Test_TimePeriod_Intersection_9()
+        {
+            var time1 = "9:30 AM - 12:00 PM";
+            var time2 = "11:00 AM - 1:00 PM";
+            var input1 = TimePeriod.Parse(time1);
+            var input2 = TimePeriod.Parse(time2);
+            Assert.True(input1.IntersectWith(input2));
+        }
+
+        [Test]
         public void Test_TimePeriod_ToBinary_1() {
             var input1 = new TimePeriod(Time.CreateTime_24HourFormat(8 , 0) , Time.CreateTime_24HourFormat(10 , 0));
             var result = Convert.ToString(input1.ToBinary(),2);
