@@ -87,6 +87,7 @@ namespace Time_Table_Arranging_Program.Pages {
             }
 
             string html = GetHtml(Browser);
+            ProgressBar.Visibility = Visibility.Visible;
             var bg = CustomBackgroundWorker<string , List<Slot>>.RunAndShowLoadingScreen(
                new HtmlSlotParser().Parse , html , "Loading slots . . .");
             //    TryGetStartDateAndEndDate(plainText);

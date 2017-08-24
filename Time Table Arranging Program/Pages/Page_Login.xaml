@@ -64,7 +64,9 @@
                             <TextBlock Margin="5,0,0,0">RESET</TextBlock>
                         </StackPanel>
                     </Button>
+                    <ProgressBar x:Name="ProgressBar" Visibility="Hidden" IsIndeterminate="True" />
                 </StackPanel>
+
             </materialDesign:Card>
 
             <materialDesign:Card Visibility="Hidden" DockPanel.Dock="Top" Width="100" Height="100"  Margin="5" HorizontalAlignment="Center" VerticalAlignment="Stretch">
