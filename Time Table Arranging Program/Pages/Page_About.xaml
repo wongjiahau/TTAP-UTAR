@@ -137,6 +137,13 @@
                                                                   RequestNavigate="Hyperlink_RequestNavigate"><Run Text="GNU Affero General Public License v3.0"/></Hyperlink></TextBlock>
                 </StackPanel>
             </materialDesign:Card>
+            <materialDesign:Card Background="Black">
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon Foreground="White" Kind="CubeOutline" />
+                    <TextBlock FontWeight="Bold"    Foreground="White"  FontFamily="Consolas" Text="Developers = " />
+                    <TextBlock FontWeight="DemiBold" Foreground="White" FontFamily="Consolas" Text="{}{Aw Yi Han , C , JY HEE , _sqfong , UHaooooo , WJH};" />
+                </StackPanel>
+            </materialDesign:Card>
             <Label Margin="5" />
         </StackPanel>
     </ScrollViewer>
