@@ -22,17 +22,17 @@ namespace Time_Table_Arranging_Program.Pages {
     ///     Interaction logic for Page_SelectSubject.xaml
     /// </summary>
     public partial class Page_CreateTimetable : Page, IDirtyObserver<IOutputTimetableModel>, IPageWithLoadedFunction {
-        public static Page_CreateTimetable GetInstance(Setting searchByConsideringWeekNumber,
+        public static Page_CreateTimetable GetInstance(Setting searchByConsideringWeekNumber ,
                                                        Setting generalizeSlot) {
             ISlotGeneralizer generalizer = generalizeSlot.IsChecked
                 ? (ISlotGeneralizer)new SlotGeneralizer()
                 : new NullGeneralizer();
             var permutator = searchByConsideringWeekNumber.IsChecked
-                ? (Func<Slot[], List<List<Slot>>>) Permutator.Run_v2_WithConsideringWeekNumber
+                ? (Func<Slot[] , List<List<Slot>>>)Permutator.Run_v2_WithConsideringWeekNumber
                 : Permutator.Run_v2_withoutConsideringWeekNumber;
             var result = new SlotList();
             result.AddRange(generalizer.Generalize(Global.InputSlotList).ToArray());
-            return new Page_CreateTimetable(result, permutator);
+            return new Page_CreateTimetable(result , permutator);
         }
         private readonly MutableObservable<ITimetable> _currentViewedTimetable = new ObservableTimetable(Timetable.Empty);
         private CyclicIndex _cyclicIndex;
@@ -45,9 +45,9 @@ namespace Time_Table_Arranging_Program.Pages {
         private List<Predicate<Slot>> _predicates = new List<Predicate<Slot>>();
 
         private MutableObservable<IOutputTimetableModel> _timetableList;
-        private readonly Func<Slot[],List<List<Slot>>> _permutator;
+        private readonly Func<Slot[] , List<List<Slot>>> _permutator;
 
-        private Page_CreateTimetable(SlotList inputSlots , Func<Slot[],List<List<Slot>>> permutator) {
+        private Page_CreateTimetable(SlotList inputSlots , Func<Slot[] , List<List<Slot>>> permutator) {
             _inputSlots = inputSlots;
             _permutator = permutator;
             InitializeComponent();
@@ -87,10 +87,9 @@ namespace Time_Table_Arranging_Program.Pages {
                 }
                 else {
                     _outputTimetables.SetState(TimetableList.NoPossibleCombination);
-                    NotificationBar.Show("No possible timetable found.", "Tell me why", ()=>
-                        {
-                            DialogBox.Show("Why no possible combination?", new ClashFinder(_subjectModels, _permutator).Message);
-                        }, false);
+                    NotificationBar.Show("No possible timetable found." , "Tell me why" , () => {
+                        DialogBox.Show("Why no possible combination?" , new ClashFinder(_subjectModels , _permutator).Message);
+                    } , false);
                 }
                 ToolBoxPanel.Visibility = Visibility.Hidden;
                 _cyclicIndex.Reset();
@@ -126,12 +125,20 @@ namespace Time_Table_Arranging_Program.Pages {
         }
 
 
+        private bool _justDeselectedASubject = false;
         private void SelectSubjectPanel_OnSlotSelectionChanged(object sender , EventArgs e) {
             _predicates.Clear();
             _inputSlots.SelectedSubjectNames = SelectSubjectPanel.GetNamesOfCheckedSubject().ToList();
             var selectedSlots = _inputSlots.GetSlotsOf(SelectSubjectPanel.UIDofSelectedSlots);
             SetTimeConstraintButton.Visibility = selectedSlots.Length == 0 ? Visibility.Hidden : Visibility.Visible;
             List<List<Slot>> result = RunPermutation(selectedSlots);
+            if (result != null && result.Count == 0) {
+                _justDeselectedASubject = true;
+                SelectSubjectPanel.DeselectAndDisableLastSelectedSubject("Cannot select this subject as it will cause clashes");//new ClashFinder(_subjectModels , _permutator).Message);
+                return;
+            }
+            if (_justDeselectedASubject) _justDeselectedASubject = false;
+            else SelectSubjectPanel.EnableAllDisabledSubject();
             _windowStateSummary = new Window_StateSummary(selectedSlots.ToList() , result);
             UpdateGUI(result);
         }
@@ -166,15 +173,14 @@ namespace Time_Table_Arranging_Program.Pages {
 
         private void SaveAsPicture_OnClick(object sender , RoutedEventArgs e) {
             DrawerHost.IsBottomDrawerOpen = false;
-            var p = new Window()
-            {
-                SizeToContent = SizeToContent.WidthAndHeight,
+            var p = new Window() {
+                SizeToContent = SizeToContent.WidthAndHeight ,
                 Content = new Page_SaveTimetableAsImage(TimetableViewer.GetCurrentTimetable())
             };
             p.Show();
             p.Close();
         }
-    
+
         private void SaveAsNotepadFile_OnClick(object sender , RoutedEventArgs e) {
             DrawerHost.IsBottomDrawerOpen = false;
             var slots = TimetableViewer.GetCurrentTimetable().ToList();
@@ -194,8 +200,8 @@ namespace Time_Table_Arranging_Program.Pages {
                     () => { Process.Start(p.FileName); });
             }
             catch (Exception ex) {
-                Global.Snackbar.MessageQueue.Enqueue("Failed to save file." , "SHOW DETAILS" , 
-                    () => {MessageBox.Show(ex.Message);});
+                Global.Snackbar.MessageQueue.Enqueue("Failed to save file." , "SHOW DETAILS" ,
+                    () => { MessageBox.Show(ex.Message); });
             }
         }
     }

@@ -27,6 +27,7 @@ namespace Time_Table_Arranging_Program.User_Control {
         event RoutedEventHandler Checked;
         event RoutedEventHandler ListViewCheckBox_Checked;
         void Highlight();
+        void SetErrorMessage(string message);
     }
 
     public partial class CheckBoxWithListDownMenu : UserControl, ICheckBoxWithListDownMenu, INeedDataContext<SubjectModel> {
@@ -53,6 +54,19 @@ namespace Time_Table_Arranging_Program.User_Control {
             _ownerOfCurrentFocus?.Dehighlight();
             _ownerOfCurrentFocus = this;
             Border.Background = ColorDictionary.GotFocusedColor;
+        }
+
+        public void SetErrorMessage(string message) {
+            if (message == null) {
+                DrawerHost.IsRightDrawerOpen = false;
+                DrawerHost.IsEnabled = true;
+                ChooseSlotButton.Visibility = Visibility.Hidden;
+            }
+            else {
+                DrawerHost.IsRightDrawerOpen = true;
+                DrawerHost.IsEnabled = false;
+                ErrorTextBlock.Text = message;
+            }
         }
 
         private void Dehighlight() {
