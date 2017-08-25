@@ -134,7 +134,7 @@ namespace Time_Table_Arranging_Program.Pages {
             List<List<Slot>> result = RunPermutation(selectedSlots);
             if (result != null && result.Count == 0) {
                 _justDeselectedASubject = true;
-                SelectSubjectPanel.DeselectAndDisableLastSelectedSubject("Cannot select this subject as it will cause clashes");//new ClashFinder(_subjectModels , _permutator).Message);
+                SelectSubjectPanel.DeselectAndDisableLastSelectedSubject(new ClashFinder(_subjectModels , _permutator).CrashingSlots);//
                 return;
             }
             if (_justDeselectedASubject) _justDeselectedASubject = false;

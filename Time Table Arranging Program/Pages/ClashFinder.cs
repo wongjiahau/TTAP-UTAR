@@ -15,47 +15,49 @@ namespace Time_Table_Arranging_Program.Pages {
     public class SubjectModelWithState {
         public string SubjectName;
         public int[/*7*/] StateOfEachDay;
-        public SubjectModelWithState(string subjectName, int[] stateOfEachDay) {
+        public SubjectModelWithState(string subjectName , int[] stateOfEachDay) {
             SubjectName = subjectName;
             StateOfEachDay = stateOfEachDay;
         }
 
         public bool ClashesWith(SubjectModelWithState s) {
-            for (int i = 0; i < Day.NumberOfDaysPerWeek; i++) {
+            for (int i = 0 ; i < Day.NumberOfDaysPerWeek ; i++) {
                 if ((this.StateOfEachDay[i] & s.StateOfEachDay[i]) > 0) return true;
             }
             return false;
         }
     }
 
-    
+
     public class ClashFinder {
         private List<SubjectModelWithState> _subjectStateList = new List<SubjectModelWithState>();
-        public ClashFinder(List<SubjectModel> subjectModels, Func<Slot[], List<List<Slot>>> permutator) {
+        public ClashFinder(List<SubjectModel> subjectModels , Func<Slot[] , List<List<Slot>>> permutator) {
             var selectedSubjects = subjectModels.FindAll(x => x.IsSelected);
-            for (var i = 0; i < selectedSubjects.Count; i++) {
+            for (var i = 0 ; i < selectedSubjects.Count ; i++) {
                 SubjectModel s = selectedSubjects[i];
-                int[] subjectState = GetSubjectState(permutator( s.GetSelectedSlots().ToArray()));
-                _subjectStateList.Add(new SubjectModelWithState(s.Name, subjectState));
+                int[] subjectState = GetSubjectState(permutator(s.GetSelectedSlots().ToArray()));
+                _subjectStateList.Add(new SubjectModelWithState(s.Name , subjectState));
             }
-            for (int i = 0; i < _subjectStateList.Count; i++) {
-                for (int j = 0; j < _subjectStateList.Count; j++) {
+            for (int i = 0 ; i < _subjectStateList.Count ; i++) {
+                for (int j = 0 ; j < _subjectStateList.Count ; j++) {
                     if (i == j) continue;
                     if (_subjectStateList[i].ClashesWith(_subjectStateList[j])) {
-                        Message = $"Because\n--{_subjectStateList[i].SubjectName}\nclashes with\n--{_subjectStateList[j].SubjectName}";
+                        CrashingSlots = (_subjectStateList[i], _subjectStateList[j]);
+                        Message = $"Because\n--{_subjectStateList[i].SubjectName}\nclashes with\n--{_subjectStateList[j].SubjectName}";                   
                         return;
                     }
                 }
             }
             Message = $"Sorry... the reason is too complicated to be explained.";
+            CrashingSlots = null;
         }
 
         public static int[] GetSubjectState(List<List<Slot>> outputTimetables) {
-            var finalResult = new int[7] {-1, -1, -1, -1, -1, -1, -1}; 
-            for (var i = 0; i < outputTimetables.Count; i++) {
+            var finalResult = new int[7] { -1 , -1 , -1 , -1 , -1 , -1 , -1 };
+            for (var i = 0 ; i < outputTimetables.Count ; i++) {
                 var timetable = outputTimetables[i];
-                var stateOfThisTimetable = GetTimetableState(timetable);               
-                for (int k = 0; k < Day.NumberOfDaysPerWeek; k++) {
+                var stateOfThisTimetable = GetTimetableState(timetable);
+                for (int k = 0 ; k < Day.NumberOfDaysPerWeek ; k++) {
                     finalResult[k] &= stateOfThisTimetable[k];
                 }
             }
@@ -72,6 +74,7 @@ namespace Time_Table_Arranging_Program.Pages {
             return result;
         }
 
+        public (SubjectModelWithState, SubjectModelWithState)? CrashingSlots { get; private set; }
         public string Message { private set; get; }
     }
 }

@@ -11,6 +11,7 @@ using Time_Table_Arranging_Program.Class;
 using Time_Table_Arranging_Program.Class.Helper;
 using Time_Table_Arranging_Program.Interfaces;
 using Time_Table_Arranging_Program.Model;
+using Time_Table_Arranging_Program.Pages;
 using Time_Table_Arranging_Program.UserInterface;
 using static System.Windows.Visibility;
 
@@ -81,8 +82,17 @@ namespace Time_Table_Arranging_Program.User_Control {
             FocusSearchBox();
         }
 
-        public void DeselectAndDisableLastSelectedSubject(string errorMessage) {
+        public void DeselectAndDisableLastSelectedSubject((SubjectModelWithState, SubjectModelWithState)? crashingSubjects) {
             _lastCheckedSubject.IsChecked = false;
+            string errorMessage;
+            if (crashingSubjects == null) errorMessage = "Cannot select this subject as it will cause clashes.";
+            else {
+                errorMessage = "Cannot select this subject as it clashes with ";
+                if (crashingSubjects.Value.Item1.SubjectName == _lastCheckedSubject.SubjectName)
+                    errorMessage += crashingSubjects.Value.Item2.SubjectName;
+                else
+                    errorMessage += crashingSubjects.Value.Item1.SubjectName;
+            }
             _lastCheckedSubject.SetErrorMessage(errorMessage);
         }
 
