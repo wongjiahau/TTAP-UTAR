@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Navigation;
 using Time_Table_Arranging_Program.Class;
+using Time_Table_Arranging_Program.Class.Helper;
 using Time_Table_Arranging_Program.Class.TokenParser;
 using Time_Table_Arranging_Program.Windows_Control;
 using KeyEventArgs = System.Windows.Input.KeyEventArgs;
@@ -37,6 +39,7 @@ namespace Time_Table_Arranging_Program.Pages {
         public Page_Login() {
             InitializeComponent();
         }
+
 
         private bool _loadDataFromTestServer;
         public Page_Login(bool loadDataFromTestServer) : this() {
@@ -143,6 +146,16 @@ namespace Time_Table_Arranging_Program.Pages {
             return htmlText.Contains($"javascript:changePage(\'{pageNumber}\')");
         }
 
+        private bool CheckForInternetConnection() {
+            if (Helper.CanConnectToInternet()) {
+                DrawerHost.IsBottomDrawerOpen = false;
+                return true;
+            }
+            else {
+                DrawerHost.IsBottomDrawerOpen = true;
+                return false;
+            }
+        }
         #region EventHandlers
         private void ResetButton_OnClick(object sender , RoutedEventArgs e) {
             UserNameBox.Text = "";
@@ -170,25 +183,38 @@ namespace Time_Table_Arranging_Program.Pages {
         }
 
         private void LoginButton_OnClick(object sender , RoutedEventArgs e) {
-            _studentIdInput = UserNameBox.Text;
-            _passwordInput = PasswordBox.Password;
-            _captchaInput = CaptchaBox.Text;
-            Browser.InvokeScript("execScript" ,
-                "document.getElementsByName('reqFregkey')[0].value='" + _studentIdInput + "'" , "JavaScript");
-            Browser.InvokeScript("execScript" ,
-                "document.getElementsByName('reqPassword')[0].value='" + _passwordInput + "'" , "JavaScript");
-            Browser.InvokeScript("execScript" ,
-                "document.getElementsByName('kaptchafield')[0].value='" + _captchaInput + "'" , "JavaScript");
-            Browser.InvokeScript("execScript" ,
-                "document.getElementsByName('_submit')[0].click()" , "JavaScript");
+            if (!CheckForInternetConnection()) return;
+            try {
+                _studentIdInput = UserNameBox.Text;
+                _passwordInput = PasswordBox.Password;
+                _captchaInput = CaptchaBox.Text;
+                Browser.InvokeScript("execScript",
+                    "document.getElementsByName('reqFregkey')[0].value='" + _studentIdInput + "'", "JavaScript");
+                Browser.InvokeScript("execScript",
+                    "document.getElementsByName('reqPassword')[0].value='" + _passwordInput + "'", "JavaScript");
+                Browser.InvokeScript("execScript",
+                    "document.getElementsByName('kaptchafield')[0].value='" + _captchaInput + "'", "JavaScript");
+                Browser.InvokeScript("execScript",
+                    "document.getElementsByName('_submit')[0].click()", "JavaScript");
+            }
+            catch (Exception ex) {
+                //If the flow went here, it may be due to the following steps : 
+                // 1. User login into account, and successfully loaded slots
+                // 2. User clicked back
+                // 3. User login again
 
+            }
         }
 
         private void CaptchaBox_OnKeyUp(object sender , KeyEventArgs e) {
             if (e.Key == Key.Enter)
                 LoginButton_OnClick(null , null);
         }
-        #endregion
 
+        private void RetryButton_OnClicked(object sender , RoutedEventArgs e) {
+            CheckForInternetConnection();
+        }
+
+        #endregion
     }
 }
