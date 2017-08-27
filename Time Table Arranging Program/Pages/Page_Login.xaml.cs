@@ -147,7 +147,7 @@ namespace Time_Table_Arranging_Program.Pages {
         }
 
         private bool CheckForInternetConnection() {
-            if (Helper.CanConnectToInternet()) {
+            if (Helper.CanConnectToWebsite(LoginPageUrl)) {
                 DrawerHost.IsBottomDrawerOpen = false;
                 return true;
             }

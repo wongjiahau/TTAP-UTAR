@@ -92,11 +92,12 @@ namespace Time_Table_Arranging_Program.Class.Helper {
         /// <summary>
         /// Return true if there are Internet connection, else false
         /// </summary>
+        /// <param name="url"></param>
         /// <returns></returns>
-        public static bool CanConnectToInternet() {
+        public static bool CanConnectToWebsite(string url) {
             try {
                 using (var client = new WebClient()) {
-                    using (client.OpenRead("http://clients3.google.com/generate_204")) {
+                    using (client.OpenRead(url)) {
                         return true;
                     }
                 }
