@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -86,6 +87,24 @@ namespace Time_Table_Arranging_Program.Class.Helper {
             Rect bounds = element.TransformToAncestor(container).TransformBounds(new Rect(0.0, 0.0, element.ActualWidth, element.ActualHeight));
             Rect rect = new Rect(0.0,0.0,container.ActualWidth, container.ActualHeight);
             return rect.Contains(bounds.TopLeft) || rect.Contains(bounds.BottomRight);
+        }
+
+        /// <summary>
+        /// Return true if there are Internet connection, else false
+        /// </summary>
+        /// <param name="url"></param>
+        /// <returns></returns>
+        public static bool CanConnectToWebsite(string url) {
+            try {
+                using (var client = new WebClient()) {
+                    using (client.OpenRead(url)) {
+                        return true;
+                    }
+                }
+            }
+            catch {
+                return false;
+            }
         }
     }
 }
