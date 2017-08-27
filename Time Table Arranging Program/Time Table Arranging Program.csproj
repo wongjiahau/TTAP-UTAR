@@ -253,6 +253,7 @@
     <Compile Include="Pages\GettingStarted\LetsGetStarted.xaml.cs">
       <DependentUpon>LetsGetStarted.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Login\UrlProvider.cs" />
     <Compile Include="Pages\Page_About.xaml.cs">
       <DependentUpon>Page_About.xaml</DependentUpon>
     </Compile>
@@ -271,7 +272,7 @@
     <Compile Include="Pages\GettingStarted\Page_Introduction.xaml.cs">
       <DependentUpon>Page_Introduction.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Page_Login.xaml.cs">
+    <Compile Include="Pages\Login\Page_Login.xaml.cs">
       <DependentUpon>Page_Login.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Page_Help.xaml.cs">
@@ -441,7 +442,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\Page_Login.xaml">
+    <Page Include="Pages\Login\Page_Login.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

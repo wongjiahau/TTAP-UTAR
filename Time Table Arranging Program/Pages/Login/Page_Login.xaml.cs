@@ -8,6 +8,7 @@ using System.Windows.Navigation;
 using Time_Table_Arranging_Program.Class;
 using Time_Table_Arranging_Program.Class.Helper;
 using Time_Table_Arranging_Program.Class.TokenParser;
+using Time_Table_Arranging_Program.Pages.Login;
 using Time_Table_Arranging_Program.Windows_Control;
 using KeyEventArgs = System.Windows.Input.KeyEventArgs;
 using MessageBox = System.Windows.MessageBox;
@@ -19,26 +20,20 @@ namespace Time_Table_Arranging_Program.Pages {
     /// Interaction logic for Page_First.xaml
     /// </summary>
     public partial class Page_Login : Page {
-        private const string LoginPageUrl = "https://unitreg.utar.edu.my/portal/courseRegStu/login.jsp";
-
-        private const string LoginFailedUrl =
-            "https://unitreg.utar.edu.my/portal/courseRegStu/login.jsp?message=invalidSecurity";
-
-        private const string CourseTimetablePreviewUrl =
-            "https://unitreg.utar.edu.my/portal/courseRegStu/schedule/masterSchedule.jsp";
-
+        private UrlProvider _urlProvider;
         private string _studentIdInput;
         private string _passwordInput;
         private string _captchaInput;
-        private const string TestServerUrl = "http://localhost/ttap_testdata/";
-
         private int _currentPage = 1;
         private const int NavigationCountUpperLimit = 3;
         private int _navigationCount = 0;
 
         public Page_Login() {
+            _urlProvider = new UrlProvider();
             InitializeComponent();
+            CheckForInternetConnection();           
         }
+
 
 
         private bool _loadDataFromTestServer;
@@ -49,10 +44,10 @@ namespace Time_Table_Arranging_Program.Pages {
         private void Page_Login_OnLoaded(object sender , RoutedEventArgs e) {
             GotItButton_OnClick(null , null);
             if (_loadDataFromTestServer) {
-                Browser.Navigate(TestServerUrl);
+                Browser.Navigate(_urlProvider.TestServerUrl);
                 return;
             }
-            Browser.Navigate(LoginPageUrl);
+            Browser.Navigate(_urlProvider.LoginPageUrl);
         }
 
         private bool _browsingToCourseTimetablePreview = false;
@@ -61,27 +56,27 @@ namespace Time_Table_Arranging_Program.Pages {
             KapchaBrowser.Navigate("https://unitreg.utar.edu.my/portal/Kaptcha.jpg");
             ResetButton.IsEnabled = true;
             string currentUrl = Browser.Source.ToString();
-            if (currentUrl.Contains(TestServerUrl)) goto here;
-            if (currentUrl == LoginFailedUrl ||
-                (currentUrl == LoginPageUrl && PasswordBox.Password.Length > 0)
+            if (currentUrl.Contains(_urlProvider.TestServerUrl)) goto here;
+            if (currentUrl == _urlProvider.LoginFailedUrl ||
+                (currentUrl == _urlProvider.LoginPageUrl && PasswordBox.Password.Length > 0)
                 ) {
                 //display error and ert a newline after current cursor without entering INSERT efresh page when error
                 MessageBox.Show("Please make sure information are valid!");
                 this.NavigationService.Refresh();
             }
-            if (currentUrl == LoginPageUrl || currentUrl == LoginFailedUrl) {
+            if (currentUrl == _urlProvider.LoginPageUrl || currentUrl == _urlProvider.LoginFailedUrl) {
                 _navigationCount = 0;
                 return;
             }
-            if (currentUrl.Contains(CourseTimetablePreviewUrl) == false) {
+            if (currentUrl.Contains(_urlProvider.CourseTimetablePreviewUrl) == false) {
                 _currentPage = 1;
                 if (_browsingToCourseTimetablePreview == false) {
                     if (_navigationCount < NavigationCountUpperLimit) {
-                        Browser.Navigate(CourseTimetablePreviewUrl);
+                        Browser.Navigate(_urlProvider.CourseTimetablePreviewUrl);
                         _navigationCount++;
                     }
                     else {
-                        Browser.Navigate(LoginPageUrl);
+                        Browser.Navigate(_urlProvider.LoginPageUrl);
                         Global.Snackbar.MessageQueue.Enqueue("No record found, please try again.");
                     }
                 }
@@ -147,7 +142,7 @@ namespace Time_Table_Arranging_Program.Pages {
         }
 
         private bool CheckForInternetConnection() {
-            if (Helper.CanConnectToWebsite(LoginPageUrl)) {
+            if (Helper.CanConnectToWebsite(_urlProvider.LoginPageUrl)) {
                 DrawerHost.IsBottomDrawerOpen = false;
                 return true;
             }
@@ -161,12 +156,12 @@ namespace Time_Table_Arranging_Program.Pages {
             UserNameBox.Text = "";
             PasswordBox.Password = "";
             CaptchaBox.Text = "";
-            Browser.Navigate(LoginPageUrl);
+            Browser.Navigate(_urlProvider.LoginPageUrl);
         }
 
         private void GotItButton_OnClick(object sender , RoutedEventArgs e) {
             DialogHost.IsOpen = false;
-            Browser.Navigate(LoginPageUrl);
+            Browser.Navigate(_urlProvider.LoginPageUrl);
             Browser.Visibility = Visibility.Visible;
         }
 
