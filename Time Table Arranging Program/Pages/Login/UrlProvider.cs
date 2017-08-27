@@ -10,6 +10,7 @@ namespace Time_Table_Arranging_Program.Pages.Login {
         public string CourseTimetablePreviewUrl => "https://unitreg.utar.edu.my/portal/courseRegStu/schedule/masterSchedule.jsp";
         public string KaptchaUrl => "https://unitreg.utar.edu.my/portal/Kaptcha.jpg";
         public string TestServerUrl => "http://localhost/ttap_testdata/";
+        public string EndUrl => "http://0.0.0.0/";
         public bool IsLoginFailed(string url) {
             string InvalidIdOrPasswordUrl = "https://unitreg.utar.edu.my/portal/courseRegStu/login.jsp?message=loginError";
             string InvalidCaptchaUrl = "https://unitreg.utar.edu.my/portal/courseRegStu/login.jsp?message=invalidSecurity";

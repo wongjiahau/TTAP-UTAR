@@ -70,18 +70,20 @@ namespace Time_Table_Arranging_Program.Pages {
             KapchaBrowser.Navigate(_urlProvider.KaptchaUrl);
             ResetButton.IsEnabled = true;
             string currentUrl = Browser.Source.ToString();
+            if (currentUrl == _urlProvider.EndUrl) return;
             if (currentUrl.Contains(_urlProvider.TestServerUrl)) ExtractData();
-            if (_urlProvider.IsLoginFailed(currentUrl)) DisplayLoginFailedMessage();
-            else if (_urlProvider.IsAtLoginPage(currentUrl)) {
-                string html = GetHtml(Browser);
-                //if login page not loaded successfully
-                if (!html.Contains("Course Registration System"))
-                    Browser.Navigate(_urlProvider.LoginPageUrl);
-            }
+            else if (_urlProvider.IsLoginFailed(currentUrl)) DisplayLoginFailedMessage();
+            else if (_urlProvider.IsAtLoginPage(currentUrl)) AssertLoginPageIsLoadedProperly();
             else if (!currentUrl.Contains(_urlProvider.CourseTimetablePreviewUrl)) NavigateToCourseTimeTablePreview();
             else if (currentUrl.Contains(_urlProvider.CourseTimetablePreviewUrl)) ExtractData();
 
             #region NestedFunctions
+            void AssertLoginPageIsLoadedProperly()
+            {
+                string html = GetHtml(Browser);
+                if (!html.Contains("Course Registration System"))
+                    Browser.Navigate(_urlProvider.LoginPageUrl);
+            }
             void DisplayLoginFailedMessage()
             {
                 Global.Snackbar.MessageQueue.Enqueue("Login failed. Please make sure you entered the correct information.");
@@ -120,6 +122,7 @@ namespace Time_Table_Arranging_Program.Pages {
                         ResetButton_OnClick(null , null);
                         return;
                     }
+                    Browser.Navigate(_urlProvider.EndUrl);
                     NavigationService.Navigate(
                         Page_CreateTimetable.GetInstance(Global.Settings.SearchByConsideringWeekNumber ,
                             Global.Settings.GeneralizeSlot));
@@ -147,6 +150,7 @@ namespace Time_Table_Arranging_Program.Pages {
             }
             #endregion
         }
+
 
         private void SaveToFile(string html) {
             var saveFileDialog = new SaveFileDialog();
