@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -32,7 +33,7 @@ namespace Time_Table_Arranging_Program.Pages {
             _urlProvider = new UrlProvider();
             InitializeComponent();
             bool gotInternet = CheckForInternetConnection();
-            if(gotInternet) this.Loaded += Page_Login_Loaded;
+            if (gotInternet) this.Loaded += Page_Login_Loaded;
         }
 
         private void Page_Login_Loaded(object sender , RoutedEventArgs e) {
@@ -40,7 +41,22 @@ namespace Time_Table_Arranging_Program.Pages {
                 Browser.Navigate(_urlProvider.TestServerUrl);
                 return;
             }
-            Browser.Navigate(_urlProvider.LoginPageUrl);
+            if (Global.InputSlotList.Count == 0) Browser.Navigate(_urlProvider.LoginPageUrl);
+            else {
+                DialogBox.Show("Login again?" , "WARNING : If you login again your previous data will be overwrited." ,
+                    "CANCEL" , "LOGIN AGAIN");
+                switch (DialogBox.Result) {
+                    case DialogBox.ResultEnum.LeftButtonClicked:
+                        this.NavigationService.GoForward();
+                        break;
+                    case DialogBox.ResultEnum.RightButtonClicked:
+                        Global.InputSlotList.Clear();
+                        //Need to reset two times to properly load the login page again
+                        ResetButton_OnClick(null , null);
+                        ResetButton_OnClick(null , null);
+                        break;
+                }
+            }
         }
 
         private readonly bool _loadDataFromTestServer;
@@ -56,7 +72,12 @@ namespace Time_Table_Arranging_Program.Pages {
             string currentUrl = Browser.Source.ToString();
             if (currentUrl.Contains(_urlProvider.TestServerUrl)) ExtractData();
             if (_urlProvider.IsLoginFailed(currentUrl)) DisplayLoginFailedMessage();
-            else if (currentUrl.Contains(_urlProvider.LoginPageUrl)) return;
+            else if (_urlProvider.IsAtLoginPage(currentUrl)) {
+                string html = GetHtml(Browser);
+                //if login page not loaded successfully
+                if (!html.Contains("Course Registration System"))
+                    Browser.Navigate(_urlProvider.LoginPageUrl);
+            }
             else if (!currentUrl.Contains(_urlProvider.CourseTimetablePreviewUrl)) NavigateToCourseTimeTablePreview();
             else if (currentUrl.Contains(_urlProvider.CourseTimetablePreviewUrl)) ExtractData();
 
@@ -78,6 +99,7 @@ namespace Time_Table_Arranging_Program.Pages {
                 else {
                     Browser.Navigate(_urlProvider.LoginPageUrl);
                     Global.Snackbar.MessageQueue.Enqueue("No record found, please try again.");
+                    ResetButton_OnClick(null , null);
                 }
             }
             void ExtractData()
@@ -95,20 +117,15 @@ namespace Time_Table_Arranging_Program.Pages {
                 else {
                     if (Global.InputSlotList.Count == 0) {
                         DialogBox.Show("No data available." , "" , "OK");
+                        ResetButton_OnClick(null , null);
                         return;
                     }
                     NavigationService.Navigate(
-                        Page_CreateTimetable.GetInstance(Global.Settings.SearchByConsideringWeekNumber,
+                        Page_CreateTimetable.GetInstance(Global.Settings.SearchByConsideringWeekNumber ,
                             Global.Settings.GeneralizeSlot));
                 }
 
                 #region NestedFunctions
-                string GetHtml(WebBrowser b)
-                {
-                    dynamic doc = b.Document;
-                    var htmlText = doc.documentElement.InnerHtml;
-                    return htmlText;
-                }
 
                 bool CanGoToPage(int pageNumber)
                 {
@@ -152,6 +169,11 @@ namespace Time_Table_Arranging_Program.Pages {
             }
         }
 
+        private string GetHtml(WebBrowser b) {
+            dynamic doc = b.Document;
+            var htmlText = doc.documentElement.InnerHtml;
+            return htmlText;
+        }
         #region EventHandlers
 
         private void ResetButton_OnClick(object sender , RoutedEventArgs e) {
@@ -160,6 +182,7 @@ namespace Time_Table_Arranging_Program.Pages {
             CaptchaBox.Text = "";
             Browser.Navigate(_urlProvider.LoginPageUrl);
         }
+
 
         private void GotItButton_OnClick(object sender , RoutedEventArgs e) {
             DialogHost.IsOpen = false;
@@ -191,7 +214,7 @@ namespace Time_Table_Arranging_Program.Pages {
                 // 1. User login into account, and successfully loaded slots
                 // 2. User clicked back
                 // 3. User login again
-
+                ResetButton_OnClick(null , null);
             }
         }
 

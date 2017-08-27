@@ -17,5 +17,9 @@ namespace Time_Table_Arranging_Program.Pages.Login {
                 url.Contains(InvalidCaptchaUrl) ||
                 url.Contains(InvalidIdOrPasswordUrl);
         }
+
+        public bool IsAtLoginPage(string url) {
+            return url.Split(new string[] { "//" }, StringSplitOptions.None)[1] == LoginPageUrl.Split(new string[] { "//" }, StringSplitOptions.None)[1];
+        }
     }
 }
