@@ -20,101 +20,110 @@
     <UserControl.DataContext>
         <Model:SubjectModel />
     </UserControl.DataContext>
-    <DockPanel  LastChildFill="True" >
-        <Popup x:Name="ListViewPopup" StaysOpen="True" PopupAnimation="Scroll" AllowsTransparency="True"
+    <materialDesign:DrawerHost x:Name="DrawerHost" IsRightDrawerOpen="False">
+        <materialDesign:DrawerHost.RightDrawerContent>
+            <Border Background="DarkRed">
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon Kind="AlertOctagon" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10 10 5 10" Height="25" Width="25" Foreground="White" />
+                    <TextBlock x:Name="ErrorTextBlock" VerticalAlignment="Center" Margin="5 5 10 5" MaxWidth="150" TextWrapping="Wrap" Foreground="White">Cannot select this subject because it crashes with</TextBlock>
+                </StackPanel>
+            </Border>
+        </materialDesign:DrawerHost.RightDrawerContent>
+        <DockPanel  LastChildFill="True" >
+            <Popup x:Name="ListViewPopup" StaysOpen="True" PopupAnimation="Scroll" AllowsTransparency="True"
                Placement="Mouse" MaxHeight="500" Closed="ListViewPopup_OnClosed">
 
 
-            <DockPanel x:Name="PopupDp">
-                <materialDesign:Card>
-                    <Border BorderThickness="3" BorderBrush="Black" Background="White" Padding="5" >
-                        <DockPanel LastChildFill="True">
-                            <Border Background="White" DockPanel.Dock="Top">
-                                <DockPanel LastChildFill="True">
-                                    <DockPanel.Resources>
-                                        <Style TargetType="Button">
-                                            <Setter Property="Background" Value="White" />
-                                            <Setter Property="Width" Value="30" />
-                                            <Setter Property="HorizontalAlignment" Value="Right" />
-                                            <Setter Property="FontWeight" Value="ExtraBold" />
-                                            <Setter Property="FontSize" Value="15" />
-                                            <Setter Property="BorderThickness" Value="0" />
-                                        </Style>
-                                    </DockPanel.Resources>
+                <DockPanel x:Name="PopupDp">
+                    <materialDesign:Card>
+                        <Border BorderThickness="3" BorderBrush="Black" Background="White" Padding="5" >
+                            <DockPanel LastChildFill="True">
+                                <Border Background="White" DockPanel.Dock="Top">
+                                    <DockPanel LastChildFill="True">
+                                        <DockPanel.Resources>
+                                            <Style TargetType="Button">
+                                                <Setter Property="Background" Value="White" />
+                                                <Setter Property="Width" Value="30" />
+                                                <Setter Property="HorizontalAlignment" Value="Right" />
+                                                <Setter Property="FontWeight" Value="ExtraBold" />
+                                                <Setter Property="FontSize" Value="15" />
+                                                <Setter Property="BorderThickness" Value="0" />
+                                            </Style>
+                                        </DockPanel.Resources>
 
 
 
 
-                                    <Button DockPanel.Dock="Right" Style="{StaticResource MaterialDesignFlatButton}" Foreground="White" Height="25" Background="LightCoral" Click="CloseButton_OnClick" >
-                                        <materialDesign:PackIcon Kind="WindowClose" />
-                                    </Button>
-                                    <Button DockPanel.Dock="Right" Style="{StaticResource MaterialDesignFlatButton}"  
+                                        <Button DockPanel.Dock="Right" Style="{StaticResource MaterialDesignFlatButton}" Foreground="White" Height="25" Background="LightCoral" Click="CloseButton_OnClick" >
+                                            <materialDesign:PackIcon Kind="WindowClose" />
+                                        </Button>
+                                        <Button DockPanel.Dock="Right" Style="{StaticResource MaterialDesignFlatButton}"  
                                      x:Name="HidePopupButton"   Click="HideButton_Click">
-                                        <materialDesign:PackIcon Kind="WindowMinimize" />
-                                    </Button>
+                                            <materialDesign:PackIcon Kind="WindowMinimize" />
+                                        </Button>
 
-                                    <Label x:Name="SubjectNameLabel" HorizontalAlignment="Stretch" FontWeight="Bold"
+                                        <Label x:Name="SubjectNameLabel" HorizontalAlignment="Stretch" FontWeight="Bold"
                                        Background="White"  Cursor="SizeAll" Content="{Binding Name}" />
-                                </DockPanel>
-                            </Border>
-                            <Button x:Name="ToggleCheckButton" Content="Untick all slots" Width="auto" DockPanel.Dock="Bottom"
+                                    </DockPanel>
+                                </Border>
+                                <Button x:Name="ToggleCheckButton" Content="Untick all slots" Width="auto" DockPanel.Dock="Bottom"
                                 Click="ToggleCheckButton_OnClick" HorizontalAlignment="Center" Margin="0,5,0,0"/>
-                            <Label x:Name="InstructionLabel" DockPanel.Dock="Top" Background="WhiteSmoke" FontWeight="DemiBold">. . . Untick the slots that you don't want</Label>
-                            <Rectangle DockPanel.Dock="Top"  Height="1" Fill="LightGray" />
-                            <Border BorderThickness="1" BorderBrush="LightGray">
-                                <ListView x:Name="ListView" DockPanel.Dock="Bottom" Margin="4" 
+                                <Label x:Name="InstructionLabel" DockPanel.Dock="Top" Background="WhiteSmoke" FontWeight="DemiBold">. . . Untick the slots that you don't want</Label>
+                                <Rectangle DockPanel.Dock="Top"  Height="1" Fill="LightGray" />
+                                <Border BorderThickness="1" BorderBrush="LightGray">
+                                    <ListView x:Name="ListView" DockPanel.Dock="Bottom" Margin="4" 
                                           ItemsSource="{Binding Slots}"
                                           >
-                                    <!--<ListView.DataContext>
+                                        <!--<ListView.DataContext>
                                         <class:Slot />
                                     </ListView.DataContext>-->
-                                    <ListView.View>
-                                        <GridView>
-                                            <GridViewColumn CellTemplate="{StaticResource FirstCell}" />
-                                            <GridViewColumn Header="Type" DisplayMemberBinding="{Binding Type}" />
-                                            <GridViewColumn Header="Number" DisplayMemberBinding="{Binding Number}" />
-                                            <GridViewColumn Header="Time" DisplayMemberBinding="{Binding TimePeriod}" />
-                                            <GridViewColumn Header="Day" DisplayMemberBinding="{Binding Day}" />
-                                            <GridViewColumn Header="Week"  DisplayMemberBinding="{Binding WeekNumber}" />
-                                            <GridViewColumn Header="Venue" DisplayMemberBinding="{Binding Venue}" />
-                                        </GridView>
-                                    </ListView.View>
-                                    <ListView.ItemContainerStyle>
-                                        <Style TargetType="ListViewItem">
-                                            <EventSetter Event="PreviewMouseLeftButtonDown" Handler="ListViewItem_PreviewMouseLeftButtonDown" />
-                                        </Style>
-                                    </ListView.ItemContainerStyle>
-                                </ListView>
-                            </Border>
+                                        <ListView.View>
+                                            <GridView>
+                                                <GridViewColumn CellTemplate="{StaticResource FirstCell}" />
+                                                <GridViewColumn Header="Type" DisplayMemberBinding="{Binding Type}" />
+                                                <GridViewColumn Header="Number" DisplayMemberBinding="{Binding Number}" />
+                                                <GridViewColumn Header="Time" DisplayMemberBinding="{Binding TimePeriod}" />
+                                                <GridViewColumn Header="Day" DisplayMemberBinding="{Binding Day}" />
+                                                <GridViewColumn Header="Week"  DisplayMemberBinding="{Binding WeekNumber}" />
+                                                <GridViewColumn Header="Venue" DisplayMemberBinding="{Binding Venue}" />
+                                            </GridView>
+                                        </ListView.View>
+                                        <ListView.ItemContainerStyle>
+                                            <Style TargetType="ListViewItem">
+                                                <EventSetter Event="PreviewMouseLeftButtonDown" Handler="ListViewItem_PreviewMouseLeftButtonDown" />
+                                            </Style>
+                                        </ListView.ItemContainerStyle>
+                                    </ListView>
+                                </Border>
 
 
-                        </DockPanel>
-                    </Border>
-                </materialDesign:Card>
-            </DockPanel>
+                            </DockPanel>
+                        </Border>
+                    </materialDesign:Card>
+                </DockPanel>
 
 
-        </Popup>
-        <Border x:Name="Border" BorderBrush="Gray" BorderThickness="0,0,0,1" Padding="2" 
+            </Popup>
+            <Border x:Name="Border" BorderBrush="Gray" BorderThickness="0,0,0,1" Padding="2" 
                 Background="WhiteSmoke"
                 MouseDown="Border_OnMouseDown" Cursor="Hand" >
-            <DockPanel   HorizontalAlignment="Stretch">
-                <CheckBox  IsChecked="{Binding IsSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Visibility="Visible" Margin="5,0,0,0" DockPanel.Dock="Left" x:Name="Checkbox"  VerticalAlignment="Center"
+                <DockPanel   HorizontalAlignment="Stretch">
+                    <CheckBox  IsChecked="{Binding IsSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Visibility="Visible" Margin="5,0,0,0" DockPanel.Dock="Left" x:Name="Checkbox"  VerticalAlignment="Center"
                           Checked="CheckBox_CheckChanged" Unchecked="CheckBox_CheckChanged"
                           />
-                <StackPanel DockPanel.Dock="Left">
-                    <local:HighlightTextBlock FontSize="14"   DockPanel.Dock="Left" x:Name="SubjectNameHighlightTextBlock" Text="{Binding Name}" Margin="10,5,5,2"
+                    <StackPanel DockPanel.Dock="Left">
+                        <local:HighlightTextBlock FontSize="14"   DockPanel.Dock="Left" x:Name="SubjectNameHighlightTextBlock" Text="{Binding Name}" Margin="10,5,5,2"
                                       Cursor="Hand" VerticalAlignment="Center" FontWeight="DemiBold"  />
-                    <local:HighlightTextBlock x:Name="SubjectCodeHighlightTextBlock" VerticalAlignment="Center" Text="{Binding CodeAndNameInitials}" Margin="15,0,0,5" />
-                </StackPanel>
-                <Button x:Name="ChooseSlotButton"  Style="{StaticResource MaterialDesignFlatButton}" Margin="5" FontSize="11" DockPanel.Dock="Right" VerticalAlignment="Center" Visibility="Hidden"                        
+                        <local:HighlightTextBlock x:Name="SubjectCodeHighlightTextBlock" VerticalAlignment="Center" Text="{Binding CodeAndNameInitials}" Margin="15,0,0,5" />
+                    </StackPanel>
+                    <Button x:Name="ChooseSlotButton"  Style="{StaticResource MaterialDesignFlatButton}" Margin="5" FontSize="11" DockPanel.Dock="Right" VerticalAlignment="Center" Visibility="Hidden"                        
                     Click="ChooseSlotButton_Click" ToolTip="Choose specific slots" HorizontalAlignment="Right">
-                    <materialDesign:PackIcon Kind="Pencil" />
-                </Button>
+                        <materialDesign:PackIcon Kind="Pencil" />
+                    </Button>
 
-            </DockPanel>
-        </Border>
+                </DockPanel>
+            </Border>
 
-    </DockPanel>
-
+        </DockPanel>
+    </materialDesign:DrawerHost>
 </UserControl>
