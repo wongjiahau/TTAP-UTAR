@@ -9,6 +9,13 @@ namespace NUnit.Tests2 {
     [TestFixture]
     public class Test_Slot {
         [Test]
+        public void Test_Slot_Equals_0() {
+            var a = new Slot();
+            var b = new Slot();
+            Assert.AreNotEqual(a.OID, b.OID);
+        }
+
+        [Test]
         public void Test_Slot_Equals_1() {
             //Exactly same slots
             var a = new Slot(213,"MPU3113","Hubungan Etnik", "2", "L", Day.Monday, "KB312", new TimePeriod(Time.CreateTime_24HourFormat(10,30),Time.CreateTime_24HourFormat( 12,00) ), new WeekNumber(new List<int>(){1,2,3}));
@@ -21,7 +28,7 @@ namespace NUnit.Tests2 {
             //Exactly same slots except for UID
             var a = new Slot(213 , "MPU3113" , "Hubungan Etnik" , "2" , "L" , Day.Monday , "KB312" , new TimePeriod(Time.CreateTime_24HourFormat(10 , 30) , Time.CreateTime_24HourFormat(12 , 00)) , new WeekNumber(new List<int>() { 1 , 2 , 3 }));
             var b = new Slot(212 , "MPU3113" , "Hubungan Etnik" , "2" , "L" , Day.Monday , "KB312" , new TimePeriod(Time.CreateTime_24HourFormat(10 , 30) , Time.CreateTime_24HourFormat(12 , 00)) , new WeekNumber(new List<int>() { 1 , 2 , 3 }));
-            Assert.True(a.Equals(b));
+            Assert.False(a.Equals(b));
         }
 
         [Test]
@@ -103,6 +110,13 @@ namespace NUnit.Tests2 {
             var b = new Slot(2 , "xxx" , "name" , "3" , "L" , Day.Monday , "KB104" , new TimePeriod(Time.CreateTime_24HourFormat(8 , 0) , Time.CreateTime_24HourFormat(10 , 0)) , new WeekNumber(new List<int>() { 1 , 2 , 3 }));
 
             Assert.False(a.EqualsExceptNumberAndVenue(b));
+        }
+
+        [Test]
+        public void Test_Slot_GetDuplicate() {
+            var a = new Slot(213,"MPU3113","Hubungan Etnik", "2", "L", Day.Monday, "KB312", new TimePeriod(Time.CreateTime_24HourFormat(10,30),Time.CreateTime_24HourFormat( 12,00) ), new WeekNumber(new List<int>(){1,2,3}));
+            var b = a.GetDuplicate();
+            Assert.IsTrue(a.Equals(b));
         }
     }
 }

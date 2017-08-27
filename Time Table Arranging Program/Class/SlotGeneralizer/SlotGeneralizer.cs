@@ -9,27 +9,59 @@ namespace Time_Table_Arranging_Program.Class.SlotGeneralizer {
     }
     public class SlotGeneralizer : ISlotGeneralizer {
         public List<Slot> Generalize(List<Slot> slots) {
-            var generalized = new List<Slot>();
-            foreach (Slot s in slots) {
-                var toBeAdded = s.GetDuplicate();
-                //toBeAdded.WeekNumber = new NullWeekNumber();
-                generalized.Add(toBeAdded);
+            var shouldNotBeGeneralized = GetSlotsThatShouldNotBeGeneralized(slots);
+            var shallBeGenerazlied = SetDifference(slots , shouldNotBeGeneralized);
+            var duplicate = new List<Slot>();
+            foreach (Slot s in shallBeGenerazlied) {
+                duplicate.Add(s.GetDuplicate());
             }
-
-            var dic = new Dictionary<string , Slot>();
-            for (int i = 0 ; i < generalized.Count ; i++) {
-                var s = generalized[i];
+            var generalized = new Dictionary<string , Slot>();
+            for (int i = 0 ; i < duplicate.Count ; i++) {
+                var s = duplicate[i];
                 string key = $"{s.Day}{s.Code}{s.Type}{s.TimePeriod}";
-                if (!dic.ContainsKey(key)) {
-                    dic.Add(key , s);
+                if (!generalized.ContainsKey(key)) {
+                    generalized.Add(key , s);
                 }
                 else {
-                    dic[key].Number += $"/{s.Number}";
+                    generalized[key].Number += $"/{s.Number}";
 
                 }
             }
-            return dic.Values.ToList();
+            var result = generalized.Values.ToList();
+            result.AddRange(shouldNotBeGeneralized);
+            return result;
+        }
 
+        public List<Slot> SetDifference(List<Slot> setA , List<Slot> setB) { //A-B
+            var result = new List<Slot>();
+            foreach (var x in setA) {
+                foreach (var y in setB) {
+                    if (x.OID == y.OID) goto here;
+                }
+                result.Add(x);
+                here:
+                ;
+            }
+            return result;
+        }
+
+        public List<Slot> GetSlotsThatShouldNotBeGeneralized(List<Slot> slots) {
+            var dic = new Dictionary<string , List<Slot>>();
+            for (int i = 0 ; i < slots.Count ; i++) {
+                var s = slots[i];
+                string key = $"{s.Code}{s.Type}{s.Number}";
+                if (!dic.ContainsKey(key)) {
+                    dic.Add(key , new List<Slot>());
+                }
+                dic[key].Add(s);
+            }
+            var result = new List<Slot>();
+            foreach (var key in dic.Keys) {
+                if (dic[key].Count > 1) {
+                    result.AddRange(dic[key]);
+                }
+            }
+            return result;
         }
 
         public IEnumerable<Slot> GeneralizeBySubject(List<Slot> slots) {
