@@ -87,7 +87,7 @@ namespace Time_Table_Arranging_Program.User_Control {
             string errorMessage;
             if (crashingSubjects == null) errorMessage = "Cannot select this subject as it will cause clashes.";
             else {
-                errorMessage = "Cannot select this subject as it clashes with ";
+                errorMessage = "Cannot select this subject as it clashes with :\n";
                 if (crashingSubjects.Value.Item1.SubjectName == _lastCheckedSubject.SubjectName)
                     errorMessage += crashingSubjects.Value.Item2.SubjectName;
                 else
