@@ -7,7 +7,7 @@
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       xmlns:userControl="clr-namespace:Time_Table_Arranging_Program.User_Control"
       mc:Ignorable="d"       
-      Title="Page_First"  Loaded="Page_Login_OnLoaded" >
+      Title="Page_First">
     <Page.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

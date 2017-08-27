@@ -31,18 +31,11 @@ namespace Time_Table_Arranging_Program.Pages {
         public Page_Login() {
             _urlProvider = new UrlProvider();
             InitializeComponent();
-            CheckForInternetConnection();           
+            bool gotInternet = CheckForInternetConnection();
+            if(gotInternet) this.Loaded += Page_Login_Loaded;
         }
 
-
-
-        private bool _loadDataFromTestServer;
-        public Page_Login(bool loadDataFromTestServer) : this() {
-            _loadDataFromTestServer = loadDataFromTestServer;
-        }
-
-        private void Page_Login_OnLoaded(object sender , RoutedEventArgs e) {
-            GotItButton_OnClick(null , null);
+        private void Page_Login_Loaded(object sender , RoutedEventArgs e) {
             if (_loadDataFromTestServer) {
                 Browser.Navigate(_urlProvider.TestServerUrl);
                 return;
@@ -50,64 +43,92 @@ namespace Time_Table_Arranging_Program.Pages {
             Browser.Navigate(_urlProvider.LoginPageUrl);
         }
 
-        private bool _browsingToCourseTimetablePreview = false;
+        private readonly bool _loadDataFromTestServer;
 
+        public Page_Login(bool loadDataFromTestServer) : this() {
+            _loadDataFromTestServer = loadDataFromTestServer;
+        }
+
+        private bool _browsingToCourseTimetablePreview = false;
         private void Browser_OnLoadCompleted(object sender , NavigationEventArgs e) {
-            KapchaBrowser.Navigate("https://unitreg.utar.edu.my/portal/Kaptcha.jpg");
+            KapchaBrowser.Navigate(_urlProvider.KaptchaUrl);
             ResetButton.IsEnabled = true;
             string currentUrl = Browser.Source.ToString();
-            if (currentUrl.Contains(_urlProvider.TestServerUrl)) goto here;
-            if (currentUrl == _urlProvider.LoginFailedUrl ||
-                (currentUrl == _urlProvider.LoginPageUrl && PasswordBox.Password.Length > 0)
-                ) {
-                //display error and ert a newline after current cursor without entering INSERT efresh page when error
-                MessageBox.Show("Please make sure information are valid!");
+            if (currentUrl.Contains(_urlProvider.TestServerUrl)) ExtractData();
+            if (_urlProvider.IsLoginFailed(currentUrl)) DisplayLoginFailedMessage();
+            else if (currentUrl.Contains(_urlProvider.LoginPageUrl)) return;
+            else if (!currentUrl.Contains(_urlProvider.CourseTimetablePreviewUrl)) NavigateToCourseTimeTablePreview();
+            else if (currentUrl.Contains(_urlProvider.CourseTimetablePreviewUrl)) ExtractData();
+
+            #region NestedFunctions
+            void DisplayLoginFailedMessage()
+            {
+                Global.Snackbar.MessageQueue.Enqueue("Login failed. Please make sure you entered the correct information.");
                 this.NavigationService.Refresh();
-            }
-            if (currentUrl == _urlProvider.LoginPageUrl || currentUrl == _urlProvider.LoginFailedUrl) {
                 _navigationCount = 0;
-                return;
             }
-            if (currentUrl.Contains(_urlProvider.CourseTimetablePreviewUrl) == false) {
+            void NavigateToCourseTimeTablePreview()
+            {
                 _currentPage = 1;
-                if (_browsingToCourseTimetablePreview == false) {
-                    if (_navigationCount < NavigationCountUpperLimit) {
-                        Browser.Navigate(_urlProvider.CourseTimetablePreviewUrl);
-                        _navigationCount++;
-                    }
-                    else {
-                        Browser.Navigate(_urlProvider.LoginPageUrl);
-                        Global.Snackbar.MessageQueue.Enqueue("No record found, please try again.");
-                    }
+                if (_browsingToCourseTimetablePreview) return;
+                if (_navigationCount < NavigationCountUpperLimit) {
+                    Browser.Navigate(_urlProvider.CourseTimetablePreviewUrl);
+                    _navigationCount++;
                 }
-                return;
+                else {
+                    Browser.Navigate(_urlProvider.LoginPageUrl);
+                    Global.Snackbar.MessageQueue.Enqueue("No record found, please try again.");
+                }
             }
-
-            here:
-            string html = GetHtml(Browser);
-            if (Global.Toggles.SaveLoadedHtmlToggle.IsToggledOn) SaveToFile(html);
-            ProgressBar.Visibility = Visibility.Visible;
-            var bg = CustomBackgroundWorker<string , List<Slot>>.RunAndShowLoadingScreen(
-               new HtmlSlotParser().Parse , html , "Loading slots . . .");
-            //    TryGetStartDateAndEndDate(plainText);
-            Global.InputSlotList.AddRange(bg.GetResult());
-            if (CanGoToPage(_currentPage + 1)) {
-                Browser.InvokeScript("changePage" , _currentPage + 1);
-                _currentPage++;
-            }
-            else {
-                if (Global.InputSlotList.Count == 0) {
-                    DialogBox.Show("No data available." , "" , "OK");
-                    if (DialogBox.Result == DialogBox.ResultEnum.RightButtonClicked) {
-                        LoadTestDataButton_OnClick(null , null);
+            void ExtractData()
+            {
+                string html = GetHtml(Browser);
+                if (Global.Toggles.SaveLoadedHtmlToggle.IsToggledOn) SaveToFile(html);
+                var bg = CustomBackgroundWorker<string , List<Slot>>.RunAndShowLoadingScreen(
+                    new HtmlSlotParser().Parse , html , "Loading slots . . .");
+                //    TryGetStartDateAndEndDate(plainText);
+                Global.InputSlotList.AddRange(bg.GetResult());
+                if (CanGoToPage(_currentPage + 1)) {
+                    Browser.InvokeScript("changePage" , _currentPage + 1);
+                    _currentPage++;
+                }
+                else {
+                    if (Global.InputSlotList.Count == 0) {
+                        DialogBox.Show("No data available." , "" , "OK");
+                        return;
                     }
-                    return;
+                    NavigationService.Navigate(
+                        Page_CreateTimetable.GetInstance(Global.Settings.SearchByConsideringWeekNumber,
+                            Global.Settings.GeneralizeSlot));
                 }
 
-                NavigationService.Navigate(
-                    Page_CreateTimetable.GetInstance(Global.Settings.SearchByConsideringWeekNumber ,
-                        Global.Settings.GeneralizeSlot));
+                #region NestedFunctions
+                string GetHtml(WebBrowser b)
+                {
+                    dynamic doc = b.Document;
+                    var htmlText = doc.documentElement.InnerHtml;
+                    return htmlText;
+                }
+
+                bool CanGoToPage(int pageNumber)
+                {
+                    dynamic doc = Browser.Document;
+                    string htmlText = doc.documentElement.InnerHtml;
+                    return htmlText.Contains($"javascript:changePage(\'{pageNumber}\')");
+                }
+                void TryGetStartDateAndEndDate(string input)
+                {
+                    try {
+                        var parser = new StartDateEndDateFinder(input);
+                        Global.TimetableStartDate = parser.GetStartDate();
+                        Global.TimetableEndDate = parser.GetEndDate();
+                    }
+                    catch { }
+                }
+                #endregion
+
             }
+            #endregion
         }
 
         private void SaveToFile(string html) {
@@ -120,27 +141,6 @@ namespace Time_Table_Arranging_Program.Pages {
             }
         }
 
-        private string GetHtml(WebBrowser b) {
-            dynamic doc = b.Document;
-            var htmlText = doc.documentElement.InnerHtml;
-            return htmlText;
-        }
-
-        private void TryGetStartDateAndEndDate(string input) {
-            try {
-                var parser = new StartDateEndDateFinder(input);
-                Global.TimetableStartDate = parser.GetStartDate();
-                Global.TimetableEndDate = parser.GetEndDate();
-            }
-            catch { }
-        }
-
-        private bool CanGoToPage(int pageNumber) {
-            dynamic doc = Browser.Document;
-            string htmlText = doc.documentElement.InnerHtml;
-            return htmlText.Contains($"javascript:changePage(\'{pageNumber}\')");
-        }
-
         private bool CheckForInternetConnection() {
             if (Helper.CanConnectToWebsite(_urlProvider.LoginPageUrl)) {
                 DrawerHost.IsBottomDrawerOpen = false;
@@ -151,7 +151,9 @@ namespace Time_Table_Arranging_Program.Pages {
                 return false;
             }
         }
+
         #region EventHandlers
+
         private void ResetButton_OnClick(object sender , RoutedEventArgs e) {
             UserNameBox.Text = "";
             PasswordBox.Password = "";
@@ -165,14 +167,6 @@ namespace Time_Table_Arranging_Program.Pages {
             Browser.Visibility = Visibility.Visible;
         }
 
-        private void LoadTestDataButton_OnClick(object sender , RoutedEventArgs e) {
-            Global.InputSlotList.AddRange(TestData.TestSlots);
-            NavigationService.Navigate(
-                Page_CreateTimetable.GetInstance(Global.Settings.SearchByConsideringWeekNumber ,
-                    Global.Settings.GeneralizeSlot));
-
-        }
-
         private void KapchaBrowser_OnLoadCompleted(object sender , NavigationEventArgs e) {
             KapchaBrowser.InvokeScript("execScript" , "document.body.style.overflow ='hidden'" , "JavaScript");
         }
@@ -183,14 +177,14 @@ namespace Time_Table_Arranging_Program.Pages {
                 _studentIdInput = UserNameBox.Text;
                 _passwordInput = PasswordBox.Password;
                 _captchaInput = CaptchaBox.Text;
-                Browser.InvokeScript("execScript",
-                    "document.getElementsByName('reqFregkey')[0].value='" + _studentIdInput + "'", "JavaScript");
-                Browser.InvokeScript("execScript",
-                    "document.getElementsByName('reqPassword')[0].value='" + _passwordInput + "'", "JavaScript");
-                Browser.InvokeScript("execScript",
-                    "document.getElementsByName('kaptchafield')[0].value='" + _captchaInput + "'", "JavaScript");
-                Browser.InvokeScript("execScript",
-                    "document.getElementsByName('_submit')[0].click()", "JavaScript");
+                Browser.InvokeScript("execScript" ,
+                    "document.getElementsByName('reqFregkey')[0].value='" + _studentIdInput + "'" , "JavaScript");
+                Browser.InvokeScript("execScript" ,
+                    "document.getElementsByName('reqPassword')[0].value='" + _passwordInput + "'" , "JavaScript");
+                Browser.InvokeScript("execScript" ,
+                    "document.getElementsByName('kaptchafield')[0].value='" + _captchaInput + "'" , "JavaScript");
+                Browser.InvokeScript("execScript" ,
+                    "document.getElementsByName('_submit')[0].click()" , "JavaScript");
             }
             catch (Exception ex) {
                 //If the flow went here, it may be due to the following steps : 
