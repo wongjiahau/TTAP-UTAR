@@ -182,6 +182,8 @@
     <Compile Include="Class\testing_for_revert.cs" />
     <Compile Include="Class\ToggableObject.cs" />
     <Compile Include="Class\TokenParser\HtmlSlotParser.cs" />
+    <Compile Include="Class\UndoFramework\IUndoableAction.cs" />
+    <Compile Include="Class\UndoFramework\UndoManager.cs" />
     <Compile Include="ConsoleCommands\HideConsoleCommand.cs" />
     <Compile Include="ConsoleCommands\LoadDataFromTestServerCommand.cs" />
     <Compile Include="ConsoleCommands\LoadTestDataCommand.cs" />
