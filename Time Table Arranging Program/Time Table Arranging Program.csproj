@@ -354,6 +354,9 @@
     <Compile Include="User Control\TimetableDescriptionViewer2.xaml.cs">
       <DependentUpon>TimetableDescriptionViewer2.xaml</DependentUpon>
     </Compile>
+    <Compile Include="User Control\TimetableGuiControls\DayTimeCell.xaml.cs">
+      <DependentUpon>DayTimeCell.xaml</DependentUpon>
+    </Compile>
     <Compile Include="User Control\TimetableGUI_Full.xaml.cs">
       <DependentUpon>TimetableGUI_Full.xaml</DependentUpon>
     </Compile>
@@ -534,6 +537,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="User Control\TimetableDescriptionViewer2.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User Control\TimetableGuiControls\DayTimeCell.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
