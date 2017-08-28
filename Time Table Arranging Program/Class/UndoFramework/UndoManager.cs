@@ -14,13 +14,20 @@ namespace Time_Table_Arranging_Program.Class.UndoFramework {
             _redoableActions.Clear();
         }
 
+        public void ClearHistory() {
+            _undoableActions.Clear();
+            _redoableActions.Clear();
+        }
+
         public void Undo() {
+            if(_undoableActions.Count == 0 ) return;
             var lastAction = _undoableActions.Pop();
             lastAction.Undo();
             _redoableActions.Push(lastAction);
         }
 
         public void Redo() {
+            if(_redoableActions.Count == 0 ) return;
             var lastUndoneAction = _redoableActions.Pop();
             lastUndoneAction.Execute();
             _undoableActions.Push(lastUndoneAction);

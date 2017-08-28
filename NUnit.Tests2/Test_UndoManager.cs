@@ -15,11 +15,78 @@ namespace NUnit.Tests2 {
         private AddTwoAction _addTwoAction = new AddTwoAction(_intObject);
         [Test]
         public void Test_UndoManager_Execute() {
-
+            _undoManager.ClearHistory();
             _undoManager.Execute(_addOneAction);
+            _undoManager.Execute(_addTwoAction);
+            Assert.AreEqual(3 , _intObject.Value);
+        }
+
+        [Test]
+        public void Test_UndoManager_Undo_1() {
+            _intObject.Reset();
+            _undoManager.ClearHistory();
+            _undoManager.Execute(_addOneAction);
+            _undoManager.Execute(_addTwoAction);
+            _undoManager.Undo();
             Assert.AreEqual(1 , _intObject.Value);
         }
 
+        [Test]
+        public void Test_UndoManager_Undo_2() {
+            _intObject.Reset();
+            _undoManager.ClearHistory();
+            _undoManager.Execute(_addOneAction);
+            _undoManager.Execute(_addTwoAction);
+            _undoManager.Undo();
+            _undoManager.Undo();
+            Assert.AreEqual(0 , _intObject.Value);
+        }
+
+        [Test]
+        public void Test_UndoManager_Redo() {
+            _intObject.Reset();
+            _undoManager.ClearHistory();
+            _undoManager.Execute(_addOneAction);
+            _undoManager.Execute(_addTwoAction);
+            _undoManager.Undo();
+            _undoManager.Redo();
+            Assert.AreEqual(3 , _intObject.Value);
+        }
+
+        [Test]
+        public void Test_UndoManager_UndoingARedo() {
+            _intObject.Reset();
+            _undoManager.ClearHistory();
+            _undoManager.Execute(_addOneAction);
+            _undoManager.Execute(_addTwoAction);
+            _undoManager.Undo();
+            _undoManager.Redo();
+            _undoManager.Undo();
+            Assert.AreEqual(1 , _intObject.Value);
+        }
+
+        [Test]
+        public void Test_UndoManager_WhenUndoStackIsEmpty() {
+            _undoManager.ClearHistory();
+            try {
+                _undoManager.Undo();
+            }
+
+            catch (Exception e) {
+                Assert.Fail(e.Message);
+            }
+        }
+        [Test]
+        public void Test_UndoManager_WhenRedoStackIsEmpty() {
+            _undoManager.ClearHistory();
+            try {
+                _undoManager.Redo();
+            }
+
+            catch (Exception e) {
+                Assert.Fail(e.Message);
+            }
+        }
 
     }
 
