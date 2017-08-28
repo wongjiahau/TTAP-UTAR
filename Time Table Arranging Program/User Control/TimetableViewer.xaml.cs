@@ -40,19 +40,20 @@ namespace Time_Table_Arranging_Program.User_Control {
             _outputTimeTable = currentState.ToList();
             TimeTableGui.GenerateGui(_outputTimeTable[0]);
             InstructionLabel.Visibility = Visibility.Collapsed;
-            TimeTableGui.Visibility = Visibility.Visible;            
+            TimeTableGui.Visibility = Visibility.Visible;
             //  IndexViewer.Initialize(_cyclicIndex);
         }
 
         public void Initialize(CyclicIndex cyclicIndex) {
             _cyclicIndex = cyclicIndex;
-            _cyclicIndex.CurrentValueChanged += CyclicIndexOnCurrentValueChanged;            
+            _cyclicIndex.CurrentValueChanged += CyclicIndexOnCurrentValueChanged;
+            CyclicIndexOnCurrentValueChanged(null , null);
         }
 
-        private void CyclicIndexOnCurrentValueChanged(object sender, EventArgs eventArgs) {
+        private void CyclicIndexOnCurrentValueChanged(object sender , EventArgs eventArgs) {
             if (_cyclicIndex.CurrentValue < 0) return;
             TimeTableGui.GenerateGui(_outputTimeTable[_cyclicIndex.CurrentValue]);
-            ViewChanged(this, null);
+            ViewChanged(this , null);
         }
 
         public event EventHandler ViewChanged;
@@ -61,7 +62,7 @@ namespace Time_Table_Arranging_Program.User_Control {
             return _cyclicIndex.CurrentValue == 0;
         }
 
-        public void Update(List<ITimetable> outputTimeTable, bool inputSlotsIsEmpty) {
+        public void Update(List<ITimetable> outputTimeTable , bool inputSlotsIsEmpty) {
             if (outputTimeTable == null || outputTimeTable.Count == 0) {
                 if (inputSlotsIsEmpty)
                     InstructionLabel.Content = "Please select your subjects";
