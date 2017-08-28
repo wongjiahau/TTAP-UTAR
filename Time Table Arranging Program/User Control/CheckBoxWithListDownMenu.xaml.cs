@@ -60,6 +60,7 @@ namespace Time_Table_Arranging_Program.User_Control {
             if (message == null) {
                 DrawerHost.IsRightDrawerOpen = false;
                 DrawerHost.IsEnabled = true;
+                ErrorTextBlock.Text = "";
                 if (!this.IsChecked) ChooseSlotButton.Visibility = Visibility.Hidden;
             }
             else {
