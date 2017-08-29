@@ -29,9 +29,5 @@ namespace Time_Table_Arranging_Program.ConsoleCommands {
         public override string Help() {
             return "Load sample timeslots from local server (IIS).";
         }
-
-        public override string[] Options() {
-            throw new NotImplementedException();
-        }
     }
 }

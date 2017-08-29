@@ -24,10 +24,5 @@ namespace Time_Table_Arranging_Program.ConsoleCommands {
         public override string Help() {
             return "Load sample data of timeslots";
         }
-
-        public override string[] Options() {
-            throw new NotImplementedException();
-        }
-
     }
 }

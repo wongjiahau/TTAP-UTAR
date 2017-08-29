@@ -27,9 +27,5 @@ namespace Time_Table_Arranging_Program.ConsoleCommands {
         public override string Help() {
             return "Clear the data in variable Global.InputSlotLists.";
         }
-
-        public override string[] Options() {
-            throw new NotImplementedException();
-        }
     }
 }

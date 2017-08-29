@@ -27,9 +27,5 @@ namespace ConsoleTerminalLibrary.BuildIn_Command {
         public override string Help() {
             return "Clear the screen of the console.";
         }
-
-        public override string[] Options() {
-            throw new NotImplementedException();
-        }
     }
 }

@@ -24,9 +24,5 @@ namespace Time_Table_Arranging_Program.ConsoleCommands {
         public override string Help() {
             return "Hide/Collapse this console";
         }
-
-        public override string[] Options() {
-            throw new NotImplementedException();
-        }
     }
 }
