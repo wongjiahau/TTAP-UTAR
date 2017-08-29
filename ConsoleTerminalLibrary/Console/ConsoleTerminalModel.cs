@@ -111,11 +111,38 @@ namespace ConsoleTerminalLibrary.Console {
                 ConsoleInput = matched[0].Keyword();
             }
             else {
+                List<string> matchedCommands = matched.Select(consoleCommand => consoleCommand.Keyword()).ToList();
+                ConsoleInput = GetCommonStartingSubstring(matchedCommands);
                 ConsoleOutput.Add("Matching commands : ");
                 foreach (var consoleCommand in matched) {
                     ConsoleOutput.Add("\t" + consoleCommand.Keyword());
                 }
             }
+        }
+
+        private string GetCommonStartingSubstring(List<string> matched) {
+            string result = "";
+            string shortestString = GetShortestString(matched);
+            for (int i = 0 ; i < shortestString.Length ; i++) {
+                char currentChar = shortestString[i];
+                for (int j = 1 ; j < matched.Count ; j++) {
+                    if (matched[j][i] != currentChar) return result;
+                }
+                result += currentChar;
+            }
+            return result;
+        }
+
+        private string GetShortestString(List<string> matched) {
+            int minLength = matched[0].Length;
+            int index = 0;
+            for (int i = 1 ; i < matched.Count ; i++) {
+                if (matched[i].Length < minLength) {
+                    minLength = matched[i].Length;
+                    index = i;
+                }
+            }
+            return matched[index];
         }
 
         private void ShowPossibleArgument(string input) {
@@ -139,11 +166,12 @@ namespace ConsoleTerminalLibrary.Console {
                 ConsoleInput = command + " " + matchedArg[0];
             }
             else {
-                string result = "\t";
+                string result = "";
                 foreach (var x in matchedArg) {
-                    result += x + " ";
+                    result += "\t" + x + "\n";
                 }
-                ConsoleOutput.Add(command);
+                ConsoleInput = command + " " + GetCommonStartingSubstring(matchedArg);
+                ConsoleOutput.Add("Matching arguments: ");
                 ConsoleOutput.Add(result);
             }
         }
