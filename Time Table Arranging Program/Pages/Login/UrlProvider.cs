@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace Time_Table_Arranging_Program.Pages.Login {
     public class UrlProvider {
+        public string FeedbackFormUrl = "https://goo.gl/forms/qKdc6EVGbxspoTaS2";
+        public string ReportBugUrl = "https://goo.gl/forms/4PJupNgRTEyGGTCN2";
+        public string HelpGifUrl = "https://raw.githubusercontent.com/wongjiahau/TTAP-UTAR/master/TTAP_Tutorial_v2.gif";
+        public string ReadMeUrl = "https://github.com/wongjiahau/TTAP-UTAR/blob/master/README.md";
         public string LoginPageUrl => "https://unitreg.utar.edu.my/portal/courseRegStu/login.jsp";
         public string CourseTimetablePreviewUrl => "https://unitreg.utar.edu.my/portal/courseRegStu/schedule/masterSchedule.jsp";
         public string KaptchaUrl => "https://unitreg.utar.edu.my/portal/Kaptcha.jpg";

@@ -16,6 +16,7 @@ using Time_Table_Arranging_Program.Class.TokenParser;
 using Time_Table_Arranging_Program.ConsoleCommands;
 using Time_Table_Arranging_Program.Interfaces;
 using Time_Table_Arranging_Program.Pages;
+using Time_Table_Arranging_Program.Pages.Login;
 using Time_Table_Arranging_Program.Pages.Page_GettingStarted;
 using Time_Table_Arranging_Program.User_Control;
 using Time_Table_Arranging_Program.UserInterface;
@@ -28,14 +29,8 @@ namespace Time_Table_Arranging_Program {
     ///     Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window {
-        public const string FeedbackFormUrl = "https://goo.gl/forms/qKdc6EVGbxspoTaS2";
-        public const string ReportBugUrl = "https://goo.gl/forms/4PJupNgRTEyGGTCN2";
-        public const string HelpGifUrl =
-            "https://raw.githubusercontent.com/wongjiahau/TTAP-UTAR/master/TTAP_Tutorial_v2.gif";
-        public const string ReadMeUrl =
-            "https://github.com/wongjiahau/TTAP-UTAR/blob/master/README.md";
         private readonly List<string> _previousInputString = new List<string>();
-
+        private readonly UrlProvider _urlProvider = new UrlProvider();
         public MainWindow() {
             //The following two lines of code is to reset the PromptForFeedbackSettings to true
             //Please uncomment it, build it, before actual release
@@ -104,7 +99,7 @@ namespace Time_Table_Arranging_Program {
         }
 
         private void HelpButton_Click(object sender , RoutedEventArgs e) {
-            Process.Start(new ProcessStartInfo(ReadMeUrl));
+            Process.Start(new ProcessStartInfo(_urlProvider.ReadMeUrl));
             e.Handled = true;
         }
 
@@ -124,7 +119,7 @@ namespace Time_Table_Arranging_Program {
         }
 
         private void FeedbackButton_OnClick(object sender , RoutedEventArgs e) {
-            Process.Start(new ProcessStartInfo(FeedbackFormUrl));
+            Process.Start(new ProcessStartInfo(_urlProvider.FeedbackFormUrl));
         }
 
         private void SaveSlot_OnClick(object sender , RoutedEventArgs e) {
@@ -184,7 +179,7 @@ namespace Time_Table_Arranging_Program {
         }
 
         private void ReportBug_Click(object sender , RoutedEventArgs e) {
-            Process.Start(new ProcessStartInfo(ReportBugUrl));
+            Process.Start(new ProcessStartInfo(_urlProvider.ReportBugUrl));
         }
 
         public void LoadTestData() {
