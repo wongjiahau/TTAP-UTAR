@@ -133,7 +133,7 @@ namespace ConsoleTerminalLibrary.Console {
             var possibleArguments = (matched as ConsoleCommandWithArgument).Arguments();
             var matchedArg = possibleArguments.ToList().FindAll(x => x.StartsWith(arg));
             if (matchedArg.Count == 0) {
-                ConsoleOutput.Add($"Error : No matching options arguments with '{arg}'");
+                ConsoleOutput.Add($"Error : No matching arguments with '{arg}'");
             }
             else if (matchedArg.Count == 1) {
                 ConsoleInput = command + " " + matchedArg[0];

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using ConsoleTerminalLibrary.Console;
@@ -12,7 +13,8 @@ namespace Time_Table_Arranging_Program.ConsoleCommands {
         }
 
         public override string[] Arguments() {
-            return new[] {"hello", "banana"};
+            string[] embeddedResources = Assembly.GetAssembly(this.GetType()).GetManifestResourceNames();
+            return embeddedResources.ToList().Where(x => x.EndsWith("html")).ToArray();
         }
 
         protected override string Execute(string s) {
