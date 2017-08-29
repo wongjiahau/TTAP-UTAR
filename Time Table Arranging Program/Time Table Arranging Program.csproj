@@ -683,7 +683,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="SampleData\QingShengSampleHtmlData.html" />
+    <EmbeddedResource Include="SampleData\QingShengSampleHtmlData.html" />
     <EmbeddedResource Include="SampleData\Sample HTML.html" />
     <EmbeddedResource Include="SampleData\SampleData-FAM-2017-2ndSem.html" />
     <EmbeddedResource Include="SampleData\SampleData-FCI-2017-2ndSem.html" />

@@ -5,6 +5,8 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using ConsoleTerminalLibrary.Console;
+using Time_Table_Arranging_Program.Class.Helper;
+using Time_Table_Arranging_Program.Class.TokenParser;
 using Time_Table_Arranging_Program.Pages;
 
 namespace Time_Table_Arranging_Program.ConsoleCommands {
@@ -22,8 +24,10 @@ namespace Time_Table_Arranging_Program.ConsoleCommands {
             return sampleDataFiles;
         }
 
-        protected override string Execute(string s) {
-            ((MainWindow)Commandee).LoadTestData();
+        protected override string Execute(string resourceName) {
+            string raw = Helper.RawStringOfTestFile(resourceName, leadingNamespace + ".");
+            var slots = new HtmlSlotParser().Parse(raw);
+            ((MainWindow)Commandee).LoadTestData(slots);
             return "Loaded test data.";
         }
 

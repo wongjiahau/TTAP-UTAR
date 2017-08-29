@@ -187,8 +187,8 @@ namespace Time_Table_Arranging_Program {
             Process.Start(new ProcessStartInfo(ReportBugUrl));
         }
 
-        public void LoadTestData() {
-            Global.InputSlotList.AddRange(TestData.TestSlots);
+        public void LoadTestData(List<Slot> input) {
+            Global.InputSlotList.AddRange(input);
             MainFrame.Navigate(
                 Page_CreateTimetable.GetInstance(Global.Settings.SearchByConsideringWeekNumber ,
                     Global.Settings.GeneralizeSlot));
