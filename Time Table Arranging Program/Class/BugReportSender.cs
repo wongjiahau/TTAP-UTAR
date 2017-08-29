@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
+using Octokit;
 
 namespace Time_Table_Arranging_Program.Class {
     public class BugReportSender {
@@ -28,6 +29,15 @@ namespace Time_Table_Arranging_Program.Class {
             }) {
                 smtp.Send(message);
             }
+        }
+
+        public static async void SendIssue(string body) {
+            var client = new GitHubClient(new ProductHeaderValue("ttap-bug-report"));
+            var basicAuth = new Credentials("ecce578659b3b1d071db571c1120b870cbb06767"); // NOTE: not real credentials
+            client.Credentials = basicAuth;
+            var createIssue = new NewIssue("Bug report #" + DateTime.Now.GetHashCode());
+            createIssue.Body = body;
+            var issue = await client.Issue.Create("wongjiahau" , "TTAP-UTAR" , createIssue);
         }
 
     }

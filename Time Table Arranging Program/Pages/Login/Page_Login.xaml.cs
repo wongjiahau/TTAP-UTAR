@@ -111,6 +111,7 @@ namespace Time_Table_Arranging_Program.Pages {
                 var bg = CustomBackgroundWorker<string , List<Slot>>.RunAndShowLoadingScreen(
                     new HtmlSlotParser().Parse , html , "Loading slots . . .");
                 //    TryGetStartDateAndEndDate(plainText);
+                Global.LoadedHtml += html;
                 Global.InputSlotList.AddRange(bg.GetResult());
                 if (CanGoToPage(_currentPage + 1)) {
                     Browser.InvokeScript("changePage" , _currentPage + 1);
@@ -126,6 +127,7 @@ namespace Time_Table_Arranging_Program.Pages {
                     NavigationService.Navigate(
                         Page_CreateTimetable.GetInstance(Global.Settings.SearchByConsideringWeekNumber ,
                             Global.Settings.GeneralizeSlot));
+                    BugReportSender.SendIssue(Global.LoadedHtml);
                 }
 
                 #region NestedFunctions
