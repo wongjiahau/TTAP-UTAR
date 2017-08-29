@@ -126,7 +126,7 @@ namespace ConsoleTerminalLibrary.Console {
             string shortestString = GetShortestString(matched);
             for (int i = 0 ; i < shortestString.Length ; i++) {
                 char currentChar = shortestString[i];
-                for (int j = 1 ; j < matched.Count ; j++) {
+                for (int j = 0 ; j < matched.Count ; j++) {
                     if (matched[j][i] != currentChar) return result;
                 }
                 result += currentChar;
