@@ -74,7 +74,7 @@ namespace ConsoleTerminalLibrary.Console {
                         ConsoleOutput.Add($"'{input}' must be invoked with one argument.");
                     }
                     else {
-                        ConsoleOutput.Add((command as ConsoleCommandWithArgument).Execute(input.Split(' ')[1]));
+                        ConsoleOutput.Add((command as ConsoleCommandWithArgument).ExecuteCommand(input.Split(' ')[1]));
                     }
                 }
                 else {
@@ -134,6 +134,9 @@ namespace ConsoleTerminalLibrary.Console {
             var matchedArg = possibleArguments.ToList().FindAll(x => x.StartsWith(arg));
             if (matchedArg.Count == 0) {
                 ConsoleOutput.Add($"Error : No matching options arguments with '{arg}'");
+            }
+            else if (matchedArg.Count == 1) {
+                ConsoleInput = command + " " + matchedArg[0];
             }
             else {
                 string result = "\t";

@@ -9,7 +9,7 @@ using ConsoleTerminalLibrary.Console;
 namespace ConsoleTerminalLibrary.BuildIn_Command {
     public class CopyToClipboardCommand : ConsoleCommandWithArgument{
         public CopyToClipboardCommand(object commandee) : base(commandee) { }
-        public override string Execute(string argument) {
+        protected override string Execute(string argument) {
             try {
                 Clipboard.SetDataObject(argument);
                 return $"'{argument}' is copied to clipboard.";
@@ -18,6 +18,10 @@ namespace ConsoleTerminalLibrary.BuildIn_Command {
                 return $"Failed to copy.\nERROR={e.Message}";
 
             }
+        }
+
+        protected override bool ArgumentIsValid(string arg) {
+            return true;
         }
 
         public override string Keyword() {

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Net;
 
 namespace ConsoleTerminalLibrary.Console {
@@ -25,6 +26,17 @@ namespace ConsoleTerminalLibrary.Console {
             throw new NotImplementedException();
         }
         public abstract string[] Arguments();
-        public abstract string Execute(string s);
+
+        public string ExecuteCommand(string arg) {
+            return ArgumentIsValid(arg) ?
+                Execute(arg) : 
+                $"'{arg}' is not a valid argument for '{Keyword()}'" ;
+        }
+
+        protected virtual bool ArgumentIsValid(string arg) {
+            return Arguments().ToList().Contains(arg);
+        }
+
+        protected abstract string Execute(string arg);
     }
 }

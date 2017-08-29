@@ -15,7 +15,7 @@ namespace Time_Table_Arranging_Program.ConsoleCommands {
             return new[] {"hello", "banana"};
         }
 
-        public override string Execute(string s) {
+        protected override string Execute(string s) {
             ((MainWindow)Commandee).LoadTestData();
             return "Loaded test data.";
         }
