@@ -23,9 +23,5 @@ namespace ConsoleTerminalLibrary.BuildIn_Command {
         public override string Help() {
             return "List history of executed commands.";
         }
-
-        public override string[] Options() {
-            throw new NotImplementedException();
-        }
     }
 }

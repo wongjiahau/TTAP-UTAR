@@ -94,6 +94,7 @@
     <Compile Include="Test_TimetableRow.cs" />
     <Compile Include="Test_Token.cs" />
     <Compile Include="Test_SlotParser.cs" />
+    <Compile Include="Test_UndoManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

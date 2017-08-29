@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Globalization;
 using System.Linq;
 using ConsoleTerminalLibrary.BuildIn_Command;
 using ConsoleTerminalLibrary.HelperClass;
@@ -69,12 +70,12 @@ namespace ConsoleTerminalLibrary.Console {
             string commandKeyword = input.Split(' ')[0];
             var command = _commandList.Find(x => x.Keyword() == commandKeyword);
             if (command != null)
-                if (command is CommandWithArgument) {
+                if (command is ConsoleCommandWithArgument) {
                     if (input.Split(' ').Length != 2) {
                         ConsoleOutput.Add($"'{input}' must be invoked with one argument.");
                     }
                     else {
-                        ConsoleOutput.Add((command as CommandWithArgument).Execute(input.Split(' ')[1]));
+                        ConsoleOutput.Add((command as ConsoleCommandWithArgument).ExecuteCommand(input.Split(' ')[1]));
                     }
                 }
                 else {
@@ -99,14 +100,20 @@ namespace ConsoleTerminalLibrary.Console {
 
         public void ShowMatchingCommand(string input) {
             if (input == "") return;
-            var matched = _commandList.FindAll(x => x.Keyword().StartsWith(input));
+            if (input.Contains(' ')) {
+                ShowPossibleArgument(input);
+                return;
+            }
+            var matched = _commandList.FindAll(x => x.Keyword().StartsWith(input , true , CultureInfo.InvariantCulture));
             if (matched.Count == 0) {
-                ConsoleOutput.Add($"No matching command starts with '{input}'");
+                ConsoleOutput.Add($"Error : No matching command starts with '{input}'");
             }
             else if (matched.Count == 1) {
                 ConsoleInput = matched[0].Keyword();
             }
             else {
+                List<string> matchedCommands = matched.Select(consoleCommand => consoleCommand.Keyword()).ToList();
+                ConsoleInput = GetCommonStartingSubstring(matchedCommands);
                 ConsoleOutput.Add("Matching commands : ");
                 foreach (var consoleCommand in matched) {
                     ConsoleOutput.Add("\t" + consoleCommand.Keyword());
@@ -114,6 +121,61 @@ namespace ConsoleTerminalLibrary.Console {
             }
         }
 
+        private string GetCommonStartingSubstring(List<string> matched) {
+            string result = "";
+            string shortestString = GetShortestString(matched);
+            for (int i = 0 ; i < shortestString.Length ; i++) {
+                char currentChar = shortestString[i];
+                for (int j = 0 ; j < matched.Count ; j++) {
+                    if (matched[j][i] != currentChar) return result;
+                }
+                result += currentChar;
+            }
+            return result;
+        }
+
+        private string GetShortestString(List<string> matched) {
+            int minLength = matched[0].Length;
+            int index = 0;
+            for (int i = 1 ; i < matched.Count ; i++) {
+                if (matched[i].Length < minLength) {
+                    minLength = matched[i].Length;
+                    index = i;
+                }
+            }
+            return matched[index];
+        }
+
+        private void ShowPossibleArgument(string input) {
+            string command = input.Split(' ')[0];
+            var matched = _commandList.Find(x => x.Keyword() == command);
+            if (matched == null) {
+                ConsoleOutput.Add($"Error : '{input}' is not a recognizable command.");
+                return;
+            }
+            if (!(matched is ConsoleCommandWithArgument)) {
+                ConsoleOutput.Add($"Error : '{input}' does not take any arguments.");
+                return;
+            }
+            string arg = input.Split(' ')[1];
+            var possibleArguments = (matched as ConsoleCommandWithArgument).Arguments();
+            var matchedArg = possibleArguments.ToList().FindAll(x => x.StartsWith(arg , true , CultureInfo.InvariantCulture));
+            if (matchedArg.Count == 0) {
+                ConsoleOutput.Add($"Error : No matching arguments with '{arg}'");
+            }
+            else if (matchedArg.Count == 1) {
+                ConsoleInput = command + " " + matchedArg[0];
+            }
+            else {
+                string result = "";
+                foreach (var x in matchedArg) {
+                    result += "\t" + x + "\n";
+                }
+                ConsoleInput = command + " " + GetCommonStartingSubstring(matchedArg);
+                ConsoleOutput.Add("Matching arguments: ");
+                ConsoleOutput.Add(result);
+            }
+        }
 
         public void GoToPreviousCommand() {
             _inputHistory.GoToPrevious();

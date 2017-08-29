@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Net;
 
 namespace ConsoleTerminalLibrary.Console {
@@ -7,7 +8,6 @@ namespace ConsoleTerminalLibrary.Console {
         object Commandee { get; }
         string Keyword();
         string Help();
-        string[] Options();
     }
 
     public abstract class ConsoleCommandBase : IConsoleCommand {
@@ -18,15 +18,25 @@ namespace ConsoleTerminalLibrary.Console {
         public abstract string Execute();
         public abstract string Keyword();
         public abstract string Help();
-        public abstract string[] Options();
     }
 
-    public abstract class CommandWithArgument : ConsoleCommandBase {
-        public CommandWithArgument(object commandee) : base(commandee) { }
+    public abstract class ConsoleCommandWithArgument : ConsoleCommandBase {
+        public ConsoleCommandWithArgument(object commandee) : base(commandee) { }
         public sealed override string Execute() {
             throw new NotImplementedException();
         }
+        public abstract string[] Arguments();
 
-        public abstract string Execute(string s);
+        public string ExecuteCommand(string arg) {
+            return ArgumentIsValid(arg) ?
+                Execute(arg) : 
+                $"'{arg}' is not a valid argument for '{Keyword()}'" ;
+        }
+
+        protected virtual bool ArgumentIsValid(string arg) {
+            return Arguments().ToList().Contains(arg);
+        }
+
+        protected abstract string Execute(string arg);
     }
 }

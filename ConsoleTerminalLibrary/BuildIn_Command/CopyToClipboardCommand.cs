@@ -7,9 +7,9 @@ using System.Windows;
 using ConsoleTerminalLibrary.Console;
 
 namespace ConsoleTerminalLibrary.BuildIn_Command {
-    public class CopyToClipboardCommand : CommandWithArgument{
+    public class CopyToClipboardCommand : ConsoleCommandWithArgument{
         public CopyToClipboardCommand(object commandee) : base(commandee) { }
-        public override string Execute(string argument) {
+        protected override string Execute(string argument) {
             try {
                 Clipboard.SetDataObject(argument);
                 return $"'{argument}' is copied to clipboard.";
@@ -20,6 +20,10 @@ namespace ConsoleTerminalLibrary.BuildIn_Command {
             }
         }
 
+        protected override bool ArgumentIsValid(string arg) {
+            return true;
+        }
+
         public override string Keyword() {
             return "/copy-to-clipboard";
         }
@@ -28,7 +32,7 @@ namespace ConsoleTerminalLibrary.BuildIn_Command {
             return "Format : copy <arg1>\n" + "Copy <arg1> to system clipboard";
         }
 
-        public override string[] Options() {
+        public override string[] Arguments() {
             throw new NotImplementedException();
         }
     }

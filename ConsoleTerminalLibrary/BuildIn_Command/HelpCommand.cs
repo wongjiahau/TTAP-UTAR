@@ -30,9 +30,5 @@ namespace ConsoleTerminalLibrary.BuildIn_Command {
         public override string Help() {
             return "Show list of available commands";
         }
-
-        public override string[] Options() {
-            throw new NotImplementedException();
-        }
     }
 }

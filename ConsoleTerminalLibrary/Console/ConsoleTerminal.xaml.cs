@@ -37,6 +37,8 @@ namespace EmbeddedConsole.Console {
                 case Key.Tab:
                     e.Handled = true;
                     _model.ShowMatchingCommand(input);
+                    InputBlock.SelectionStart = InputBlock.Text.Length; 
+                    InputBlock.SelectionLength = 0;
                     break;
                 case Key.Up:
                     e.Handled = true;
