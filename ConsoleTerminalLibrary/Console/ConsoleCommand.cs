@@ -19,8 +19,8 @@ namespace ConsoleTerminalLibrary.Console {
         public abstract string Help();
     }
 
-    public abstract class CommandWithArgument : ConsoleCommandBase {
-        public CommandWithArgument(object commandee) : base(commandee) { }
+    public abstract class ConsoleCommandWithArgument : ConsoleCommandBase {
+        public ConsoleCommandWithArgument(object commandee) : base(commandee) { }
         public sealed override string Execute() {
             throw new NotImplementedException();
         }

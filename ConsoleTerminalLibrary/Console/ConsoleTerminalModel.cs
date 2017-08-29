@@ -69,12 +69,12 @@ namespace ConsoleTerminalLibrary.Console {
             string commandKeyword = input.Split(' ')[0];
             var command = _commandList.Find(x => x.Keyword() == commandKeyword);
             if (command != null)
-                if (command is CommandWithArgument) {
+                if (command is ConsoleCommandWithArgument) {
                     if (input.Split(' ').Length != 2) {
                         ConsoleOutput.Add($"'{input}' must be invoked with one argument.");
                     }
                     else {
-                        ConsoleOutput.Add((command as CommandWithArgument).Execute(input.Split(' ')[1]));
+                        ConsoleOutput.Add((command as ConsoleCommandWithArgument).Execute(input.Split(' ')[1]));
                     }
                 }
                 else {
@@ -125,15 +125,23 @@ namespace ConsoleTerminalLibrary.Console {
                 ConsoleOutput.Add($"Error : '{input}' is not a recognizable command.");
                 return;
             }
-            if (!(matched is CommandWithArgument)) {
+            if (!(matched is ConsoleCommandWithArgument)) {
                 ConsoleOutput.Add($"Error : '{input}' does not take any arguments.");
                 return;
             }
             string arg = input.Split(' ')[1];
-            var possibleArguments = (matched as CommandWithArgument).Arguments();
-            string matchedArg = possibleArguments.ToList().Find(x => x.StartsWith(arg));
-            if (matchedArg == null) {
-                ConsoleOutput.Add($"Error : No matching options arguments with '{matchedArg}'");
+            var possibleArguments = (matched as ConsoleCommandWithArgument).Arguments();
+            var matchedArg = possibleArguments.ToList().FindAll(x => x.StartsWith(arg));
+            if (matchedArg.Count == 0) {
+                ConsoleOutput.Add($"Error : No matching options arguments with '{arg}'");
+            }
+            else {
+                string result = "\t";
+                foreach (var x in matchedArg) {
+                    result += x + " ";
+                }
+                ConsoleOutput.Add(command);
+                ConsoleOutput.Add(result);
             }
         }
 

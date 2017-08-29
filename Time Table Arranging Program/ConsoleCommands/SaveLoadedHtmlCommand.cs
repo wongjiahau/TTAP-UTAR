@@ -25,9 +25,5 @@ namespace Time_Table_Arranging_Program.ConsoleCommands {
         public override string Help() {
             return "Turn on to save loaded HTML";
         }
-
-        public override string[] Options() {
-            throw new NotImplementedException();
-        }
     }
 }

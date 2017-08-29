@@ -7,7 +7,7 @@ using System.Windows;
 using ConsoleTerminalLibrary.Console;
 
 namespace ConsoleTerminalLibrary.BuildIn_Command {
-    public class CopyToClipboardCommand : CommandWithArgument{
+    public class CopyToClipboardCommand : ConsoleCommandWithArgument{
         public CopyToClipboardCommand(object commandee) : base(commandee) { }
         public override string Execute(string argument) {
             try {
