@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Globalization;
 using System.Linq;
 using ConsoleTerminalLibrary.BuildIn_Command;
 using ConsoleTerminalLibrary.HelperClass;
@@ -103,7 +104,7 @@ namespace ConsoleTerminalLibrary.Console {
                 ShowPossibleArgument(input);
                 return;
             }
-            var matched = _commandList.FindAll(x => x.Keyword().StartsWith(input));
+            var matched = _commandList.FindAll(x => x.Keyword().StartsWith(input , true , CultureInfo.InvariantCulture));
             if (matched.Count == 0) {
                 ConsoleOutput.Add($"Error : No matching command starts with '{input}'");
             }
@@ -158,7 +159,7 @@ namespace ConsoleTerminalLibrary.Console {
             }
             string arg = input.Split(' ')[1];
             var possibleArguments = (matched as ConsoleCommandWithArgument).Arguments();
-            var matchedArg = possibleArguments.ToList().FindAll(x => x.StartsWith(arg));
+            var matchedArg = possibleArguments.ToList().FindAll(x => x.StartsWith(arg , true , CultureInfo.InvariantCulture));
             if (matchedArg.Count == 0) {
                 ConsoleOutput.Add($"Error : No matching arguments with '{arg}'");
             }
