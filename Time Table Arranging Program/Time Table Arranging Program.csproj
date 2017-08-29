@@ -171,6 +171,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Class\BugReportSender.cs" />
     <Compile Include="Class\Helper\Helper.cs" />
     <Compile Include="Class\Helper\WaitCursor.cs" />
     <Compile Include="Class\IndexedSlot.cs" />
