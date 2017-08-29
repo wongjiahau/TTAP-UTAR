@@ -28,7 +28,7 @@ namespace ConsoleTerminalLibrary.BuildIn_Command {
             return "Format : copy <arg1>\n" + "Copy <arg1> to system clipboard";
         }
 
-        public override string[] Options() {
+        public override string[] Arguments() {
             throw new NotImplementedException();
         }
     }

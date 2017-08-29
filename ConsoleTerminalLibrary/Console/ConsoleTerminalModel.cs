@@ -99,9 +99,13 @@ namespace ConsoleTerminalLibrary.Console {
 
         public void ShowMatchingCommand(string input) {
             if (input == "") return;
+            if (input.Contains(' ')) {
+                ShowPossibleArgument(input);
+                return;
+            }
             var matched = _commandList.FindAll(x => x.Keyword().StartsWith(input));
             if (matched.Count == 0) {
-                ConsoleOutput.Add($"No matching command starts with '{input}'");
+                ConsoleOutput.Add($"Error : No matching command starts with '{input}'");
             }
             else if (matched.Count == 1) {
                 ConsoleInput = matched[0].Keyword();
@@ -114,6 +118,24 @@ namespace ConsoleTerminalLibrary.Console {
             }
         }
 
+        private void ShowPossibleArgument(string input) {
+            string command = input.Split(' ')[0];
+            var matched = _commandList.Find(x => x.Keyword() == command);
+            if (matched == null) {
+                ConsoleOutput.Add($"Error : '{input}' is not a recognizable command.");
+                return;
+            }
+            if (!(matched is CommandWithArgument)) {
+                ConsoleOutput.Add($"Error : '{input}' does not take any arguments.");
+                return;
+            }
+            string arg = input.Split(' ')[1];
+            var possibleArguments = (matched as CommandWithArgument).Arguments();
+            string matchedArg = possibleArguments.ToList().Find(x => x.StartsWith(arg));
+            if (matchedArg == null) {
+                ConsoleOutput.Add($"Error : No matching options arguments with '{matchedArg}'");
+            }
+        }
 
         public void GoToPreviousCommand() {
             _inputHistory.GoToPrevious();

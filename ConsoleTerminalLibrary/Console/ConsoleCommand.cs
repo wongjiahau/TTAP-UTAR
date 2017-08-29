@@ -7,7 +7,6 @@ namespace ConsoleTerminalLibrary.Console {
         object Commandee { get; }
         string Keyword();
         string Help();
-        string[] Options();
     }
 
     public abstract class ConsoleCommandBase : IConsoleCommand {
@@ -18,7 +17,6 @@ namespace ConsoleTerminalLibrary.Console {
         public abstract string Execute();
         public abstract string Keyword();
         public abstract string Help();
-        public abstract string[] Options();
     }
 
     public abstract class CommandWithArgument : ConsoleCommandBase {
@@ -26,7 +24,7 @@ namespace ConsoleTerminalLibrary.Console {
         public sealed override string Execute() {
             throw new NotImplementedException();
         }
-
+        public abstract string[] Arguments();
         public abstract string Execute(string s);
     }
 }
