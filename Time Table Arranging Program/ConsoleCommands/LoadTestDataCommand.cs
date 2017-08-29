@@ -8,13 +8,18 @@ using ConsoleTerminalLibrary.Console;
 using Time_Table_Arranging_Program.Pages;
 
 namespace Time_Table_Arranging_Program.ConsoleCommands {
-    public class LoadTestDataCommand : ConsoleCommandWithArgument{
+    public class LoadTestDataCommand : ConsoleCommandWithArgument {
         public LoadTestDataCommand(object commandee) : base(commandee) {
         }
 
+        readonly string leadingNamespace = "Time_Table_Arranging_Program.SampleData";
         public override string[] Arguments() {
             string[] embeddedResources = Assembly.GetAssembly(this.GetType()).GetManifestResourceNames();
-            return embeddedResources.ToList().Where(x => x.EndsWith("html")).ToArray();
+            string[] sampleDataFiles = embeddedResources.ToList().Where(x => x.EndsWith("html")).ToArray();
+            for (int i = 0 ; i < sampleDataFiles.Length ; i++) {
+                sampleDataFiles[i] = sampleDataFiles[i].Substring(leadingNamespace.Length + 1);
+            }
+            return sampleDataFiles;
         }
 
         protected override string Execute(string s) {
