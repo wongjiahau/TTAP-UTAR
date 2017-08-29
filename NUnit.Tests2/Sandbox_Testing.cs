@@ -1,6 +1,8 @@
 ﻿using NUnit.Framework;
 using System;
 using System.Collections.Generic;
+using System.Reflection;
+using System.Windows;
 using Time_Table_Arranging_Program;
 using Time_Table_Arranging_Program.Class;
 using Time_Table_Arranging_Program.Class.SlotGeneralizer;
@@ -49,6 +51,16 @@ namespace NUnit.Tests2 {
         [Test]
         public void SandboxTest_4() {
             Console.WriteLine("Who live in a pineapple under the sea".TruncateRight(30));
+        }
+
+        [Test]
+        public void SandboxTest_5() {
+            string[] embeddedResources = Assembly.GetAssembly(this.GetType()).GetManifestResourceNames();
+            string all = "";
+            for (int i = 0; i < embeddedResources.Length; i++) {
+                all += embeddedResources[i] + "\n";
+            }
+            MessageBox.Show(all);
         }
     }
 }
