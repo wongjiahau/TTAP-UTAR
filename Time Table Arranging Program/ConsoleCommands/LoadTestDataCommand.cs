@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using ConsoleTerminalLibrary.Console;
+using Time_Table_Arranging_Program.Class;
 using Time_Table_Arranging_Program.Class.Helper;
 using Time_Table_Arranging_Program.Class.TokenParser;
 using Time_Table_Arranging_Program.Pages;
@@ -27,8 +28,15 @@ namespace Time_Table_Arranging_Program.ConsoleCommands {
         protected override string Execute(string resourceName) {
             string raw = Helper.RawStringOfTestFile(resourceName, leadingNamespace + ".");
             var slots = new HtmlSlotParser().Parse(raw);
+            try
+            {
+                var parser = new StartDateEndDateFinder(raw);
+                Global.TimetableStartDate = parser.GetStartDate();
+                Global.TimetableEndDate = parser.GetEndDate();
+            }
+            catch { }
             ((MainWindow)Commandee).LoadTestData(slots);
-            return "Loaded test data.";
+            return "Starting date: " + Global.TimetableStartDate + " EndingDate: " + Global.TimetableEndDate;
         }
 
         public override string Keyword() {
