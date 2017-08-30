@@ -20,9 +20,6 @@ namespace Time_Table_Arranging_Program {
         public static SlotList InputSlotList = new SlotList();
         public static UndoManager UndoManager = new UndoManager();
 
-        public static class Toggles {
-            public static ToggableObject SaveLoadedHtmlToggle = new ToggableObject(false);
-        }
 
         public static class Settings {
             public static Setting SearchByConsideringWeekNumber { private set; get; } =

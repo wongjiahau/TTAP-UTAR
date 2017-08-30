@@ -107,11 +107,7 @@ namespace Time_Table_Arranging_Program.Pages {
             void ExtractData()
             {
                 string html = GetHtml(Browser);
-                if (Global.Toggles.SaveLoadedHtmlToggle.IsToggledOn) SaveToFile(html);
-                var bg = CustomBackgroundWorker<string , List<Slot>>.RunAndShowLoadingScreen(
-                    new HtmlSlotParser().Parse , html , "Loading slots . . .");
                    TryGetStartDateAndEndDate(html);
-                Global.InputSlotList.AddRange(bg.GetResult());
                 if (CanGoToPage(_currentPage + 1)) {
                     Browser.InvokeScript("changePage" , _currentPage + 1);
                     _currentPage++;

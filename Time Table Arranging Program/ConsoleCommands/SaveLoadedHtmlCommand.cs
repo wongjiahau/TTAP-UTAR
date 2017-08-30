@@ -11,10 +11,7 @@ namespace Time_Table_Arranging_Program.ConsoleCommands {
         public SaveLoadedHtmlCommand(object commandee) : base(commandee) { }
 
         public override string Execute() {
-            var togglableObject = Commandee as IToggableObject;
-            togglableObject.Toggle();
-            return $"Load HTML toggle is toggled " +
-                   (togglableObject.IsToggledOn ? "ON" : "OFF") + ".";
+            return "LOL";
         }
 
 

@@ -27,7 +27,6 @@ namespace Time_Table_Arranging_Program.ConsoleCommands {
 
         protected override string Execute(string resourceName) {
             string raw = Helper.RawStringOfTestFile(resourceName, leadingNamespace + ".");
-            var slots = new HtmlSlotParser().Parse(raw);
             try
             {
                 var parser = new StartDateEndDateFinder(raw);
@@ -35,7 +34,6 @@ namespace Time_Table_Arranging_Program.ConsoleCommands {
                 Global.TimetableEndDate = parser.GetEndDate();
             }
             catch { }
-            ((MainWindow)Commandee).LoadTestData(slots);
             return "Starting date: " + Global.TimetableStartDate + " EndingDate: " + Global.TimetableEndDate;
         }
 
