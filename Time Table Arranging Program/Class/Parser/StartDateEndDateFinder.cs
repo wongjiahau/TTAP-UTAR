@@ -13,25 +13,16 @@ namespace Time_Table_Arranging_Program.Class {
         {
             var doc = new HtmlDocument();
             doc.LoadHtml(input);
-
-            //get timetable start date and end date
             HtmlNodeCollection nodes = doc.DocumentNode.SelectNodes("//div");
-
             HtmlNode table = nodes[1].SelectSingleNode("table");
-
             HtmlNode tableRow =
                 table.SelectSingleNode("tr") ??
                 table.SelectNodes("tbody")[0].SelectSingleNode("tr");
-
             HtmlNodeCollection tableColumn = tableRow.SelectNodes("td");
-
             string targetColumn = tableColumn[9].InnerText;
-
             string[] parseTargetColumn = targetColumn.Split(' ');
-
-            _startDate = Convert.ToDateTime(parseTargetColumn[0]);
-
-            _endDate = Convert.ToDateTime(parseTargetColumn[2]);
+            _startDate = DateTime.ParseExact(parseTargetColumn[0],"dd/MM/yyyy", CultureInfo.InvariantCulture);
+            _endDate =DateTime.ParseExact(parseTargetColumn[2],"dd/MM/yyyy", CultureInfo.InvariantCulture);
         }
 
         private DateTime ParseDate(string input) {
