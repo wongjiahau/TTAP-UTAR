@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-using System.Windows;
 using Time_Table_Arranging_Program;
 using Time_Table_Arranging_Program.Class;
 using Time_Table_Arranging_Program.Class.SlotGeneralizer;
@@ -60,7 +59,6 @@ namespace NUnit.Tests2 {
             for (int i = 0; i < embeddedResources.Length; i++) {
                 all += embeddedResources[i] + "\n";
             }
-            MessageBox.Show(all);
         }
     }
 }

@@ -1,39 +1,37 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using System.Windows.Media.Animation;
+using System.Windows.Navigation;
+using MaterialDesignThemes.Wpf;
+using Time_Table_Arranging_Program.UserInterface;
 
 namespace Time_Table_Arranging_Program.Windows_Control {
     /// <summary>
-    /// Interaction logic for DialogBox.xaml
+    ///     Interaction logic for DialogBox.xaml
     /// </summary>
     public partial class DialogBox : Window {
-        public DialogBox() {
-            InitializeComponent();
-        }
-
-
         public enum ResultEnum {
             LeftButtonClicked,
             RightButtonClicked
         }
 
-        private ResultEnum _result;
-
+        public static object ReturnedValue { get; set; }
 
         public static ResultEnum Result;
 
-        public static ResultEnum Show(string title , string message , string leftButtonText = "Got it!" , string rightButtonText = null) {
+        private ResultEnum _result;
+
+        public DialogBox() {
+            InitializeComponent();
+            this.AllowsTransparency = true;
+        }
+
+        public static ResultEnum Show(string title , string message , string leftButtonText = "Got it!" ,
+                                      string rightButtonText = null) {
+            CloseDialog();
             var p = new DialogBox();
+            _lastOpenedDialog = p;
             p.SetContent(title , message , leftButtonText , rightButtonText);
             p.DialogHost.IsOpen = true;
             p.ShowDialog();
@@ -47,31 +45,61 @@ namespace Time_Table_Arranging_Program.Windows_Control {
             TextBlock_Message.Text = message;
             Button_Left.Content = leftButtonText;
             Button_Right.Content = rightButtonText;
+            Custom.Visibility = Visibility.Collapsed;
+            Default.Visibility = Visibility.Visible;
+        }
+
+        private static DialogBox _lastOpenedDialog;
+        public static void Show(UserControl content) {
+            CloseDialog();
+            var p = new DialogBox();
+            _lastOpenedDialog = p;
+            p.SetContent(content);
+            p.DialogHost.IsOpen = true;
+            if (p.Visibility == Visibility.Visible) return;
+            p.ShowDialog();
+        }
+
+        public static void CloseDialog() {
+            if (_lastOpenedDialog == null) return;
+            _lastOpenedDialog.DialogHost.IsOpen = false;
+            _lastOpenedDialog.Hide();
+        }
+
+        private void SetContent(UserControl content) {
+            Default.Visibility = Visibility.Collapsed;
+            Custom.Visibility = Visibility.Visible;
+            Frame.Navigate(content);
         }
 
         private void Button_Left_OnClick(object sender , RoutedEventArgs e) {
             _result = ResultEnum.LeftButtonClicked;
-            this.Hide();
+            Close();
         }
 
         private void Button_Right_OnClick(object sender , RoutedEventArgs e) {
             _result = ResultEnum.RightButtonClicked;
-            this.Hide();
+            Close();
         }
 
         private void SampleCode() {
-            DialogBox.Show("Title" , "message" , "OK" , "Cancel");
-            switch (DialogBox.Result) {
-                case DialogBox.ResultEnum.LeftButtonClicked:
+            Show("Title" , "message" , "OK" , "Cancel");
+            switch (Result) {
+                case ResultEnum.LeftButtonClicked:
                     MessageBox.Show("You clicked left button");
                     break;
-                case DialogBox.ResultEnum.RightButtonClicked:
+                case ResultEnum.RightButtonClicked:
                     MessageBox.Show("you clicked right button");
                     break;
-
             }
+        }
+
+        private void DialogHost_OnDialogClosing(object sender , DialogClosingEventArgs eventargs) {
+            this.Close();
+        }
+
+        private void DialogBox_OnClosing(object sender , CancelEventArgs e) {
+            DialogHost.IsOpen = false;
         }
     }
 }
-
-
