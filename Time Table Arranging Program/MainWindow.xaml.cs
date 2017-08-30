@@ -171,6 +171,8 @@ namespace Time_Table_Arranging_Program {
             var p = Windows_Settings.GetInstance();
             p.ShowDialog();
             if (p.ApplyClicked == false) return;
+            Global.Snackbar.MessageQueue.Enqueue("Settings applied.");
+            if (Global.InputSlotList.Count == 0) return;
             MainFrame.Navigate(Page_CreateTimetable.GetInstance(Global.Settings.SearchByConsideringWeekNumber ,
                 Global.Settings.GeneralizeSlot));
         }

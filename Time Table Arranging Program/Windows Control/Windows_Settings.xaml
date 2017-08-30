@@ -37,7 +37,7 @@
                                     <materialDesign:PopupBox DockPanel.Dock="Right" HorizontalAlignment="Right">
                                         <Button Content="{Binding Explanation}"></Button>
                                     </materialDesign:PopupBox>
-                                    <ToggleButton DockPanel.Dock="Right" HorizontalAlignment="Right"   IsChecked="{Binding IsChecked}" />
+                                    <ToggleButton DockPanel.Dock="Right" Checked="ToggleButton_OnChecked" HorizontalAlignment="Right" IsChecked="{Binding IsChecked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                                 </DockPanel>
                             </Border>
 
