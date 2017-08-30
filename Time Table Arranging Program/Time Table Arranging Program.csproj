@@ -687,6 +687,7 @@
     <EmbeddedResource Include="SampleData\Sample HTML.html" />
     <EmbeddedResource Include="SampleData\SampleData-FAM-2017-2ndSem.html" />
     <EmbeddedResource Include="SampleData\SampleData-FCI-2017-2ndSem.html" />
+    <Resource Include="Images\calendarBig.png" />
     <Content Include="SampleData\SampleHTML_FromLocalTestServer.html" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
