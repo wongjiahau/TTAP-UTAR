@@ -9,31 +9,10 @@ using Octokit;
 
 namespace Time_Table_Arranging_Program.Class {
     public class BugReportSender {
-        public void Send( string body) {
-            var fromAddress = new MailAddress("ttaputar@gmail.com" , "TTAP");
-            var toAddress = new MailAddress("ttaputar@gmail.com" , "TTAP");
-            const string fromPassword = "842684268426ttap";
-            string subject = "Bug report " + body.GetHashCode();
-
-            var smtp = new SmtpClient {
-                Host = "smtp.gmail.com" ,
-                Port = 587 ,
-                EnableSsl = true ,
-                DeliveryMethod = SmtpDeliveryMethod.Network ,
-                UseDefaultCredentials = false ,
-                Credentials = new NetworkCredential(fromAddress.Address , fromPassword)
-            };
-            using (var message = new MailMessage(fromAddress , toAddress) {
-                Subject = subject ,
-                Body = body
-            }) {
-                smtp.Send(message);
-            }
-        }
-
         public static async void SendIssue(Exception ex,string body) {
             var client = new GitHubClient(new ProductHeaderValue("ttap-bug-report"));
-            var basicAuth = new Credentials("ecce578659b3b1d071db571c1120b870cbb06767"); // NOTE: not real credentials
+            string encryptedToken = "n5eW48VENjjGwihIdstsCAyRHf8Jp1cTiGd9x1E8qUrTluvMFZVX4i/w4dRJrIIga4ZKWZPjOa7nn4GwWVvSB7YjB+NzHj+xh/4EiMZnByCIeF0myABJux1OhLu7Yam8ZfI84YMunzv7bot87P2a38CiOKJtoSBYg4ztxh7byp0=";
+            var basicAuth = new Credentials(StringCipher.Decrypt(encryptedToken, "TTAP")); // NOTE: not real credentials
             client.Credentials = basicAuth;
             var createIssue = new NewIssue("Bug report #" + DateTime.Now.GetHashCode());
             createIssue.Body = ex.Message + "\n====================\n";
