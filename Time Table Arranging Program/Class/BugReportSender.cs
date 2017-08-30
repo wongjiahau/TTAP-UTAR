@@ -9,7 +9,7 @@ using Octokit;
 
 namespace Time_Table_Arranging_Program.Class {
     public class BugReportSender {
-        public void Send(string body) {
+        public void Send( string body) {
             var fromAddress = new MailAddress("ttaputar@gmail.com" , "TTAP");
             var toAddress = new MailAddress("ttaputar@gmail.com" , "TTAP");
             const string fromPassword = "842684268426ttap";
@@ -31,13 +31,15 @@ namespace Time_Table_Arranging_Program.Class {
             }
         }
 
-        public static async void SendIssue(string body) {
+        public static async void SendIssue(Exception ex,string body) {
             var client = new GitHubClient(new ProductHeaderValue("ttap-bug-report"));
             var basicAuth = new Credentials("ecce578659b3b1d071db571c1120b870cbb06767"); // NOTE: not real credentials
             client.Credentials = basicAuth;
             var createIssue = new NewIssue("Bug report #" + DateTime.Now.GetHashCode());
-            createIssue.Body = body;
-            var issue = await client.Issue.Create("wongjiahau" , "TTAP-UTAR" , createIssue);
+            createIssue.Body = ex.Message + "\n====================\n";
+            createIssue.Body += ex.StackTrace+ "\n====================\n";
+            createIssue.Body += body;
+            var issue = await client.Issue.Create("wongjiahau" , "TTAP-Bug-Report" , createIssue);
         }
 
     }
