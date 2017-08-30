@@ -21,6 +21,7 @@ namespace Time_Table_Arranging_Program.Class {
 
             string targetColumn = tableColumn[9].InnerText;
 
+            string[] parseTargetColumn = targetColumn.Split(' ');
 
         }
 
