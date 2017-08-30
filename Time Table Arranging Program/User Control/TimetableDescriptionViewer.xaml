@@ -20,6 +20,9 @@
                     <ColumnDefinition />
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
                 <Grid.Resources>
                     <Style TargetType="Label">
                         <Setter Property="BorderThickness" Value="1"></Setter>
