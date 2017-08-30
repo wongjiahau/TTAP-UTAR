@@ -127,7 +127,6 @@ namespace Time_Table_Arranging_Program.Pages {
                     NavigationService.Navigate(
                         Page_CreateTimetable.GetInstance(Global.Settings.SearchByConsideringWeekNumber ,
                             Global.Settings.GeneralizeSlot));
-                    BugReportSender.SendIssue(Global.LoadedHtml);
                 }
 
                 #region NestedFunctions
