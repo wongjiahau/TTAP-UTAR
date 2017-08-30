@@ -21,6 +21,7 @@ namespace NUnit.Tests2 {
             Console.WriteLine(expected.ToString());
             Console.WriteLine(actual.ToString());
             Assert.True(expected.Equals(actual));
+            //fgdjkfgdfg
         }
 
         [Test]

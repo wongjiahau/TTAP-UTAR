@@ -1,0 +1,25 @@
+1 = Correct 
+0 = Incorrect
+
+ID	password	captcha		
+1	1		1		https://unitreg.utar.edu.my/portal/courseRegStu/schedule/masterSchedule.jsp
+1	0		1		https://unitreg.utar.edu.my/portal/courseRegStu/login.jsp?message=loginError
+1	1		0		https://unitreg.utar.edu.my/portal/courseRegStu/login.jsp?message=invalidSecurity
+1	0		0		https://unitreg.utar.edu.my/portal/courseRegStu/login.jsp?message=invalidSecurity
+0	1		1		https://unitreg.utar.edu.my/portal/courseRegStu/login.jsp?message=loginError
+0	0		1		https://unitreg.utar.edu.my/portal/courseRegStu/login.jsp?message=loginError
+0	1		0		https://unitreg.utar.edu.my/portal/courseRegStu/login.jsp?message=invalidSecurity
+0	0		0		https://unitreg.utar.edu.my/portal/courseRegStu/login.jsp?message=invalidSecurity
+-	1		1		pop up message : "Please key in STUDENT ID"
+-	0		1		pop up message : "Please key in STUDENT ID"
+-	1		0		pop up message : "Please key in STUDENT ID"
+-	0		0		pop up message : "Please key in STUDENT ID"
+1	-		1		pop up message : "Please key in PASSWORD"
+0	-		1		pop up message : "Please key in PASSWORD"
+1	-		0		pop up message : "Please key in PASSWORD"
+0	-		0		pop up message : "Please key in PASSWORD"
+1	1		-		pop up message : "Please key in the CODE shown"
+0	1		-		pop up message : "Please key in the CODE shown"
+1	0		-		pop up message : "Please key in the CODE shown"
+0	0		-		pop up message : "Please key in the CODE shown"
+

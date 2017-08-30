@@ -10,6 +10,7 @@ using Time_Table_Arranging_Program.Class;
 using Time_Table_Arranging_Program.Class.Converter;
 using Time_Table_Arranging_Program.Class.StateSummary;
 using Time_Table_Arranging_Program.Pages;
+using Time_Table_Arranging_Program.User_Control.TimetableGuiControls;
 using Time_Table_Arranging_Program.Windows_Control;
 
 namespace Time_Table_Arranging_Program {
@@ -38,7 +39,16 @@ namespace Time_Table_Arranging_Program {
             BuildBorders();
             BuildTimeRow();
             BuildDayColumn();
+            BuildDayTimeCellAtTopLeftCorner();
             _occupiedIndex = new Dictionary<int , HashSet<int>>();
+        }
+
+        private void BuildDayTimeCellAtTopLeftCorner() {
+            var dayTimeCell = new DayTimeCell(){VerticalAlignment = VerticalAlignment.Bottom};
+            Grid.Children.Add(dayTimeCell);
+            Grid.SetColumn(dayTimeCell , 0);
+            Grid.SetRow(dayTimeCell , 0);
+            Grid.SetRowSpan(dayTimeCell , 2);
         }
 
         public ITimetable Timetable {
@@ -75,18 +85,24 @@ namespace Time_Table_Arranging_Program {
             string[] days = { "MON" , "TUE" , "WED" , "THU" , "FRI" , "SAT" , "SUN" };
             var rowIndex = 2;
             for (var i = 0 ; i < days.Length ; i++) {
-                var lbl = new Label {
-                    Content = days[i] ,
-                    HorizontalAlignment = HorizontalAlignment.Center ,
-                    FontWeight = FontWeights.Bold ,
-                    FontFamily = new FontFamily("Consolas") ,
-                    FontSize = 15 ,
-                    VerticalAlignment = VerticalAlignment.Center
+                var border = new Border()
+                {
+                    BorderBrush = Brushes.Black,
+                    BorderThickness = new Thickness(0, 0, 1, 0),
+                    Child =
+                        new Label
+                        {
+                            Content = days[i],
+                            HorizontalAlignment = HorizontalAlignment.Center,
+                            FontWeight = FontWeights.Bold,
+                            FontSize = 15,
+                            VerticalAlignment = VerticalAlignment.Center
+                        }
                 };
-                Grid.Children.Add(lbl);
-                Grid.SetColumn(lbl , 0);
-                Grid.SetRow(lbl , rowIndex);
-                Grid.SetRowSpan(lbl , _eachDayHaveHowManyRow);
+                Grid.Children.Add(border);
+                Grid.SetColumn(border , 0);
+                Grid.SetRow(border , rowIndex);
+                Grid.SetRowSpan(border , _eachDayHaveHowManyRow);
                 rowIndex += _eachDayHaveHowManyRow;
             }
         }
@@ -151,10 +167,11 @@ namespace Time_Table_Arranging_Program {
 
         private Label GetLabel() {
             return new Label {
-                BorderThickness = new Thickness(1) ,
+                BorderThickness = new Thickness(0.5) ,
                 BorderBrush = Brushes.Black ,
                 HorizontalContentAlignment = HorizontalAlignment.Center ,
                 FontWeight = FontWeights.Bold ,
+                Height = 30
             };
         }
 

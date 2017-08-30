@@ -9,11 +9,14 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
 using System.Windows.Navigation;
+using ConsoleTerminalLibrary.Console;
 using Time_Table_Arranging_Program.Class;
 using Time_Table_Arranging_Program.Class.SlotGeneralizer;
 using Time_Table_Arranging_Program.Class.TokenParser;
+using Time_Table_Arranging_Program.ConsoleCommands;
 using Time_Table_Arranging_Program.Interfaces;
 using Time_Table_Arranging_Program.Pages;
+using Time_Table_Arranging_Program.Pages.Login;
 using Time_Table_Arranging_Program.Pages.Page_GettingStarted;
 using Time_Table_Arranging_Program.User_Control;
 using Time_Table_Arranging_Program.UserInterface;
@@ -26,12 +29,8 @@ namespace Time_Table_Arranging_Program {
     ///     Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window {
-        public const string FeedbackFormUrl = "https://goo.gl/forms/qKdc6EVGbxspoTaS2";
-        public const string ReportBugUrl = "https://goo.gl/forms/4PJupNgRTEyGGTCN2";
-        public const string HelpGifUrl =
-            "https://raw.githubusercontent.com/wongjiahau/TTAP-UTAR/master/TTAP_Tutorial_v2.gif";
         private readonly List<string> _previousInputString = new List<string>();
-
+        private readonly UrlProvider _urlProvider = new UrlProvider();
         public MainWindow() {
             //The following two lines of code is to reset the PromptForFeedbackSettings to true
             //Please uncomment it, build it, before actual release
@@ -44,8 +43,14 @@ namespace Time_Table_Arranging_Program {
             Global.Snackbar = Snackbar;            
             var firstPage = new Page_AddSlot();
             MainFrame.Navigate(firstPage);
-            //new HtmlSlotParser().Parse(File.ReadAllText(
-            //    @"C:\Users\User\Desktop\TTAPv7.7\NUnit.Tests2\TestFiles\CopiedTextFromSampleHTML.txt"));
+            ConsoleTerminal.Initialize(new ConsoleTerminalModel(new List<IConsoleCommand>()
+            {
+                new LoadTestDataCommand(this),
+                new HideConsoleCommand(DrawerHost),
+                new LoadDataFromTestServerCommand(this),
+                new ResetDataCommand(Global.InputSlotList),
+                new SaveLoadedHtmlCommand(Global.Toggles.SaveLoadedHtmlToggle)
+            }));
         }
 
         private void MainFrame_OnNavigating(object sender , NavigatingCancelEventArgs e) {
@@ -94,7 +99,7 @@ namespace Time_Table_Arranging_Program {
         }
 
         private void HelpButton_Click(object sender , RoutedEventArgs e) {
-            Process.Start(new ProcessStartInfo(HelpGifUrl));
+            Process.Start(new ProcessStartInfo(_urlProvider.ReadMeUrl));
             e.Handled = true;
         }
 
@@ -114,7 +119,7 @@ namespace Time_Table_Arranging_Program {
         }
 
         private void FeedbackButton_OnClick(object sender , RoutedEventArgs e) {
-            Process.Start(new ProcessStartInfo(FeedbackFormUrl));
+            Process.Start(new ProcessStartInfo(_urlProvider.FeedbackFormUrl));
         }
 
         private void SaveSlot_OnClick(object sender , RoutedEventArgs e) {
@@ -174,7 +179,19 @@ namespace Time_Table_Arranging_Program {
         }
 
         private void ReportBug_Click(object sender , RoutedEventArgs e) {
-            Process.Start(new ProcessStartInfo(ReportBugUrl));
+            Process.Start(new ProcessStartInfo(_urlProvider.ReportBugUrl));
+        }
+
+        public void LoadTestData(List<Slot> input) {
+            Global.InputSlotList.AddRange(input);
+            MainFrame.Navigate(
+                Page_CreateTimetable.GetInstance(Global.Settings.SearchByConsideringWeekNumber ,
+                    Global.Settings.GeneralizeSlot));
+        }
+
+        public void LoadDataFromTestServer() {
+            var page_login = new Page_Login(true);
+            MainFrame.Navigate(page_login);
         }
     }
 }

@@ -69,6 +69,12 @@
     <Compile Include="TestClass_PermutateV4.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestData.cs" />
+    <Compile Include="TestSuite_HtmlSlotParser\TestHtmlSlotParser_SampleData-FAM-2017-2ndSem.cs" />
+    <Compile Include="TestSuite_HtmlSlotParser\TestHtmlSlotParser_SampleData-FCI-2017-2ndSem.cs" />
+    <Compile Include="TestSuite_HtmlSlotParser\Test_HtmlSlotParserBase.cs" />
+    <Compile Include="TestSuite_HtmlSlotParser\TestHtmlSlotParser_SampleHtml.cs" />
+    <Compile Include="TestSuite_HtmlSlotParser\TestHtmlSlotParser_MainFrame.cs" />
+    <Compile Include="TestUrlProvider.cs" />
     <Compile Include="Test_ClashFinder.cs" />
     <Compile Include="Test_Class_ExtensionMethods.cs" />
     <Compile Include="Test_Class_Subject.cs" />
@@ -79,7 +85,6 @@
     <Compile Include="Test_Day.cs" />
     <Compile Include="Test_Filterer.cs" />
     <Compile Include="Test_Helper.cs" />
-    <Compile Include="Test_HtmlSlotParser.cs" />
     <Compile Include="Test_Indices.cs" />
     <Compile Include="Test_ParsingFGO.cs" />
     <Compile Include="Test_ParsingHtml.cs" />
@@ -93,6 +98,7 @@
     <Compile Include="Test_TimetableRow.cs" />
     <Compile Include="Test_Token.cs" />
     <Compile Include="Test_SlotParser.cs" />
+    <Compile Include="Test_UndoManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -125,6 +131,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="TestFiles\Sample HTML.html" />
+    <EmbeddedResource Include="TestFiles\SampleHTML_FromLocalTestServer.txt" />
+    <EmbeddedResource Include="TestFiles\SampleData-FAM-2017-2ndSem.html" />
+    <EmbeddedResource Include="TestFiles\SampleData-FCI-2017-2ndSem.html" />
     <Content Include="TestFiles\SoftwareEngineering2017AprSlots.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

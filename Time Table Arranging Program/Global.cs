@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Controls;
 using Time_Table_Arranging_Program.Class;
 using Time_Table_Arranging_Program.Class.SlotGeneralizer;
+using Time_Table_Arranging_Program.Class.UndoFramework;
 using Time_Table_Arranging_Program.Pages;
 using Time_Table_Arranging_Program.Windows_Control;
 
@@ -17,6 +18,11 @@ namespace Time_Table_Arranging_Program {
         public static DateTime TimetableStartDate;
         public static DateTime TimetableEndDate;
         public static SlotList InputSlotList = new SlotList();
+        public static UndoManager UndoManager = new UndoManager();
+
+        public static class Toggles {
+            public static ToggableObject SaveLoadedHtmlToggle = new ToggableObject(false);
+        }
 
         public static class Settings {
             public static Setting SearchByConsideringWeekNumber { private set; get; } =

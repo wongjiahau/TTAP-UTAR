@@ -29,21 +29,43 @@
     </Page.Resources>
     <ScrollViewer>
         <StackPanel HorizontalAlignment="Center">
-            <materialDesign:Card Background="BlanchedAlmond">
+            <materialDesign:Card Padding="0">
+                <Expander HorizontalAlignment="Stretch" IsExpanded="True">
+                    <Expander.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Alert" />
+                            <TextBlock FontWeight="Bold">DISCLAIMER</TextBlock>
+                        </StackPanel>
+                    </Expander.Header>
+                    <StackPanel
+                    Margin="24,8,24,16"
+                    Orientation="Vertical"
+                    TextBlock.Foreground="{DynamicResource MaterialDesignBody}">
+                        <TextBlock
+                        Opacity="0.8"
+                        Text="TTAP is only a prototype software to assist students in finding the optimal timetable arrangement. 
+                            UTAR or the author will not be liable for any issues arising from the use of this software."
+                        TextWrapping="Wrap" 
+                            MaxWidth="650"
+                            />
+                    </StackPanel>
+                </Expander>
+            </materialDesign:Card>
+            <materialDesign:Card x:Name="FirstCard" Background="BlanchedAlmond">
                 <StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="CodeTags" />
                         <TextBlock FontWeight="Bold"><Run Text="Program written by"/></TextBlock>
-                        <TextBlock Text=" Wong Jia Hau"/>
+                        <TextBlock Text="Aries &amp; Gemini"/>
                         <TextBlock Text=" using " FontWeight="Bold"/>
                         <TextBlock Text="C# WPF.NET"/>
                     </StackPanel>
-                    <Separator />
-                    <StackPanel   Orientation="Horizontal">
+                    <Separator Visibility="Collapsed"  />
+                    <StackPanel Visibility="Collapsed"   Orientation="Horizontal">
                         <materialDesign:PackIcon Margin="10" Kind="Whatsapp" />
                         <TextBlock VerticalAlignment="Center" Text="011-16372171"/>
                     </StackPanel>
-                    <StackPanel Orientation="Horizontal">
+                    <StackPanel Visibility="Collapsed" Orientation="Horizontal">
                         <materialDesign:PackIcon Margin="10"  Kind="Email" />
                         <TextBlock Text="jiahau.wong@1utar.my" />
                         <Button Margin="10,0,0,0" Click="CopyEmailButton_OnClick" Content="COPY" materialDesign:ShadowAssist.ShadowDepth="Depth0"/>
@@ -113,6 +135,13 @@
                     <TextBlock FontWeight="Bold" Text="License : " />
                     <TextBlock DockPanel.Dock="Bottom"><Hyperlink NavigateUri="https://www.gnu.org/licenses/agpl-3.0-standalone.html"
                                                                   RequestNavigate="Hyperlink_RequestNavigate"><Run Text="GNU Affero General Public License v3.0"/></Hyperlink></TextBlock>
+                </StackPanel>
+            </materialDesign:Card>
+            <materialDesign:Card Background="Black">
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon Foreground="White" Kind="CubeOutline" />
+                    <TextBlock FontWeight="Bold"    Foreground="White"  FontFamily="Consolas" Text="Developers = " />
+                    <TextBlock FontWeight="DemiBold" Foreground="White" FontFamily="Consolas" Text="{}{Aw Yi Han , C , JY HEE , _sqfong , UHaooooo , WJH};" />
                 </StackPanel>
             </materialDesign:Card>
             <Label Margin="5" />

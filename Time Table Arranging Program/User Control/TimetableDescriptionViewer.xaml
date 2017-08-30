@@ -11,18 +11,37 @@
         </Style>
     </UserControl.Resources>
     <Grid>
-    <StackPanel>
-        <Grid x:Name="SubjectDescGrid">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition />
-                <ColumnDefinition />
-                <ColumnDefinition />
+        <StackPanel>
+            <Grid x:Name="SubjectDescGrid">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
                 </Grid.ColumnDefinitions>
-        </Grid>
-    </StackPanel>
-      
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.Resources>
+                    <Style TargetType="Label">
+                        <Setter Property="BorderThickness" Value="1"></Setter>
+                        <Setter Property="BorderBrush" Value="Gray"></Setter>
+                        <Setter Property="Background" Value="White"></Setter>
+                        <Setter Property="FontWeight" Value="Normal"></Setter>
+                        <Setter Property="FontFamily" Value="Calibri"></Setter>
+                        <Setter Property="HorizontalAlignment" Value="Stretch"></Setter>
+                        <Setter Property="HorizontalContentAlignment" Value="Center"></Setter>
+                    </Style>
+                </Grid.Resources>
+                <Label Grid.Column="0">Course Code</Label>
+                <Label Grid.Column="1">Course Title</Label>
+                <Label Grid.Column="2">Lecture</Label>
+                <Label Grid.Column="3">Tutorial</Label>
+                <Label Grid.Column="4">Practical</Label>
+            </Grid>
+        </StackPanel>
+
     </Grid>
 </UserControl>
 

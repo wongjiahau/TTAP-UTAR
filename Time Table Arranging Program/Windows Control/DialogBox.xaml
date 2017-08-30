@@ -3,24 +3,44 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Time_Table_Arranging_Program.Windows_Control"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="DialogBoxx" WindowState="Maximized" AllowsTransparency="True" Background="Transparent" WindowStyle="None" WindowStartupLocation="CenterScreen">
+        Title="DialogBoxx" ShowInTaskbar="False" WindowState="Maximized" AllowsTransparency="True" Background="Transparent"
+        WindowStyle="None" WindowStartupLocation="CenterScreen" Closing="DialogBox_OnClosing">
     <Grid>
-        <materialDesign:DialogHost x:Name="DialogHost" IsOpen="False">
+        <materialDesign:DialogHost x:Name="DialogHost" DialogClosing="DialogHost_OnDialogClosing" CloseOnClickAway="False" IsOpen="False">
             <materialDesign:DialogHost.DialogContent>
-                <Border Padding="20">
-                    <StackPanel>
-                        <TextBlock x:Name="TextBlock_Title"  Margin="10,10,10,0" MinWidth="300" MaxWidth="300" FontSize="30" TextWrapping="Wrap" FontWeight="Bold">Why no possible timetable?</TextBlock>
-                        <TextBlock x:Name="TextBlock_Message" Margin="10" FontSize="20" MinWidth="300" MaxWidth="300" TextWrapping="Wrap">Please make sure you copied the correct content and is using Google Chrome</TextBlock>
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                            <Button x:Name="Button_Left" materialDesign:ShadowAssist.ShadowDepth="Depth0" Margin="10,10,0,0" HorizontalAlignment="Center" FontSize="20" Height="40" Click="Button_Left_OnClick">Left</Button>
-                            <Button x:Name="Button_Right" materialDesign:ShadowAssist.ShadowDepth="Depth0" Margin="10,10,0,0" HorizontalAlignment="Center" FontSize="20" Height="40" Click="Button_Right_OnClick">Right</Button>
+                <Grid>
+                    <Border x:Name="Custom" Visibility="Hidden" Padding="20">
+                        <Frame NavigationUIVisibility="Hidden" x:Name="Frame"></Frame>
+                    </Border>
+                    <Border x:Name="Default" Visibility="Hidden" Padding="20">
+                        <StackPanel>
+                            <TextBlock x:Name="TextBlock_Title" Margin="10,10,10,0" MinWidth="300" MaxWidth="300"
+                                       FontSize="30" TextWrapping="Wrap" FontWeight="Bold">
+                                Why no possible timetable?
+                            </TextBlock>
+                            <TextBlock x:Name="TextBlock_Message" Margin="10" FontSize="20" MinWidth="300" MaxWidth="300"
+                                       TextWrapping="Wrap">
+                                Please make sure you copied the correct content and is using Google Chrome
+                            </TextBlock>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                <Button x:Name="Button_Left" materialDesign:ShadowAssist.ShadowDepth="Depth0"
+                                        Margin="10,10,0,0" HorizontalAlignment="Center" FontSize="20" Height="40"
+                                        Click="Button_Left_OnClick">
+                                    Left
+                                </Button>
+                                <Button x:Name="Button_Right" materialDesign:ShadowAssist.ShadowDepth="Depth0"
+                                        Margin="10,10,0,0" HorizontalAlignment="Center" FontSize="20" Height="40"
+                                        Click="Button_Right_OnClick">
+                                    Right
+                                </Button>
+                            </StackPanel>
                         </StackPanel>
-                    </StackPanel>
-                </Border>
+                    </Border>
+                </Grid>
             </materialDesign:DialogHost.DialogContent>
         </materialDesign:DialogHost>
 
-    </Grid></Window>
+    </Grid>
+</Window>

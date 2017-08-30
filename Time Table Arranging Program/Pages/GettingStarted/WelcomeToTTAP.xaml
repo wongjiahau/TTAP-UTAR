@@ -7,6 +7,10 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" >
     <materialDesign:Card Padding="40"  HorizontalAlignment="Center">
-        <TextBlock Style="{StaticResource  MaterialDesignDisplay4TextBlock}">Welcome to TTAP.</TextBlock>
+        <StackPanel>
+            <Image Source="../../Images/calendarBig.png" Width="250"></Image>
+            <TextBlock Style="{StaticResource  MaterialDesignDisplay4TextBlock}">Welcome to TTAP.</TextBlock>
+            <TextBlock Style="{StaticResource MaterialDesignBody2TextBlock}" HorizontalAlignment="Right"> - The time table arranging program for frustrated UTAR students.</TextBlock>
+        </StackPanel>
     </materialDesign:Card>
 </UserControl>

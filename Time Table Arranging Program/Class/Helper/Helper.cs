@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
@@ -12,6 +13,14 @@ using System.Windows.Media.Imaging;
 
 namespace Time_Table_Arranging_Program.Class.Helper {
     public static class Helper {
+        public static string RawStringOfTestFile(string fileName , string nameSpace = "NUnit.Tests2.TestFiles.") {
+            var assembly = Assembly.GetExecutingAssembly();
+            var resourceName = nameSpace + fileName;
+            using (Stream stream = assembly.GetManifestResourceStream(resourceName))
+            using (StreamReader reader = new StreamReader(stream)) {
+                return reader.ReadToEnd();
+            }
+        }
         public static BitArray ToBitArray(this List<int> input) {
             int length = 32;
             var vector = new BitArray(length);
@@ -89,13 +98,21 @@ namespace Time_Table_Arranging_Program.Class.Helper {
             return rect.Contains(bounds.TopLeft) || rect.Contains(bounds.BottomRight);
         }
 
-        public static string RawStringOfTestFile(string fileName) {
-            string parentDirectory = "Time_Table_Arranging_Program.TestFiles.";
-            var assembly = Assembly.GetExecutingAssembly();
-            var resourceName = parentDirectory + fileName;
-            using (Stream stream = assembly.GetManifestResourceStream(resourceName))
-            using (StreamReader reader = new StreamReader(stream)) {
-                return reader.ReadToEnd();
+        /// <summary>
+        /// Return true if there are Internet connection, else false
+        /// </summary>
+        /// <param name="url"></param>
+        /// <returns></returns>
+        public static bool CanConnectToWebsite(string url) {
+            try {
+                using (var client = new WebClient()) {
+                    using (client.OpenRead(url)) {
+                        return true;
+                    }
+                }
+            }
+            catch {
+                return false;
             }
         }
     }
