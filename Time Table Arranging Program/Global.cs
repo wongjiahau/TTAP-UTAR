@@ -18,6 +18,7 @@ namespace Time_Table_Arranging_Program {
         public static DateTime TimetableStartDate;
         public static DateTime TimetableEndDate;
         public static SlotList InputSlotList = new SlotList();
+        public static string LoadedHtml = "";
         public static UndoManager UndoManager = new UndoManager();
 
         public static class Toggles {

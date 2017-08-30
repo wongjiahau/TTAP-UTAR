@@ -143,6 +143,9 @@
       <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Octokit, Version=0.24.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Octokit.0.25.0\lib\net45\Octokit.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -171,6 +174,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Class\BugReportSender.cs" />
     <Compile Include="Class\Helper\Helper.cs" />
     <Compile Include="Class\Helper\WaitCursor.cs" />
     <Compile Include="Class\IndexedSlot.cs" />
@@ -179,6 +183,7 @@
     <Compile Include="Class\PermutatorForBinarizedSlot.cs" />
     <Compile Include="Class\SlotGeneralizer\SlotGeneralizer.cs" />
     <Compile Include="Class\StateSummary\StateTable.cs" />
+    <Compile Include="Class\StringCipher.cs" />
     <Compile Include="Class\testing_for_revert.cs" />
     <Compile Include="Class\ToggableObject.cs" />
     <Compile Include="Class\TokenParser\HtmlSlotParser.cs" />
@@ -191,6 +196,7 @@
     <Compile Include="ConsoleCommands\LoadTestDataCommand.cs" />
     <Compile Include="ConsoleCommands\ResetDataCommand.cs" />
     <Compile Include="ConsoleCommands\SaveLoadedHtmlCommand.cs" />
+    <Compile Include="ConsoleCommands\ThrowExceptionCommand.cs" />
     <Compile Include="Interfaces\INeedDataContext.cs" />
     <Compile Include="Interfaces\IPageWithLoadedFunction.cs" />
     <Compile Include="Interfaces\ToBinary.cs" />

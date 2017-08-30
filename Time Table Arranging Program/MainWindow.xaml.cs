@@ -49,7 +49,8 @@ namespace Time_Table_Arranging_Program {
                 new HideConsoleCommand(DrawerHost),
                 new LoadDataFromTestServerCommand(this),
                 new ResetDataCommand(Global.InputSlotList),
-                new SaveLoadedHtmlCommand(Global.Toggles.SaveLoadedHtmlToggle)
+                new SaveLoadedHtmlCommand(Global.Toggles.SaveLoadedHtmlToggle),
+                new ThrowExceptionCommand(null)
             }));
         }
 
