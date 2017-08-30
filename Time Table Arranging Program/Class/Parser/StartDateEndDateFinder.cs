@@ -16,6 +16,12 @@ namespace Time_Table_Arranging_Program.Class {
 
             //get timetable start date and end date
             HtmlNodeCollection nodes = doc.DocumentNode.SelectNodes("//div");
+
+            HtmlNodeCollection tableColumn = nodes[1].SelectNodes("td");
+
+            string targetColumn = tableColumn[9].InnerText;
+
+
         }
 
         private DateTime ParseDate(string input) {
