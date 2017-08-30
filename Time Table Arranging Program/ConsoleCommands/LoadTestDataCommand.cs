@@ -22,21 +22,28 @@ namespace Time_Table_Arranging_Program.ConsoleCommands {
             for (int i = 0 ; i < sampleDataFiles.Length ; i++) {
                 sampleDataFiles[i] = sampleDataFiles[i].Substring(leadingNamespace.Length + 1);
             }
-            return sampleDataFiles;
+            var result = sampleDataFiles.ToList();
+            result.Add("default");
+            return result.ToArray();
         }
 
         protected override string Execute(string resourceName) {
-            string raw = Helper.RawStringOfTestFile(resourceName, leadingNamespace + ".");
+            if (resourceName == "default") {
+                ((MainWindow)Commandee).LoadTestData(TestData.TestSlots);
+                return "Loaded default data.";
+            }
+            string raw = Helper.RawStringOfTestFile(resourceName , leadingNamespace + ".");
             var slots = new HtmlSlotParser().Parse(raw);
-            try
-            {
+            try {
                 var parser = new StartDateEndDateFinder(raw);
                 Global.TimetableStartDate = parser.GetStartDate();
                 Global.TimetableEndDate = parser.GetEndDate();
             }
             catch { }
             ((MainWindow)Commandee).LoadTestData(slots);
-            return "Starting date: " + Global.TimetableStartDate + " EndingDate: " + Global.TimetableEndDate;
+            return $"Loaded data from {resourceName}" +
+                "\nStarting date: " + Global.TimetableStartDate.ToLongDateString() +
+                " EndingDate: " + Global.TimetableEndDate.ToLongDateString();
         }
 
         public override string Keyword() {
