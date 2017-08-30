@@ -17,12 +17,21 @@ namespace Time_Table_Arranging_Program.Class {
             //get timetable start date and end date
             HtmlNodeCollection nodes = doc.DocumentNode.SelectNodes("//div");
 
-            HtmlNodeCollection tableColumn = nodes[1].SelectNodes("td");
+            HtmlNode table = nodes[1].SelectSingleNode("table");
+
+            HtmlNode tableRow =
+                table.SelectSingleNode("tr") ??
+                table.SelectNodes("tbody")[0].SelectSingleNode("tr");
+
+            HtmlNodeCollection tableColumn = tableRow.SelectNodes("td");
 
             string targetColumn = tableColumn[9].InnerText;
 
             string[] parseTargetColumn = targetColumn.Split(' ');
 
+            _startDate = Convert.ToDateTime(parseTargetColumn[0]);
+
+            _endDate = Convert.ToDateTime(parseTargetColumn[2]);
         }
 
         private DateTime ParseDate(string input) {
