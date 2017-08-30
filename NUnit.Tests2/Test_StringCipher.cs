@@ -21,7 +21,7 @@ namespace NUnit.Tests2 {
 
         [Test]
         public void Sandbox() {
-            string input = "b1b646cc09f082759dd01fa0abf2314e34333a1b";
+            string input = "token lol";
             string salt = "TTAP";
             Console.WriteLine(StringCipher.Encrypt(input, salt));
         }
