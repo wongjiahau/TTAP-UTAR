@@ -78,7 +78,6 @@ namespace Time_Table_Arranging_Program.User_Control {
 
         private void Update() {
             UpdateBottomPanelVisibility();
-
             SlotSelectionChanged(this , null);
             FocusSearchBox();
         }
@@ -87,7 +86,7 @@ namespace Time_Table_Arranging_Program.User_Control {
             _lastClickedSubject.IsChecked = false;
             string errorMessage;
             if (crashingSubjects == null) {
-                errorMessage = "Cannot select this subject as it will cause clashes.";
+                errorMessage = "Cannot select this subject as it clashes with the currently selected subjects.";
                 _lastClickedSubject.NameOfCrashingCounterpart = null;
             }
             else {
