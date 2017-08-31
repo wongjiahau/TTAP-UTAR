@@ -135,10 +135,11 @@ namespace Time_Table_Arranging_Program.Pages {
             if (result != null && result.Count == 0) {
                 _justDeselectedASubject = true;
                 SelectSubjectPanel.DeselectAndDisableLastSelectedSubject(new ClashFinder(_subjectModels , _permutator).CrashingSlots);//
+
                 return;
             }
             if (_justDeselectedASubject) _justDeselectedASubject = false;
-            else SelectSubjectPanel.EnableAllDisabledSubject();
+            else SelectSubjectPanel.EnableRelevantDisabledSubject();
             _windowStateSummary = new Window_StateSummary(selectedSlots.ToList() , result);
             UpdateGUI(result);
         }

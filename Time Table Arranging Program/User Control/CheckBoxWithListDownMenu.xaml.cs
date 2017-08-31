@@ -16,6 +16,7 @@ namespace Time_Table_Arranging_Program.User_Control {
     /// </summary>
     public interface ICheckBoxWithListDownMenu {
         bool IsChecked { get; set; }
+        bool IsSelectable { get; }
         FontWeight FontWeight { set; }
         string SubjectName { get; set; }
         string SubjectCode { get; set; }
@@ -24,6 +25,7 @@ namespace Time_Table_Arranging_Program.User_Control {
 
         HashSet<int> UIDofDeselectedSlots { get; set; }
         HashSet<int> UIDofSelectedSlots { get; set; }
+        string NameOfCrashingCounterpart { get; set; }
         event RoutedEventHandler Checked;
         event RoutedEventHandler ListViewCheckBox_Checked;
         void Highlight();
@@ -39,14 +41,16 @@ namespace Time_Table_Arranging_Program.User_Control {
             UIDofSelectedSlots = new HashSet<int>();
             InitializeDraggablePopup();
         }
-        public void SetDataContext(SubjectModel subjectModel) {
-            _subjectModel = subjectModel;
-            this.DataContext = subjectModel;
-            foreach (var item in subjectModel.Slots) {
+        public void SetDataContext(SubjectModel subjectModels) {
+            _subjectModel = subjectModels;
+            this.DataContext = subjectModels;
+            foreach (var item in subjectModels.Slots) {
                 item.IsSelected = true;
                 UIDofSelectedSlots.Add(item.UID);
             }
         }
+
+        public string NameOfCrashingCounterpart { get; set; }
         public event RoutedEventHandler Checked;
         public event RoutedEventHandler ListViewCheckBox_Checked;
         private static CheckBoxWithListDownMenu _ownerOfCurrentFocus;
@@ -58,15 +62,28 @@ namespace Time_Table_Arranging_Program.User_Control {
 
         public void SetErrorMessage(string message) {
             if (message == null) {
-                DrawerHost.IsRightDrawerOpen = false;
-                DrawerHost.IsEnabled = true;
-                ErrorTextBlock.Text = "";
-                if (!this.IsChecked) ChooseSlotButton.Visibility = Visibility.Hidden;
+                IsSelectable = true;
             }
             else {
+                ErrorTextBlock.Text = message;
+                IsSelectable = false;
+            }
+        }
+
+        private bool _isSelectable;
+        public bool IsSelectable {
+            get => _isSelectable;
+            private set {
+                if (value) {
+                    DrawerHost.IsRightDrawerOpen = false;
+                    DrawerHost.IsEnabled = true;
+                    ErrorTextBlock.Text = "";
+                    if (!this.IsChecked) ChooseSlotButton.Visibility = Visibility.Hidden;
+                }
+                else {
                 DrawerHost.IsRightDrawerOpen = true;
                 DrawerHost.IsEnabled = false;
-                ErrorTextBlock.Text = message;
+                }
             }
         }
 

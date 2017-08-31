@@ -60,7 +60,7 @@ namespace Time_Table_Arranging_Program.User_Control {
             Update();
         }
 
-        private ICheckBoxWithListDownMenu _lastCheckedSubject = new CheckBoxWithListDownMenu();
+        private ICheckBoxWithListDownMenu _lastClickedSubject = new CheckBoxWithListDownMenu();
         private void Box_CheckChanged(object sender , RoutedEventArgs e) {
             var x = sender as ICheckBoxWithListDownMenu;
             if (x.IsChecked) {
@@ -72,35 +72,44 @@ namespace Time_Table_Arranging_Program.User_Control {
                 UIDofSelectedSlots.ExceptWith(x.UIDofSelectedSlots.Union(x.UIDofDeselectedSlots));
             }
             //e.Handled = true;
-            _lastCheckedSubject = x;
+            _lastClickedSubject = x;
             Update();
         }
 
         private void Update() {
             UpdateBottomPanelVisibility();
+
             SlotSelectionChanged(this , null);
             FocusSearchBox();
         }
 
         public void DeselectAndDisableLastSelectedSubject((SubjectModelWithState, SubjectModelWithState)? crashingSubjects) {
-            _lastCheckedSubject.IsChecked = false;
+            _lastClickedSubject.IsChecked = false;
             string errorMessage;
-            if (crashingSubjects == null) errorMessage = "Cannot select this subject as it will cause clashes.";
+            if (crashingSubjects == null) {
+                errorMessage = "Cannot select this subject as it will cause clashes.";
+                _lastClickedSubject.NameOfCrashingCounterpart = null;
+            }
             else {
                 errorMessage = "Cannot select this subject as it clashes with :\n";
-                if (crashingSubjects.Value.Item1.SubjectName == _lastCheckedSubject.SubjectName)
-                    errorMessage += crashingSubjects.Value.Item2.SubjectName;
-                else
-                    errorMessage += crashingSubjects.Value.Item1.SubjectName;
+                var nameOfCrashingCounterpart =
+                    crashingSubjects.Value.Item1.SubjectName == _lastClickedSubject.SubjectName ?
+                    crashingSubjects.Value.Item2.SubjectName :
+                    crashingSubjects.Value.Item1.SubjectName;
+                errorMessage += nameOfCrashingCounterpart;
+                _lastClickedSubject.NameOfCrashingCounterpart = nameOfCrashingCounterpart;
             }
-            _lastCheckedSubject.SetErrorMessage(errorMessage);
+            _lastClickedSubject.SetErrorMessage(errorMessage);
         }
 
-        public void EnableAllDisabledSubject() {
+        public void EnableRelevantDisabledSubject() {
             foreach (UIElement child in CheckerBoxStackPanel.Children) {
-                if (child is ICheckBoxWithListDownMenu) {
-                    (child as ICheckBoxWithListDownMenu).SetErrorMessage(null);
-                }
+                if (!(child is ICheckBoxWithListDownMenu)) continue;
+                var x = (child as ICheckBoxWithListDownMenu);
+                if (x.IsSelectable) continue;
+                if (x.NameOfCrashingCounterpart == null ||
+                    x.NameOfCrashingCounterpart == _lastClickedSubject.SubjectName)
+                    x.SetErrorMessage(null);
             }
         }
 
@@ -220,10 +229,11 @@ namespace Time_Table_Arranging_Program.User_Control {
 
 
         private CyclicIteratableList<ICheckBoxWithListDownMenu> _iteratableList;
-        public void SetDataContext(List<SubjectModel> subjectModel) {
-            var subjectModels = subjectModel;
+        private List<SubjectModel> _subjectModels;
+        public void SetDataContext(List<SubjectModel> subjectModels) {
+            _subjectModels = subjectModels;
             _nameAndCodeOfAllSubjects = new List<string>();
-            foreach (var subject in subjectModels) {
+            foreach (var subject in _subjectModels) {
                 _nameAndCodeOfAllSubjects.Add(subject.Name);
                 _nameAndCodeOfAllSubjects.Add(subject.Code);
                 var box = new CheckBoxWithListDownMenu();
