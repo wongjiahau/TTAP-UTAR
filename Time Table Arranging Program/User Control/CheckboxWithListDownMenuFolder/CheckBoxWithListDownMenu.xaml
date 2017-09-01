@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Time_Table_Arranging_Program.User_Control.CheckBoxWithListDownMenu"
+﻿<UserControl x:Class="Time_Table_Arranging_Program.User_Control.CheckboxWithListDownMenuFolder.CheckBoxWithListDownMenu"
              xmlns:Model ="clr-namespace:Time_Table_Arranging_Program.Model"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"

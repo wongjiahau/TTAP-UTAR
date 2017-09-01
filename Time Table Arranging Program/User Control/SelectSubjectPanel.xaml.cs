@@ -13,6 +13,7 @@ using Time_Table_Arranging_Program.Interfaces;
 using Time_Table_Arranging_Program.Model;
 using Time_Table_Arranging_Program.Pages;
 using Time_Table_Arranging_Program.UserInterface;
+using Time_Table_Arranging_Program.User_Control.CheckboxWithListDownMenuFolder;
 using static System.Windows.Visibility;
 
 namespace Time_Table_Arranging_Program.User_Control {
@@ -21,13 +22,16 @@ namespace Time_Table_Arranging_Program.User_Control {
     /// </summary>
     public partial class SelectSubjectPanel : UserControl, INeedDataContext<List<SubjectModel>> {
         private List<ICheckBoxWithListDownMenu> _anyCheckBoxs;
-
         private List<string> _nameAndCodeOfAllSubjects;
-
         private string _suggestedText = "";
-
+        private Func<Slot[] , List<List<Slot>>> _permutator;
         public SelectSubjectPanel() {
             InitializeComponent();
+        }
+
+        public void Initialize(Func<Slot[] , List<List<Slot>>> permutator, List<SubjectModel> subjectModels ) {
+            _permutator = permutator;
+            SetDataContext(subjectModels);
         }
         public void SetDrawerHost(DrawerHost drawerHost) {
             _drawerHost = drawerHost;
@@ -60,7 +64,7 @@ namespace Time_Table_Arranging_Program.User_Control {
             Update();
         }
 
-        private ICheckBoxWithListDownMenu _lastClickedSubject = new CheckBoxWithListDownMenu();
+        private ICheckBoxWithListDownMenu _lastClickedSubject = new CheckboxWithListDownMenuFolder.CheckBoxWithListDownMenu();
         private void Box_CheckChanged(object sender , RoutedEventArgs e) {
             var x = sender as ICheckBoxWithListDownMenu;
             if (x.IsChecked) {
@@ -235,7 +239,7 @@ namespace Time_Table_Arranging_Program.User_Control {
             foreach (var subject in _subjectModels) {
                 _nameAndCodeOfAllSubjects.Add(subject.Name);
                 _nameAndCodeOfAllSubjects.Add(subject.Code);
-                var box = new CheckBoxWithListDownMenu();
+                var box = new CheckboxWithListDownMenuFolder.CheckBoxWithListDownMenu();
                 box.SetDataContext(subject);
                 CheckerBoxStackPanel.Children.Add(box);
                 box.Checked += Box_CheckChanged;
@@ -259,7 +263,7 @@ namespace Time_Table_Arranging_Program.User_Control {
                 case Key.Up:
                 case Key.Left:
                     _iteratableList.GoToPrevious();
-                    var current1 = (CheckBoxWithListDownMenu)_iteratableList.GetCurrent();
+                    var current1 = (CheckboxWithListDownMenuFolder.CheckBoxWithListDownMenu)_iteratableList.GetCurrent();
                     if (current1 == null) return;
                     current1.Highlight();
                     if (_iteratableList.AtLast()) ScrollViewer.ScrollToBottom();
@@ -268,14 +272,14 @@ namespace Time_Table_Arranging_Program.User_Control {
                 case Key.Down:
                 case Key.Right:
                     _iteratableList.GoToNext();
-                    var current = (CheckBoxWithListDownMenu)_iteratableList.GetCurrent();
+                    var current = (CheckboxWithListDownMenuFolder.CheckBoxWithListDownMenu)_iteratableList.GetCurrent();
                     if (current == null) return;
                     current.Highlight();
                     if (_iteratableList.AtFirst()) ScrollViewer.ScrollToHome();
                     else if (!current.IsVisibleToUser(ScrollViewer)) ScrollViewer.PageDown();
                     break;
                 case Key.Enter:
-                    var current2 = (CheckBoxWithListDownMenu)_iteratableList.GetCurrent();
+                    var current2 = (CheckboxWithListDownMenuFolder.CheckBoxWithListDownMenu)_iteratableList.GetCurrent();
                     if (current2 == null) return;
                     current2.IsChecked = !_iteratableList.GetCurrent().IsChecked;
                     break;
