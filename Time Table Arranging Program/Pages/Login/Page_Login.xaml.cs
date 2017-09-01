@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -66,7 +67,7 @@ namespace Time_Table_Arranging_Program.Pages {
         }
 
         private bool _browsingToCourseTimetablePreview = false;
-        private void Browser_OnLoadCompleted(object sender , NavigationEventArgs e) {
+        private async void Browser_OnLoadCompleted(object sender , NavigationEventArgs e) {
             KapchaBrowser.Navigate(_urlProvider.KaptchaUrl);
             ResetButton.IsEnabled = true;
             string currentUrl = Browser.Source.ToString();
@@ -76,7 +77,6 @@ namespace Time_Table_Arranging_Program.Pages {
             else if (_urlProvider.IsAtLoginPage(currentUrl)) AssertLoginPageIsLoadedProperly();
             else if (!currentUrl.Contains(_urlProvider.CourseTimetablePreviewUrl)) NavigateToCourseTimeTablePreview();
             else if (currentUrl.Contains(_urlProvider.CourseTimetablePreviewUrl)) ExtractData();
-
             #region NestedFunctions
             void AssertLoginPageIsLoadedProperly()
             {
@@ -104,20 +104,22 @@ namespace Time_Table_Arranging_Program.Pages {
                     ResetButton_OnClick(null , null);
                 }
             }
-            void ExtractData()
+            async void ExtractData()
             {
                 string html = GetHtml(Browser);
-                if (Global.Toggles.SaveLoadedHtmlToggle.IsToggledOn) SaveToFile(html);
-                var bg = CustomBackgroundWorker<string , List<Slot>>.RunAndShowLoadingScreen(
-                    new HtmlSlotParser().Parse , html , "Loading slots . . .");
-                Global.LoadedHtml += html;
-                TryGetStartDateAndEndDate(html);
-                Global.InputSlotList.AddRange(bg.GetResult());
+                DisplayLoadingBar(true);
+                await Task.Run(() => {
+                    if (Global.Toggles.SaveLoadedHtmlToggle.IsToggledOn) SaveToFile(html);
+                    Global.InputSlotList.AddRange(new HtmlSlotParser().Parse(html));
+                    Global.LoadedHtml += html;
+                    TryGetStartDateAndEndDate(html);
+                });
                 if (CanGoToPage(_currentPage + 1)) {
                     Browser.InvokeScript("changePage" , _currentPage + 1);
                     _currentPage++;
                 }
                 else {
+                    DisplayLoadingBar(false);
                     if (Global.InputSlotList.Count == 0) {
                         DialogBox.Show("No data available." , "" , "OK");
                         ResetButton_OnClick(null , null);
@@ -128,7 +130,6 @@ namespace Time_Table_Arranging_Program.Pages {
                         Page_CreateTimetable.GetInstance(Global.Settings.SearchByConsideringWeekNumber ,
                             Global.Settings.GeneralizeSlot));
                 }
-
                 #region NestedFunctions
 
                 bool CanGoToPage(int pageNumber)
@@ -233,5 +234,11 @@ namespace Time_Table_Arranging_Program.Pages {
         }
 
         #endregion
+
+        private void DisplayLoadingBar(bool displayIt) {
+            KapchaBrowser.Visibility = displayIt ? Visibility.Hidden : Visibility.Visible;
+            DrawerHost.IsTopDrawerOpen = displayIt;
+            DrawerHost.IsEnabled = !displayIt;
+        }
     }
 }

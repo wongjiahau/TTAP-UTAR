@@ -11,10 +11,10 @@ namespace Time_Table_Arranging_Program.ConsoleCommands {
     public class LoadDataFromTestServerCommand : ConsoleCommandBase{
         public LoadDataFromTestServerCommand(object commandee) : base(commandee) { }
         public override string Execute() {
-            var page_login = Commandee as MainWindow;
-            Assert.IsNotNull(page_login);
+            var mainWindow = Commandee as MainWindow;
+            Assert.IsNotNull(mainWindow);
             try {
-                page_login.LoadDataFromTestServer();
+                mainWindow.LoadDataFromTestServer();
                 return "";
             }
             catch (Exception e) {

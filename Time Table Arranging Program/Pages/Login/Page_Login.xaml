@@ -28,6 +28,9 @@
         </materialDesign:DialogHost.DialogContent>
         <Grid>
             <materialDesign:DrawerHost x:Name="DrawerHost">
+                <materialDesign:DrawerHost.TopDrawerContent>
+                    <ProgressBar Height="5" IsIndeterminate="True" />
+                </materialDesign:DrawerHost.TopDrawerContent>
                 <materialDesign:DrawerHost.BottomDrawerContent>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                         <materialDesign:PackIcon Margin="10 10 0 10" VerticalAlignment="Center" Width="20" Height="20" Foreground="DarkRed" Kind="AlertCircle" />
@@ -37,11 +40,7 @@
                 </materialDesign:DrawerHost.BottomDrawerContent>
                 <materialDesign:Card Width="400" HorizontalAlignment="Center" VerticalAlignment="Center">
                     <StackPanel VerticalAlignment="Center">
-                        <materialDesign:ColorZone
-                    Padding="16"
-                    materialDesign:ShadowAssist.ShadowDepth="Depth1"
-                    CornerRadius="3"
-                    Mode="PrimaryDark">
+                        <materialDesign:ColorZone Padding="16" materialDesign:ShadowAssist.ShadowDepth="Depth1" CornerRadius="3" Mode="PrimaryDark">
                             <TextBlock Margin="16,0,0,0" FontSize="24" FontWeight="DemiBold" VerticalAlignment="Center">Log in to your UTAR account.</TextBlock>
                         </materialDesign:ColorZone>
                         <StackPanel Visibility="Visible" DockPanel.Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Center">
