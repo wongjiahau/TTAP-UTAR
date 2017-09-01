@@ -9,8 +9,8 @@
         <TextBlock x:Name="ErrorTextBlock" VerticalAlignment="Center" Margin="5 5 10 5" MaxWidth="150" TextWrapping="Wrap" Foreground="White">
             <Run>Cannot select this subject because it causes</Run>
             <TextBlock>
-                <Hyperlink Foreground="LightBlue" Cursor="Hand" NavigateUri="https://github.com/wongjiahau/TTAP-UTAR/wiki/FAQ#what-is-group-clashing"
-                          RequestNavigate="Hyperlink_RequestNavigate" ToolTip="Learn more about group-clashing"><Run Text="group-clashing"/></Hyperlink>
+                <Hyperlink Foreground="LightBlue" FontWeight="DemiBold" Cursor="Hand" NavigateUri="https://github.com/wongjiahau/TTAP-UTAR/wiki/FAQ#what-is-group-clashing"
+                          RequestNavigate="Hyperlink_RequestNavigate" ToolTip="Learn more about Group-Clashing"><Run Text="Group-Clashing"/></Hyperlink>
             </TextBlock>
         </TextBlock>
     </StackPanel>

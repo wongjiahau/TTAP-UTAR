@@ -91,7 +91,7 @@ namespace Time_Table_Arranging_Program.User_Control {
             _lastClickedSubject.IsChecked = false;
             string errorMessage;
             if (crashingSubjects == null) {
-                _lastClickedSubject.SetErrorMessage(ClashingErrorType.TypeTwoError);
+                _lastClickedSubject.SetErrorMessage(ClashingErrorType.GroupClashingError);
                 _lastClickedSubject.NameOfClashingCounterpart = null;
             }
             else {
@@ -99,7 +99,7 @@ namespace Time_Table_Arranging_Program.User_Control {
                     crashingSubjects.Value.Item1.SubjectName == _lastClickedSubject.SubjectName ?
                     crashingSubjects.Value.Item2.SubjectName :
                     crashingSubjects.Value.Item1.SubjectName;
-                _lastClickedSubject.SetErrorMessage(ClashingErrorType.TypeOneError);
+                _lastClickedSubject.SetErrorMessage(ClashingErrorType.SingleClashingError);
             }
         }
 

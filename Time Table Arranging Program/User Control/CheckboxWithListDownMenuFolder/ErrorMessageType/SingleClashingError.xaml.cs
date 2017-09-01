@@ -23,7 +23,7 @@ namespace Time_Table_Arranging_Program.User_Control.CheckboxWithListDownMenuFold
         }
 
         public TypeOneError(string nameOfCrashingCounterpart) : this() {
-            ErrorTextBlock.Text += "\n" + nameOfCrashingCounterpart;
+            NameOfClashingCounterPart.Text += nameOfCrashingCounterpart;
         }
     }
 }

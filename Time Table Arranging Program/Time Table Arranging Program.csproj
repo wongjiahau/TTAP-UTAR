@@ -307,12 +307,11 @@
     <Compile Include="User Control\AutoCloseNotificationBar.cs" />
     <Compile Include="MVVM_Framework\Models\CyclicIndex.cs" />
     <Compile Include="User Control\CheckboxWithListDownMenuFolder\ErrorMessageType\ClashingErrorType.cs" />
-    <Compile Include="User Control\CheckboxWithListDownMenuFolder\ErrorMessageType\TypeOneError.xaml.cs">
-      <DependentUpon>TypeOneError.xaml</DependentUpon>
+    <Compile Include="User Control\CheckboxWithListDownMenuFolder\ErrorMessageType\SingleClashingError.xaml.cs">
+      <DependentUpon>SingleClashingError.xaml</DependentUpon>
     </Compile>
-    <Compile Include="User Control\CheckboxWithListDownMenuFolder\ErrorMessageType\IErrorMessage.cs" />
-    <Compile Include="User Control\CheckboxWithListDownMenuFolder\ErrorMessageType\TypeTwoError.xaml.cs">
-      <DependentUpon>TypeTwoError.xaml</DependentUpon>
+    <Compile Include="User Control\CheckboxWithListDownMenuFolder\ErrorMessageType\GroupClashingError.xaml.cs">
+      <DependentUpon>GroupClashingError.xaml</DependentUpon>
     </Compile>
     <Compile Include="User Control\ConfirmationForExitPrompt.xaml.cs">
       <DependentUpon>ConfirmationForExitPrompt.xaml</DependentUpon>
@@ -486,11 +485,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="User Control\CheckboxWithListDownMenuFolder\ErrorMessageType\TypeOneError.xaml">
+    <Page Include="User Control\CheckboxWithListDownMenuFolder\ErrorMessageType\SingleClashingError.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="User Control\CheckboxWithListDownMenuFolder\ErrorMessageType\TypeTwoError.xaml">
+    <Page Include="User Control\CheckboxWithListDownMenuFolder\ErrorMessageType\GroupClashingError.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

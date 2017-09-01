@@ -66,11 +66,11 @@ namespace Time_Table_Arranging_Program.User_Control.CheckboxWithListDownMenuFold
                 case ClashingErrorType.NoError:
                     IsSelectable = true;
                     break;
-                case ClashingErrorType.TypeOneError:
+                case ClashingErrorType.SingleClashingError:
                     IsSelectable = false;                    
                     ErrorContent.Content = new TypeOneError(NameOfClashingCounterpart);
                     break;
-                case ClashingErrorType.TypeTwoError:
+                case ClashingErrorType.GroupClashingError:
                     ErrorContent.Content = new TypeTwoError();
                     IsSelectable = false;                    
                     break;
