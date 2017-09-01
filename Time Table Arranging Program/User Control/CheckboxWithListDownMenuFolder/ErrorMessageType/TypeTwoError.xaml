@@ -1,0 +1,15 @@
+﻿<UserControl x:Class="Time_Table_Arranging_Program.User_Control.CheckboxWithListDownMenuFolder.ErrorMessageType.TypeTwoError"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Time_Table_Arranging_Program.User_Control.CheckboxWithListDownMenuFolder.ErrorMessageType"
+             mc:Ignorable="d" >
+    <StackPanel Orientation="Horizontal">
+        <TextBlock x:Name="ErrorTextBlock" VerticalAlignment="Center" Margin="5 5 10 5" MaxWidth="150" TextWrapping="Wrap" Foreground="White">
+            <Run>Cannot select this subject as it causes</Run>
+            <Hyperlink NavigateUri="https://www.gnu.org/licenses/agpl-3.0-standalone.html"
+                      RequestNavigate="Hyperlink_RequestNavigate" ToolTip="Learn more about Type-2 Error"><Run Text="Type-2 Error"/></Hyperlink>
+        </TextBlock>
+    </StackPanel>
+</UserControl>

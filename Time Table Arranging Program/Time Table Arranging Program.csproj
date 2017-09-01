@@ -306,7 +306,14 @@
     <Compile Include="TrashFile.cs" />
     <Compile Include="User Control\AutoCloseNotificationBar.cs" />
     <Compile Include="MVVM_Framework\Models\CyclicIndex.cs" />
+    <Compile Include="User Control\CheckboxWithListDownMenuFolder\ErrorMessageType\ClashingErrorType.cs" />
+    <Compile Include="User Control\CheckboxWithListDownMenuFolder\ErrorMessageType\TypeOneError.xaml.cs">
+      <DependentUpon>TypeOneError.xaml</DependentUpon>
+    </Compile>
     <Compile Include="User Control\CheckboxWithListDownMenuFolder\ErrorMessageType\IErrorMessage.cs" />
+    <Compile Include="User Control\CheckboxWithListDownMenuFolder\ErrorMessageType\TypeTwoError.xaml.cs">
+      <DependentUpon>TypeTwoError.xaml</DependentUpon>
+    </Compile>
     <Compile Include="User Control\ConfirmationForExitPrompt.xaml.cs">
       <DependentUpon>ConfirmationForExitPrompt.xaml</DependentUpon>
     </Compile>
@@ -476,6 +483,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\Window_StateSummary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User Control\CheckboxWithListDownMenuFolder\ErrorMessageType\TypeOneError.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User Control\CheckboxWithListDownMenuFolder\ErrorMessageType\TypeTwoError.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
