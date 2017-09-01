@@ -5,11 +5,13 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Time_Table_Arranging_Program.User_Control.CheckboxWithListDownMenuFolder.ErrorMessageType"
              mc:Ignorable="d" >
-    <StackPanel Orientation="Horizontal">
+    <StackPanel>
         <TextBlock x:Name="ErrorTextBlock" VerticalAlignment="Center" Margin="5 5 10 5" MaxWidth="150" TextWrapping="Wrap" Foreground="White">
-            <Run>Cannot select this subject as it causes</Run>
-            <Hyperlink NavigateUri="https://www.gnu.org/licenses/agpl-3.0-standalone.html"
-                      RequestNavigate="Hyperlink_RequestNavigate" ToolTip="Learn more about Type-2 Error"><Run Text="Type-2 Error"/></Hyperlink>
+            <Run>Cannot select this subject because it causes</Run>
+            <TextBlock>
+                <Hyperlink Foreground="LightBlue" Cursor="Hand" NavigateUri="https://github.com/wongjiahau/TTAP-UTAR/wiki/FAQ#what-is-group-clashing"
+                          RequestNavigate="Hyperlink_RequestNavigate" ToolTip="Learn more about group-clashing"><Run Text="group-clashing"/></Hyperlink>
+            </TextBlock>
         </TextBlock>
     </StackPanel>
 </UserControl>

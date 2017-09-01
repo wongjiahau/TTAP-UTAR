@@ -21,6 +21,8 @@ namespace Time_Table_Arranging_Program.User_Control.CheckboxWithListDownMenuFold
     public partial class TypeTwoError : UserControl {
         public TypeTwoError() {
             InitializeComponent();
+            ErrorTextBlock.AddHandler(Hyperlink.RequestNavigateEvent ,
+                new RequestNavigateEventHandler(Hyperlink_RequestNavigate));
         }
 
         private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e) {

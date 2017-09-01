@@ -9,6 +9,7 @@ using Time_Table_Arranging_Program.Class;
 using Time_Table_Arranging_Program.Interfaces;
 using Time_Table_Arranging_Program.Model;
 using Time_Table_Arranging_Program.UserInterface;
+using Time_Table_Arranging_Program.User_Control.CheckboxWithListDownMenuFolder.ErrorMessageType;
 
 namespace Time_Table_Arranging_Program.User_Control.CheckboxWithListDownMenuFolder {
     /// <summary>
@@ -25,11 +26,11 @@ namespace Time_Table_Arranging_Program.User_Control.CheckboxWithListDownMenuFold
 
         HashSet<int> UIDofDeselectedSlots { get; set; }
         HashSet<int> UIDofSelectedSlots { get; set; }
-        string NameOfCrashingCounterpart { get; set; }
+        string NameOfClashingCounterpart { get; set; }
         event RoutedEventHandler Checked;
         event RoutedEventHandler ListViewCheckBox_Checked;
         void Highlight();
-        void SetErrorMessage(string message);
+        void SetErrorMessage(ClashingErrorType clashingErrorType);
     }
 
     public partial class CheckBoxWithListDownMenu : UserControl, ICheckBoxWithListDownMenu, INeedDataContext<SubjectModel> {
@@ -50,7 +51,7 @@ namespace Time_Table_Arranging_Program.User_Control.CheckboxWithListDownMenuFold
             }
         }
 
-        public string NameOfCrashingCounterpart { get; set; }
+        public string NameOfClashingCounterpart { get; set; }
         public event RoutedEventHandler Checked;
         public event RoutedEventHandler ListViewCheckBox_Checked;
         private static CheckBoxWithListDownMenu _ownerOfCurrentFocus;
@@ -60,13 +61,21 @@ namespace Time_Table_Arranging_Program.User_Control.CheckboxWithListDownMenuFold
             Border.Background = ColorDictionary.GotFocusedColor;
         }
 
-        public void SetErrorMessage(string message) {
-            if (message == null) {
-                IsSelectable = true;
-            }
-            else {
-                ErrorTextBlock.Text = message;
-                IsSelectable = false;
+        public void SetErrorMessage(ClashingErrorType clashingErrorType) {
+            switch (clashingErrorType) {
+                case ClashingErrorType.NoError:
+                    IsSelectable = true;
+                    break;
+                case ClashingErrorType.TypeOneError:
+                    IsSelectable = false;                    
+                    ErrorContent.Content = new TypeOneError(NameOfClashingCounterpart);
+                    break;
+                case ClashingErrorType.TypeTwoError:
+                    ErrorContent.Content = new TypeTwoError();
+                    IsSelectable = false;                    
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(clashingErrorType), clashingErrorType, null);
             }
         }
 
@@ -76,13 +85,11 @@ namespace Time_Table_Arranging_Program.User_Control.CheckboxWithListDownMenuFold
             private set {
                 if (value) {
                     DrawerHost.IsRightDrawerOpen = false;
-                    DrawerHost.IsEnabled = true;
-                    ErrorTextBlock.Text = "";
+                    ErrorContent.Content = null;
                     if (!this.IsChecked) ChooseSlotButton.Visibility = Visibility.Hidden;
                 }
                 else {
                 DrawerHost.IsRightDrawerOpen = true;
-                DrawerHost.IsEnabled = false;
                 }
             }
         }

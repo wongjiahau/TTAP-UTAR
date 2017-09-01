@@ -25,7 +25,7 @@
             <Border Background="DarkRed">
                 <StackPanel Orientation="Horizontal">
                     <materialDesign:PackIcon Kind="AlertOctagon" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10 10 5 10" Height="25" Width="25" Foreground="White" />
-                    <TextBlock x:Name="ErrorTextBlock" VerticalAlignment="Center" Margin="5 5 10 5" MaxWidth="150" TextWrapping="Wrap" Foreground="White">Cannot select this subject because it crashes with</TextBlock>
+                    <ContentPresenter x:Name="ErrorContent"></ContentPresenter>
                 </StackPanel>
             </Border>
         </materialDesign:DrawerHost.RightDrawerContent>

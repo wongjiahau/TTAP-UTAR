@@ -14,6 +14,7 @@ using Time_Table_Arranging_Program.Model;
 using Time_Table_Arranging_Program.Pages;
 using Time_Table_Arranging_Program.UserInterface;
 using Time_Table_Arranging_Program.User_Control.CheckboxWithListDownMenuFolder;
+using Time_Table_Arranging_Program.User_Control.CheckboxWithListDownMenuFolder.ErrorMessageType;
 using static System.Windows.Visibility;
 
 namespace Time_Table_Arranging_Program.User_Control {
@@ -29,7 +30,7 @@ namespace Time_Table_Arranging_Program.User_Control {
             InitializeComponent();
         }
 
-        public void Initialize(Func<Slot[] , List<List<Slot>>> permutator, List<SubjectModel> subjectModels ) {
+        public void Initialize(Func<Slot[] , List<List<Slot>>> permutator , List<SubjectModel> subjectModels) {
             _permutator = permutator;
             SetDataContext(subjectModels);
         }
@@ -90,19 +91,16 @@ namespace Time_Table_Arranging_Program.User_Control {
             _lastClickedSubject.IsChecked = false;
             string errorMessage;
             if (crashingSubjects == null) {
-                errorMessage = "Cannot select this subject as it clashes with the currently selected subjects.";
-                _lastClickedSubject.NameOfCrashingCounterpart = null;
+                _lastClickedSubject.SetErrorMessage(ClashingErrorType.TypeTwoError);
+                _lastClickedSubject.NameOfClashingCounterpart = null;
             }
             else {
-                errorMessage = "Cannot select this subject as it clashes with :\n";
-                var nameOfCrashingCounterpart =
+                _lastClickedSubject.NameOfClashingCounterpart =
                     crashingSubjects.Value.Item1.SubjectName == _lastClickedSubject.SubjectName ?
                     crashingSubjects.Value.Item2.SubjectName :
                     crashingSubjects.Value.Item1.SubjectName;
-                errorMessage += nameOfCrashingCounterpart;
-                _lastClickedSubject.NameOfCrashingCounterpart = nameOfCrashingCounterpart;
+                _lastClickedSubject.SetErrorMessage(ClashingErrorType.TypeOneError);
             }
-            _lastClickedSubject.SetErrorMessage(errorMessage);
         }
 
         public void EnableRelevantDisabledSubject() {
@@ -110,9 +108,9 @@ namespace Time_Table_Arranging_Program.User_Control {
                 if (!(child is ICheckBoxWithListDownMenu)) continue;
                 var x = (child as ICheckBoxWithListDownMenu);
                 if (x.IsSelectable) continue;
-                if (x.NameOfCrashingCounterpart == null ||
-                    x.NameOfCrashingCounterpart == _lastClickedSubject.SubjectName)
-                    x.SetErrorMessage(null);
+                if (x.NameOfClashingCounterpart == null ||
+                    x.NameOfClashingCounterpart == _lastClickedSubject.SubjectName)
+                    x.SetErrorMessage(ClashingErrorType.NoError);
             }
         }
 
