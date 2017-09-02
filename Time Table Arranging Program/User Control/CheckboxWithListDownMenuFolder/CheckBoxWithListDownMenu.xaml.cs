@@ -67,15 +67,15 @@ namespace Time_Table_Arranging_Program.User_Control.CheckboxWithListDownMenuFold
                     IsSelectable = true;
                     break;
                 case ClashingErrorType.SingleClashingError:
-                    IsSelectable = false;                    
+                    IsSelectable = false;
                     ErrorContent.Content = new TypeOneError(NameOfClashingCounterpart);
                     break;
                 case ClashingErrorType.GroupClashingError:
                     ErrorContent.Content = new TypeTwoError();
-                    IsSelectable = false;                    
+                    IsSelectable = false;
                     break;
                 default:
-                    throw new ArgumentOutOfRangeException(nameof(clashingErrorType), clashingErrorType, null);
+                    throw new ArgumentOutOfRangeException(nameof(clashingErrorType) , clashingErrorType , null);
             }
         }
 
@@ -89,7 +89,7 @@ namespace Time_Table_Arranging_Program.User_Control.CheckboxWithListDownMenuFold
                     if (!this.IsChecked) ChooseSlotButton.Visibility = Visibility.Hidden;
                 }
                 else {
-                DrawerHost.IsRightDrawerOpen = true;
+                    DrawerHost.IsRightDrawerOpen = true;
                 }
             }
         }
@@ -106,17 +106,6 @@ namespace Time_Table_Arranging_Program.User_Control.CheckboxWithListDownMenuFold
             set {
                 _ownerOfCurrentFocus?.Dehighlight();
                 _ownerOfCurrentFocus = this;
-                _subjectModel.IsSelected = value;
-                if (value) {
-                    Border.Background = ColorDictionary.CheckedColor;
-                    ChooseSlotButton.Visibility = Visibility.Visible;
-                }
-                else {
-                    ChooseSlotButton.Visibility = Visibility.Hidden;
-                    Border.Background = null;
-                    Border.Background = ColorDictionary.GotFocusedColor;
-                }
-
             }
         }
 
@@ -157,7 +146,7 @@ namespace Time_Table_Arranging_Program.User_Control.CheckboxWithListDownMenuFold
 
 
         private void Border_OnMouseDown(object sender , MouseButtonEventArgs e) {
-            this.IsChecked = !IsChecked;
+            _subjectModel.IsSelected = !_subjectModel.IsSelected;
         }
 
         private void CheckBox_CheckChanged(object sender , RoutedEventArgs e) {

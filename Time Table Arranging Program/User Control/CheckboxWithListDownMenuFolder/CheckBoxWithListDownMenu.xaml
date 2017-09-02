@@ -107,6 +107,18 @@
             <Border x:Name="Border" BorderBrush="Gray" BorderThickness="0,0,0,1" Padding="2" 
                 Background="WhiteSmoke"
                 MouseDown="Border_OnMouseDown" Cursor="Hand" >
+                <Border.Style>
+                    <Style TargetType="Border">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsSelected}" Value="True">
+                                <Setter Property="Background" Value="LightCyan"></Setter>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding IsSelected}" Value="False">
+                                <Setter Property="Background" Value="WhiteSmoke"></Setter>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Border.Style>
                 <DockPanel   HorizontalAlignment="Stretch">
                     <CheckBox  IsChecked="{Binding IsSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Visibility="Visible" Margin="5,0,0,0" DockPanel.Dock="Left" x:Name="Checkbox"  VerticalAlignment="Center"
                           Checked="CheckBox_CheckChanged" Unchecked="CheckBox_CheckChanged"
@@ -116,8 +128,20 @@
                                       Cursor="Hand" VerticalAlignment="Center" FontWeight="DemiBold"  />
                         <local:HighlightTextBlock x:Name="SubjectCodeHighlightTextBlock" VerticalAlignment="Center" Text="{Binding CodeAndNameInitials}" Margin="15,0,0,5" />
                     </StackPanel>
-                    <Button x:Name="ChooseSlotButton"  Style="{StaticResource MaterialDesignFlatButton}" Margin="5" FontSize="11" DockPanel.Dock="Right" VerticalAlignment="Center" Visibility="Hidden"                        
+                    <Button x:Name="ChooseSlotButton"  Margin="5" FontSize="11" DockPanel.Dock="Right" VerticalAlignment="Center" 
                     Click="ChooseSlotButton_Click" ToolTip="Choose specific slots" HorizontalAlignment="Right">
+                        <Button.Style>
+                            <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignFlatButton}">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsSelected}" Value="True">
+                                        <Setter Property="Visibility" Value="Visible"></Setter>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding IsSelected}" Value="False">
+                                        <Setter Property="Visibility" Value="Hidden"></Setter>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
                         <materialDesign:PackIcon Kind="Pencil" />
                     </Button>
 
