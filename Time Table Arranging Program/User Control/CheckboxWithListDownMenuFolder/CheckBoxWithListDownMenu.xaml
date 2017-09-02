@@ -142,7 +142,6 @@
 
             </Popup>
             <Border x:Name="Border" BorderBrush="Gray" BorderThickness="0,0,0,1" Padding="2" 
-                Background="WhiteSmoke"
                 MouseDown="Border_OnMouseDown" Cursor="Hand" >
                 <Border.Style>
                     <Style TargetType="Border">
@@ -152,6 +151,9 @@
                             </DataTrigger>
                             <DataTrigger Binding="{Binding IsSelected}" Value="False">
                                 <Setter Property="Background" Value="WhiteSmoke"></Setter>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding IsFocused}" Value="True">
+                                <Setter Property="Background" Value="LightBlue"></Setter>
                             </DataTrigger>
                         </Style.Triggers>
                     </Style>

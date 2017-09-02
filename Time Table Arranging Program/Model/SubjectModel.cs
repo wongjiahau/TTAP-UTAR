@@ -78,7 +78,7 @@ namespace Time_Table_Arranging_Program.Model {
             get => _isFocused;
             set {
                 SetProperty(ref _isFocused, value);
-                if (_lastFocusedSubject != null) _lastFocusedSubject.IsFocused = false;
+                if (_lastFocusedSubject != null) _lastFocusedSubject._isFocused = false;
                 _lastFocusedSubject = this;
             }
         }

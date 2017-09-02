@@ -53,9 +53,7 @@ namespace Time_Table_Arranging_Program.User_Control.CheckboxWithListDownMenuFold
         public event RoutedEventHandler ListViewCheckBox_Checked;
         private static CheckBoxWithListDownMenu _ownerOfCurrentFocus;
         public void Highlight() {
-            _ownerOfCurrentFocus?.Dehighlight();
             _ownerOfCurrentFocus = this;
-            Border.Background = ColorDictionary.GotFocusedColor;
         }
 
         private bool _isSelectable;
@@ -69,17 +67,10 @@ namespace Time_Table_Arranging_Program.User_Control.CheckboxWithListDownMenuFold
             }
         }
 
-        private void Dehighlight() {
-            Border.Background =
-                Checkbox.IsChecked.Value
-                    ? ColorDictionary.CheckedColor
-                    : ColorDictionary.UncheckedColor;
-        }
 
         public bool IsChecked {
             get { return _subjectModel.IsSelected == true; }
             set {
-                _ownerOfCurrentFocus?.Dehighlight();
                 _ownerOfCurrentFocus = this;
             }
         }
@@ -112,11 +103,11 @@ namespace Time_Table_Arranging_Program.User_Control.CheckboxWithListDownMenuFold
 
 
         private void CheckBoxWithListDownMenu_OnMouseEnter(object sender , MouseEventArgs e) {
-            Highlight();
+            if (!_subjectModel.IsFocused) _subjectModel.IsFocused = true;
         }
 
         private void CheckBoxWithListDownMenu_OnMouseLeave(object sender , MouseEventArgs e) {
-            Dehighlight();
+            if (_subjectModel.IsFocused) _subjectModel.IsFocused = false;
         }
 
 
