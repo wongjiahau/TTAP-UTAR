@@ -13,6 +13,8 @@ using Time_Table_Arranging_Program.Interfaces;
 using Time_Table_Arranging_Program.Model;
 using Time_Table_Arranging_Program.Pages;
 using Time_Table_Arranging_Program.UserInterface;
+using Time_Table_Arranging_Program.User_Control.CheckboxWithListDownMenuFolder;
+using Time_Table_Arranging_Program.User_Control.CheckboxWithListDownMenuFolder.ErrorMessageType;
 using static System.Windows.Visibility;
 
 namespace Time_Table_Arranging_Program.User_Control {
@@ -21,13 +23,16 @@ namespace Time_Table_Arranging_Program.User_Control {
     /// </summary>
     public partial class SelectSubjectPanel : UserControl, INeedDataContext<List<SubjectModel>> {
         private List<ICheckBoxWithListDownMenu> _anyCheckBoxs;
-
         private List<string> _nameAndCodeOfAllSubjects;
-
         private string _suggestedText = "";
-
+        private Func<Slot[] , List<List<Slot>>> _permutator;
         public SelectSubjectPanel() {
             InitializeComponent();
+        }
+
+        public void Initialize(Func<Slot[] , List<List<Slot>>> permutator , List<SubjectModel> subjectModels) {
+            _permutator = permutator;
+            SetDataContext(subjectModels);
         }
         public void SetDrawerHost(DrawerHost drawerHost) {
             _drawerHost = drawerHost;
@@ -60,7 +65,7 @@ namespace Time_Table_Arranging_Program.User_Control {
             Update();
         }
 
-        private ICheckBoxWithListDownMenu _lastCheckedSubject = new CheckBoxWithListDownMenu();
+        private ICheckBoxWithListDownMenu _lastClickedSubject = new CheckboxWithListDownMenuFolder.CheckBoxWithListDownMenu();
         private void Box_CheckChanged(object sender , RoutedEventArgs e) {
             var x = sender as ICheckBoxWithListDownMenu;
             if (x.IsChecked) {
@@ -72,7 +77,7 @@ namespace Time_Table_Arranging_Program.User_Control {
                 UIDofSelectedSlots.ExceptWith(x.UIDofSelectedSlots.Union(x.UIDofDeselectedSlots));
             }
             //e.Handled = true;
-            _lastCheckedSubject = x;
+            _lastClickedSubject = x;
             Update();
         }
 
@@ -83,24 +88,29 @@ namespace Time_Table_Arranging_Program.User_Control {
         }
 
         public void DeselectAndDisableLastSelectedSubject((SubjectModelWithState, SubjectModelWithState)? crashingSubjects) {
-            _lastCheckedSubject.IsChecked = false;
+            _lastClickedSubject.IsChecked = false;
             string errorMessage;
-            if (crashingSubjects == null) errorMessage = "Cannot select this subject as it will cause clashes.";
-            else {
-                errorMessage = "Cannot select this subject as it clashes with :\n";
-                if (crashingSubjects.Value.Item1.SubjectName == _lastCheckedSubject.SubjectName)
-                    errorMessage += crashingSubjects.Value.Item2.SubjectName;
-                else
-                    errorMessage += crashingSubjects.Value.Item1.SubjectName;
+            if (crashingSubjects == null) {
+                _lastClickedSubject.SetErrorMessage(ClashingErrorType.GroupClashingError);
+                _lastClickedSubject.NameOfClashingCounterpart = null;
             }
-            _lastCheckedSubject.SetErrorMessage(errorMessage);
+            else {
+                _lastClickedSubject.NameOfClashingCounterpart =
+                    crashingSubjects.Value.Item1.SubjectName == _lastClickedSubject.SubjectName ?
+                    crashingSubjects.Value.Item2.SubjectName :
+                    crashingSubjects.Value.Item1.SubjectName;
+                _lastClickedSubject.SetErrorMessage(ClashingErrorType.SingleClashingError);
+            }
         }
 
-        public void EnableAllDisabledSubject() {
+        public void EnableRelevantDisabledSubject() {
             foreach (UIElement child in CheckerBoxStackPanel.Children) {
-                if (child is ICheckBoxWithListDownMenu) {
-                    (child as ICheckBoxWithListDownMenu).SetErrorMessage(null);
-                }
+                if (!(child is ICheckBoxWithListDownMenu)) continue;
+                var x = (child as ICheckBoxWithListDownMenu);
+                if (x.IsSelectable) continue;
+                if (x.NameOfClashingCounterpart == null ||
+                    x.NameOfClashingCounterpart == _lastClickedSubject.SubjectName)
+                    x.SetErrorMessage(ClashingErrorType.NoError);
             }
         }
 
@@ -220,13 +230,14 @@ namespace Time_Table_Arranging_Program.User_Control {
 
 
         private CyclicIteratableList<ICheckBoxWithListDownMenu> _iteratableList;
-        public void SetDataContext(List<SubjectModel> subjectModel) {
-            var subjectModels = subjectModel;
+        private List<SubjectModel> _subjectModels;
+        public void SetDataContext(List<SubjectModel> subjectModels) {
+            _subjectModels = subjectModels;
             _nameAndCodeOfAllSubjects = new List<string>();
-            foreach (var subject in subjectModels) {
+            foreach (var subject in _subjectModels) {
                 _nameAndCodeOfAllSubjects.Add(subject.Name);
                 _nameAndCodeOfAllSubjects.Add(subject.Code);
-                var box = new CheckBoxWithListDownMenu();
+                var box = new CheckboxWithListDownMenuFolder.CheckBoxWithListDownMenu();
                 box.SetDataContext(subject);
                 CheckerBoxStackPanel.Children.Add(box);
                 box.Checked += Box_CheckChanged;
@@ -250,7 +261,7 @@ namespace Time_Table_Arranging_Program.User_Control {
                 case Key.Up:
                 case Key.Left:
                     _iteratableList.GoToPrevious();
-                    var current1 = (CheckBoxWithListDownMenu)_iteratableList.GetCurrent();
+                    var current1 = (CheckboxWithListDownMenuFolder.CheckBoxWithListDownMenu)_iteratableList.GetCurrent();
                     if (current1 == null) return;
                     current1.Highlight();
                     if (_iteratableList.AtLast()) ScrollViewer.ScrollToBottom();
@@ -259,14 +270,14 @@ namespace Time_Table_Arranging_Program.User_Control {
                 case Key.Down:
                 case Key.Right:
                     _iteratableList.GoToNext();
-                    var current = (CheckBoxWithListDownMenu)_iteratableList.GetCurrent();
+                    var current = (CheckboxWithListDownMenuFolder.CheckBoxWithListDownMenu)_iteratableList.GetCurrent();
                     if (current == null) return;
                     current.Highlight();
                     if (_iteratableList.AtFirst()) ScrollViewer.ScrollToHome();
                     else if (!current.IsVisibleToUser(ScrollViewer)) ScrollViewer.PageDown();
                     break;
                 case Key.Enter:
-                    var current2 = (CheckBoxWithListDownMenu)_iteratableList.GetCurrent();
+                    var current2 = (CheckboxWithListDownMenuFolder.CheckBoxWithListDownMenu)_iteratableList.GetCurrent();
                     if (current2 == null) return;
                     current2.IsChecked = !_iteratableList.GetCurrent().IsChecked;
                     break;

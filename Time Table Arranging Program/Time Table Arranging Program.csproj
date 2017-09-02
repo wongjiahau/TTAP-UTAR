@@ -306,6 +306,13 @@
     <Compile Include="TrashFile.cs" />
     <Compile Include="User Control\AutoCloseNotificationBar.cs" />
     <Compile Include="MVVM_Framework\Models\CyclicIndex.cs" />
+    <Compile Include="User Control\CheckboxWithListDownMenuFolder\ErrorMessageType\ClashingErrorType.cs" />
+    <Compile Include="User Control\CheckboxWithListDownMenuFolder\ErrorMessageType\SingleClashingError.xaml.cs">
+      <DependentUpon>SingleClashingError.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User Control\CheckboxWithListDownMenuFolder\ErrorMessageType\GroupClashingError.xaml.cs">
+      <DependentUpon>GroupClashingError.xaml</DependentUpon>
+    </Compile>
     <Compile Include="User Control\ConfirmationForExitPrompt.xaml.cs">
       <DependentUpon>ConfirmationForExitPrompt.xaml</DependentUpon>
     </Compile>
@@ -380,7 +387,7 @@
     <Compile Include="Windows Control\AddRuleWindow_v2.xaml.cs">
       <DependentUpon>AddRuleWindow_v2.xaml</DependentUpon>
     </Compile>
-    <Compile Include="User Control\CheckBoxWithListDownMenu.xaml.cs">
+    <Compile Include="User Control\CheckboxWithListDownMenuFolder\CheckBoxWithListDownMenu.xaml.cs">
       <DependentUpon>CheckBoxWithListDownMenu.xaml</DependentUpon>
     </Compile>
     <Compile Include="Class\ColorGenerator.cs" />
@@ -478,6 +485,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="User Control\CheckboxWithListDownMenuFolder\ErrorMessageType\SingleClashingError.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User Control\CheckboxWithListDownMenuFolder\ErrorMessageType\GroupClashingError.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="User Control\ConfirmationForExitPrompt.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -566,7 +581,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="User Control\CheckBoxWithListDownMenu.xaml">
+    <Page Include="User Control\CheckboxWithListDownMenuFolder\CheckBoxWithListDownMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
