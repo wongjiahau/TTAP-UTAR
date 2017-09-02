@@ -131,12 +131,12 @@ namespace Time_Table_Arranging_Program.Pages {
             _inputSlots.SelectedSubjectNames = SelectSubjectPanel.GetNamesOfCheckedSubject().ToList();
             var selectedSlots = _inputSlots.GetSlotsOf(SelectSubjectPanel.UIDofSelectedSlots);
             SetTimeConstraintButton.Visibility = selectedSlots.Length == 0 ? Visibility.Hidden : Visibility.Visible;
-            List<List<Slot>> result = RunPermutation(selectedSlots);
-            if (result != null && result.Count == 0) {
-                _justDeselectedASubject = true;
-                SelectSubjectPanel.DeselectAndDisableLastSelectedSubject(new ClashFinder(_subjectModels , _permutator).CrashingSlots);//
-                return;
-            }
+            List<List<Slot>> result = SelectSubjectPanel.PossibleTimetables;// RunPermutation(selectedSlots);
+//            if (result != null && result.Count == 0) {
+//                _justDeselectedASubject = true;
+//                SelectSubjectPanel.DeselectAndDisableLastSelectedSubject(new ClashFinder(_subjectModels , _permutator).CrashingSlots);//
+//                return;
+//            }
             if (_justDeselectedASubject) _justDeselectedASubject = false;
             else SelectSubjectPanel.EnableRelevantDisabledSubject();
             _windowStateSummary = new Window_StateSummary(selectedSlots.ToList() , result);

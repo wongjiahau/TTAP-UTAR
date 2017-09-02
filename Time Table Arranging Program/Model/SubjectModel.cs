@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Time_Table_Arranging_Program.Class;
 using Time_Table_Arranging_Program.Class.AbstractClass;
+using Time_Table_Arranging_Program.User_Control.CheckboxWithListDownMenuFolder.ErrorMessageType;
 
 namespace Time_Table_Arranging_Program.Model {
     public class SubjectModel : ObservableObject {
@@ -12,6 +14,7 @@ namespace Time_Table_Arranging_Program.Model {
             Name = "Testing Subject 123";
             CodeAndNameInitials = "MPU329999";
             Slots = TestData.GetSlotRange(3 , 9);
+            IsSelected = true;
         }
         public SubjectModel(string name , string code , int creditHour , List<Slot> slots) {
             Name = name;
@@ -36,9 +39,36 @@ namespace Time_Table_Arranging_Program.Model {
                 if (value) Selected?.Invoke(this , null);
                 else Deselected?.Invoke(this , null);
             }
+
         }
 
+
+        private ClashingErrorType _clashingErrorType;
+
+        public ClashingErrorType ClashingErrorType {
+            get => _clashingErrorType;
+            set {
+                SetProperty(ref _clashingErrorType, value);
+                switch(value)
+                {
+                    case ClashingErrorType.NoError:
+                        IsSelected = true;
+                        break;
+                    case ClashingErrorType.SingleClashingError:
+                        IsSelected = false;
+                        break;
+                    case ClashingErrorType.GroupClashingError:
+                        IsSelected = false;
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException(nameof(value), value, null);
+                }   
+            }
+        }
+
+
         public List<Slot> Slots { get; private set; }
+        public string NameOfCrashingCounterpart { get; set; }
 
         public List<Slot> GetSelectedSlots() {
             var result = new List<Slot>();

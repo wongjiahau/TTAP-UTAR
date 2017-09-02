@@ -87,22 +87,6 @@ namespace Time_Table_Arranging_Program.User_Control {
             FocusSearchBox();
         }
 
-        public void DeselectAndDisableLastSelectedSubject((SubjectModelWithState, SubjectModelWithState)? crashingSubjects) {
-            _lastClickedSubject.IsChecked = false;
-            string errorMessage;
-            if (crashingSubjects == null) {
-                _lastClickedSubject.SetErrorMessage(ClashingErrorType.GroupClashingError);
-                _lastClickedSubject.NameOfClashingCounterpart = null;
-            }
-            else {
-                _lastClickedSubject.NameOfClashingCounterpart =
-                    crashingSubjects.Value.Item1.SubjectName == _lastClickedSubject.SubjectName ?
-                    crashingSubjects.Value.Item2.SubjectName :
-                    crashingSubjects.Value.Item1.SubjectName;
-                _lastClickedSubject.SetErrorMessage(ClashingErrorType.SingleClashingError);
-            }
-        }
-
         public void EnableRelevantDisabledSubject() {
             foreach (UIElement child in CheckerBoxStackPanel.Children) {
                 if (!(child is ICheckBoxWithListDownMenu)) continue;
@@ -254,16 +238,31 @@ namespace Time_Table_Arranging_Program.User_Control {
         }
 
         private void Subject_Deselected(object sender , EventArgs e) {
-            throw new NotImplementedException();
+
         }
 
+        public List<List<Slot>> PossibleTimetables;
         private void Subject_Selected(object sender , EventArgs e) {
-            var selectedSubject = sender as SubjectModel;
-            var prototype = new List<SubjectModel> {selectedSubject};
+            var currentlySelectedSubject = sender as SubjectModel;
+            var prototype = new List<SubjectModel> { currentlySelectedSubject };
             prototype.AddRange(_previousSelectedSubjects);
-            var possibleTimetables = _permutator.Invoke(prototype.GetSelectedSlots().ToArray());
-            
-
+            PossibleTimetables = _permutator.Invoke(prototype.GetSelectedSlots().ToArray());
+            if (PossibleTimetables == null || PossibleTimetables.Count == 0) {
+                var clashingSubjects = new ClashFinder(_subjectModels , _permutator).CrashingSlots;
+                if (clashingSubjects == null)
+                    currentlySelectedSubject.ClashingErrorType = ClashingErrorType.GroupClashingError;
+                else {
+                    currentlySelectedSubject.NameOfCrashingCounterpart = 
+                    clashingSubjects.Value.Item1.SubjectName == _lastClickedSubject.SubjectName ?
+                    clashingSubjects.Value.Item2.SubjectName :
+                    clashingSubjects.Value.Item1.SubjectName;
+                    currentlySelectedSubject.ClashingErrorType = ClashingErrorType.SingleClashingError;
+                }
+            }
+            else {
+                _previousSelectedSubjects.Add(currentlySelectedSubject);
+                SlotSelectionChanged?.Invoke(this , null);
+            }
         }
 
         private void DoneButton_OnClick(object sender , RoutedEventArgs e) {
