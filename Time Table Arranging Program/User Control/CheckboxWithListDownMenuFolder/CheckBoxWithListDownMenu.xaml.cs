@@ -9,7 +9,6 @@ using Time_Table_Arranging_Program.Class;
 using Time_Table_Arranging_Program.Interfaces;
 using Time_Table_Arranging_Program.Model;
 using Time_Table_Arranging_Program.UserInterface;
-using Time_Table_Arranging_Program.User_Control.CheckboxWithListDownMenuFolder.ErrorMessageType;
 
 namespace Time_Table_Arranging_Program.User_Control.CheckboxWithListDownMenuFolder {
     /// <summary>
@@ -27,10 +26,8 @@ namespace Time_Table_Arranging_Program.User_Control.CheckboxWithListDownMenuFold
         HashSet<int> UIDofDeselectedSlots { get; set; }
         HashSet<int> UIDofSelectedSlots { get; set; }
         string NameOfClashingCounterpart { get; set; }
-        event RoutedEventHandler Checked;
         event RoutedEventHandler ListViewCheckBox_Checked;
         void Highlight();
-        void SetErrorMessage(ClashingErrorType clashingErrorType);
     }
 
     public partial class CheckBoxWithListDownMenu : UserControl, ICheckBoxWithListDownMenu, INeedDataContext<SubjectModel> {
@@ -61,30 +58,11 @@ namespace Time_Table_Arranging_Program.User_Control.CheckboxWithListDownMenuFold
             Border.Background = ColorDictionary.GotFocusedColor;
         }
 
-        public void SetErrorMessage(ClashingErrorType clashingErrorType) {
-            switch (clashingErrorType) {
-                case ClashingErrorType.NoError:
-                    IsSelectable = true;
-                    break;
-                case ClashingErrorType.SingleClashingError:
-                    IsSelectable = false;
-                    ErrorContent.Content = new TypeOneError(NameOfClashingCounterpart);
-                    break;
-                case ClashingErrorType.GroupClashingError:
-                    ErrorContent.Content = new TypeTwoError();
-                    IsSelectable = false;
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(clashingErrorType) , clashingErrorType , null);
-            }
-        }
-
         private bool _isSelectable;
         public bool IsSelectable {
             get => _isSelectable;
             private set {
                 if (value) {
-                    ErrorContent.Content = null;
                 }
                 else {
                 }

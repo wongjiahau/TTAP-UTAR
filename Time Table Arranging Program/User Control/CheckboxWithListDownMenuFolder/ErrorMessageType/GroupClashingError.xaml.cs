@@ -18,8 +18,8 @@ namespace Time_Table_Arranging_Program.User_Control.CheckboxWithListDownMenuFold
     /// <summary>
     /// Interaction logic for TypeTwoError.xaml
     /// </summary>
-    public partial class TypeTwoError : UserControl {
-        public TypeTwoError() {
+    public partial class GroupClashingError : UserControl {
+        public GroupClashingError() {
             InitializeComponent();
             ErrorTextBlock.AddHandler(Hyperlink.RequestNavigateEvent ,
                 new RequestNavigateEventHandler(Hyperlink_RequestNavigate));

@@ -93,8 +93,7 @@ namespace Time_Table_Arranging_Program.User_Control {
                 var x = (child as ICheckBoxWithListDownMenu);
                 if (x.IsSelectable) continue;
                 if (x.NameOfClashingCounterpart == null ||
-                    x.NameOfClashingCounterpart == _lastClickedSubject.SubjectName)
-                    x.SetErrorMessage(ClashingErrorType.NoError);
+                    x.NameOfClashingCounterpart == _lastClickedSubject.SubjectName) ;
             }
         }
 

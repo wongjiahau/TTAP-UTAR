@@ -7,6 +7,7 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:Time_Table_Arranging_Program.User_Control"
              xmlns:class="clr-namespace:Time_Table_Arranging_Program.Class"
+             xmlns:errorMessageType="clr-namespace:Time_Table_Arranging_Program.User_Control.CheckboxWithListDownMenuFolder.ErrorMessageType"
              mc:Ignorable="d" MouseEnter="CheckBoxWithListDownMenu_OnMouseEnter" MouseLeave="CheckBoxWithListDownMenu_OnMouseLeave">
     <UserControl.Resources>
         <DataTemplate x:Key="FirstCell">
@@ -21,26 +22,47 @@
         <Model:SubjectModel />
     </UserControl.DataContext>
     <materialDesign:DrawerHost x:Name="DrawerHost" CloseOnClickAway="False">
-    <materialDesign:DrawerHost.Style>
-        <Style TargetType="materialDesign:DrawerHost">
-            <Style.Triggers>
+        <materialDesign:DrawerHost.Style>
+            <Style TargetType="materialDesign:DrawerHost">
+                <Style.Triggers>
                     <DataTrigger Binding="{Binding ClashingErrorType}" Value="NoError">
-                        <Setter Property="IsRightDrawerOpen" Value="False"></Setter>
+                        <Setter Property="IsRightDrawerOpen" Value="False" />
                     </DataTrigger>
                     <DataTrigger Binding="{Binding ClashingErrorType}" Value="SingleClashingError">
-                        <Setter Property="IsRightDrawerOpen" Value="True"></Setter>
+                        <Setter Property="IsRightDrawerOpen" Value="True" />
                     </DataTrigger>
                     <DataTrigger Binding="{Binding ClashingErrorType}" Value="GroupClashingError">
-                        <Setter Property="IsRightDrawerOpen" Value="True"></Setter>
+                        <Setter Property="IsRightDrawerOpen" Value="True" />
                     </DataTrigger>
-            </Style.Triggers>
-        </Style>
-    </materialDesign:DrawerHost.Style>
+                </Style.Triggers>
+            </Style>
+        </materialDesign:DrawerHost.Style>
         <materialDesign:DrawerHost.RightDrawerContent>
             <Border Background="DarkRed">
                 <StackPanel Orientation="Horizontal">
                     <materialDesign:PackIcon Kind="AlertOctagon" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10 10 5 10" Height="25" Width="25" Foreground="White" />
-                    <ContentPresenter x:Name="ErrorContent"></ContentPresenter>
+                    <ContentPresenter x:Name="ErrorContent">
+                        <ContentPresenter.Style>
+                            <Style TargetType="ContentPresenter">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding ClashingErrorType}" Value="SingleClashingError">
+                                        <Setter Property="Content">
+                                            <Setter.Value>
+                                                <errorMessageType:SingleClashingError NameOfClashingCounterpart="{Binding NameOfCrashingCounterpart}"></errorMessageType:SingleClashingError>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding ClashingErrorType}" Value="GroupClashingError">
+                                        <Setter Property="Content">
+                                            <Setter.Value>
+                                                <errorMessageType:GroupClashingError></errorMessageType:GroupClashingError>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ContentPresenter.Style>
+                    </ContentPresenter>
                 </StackPanel>
             </Border>
         </materialDesign:DrawerHost.RightDrawerContent>
