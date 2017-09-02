@@ -27,7 +27,7 @@
             </StackPanel>
         </materialDesign:DialogHost.DialogContent>
         <Grid>
-            <materialDesign:DrawerHost x:Name="DrawerHost">
+            <materialDesign:DrawerHost x:Name="DrawerHost" CloseOnClickAway="False">
                 <materialDesign:DrawerHost.TopDrawerContent>
                     <ProgressBar Height="5" IsIndeterminate="True" />
                 </materialDesign:DrawerHost.TopDrawerContent>
