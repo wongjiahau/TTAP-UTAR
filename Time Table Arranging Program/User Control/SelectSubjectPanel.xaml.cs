@@ -170,6 +170,7 @@ namespace Time_Table_Arranging_Program.User_Control {
             ViewChangerButton.Content = "Show all subjects";
         }
 
+        #region SearchBoxEvents
         private void SearchBoxOnTextChanged(object sender , TextChangedEventArgs textChangedEventArgs) {
             ShowAllSubjects();
             string searchedText = SearchBox.Text.ToLower();
@@ -222,6 +223,7 @@ namespace Time_Table_Arranging_Program.User_Control {
             SearchBox.Text = _suggestedText;
         }
 
+        #endregion
         private void SelectSubjectPanel_OnKeyDown(object sender , KeyEventArgs e) {
             if (SearchBox.IsKeyboardFocused() || SearchBox.IsFocused) return;
             FocusManager.SetFocusedElement(this , SearchBox);
@@ -231,21 +233,37 @@ namespace Time_Table_Arranging_Program.User_Control {
 
         private CyclicIteratableList<ICheckBoxWithListDownMenu> _iteratableList;
         private List<SubjectModel> _subjectModels;
+        private List<SubjectModel> _previousSelectedSubjects = new List<SubjectModel>();
         public void SetDataContext(List<SubjectModel> subjectModels) {
             _subjectModels = subjectModels;
             _nameAndCodeOfAllSubjects = new List<string>();
             foreach (var subject in _subjectModels) {
                 _nameAndCodeOfAllSubjects.Add(subject.Name);
                 _nameAndCodeOfAllSubjects.Add(subject.Code);
-                var box = new CheckboxWithListDownMenuFolder.CheckBoxWithListDownMenu();
+                subject.Selected += Subject_Selected;
+                subject.Deselected += Subject_Deselected;
+                var box = new CheckBoxWithListDownMenu();
                 box.SetDataContext(subject);
                 CheckerBoxStackPanel.Children.Add(box);
-                box.Checked += Box_CheckChanged;
+                //box.Checked += Box_CheckChanged;
                 box.ListViewCheckBox_Checked += Box_ListViewCheckBox_Checked;
             }
             _anyCheckBoxs =
                 new List<ICheckBoxWithListDownMenu>(CheckerBoxStackPanel.Children.OfType<ICheckBoxWithListDownMenu>());
             _iteratableList = new CyclicIteratableList<ICheckBoxWithListDownMenu>(_anyCheckBoxs);
+        }
+
+        private void Subject_Deselected(object sender , EventArgs e) {
+            throw new NotImplementedException();
+        }
+
+        private void Subject_Selected(object sender , EventArgs e) {
+            var selectedSubject = sender as SubjectModel;
+            var prototype = new List<SubjectModel> {selectedSubject};
+            prototype.AddRange(_previousSelectedSubjects);
+            var possibleTimetables = _permutator.Invoke(prototype.GetSelectedSlots().ToArray());
+            
+
         }
 
         private void DoneButton_OnClick(object sender , RoutedEventArgs e) {
