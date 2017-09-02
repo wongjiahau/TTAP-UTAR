@@ -84,12 +84,9 @@ namespace Time_Table_Arranging_Program.User_Control.CheckboxWithListDownMenuFold
             get => _isSelectable;
             private set {
                 if (value) {
-                    DrawerHost.IsRightDrawerOpen = false;
                     ErrorContent.Content = null;
-                    if (!this.IsChecked) ChooseSlotButton.Visibility = Visibility.Hidden;
                 }
                 else {
-                    DrawerHost.IsRightDrawerOpen = true;
                 }
             }
         }

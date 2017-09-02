@@ -20,7 +20,22 @@
     <UserControl.DataContext>
         <Model:SubjectModel />
     </UserControl.DataContext>
-    <materialDesign:DrawerHost x:Name="DrawerHost" CloseOnClickAway="False" IsRightDrawerOpen="False">
+    <materialDesign:DrawerHost x:Name="DrawerHost" CloseOnClickAway="False">
+    <materialDesign:DrawerHost.Style>
+        <Style TargetType="materialDesign:DrawerHost">
+            <Style.Triggers>
+                    <DataTrigger Binding="{Binding ClashingErrorType}" Value="NoError">
+                        <Setter Property="IsRightDrawerOpen" Value="False"></Setter>
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding ClashingErrorType}" Value="SingleClashingError">
+                        <Setter Property="IsRightDrawerOpen" Value="True"></Setter>
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding ClashingErrorType}" Value="GroupClashingError">
+                        <Setter Property="IsRightDrawerOpen" Value="True"></Setter>
+                    </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </materialDesign:DrawerHost.Style>
         <materialDesign:DrawerHost.RightDrawerContent>
             <Border Background="DarkRed">
                 <StackPanel Orientation="Horizontal">
