@@ -29,6 +29,37 @@ namespace Time_Table_Arranging_Program.Model {
         public string Code { get; }
         public int CreditHour { get; private set; }
 
+
+        public List<Slot> Slots { get; private set; }
+        public string NameOfCrashingCounterpart { get; set; }
+
+        public List<Slot> GetSelectedSlots() {
+            var result = new List<Slot>();
+            for (int i = 0 ; i < Slots.Count ; i++) {
+                if (Slots[i].IsSelected)
+                    result.Add(Slots[i]);
+            }
+            return result;
+        }
+
+        public static List<SubjectModel> Parse(List<Slot> slots) {
+            var result = new List<SubjectModel>();
+            var dic = new Dictionary<string , List<Slot>>();
+            foreach (Slot s in slots) {
+                if (!dic.ContainsKey(s.Code)) {
+                    dic.Add(s.Code , new List<Slot>());
+                }
+                dic[s.Code].Add(s);
+            }
+            foreach (KeyValuePair<string , List<Slot>> entry in dic) {
+                var v = entry.Value[0];
+                result.Add(new SubjectModel(v.SubjectName , v.Code , 0 , entry.Value));
+            }
+            result = result.OrderBy(o => o.Name).ToList();
+            return result;
+        }
+
+        #region ViewModelProperties
         public event EventHandler Selected;
         public event EventHandler Deselected;
         private bool _isSelected;
@@ -39,12 +70,20 @@ namespace Time_Table_Arranging_Program.Model {
                 if (value) Selected?.Invoke(this , null);
                 else Deselected?.Invoke(this , null);
             }
-
         }
 
+        private bool _isFocused;
+        private static SubjectModel _lastFocusedSubject;
+        public bool IsFocused {
+            get => _isFocused;
+            set {
+                SetProperty(ref _isFocused, value);
+                if (_lastFocusedSubject != null) _lastFocusedSubject.IsFocused = false;
+                _lastFocusedSubject = this;
+            }
+        }
 
         private ClashingErrorType _clashingErrorType;
-
         public ClashingErrorType ClashingErrorType {
             get => _clashingErrorType;
             set {
@@ -66,35 +105,6 @@ namespace Time_Table_Arranging_Program.Model {
             }
         }
 
-
-        public List<Slot> Slots { get; private set; }
-        public string NameOfCrashingCounterpart { get; set; }
-
-        public List<Slot> GetSelectedSlots() {
-            var result = new List<Slot>();
-            for (int i = 0 ; i < Slots.Count ; i++) {
-                if (Slots[i].IsSelected)
-                    result.Add(Slots[i]);
-            }
-            return result;
-        }
-
-        public static List<SubjectModel> Parse(List<Slot> slots) {
-            var result = new List<SubjectModel>();
-            var dic = new Dictionary<string, List<Slot>>();
-            for (var i = 0; i < slots.Count; i++) {
-                Slot s = slots[i];
-                if (!dic.ContainsKey(s.Code)) {
-                    dic.Add(s.Code, new List<Slot>());
-                }
-                dic[s.Code].Add(s);
-            }
-            foreach (KeyValuePair<string , List<Slot>> entry in dic) {
-                var v = entry.Value[0];
-                result.Add(new SubjectModel(v.SubjectName , v.Code , 0 , entry.Value));
-            }
-            result = result.OrderBy(o => o.Name).ToList();
-            return result;
-        }
+        #endregion
     }
 }
