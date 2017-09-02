@@ -41,9 +41,9 @@
             <Border Background="DarkRed">
                 <StackPanel Orientation="Horizontal">
                     <materialDesign:PackIcon Kind="AlertOctagon" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10 10 5 10" Height="25" Width="25" Foreground="White" />
-                    <ContentPresenter x:Name="ErrorContent">
-                        <ContentPresenter.Style>
-                            <Style TargetType="ContentPresenter">
+                    <ContentControl x:Name="ErrorContent">
+                        <ContentControl.Style>
+                            <Style TargetType="ContentControl">
                                 <Style.Triggers>
                                     <DataTrigger Binding="{Binding ClashingErrorType}" Value="SingleClashingError">
                                         <Setter Property="Content">
@@ -61,8 +61,8 @@
                                     </DataTrigger>
                                 </Style.Triggers>
                             </Style>
-                        </ContentPresenter.Style>
-                    </ContentPresenter>
+                        </ContentControl.Style>
+                    </ContentControl>
                 </StackPanel>
             </Border>
         </materialDesign:DrawerHost.RightDrawerContent>
