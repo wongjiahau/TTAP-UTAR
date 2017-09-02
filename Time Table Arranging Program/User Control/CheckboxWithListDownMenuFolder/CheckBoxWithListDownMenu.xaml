@@ -20,7 +20,7 @@
     <UserControl.DataContext>
         <Model:SubjectModel />
     </UserControl.DataContext>
-    <materialDesign:DrawerHost x:Name="DrawerHost" IsRightDrawerOpen="False">
+    <materialDesign:DrawerHost x:Name="DrawerHost" CloseOnClickAway="False" IsRightDrawerOpen="False">
         <materialDesign:DrawerHost.RightDrawerContent>
             <Border Background="DarkRed">
                 <StackPanel Orientation="Horizontal">
