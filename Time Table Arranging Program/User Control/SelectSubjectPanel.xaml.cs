@@ -133,22 +133,15 @@ namespace Time_Table_Arranging_Program.User_Control {
         }
 
         private void ShowAllSubjects() {
-            foreach (UIElement child in CheckerBoxStackPanel.Children) {
-                if (child is ICheckBoxWithListDownMenu) {
-                    child.Visibility = Visible;
-                }
+            foreach (var subjectModel in _subjectModels) {
+                subjectModel.IsVisible = true;
             }
             ViewChangerButton.Content = "Show selected subjects";
         }
 
         private void ShowSelectedSubjects() {
-            foreach (UIElement child in CheckerBoxStackPanel.Children) {
-                if (child is ICheckBoxWithListDownMenu) {
-                    child.Visibility =
-                        (child as ICheckBoxWithListDownMenu).IsChecked
-                            ? Visible
-                            : Collapsed;
-                }
+            foreach (var subjectModel in _subjectModels) {
+                subjectModel.IsVisible = subjectModel.IsSelected;
             }
             ViewChangerButton.Content = "Show all subjects";
         }
@@ -183,7 +176,7 @@ namespace Time_Table_Arranging_Program.User_Control {
             bool somethingFound = false;
             var found = new List<SubjectModel>();
             foreach (SubjectModel subject in _subjectModels) {
-                string comparedString = subject.Name.ToLower() + subject.Code.ToLower();
+                string comparedString = subject.Name.ToLower() + subject.Code.ToLower() + subject.Name.GetInitial().ToLower();
                 if (comparedString.Contains(searchedText)) {
                     somethingFound = true;
                     subject.IsVisible = true; 
