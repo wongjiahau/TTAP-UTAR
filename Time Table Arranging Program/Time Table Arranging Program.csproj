@@ -306,6 +306,7 @@
     <Compile Include="TrashFile.cs" />
     <Compile Include="User Control\AutoCloseNotificationBar.cs" />
     <Compile Include="MVVM_Framework\Models\CyclicIndex.cs" />
+    <Compile Include="User Control\SubjectListFolder\SubjectListModel.cs" />
     <Compile Include="User Control\SubjectViewFolder\ErrorMessageType\ClashingErrorType.cs" />
     <Compile Include="User Control\SubjectViewFolder\ErrorMessageType\SingleClashingError.xaml.cs">
       <DependentUpon>SingleClashingError.xaml</DependentUpon>
