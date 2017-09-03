@@ -22,7 +22,7 @@ namespace Time_Table_Arranging_Program.User_Control {
     /// Interaction logic for SelectSubjectPanel.xaml
     /// </summary>
     public partial class SelectSubjectPanel : UserControl, INeedDataContext<List<SubjectModel>> {
-        private List<ICheckBoxWithListDownMenu> _anyCheckBoxs;
+        private List<SubjectView> _anyCheckBoxs;
         private List<string> _nameAndCodeOfAllSubjects;
         private string _suggestedText = "";
         private Func<Slot[] , List<List<Slot>>> _permutator;
@@ -46,16 +46,16 @@ namespace Time_Table_Arranging_Program.User_Control {
             CheckerBoxStackPanel.Children.Clear();
         }
 
-        public string[] GetNamesOfCheckedSubject() {
-            var checkedSubject = new List<string>();
-            foreach (var box in _anyCheckBoxs) {
-                if (box.IsChecked) checkedSubject.Add(box.SubjectName);
+        public string[] GetNamesOfSelectedSubject() {
+            var selectedSubjects = new List<string>();
+            foreach (var subjectModel in _subjectModels) {
+               if(subjectModel.IsSelected) selectedSubjects.Add(subjectModel.Name); 
             }
-            return checkedSubject.ToArray();
+            return selectedSubjects.ToArray();
         }
 
         private void Box_ListViewCheckBox_Checked(object sender , RoutedEventArgs e) {
-            var c = (ICheckBoxWithListDownMenu)sender;
+            var c = (SubjectView)sender;
             foreach (var uid in c.UIDofSelectedSlots) {
                 UIDofSelectedSlots.Add(uid);
             }
@@ -65,21 +65,7 @@ namespace Time_Table_Arranging_Program.User_Control {
             Update();
         }
 
-        private ICheckBoxWithListDownMenu _lastClickedSubject = new CheckboxWithListDownMenuFolder.CheckBoxWithListDownMenu();
-        private void Box_CheckChanged(object sender , RoutedEventArgs e) {
-            var x = sender as ICheckBoxWithListDownMenu;
-            if (x.IsChecked) {
-                x.FontWeight = FontWeights.Bold;
-                UIDofSelectedSlots.UnionWith(x.UIDofSelectedSlots);
-            }
-            else {
-                x.FontWeight = FontWeights.Normal;
-                UIDofSelectedSlots.ExceptWith(x.UIDofSelectedSlots.Union(x.UIDofDeselectedSlots));
-            }
-            //e.Handled = true;
-            _lastClickedSubject = x;
-            Update();
-        }
+        private SubjectView _lastClickedSubject = new CheckboxWithListDownMenuFolder.SubjectView();
 
         private void Update() {
             UpdateBottomPanelVisibility();
@@ -89,9 +75,8 @@ namespace Time_Table_Arranging_Program.User_Control {
 
         public void EnableRelevantDisabledSubject() {
             foreach (UIElement child in CheckerBoxStackPanel.Children) {
-                if (!(child is ICheckBoxWithListDownMenu)) continue;
-                var x = (child as ICheckBoxWithListDownMenu);
-                if (x.IsSelectable) continue;
+                if (!(child is SubjectView)) continue;
+                var x = (child as SubjectView);
                 if (x.NameOfClashingCounterpart == null ||
                     x.NameOfClashingCounterpart == _lastClickedSubject.SubjectName) ;
             }
@@ -116,7 +101,7 @@ namespace Time_Table_Arranging_Program.User_Control {
             }
             else {
                 da = CustomAnimation.GetEnteringScreenAnimation(0 , 70 , false);
-                ViewChanger.Badge = GetNamesOfCheckedSubject().Length;
+                ViewChanger.Badge = GetNamesOfSelectedSubject().Length;
                 if (BottomPanel.ActualHeight > 0) return;
             }
             BottomPanel.BeginAnimation(HeightProperty , da);
@@ -216,14 +201,14 @@ namespace Time_Table_Arranging_Program.User_Control {
                 _nameAndCodeOfAllSubjects.Add(subject.Code);
                 subject.Selected += Subject_Selected;
                 subject.Deselected += Subject_Deselected;
-                var box = new CheckBoxWithListDownMenu();
+                var box = new SubjectView();
                 box.SetDataContext(subject);
                 CheckerBoxStackPanel.Children.Add(box);
                 //box.Checked += Box_CheckChanged;
                 box.ListViewCheckBox_Checked += Box_ListViewCheckBox_Checked;
             }
             _anyCheckBoxs =
-                new List<ICheckBoxWithListDownMenu>(CheckerBoxStackPanel.Children.OfType<ICheckBoxWithListDownMenu>());
+                new List<SubjectView>(CheckerBoxStackPanel.Children.OfType<SubjectView>());
             _iteratableList = new CyclicIteratableList<SubjectModel>(_subjectModels);
         }
 

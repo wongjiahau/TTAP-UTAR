@@ -14,26 +14,18 @@ namespace Time_Table_Arranging_Program.User_Control.CheckboxWithListDownMenuFold
     /// <summary>
     ///     Interaction logic for CheckBoxWithListDownMenu.xaml
     /// </summary>
-    public interface ICheckBoxWithListDownMenu {
-        bool IsChecked { get; set; }
-        bool IsSelectable { get; }
-        FontWeight FontWeight { set; }
+    public interface ISubjectView {
         string SubjectName { get; set; }
-        string SubjectCode { get; set; }
-        string HighlightText { get; set; }
-
-
         HashSet<int> UIDofDeselectedSlots { get; set; }
         HashSet<int> UIDofSelectedSlots { get; set; }
         string NameOfClashingCounterpart { get; set; }
         event RoutedEventHandler ListViewCheckBox_Checked;
-        void Highlight();
     }
 
-    public partial class CheckBoxWithListDownMenu : UserControl, ICheckBoxWithListDownMenu, INeedDataContext<SubjectModel> {
+    public partial class SubjectView : UserControl, ISubjectView, INeedDataContext<SubjectModel> {
         private double _listviewOriginalHeight;
         private SubjectModel _subjectModel;
-        public CheckBoxWithListDownMenu() {
+        public SubjectView() {
             InitializeComponent();
             UIDofDeselectedSlots = new HashSet<int>();
             UIDofSelectedSlots = new HashSet<int>();
@@ -49,59 +41,17 @@ namespace Time_Table_Arranging_Program.User_Control.CheckboxWithListDownMenuFold
         }
 
         public string NameOfClashingCounterpart { get; set; }
-        public event RoutedEventHandler Checked;
         public event RoutedEventHandler ListViewCheckBox_Checked;
-        private static CheckBoxWithListDownMenu _ownerOfCurrentFocus;
-        public void Highlight() {
-            _ownerOfCurrentFocus = this;
-        }
-
-        private bool _isSelectable;
-        public bool IsSelectable {
-            get => _isSelectable;
-            private set {
-                if (value) {
-                }
-                else {
-                }
-            }
-        }
-
-
-        public bool IsChecked {
-            get { return _subjectModel.IsSelected == true; }
-            set {
-                _ownerOfCurrentFocus = this;
-            }
-        }
-
-        public new FontWeight FontWeight {
-            set { Checkbox.FontWeight = value; }
-        }
 
         public string SubjectName {
             get => SubjectNameHighlightTextBlock.Text;
             set => SubjectNameHighlightTextBlock.Text = value;
         }
 
-        public string SubjectCode {
-            get => SubjectCodeHighlightTextBlock.Text;
-            set => SubjectCodeHighlightTextBlock.Text = value;
-        }
-
         public HashSet<int> UIDofDeselectedSlots { get; set; }
         public HashSet<int> UIDofSelectedSlots { get; set; }
 
-        public string HighlightText {
-            get => SubjectNameHighlightTextBlock.HighlightedText;
-
-            set {
-                SubjectNameHighlightTextBlock.HighlightedText = value;
-                SubjectCodeHighlightTextBlock.HighlightedText = value;
-            }
-        }
-
-
+        #region EventHandlers
         private void CheckBoxWithListDownMenu_OnMouseEnter(object sender , MouseEventArgs e) {
             if (!_subjectModel.IsFocused) _subjectModel.IsFocused = true;
         }
@@ -110,15 +60,14 @@ namespace Time_Table_Arranging_Program.User_Control.CheckboxWithListDownMenuFold
             if (_subjectModel.IsFocused) _subjectModel.IsFocused = false;
         }
 
-
         private void Border_OnMouseDown(object sender , MouseButtonEventArgs e) {
             _subjectModel.IsSelected = !_subjectModel.IsSelected;
         }
 
         private void CheckBox_CheckChanged(object sender , RoutedEventArgs e) {
-            this.IsChecked = (sender as CheckBox).IsChecked.Value;
-            Checked?.Invoke(this , null);
+            _subjectModel.IsSelected = (sender as CheckBox).IsChecked.Value;
         }
+        #endregion
 
         #region ListDownMenu
         private void InitializeDraggablePopup() {

@@ -128,7 +128,7 @@ namespace Time_Table_Arranging_Program.Pages {
         private bool _justDeselectedASubject = false;
         private void SelectSubjectPanel_OnSlotSelectionChanged(object sender , EventArgs e) {
             _predicates.Clear();
-            _inputSlots.SelectedSubjectNames = SelectSubjectPanel.GetNamesOfCheckedSubject().ToList();
+            _inputSlots.SelectedSubjectNames = SelectSubjectPanel.GetNamesOfSelectedSubject().ToList();
             var selectedSlots = _inputSlots.GetSlotsOf(SelectSubjectPanel.UIDofSelectedSlots);
             SetTimeConstraintButton.Visibility = selectedSlots.Length == 0 ? Visibility.Hidden : Visibility.Visible;
             List<List<Slot>> result = SelectSubjectPanel.PossibleTimetables;// RunPermutation(selectedSlots);
