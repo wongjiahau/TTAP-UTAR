@@ -224,15 +224,12 @@ namespace Time_Table_Arranging_Program.User_Control {
             prototype.AddRange(_previousSelectedSubjects);
             PossibleTimetables = _permutator.Invoke(prototype.GetSelectedSlots().ToArray());
             if (PossibleTimetables == null || PossibleTimetables.Count == 0) {
-                var clashingSubjects = new ClashFinder(_subjectModels , _permutator).CrashingSlots;
-                if (clashingSubjects == null)
+                var clashingCounterpart = new ClashFinder(_subjectModels, _permutator, currentlySelectedSubject)
+                    .WhoIsCrashingWithTarget();
+                if (clashingCounterpart == null)
                     currentlySelectedSubject.ClashingErrorType = ClashingErrorType.GroupClashingError;
                 else {
-                    //TODO : Refactor CrashFinder 
-                    currentlySelectedSubject.NameOfCrashingCounterpart =
-                    clashingSubjects.Value.Item1.SubjectName == _lastClickedSubject.SubjectName ?
-                    clashingSubjects.Value.Item2.SubjectName :
-                    clashingSubjects.Value.Item1.SubjectName;
+                    currentlySelectedSubject.NameOfCrashingCounterpart = clashingCounterpart.Name;
                     currentlySelectedSubject.ClashingErrorType = ClashingErrorType.SingleClashingError;
                 }
             }

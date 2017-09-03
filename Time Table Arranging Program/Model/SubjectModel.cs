@@ -67,7 +67,9 @@ namespace Time_Table_Arranging_Program.Model {
             get => _isSelected;
             set {
                 SetProperty(ref _isSelected , value);
-                if (value) Selected?.Invoke(this , null);
+                if (value) {
+                    Selected?.Invoke(this , null);
+                }
                 else Deselected?.Invoke(this , null);
             }
         }

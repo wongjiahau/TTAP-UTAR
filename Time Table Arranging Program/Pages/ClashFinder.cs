@@ -31,7 +31,11 @@ namespace Time_Table_Arranging_Program.Pages {
 
     public class ClashFinder {
         private List<SubjectModelWithState> _subjectStateList = new List<SubjectModelWithState>();
-        public ClashFinder(List<SubjectModel> subjectModels , Func<Slot[] , List<List<Slot>>> permutator) {
+        private SubjectModel _target;
+        private List<SubjectModel> _subjectModels;
+        public ClashFinder(List<SubjectModel> subjectModels , Func<Slot[] , List<List<Slot>>> permutator , SubjectModel target) {
+            _subjectModels = subjectModels;
+            _target = target;
             var selectedSubjects = subjectModels.FindAll(x => x.IsSelected);
             for (var i = 0 ; i < selectedSubjects.Count ; i++) {
                 SubjectModel s = selectedSubjects[i];
@@ -42,14 +46,14 @@ namespace Time_Table_Arranging_Program.Pages {
                 for (int j = 0 ; j < _subjectStateList.Count ; j++) {
                     if (i == j) continue;
                     if (_subjectStateList[i].ClashesWith(_subjectStateList[j])) {
-                        CrashingSlots = (_subjectStateList[i], _subjectStateList[j]);
-                        Message = $"Because\n--{_subjectStateList[i].SubjectName}\nclashes with\n--{_subjectStateList[j].SubjectName}";                   
+                        ClashingSubjects = (_subjectStateList[i], _subjectStateList[j]);
+                        Message = $"Because\n--{_subjectStateList[i].SubjectName}\nclashes with\n--{_subjectStateList[j].SubjectName}";
                         return;
                     }
                 }
             }
             Message = $"Sorry... the reason is too complicated to be explained.";
-            CrashingSlots = null;
+            ClashingSubjects = null;
         }
 
         public static int[] GetSubjectState(List<List<Slot>> outputTimetables) {
@@ -74,7 +78,16 @@ namespace Time_Table_Arranging_Program.Pages {
             return result;
         }
 
-        public (SubjectModelWithState, SubjectModelWithState)? CrashingSlots { get; private set; }
+        private (SubjectModelWithState, SubjectModelWithState)? ClashingSubjects { get; set; }
         public string Message { private set; get; }
+
+        public SubjectModel WhoIsCrashingWithTarget() {
+            if (ClashingSubjects == null) return null;
+            var nameOfClashingCounterPart = 
+            ClashingSubjects.Value.Item1.SubjectName == _target.Name ?
+            ClashingSubjects.Value.Item2.SubjectName :
+            ClashingSubjects.Value.Item1.SubjectName;
+            return _subjectModels.Find(x => x.Name == nameOfClashingCounterPart);
+        }
     }
 }

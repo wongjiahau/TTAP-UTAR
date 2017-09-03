@@ -61,11 +61,7 @@ namespace Time_Table_Arranging_Program.User_Control.SubjectViewFolder {
         }
 
         private void Border_OnMouseDown(object sender , MouseButtonEventArgs e) {
-            _subjectModel.IsSelected = !_subjectModel.IsSelected;
-        }
-
-        private void CheckBox_CheckChanged(object sender , RoutedEventArgs e) {
-            _subjectModel.IsSelected = (sender as CheckBox).IsChecked.Value;
+            Checkbox.IsChecked = !Checkbox.IsChecked;
         }
         #endregion
 

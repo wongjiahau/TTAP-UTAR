@@ -88,7 +88,7 @@ namespace Time_Table_Arranging_Program.Pages {
                 else {
                     _outputTimetables.SetState(TimetableList.NoPossibleCombination);
                     NotificationBar.Show("No possible timetable found." , "Tell me why" , () => {
-                        DialogBox.Show("Why no possible combination?" , new ClashFinder(_subjectModels , _permutator).Message);
+                //        DialogBox.Show("Why no possible combination?" , new ClashFinder(_subjectModels , _permutator).Message);
                     } , false);
                 }
                 ToolBoxPanel.Visibility = Visibility.Hidden;

@@ -171,9 +171,7 @@
                     </Style>
                 </Border.Style>
                 <DockPanel   HorizontalAlignment="Stretch">
-                    <CheckBox  IsChecked="{Binding IsSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Visibility="Visible" Margin="5,0,0,0" DockPanel.Dock="Left" x:Name="Checkbox"  VerticalAlignment="Center"
-                          Checked="CheckBox_CheckChanged" Unchecked="CheckBox_CheckChanged"
-                          />
+                    <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Visibility="Visible" Margin="5,0,0,0" DockPanel.Dock="Left" x:Name="Checkbox"  VerticalAlignment="Center" />
                     <StackPanel DockPanel.Dock="Left">
                         <local:HighlightTextBlock FontSize="14"   DockPanel.Dock="Left" x:Name="SubjectNameHighlightTextBlock" Text="{Binding Name}" HighlightedText="{Binding HighlightedText}" Margin="10,5,5,2"
                                       Cursor="Hand" VerticalAlignment="Center" FontWeight="DemiBold"  />
