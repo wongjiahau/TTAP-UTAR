@@ -83,6 +83,19 @@ namespace Time_Table_Arranging_Program.Model {
             }
         }
 
+        private bool _isVisible = true;
+
+        public bool IsVisible {
+            get => _isVisible;
+            set { SetProperty(ref _isVisible, value); }
+        }
+
+        private string _highlightedText;
+        public string HighlightedText {
+            get => _highlightedText;
+            set { SetProperty(ref _highlightedText, value); }
+        }
+
         private ClashingErrorType _clashingErrorType;
         public ClashingErrorType ClashingErrorType {
             get => _clashingErrorType;

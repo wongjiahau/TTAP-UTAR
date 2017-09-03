@@ -181,24 +181,22 @@ namespace Time_Table_Arranging_Program.User_Control {
 
         private bool SearchForMatchingSubjectAndDisplayThem(string searchedText) {
             bool somethingFound = false;
-            var found = new List<ICheckBoxWithListDownMenu>();
-            foreach (UIElement child in CheckerBoxStackPanel.Children) {
-                if (child is ICheckBoxWithListDownMenu) {
-                    var target = child as ICheckBoxWithListDownMenu;
-                    string comparedString = target.SubjectName.ToLower() + target.SubjectCode.ToLower();
-                    if (comparedString.Contains(searchedText)) {
-                        somethingFound = true;
-                        child.Visibility = Visible;
-                        found.Add(target);
-                        (child as ICheckBoxWithListDownMenu).HighlightText = searchedText;
-                    }
-                    else {
-                        child.Visibility = Collapsed;
-                    }
+            var found = new List<SubjectModel>();
+            foreach (SubjectModel subject in _subjectModels) {
+                string comparedString = subject.Name.ToLower() + subject.Code.ToLower();
+                if (comparedString.Contains(searchedText)) {
+                    somethingFound = true;
+                    subject.IsVisible = true; 
+                    found.Add(subject);
+                    subject.HighlightedText = searchedText;
+                }
+                else {
+                    subject.IsVisible = false;
                 }
             }
-            _iteratableList = new CyclicIteratableList<ICheckBoxWithListDownMenu>(found);
-            _iteratableList.GetCurrent()?.Highlight();
+            _iteratableList = new CyclicIteratableList<SubjectModel>(found);
+            var current = _iteratableList.GetCurrent();
+            if (current != null) current.IsFocused = true;
             return somethingFound;
         }
 
@@ -214,7 +212,7 @@ namespace Time_Table_Arranging_Program.User_Control {
 
 
 
-        private CyclicIteratableList<ICheckBoxWithListDownMenu> _iteratableList;
+        private CyclicIteratableList<SubjectModel> _iteratableList;
         private List<SubjectModel> _subjectModels;
         private List<SubjectModel> _previousSelectedSubjects = new List<SubjectModel>();
         public void SetDataContext(List<SubjectModel> subjectModels) {
@@ -233,7 +231,7 @@ namespace Time_Table_Arranging_Program.User_Control {
             }
             _anyCheckBoxs =
                 new List<ICheckBoxWithListDownMenu>(CheckerBoxStackPanel.Children.OfType<ICheckBoxWithListDownMenu>());
-            _iteratableList = new CyclicIteratableList<ICheckBoxWithListDownMenu>(_anyCheckBoxs);
+            _iteratableList = new CyclicIteratableList<SubjectModel>(_subjectModels);
         }
 
         private void Subject_Deselected(object sender , EventArgs e) {
@@ -251,7 +249,7 @@ namespace Time_Table_Arranging_Program.User_Control {
                 if (clashingSubjects == null)
                     currentlySelectedSubject.ClashingErrorType = ClashingErrorType.GroupClashingError;
                 else {
-                    currentlySelectedSubject.NameOfCrashingCounterpart = 
+                    currentlySelectedSubject.NameOfCrashingCounterpart =
                     clashingSubjects.Value.Item1.SubjectName == _lastClickedSubject.SubjectName ?
                     clashingSubjects.Value.Item2.SubjectName :
                     clashingSubjects.Value.Item1.SubjectName;
@@ -277,25 +275,25 @@ namespace Time_Table_Arranging_Program.User_Control {
                 case Key.Up:
                 case Key.Left:
                     _iteratableList.GoToPrevious();
-                    var current1 = (CheckboxWithListDownMenuFolder.CheckBoxWithListDownMenu)_iteratableList.GetCurrent();
+                    var current1 = _iteratableList.GetCurrent();
                     if (current1 == null) return;
-                    current1.Highlight();
+                    current1.IsFocused = true;
                     if (_iteratableList.AtLast()) ScrollViewer.ScrollToBottom();
-                    else if (!current1.IsVisibleToUser(ScrollViewer)) ScrollViewer.PageUp();
+                    //else if (!current1.IsVisibleToUser(ScrollViewer)) ScrollViewer.PageUp();
                     break;
                 case Key.Down:
                 case Key.Right:
                     _iteratableList.GoToNext();
-                    var current = (CheckboxWithListDownMenuFolder.CheckBoxWithListDownMenu)_iteratableList.GetCurrent();
+                    var current = _iteratableList.GetCurrent();
                     if (current == null) return;
-                    current.Highlight();
+                    current.IsFocused = true;
                     if (_iteratableList.AtFirst()) ScrollViewer.ScrollToHome();
-                    else if (!current.IsVisibleToUser(ScrollViewer)) ScrollViewer.PageDown();
+                    //else if (!current.IsVisibleToUser(ScrollViewer)) ScrollViewer.PageDown();
                     break;
                 case Key.Enter:
-                    var current2 = (CheckboxWithListDownMenuFolder.CheckBoxWithListDownMenu)_iteratableList.GetCurrent();
+                    var current2 = _iteratableList.GetCurrent();
                     if (current2 == null) return;
-                    current2.IsChecked = !_iteratableList.GetCurrent().IsChecked;
+                    current2.IsSelected = !current2.IsSelected;
                     break;
                 default: break;
             }

@@ -21,6 +21,18 @@
     <UserControl.DataContext>
         <Model:SubjectModel />
     </UserControl.DataContext>
+    <UserControl.Style>
+        <Style TargetType="UserControl">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding IsVisible}" Value="True">
+                    <Setter Property="Visibility" Value="Visible"></Setter>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding IsVisible}" Value="False">
+                    <Setter Property="Visibility" Value="Collapsed"></Setter>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Style>
     <materialDesign:DrawerHost x:Name="DrawerHost" CloseOnClickAway="False">
         <materialDesign:DrawerHost.Style>
             <Style TargetType="materialDesign:DrawerHost">
@@ -163,9 +175,9 @@
                           Checked="CheckBox_CheckChanged" Unchecked="CheckBox_CheckChanged"
                           />
                     <StackPanel DockPanel.Dock="Left">
-                        <local:HighlightTextBlock FontSize="14"   DockPanel.Dock="Left" x:Name="SubjectNameHighlightTextBlock" Text="{Binding Name}" Margin="10,5,5,2"
+                        <local:HighlightTextBlock FontSize="14"   DockPanel.Dock="Left" x:Name="SubjectNameHighlightTextBlock" Text="{Binding Name}" HighlightedText="{Binding HighlightedText}" Margin="10,5,5,2"
                                       Cursor="Hand" VerticalAlignment="Center" FontWeight="DemiBold"  />
-                        <local:HighlightTextBlock x:Name="SubjectCodeHighlightTextBlock" VerticalAlignment="Center" Text="{Binding CodeAndNameInitials}" Margin="15,0,0,5" />
+                        <local:HighlightTextBlock x:Name="SubjectCodeHighlightTextBlock" VerticalAlignment="Center" Text="{Binding CodeAndNameInitials}" HighlightedText="{Binding HighlightedText}" Margin="15,0,0,5" />
                     </StackPanel>
                     <Button x:Name="ChooseSlotButton"  Margin="5" FontSize="11" DockPanel.Dock="Right" VerticalAlignment="Center" 
                     Click="ChooseSlotButton_Click" ToolTip="Choose specific slots" HorizontalAlignment="Right">
