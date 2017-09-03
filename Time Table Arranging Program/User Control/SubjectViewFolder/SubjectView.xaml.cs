@@ -10,7 +10,7 @@ using Time_Table_Arranging_Program.Interfaces;
 using Time_Table_Arranging_Program.Model;
 using Time_Table_Arranging_Program.UserInterface;
 
-namespace Time_Table_Arranging_Program.User_Control.CheckboxWithListDownMenuFolder {
+namespace Time_Table_Arranging_Program.User_Control.SubjectViewFolder {
     /// <summary>
     ///     Interaction logic for CheckBoxWithListDownMenu.xaml
     /// </summary>

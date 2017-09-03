@@ -16,6 +16,7 @@ using Time_Table_Arranging_Program.UserInterface;
 using Time_Table_Arranging_Program.User_Control.CheckboxWithListDownMenuFolder;
 using Time_Table_Arranging_Program.User_Control.CheckboxWithListDownMenuFolder.ErrorMessageType;
 using static System.Windows.Visibility;
+using SubjectView = Time_Table_Arranging_Program.User_Control.SubjectViewFolder.SubjectView;
 
 namespace Time_Table_Arranging_Program.User_Control {
     /// <summary>
@@ -65,7 +66,7 @@ namespace Time_Table_Arranging_Program.User_Control {
             Update();
         }
 
-        private SubjectView _lastClickedSubject = new CheckboxWithListDownMenuFolder.SubjectView();
+        private SubjectView _lastClickedSubject = new SubjectView();
 
         private void Update() {
             UpdateBottomPanelVisibility();
