@@ -242,6 +242,7 @@ namespace Time_Table_Arranging_Program.User_Control {
                 if (clashingSubjects == null)
                     currentlySelectedSubject.ClashingErrorType = ClashingErrorType.GroupClashingError;
                 else {
+                    //TODO : Refactor CrashFinder 
                     currentlySelectedSubject.NameOfCrashingCounterpart =
                     clashingSubjects.Value.Item1.SubjectName == _lastClickedSubject.SubjectName ?
                     clashingSubjects.Value.Item2.SubjectName :

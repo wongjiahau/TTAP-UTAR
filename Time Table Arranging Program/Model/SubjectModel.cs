@@ -74,12 +74,17 @@ namespace Time_Table_Arranging_Program.Model {
 
         private bool _isFocused;
         private static SubjectModel _lastFocusedSubject;
+        private bool _isChangingFocus;
         public bool IsFocused {
             get => _isFocused;
             set {
                 SetProperty(ref _isFocused, value);
-                if (_lastFocusedSubject != null) _lastFocusedSubject._isFocused = false;
+                if (_lastFocusedSubject != null && !_isChangingFocus) {
+                    _isChangingFocus = true;
+                    _lastFocusedSubject.IsFocused = false;
+                }
                 _lastFocusedSubject = this;
+                _isChangingFocus = false;
             }
         }
 
