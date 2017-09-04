@@ -15,6 +15,7 @@ using Time_Table_Arranging_Program.Pages;
 using Time_Table_Arranging_Program.UserInterface;
 using Time_Table_Arranging_Program.User_Control.CheckboxWithListDownMenuFolder;
 using Time_Table_Arranging_Program.User_Control.CheckboxWithListDownMenuFolder.ErrorMessageType;
+using Time_Table_Arranging_Program.User_Control.SubjectListFolder;
 using static System.Windows.Visibility;
 using SubjectView = Time_Table_Arranging_Program.User_Control.SubjectViewFolder.SubjectView;
 
@@ -22,7 +23,7 @@ namespace Time_Table_Arranging_Program.User_Control {
     /// <summary>
     /// Interaction logic for SelectSubjectPanel.xaml
     /// </summary>
-    public partial class SelectSubjectPanel : UserControl, INeedDataContext<List<SubjectModel>> {
+    public partial class SelectSubjectPanel : UserControl, INeedDataContext<SubjectListModel> {
         private List<SubjectView> _anyCheckBoxs;
         private List<string> _nameAndCodeOfAllSubjects;
         private string _suggestedText = "";
@@ -31,9 +32,9 @@ namespace Time_Table_Arranging_Program.User_Control {
             InitializeComponent();
         }
 
-        public void Initialize(Func<Slot[] , List<List<Slot>>> permutator , List<SubjectModel> subjectModels) {
+        public void Initialize(Func<Slot[] , List<List<Slot>>> permutator , SubjectListModel subjectListModel) {
             _permutator = permutator;
-            SetDataContext(subjectModels);
+            SetDataContext(subjectListModel);
         }
         public void SetDrawerHost(DrawerHost drawerHost) {
             _drawerHost = drawerHost;
@@ -49,7 +50,8 @@ namespace Time_Table_Arranging_Program.User_Control {
 
         public string[] GetNamesOfSelectedSubject() {
             var selectedSubjects = new List<string>();
-            foreach (var subjectModel in _subjectModels) {
+            var list = _subjectListModel.ToList();
+            foreach (var subjectModel in list) {
                if(subjectModel.IsSelected) selectedSubjects.Add(subjectModel.Name); 
             }
             return selectedSubjects.ToArray();
@@ -109,32 +111,13 @@ namespace Time_Table_Arranging_Program.User_Control {
         }
 
         private void ViewChangerButton_OnClick(object sender , RoutedEventArgs e) {
-            if (ViewChangerButton.Content.ToString() == "Show selected subjects") {
-                ShowSelectedSubjects();
-            }
-            else {
-                ShowAllSubjects();
-            }
+            _subjectListModel.ToggleDisplayMode();
             UpdateBottomPanelVisibility();
-        }
-
-        private void ShowAllSubjects() {
-            foreach (var subjectModel in _subjectModels) {
-                subjectModel.IsVisible = true;
-            }
-            ViewChangerButton.Content = "Show selected subjects";
-        }
-
-        private void ShowSelectedSubjects() {
-            foreach (var subjectModel in _subjectModels) {
-                subjectModel.IsVisible = subjectModel.IsSelected;
-            }
-            ViewChangerButton.Content = "Show all subjects";
         }
 
         #region SearchBoxEvents
         private void SearchBoxOnTextChanged(object sender , TextChangedEventArgs textChangedEventArgs) {
-            ShowAllSubjects();
+            //ShowAllSubjects();
             string searchedText = SearchBox.Text.ToLower();
             HintLabel.Visibility = searchedText == "" ? Collapsed : Visible;
             bool somethingFound = SearchForMatchingSubjectAndDisplayThem(searchedText);
@@ -161,7 +144,8 @@ namespace Time_Table_Arranging_Program.User_Control {
         private bool SearchForMatchingSubjectAndDisplayThem(string searchedText) {
             bool somethingFound = false;
             var found = new List<SubjectModel>();
-            foreach (SubjectModel subject in _subjectModels) {
+            var list = _subjectListModel.ToList();
+            foreach (SubjectModel subject in list) {
                 string comparedString = subject.Name.ToLower() + subject.Code.ToLower() + subject.Name.GetInitial().ToLower();
                 if (comparedString.Contains(searchedText)) {
                     somethingFound = true;
@@ -192,12 +176,13 @@ namespace Time_Table_Arranging_Program.User_Control {
 
 
         private CyclicIteratableList<SubjectModel> _iteratableList;
-        private List<SubjectModel> _subjectModels;
+        private SubjectListModel _subjectListModel;
         private List<SubjectModel> _previousSelectedSubjects = new List<SubjectModel>();
-        public void SetDataContext(List<SubjectModel> subjectModels) {
-            _subjectModels = subjectModels;
+        public void SetDataContext(SubjectListModel subjectListModel) {
+            _subjectListModel = subjectListModel;
             _nameAndCodeOfAllSubjects = new List<string>();
-            foreach (var subject in _subjectModels) {
+            var list = _subjectListModel.ToList();
+            foreach (var subject in list) {
                 _nameAndCodeOfAllSubjects.Add(subject.Name);
                 _nameAndCodeOfAllSubjects.Add(subject.Code);
                 subject.Selected += Subject_Selected;
@@ -210,7 +195,7 @@ namespace Time_Table_Arranging_Program.User_Control {
             }
             _anyCheckBoxs =
                 new List<SubjectView>(CheckerBoxStackPanel.Children.OfType<SubjectView>());
-            _iteratableList = new CyclicIteratableList<SubjectModel>(_subjectModels);
+            _iteratableList = new CyclicIteratableList<SubjectModel>(_subjectListModel.ToList());
         }
 
         private void Subject_Deselected(object sender , EventArgs e) {
@@ -224,7 +209,7 @@ namespace Time_Table_Arranging_Program.User_Control {
             prototype.AddRange(_previousSelectedSubjects);
             PossibleTimetables = _permutator.Invoke(prototype.GetSelectedSlots().ToArray());
             if (PossibleTimetables == null || PossibleTimetables.Count == 0) {
-                var clashingCounterpart = new ClashFinder(_subjectModels, _permutator, currentlySelectedSubject)
+                var clashingCounterpart = new ClashFinder(_subjectListModel.ToList(), _permutator, currentlySelectedSubject)
                     .WhoIsCrashingWithTarget();
                 if (clashingCounterpart == null)
                     currentlySelectedSubject.ClashingErrorType = ClashingErrorType.GroupClashingError;

@@ -15,6 +15,7 @@ using Time_Table_Arranging_Program.Model;
 using Time_Table_Arranging_Program.MVVM_Framework.Models;
 using Time_Table_Arranging_Program.MVVM_Framework.ViewModels;
 using Time_Table_Arranging_Program.User_Control;
+using Time_Table_Arranging_Program.User_Control.SubjectListFolder;
 using Time_Table_Arranging_Program.Windows_Control;
 
 namespace Time_Table_Arranging_Program.Pages {
@@ -73,7 +74,7 @@ namespace Time_Table_Arranging_Program.Pages {
         private List<SubjectModel> _subjectModels;
         private void InitializeExtraComponents() {
             _subjectModels = SubjectModel.Parse(_inputSlots);
-            SelectSubjectPanel.Initialize(_permutator, _subjectModels);
+            SelectSubjectPanel.Initialize(_permutator , new SubjectListModel(_subjectModels));
             SelectSubjectPanel.SetDrawerHost(this.DrawerHost);
         }
 
@@ -88,7 +89,7 @@ namespace Time_Table_Arranging_Program.Pages {
                 else {
                     _outputTimetables.SetState(TimetableList.NoPossibleCombination);
                     NotificationBar.Show("No possible timetable found." , "Tell me why" , () => {
-                //        DialogBox.Show("Why no possible combination?" , new ClashFinder(_subjectModels , _permutator).Message);
+                        //        DialogBox.Show("Why no possible combination?" , new ClashFinder(_subjectModels , _permutator).Message);
                     } , false);
                 }
                 ToolBoxPanel.Visibility = Visibility.Hidden;
@@ -132,11 +133,11 @@ namespace Time_Table_Arranging_Program.Pages {
             var selectedSlots = _inputSlots.GetSlotsOf(SelectSubjectPanel.UIDofSelectedSlots);
             SetTimeConstraintButton.Visibility = selectedSlots.Length == 0 ? Visibility.Hidden : Visibility.Visible;
             List<List<Slot>> result = SelectSubjectPanel.PossibleTimetables;// RunPermutation(selectedSlots);
-//            if (result != null && result.Count == 0) {
-//                _justDeselectedASubject = true;
-//                SelectSubjectPanel.DeselectAndDisableLastSelectedSubject(new ClashFinder(_subjectModels , _permutator).CrashingSlots);//
-//                return;
-//            }
+                                                                            //            if (result != null && result.Count == 0) {
+                                                                            //                _justDeselectedASubject = true;
+                                                                            //                SelectSubjectPanel.DeselectAndDisableLastSelectedSubject(new ClashFinder(_subjectModels , _permutator).CrashingSlots);//
+                                                                            //                return;
+                                                                            //            }
             if (_justDeselectedASubject) _justDeselectedASubject = false;
             else SelectSubjectPanel.EnableRelevantDisabledSubject();
             _windowStateSummary = new Window_StateSummary(selectedSlots.ToList() , result);

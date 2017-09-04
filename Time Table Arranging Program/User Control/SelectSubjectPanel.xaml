@@ -5,9 +5,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Time_Table_Arranging_Program.User_Control"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             mc:Ignorable="d" KeyDown="SelectSubjectPanel_OnKeyDown"   FocusManager.IsFocusScope="True" FocusManager.FocusedElement="{Binding ElementName=SearchBox}"
-           
-             >
+             xmlns:subjectListFolder="clr-namespace:Time_Table_Arranging_Program.User_Control.SubjectListFolder"
+             mc:Ignorable="d" KeyDown="SelectSubjectPanel_OnKeyDown"   FocusManager.IsFocusScope="True" FocusManager.FocusedElement="{Binding ElementName=SearchBox}" >
+    <UserControl.DataContext>
+        <subjectListFolder:SubjectListModel></subjectListFolder:SubjectListModel>
+    </UserControl.DataContext>
     <materialDesign:Card VerticalAlignment="Stretch">
         <DockPanel LastChildFill="True" >
             <StackPanel DockPanel.Dock="Top">
@@ -40,7 +42,6 @@
                 </StackPanel>
                 <TextBlock x:Name="ErrorLabel" FontWeight="Bold" Visibility="Collapsed">No result found . . .</TextBlock>
             </Grid>
-            
 
             <materialDesign:ColorZone Mode="Light" materialDesign:ShadowAssist.ShadowDepth="Depth3" Height="0" x:Name="BottomPanel" DockPanel.Dock="Bottom">
                 <StackPanel  Orientation="Horizontal" HorizontalAlignment="Right" >
@@ -48,15 +49,23 @@
                                        Margin="0"                                   
                                        Width="200"
                                        Height="40"                                           
-                                       VerticalAlignment="Center"
-                >
+                                       VerticalAlignment="Center" >
                         <Button x:Name="ViewChangerButton" 
                             Height="40" 
                             VerticalAlignment="Center" 
-                            Click="ViewChangerButton_OnClick"
-                            Style="{StaticResource MaterialDesignRaisedButton}"
-                    >
-                            Show selected subjects
+                            Click="ViewChangerButton_OnClick" >
+                            <Button.Style>
+                                <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedButton}">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding DisplayMode}" Value="DisplayAllSubject">
+                                            <Setter Property="Content" Value="Show selected subjects"></Setter>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding DisplayMode}" Value="DisplaySelectedSubject">
+                                            <Setter Property="Content" Value="Show all subjects"></Setter>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style> 
                         </Button>
                     </materialDesign:Badged>
                     <Button Height="40"                             
