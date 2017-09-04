@@ -6,7 +6,11 @@
              xmlns:local="clr-namespace:Time_Table_Arranging_Program.User_Control"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:subjectListFolder="clr-namespace:Time_Table_Arranging_Program.User_Control.SubjectListFolder"
+             xmlns:iValueConverter="clr-namespace:Time_Table_Arranging_Program.IValueConverter"
              mc:Ignorable="d" KeyDown="SelectSubjectPanel_OnKeyDown"   FocusManager.IsFocusScope="True" FocusManager.FocusedElement="{Binding ElementName=SearchBox}" >
+    <UserControl.Resources>
+        <iValueConverter:CutoffConverter x:Key="CutoffConverter"></iValueConverter:CutoffConverter>
+    </UserControl.Resources>
     <UserControl.DataContext>
         <subjectListFolder:SubjectListModel></subjectListFolder:SubjectListModel>
     </UserControl.DataContext>
@@ -43,17 +47,50 @@
                 <TextBlock x:Name="ErrorLabel" FontWeight="Bold" Visibility="Collapsed">No result found . . .</TextBlock>
             </Grid>
 
-            <materialDesign:ColorZone Mode="Light" materialDesign:ShadowAssist.ShadowDepth="Depth3" Height="0" x:Name="BottomPanel" DockPanel.Dock="Bottom">
+            <materialDesign:ColorZone Mode="Light" materialDesign:ShadowAssist.ShadowDepth="Depth3" x:Name="BottomPanel" DockPanel.Dock="Bottom">
+                <materialDesign:ColorZone.Style>
+                    <Style TargetType="materialDesign:ColorZone">
+                        <Setter Property="Height" Value="70" />
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding SelectedSubjectCount, Converter={StaticResource CutoffConverter}, ConverterParameter=0}" Value="False">
+                                <DataTrigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation  Storyboard.TargetProperty="Height" From="70" To="0" Duration="0:0:0.375">
+                                                <DoubleAnimation.EasingFunction>
+                                                    <SineEase EasingMode="EaseOut" />
+                                                </DoubleAnimation.EasingFunction>
+                                            </DoubleAnimation>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </DataTrigger.EnterActions>
+                                <DataTrigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation  Storyboard.TargetProperty="Height" From="0" To="70" Duration="0:0:0.375">
+                                                <DoubleAnimation.EasingFunction>
+                                                    <SineEase EasingMode="EaseIn" />
+                                                </DoubleAnimation.EasingFunction>
+                                            </DoubleAnimation>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </DataTrigger.ExitActions>
+                            </DataTrigger>
+                        </Style.Triggers>
+
+                    </Style>
+                </materialDesign:ColorZone.Style>
                 <StackPanel  Orientation="Horizontal" HorizontalAlignment="Right" >
                     <materialDesign:Badged x:Name="ViewChanger" DockPanel.Dock="Right" HorizontalAlignment="Right" HorizontalContentAlignment="Stretch"                                   
                                        Margin="0"                                   
                                        Width="200"
                                        Height="40"                                           
+                                       Badge="{Binding SelectedSubjectCount}"
                                        VerticalAlignment="Center" >
                         <Button x:Name="ViewChangerButton" 
                             Height="40" 
                             VerticalAlignment="Center" 
-                            Click="ViewChangerButton_OnClick" >
+                            Command="{Binding ToggleDisplayModeCommand}">
                             <Button.Style>
                                 <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedButton}">
                                     <Style.Triggers>
@@ -65,7 +102,7 @@
                                         </DataTrigger>
                                     </Style.Triggers>
                                 </Style>
-                            </Button.Style> 
+                            </Button.Style>
                         </Button>
                     </materialDesign:Badged>
                     <Button Height="40"                             
@@ -96,4 +133,18 @@
 
 
 </UserControl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

@@ -71,13 +71,13 @@ namespace Time_Table_Arranging_Program.User_Control {
         private SubjectView _lastClickedSubject = new SubjectView();
 
         private void Update() {
-            UpdateBottomPanelVisibility();
             SlotSelectionChanged(this , null);
             FocusSearchBox();
         }
 
         public void EnableRelevantDisabledSubject() {
             foreach (UIElement child in CheckerBoxStackPanel.Children) {
+                
                 if (!(child is SubjectView)) continue;
                 var x = (child as SubjectView);
                 if (x.NameOfClashingCounterpart == null ||
@@ -95,25 +95,7 @@ namespace Time_Table_Arranging_Program.User_Control {
 
         }
 
-        private void UpdateBottomPanelVisibility() {
-            DoubleAnimation da;
-            if (UIDofSelectedSlots.Count == 0) {
-                da = CustomAnimation.GetLeavingScreenAnimation(70 , 0 , false);
-                ViewChanger.Badge = null;
-                if (ViewChangerButton.Content.ToString() == "Show all subjects") return;
-            }
-            else {
-                da = CustomAnimation.GetEnteringScreenAnimation(0 , 70 , false);
-                ViewChanger.Badge = GetNamesOfSelectedSubject().Length;
-                if (BottomPanel.ActualHeight > 0) return;
-            }
-            BottomPanel.BeginAnimation(HeightProperty , da);
-        }
 
-        private void ViewChangerButton_OnClick(object sender , RoutedEventArgs e) {
-            _subjectListModel.ToggleDisplayMode();
-            UpdateBottomPanelVisibility();
-        }
 
         #region SearchBoxEvents
         private void SearchBoxOnTextChanged(object sender , TextChangedEventArgs textChangedEventArgs) {
@@ -179,6 +161,7 @@ namespace Time_Table_Arranging_Program.User_Control {
         private SubjectListModel _subjectListModel;
         private List<SubjectModel> _previousSelectedSubjects = new List<SubjectModel>();
         public void SetDataContext(SubjectListModel subjectListModel) {
+            this.DataContext = subjectListModel;
             _subjectListModel = subjectListModel;
             _nameAndCodeOfAllSubjects = new List<string>();
             var list = _subjectListModel.ToList();

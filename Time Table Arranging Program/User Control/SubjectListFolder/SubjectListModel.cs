@@ -18,13 +18,11 @@ namespace Time_Table_Arranging_Program.User_Control.SubjectListFolder {
         public SubjectListModel(List<SubjectModel> subjectModels) {
             _subjectModels = subjectModels;
             foreach (var subjectModel in _subjectModels) {
-                subjectModel.Selected += SubjectModel_SelectionChanged;
+                subjectModel.Selected += SubjectModel_Selected;
+                subjectModel.Deselected += SubjectModel_Deselected;
             }
         }
 
-        private void SubjectModel_SelectionChanged(object sender , EventArgs e) {
-            throw new NotImplementedException();
-        }
 
         public List<SubjectModel> ToList() {
             return _subjectModels;
@@ -71,6 +69,24 @@ namespace Time_Table_Arranging_Program.User_Control.SubjectListFolder {
                            }
                        }));
             }
+        }
+
+        #endregion
+
+        #region NoSubjectSelectedProperty
+
+        private int _selectedSubjectCount;
+        public int SelectedSubjectCount {
+            get => _selectedSubjectCount;
+            set => SetProperty(ref _selectedSubjectCount, value);
+        }
+        
+        private void SubjectModel_Selected(object sender , EventArgs e) {
+            SelectedSubjectCount++;
+        }
+
+        private void SubjectModel_Deselected(object sender , EventArgs e) {
+            SelectedSubjectCount--;
         }
 
         #endregion

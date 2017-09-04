@@ -199,6 +199,7 @@
     <Compile Include="Interfaces\INeedDataContext.cs" />
     <Compile Include="Interfaces\IPageWithLoadedFunction.cs" />
     <Compile Include="Interfaces\ToBinary.cs" />
+    <Compile Include="IValueConverter\CutoffConverter.cs" />
     <Compile Include="IValueConverter\TooltipConverterForToggleButton.cs" />
     <Compile Include="Model\BinarizedSlotModel.cs" />
     <Compile Include="Model\SubjectModel.cs" />
