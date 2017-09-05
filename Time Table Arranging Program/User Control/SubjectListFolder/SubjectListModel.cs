@@ -100,7 +100,7 @@ namespace Time_Table_Arranging_Program.User_Control.SubjectListFolder {
         #region SearchingProperties
 
         private CyclicIteratableList<SubjectModel> _iteratableList;
-        private bool _somethingFound;
+        private bool _somethingFound = true;
         public bool SomethingFound {
             get => _somethingFound;
             set => SetProperty(ref _somethingFound , value);
@@ -113,10 +113,11 @@ namespace Time_Table_Arranging_Program.User_Control.SubjectListFolder {
         }
 
         public void Search(string searchedText) {
+            DisplayMode = DisplayModeEnum.DisplayAllSubject;
             SomethingFound = SearchForMatchingSubjectAndDisplayThem(searchedText);
             if (SomethingFound) return;
             SuggestedText = LevenshteinDistance.GetClosestMatchingTerm(searchedText , _nameAndCodeOfAllSubjects.ToArray());
-            if (SuggestedText != null) SearchForMatchingSubjectAndDisplayThem(SuggestedText);
+            if (SuggestedText != null) SearchForMatchingSubjectAndDisplayThem(SuggestedText.ToLower());
         }
 
         private bool SearchForMatchingSubjectAndDisplayThem(string searchedText) {
@@ -131,9 +132,7 @@ namespace Time_Table_Arranging_Program.User_Control.SubjectListFolder {
                     found.Add(subject);
                     subject.HighlightedText = searchedText;
                 }
-                else {
-                    subject.IsVisible = false;
-                }
+                else subject.IsVisible = false;
             }
             _iteratableList = new CyclicIteratableList<SubjectModel>(found);
             var current = _iteratableList.GetCurrent();

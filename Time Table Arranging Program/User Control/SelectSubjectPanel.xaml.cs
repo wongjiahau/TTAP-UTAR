@@ -95,56 +95,10 @@ namespace Time_Table_Arranging_Program.User_Control {
 
         }
 
-
-
         #region SearchBoxEvents
         private void SearchBoxOnTextChanged(object sender , TextChangedEventArgs textChangedEventArgs) {
-            //ShowAllSubjects();
             string searchedText = SearchBox.Text.ToLower();
             _subjectListModel.Search(searchedText);
-            return; 
-            HintLabel.Visibility = searchedText == "" ? Collapsed : Visible;
-            bool somethingFound = SearchForMatchingSubjectAndDisplayThem(searchedText);
-            if (somethingFound) {
-                FeedbackPanel.Visibility = Collapsed;
-                ErrorLabel.Visibility = Collapsed;
-            }
-            else {
-                _suggestedText = LevenshteinDistance.GetClosestMatchingTerm(searchedText , _nameAndCodeOfAllSubjects.ToArray());
-                if (_suggestedText == null) {
-                    FeedbackPanel.Visibility = Collapsed;
-                    ErrorLabel.Text = "No result found . . .";
-                    ErrorLabel.Visibility = Visible;
-                }
-                else {
-                    ErrorLabel.Visibility = Collapsed;
-                    FeedbackPanel.Visibility = Visible;
-                    SuggestedTextLabel.Text = _suggestedText.Beautify();
-                    SearchForMatchingSubjectAndDisplayThem(_suggestedText.ToLower());
-                }
-            }
-        }
-
-        private bool SearchForMatchingSubjectAndDisplayThem(string searchedText) {
-            bool somethingFound = false;
-            var found = new List<SubjectModel>();
-            var list = _subjectListModel.ToList();
-            foreach (SubjectModel subject in list) {
-                string comparedString = subject.Name.ToLower() + subject.Code.ToLower() + subject.Name.GetInitial().ToLower();
-                if (comparedString.Contains(searchedText)) {
-                    somethingFound = true;
-                    subject.IsVisible = true; 
-                    found.Add(subject);
-                    subject.HighlightedText = searchedText;
-                }
-                else {
-                    subject.IsVisible = false;
-                }
-            }
-            _iteratableList = new CyclicIteratableList<SubjectModel>(found);
-            var current = _iteratableList.GetCurrent();
-            if (current != null) current.IsFocused = true;
-            return somethingFound;
         }
 
         private void YesButton_OnClick(object sender , RoutedEventArgs e) {
