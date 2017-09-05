@@ -13,10 +13,15 @@ namespace Time_Table_Arranging_Program.User_Control {
             InitializeComponent();
         }
 
+
+
         public string Text {
-            get { return TextBox.Text; }
-            set { TextBox.Text = value; }
+            get { return (string)GetValue(TextProperty); }
+            set { SetValue(TextProperty , value); }
         }
+
+        public static readonly DependencyProperty TextProperty =
+            DependencyProperty.Register("Text" , typeof(string) , typeof(SearchBox) , new PropertyMetadata(""));
 
         public event TextChangedEventHandler TextChanged;
 
@@ -29,6 +34,7 @@ namespace Time_Table_Arranging_Program.User_Control {
         private void TextBox_OnTextChanged(object sender, TextChangedEventArgs e) {
             if (TextBox.Text.Length > 0) ClearButton.Visibility = Visibility.Visible;
             else ClearButton.Visibility = Visibility.Collapsed;
+            Text = TextBox.Text;
             TextChanged?.Invoke(this, null);
         }
 

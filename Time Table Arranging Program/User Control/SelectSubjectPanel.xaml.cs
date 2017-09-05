@@ -101,6 +101,8 @@ namespace Time_Table_Arranging_Program.User_Control {
         private void SearchBoxOnTextChanged(object sender , TextChangedEventArgs textChangedEventArgs) {
             //ShowAllSubjects();
             string searchedText = SearchBox.Text.ToLower();
+            _subjectListModel.Search(searchedText);
+            return; 
             HintLabel.Visibility = searchedText == "" ? Collapsed : Visible;
             bool somethingFound = SearchForMatchingSubjectAndDisplayThem(searchedText);
             if (somethingFound) {
