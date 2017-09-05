@@ -18,9 +18,9 @@ namespace NUnit.Tests2.BehavioralTests {
             Then Ali shall see only the SearchBox is visible 
                 ";
             var input = new SubjectListModel(SubjectModel.Parse(TestData.TestSlots));
-            Assert.IsFalse(input.IsErrorLabelVisible, behvaiour);
-            Assert.IsFalse(input.IsFeedbackPanelVisible, behvaiour);
-            Assert.IsFalse(input.IsHintLabelVisible, behvaiour);
+            Assert.IsFalse(input.IsErrorLabelVisible , behvaiour);
+            Assert.IsFalse(input.IsFeedbackPanelVisible , behvaiour);
+            Assert.IsFalse(input.IsHintLabelVisible , behvaiour);
         }
 
         [Test]
@@ -33,7 +33,7 @@ namespace NUnit.Tests2.BehavioralTests {
                 ";
             var input = new SubjectListModel(SubjectModel.Parse(TestData.TestSlots));
             input.Search("something");
-            Assert.IsTrue(input.IsHintLabelVisible, expectedBehaviour);
+            Assert.IsTrue(input.IsHintLabelVisible , expectedBehaviour);
         }
 
 
@@ -49,12 +49,12 @@ namespace NUnit.Tests2.BehavioralTests {
             var input = new SubjectListModel(SubjectModel.Parse(TestData.TestSlots));
             input.Search("something");
             input.Search("");
-            Assert.IsFalse(input.IsHintLabelVisible, expectedBehaviour);
+            Assert.IsFalse(input.IsHintLabelVisible , expectedBehaviour);
         }
 
         [Test]
         public void FilterSubject() {
-            string expectedBehaviour=
+            string expectedBehaviour =
                 @"
             Given Ali just loaded slots data (by logging in)
             When Ali search for 'ASSD'
@@ -62,12 +62,12 @@ namespace NUnit.Tests2.BehavioralTests {
                 ";
             var input = new SubjectListModel(SubjectModel.Parse(TestData.TestSlots));
             input.Search("ASSD");
-            Assert.IsTrue(input.NumberOfVisibleSubject() == 1, expectedBehaviour);
+            Assert.IsTrue(input.NumberOfVisibleSubject() == 1 , expectedBehaviour);
         }
 
         [Test]
         public void SuggestiveText_1() {
-            string expectedBehaviour = 
+            string expectedBehaviour =
                 @"
             Given Ali just loaded slots data (by logging in)
             When Ali search for 'bahsa'
@@ -75,12 +75,12 @@ namespace NUnit.Tests2.BehavioralTests {
                 ";
             var input = new SubjectListModel(SubjectModel.Parse(TestData.TestSlots));
             input.Search("bahsa");
-            Assert.IsTrue(input.IsFeedbackPanelVisible, expectedBehaviour);
+            Assert.IsTrue(input.IsFeedbackPanelVisible , expectedBehaviour);
         }
- 
+
         [Test]
         public void SuggestiveText_2() {
-            string expectedBehaviour = 
+            string expectedBehaviour =
                 @"
             Given Ali just loaded slots data (by logging in)
             When Ali search for 'bahsa'
@@ -88,12 +88,12 @@ namespace NUnit.Tests2.BehavioralTests {
                 ";
             var input = new SubjectListModel(SubjectModel.Parse(TestData.TestSlots));
             input.Search("bahsa");
-            Assert.IsTrue(input.SuggestedText == "Bahasa", expectedBehaviour);
+            Assert.IsTrue(input.SuggestedText == "Bahasa" , expectedBehaviour);
         }
 
         [Test]
         public void SuggestiveText_3() {
-            string expectedBehaviour = 
+            string expectedBehaviour =
                 @"
             Given Ali just loaded slots data (by logging in)
             When Ali search for 'bahsa'
@@ -103,12 +103,12 @@ namespace NUnit.Tests2.BehavioralTests {
             var input = new SubjectListModel(SubjectModel.Parse(TestData.TestSlots));
             input.Search("bahsa");
             input.Search("");
-            Assert.IsFalse(input.IsFeedbackPanelVisible, expectedBehaviour);
+            Assert.IsFalse(input.IsFeedbackPanelVisible , expectedBehaviour);
         }
 
         [Test]
         public void ErrorLabel_1() {
-            string expectedBehaviour = 
+            string expectedBehaviour =
                 @"
             Given Ali just loaded slots data (by logging in)
             When Ali search for 'some random text lol lol lol'
@@ -117,13 +117,13 @@ namespace NUnit.Tests2.BehavioralTests {
                 ";
             var input = new SubjectListModel(SubjectModel.Parse(TestData.TestSlots));
             input.Search("some random text lol lol lol");
-            Assert.IsTrue(input.IsErrorLabelVisible, expectedBehaviour);
-            Assert.IsFalse(input.IsFeedbackPanelVisible, expectedBehaviour);
+            Assert.IsTrue(input.IsErrorLabelVisible , expectedBehaviour);
+            Assert.IsFalse(input.IsFeedbackPanelVisible , expectedBehaviour);
         }
 
         [Test]
         public void ErrorLabel_2() {
-            string expectedBehaviour = 
+            string expectedBehaviour =
                 @"
             Given Ali just loaded slots data (by logging in)
             When Ali search for 'some random text lol lol lol'
@@ -134,7 +134,7 @@ namespace NUnit.Tests2.BehavioralTests {
             var input = new SubjectListModel(SubjectModel.Parse(TestData.TestSlots));
             input.Search("some random text lol lol lol");
             input.Search("");
-            Assert.IsFalse(input.IsErrorLabelVisible, expectedBehaviour);
+            Assert.IsFalse(input.IsErrorLabelVisible , expectedBehaviour);
         }
 
         [Test]
@@ -150,7 +150,7 @@ namespace NUnit.Tests2.BehavioralTests {
             models[0].IsSelected = true;
             var input = new SubjectListModel(models);
             input.ToggleDisplayModeCommand.Execute(null);
-            Assert.IsTrue(input.NumberOfVisibleSubject() == 1, expectedBehaviour);
+            Assert.IsTrue(input.NumberOfVisibleSubject() == 1 , expectedBehaviour);
         }
 
         [Test]
@@ -168,7 +168,7 @@ namespace NUnit.Tests2.BehavioralTests {
             var input = new SubjectListModel(models);
             input.ToggleDisplayModeCommand.Execute(null);
             input.ToggleDisplayModeCommand.Execute(null);
-            Assert.IsTrue(input.NumberOfVisibleSubject() == models.Count, expectedBehaviour);
+            Assert.IsTrue(input.NumberOfVisibleSubject() == models.Count , expectedBehaviour);
         }
 
         [Test]
@@ -186,9 +186,9 @@ namespace NUnit.Tests2.BehavioralTests {
             var input = new SubjectListModel(models);
             input.ToggleDisplayModeCommand.Execute(null);
             input.Search("");
-            Assert.IsTrue(input.NumberOfVisibleSubject() == models.Count, expectedBehaviour);
+            Assert.IsTrue(input.NumberOfVisibleSubject() == models.Count , expectedBehaviour);
         }
- 
+
         [Test]
         public void NavigateUsingArrowKeys_InitialState() {
             string expectedBehaviour =
@@ -198,7 +198,7 @@ namespace NUnit.Tests2.BehavioralTests {
                 ";
             var models = SubjectModel.Parse(TestData.TestSlots);
             var input = new SubjectListModel(models);
-            Assert.IsTrue(models[0].IsFocused, expectedBehaviour);
+            Assert.IsTrue(models[0].IsFocused , expectedBehaviour);
         }
 
         [Test]
@@ -232,5 +232,72 @@ namespace NUnit.Tests2.BehavioralTests {
             input.NavigateToPreviousSubjectCommand.Execute(null);
             Assert.IsTrue(models[0].IsFocused , expectedBehaviour);
         }
+
+        [Test]
+        public void Focusing_TestingForBug() {
+            string expectedBehaviour =
+                @"
+            Given Ali just loaded slots data (by logging in)
+            When Ali search for random text that results in no matching subject
+            And Ali press arrow keys (Up or Down)
+            Then Ali shall not crash the application
+                ";
+            var models = SubjectModel.Parse(TestData.TestSlots);
+            var input = new SubjectListModel(models);
+            input.Search("qlkehj j2f2gkjg4");
+            input.NavigateToNextSubjectCommand.Execute(null);
+            input.NavigateToPreviousSubjectCommand.Execute(null);
+            Assert.Pass(expectedBehaviour);
+        }
+
+        [Test]
+        public void NavigatingAfterSearching_1() {
+            string expectedBehaviour =
+                @"
+            Given Ali just loaded slots data (by logging in)
+            When Ali searched for 'Bahasa'
+            Then Ali shall see that the FIRST matching subject in the list is highlighted
+                ";
+            var models = SubjectModel.Parse(TestData.TestSlots);
+            var input = new SubjectListModel(models);
+            input.Search("Bahasa");
+            Assert.IsTrue(models.FindAll(x => x.Name.ToLower().Contains("Bahasa".ToLower()))[0].IsFocused , expectedBehaviour);
+        }
+
+        [Test]
+        public void NavigatingAfterSearching_2() {
+            string expectedBehaviour =
+                @"
+            Given Ali just loaded slots data (by logging in)
+            When Ali searched for 'Bahasa'
+            And Ali press Down Key
+            Then Ali shall see that the SECOND matching subject in the list is highlighted
+                ";
+            var models = SubjectModel.Parse(TestData.TestSlots);
+            var input = new SubjectListModel(models);
+            input.Search("Bahasa");
+            input.NavigateToNextSubjectCommand.Execute(null);
+            Assert.IsTrue(models.FindAll(x => x.Name.ToLower().Contains("Bahasa".ToLower()))[1].IsFocused , expectedBehaviour);
+        }
+
+
+        [Test]
+        public void NavigatingAfterSearching_3() {
+            string expectedBehaviour =
+                @"
+            Given Ali just loaded slots data (by logging in)
+            When Ali searched for 'Bahasa'
+            And Ali press Down Key
+            And Ali clear the searches
+            Then Ali shall see that only ONE subject in the list is highlighted
+                ";
+            var models = SubjectModel.Parse(TestData.TestSlots);
+            var input = new SubjectListModel(models);
+            input.Search("Bahasa");
+            input.NavigateToNextSubjectCommand.Execute(null);
+            input.Search("");
+            Assert.IsTrue(models.Count(x => x.IsFocused) == 1 , expectedBehaviour);
+        }
+
     }
 }

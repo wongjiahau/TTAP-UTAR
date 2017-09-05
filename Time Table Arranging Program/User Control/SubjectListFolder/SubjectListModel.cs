@@ -150,6 +150,7 @@ namespace Time_Table_Arranging_Program.User_Control.SubjectListFolder {
                 else subject.IsVisible = false;
             }
             _focusNavigator = new FocusNavigator(new List<IFocusable>(found));
+            _focusNavigator.FocusFirstItem();
             return somethingFound;
         }
         #endregion

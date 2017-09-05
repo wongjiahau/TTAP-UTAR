@@ -16,25 +16,28 @@ namespace Time_Table_Arranging_Program.Class {
 
     public class FocusNavigator {
         private CyclicIteratableList<IFocusable> _iteratableList;
-        private IFocusable _lastFocused;
+        private static IFocusable _lastFocused;
         public FocusNavigator(List<IFocusable> focusables) {
             _iteratableList = new CyclicIteratableList<IFocusable>(focusables);
         }
 
         public void FocusFirstItem() {
-            _iteratableList.GetCurrent().IsFocused = true;
+            var current = _iteratableList.GetCurrent();
+            if (current != null) current.IsFocused = true;
             DefocusLastFocused();
         }
 
         public void NavigateToNext() {
             _iteratableList.GoToNext();
-            _iteratableList.GetCurrent().IsFocused = true;
+            var current = _iteratableList.GetCurrent();
+            if (current != null) current.IsFocused = true;
             DefocusLastFocused();
         }
 
         public void NavigateToPrevious() {
             _iteratableList.GoToPrevious();
-            _iteratableList.GetCurrent().IsFocused = true;
+            var current = _iteratableList.GetCurrent();
+            if (current != null) current.IsFocused = true;
             DefocusLastFocused();
         }
 

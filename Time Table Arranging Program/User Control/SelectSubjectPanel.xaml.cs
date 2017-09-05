@@ -174,29 +174,16 @@ namespace Time_Table_Arranging_Program.User_Control {
         private void SearchBox_OnOnKeyPressed(object sender , KeyEventArgs e) {
             switch (e.Key) {
                 case Key.Up:
-                case Key.Left:
-                    _iteratableList.GoToPrevious();
-                    var current1 = _iteratableList.GetCurrent();
-                    if (current1 == null) return;
-                    current1.IsFocused = true;
-                    if (_iteratableList.AtLast()) ScrollViewer.ScrollToBottom();
-                    //else if (!current1.IsVisibleToUser(ScrollViewer)) ScrollViewer.PageUp();
+                    _subjectListModel.NavigateToPreviousSubjectCommand.Execute(null);
                     break;
                 case Key.Down:
-                case Key.Right:
-                    _iteratableList.GoToNext();
-                    var current = _iteratableList.GetCurrent();
-                    if (current == null) return;
-                    current.IsFocused = true;
-                    if (_iteratableList.AtFirst()) ScrollViewer.ScrollToHome();
+                    _subjectListModel.NavigateToNextSubjectCommand.Execute(null);
+                    //TODO : How to ensure the ScrollViewer scroll automatically?
                     //else if (!current.IsVisibleToUser(ScrollViewer)) ScrollViewer.PageDown();
                     break;
                 case Key.Enter:
-                    var current2 = _iteratableList.GetCurrent();
-                    if (current2 == null) return;
-                    current2.IsSelected = !current2.IsSelected;
+                    //TODO : Select current subject
                     break;
-                default: break;
             }
         }
     }
