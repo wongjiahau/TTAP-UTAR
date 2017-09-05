@@ -129,7 +129,7 @@ namespace NUnit.Tests2.BehavioralTests {
             When Ali search for 'some random text lol lol lol'
             And Ali clear searches after that
             Then Ali shall not see any suggestion
-            And Ali shall see an error message
+            And Ali shall not see the error message anymore 
                 ";
             var input = new SubjectListModel(SubjectModel.Parse(TestData.TestSlots));
             input.Search("some random text lol lol lol");

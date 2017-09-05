@@ -120,11 +120,6 @@ namespace Time_Table_Arranging_Program.User_Control.SubjectListFolder {
         }
 
         private CyclicIteratableList<SubjectModel> _iteratableList;
-        private bool _somethingFound = true;
-        public bool SomethingFound {
-            get => _somethingFound;
-            set => SetProperty(ref _somethingFound , value);
-        }
 
         private string _suggestedText;
         public string SuggestedText {
@@ -134,10 +129,14 @@ namespace Time_Table_Arranging_Program.User_Control.SubjectListFolder {
 
         public void Search(string searchedText) {
             DisplayMode = DisplayModeEnum.DisplayAllSubject;
-            SomethingFound = SearchForMatchingSubjectAndDisplayThem(searchedText);
-            if (SomethingFound) return;
+            IsHintLabelVisible = searchedText.Length > 0;
+            IsErrorLabelVisible = IsFeedbackPanelVisible = false;
+            var somethingFound = SearchForMatchingSubjectAndDisplayThem(searchedText);
+            if (somethingFound) return;
             SuggestedText = LevenshteinDistance.GetClosestMatchingTerm(searchedText , _nameAndCodeOfAllSubjects.ToArray());
             if (SuggestedText != null) SearchForMatchingSubjectAndDisplayThem(SuggestedText.ToLower());
+            IsFeedbackPanelVisible = SuggestedText != null;
+            IsErrorLabelVisible = SuggestedText == null;
         }
 
         private bool SearchForMatchingSubjectAndDisplayThem(string searchedText) {

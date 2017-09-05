@@ -9,6 +9,7 @@
              xmlns:iValueConverter="clr-namespace:Time_Table_Arranging_Program.IValueConverter"
              mc:Ignorable="d" KeyDown="SelectSubjectPanel_OnKeyDown"   FocusManager.IsFocusScope="True" FocusManager.FocusedElement="{Binding ElementName=SearchBox}" >
     <UserControl.Resources>
+        <iValueConverter:VisibilityConverter x:Key="VisibilityConverter"></iValueConverter:VisibilityConverter>
         <iValueConverter:CutoffConverter x:Key="CutoffConverter" />
         <iValueConverter:IsStringEmptyConverter x:Key="IsStringEmptyConverter" />
     </UserControl.Resources>
@@ -30,19 +31,8 @@
                     </Border>
                 </DockPanel>
             </StackPanel>
-            <TextBlock x:Name="HintLabel" Margin="10" DockPanel.Dock="Top">
-                <TextBlock.Style>
-                    <Style TargetType="TextBlock">
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding ElementName=SearchBox, Path=Text, Converter={StaticResource IsStringEmptyConverter}}" Value="True">
-                                <Setter Property="Visibility" Value="Collapsed" />
-                            </DataTrigger>
-                            <DataTrigger Binding="{Binding ElementName=SearchBox, Path=Text, Converter={StaticResource IsStringEmptyConverter}}" Value="False">
-                                <Setter Property="Visibility" Value="Visible" />
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </TextBlock.Style>
+            <TextBlock x:Name="HintLabel" Margin="10" DockPanel.Dock="Top"
+                       Visibility="{Binding IsHintLabelVisible, Converter={StaticResource VisibilityConverter}}" >
                 Press ESC to clear text of search box.
             </TextBlock>
             <Grid DockPanel.Dock="Top">
@@ -54,48 +44,16 @@
                         <Setter Property="Margin" Value="10" />
                     </Style>
                 </Grid.Resources>
-                <StackPanel x:Name="FeedbackPanel"  Orientation="Horizontal" Margin="5">
-                    <StackPanel.Style>
-                        <Style TargetType="StackPanel">
-                            <Style.Triggers>
-                                <MultiDataTrigger>
-                                    <MultiDataTrigger.Conditions>
-                                        <Condition Binding="{Binding SomethingFound}" Value="False" />
-                                        <Condition Binding="{Binding ElementName=ErrorLabel, Path=Visibility}" Value="Collapsed"/>
-                                    </MultiDataTrigger.Conditions>
-                                    <Setter Property="Visibility" Value="Visible" />
-                                </MultiDataTrigger>
-                                <DataTrigger Binding="{Binding SomethingFound}" Value="True">
-                                    <Setter Property="Visibility" Value="Collapsed"></Setter>
-                                </DataTrigger>
-                                <DataTrigger Binding="{Binding SuggestedText}" Value="{x:Null}">
-                                    <Setter Property="Visibility" Value="Collapsed"></Setter>
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </StackPanel.Style>
+                <StackPanel x:Name="FeedbackPanel"  Orientation="Horizontal" Margin="5"
+                            Visibility="{Binding IsFeedbackPanelVisible, Converter={StaticResource VisibilityConverter}}">
                     <TextBlock x:Name="FeedbackTextBlock" Text="Showing result for  " />
                     <TextBlock  Text="{Binding SuggestedText}" FontStyle="Italic" FontWeight="Bold" x:Name="SuggestedTextLabel" />
                     <Button Click="YesButton_OnClick" Visibility="Collapsed">YES</Button>
                 </StackPanel>
-                <TextBlock x:Name="ErrorLabel" Margin="10" FontSize="15" FontWeight="Bold">
-                    <TextBlock.Style>
-                        <Style TargetType="TextBlock">
-                            <Setter Property="Visibility" Value="Collapsed"></Setter>
-                            <Style.Triggers>
-                                <MultiDataTrigger>
-                                    <MultiDataTrigger.Conditions>
-                                        <Condition Binding="{Binding SomethingFound}" Value="False" />
-                                        <Condition Binding="{Binding SuggestedText}" Value="{x:Null}" />
-                                    </MultiDataTrigger.Conditions>
-                                    <Setter Property="Visibility" Value="Visible" />
-                                </MultiDataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </TextBlock.Style>
+                <TextBlock x:Name="ErrorLabel" Margin="10" FontSize="15" FontWeight="Bold"
+                           Visibility="{Binding IsErrorLabelVisible, Converter={StaticResource VisibilityConverter}}">
                     No result found . . .</TextBlock>
             </Grid>
-
             <materialDesign:ColorZone Mode="Light" materialDesign:ShadowAssist.ShadowDepth="Depth3" x:Name="BottomPanel" DockPanel.Dock="Bottom">
                 <materialDesign:ColorZone.Style>
                     <Style TargetType="materialDesign:ColorZone">
