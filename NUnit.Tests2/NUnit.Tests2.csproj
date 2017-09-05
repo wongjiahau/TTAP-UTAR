@@ -82,6 +82,7 @@
     <Compile Include="Test_CyclicIteratableList.cs" />
     <Compile Include="Test_Day.cs" />
     <Compile Include="Test_Filterer.cs" />
+    <Compile Include="Test_FocusNavigator.cs" />
     <Compile Include="Test_Helper.cs" />
     <Compile Include="Test_Indices.cs" />
     <Compile Include="Test_ParsingHtml.cs" />

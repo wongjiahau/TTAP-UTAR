@@ -189,5 +189,48 @@ namespace NUnit.Tests2.BehavioralTests {
             Assert.IsTrue(input.NumberOfVisibleSubject() == models.Count, expectedBehaviour);
         }
  
+        [Test]
+        public void NavigateUsingArrowKeys_InitialState() {
+            string expectedBehaviour =
+                @"
+            Given Ali just loaded slots data (by logging in)
+            Then Ali should see that the first subject in the list is highlighted
+                ";
+            var models = SubjectModel.Parse(TestData.TestSlots);
+            var input = new SubjectListModel(models);
+            Assert.IsTrue(models[0].IsFocused, expectedBehaviour);
+        }
+
+        [Test]
+        public void NavigateUsingArrowKeys_1() {
+            string expectedBehaviour =
+                @"
+            Given Ali just loaded slots data (by logging in)
+            When Ali focused the SelectSubjectPanel
+            And Ali press Down arrow key
+            Then Ali should see that the focus will move to the 2nd subject in the list
+                ";
+            var models = SubjectModel.Parse(TestData.TestSlots);
+            var input = new SubjectListModel(models);
+            input.NavigateToNextSubjectCommand.Execute(null);
+            Assert.IsTrue(models[1].IsFocused , expectedBehaviour);
+        }
+
+        [Test]
+        public void NavigateUsingArrowKeys_2() {
+            string expectedBehaviour =
+                @"
+            Given Ali just loaded slots data (by logging in)
+            When Ali focused the SelectSubjectPanel
+            And Ali press Down arrow key
+            And Ali press Up arrow key
+            Then Ali should see that the first subject in the list is highlighted 
+                ";
+            var models = SubjectModel.Parse(TestData.TestSlots);
+            var input = new SubjectListModel(models);
+            input.NavigateToNextSubjectCommand.Execute(null);
+            input.NavigateToPreviousSubjectCommand.Execute(null);
+            Assert.IsTrue(models[0].IsFocused , expectedBehaviour);
+        }
     }
 }

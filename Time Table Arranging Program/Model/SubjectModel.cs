@@ -9,7 +9,7 @@ using Time_Table_Arranging_Program.Class.AbstractClass;
 using Time_Table_Arranging_Program.User_Control.CheckboxWithListDownMenuFolder.ErrorMessageType;
 
 namespace Time_Table_Arranging_Program.Model {
-    public class SubjectModel : ObservableObject {
+    public class SubjectModel : ObservableObject, IFocusable {
         public SubjectModel() {
             Name = "Testing Subject 123";
             CodeAndNameInitials = "MPU329999";
@@ -75,19 +75,9 @@ namespace Time_Table_Arranging_Program.Model {
         }
 
         private bool _isFocused;
-        private static SubjectModel _lastFocusedSubject;
-        private bool _isChangingFocus;
         public bool IsFocused {
             get => _isFocused;
-            set {
-                SetProperty(ref _isFocused, value);
-                if (_lastFocusedSubject != null && !_isChangingFocus) {
-                    _isChangingFocus = true;
-                    _lastFocusedSubject.IsFocused = false;
-                }
-                _lastFocusedSubject = this;
-                _isChangingFocus = false;
-            }
+            set => SetProperty(ref _isFocused, value);
         }
 
         private bool _isVisible = true;

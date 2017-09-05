@@ -173,6 +173,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Class\BugReportSender.cs" />
+    <Compile Include="Class\FocusNavigator.cs" />
     <Compile Include="IValueConverter\IsStringEmptyConverter.cs" />
     <Compile Include="Class\Helper\Helper.cs" />
     <Compile Include="Class\Helper\WaitCursor.cs" />

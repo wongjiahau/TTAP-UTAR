@@ -26,6 +26,8 @@ namespace Time_Table_Arranging_Program.User_Control.SubjectListFolder {
                 _nameAndCodeOfAllSubjects.Add(subjectModel.Name);
                 _nameAndCodeOfAllSubjects.Add(subjectModel.Code);
             }
+            _focusNavigator = new FocusNavigator(new List<IFocusable>(_subjectModels));
+            _focusNavigator.FocusFirstItem();
         }
 
 
@@ -37,7 +39,6 @@ namespace Time_Table_Arranging_Program.User_Control.SubjectListFolder {
             return _subjectModels.Count(x => x.IsVisible);
         }
         #region ViewModelProperties
-
         #region DisplayModeProperty
 
         public enum DisplayModeEnum {
@@ -63,21 +64,18 @@ namespace Time_Table_Arranging_Program.User_Control.SubjectListFolder {
         }
 
         private ICommand _toggleDisplayModeCommand;
-        public ICommand ToggleDisplayModeCommand {
-            get {
-                return _toggleDisplayModeCommand ??
-                       (_toggleDisplayModeCommand = new RelayCommand(() => {
-                           switch (DisplayMode) {
-                               case DisplayModeEnum.DisplayAllSubject:
-                                   DisplayMode = DisplayModeEnum.DisplaySelectedSubject;
-                                   break;
-                               case DisplayModeEnum.DisplaySelectedSubject:
-                                   DisplayMode = DisplayModeEnum.DisplayAllSubject;
-                                   break;
-                           }
-                       }));
-            }
-        }
+        public ICommand ToggleDisplayModeCommand
+            => _toggleDisplayModeCommand ??
+                (_toggleDisplayModeCommand = new RelayCommand(() => {
+                    switch (DisplayMode) {
+                        case DisplayModeEnum.DisplayAllSubject:
+                            DisplayMode = DisplayModeEnum.DisplaySelectedSubject;
+                            break;
+                        case DisplayModeEnum.DisplaySelectedSubject:
+                            DisplayMode = DisplayModeEnum.DisplayAllSubject;
+                            break;
+                    }
+                }));
 
         #endregion
 
@@ -99,27 +97,25 @@ namespace Time_Table_Arranging_Program.User_Control.SubjectListFolder {
 
         #endregion
 
-
         #region SearchingProperties
         private bool _isHintLabelVisible = false;
         public bool IsHintLabelVisible {
             get => _isHintLabelVisible;
-            set => SetProperty(ref _isHintLabelVisible, value);
+            set => SetProperty(ref _isHintLabelVisible , value);
         }
 
         private bool _isFeedbackPanelVisible = false;
         public bool IsFeedbackPanelVisible {
             get => _isFeedbackPanelVisible;
-            set => SetProperty(ref _isFeedbackPanelVisible, value);
+            set => SetProperty(ref _isFeedbackPanelVisible , value);
         }
 
         private bool _isErrorLabelVisible = false;
         public bool IsErrorLabelVisible {
             get => _isErrorLabelVisible;
-            set => SetProperty(ref _isErrorLabelVisible, value);
+            set => SetProperty(ref _isErrorLabelVisible , value);
         }
 
-        private CyclicIteratableList<SubjectModel> _iteratableList;
 
         private string _suggestedText;
         public string SuggestedText {
@@ -153,12 +149,28 @@ namespace Time_Table_Arranging_Program.User_Control.SubjectListFolder {
                 }
                 else subject.IsVisible = false;
             }
-            _iteratableList = new CyclicIteratableList<SubjectModel>(found);
-            var current = _iteratableList.GetCurrent();
-            if (current != null) current.IsFocused = true;
+            _focusNavigator = new FocusNavigator(new List<IFocusable>(found));
             return somethingFound;
         }
         #endregion
+
+        #region NavigatingWithArrowKeys
+        private FocusNavigator _focusNavigator;
+        private ICommand _navigateToNextSubjectCommand;
+        public ICommand NavigateToNextSubjectCommand
+            => _navigateToNextSubjectCommand ?? 
+                (_navigateToNextSubjectCommand = new RelayCommand(() => {
+                    _focusNavigator.NavigateToNext();                    
+                }));
+
+        private ICommand _navigateToPreviousSubjectCommand;
+        public ICommand NavigateToPreviousSubjectCommand
+            => _navigateToPreviousSubjectCommand ?? 
+                (_navigateToPreviousSubjectCommand = new RelayCommand(() => {
+                    _focusNavigator.NavigateToPrevious();                    
+                }));
+        #endregion
+
         #endregion
     }
 
