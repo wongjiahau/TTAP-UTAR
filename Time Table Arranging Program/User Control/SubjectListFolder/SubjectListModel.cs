@@ -33,6 +33,9 @@ namespace Time_Table_Arranging_Program.User_Control.SubjectListFolder {
             return _subjectModels;
         }
 
+        public int NumberOfVisibleSubject() {
+            return _iteratableList.Counts;
+        }
         #region ViewModelProperties
 
         #region DisplayModeProperty
@@ -98,6 +101,23 @@ namespace Time_Table_Arranging_Program.User_Control.SubjectListFolder {
 
 
         #region SearchingProperties
+        private bool _isHintLabelVisible = false;
+        public bool IsHintLabelVisible {
+            get => _isHintLabelVisible;
+            set => SetProperty(ref _isHintLabelVisible, value);
+        }
+
+        private bool _isFeedbackPanelVisible = false;
+        public bool IsFeedbackPanelVisible {
+            get => _isFeedbackPanelVisible;
+            set => SetProperty(ref _isFeedbackPanelVisible, value);
+        }
+
+        private bool _isErrorLabelVisible = false;
+        public bool IsErrorLabelVisible {
+            get => _isErrorLabelVisible;
+            set => SetProperty(ref _isErrorLabelVisible, value);
+        }
 
         private CyclicIteratableList<SubjectModel> _iteratableList;
         private bool _somethingFound = true;

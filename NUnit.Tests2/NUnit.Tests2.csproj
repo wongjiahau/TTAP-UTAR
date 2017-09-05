@@ -61,6 +61,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BehavioralTests\SearchSubjectBehaviour.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="Sandbox_Testing.cs" />
     <Compile Include="TestClass_PermutateV4.cs" />
