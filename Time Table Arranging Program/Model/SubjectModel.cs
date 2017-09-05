@@ -115,5 +115,9 @@ namespace Time_Table_Arranging_Program.Model {
         }
 
         #endregion
+
+        public override string ToString() {
+            return $"{Name}, IsFocused={IsFocused}, IsSelected={IsSelected}, IsVisible={IsVisible}";
+        }
     }
 }
