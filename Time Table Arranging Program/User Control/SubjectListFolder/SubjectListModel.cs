@@ -34,7 +34,7 @@ namespace Time_Table_Arranging_Program.User_Control.SubjectListFolder {
         }
 
         public int NumberOfVisibleSubject() {
-            return _iteratableList.Counts;
+            return _subjectModels.Count(x => x.IsVisible);
         }
         #region ViewModelProperties
 
