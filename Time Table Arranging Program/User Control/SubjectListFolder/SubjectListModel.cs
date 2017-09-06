@@ -38,6 +38,13 @@ namespace Time_Table_Arranging_Program.User_Control.SubjectListFolder {
         public int NumberOfVisibleSubject() {
             return _subjectModels.Count(x => x.IsVisible);
         }
+
+        public bool SelectSubject(string subjectCode) {
+            var subjectToBeSelcted = _subjectModels.Find(x => x.Code == subjectCode);
+            if (subjectToBeSelcted == null) return false;
+            subjectToBeSelcted.IsSelected = true;
+            return true;
+        }
         #region ViewModelProperties
         #region DisplayModeProperty
 
