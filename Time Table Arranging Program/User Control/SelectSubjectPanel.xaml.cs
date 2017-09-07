@@ -182,7 +182,7 @@ namespace Time_Table_Arranging_Program.User_Control {
                     //else if (!current.IsVisibleToUser(ScrollViewer)) ScrollViewer.PageDown();
                     break;
                 case Key.Enter:
-                    //TODO : Select current subject
+                    _subjectListModel.ToggleSelectionOnCurrentFocusedSubject();
                     break;
             }
         }

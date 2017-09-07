@@ -39,6 +39,11 @@ namespace Time_Table_Arranging_Program.User_Control.SubjectListFolder {
             return _subjectModels.Count(x => x.IsVisible);
         }
 
+        public void ToggleSelectionOnCurrentFocusedSubject() {
+            var current = ((SubjectModel) _focusNavigator.GetCurrentlyFocusedItem());
+            current.IsSelected = !current.IsSelected;
+        }
+
         public bool SelectSubject(string subjectCode) {
             var subjectToBeSelcted = _subjectModels.Find(x => x.Code == subjectCode);
             if (subjectToBeSelcted == null) return false;

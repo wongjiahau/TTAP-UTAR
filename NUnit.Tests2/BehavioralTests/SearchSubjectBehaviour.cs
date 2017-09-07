@@ -313,5 +313,40 @@ namespace NUnit.Tests2.BehavioralTests {
             Assert.IsTrue(models.Find(x => x.CodeAndNameInitials.Contains("ASSD")).IsFocused
                 , expectedBehaviour);
         }
+
+        [Test]
+        public void SelectSubjectByPressingEnter() {
+            string expectedBehaviour =
+                @"
+            Given Ali just loaded slots data (by logging in)
+            When Ali searched for the name of first subject in the list('ASSD')
+            And Ali pressed Enter  
+            Then Ali shall see that the first subject in the list is selected
+                ";
+            var models = SubjectModel.Parse(TestData.TestSlots);
+            var input = new SubjectListModel(models);
+            input.Search("ASSD".ToLower());
+            input.ToggleSelectionOnCurrentFocusedSubject();
+            Assert.IsTrue(models.Find(x => x.CodeAndNameInitials.Contains("ASSD")).IsSelected
+                , expectedBehaviour);
+        }
+ 
+        [Test]
+        public void DeselectSubjectByPressingEnter() {
+            string expectedBehaviour =
+                @"
+            Given Ali just loaded slots data (by logging in)
+            When Ali searched for the name of first subject in the list('ASSD')
+            And Ali pressed Enter  
+            Then Ali shall see that the first subject in the list is selected
+                ";
+            var models = SubjectModel.Parse(TestData.TestSlots);
+            var input = new SubjectListModel(models);
+            input.Search("ASSD".ToLower());
+            input.ToggleSelectionOnCurrentFocusedSubject();
+            input.ToggleSelectionOnCurrentFocusedSubject();
+            Assert.IsTrue(models.Find(x => x.CodeAndNameInitials.Contains("ASSD")).IsSelected == false
+                , expectedBehaviour);
+        }
     }
 }

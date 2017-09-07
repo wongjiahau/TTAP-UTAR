@@ -21,6 +21,10 @@ namespace Time_Table_Arranging_Program.Class {
             _iteratableList = new CyclicIteratableList<IFocusable>(focusables);
         }
 
+        public IFocusable GetCurrentlyFocusedItem() {
+            return _lastFocused;
+        }
+
         public void FocusFirstItem() {
             DefocusLastFocused();
             var current = _iteratableList.GetCurrent();
