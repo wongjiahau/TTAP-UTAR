@@ -309,7 +309,7 @@ namespace NUnit.Tests2.BehavioralTests {
                 ";
             var models = SubjectModel.Parse(TestData.TestSlots);
             var input = new SubjectListModel(models);
-            input.Search("ASSD");
+            input.Search("ASSD".ToLower());
             Assert.IsTrue(models.Find(x => x.CodeAndNameInitials.Contains("ASSD")).IsFocused
                 , expectedBehaviour);
         }

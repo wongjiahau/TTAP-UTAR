@@ -134,8 +134,7 @@ namespace Time_Table_Arranging_Program.User_Control.SubjectListFolder {
             DisplayMode = DisplayModeEnum.DisplayAllSubject;
             IsHintLabelVisible = searchedText.Length > 0;
             IsErrorLabelVisible = IsFeedbackPanelVisible = false;
-            var somethingFound = SearchForMatchingSubjectAndDisplayThem(searchedText);
-            if (somethingFound) return;
+            if (SearchForMatchingSubjectAndDisplayThem(searchedText)) return;
             SuggestedText = LevenshteinDistance.GetClosestMatchingTerm(searchedText , _nameAndCodeOfAllSubjects.ToArray());
             if (SuggestedText != null) SearchForMatchingSubjectAndDisplayThem(SuggestedText.ToLower());
             IsFeedbackPanelVisible = SuggestedText != null;
@@ -166,16 +165,16 @@ namespace Time_Table_Arranging_Program.User_Control.SubjectListFolder {
         private FocusNavigator _focusNavigator;
         private ICommand _navigateToNextSubjectCommand;
         public ICommand NavigateToNextSubjectCommand
-            => _navigateToNextSubjectCommand ?? 
+            => _navigateToNextSubjectCommand ??
                 (_navigateToNextSubjectCommand = new RelayCommand(() => {
-                    _focusNavigator.NavigateToNext();                    
+                    _focusNavigator.NavigateToNext();
                 }));
 
         private ICommand _navigateToPreviousSubjectCommand;
         public ICommand NavigateToPreviousSubjectCommand
-            => _navigateToPreviousSubjectCommand ?? 
+            => _navigateToPreviousSubjectCommand ??
                 (_navigateToPreviousSubjectCommand = new RelayCommand(() => {
-                    _focusNavigator.NavigateToPrevious();                    
+                    _focusNavigator.NavigateToPrevious();
                 }));
         #endregion
 
