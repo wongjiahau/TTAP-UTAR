@@ -298,6 +298,7 @@
     <Compile Include="Pages\Window_StateSummary.xaml.cs">
       <DependentUpon>Window_StateSummary.xaml</DependentUpon>
     </Compile>
+    <Compile Include="TimetableFinder\TimetableFinder.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="TestData.cs" />

@@ -14,8 +14,8 @@ namespace Time_Table_Arranging_Program.Class.StateSummary {
             return new StateTable(x);
         }
         private StateTable(List<List<Slot>> outputTimetables) {
-          _stateCells =   NewAlgorithmUsingBinary(outputTimetables);            
-        }        
+            _stateCells = NewAlgorithmUsingBinary(outputTimetables);
+        }
         private List<IStateCell> NewAlgorithmUsingBinary(List<List<Slot>> outputTimetables) {
             var states = new Dictionary<int , int[]>();
             for (int i = 0 ; i < 7 ; i++) {
@@ -47,8 +47,8 @@ namespace Time_Table_Arranging_Program.Class.StateSummary {
                 Day day = Day.GetDay(i + 1);
                 Time time = Time.CreateTime_24HourFormat(7 , 0);
                 for (int j = 0 ; j < length ; j++) {
-                    var c = new StateCell(i,j,day,time);
-                    if (and_value[j] == true) c.State= CellState.DefinitelyOccupied;
+                    var c = new StateCell(i , j , day , time);
+                    if (and_value[j] == true) c.State = CellState.DefinitelyOccupied;
                     else if (or_value[j] == false) c.State = CellState.DefinitelyUnoccupied;
                     else c.State = CellState.MaybeUnoccupied;
                     stateCells.Add(c);
@@ -59,8 +59,8 @@ namespace Time_Table_Arranging_Program.Class.StateSummary {
         }
 
 
-     
-       
+
+
 
 
 
@@ -70,6 +70,13 @@ namespace Time_Table_Arranging_Program.Class.StateSummary {
 
         IEnumerator IEnumerable.GetEnumerator() {
             return GetEnumerator();
+        }
+
+        public static List<Slot> Filter(List<Slot> slots , StateTable state) {
+            var result = new List<Slot>();
+            for (int i = 0; i < 7; i++) {
+
+            }
         }
     }
 
@@ -105,7 +112,7 @@ namespace Time_Table_Arranging_Program.Class.StateSummary {
 
 
         public Predicate<Slot> ConstraintPredicate => BetweenPredicate;
-        public override string ToString() {            
+        public override string ToString() {
             return $"Click me if you don't want to have class from {_startTime}-{_startTime.Add(Time.CreateTime_24HourFormat(0 , 30))} on {_day}";
         }
     }

@@ -92,6 +92,7 @@
     <Compile Include="Test_StateTable.cs" />
     <Compile Include="Test_StringCipher.cs" />
     <Compile Include="Test_StudentIdFinder.cs" />
+    <Compile Include="Test_TimetableFinder.cs" />
     <Compile Include="Test_TimetableRow.cs" />
     <Compile Include="Test_Token.cs" />
     <Compile Include="Test_SlotParser.cs" />
