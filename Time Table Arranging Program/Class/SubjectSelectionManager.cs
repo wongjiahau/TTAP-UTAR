@@ -21,18 +21,19 @@ namespace Time_Table_Arranging_Program.Class {
         public void ToggleSelectionOnCurrentFocusedSubject() {
             var current = _subjectModels.Find(x => x.IsFocused);
             current.IsSelected = !current.IsSelected;
+            
         }
 
+        private SubjectModel _currentlySelectedSubject;
         private void SubjectModel_Selected(object sender , EventArgs e) {
             SelectedSubjectCount++;
             SubjectSelectionChanged?.Invoke(this, null);
+            _currentlySelectedSubject = (SubjectModel) sender;
         }
 
         private void SubjectModel_Deselected(object sender , EventArgs e) {
             SelectedSubjectCount--;
             SubjectSelectionChanged?.Invoke(this, null);
         }
-
-
     }
 }
