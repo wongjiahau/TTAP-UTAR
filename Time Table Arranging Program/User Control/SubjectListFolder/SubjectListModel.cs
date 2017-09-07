@@ -14,15 +14,16 @@ using Time_Table_Arranging_Program.MVVM_Framework;
 namespace Time_Table_Arranging_Program.User_Control.SubjectListFolder {
     public class SubjectListModel : ObservableObject {
         private List<SubjectModel> _subjectModels;
+        private SubjectSelectionManager _subjectSelectionManager;
         private readonly List<string> _nameAndCodeOfAllSubjects = new List<string>();
 
         public SubjectListModel() { }
 
         public SubjectListModel(List<SubjectModel> subjectModels) {
             _subjectModels = subjectModels;
+            _subjectSelectionManager = new SubjectSelectionManager(subjectModels);
+            _subjectSelectionManager.SubjectSelectionChanged += _subjectSelectionManager_SubjectSelectionChanged;
             foreach (var subjectModel in _subjectModels) {
-                subjectModel.Selected += SubjectModel_Selected;
-                subjectModel.Deselected += SubjectModel_Deselected;
                 _nameAndCodeOfAllSubjects.Add(subjectModel.Name);
                 _nameAndCodeOfAllSubjects.Add(subjectModel.Code);
             }
@@ -30,6 +31,9 @@ namespace Time_Table_Arranging_Program.User_Control.SubjectListFolder {
             _focusNavigator.FocusFirstItem();
         }
 
+        private void _subjectSelectionManager_SubjectSelectionChanged(object sender , EventArgs e) {
+            SelectedSubjectCount = _subjectSelectionManager.SelectedSubjectCount;
+        }
 
         public List<SubjectModel> ToList() {
             return _subjectModels;
@@ -39,9 +43,9 @@ namespace Time_Table_Arranging_Program.User_Control.SubjectListFolder {
             return _subjectModels.Count(x => x.IsVisible);
         }
 
+        #region SubjectSelection
         public void ToggleSelectionOnCurrentFocusedSubject() {
-            var current = ((SubjectModel) _focusNavigator.GetCurrentlyFocusedItem());
-            current.IsSelected = !current.IsSelected;
+            _subjectSelectionManager.ToggleSelectionOnCurrentFocusedSubject();
         }
 
         public bool SelectSubject(string subjectCode) {
@@ -50,6 +54,8 @@ namespace Time_Table_Arranging_Program.User_Control.SubjectListFolder {
             subjectToBeSelcted.IsSelected = true;
             return true;
         }
+        #endregion
+
         #region ViewModelProperties
         #region DisplayModeProperty
 
@@ -91,20 +97,12 @@ namespace Time_Table_Arranging_Program.User_Control.SubjectListFolder {
 
         #endregion
 
-        #region NoSubjectSelectedProperty
+        #region NumberOfSubjectSelectedProperty
 
         private int _selectedSubjectCount;
         public int SelectedSubjectCount {
             get => _selectedSubjectCount;
             set => SetProperty(ref _selectedSubjectCount , value);
-        }
-
-        private void SubjectModel_Selected(object sender , EventArgs e) {
-            SelectedSubjectCount++;
-        }
-
-        private void SubjectModel_Deselected(object sender , EventArgs e) {
-            SelectedSubjectCount--;
         }
 
         #endregion
@@ -127,7 +125,6 @@ namespace Time_Table_Arranging_Program.User_Control.SubjectListFolder {
             get => _isErrorLabelVisible;
             set => SetProperty(ref _isErrorLabelVisible , value);
         }
-
 
         private string _suggestedText;
         public string SuggestedText {
