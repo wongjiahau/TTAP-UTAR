@@ -299,5 +299,19 @@ namespace NUnit.Tests2.BehavioralTests {
             Assert.IsTrue(models.Count(x => x.IsFocused) == 1 , expectedBehaviour);
         }
 
+        [Test]
+        public void NavigatingAfterSearching_4() {
+            string expectedBehaviour =
+                @"
+            Given Ali just loaded slots data (by logging in)
+            When Ali searched for the name of first subject in the list('ASSD')
+            Then Ali shall see that the subject ('ASSD') is highlighted
+                ";
+            var models = SubjectModel.Parse(TestData.TestSlots);
+            var input = new SubjectListModel(models);
+            input.Search("ASSD");
+            Assert.IsTrue(models.Find(x => x.CodeAndNameInitials.Contains("ASSD")).IsFocused
+                , expectedBehaviour);
+        }
     }
 }
