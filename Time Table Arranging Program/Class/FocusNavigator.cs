@@ -22,23 +22,23 @@ namespace Time_Table_Arranging_Program.Class {
         }
 
         public void FocusFirstItem() {
+            DefocusLastFocused();
             var current = _iteratableList.GetCurrent();
             if (current != null) current.IsFocused = true;
-            DefocusLastFocused();
         }
 
         public void NavigateToNext() {
             _iteratableList.GoToNext();
+            DefocusLastFocused();
             var current = _iteratableList.GetCurrent();
             if (current != null) current.IsFocused = true;
-            DefocusLastFocused();
         }
 
         public void NavigateToPrevious() {
             _iteratableList.GoToPrevious();
+            DefocusLastFocused();
             var current = _iteratableList.GetCurrent();
             if (current != null) current.IsFocused = true;
-            DefocusLastFocused();
         }
 
         private void DefocusLastFocused() {
