@@ -15,6 +15,22 @@ namespace Time_Table_Arranging_Program.Class.StateSummary {
             return new StateTable(x);
         }
 
+        /// <summary>
+        /// 1 means DefinitelyOccupied
+        /// 0 means not DefinitelyOccupied
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public static int[] ParseString_AsStateOfDefinitelyOccupied(string input) {
+            var result = new int[7];
+            string[] tokens = input.Split('~');
+            if(tokens.Length != 7) throw new Exception("Make sure that input contains six tilde (~).");
+            for (int i = 0; i < tokens.Length; i++) {
+                result[i] = Convert.ToInt32(tokens[i], 2);
+            }
+            return result;
+        }
+
         public static int[][] GetStateOfAll(List<List<Slot>> timetables) {
             throw new NotImplementedException();
         }
@@ -23,8 +39,25 @@ namespace Time_Table_Arranging_Program.Class.StateSummary {
             throw new NotImplementedException();
         }
 
-        public static int[][] GetStateOfDefinitelyOccupied(List<List<Slot>> timetables) {
-            throw new NotImplementedException();
+        public static int[] GetStateOfDefinitelyOccupied(List<List<Slot>> timetables) {
+            var states = new int[7];
+            for (int i = 0 ; i < 7 ; i++) {
+                states[i] = Convert.ToInt32("11111111111111111111111111111111" , 2);
+            } var o = timetables;
+            if (o == null) return null;
+            for (int i = 0 ; i < o.Count ; i++) {
+                int[] result = new[] { 0 , 0 , 0 , 0 , 0 , 0 , 0 };
+                for (int j = 0 ; j < o[i].Count ; j++) {
+                    var slot = o[i][j];
+                    int day = slot.Day.IntValue - 1;
+                    int timeperiodInBinary = slot.TimePeriod.ToBinary();
+                    result[day] |= timeperiodInBinary;
+                }
+                for (int j = 0 ; j < 7 ; j++) {
+                    states[j] &= result[j];
+                }
+            }
+            return states;
         }
 
         public static int[][] GetStateOfUncertain(List<List<Slot>> timetables) {
@@ -94,7 +127,7 @@ namespace Time_Table_Arranging_Program.Class.StateSummary {
         public static List<Slot> Filter(List<Slot> slots , StateTable state) {
             throw new NotImplementedException();
             var result = new List<Slot>();
-            for (int i = 0; i < 7; i++) {
+            for (int i = 0 ; i < 7 ; i++) {
 
             }
         }
