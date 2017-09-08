@@ -24,72 +24,80 @@ namespace NUnit.Tests2 {
 
         [Test]
         public void Test_TimetableFinder_UsingRunByConsideringWeekNumber() {
-            var input = SubjectModel.Parse(this.input());
             int expectedCount = 616872;
-            var timer = Stopwatch.StartNew();
-            var result =
-                new TimetableFinder().GetPossibleTimetables(input , Permutator.Run_v2_WithConsideringWeekNumber);
-            timer.Stop();
-            Console.WriteLine("Combination count : " + result.Count);
-            Console.WriteLine("Elapsed time : " + timer.Elapsed.TotalSeconds + " s");
+            List<List<Slot>> result = new List<List<Slot>>();
+            Benchmark(() => {
+                var input = SubjectModel.Parse(this.input());
+                result =
+                    new TimetableFinder().GetPossibleTimetables(input , Permutator.Run_v2_WithConsideringWeekNumber);
+            }, "TimetableFinder_ConsideringWeekNumber");
             Assert.True(result.Count == expectedCount);
         }
 
         [Test]
         public void Test_TimetableFinder_UsingRunByWithoutConsideringWeekNumber() {
-            var input = SubjectModel.Parse(this.input());
             int expectedCount = 285696;
-            var timer = Stopwatch.StartNew();
-            var result =
-                new TimetableFinder().GetPossibleTimetables(input , Permutator.Run_v2_withoutConsideringWeekNumber);
-            timer.Stop();
-            Console.WriteLine("Combination count : " + result.Count);
-            Console.WriteLine("Elapsed time : " + timer.Elapsed.TotalSeconds + " s");
+            List<List<Slot>> result = new List<List<Slot>>();
+            Benchmark(() => {
+                var input = SubjectModel.Parse(this.input());
+                result =
+                    new TimetableFinder().GetPossibleTimetables(input , Permutator.Run_v2_withoutConsideringWeekNumber);
+            } , "TimetableFinder_WithoutConsideringWeekNumber");
             Assert.True(result.Count == expectedCount);
 
         }
         [Test]
         public void Test_PermutateV4_Runv2_WithConsideringWeekNumber() {
             int expectedCount = 616872;
-            var timer = Stopwatch.StartNew();
             IPermutator permutator = new Permutator_WithConsideringWeekNumber();
-            var result = permutator.Permutate(input().ToArray());
-            timer.Stop();
-            Console.WriteLine("Combination count : " + result.Count);
-            Console.WriteLine("Elapsed time : " + timer.Elapsed.TotalSeconds + " s");
+            List<List<Slot>> result = new List<List<Slot>>();
+            Benchmark(() => {
+                result = permutator.Permutate(input().ToArray());
+            } , "Runv2_WithConsideringWeekNumber");
             Assert.True(result.Count == expectedCount);
         }
 
         [Test]
         public void Test_PermutateV4_Runv2_WithoutConsideringWeekNumber() {
             int expectedCount = 285696;
-            var timer = Stopwatch.StartNew();
             IPermutator permutator = new Permutator_WithoutConsideringWeekNumber();
-            var result = permutator.Permutate(input().ToArray());
-            timer.Stop();
-            Console.WriteLine("Combination count : " + result.Count);
-            Console.WriteLine("Elapsed time : " + timer.Elapsed.TotalSeconds + " s");
+            List<List<Slot>> result = new List<List<Slot>>();
+            Benchmark(() => {
+                result = permutator.Permutate(input().ToArray());
+            } , "Runv2_WithoutConsideringWeekNumber");
             Assert.True(result.Count == expectedCount);
         }
 
         [Test]
-        public void Test_Benchmarking_ListToArray() {
+        public void Benchmarkihg_ListToArray() {
             //The purpose of this test is to identifiy whethere List.ToArray() is a slowing factor for TimetableFinder
             var input = this.input();
             int loopCount = 1000; //Actually this is more than enough, since TimetableFinder is expected to call List.ToArray() less than a hundred time
             Console.WriteLine("List size is " + input.Count);
             Console.WriteLine(@"Calling List.ToArray() by " + loopCount + @" times");
-            var timer = Stopwatch.StartNew();
-            for (int i = 0 ; i < loopCount; i++) {
-                var x = input.ToArray();
-            }
-            timer.Stop();
-            Console.WriteLine("Elapsed time : " + timer.Elapsed.TotalSeconds + " s");
-            Console.WriteLine(timer.Elapsed.TotalSeconds < 0.01
-                ? "Conclusion : List.ToArray() is NOT a slowing factor."
-                : "Conclusion : List.ToArray() is a slowing factor.");
+            Benchmark(() => {
+                for (int i = 0 ; i < loopCount ; i++) {
+                    var x = input.ToArray();
+                }
+            } , "List.ToArray()");
         }
 
+        [Test]
+        public void Benchmarking_SubjectModel_Parse() {
+            Benchmark(() => {
+                var result = SubjectModel.Parse(input());
+            }, "SubjectModel.Parse()");
+        }
+        private static void Benchmark(Action act , string methodName , int iterations = 1) {
+            GC.Collect();
+            act.Invoke(); // run once outside of loop to avoid initialization costs
+            Stopwatch timer = Stopwatch.StartNew();
+            for (int i = 0 ; i < iterations ; i++) {
+                act.Invoke();
+            }
+            timer.Stop();
+            Console.WriteLine(methodName + " : " + timer.Elapsed.TotalSeconds / iterations + " s");
+        }
 
     }
 }
