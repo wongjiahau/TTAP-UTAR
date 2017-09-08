@@ -10,9 +10,27 @@ namespace Time_Table_Arranging_Program.Class.StateSummary {
 
     public class StateTable : IStateTable {
         private readonly List<IStateCell> _stateCells;
+        private int[][] _definitelyOccupiedState = new int[7][];
         public static StateTable Parse(List<List<Slot>> x) {
             return new StateTable(x);
         }
+
+        public static int[][] GetStateOfAll(List<List<Slot>> timetables) {
+            throw new NotImplementedException();
+        }
+
+        public static int[][] GetStateOfDefinitelyUnoccupied(List<List<Slot>> timetables) {
+            throw new NotImplementedException();
+        }
+
+        public static int[][] GetStateOfDefinitelyOccupied(List<List<Slot>> timetables) {
+            throw new NotImplementedException();
+        }
+
+        public static int[][] GetStateOfUncertain(List<List<Slot>> timetables) {
+            throw new NotImplementedException();
+        }
+
         private StateTable(List<List<Slot>> outputTimetables) {
             _stateCells = NewAlgorithmUsingBinary(outputTimetables);
         }
@@ -53,6 +71,7 @@ namespace Time_Table_Arranging_Program.Class.StateSummary {
                     else c.State = CellState.MaybeUnoccupied;
                     stateCells.Add(c);
                     time = (Time)time.Add(Time.CreateTime_24HourFormat(0 , 30));
+
                 }
             }
             return stateCells;
@@ -73,6 +92,7 @@ namespace Time_Table_Arranging_Program.Class.StateSummary {
         }
 
         public static List<Slot> Filter(List<Slot> slots , StateTable state) {
+            throw new NotImplementedException();
             var result = new List<Slot>();
             for (int i = 0; i < 7; i++) {
 
