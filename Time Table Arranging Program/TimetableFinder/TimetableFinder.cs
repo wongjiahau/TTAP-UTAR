@@ -16,7 +16,7 @@ namespace Time_Table_Arranging_Program.TimetableFinder {
             subjects = SortBySlotCount(subjects);
             var currentSlots = subjects[0].Slots;
             var possibleCombination = permutator.Invoke(currentSlots.ToArray());
-            var state = StateTable.Parse(possibleCombination);
+            var state = StateTable.GetStateOfDefinitelyOccupied(possibleCombination);
             for (int i = 1 ; i < subjects.Count ; i++) {
                 var filtrate = StateTable.Filter(subjects[i].Slots , state);
                 //currentSlots.Add(filtrate.ToArray());

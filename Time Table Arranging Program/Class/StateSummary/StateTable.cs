@@ -24,9 +24,9 @@ namespace Time_Table_Arranging_Program.Class.StateSummary {
         public static int[] ParseString_AsStateOfDefinitelyOccupied(string input) {
             var result = new int[7];
             string[] tokens = input.Split('~');
-            if(tokens.Length != 7) throw new Exception("Make sure that input contains six tilde (~).");
-            for (int i = 0; i < tokens.Length; i++) {
-                result[i] = Convert.ToInt32(tokens[i].Reverse(), 2);
+            if (tokens.Length != 7) throw new Exception("Make sure that input contains six tilde (~).");
+            for (int i = 0 ; i < tokens.Length ; i++) {
+                result[i] = Convert.ToInt32(tokens[i].Reverse() , 2);
             }
             return result;
         }
@@ -44,7 +44,8 @@ namespace Time_Table_Arranging_Program.Class.StateSummary {
             var states = new int[7];
             for (int i = 0 ; i < 7 ; i++) {
                 states[i] = Convert.ToInt32("11111111111111111111111111111111" , 2);
-            } var o = timetables;
+            }
+            var o = timetables;
             if (o == null) return null;
             for (int i = 0 ; i < o.Count ; i++) {
                 int[] result = new[] { 0 , 0 , 0 , 0 , 0 , 0 , 0 };
@@ -111,12 +112,6 @@ namespace Time_Table_Arranging_Program.Class.StateSummary {
             return stateCells;
         }
 
-
-
-
-
-
-
         public IEnumerator<IStateCell> GetEnumerator() {
             return _stateCells.GetEnumerator();
         }
@@ -125,12 +120,14 @@ namespace Time_Table_Arranging_Program.Class.StateSummary {
             return GetEnumerator();
         }
 
-        public static List<Slot> Filter(List<Slot> slots , StateTable state) {
-            throw new NotImplementedException();
+        public static List<Slot> Filter(List<Slot> slots , int[] state) {
             var result = new List<Slot>();
-            for (int i = 0 ; i < 7 ; i++) {
-
+            for (int i = 0 ; i < slots.Count ; i++) {
+                var currentSlot = slots[i];
+                if ((currentSlot.TimePeriod.ToBinary() & state[currentSlot.Day.IntValue - 1]) == 0)
+                    result.Add(currentSlot);
             }
+            return result;
         }
     }
 
