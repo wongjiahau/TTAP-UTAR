@@ -132,5 +132,23 @@ namespace NUnit.Tests2 {
             var actualCount = StateTable.Filter(input, inputState).Count;
             Assert.AreEqual(expectedCount, actualCount);
         }
+
+        [Test]
+        public void Test_StateTable_Filter_ShouldRemoveRelatedSlots() {
+            var input = new List<Slot> {TestData.GetSlot(309), TestData.GetSlot(311)};
+            var inputState = StateTable.ParseString_AsStateOfDefinitelyOccupied(
+                "00000011110000000000000000000000~" +
+                "00000000000000000000000000000000~" +
+                "00000000000000000000000000000000~" +
+                "00000000000000000000000000000000~" +
+                "00000000000000000000000000000000~" +
+                "00000000000000000000000000000000~" +
+                "00000000000000000000000000000000"
+            );
+            var expectedCount = 0;
+            var actualCount = StateTable.Filter(input, inputState).Count;
+            Assert.AreEqual(expectedCount, actualCount);
+
+        }
     }
 }
