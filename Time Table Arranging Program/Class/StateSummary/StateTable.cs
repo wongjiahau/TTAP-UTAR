@@ -26,10 +26,11 @@ namespace Time_Table_Arranging_Program.Class.StateSummary {
             string[] tokens = input.Split('~');
             if(tokens.Length != 7) throw new Exception("Make sure that input contains six tilde (~).");
             for (int i = 0; i < tokens.Length; i++) {
-                result[i] = Convert.ToInt32(tokens[i], 2);
+                result[i] = Convert.ToInt32(tokens[i].Reverse(), 2);
             }
             return result;
         }
+
 
         public static int[][] GetStateOfAll(List<List<Slot>> timetables) {
             throw new NotImplementedException();

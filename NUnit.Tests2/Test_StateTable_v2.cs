@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
+using Time_Table_Arranging_Program.Class;
 using Time_Table_Arranging_Program.Class.StateSummary;
 
 namespace NUnit.Tests2 {
@@ -27,16 +28,58 @@ namespace NUnit.Tests2 {
         [Test]
         public void Test_StateTable_ParseString_2() {
             string input =
-                "00000000000000000000000000000001~" +
-                "00000000000000000000000000000001~" +
-                "00000000000000000000000000000001~" +
-                "00000000000000000000000000000001~" +
-                "00000000000000000000000000000001~" +
-                "00000000000000000000000000000001~" +
-                "00000000000000000000000000000001";
+                "10000000000000000000000000000000~" +
+                "10000000000000000000000000000000~" +
+                "10000000000000000000000000000000~" +
+                "10000000000000000000000000000000~" +
+                "10000000000000000000000000000000~" +
+                "10000000000000000000000000000000~" +
+                "10000000000000000000000000000000";
             var expected = new int[7] { 1 , 1 , 1 , 1 , 1 , 1 , 1 };
             var actual = StateTable.ParseString_AsStateOfDefinitelyOccupied(input);
             Assert.IsTrue(Enumerable.SequenceEqual(actual , expected));
+        }
+
+        [Test]
+        public void Test_StateTable_GetStateOfDefinitelyOccupied_1() {
+            var input = Permutator.Run_v2_withoutConsideringWeekNumber(TestData
+                .GetSlotsByName(TestData.Subjects.AdvancedStructuralSteelDesign).ToArray());
+            var expected = StateTable.ParseString_AsStateOfDefinitelyOccupied(
+                "00000000000000111100000000000000~" +
+                "00110000000000000000000000000000~" +
+                "00000000000000000000000000000000~" +
+                "00000000000000000000000000000000~" +
+                "00000000000000000000000000000000~" +
+                "00000000000000000000000000000000~" +
+                "00000000000000000000000000000000"
+            );
+            var actual = StateTable.GetStateOfDefinitelyOccupied(input);
+            Assert.IsTrue(Enumerable.SequenceEqual(actual , expected));
+        }
+
+        [Test]
+        public void Test_StateTable_GetStateOfDefinitelyOccupied_2() {
+            var input = Permutator.Run_v2_withoutConsideringWeekNumber(TestData
+                .GetSlotsByName(TestData.Subjects.HighwayAndTransportation).ToArray());
+            var expected = StateTable.ParseString_AsStateOfDefinitelyOccupied(
+                "00000000000000000000001100000000~" +
+                "00000000000000000000000000000000~" +
+                "00000011110000000000000000000000~" +
+                "00000000000000000000000000000000~" +
+                "00000000000000000000000000000000~" +
+                "00000000000000000000000000000000~" +
+                "00000000000000000000000000000000"
+            );
+            var actual = StateTable.GetStateOfDefinitelyOccupied(input);
+            for (int i = 0; i < 7; i++) {
+                if (expected[i] != actual[i]) {
+                    string errorMessage="Error at day = " + i + "\n";
+                    errorMessage += "Expected = " + Convert.ToString(expected[i], 2) + "\n";
+                    errorMessage += "Actual   = " + Convert.ToString(actual[i], 2);
+                    Assert.Fail(errorMessage);
+                }
+            }
+            Assert.Pass();
         }
     }
 }
