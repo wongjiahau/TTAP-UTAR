@@ -52,10 +52,9 @@ namespace Time_Table_Arranging_Program.Model
         {
             var result = new List<SubjectModel>();
             var dic = new Dictionary<string, List<Slot>>();
-            foreach (Slot s in slots)
-            {
-                if (!dic.ContainsKey(s.Code))
-                {
+            for (var i = 0; i < slots.Count; i++) {
+                Slot s = slots[i];
+                if (!dic.ContainsKey(s.Code)) {
                     dic.Add(s.Code, new List<Slot>());
                 }
                 dic[s.Code].Add(s);
