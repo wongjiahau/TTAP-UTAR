@@ -16,11 +16,13 @@ namespace Time_Table_Arranging_Program.TimetableFinder {
             var currentSlots = subjects[0].Slots;
             var possibleCombination = permutator.Invoke(currentSlots.ToArray());
             var state = StateTable.GetStateOfDefinitelyOccupied(possibleCombination);
+            int last = subjects.Count - 1;
             for (int i = 1 ; i < subjects.Count ; i++) {
                 var filtrate = StateTable.Filter(subjects[i].Slots , state);
                 currentSlots.AddRange(filtrate);
                 possibleCombination = permutator.Invoke(currentSlots.ToArray());
-                state = StateTable.GetStateOfDefinitelyOccupied(possibleCombination);
+                if (i != last)
+                    state = StateTable.GetStateOfDefinitelyOccupied(possibleCombination);
             }
             return possibleCombination;
 
