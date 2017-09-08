@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
 using Time_Table_Arranging_Program.Class;
+using Time_Table_Arranging_Program.Model;
+using Time_Table_Arranging_Program.TimetableFinder;
 
 namespace NUnit.Tests2 {
     [TestFixture]
@@ -19,6 +21,21 @@ namespace NUnit.Tests2 {
             result.AddRange(TestData.GetSlotsByName(TestData.Subjects.IntroductionToBuildingServices));
             return result;
         }
+
+        [Test]
+        public void Test_TimetableFinder() {
+            var input = SubjectModel.Parse(this.input());
+            int expectedCount = 616872;
+            var timer = Stopwatch.StartNew();
+            var result =
+                new TimetableFinder().GetPossibleTimetables(input , Permutator.Run_v2_WithConsideringWeekNumber);
+            timer.Stop();
+            Console.WriteLine("Combination count : " + result.Count);
+            Console.WriteLine("Elapsed time : " + timer.Elapsed.TotalSeconds + " s");
+            Assert.True(result.Count == expectedCount);
+
+        }
+
         [Test]
         public void Test_PermutateV4_Runv2_WithConsideringWeekNumber() {
             int expectedCount = 616872;

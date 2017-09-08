@@ -12,15 +12,17 @@ namespace Time_Table_Arranging_Program.TimetableFinder {
 
     public class TimetableFinder : ITimetableFinder {
         public List<List<Slot>> GetPossibleTimetables(List<SubjectModel> subjects , Func<Slot[] , List<List<Slot>>> permutator) {
-            throw new NotImplementedException();
             subjects = SortBySlotCount(subjects);
             var currentSlots = subjects[0].Slots;
             var possibleCombination = permutator.Invoke(currentSlots.ToArray());
             var state = StateTable.GetStateOfDefinitelyOccupied(possibleCombination);
             for (int i = 1 ; i < subjects.Count ; i++) {
                 var filtrate = StateTable.Filter(subjects[i].Slots , state);
-                //currentSlots.Add(filtrate.ToArray());
+                currentSlots.AddRange(filtrate);
+                possibleCombination = permutator.Invoke(currentSlots.ToArray());
+                state = StateTable.GetStateOfDefinitelyOccupied(possibleCombination);
             }
+            return possibleCombination;
 
         }
 
