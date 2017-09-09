@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Time_Table_Arranging_Program.Class;
 using Time_Table_Arranging_Program.Class.AbstractClass;
+using Time_Table_Arranging_Program.Pages;
 using Time_Table_Arranging_Program.User_Control.CheckboxWithListDownMenuFolder.ErrorMessageType;
 
 namespace Time_Table_Arranging_Program.Model {
@@ -113,6 +114,11 @@ namespace Time_Table_Arranging_Program.Model {
                 }   
             }
         }
+
+        private ClashReport _clashReport;
+        public ClashReport ClashReport {
+            get => _clashReport;
+            set { SetProperty(ref _clashReport, value); } }
 
         #endregion
 

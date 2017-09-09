@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Time_Table_Arranging_Program.Class;
 using Time_Table_Arranging_Program.Class.Converter;
 using Time_Table_Arranging_Program.Model;
+using Time_Table_Arranging_Program.User_Control.CheckboxWithListDownMenuFolder.ErrorMessageType;
 
 namespace Time_Table_Arranging_Program.Pages {
 
@@ -30,9 +31,9 @@ namespace Time_Table_Arranging_Program.Pages {
 
 
     public class ClashFinder {
-        private List<SubjectModelWithState> _subjectStateList = new List<SubjectModelWithState>();
-        private SubjectModel _target;
-        private List<SubjectModel> _subjectModels;
+        private readonly List<SubjectModelWithState> _subjectStateList = new List<SubjectModelWithState>();
+        private readonly SubjectModel _target;
+        private readonly List<SubjectModel> _subjectModels;
         public ClashFinder(List<SubjectModel> subjectModels , Func<Slot[] , List<List<Slot>>> permutator , SubjectModel target) {
             _subjectModels = subjectModels;
             _target = target;
@@ -79,15 +80,31 @@ namespace Time_Table_Arranging_Program.Pages {
         }
 
         private (SubjectModelWithState, SubjectModelWithState)? ClashingSubjects { get; set; }
-        public string Message { private set; get; }
+        private string Message { set; get; }
 
-        public SubjectModel WhoIsCrashingWithTarget() {
+        private SubjectModel WhoIsCrashingWithTarget() {
             if (ClashingSubjects == null) return null;
-            var nameOfClashingCounterPart = 
+            var nameOfClashingCounterPart =
             ClashingSubjects.Value.Item1.SubjectName == _target.Name ?
             ClashingSubjects.Value.Item2.SubjectName :
             ClashingSubjects.Value.Item1.SubjectName;
             return _subjectModels.Find(x => x.Name == nameOfClashingCounterPart);
         }
+
+        public ClashReport GetReport() {
+            var clashingCounterpart = WhoIsCrashingWithTarget();
+            return clashingCounterpart == null ?
+                new ClashReport(ClashingErrorType.GroupClashingError , null) :
+                new ClashReport(ClashingErrorType.SingleClashingError , clashingCounterpart);
+        }
+    }
+
+    public class ClashReport {
+        public ClashReport(ClashingErrorType clashingErrorType , SubjectModel clashingCounterpart) {
+            ClashingErrorType = clashingErrorType;
+            ClashingCounterpart = clashingCounterpart;
+        }
+        public ClashingErrorType ClashingErrorType { get; set; }
+        public SubjectModel ClashingCounterpart { get; set; }
     }
 }

@@ -16,6 +16,7 @@ namespace Time_Table_Arranging_Program.User_Control.SubjectListFolder {
         private List<SubjectModel> _subjectModels;
         private SubjectSelectionManager _subjectSelectionManager;
         private readonly List<string> _nameAndCodeOfAllSubjects = new List<string>();
+        public event EventHandler NewListOfTimetableGenerated;
 
         public SubjectListModel() { }
 
