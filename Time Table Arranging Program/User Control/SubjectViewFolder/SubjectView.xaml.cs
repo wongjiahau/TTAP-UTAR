@@ -52,8 +52,12 @@ namespace Time_Table_Arranging_Program.User_Control.SubjectViewFolder {
         public HashSet<int> UIDofSelectedSlots { get; set; }
 
         #region EventHandlers
-        private void CheckBoxWithListDownMenu_OnMouseEnter(object sender , MouseEventArgs e) {
+        private void SubjectView_OnMouseEnter(object sender , MouseEventArgs e) {
             _subjectModel.FocusMe();
+        }
+
+        private void SubjectView_OnMouseLeave(object sender, MouseEventArgs e) {
+            _subjectModel.IsFocused = false;
         }
 
         private void Border_OnMouseDown(object sender , MouseButtonEventArgs e) {
@@ -184,7 +188,6 @@ namespace Time_Table_Arranging_Program.User_Control.SubjectViewFolder {
         }
 
         #endregion
-
 
 
     }
