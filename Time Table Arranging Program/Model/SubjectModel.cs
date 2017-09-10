@@ -80,6 +80,16 @@ namespace Time_Table_Arranging_Program.Model {
             set => SetProperty(ref _isFocused , value);
         }
 
+
+        private ISupervisor _supervisor;
+        public void SetSupervisor(ISupervisor supervisor) {
+            _supervisor = supervisor;
+        }
+
+        public void FocusMe() {
+            _supervisor.FocusMe(this);
+        }
+
         private bool _isVisible = true;
         public bool IsVisible {
             get => _isVisible;

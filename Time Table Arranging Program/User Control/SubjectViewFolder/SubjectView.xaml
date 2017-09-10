@@ -8,7 +8,7 @@
              xmlns:local="clr-namespace:Time_Table_Arranging_Program.User_Control"
              xmlns:class="clr-namespace:Time_Table_Arranging_Program.Class"
              xmlns:errorMessageType="clr-namespace:Time_Table_Arranging_Program.User_Control.CheckboxWithListDownMenuFolder.ErrorMessageType"
-             mc:Ignorable="d" MouseEnter="CheckBoxWithListDownMenu_OnMouseEnter" MouseLeave="CheckBoxWithListDownMenu_OnMouseLeave">
+             mc:Ignorable="d" MouseEnter="CheckBoxWithListDownMenu_OnMouseEnter">
     <UserControl.Resources>
         <DataTemplate x:Key="FirstCell">
             <StackPanel Orientation="Horizontal">

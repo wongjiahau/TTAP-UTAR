@@ -53,11 +53,7 @@ namespace Time_Table_Arranging_Program.User_Control.SubjectViewFolder {
 
         #region EventHandlers
         private void CheckBoxWithListDownMenu_OnMouseEnter(object sender , MouseEventArgs e) {
-            if (!_subjectModel.IsFocused) _subjectModel.IsFocused = true;
-        }
-
-        private void CheckBoxWithListDownMenu_OnMouseLeave(object sender , MouseEventArgs e) {
-            if (_subjectModel.IsFocused) _subjectModel.IsFocused = false;
+            _subjectModel.FocusMe();
         }
 
         private void Border_OnMouseDown(object sender , MouseButtonEventArgs e) {
