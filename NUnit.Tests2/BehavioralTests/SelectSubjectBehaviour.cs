@@ -81,5 +81,37 @@ namespace NUnit.Tests2.BehavioralTests {
             Assert.IsTrue(input.ToList().Find(x => x.Code == "UEMX2363").ClashingErrorType == ClashingErrorType.NoError, behaviour2);
 
         }
+
+        [Test]
+        public void ClashReporting_GroupClashing_1() {
+            string behaviour =
+                @"
+            Given Ali just loaded slots data (by logging in)
+            When Ali selected a bunch of subjects 
+            And Then Ali selected a subject X which causes group clashing error
+            Then Ali shall see that a clash report will appear for subject X
+                ";
+            var input = this.Input();
+            //TODO : Complete the code here
+            Assert.Fail("Incomplete yet");
+
+        }
+
+        [Test]
+        public void ClashReporting_GroupClashing_2() {
+            string behaviour =
+                @"
+            Given Ali just loaded slots data (by logging in)
+            When Ali selected a bunch of subjects (A, B, C, D, E)
+            And Then Ali selected a subject X which causes group clashing error
+            And Then Ali deselected one of the subject (one from A, B, C, D, E)
+            Then TTAP should recalculate to see if subject X still causes Group-Clashing error
+            
+                ";
+            var input = this.Input();
+            //TODO : Complete the code here
+            Assert.Fail("Incomplete yet");
+
+        }
     }
 }

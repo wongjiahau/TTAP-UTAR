@@ -128,7 +128,7 @@ namespace Time_Table_Arranging_Program.Model {
                     ClashingErrorType = value.ClashingErrorType;
                     return;
                 }
-                NameOfClashingCounterpart = value.ClashingCounterpart.Name;
+                NameOfClashingCounterpart = value.ClashingCounterpart?.Name;
                 ClashingErrorType = value.ClashingErrorType;
                 ClashingCounterparts.Add(value.ClashingCounterpart);
             }
