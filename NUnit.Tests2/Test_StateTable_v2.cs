@@ -133,7 +133,9 @@ namespace NUnit.Tests2 {
             Assert.AreEqual(expectedCount, actualCount);
         }
 
+
         [Test]
+        [Ignore("Because this method is not use in production code yet")]
         public void Test_StateTable_Filter_ShouldRemoveRelatedSlots() {
             var input = new List<Slot> {TestData.GetSlot(309), TestData.GetSlot(311)};
             var inputState = StateTable.ParseString_AsStateOfDefinitelyOccupied(
