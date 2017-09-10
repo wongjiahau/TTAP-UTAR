@@ -13,12 +13,12 @@ namespace NUnit.Tests2.BehavioralTests {
     [TestFixture]
     public class SelectSubjectBehaviour {
         private SubjectListModel Input() {
-            return new SubjectListModel(SubjectModel.Parse(TestData.TestSlots), Permutator.Run_v2_withoutConsideringWeekNumber);
+            return new SubjectListModel(SubjectModel.Parse(TestData.TestSlots) , Permutator.Run_v2_withoutConsideringWeekNumber);
         }
 
         [Test]
         public void ClashReporting_1() {
-            string behvaiour =
+            string behaviour =
                 @"
             Given Ali just loaded slots data (by logging in)
             When Ali selected subject 'MPU34072' (Art, Craft, And Design)
@@ -30,8 +30,8 @@ namespace NUnit.Tests2.BehavioralTests {
             input.SelectSubject("MPU34072");
             input.SelectSubject("UEMX4313");
             var subject_UEMX4313 = input.ToList().Find(x => x.Code == "UEMX4313");
-            Assert.IsTrue(subject_UEMX4313.ClashingErrorType == ClashingErrorType.SingleClashingError);
-            Assert.IsFalse(subject_UEMX4313.IsSelected);
+            Assert.IsTrue(subject_UEMX4313.ClashingErrorType == ClashingErrorType.SingleClashingError , behaviour);
+            Assert.IsFalse(subject_UEMX4313.IsSelected , behaviour);
         }
 
         [Test]
@@ -48,10 +48,38 @@ namespace NUnit.Tests2.BehavioralTests {
             var input = this.Input();
             input.SelectSubject("MPU34072");
             input.SelectSubject("UEMX4313");
-            input.SelectSubject("MPU34072", false);
+            input.SelectSubject("MPU34072" , false);
             var subject_UEMX4313 = input.ToList().Find(x => x.Code == "UEMX4313");
-            Assert.IsTrue(subject_UEMX4313.ClashingErrorType == ClashingErrorType.NoError);
-            Assert.IsFalse(subject_UEMX4313.IsSelected);
+            Assert.IsTrue(subject_UEMX4313.ClashingErrorType == ClashingErrorType.NoError , behvaiour);
+            Assert.IsFalse(subject_UEMX4313.IsSelected , behvaiour);
+        }
+
+        [Test]
+        public void ClashReporting_3() {
+            string behaviour1 =
+                @"
+            Given Ali just loaded slots data (by logging in)
+            When Ali selected a subject X  
+            And Ali selected two subjects(Y, Z) which is clashing with X
+            Then Ali shall see that clash report for Y and Z appear
+                ";
+
+            string behaviour2 =
+                @"
+            And Then When Ali deslected subject X
+            Then Ali shall see that the clash report of Y, Z is dissappeared
+                ";
+            var input = this.Input();
+            input.SelectSubject("UEMX4313"); //Subject X = Advanced structural steel design
+            input.SelectSubject("MPU34072"); //Subject Y = Art, Craft & Design
+            input.SelectSubject("UEMX2363"); //Subject Z = Concrete Structures Design II
+            Assert.IsTrue(input.ToList().Find(x => x.Code == "MPU34072").ClashingErrorType == ClashingErrorType.SingleClashingError , behaviour1);
+            Assert.IsTrue(input.ToList().Find(x => x.Code == "UEMX2363").ClashingErrorType == ClashingErrorType.SingleClashingError , behaviour1);
+
+            input.SelectSubject("UEMX4313" , false); //Subject X = Advanced structural steel design
+            Assert.IsTrue(input.ToList().Find(x => x.Code == "MPU34072").ClashingErrorType == ClashingErrorType.NoError, behaviour2);
+            Assert.IsTrue(input.ToList().Find(x => x.Code == "UEMX2363").ClashingErrorType == ClashingErrorType.NoError, behaviour2);
+
         }
     }
 }

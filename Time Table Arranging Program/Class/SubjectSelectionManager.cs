@@ -54,12 +54,13 @@ namespace Time_Table_Arranging_Program.Class {
 
         private readonly List<SubjectModel> _disabledSubjects = new List<SubjectModel>();
         private void SubjectModel_Deselected(object sender , EventArgs e) {
-            var currentlyDeselectedSubject = (SubjectModel) sender;
-            for (var i = 0; i < _disabledSubjects.Count; i++) {
+            var currentlyDeselectedSubject = (SubjectModel)sender;
+            for (var i = 0 ; i < _disabledSubjects.Count ; i++) {
                 SubjectModel s = _disabledSubjects[i];
                 if (s.ClashingCounterparts.Any(x => x.Code == currentlyDeselectedSubject.Code)) {
                     s.ClashReport = new NullClashReport();
                     _disabledSubjects.Remove(s);
+                    i--;
                 }
             }
             SelectedSubjectCount--;
