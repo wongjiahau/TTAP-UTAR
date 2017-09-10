@@ -9,10 +9,11 @@ using Time_Table_Arranging_Program.Pages;
 namespace Time_Table_Arranging_Program.Class {
     public class SubjectSelectionManager {
         private readonly List<SubjectModel> _subjectModels;
-        private readonly Func<Slot[], List<List<Slot>>> _permutator;
+        private readonly Func<Slot[] , List<List<Slot>>> _permutator;
         public int SelectedSubjectCount { get; private set; }
         public event EventHandler SubjectSelectionChanged;
-        public SubjectSelectionManager(List<SubjectModel> subjectModels, Func<Slot[], List<List<Slot>>> permutator) {
+        public event EventHandler NewListOfTimetablesGenerated;
+        public SubjectSelectionManager(List<SubjectModel> subjectModels , Func<Slot[] , List<List<Slot>>> permutator) {
             this._subjectModels = subjectModels;
             _permutator = permutator;
             foreach (var subjectModel in _subjectModels) {
@@ -28,7 +29,7 @@ namespace Time_Table_Arranging_Program.Class {
 
         private Slot[] GetSelectedSlots() {
             var result = new List<Slot>();
-            for (int i = 0; i < _subjectModels.Count; i++) {
+            for (int i = 0 ; i < _subjectModels.Count ; i++) {
                 result.AddRange(_subjectModels[i].Slots); //Not using GetSelectedSlots here because this feature shall be moved to another place
             }
             return result.ToArray();
@@ -37,21 +38,21 @@ namespace Time_Table_Arranging_Program.Class {
         private SubjectModel _currentlySelectedSubject;
         private void SubjectModel_Selected(object sender , EventArgs e) {
             SelectedSubjectCount++;
-            SubjectSelectionChanged?.Invoke(this, null);
-            _currentlySelectedSubject = (SubjectModel) sender;
-            var possibleTimetables = _permutator.Invoke(GetSelectedSlots());
-            if (possibleTimetables.Count == 0) {
+            SubjectSelectionChanged?.Invoke(this , null);
+            _currentlySelectedSubject = (SubjectModel)sender;
+            var possibleTimetables = _permutator?.Invoke(GetSelectedSlots());
+            if (possibleTimetables?.Count == 0) {
                 var clashReport = new ClashFinder(_subjectModels, _permutator, _currentlySelectedSubject).GetReport();
                 _currentlySelectedSubject.ClashReport = clashReport;
-
-
             }
-
+            else {
+                NewListOfTimetablesGenerated?.Invoke(possibleTimetables, null);
+            }
         }
 
         private void SubjectModel_Deselected(object sender , EventArgs e) {
             SelectedSubjectCount--;
-            SubjectSelectionChanged?.Invoke(this, null);
+            SubjectSelectionChanged?.Invoke(this , null);
         }
     }
 }

@@ -143,24 +143,24 @@ namespace Time_Table_Arranging_Program.User_Control {
 
         public List<List<Slot>> PossibleTimetables;
         private void Subject_Selected(object sender , EventArgs e) {
-            var currentlySelectedSubject = sender as SubjectModel;
-            var prototype = new List<SubjectModel> { currentlySelectedSubject };
-            prototype.AddRange(_previousSelectedSubjects);
-            PossibleTimetables = _permutator.Invoke(prototype.GetSelectedSlots().ToArray());
-            if (PossibleTimetables == null || PossibleTimetables.Count == 0) {
-                var clashingCounterpart = new ClashFinder(_subjectListModel.ToList(), _permutator, currentlySelectedSubject)
-                    .WhoIsCrashingWithTarget();
-                if (clashingCounterpart == null)
-                    currentlySelectedSubject.ClashingErrorType = ClashingErrorType.GroupClashingError;
-                else {
-                    currentlySelectedSubject.NameOfCrashingCounterpart = clashingCounterpart.Name;
-                    currentlySelectedSubject.ClashingErrorType = ClashingErrorType.SingleClashingError;
-                }
-            }
-            else {
-                _previousSelectedSubjects.Add(currentlySelectedSubject);
-                SlotSelectionChanged?.Invoke(this , null);
-            }
+           //var currentlySelectedSubject = sender as SubjectModel;
+           // var prototype = new List<SubjectModel> { currentlySelectedSubject };
+           // prototype.AddRange(_previousSelectedSubjects);
+           // PossibleTimetables = _permutator.Invoke(prototype.GetSelectedSlots().ToArray());
+           // if (PossibleTimetables == null || PossibleTimetables.Count == 0) {
+           //     var clashingCounterpart = new ClashFinder(_subjectListModel.ToList(), _permutator, currentlySelectedSubject)
+           //         .WhoIsCrashingWithTarget();
+           //     if (clashingCounterpart == null)
+           //         currentlySelectedSubject.ClashingErrorType = ClashingErrorType.GroupClashingError;
+           //     else {
+           //         currentlySelectedSubject.NameOfClashingCounterpart = clashingCounterpart.Name;
+           //         currentlySelectedSubject.ClashingErrorType = ClashingErrorType.SingleClashingError;
+           //     }
+           // }
+           // else {
+           //     _previousSelectedSubjects.Add(currentlySelectedSubject);
+           //     SlotSelectionChanged?.Invoke(this , null);
+           // }
         }
 
         private void DoneButton_OnClick(object sender , RoutedEventArgs e) {

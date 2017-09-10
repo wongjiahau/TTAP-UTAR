@@ -32,7 +32,6 @@ namespace Time_Table_Arranging_Program.Model {
 
 
         public List<Slot> Slots { get; private set; }
-        public string NameOfCrashingCounterpart { get; set; }
 
         public List<Slot> GetSelectedSlots() {
             var result = new List<Slot>();
@@ -78,28 +77,27 @@ namespace Time_Table_Arranging_Program.Model {
         private bool _isFocused;
         public bool IsFocused {
             get => _isFocused;
-            set => SetProperty(ref _isFocused, value);
+            set => SetProperty(ref _isFocused , value);
         }
 
         private bool _isVisible = true;
         public bool IsVisible {
             get => _isVisible;
-            set { SetProperty(ref _isVisible, value); }
+            set { SetProperty(ref _isVisible , value); }
         }
 
         private string _highlightedText;
         public string HighlightedText {
             get => _highlightedText;
-            set { SetProperty(ref _highlightedText, value); }
+            set { SetProperty(ref _highlightedText , value); }
         }
 
         private ClashingErrorType _clashingErrorType;
         public ClashingErrorType ClashingErrorType {
             get => _clashingErrorType;
-            set {
-                SetProperty(ref _clashingErrorType, value);
-                switch(value)
-                {
+            private set {
+                SetProperty(ref _clashingErrorType , value);
+                switch (value) {
                     case ClashingErrorType.NoError:
                         IsSelected = true;
                         break;
@@ -110,15 +108,16 @@ namespace Time_Table_Arranging_Program.Model {
                         IsSelected = false;
                         break;
                     default:
-                        throw new ArgumentOutOfRangeException(nameof(value), value, null);
-                }   
+                        throw new ArgumentOutOfRangeException(nameof(value) , value , null);
+                }
             }
         }
 
         private ClashReport _clashReport;
         public ClashReport ClashReport {
             get => _clashReport;
-            set { SetProperty(ref _clashReport, value); } }
+            set { SetProperty(ref _clashReport , value); }
+        }
 
         #endregion
 

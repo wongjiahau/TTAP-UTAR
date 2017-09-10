@@ -20,9 +20,9 @@ namespace Time_Table_Arranging_Program.User_Control.SubjectListFolder {
 
         public SubjectListModel() { }
 
-        public SubjectListModel(List<SubjectModel> subjectModels) {
+        public SubjectListModel(List<SubjectModel> subjectModels, Func<Slot[], List<List<Slot>>> permutator = null) {
             _subjectModels = subjectModels;
-            _subjectSelectionManager = new SubjectSelectionManager(subjectModels);
+            _subjectSelectionManager = new SubjectSelectionManager(subjectModels, permutator);
             _subjectSelectionManager.SubjectSelectionChanged += _subjectSelectionManager_SubjectSelectionChanged;
             foreach (var subjectModel in _subjectModels) {
                 _nameAndCodeOfAllSubjects.Add(subjectModel.Name);
@@ -49,11 +49,10 @@ namespace Time_Table_Arranging_Program.User_Control.SubjectListFolder {
             _subjectSelectionManager.ToggleSelectionOnCurrentFocusedSubject();
         }
 
-        public bool SelectSubject(string subjectCode) {
+        public void SelectSubject(string subjectCode) {
             var subjectToBeSelcted = _subjectModels.Find(x => x.Code == subjectCode);
-            if (subjectToBeSelcted == null) return false;
+            if (subjectToBeSelcted == null) throw new ArgumentException($"{subjectCode} does not match any subject.");
             subjectToBeSelcted.IsSelected = true;
-            return true;
         }
         #endregion
 

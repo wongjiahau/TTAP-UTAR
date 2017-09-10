@@ -74,7 +74,7 @@ namespace Time_Table_Arranging_Program.Pages {
         private List<SubjectModel> _subjectModels;
         private void InitializeExtraComponents() {
             _subjectModels = SubjectModel.Parse(_inputSlots);
-            SelectSubjectPanel.Initialize(_permutator , new SubjectListModel(_subjectModels));
+            SelectSubjectPanel.Initialize(_permutator , new SubjectListModel(_subjectModels, _permutator));
             SelectSubjectPanel.SetDrawerHost(this.DrawerHost);
         }
 

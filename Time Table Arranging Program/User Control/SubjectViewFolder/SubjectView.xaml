@@ -60,7 +60,7 @@
                                     <DataTrigger Binding="{Binding ClashingErrorType}" Value="SingleClashingError">
                                         <Setter Property="Content">
                                             <Setter.Value>
-                                                <errorMessageType:SingleClashingError NameOfClashingCounterpart="{Binding NameOfCrashingCounterpart}"></errorMessageType:SingleClashingError>
+                                                <errorMessageType:SingleClashingError NameOfClashingCounterpart="{Binding NameOfClashingCounterpart}"></errorMessageType:SingleClashingError>
                                             </Setter.Value>
                                         </Setter>
                                     </DataTrigger>
