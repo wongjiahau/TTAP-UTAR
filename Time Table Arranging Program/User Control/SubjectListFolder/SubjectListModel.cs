@@ -16,20 +16,25 @@ namespace Time_Table_Arranging_Program.User_Control.SubjectListFolder {
         private List<SubjectModel> _subjectModels;
         private SubjectSelectionManager _subjectSelectionManager;
         private readonly List<string> _nameAndCodeOfAllSubjects = new List<string>();
-        public event EventHandler NewListOfTimetableGenerated;
+        public event EventHandler NewListOfTimetablesGenerated;
 
         public SubjectListModel() { }
 
-        public SubjectListModel(List<SubjectModel> subjectModels, Func<Slot[], List<List<Slot>>> permutator = null) {
+        public SubjectListModel(List<SubjectModel> subjectModels , Func<Slot[] , List<List<Slot>>> permutator = null) {
             _subjectModels = subjectModels;
-            _subjectSelectionManager = new SubjectSelectionManager(subjectModels, permutator);
+            _subjectSelectionManager = new SubjectSelectionManager(subjectModels , permutator);
             _subjectSelectionManager.SubjectSelectionChanged += _subjectSelectionManager_SubjectSelectionChanged;
+            _subjectSelectionManager.NewListOfTimetablesGenerated += _subjectSelectionManager_NewListOfTimetablesGenerated;
             foreach (var subjectModel in _subjectModels) {
                 _nameAndCodeOfAllSubjects.Add(subjectModel.Name);
                 _nameAndCodeOfAllSubjects.Add(subjectModel.Code);
             }
             _focusNavigator = new FocusNavigator(new List<IFocusable>(_subjectModels));
             _focusNavigator.FocusFirstItem();
+        }
+
+        private void _subjectSelectionManager_NewListOfTimetablesGenerated(object sender , EventArgs e) {
+            NewListOfTimetablesGenerated?.Invoke(sender , null);
         }
 
         private void _subjectSelectionManager_SubjectSelectionChanged(object sender , EventArgs e) {

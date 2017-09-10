@@ -74,8 +74,15 @@ namespace Time_Table_Arranging_Program.Pages {
         private List<SubjectModel> _subjectModels;
         private void InitializeExtraComponents() {
             _subjectModels = SubjectModel.Parse(_inputSlots);
-            SelectSubjectPanel.Initialize(_permutator , new SubjectListModel(_subjectModels, _permutator));
+            var subjectListModel = new SubjectListModel(_subjectModels , _permutator);
+            subjectListModel.NewListOfTimetablesGenerated += SubjectListModel_NewListOfTimetablesGenerated;
+            SelectSubjectPanel.Initialize(_permutator , subjectListModel);
             SelectSubjectPanel.SetDrawerHost(this.DrawerHost);
+        }
+
+        private void SubjectListModel_NewListOfTimetablesGenerated(object sender , EventArgs e) {
+            var possibleTimetable = (List<List<Slot>>)sender;
+            UpdateGUI(possibleTimetable);
         }
 
         private void UpdateGUI(List<List<Slot>> result) {

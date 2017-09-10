@@ -30,7 +30,8 @@ namespace Time_Table_Arranging_Program.Class {
         private Slot[] GetSelectedSlots() {
             var result = new List<Slot>();
             for (int i = 0 ; i < _subjectModels.Count ; i++) {
-                result.AddRange(_subjectModels[i].Slots); //Not using GetSelectedSlots here because this feature shall be moved to another place
+                if (_subjectModels[i].IsSelected)
+                    result.AddRange(_subjectModels[i].Slots); //Not using GetSelectedSlots here because this feature shall be moved to another place
             }
             return result.ToArray();
         }
@@ -42,11 +43,11 @@ namespace Time_Table_Arranging_Program.Class {
             _currentlySelectedSubject = (SubjectModel)sender;
             var possibleTimetables = _permutator?.Invoke(GetSelectedSlots());
             if (possibleTimetables?.Count == 0) {
-                var clashReport = new ClashFinder(_subjectModels, _permutator, _currentlySelectedSubject).GetReport();
+                var clashReport = new ClashFinder(_subjectModels , _permutator , _currentlySelectedSubject).GetReport();
                 _currentlySelectedSubject.ClashReport = clashReport;
             }
             else {
-                NewListOfTimetablesGenerated?.Invoke(possibleTimetables, null);
+                NewListOfTimetablesGenerated?.Invoke(possibleTimetables , null);
             }
         }
 
