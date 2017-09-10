@@ -14,7 +14,7 @@ namespace Time_Table_Arranging_Program.Class {
     public class MockFocusableObject : IFocusable {
         public bool IsFocused { get; set; }
         public void SetSupervisor(ISupervisor focusNavigator) {
-            throw new NotImplementedException();
+            //Do nothing
         }
     }
 
