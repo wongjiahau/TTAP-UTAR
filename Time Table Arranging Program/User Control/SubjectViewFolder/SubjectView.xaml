@@ -1,5 +1,5 @@
 ﻿<UserControl x:Class="Time_Table_Arranging_Program.User_Control.SubjectViewFolder.SubjectView"
-             xmlns:Model ="clr-namespace:Time_Table_Arranging_Program.Model"
+             xmlns:Model="clr-namespace:Time_Table_Arranging_Program.Model"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -25,10 +25,10 @@
         <Style TargetType="UserControl">
             <Style.Triggers>
                 <DataTrigger Binding="{Binding IsVisible}" Value="True">
-                    <Setter Property="Visibility" Value="Visible"></Setter>
+                    <Setter Property="Visibility" Value="Visible" />
                 </DataTrigger>
                 <DataTrigger Binding="{Binding IsVisible}" Value="False">
-                    <Setter Property="Visibility" Value="Collapsed"></Setter>
+                    <Setter Property="Visibility" Value="Collapsed" />
                 </DataTrigger>
             </Style.Triggers>
         </Style>
@@ -52,7 +52,9 @@
         <materialDesign:DrawerHost.RightDrawerContent>
             <Border Background="DarkRed">
                 <StackPanel Orientation="Horizontal">
-                    <materialDesign:PackIcon Kind="AlertOctagon" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10 10 5 10" Height="25" Width="25" Foreground="White" />
+                    <materialDesign:PackIcon Kind="AlertOctagon" HorizontalAlignment="Center"
+                                             VerticalAlignment="Center" Margin="10 10 5 10" Height="25" Width="25"
+                                             Foreground="White" />
                     <ContentControl x:Name="ErrorContent">
                         <ContentControl.Style>
                             <Style TargetType="ContentControl">
@@ -60,14 +62,15 @@
                                     <DataTrigger Binding="{Binding ClashingErrorType}" Value="SingleClashingError">
                                         <Setter Property="Content">
                                             <Setter.Value>
-                                                <errorMessageType:SingleClashingError NameOfClashingCounterpart="{Binding NameOfClashingCounterpart}"></errorMessageType:SingleClashingError>
+                                                <errorMessageType:SingleClashingError
+                                                    NameOfClashingCounterpart="{Binding NameOfClashingCounterpart}" />
                                             </Setter.Value>
                                         </Setter>
                                     </DataTrigger>
                                     <DataTrigger Binding="{Binding ClashingErrorType}" Value="GroupClashingError">
                                         <Setter Property="Content">
                                             <Setter.Value>
-                                                <errorMessageType:GroupClashingError></errorMessageType:GroupClashingError>
+                                                <errorMessageType:GroupClashingError />
                                             </Setter.Value>
                                         </Setter>
                                     </DataTrigger>
@@ -78,14 +81,14 @@
                 </StackPanel>
             </Border>
         </materialDesign:DrawerHost.RightDrawerContent>
-        <DockPanel  LastChildFill="True" >
+        <DockPanel LastChildFill="True">
             <Popup x:Name="ListViewPopup" StaysOpen="True" PopupAnimation="Scroll" AllowsTransparency="True"
-               Placement="Mouse" MaxHeight="500" Closed="ListViewPopup_OnClosed">
+                   Placement="Mouse" MaxHeight="500" Closed="ListViewPopup_OnClosed">
 
 
                 <DockPanel x:Name="PopupDp">
                     <materialDesign:Card>
-                        <Border BorderThickness="3" BorderBrush="Black" Background="White" Padding="5" >
+                        <Border BorderThickness="3" BorderBrush="Black" Background="White" Padding="5">
                             <DockPanel LastChildFill="True">
                                 <Border Background="White" DockPanel.Dock="Top">
                                     <DockPanel LastChildFill="True">
@@ -101,28 +104,33 @@
                                         </DockPanel.Resources>
 
 
-
-
-                                        <Button DockPanel.Dock="Right" Style="{StaticResource MaterialDesignFlatButton}" Foreground="White" Height="25" Background="LightCoral" Click="CloseButton_OnClick" >
+                                        <Button DockPanel.Dock="Right"
+                                                Style="{StaticResource MaterialDesignFlatButton}" Foreground="White"
+                                                Height="25" Background="LightCoral" Click="CloseButton_OnClick">
                                             <materialDesign:PackIcon Kind="WindowClose" />
                                         </Button>
-                                        <Button DockPanel.Dock="Right" Style="{StaticResource MaterialDesignFlatButton}"  
-                                     x:Name="HidePopupButton"   Click="HideButton_Click">
+                                        <Button DockPanel.Dock="Right"
+                                                Style="{StaticResource MaterialDesignFlatButton}"
+                                                x:Name="HidePopupButton" Click="HideButton_Click">
                                             <materialDesign:PackIcon Kind="WindowMinimize" />
                                         </Button>
 
-                                        <Label x:Name="SubjectNameLabel" HorizontalAlignment="Stretch" FontWeight="Bold"
-                                       Background="White"  Cursor="SizeAll" Content="{Binding Name}" />
+                                        <Label x:Name="SubjectNameLabel" HorizontalAlignment="Stretch"
+                                               FontWeight="Bold"
+                                               Background="White" Cursor="SizeAll" Content="{Binding Name}" />
                                     </DockPanel>
                                 </Border>
-                                <Button x:Name="ToggleCheckButton" Content="Untick all slots" Width="auto" DockPanel.Dock="Bottom"
-                                Click="ToggleCheckButton_OnClick" HorizontalAlignment="Center" Margin="0,5,0,0"/>
-                                <Label x:Name="InstructionLabel" DockPanel.Dock="Top" Background="WhiteSmoke" FontWeight="DemiBold">. . . Untick the slots that you don't want</Label>
-                                <Rectangle DockPanel.Dock="Top"  Height="1" Fill="LightGray" />
+                                <Button x:Name="ToggleCheckButton" Content="Untick all slots" Width="auto"
+                                        DockPanel.Dock="Bottom"
+                                        Click="ToggleCheckButton_OnClick" HorizontalAlignment="Center" Margin="0,5,0,0" />
+                                <Label x:Name="InstructionLabel" DockPanel.Dock="Top" Background="WhiteSmoke"
+                                       FontWeight="DemiBold">
+                                    . . . Untick the slots that you don't want
+                                </Label>
+                                <Rectangle DockPanel.Dock="Top" Height="1" Fill="LightGray" />
                                 <Border BorderThickness="1" BorderBrush="LightGray">
-                                    <ListView x:Name="ListView" DockPanel.Dock="Bottom" Margin="4" 
-                                          ItemsSource="{Binding Slots}"
-                                          >
+                                    <ListView x:Name="ListView" DockPanel.Dock="Bottom" Margin="4"
+                                              ItemsSource="{Binding Slots}">
                                         <!--<ListView.DataContext>
                                         <class:Slot />
                                     </ListView.DataContext>-->
@@ -131,15 +139,18 @@
                                                 <GridViewColumn CellTemplate="{StaticResource FirstCell}" />
                                                 <GridViewColumn Header="Type" DisplayMemberBinding="{Binding Type}" />
                                                 <GridViewColumn Header="Number" DisplayMemberBinding="{Binding Number}" />
-                                                <GridViewColumn Header="Time" DisplayMemberBinding="{Binding TimePeriod}" />
+                                                <GridViewColumn Header="Time"
+                                                                DisplayMemberBinding="{Binding TimePeriod}" />
                                                 <GridViewColumn Header="Day" DisplayMemberBinding="{Binding Day}" />
-                                                <GridViewColumn Header="Week"  DisplayMemberBinding="{Binding WeekNumber}" />
+                                                <GridViewColumn Header="Week"
+                                                                DisplayMemberBinding="{Binding WeekNumber}" />
                                                 <GridViewColumn Header="Venue" DisplayMemberBinding="{Binding Venue}" />
                                             </GridView>
                                         </ListView.View>
                                         <ListView.ItemContainerStyle>
                                             <Style TargetType="ListViewItem">
-                                                <EventSetter Event="PreviewMouseLeftButtonDown" Handler="ListViewItem_PreviewMouseLeftButtonDown" />
+                                                <EventSetter Event="PreviewMouseLeftButtonDown"
+                                                             Handler="ListViewItem_PreviewMouseLeftButtonDown" />
                                             </Style>
                                         </ListView.ItemContainerStyle>
                                     </ListView>
@@ -153,40 +164,51 @@
 
 
             </Popup>
-            <Border x:Name="Border" BorderBrush="Gray" BorderThickness="0,0,0,1" Padding="2" 
-                MouseDown="Border_OnMouseDown" Cursor="Hand" >
+            <Border x:Name="Border" BorderBrush="Gray" BorderThickness="0,0,0,1" Padding="2"
+                    MouseDown="Border_OnMouseDown" Cursor="Hand">
                 <Border.Style>
                     <Style TargetType="Border">
                         <Style.Triggers>
                             <DataTrigger Binding="{Binding IsSelected}" Value="True">
-                                <Setter Property="Background" Value="LightCyan"></Setter>
+                                <Setter Property="Background" Value="LightCyan" />
                             </DataTrigger>
                             <DataTrigger Binding="{Binding IsSelected}" Value="False">
-                                <Setter Property="Background" Value="WhiteSmoke"></Setter>
+                                <Setter Property="Background" Value="WhiteSmoke" />
                             </DataTrigger>
                             <DataTrigger Binding="{Binding IsFocused}" Value="True">
-                                <Setter Property="Background" Value="LightBlue"></Setter>
+                                <Setter Property="Background" Value="LightBlue" />
                             </DataTrigger>
                         </Style.Triggers>
                     </Style>
                 </Border.Style>
-                <DockPanel   HorizontalAlignment="Stretch">
-                    <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Visibility="Visible" Margin="5,0,0,0" DockPanel.Dock="Left" x:Name="Checkbox"  VerticalAlignment="Center" />
+                <DockPanel HorizontalAlignment="Stretch">
+                    <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                              Visibility="Visible" Margin="5,0,0,0" DockPanel.Dock="Left" x:Name="Checkbox"
+                              VerticalAlignment="Center">
+                        <CheckBox.LayoutTransform>
+                            <ScaleTransform ScaleY="1.6" ScaleX="1.6" />
+                        </CheckBox.LayoutTransform>
+                    </CheckBox>
                     <StackPanel DockPanel.Dock="Left">
-                        <local:HighlightTextBlock FontSize="14"   DockPanel.Dock="Left" x:Name="SubjectNameHighlightTextBlock" Text="{Binding Name}" HighlightedText="{Binding HighlightedText}" Margin="10,5,5,2"
-                                      Cursor="Hand" VerticalAlignment="Center" FontWeight="DemiBold"  />
-                        <local:HighlightTextBlock x:Name="SubjectCodeHighlightTextBlock" VerticalAlignment="Center" Text="{Binding CodeAndNameInitials}" HighlightedText="{Binding HighlightedText}" Margin="15,0,0,5" />
+                        <local:HighlightTextBlock FontSize="14" DockPanel.Dock="Left"
+                                                  x:Name="SubjectNameHighlightTextBlock" Text="{Binding Name}"
+                                                  HighlightedText="{Binding HighlightedText}" Margin="10,5,5,2"
+                                                  Cursor="Hand" VerticalAlignment="Center" FontWeight="DemiBold" />
+                        <local:HighlightTextBlock x:Name="SubjectCodeHighlightTextBlock" VerticalAlignment="Center"
+                                                  Text="{Binding CodeAndNameInitials}"
+                                                  HighlightedText="{Binding HighlightedText}" Margin="15,0,0,5" />
                     </StackPanel>
-                    <Button x:Name="ChooseSlotButton"  Margin="5" FontSize="11" DockPanel.Dock="Right" VerticalAlignment="Center" 
-                    Click="ChooseSlotButton_Click" ToolTip="Choose specific slots" HorizontalAlignment="Right">
+                    <Button x:Name="ChooseSlotButton" Margin="5" FontSize="11" DockPanel.Dock="Right"
+                            VerticalAlignment="Center"
+                            Click="ChooseSlotButton_Click" ToolTip="Choose specific slots" HorizontalAlignment="Right">
                         <Button.Style>
                             <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignFlatButton}">
                                 <Style.Triggers>
                                     <DataTrigger Binding="{Binding IsSelected}" Value="True">
-                                        <Setter Property="Visibility" Value="Visible"></Setter>
+                                        <Setter Property="Visibility" Value="Visible" />
                                     </DataTrigger>
                                     <DataTrigger Binding="{Binding IsSelected}" Value="False">
-                                        <Setter Property="Visibility" Value="Hidden"></Setter>
+                                        <Setter Property="Visibility" Value="Hidden" />
                                     </DataTrigger>
                                 </Style.Triggers>
                             </Style>
