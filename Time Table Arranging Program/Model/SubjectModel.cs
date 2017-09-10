@@ -99,7 +99,6 @@ namespace Time_Table_Arranging_Program.Model {
                 SetProperty(ref _clashingErrorType , value);
                 switch (value) {
                     case ClashingErrorType.NoError:
-                        IsSelected = true;
                         break;
                     case ClashingErrorType.SingleClashingError:
                         IsSelected = false;
