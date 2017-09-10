@@ -120,10 +120,10 @@
                                                Background="White" Cursor="SizeAll" Content="{Binding Name}" />
                                     </DockPanel>
                                 </Border>
-                                <Button x:Name="ToggleCheckButton" Content="Untick all slots" Width="auto"
+                                <Button Visibility="Collapsed" x:Name="ToggleCheckButton" Content="Untick all slots" Width="auto"
                                         DockPanel.Dock="Bottom"
                                         Click="ToggleCheckButton_OnClick" HorizontalAlignment="Center" Margin="0,5,0,0" />
-                                <Label x:Name="InstructionLabel" DockPanel.Dock="Top" Background="WhiteSmoke"
+                                <Label Visibility="Collapsed" x:Name="InstructionLabel" DockPanel.Dock="Top" Background="WhiteSmoke"
                                        FontWeight="DemiBold">
                                     . . . Untick the slots that you don't want
                                 </Label>
@@ -131,12 +131,25 @@
                                 <Border BorderThickness="1" BorderBrush="LightGray">
                                     <ListView x:Name="ListView" DockPanel.Dock="Bottom" Margin="4"
                                               ItemsSource="{Binding Slots}">
+                                        <ListView.Resources>
+                                            <Style TargetType="{x:Type GridViewColumnHeader}">
+                                                <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                            </Style>
+                                        </ListView.Resources>
+                                        <ListView.ItemContainerStyle>
+                                            <Style TargetType="ListViewItem">
+                                                <EventSetter Event="PreviewMouseLeftButtonDown"
+                                                             Handler="ListViewItem_PreviewMouseLeftButtonDown" />
+                                                <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                            </Style>
+                                        </ListView.ItemContainerStyle>
+
                                         <!--<ListView.DataContext>
                                         <class:Slot />
                                     </ListView.DataContext>-->
                                         <ListView.View>
                                             <GridView>
-                                                <GridViewColumn CellTemplate="{StaticResource FirstCell}" />
+                                                <!--<GridViewColumn CellTemplate="{StaticResource FirstCell}" />-->
                                                 <GridViewColumn Header="Type" DisplayMemberBinding="{Binding Type}" />
                                                 <GridViewColumn Header="Number" DisplayMemberBinding="{Binding Number}" />
                                                 <GridViewColumn Header="Time"
@@ -147,12 +160,6 @@
                                                 <GridViewColumn Header="Venue" DisplayMemberBinding="{Binding Venue}" />
                                             </GridView>
                                         </ListView.View>
-                                        <ListView.ItemContainerStyle>
-                                            <Style TargetType="ListViewItem">
-                                                <EventSetter Event="PreviewMouseLeftButtonDown"
-                                                             Handler="ListViewItem_PreviewMouseLeftButtonDown" />
-                                            </Style>
-                                        </ListView.ItemContainerStyle>
                                     </ListView>
                                 </Border>
 
@@ -189,7 +196,7 @@
                             <ScaleTransform ScaleY="1.6" ScaleX="1.6" />
                         </CheckBox.LayoutTransform>
                     </CheckBox>
-                    <StackPanel DockPanel.Dock="Left">
+                    <StackPanel DockPanel.Dock="Left" VerticalAlignment="Center">
                         <local:HighlightTextBlock FontSize="14" DockPanel.Dock="Left"
                                                   x:Name="SubjectNameHighlightTextBlock" Text="{Binding Name}"
                                                   HighlightedText="{Binding HighlightedText}" Margin="10,5,5,2"
@@ -200,7 +207,7 @@
                     </StackPanel>
                     <Button x:Name="ChooseSlotButton" Margin="5" FontSize="11" DockPanel.Dock="Right"
                             VerticalAlignment="Center"
-                            Click="ChooseSlotButton_Click" ToolTip="Choose specific slots" HorizontalAlignment="Right">
+                            Click="ChooseSlotButton_Click" ToolTip="View slots" HorizontalAlignment="Right">
                         <Button.Style>
                             <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignFlatButton}">
                                 <Style.Triggers>
@@ -213,7 +220,7 @@
                                 </Style.Triggers>
                             </Style>
                         </Button.Style>
-                        <materialDesign:PackIcon Kind="Pencil" />
+                        <materialDesign:PackIcon Kind="Eye" />
                     </Button>
 
                 </DockPanel>
