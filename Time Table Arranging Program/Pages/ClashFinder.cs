@@ -107,4 +107,10 @@ namespace Time_Table_Arranging_Program.Pages {
         public ClashingErrorType ClashingErrorType { get; set; }
         public SubjectModel ClashingCounterpart { get; set; }
     }
+
+    public class NullClashReport : ClashReport {
+        public NullClashReport() : base(ClashingErrorType.NoError, null) {
+            
+        }
+    }
 }

@@ -45,13 +45,21 @@ namespace Time_Table_Arranging_Program.Class {
             if (possibleTimetables?.Count == 0) {
                 var clashReport = new ClashFinder(_subjectModels , _permutator , _currentlySelectedSubject).GetReport();
                 _currentlySelectedSubject.ClashReport = clashReport;
+                _disabledSubjects.Add(_currentlySelectedSubject);
             }
             else {
                 NewListOfTimetablesGenerated?.Invoke(possibleTimetables , null);
             }
         }
 
+        private readonly List<SubjectModel> _disabledSubjects = new List<SubjectModel>();
         private void SubjectModel_Deselected(object sender , EventArgs e) {
+            var currentlyDeselectedSubject = (SubjectModel) sender;
+            foreach (SubjectModel s in _disabledSubjects) {
+                if (s.ClashingCounterparts.Any(x => x.Code == currentlyDeselectedSubject.Code)) {
+                    s.ClashReport = new NullClashReport();
+                }
+            }
             SelectedSubjectCount--;
             SubjectSelectionChanged?.Invoke(this , null);
         }

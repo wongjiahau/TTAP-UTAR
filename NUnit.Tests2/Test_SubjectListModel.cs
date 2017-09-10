@@ -13,6 +13,8 @@ namespace NUnit.Tests2 {
         private SubjectListModel input() {
             return new SubjectListModel(SubjectModel.Parse(TestData.TestSlots));
         }
+
+
         [Test]
         public void Test_SelectSubjectUsingRandomCodeShallThrowException() {
             var input = this.input();

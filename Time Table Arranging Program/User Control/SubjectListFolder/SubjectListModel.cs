@@ -54,10 +54,15 @@ namespace Time_Table_Arranging_Program.User_Control.SubjectListFolder {
             _subjectSelectionManager.ToggleSelectionOnCurrentFocusedSubject();
         }
 
-        public void SelectSubject(string subjectCode) {
+        /// <summary>
+        /// Select a subject using code (e.g. MPU3113)
+        /// </summary>
+        /// <param name="subjectCode"></param>
+        /// <param name="isSelectingSubject">Set this to false if you want to deselect the subject specified</param>
+        public void SelectSubject(string subjectCode , bool isSelectingSubject = true) {
             var subjectToBeSelcted = _subjectModels.Find(x => x.Code == subjectCode);
             if (subjectToBeSelcted == null) throw new ArgumentException($"{subjectCode} does not match any subject.");
-            subjectToBeSelcted.IsSelected = true;
+            subjectToBeSelcted.IsSelected = isSelectingSubject;
         }
         #endregion
 

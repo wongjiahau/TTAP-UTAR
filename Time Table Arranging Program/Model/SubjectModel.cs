@@ -92,7 +92,7 @@ namespace Time_Table_Arranging_Program.Model {
             set { SetProperty(ref _highlightedText , value); }
         }
 
-        private ClashingErrorType _clashingErrorType;
+        private ClashingErrorType _clashingErrorType = ClashingErrorType.NoError;
         public ClashingErrorType ClashingErrorType {
             get => _clashingErrorType;
             private set {
@@ -113,16 +113,27 @@ namespace Time_Table_Arranging_Program.Model {
             }
         }
 
-        private ClashReport _clashReport;
         public ClashReport ClashReport {
-            get => _clashReport;
-            set { SetProperty(ref _clashReport , value); }
+            set {
+                if (value.GetType() == typeof(NullClashReport)) {
+                    ClashingErrorType = value.ClashingErrorType;
+                    return;
+                }
+                NameOfClashingCounterpart = value.ClashingCounterpart.Name;
+                ClashingErrorType = value.ClashingErrorType;
+                ClashingCounterparts.Add(value.ClashingCounterpart);
+            }
         }
 
+        public string NameOfClashingCounterpart { get; private set; }
+
         #endregion
+
+        public List<SubjectModel> ClashingCounterparts { get; private set; } = new List<SubjectModel>();
 
         public override string ToString() {
             return $"{Name}, IsFocused={IsFocused}, IsSelected={IsSelected}, IsVisible={IsVisible}";
         }
     }
+
 }
