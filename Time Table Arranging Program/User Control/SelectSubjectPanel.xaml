@@ -24,8 +24,9 @@
         <DockPanel LastChildFill="True" >
             <StackPanel DockPanel.Dock="Top">
                 <DockPanel>
-                    <Label VerticalAlignment="Center" FontSize="30" Margin="5" HorizontalAlignment="Center" FontWeight="Bold">
-                        Search &amp; select your subjects</Label>
+                    <TextBlock Margin="10" FontWeight="Bold" Style="{StaticResource MaterialDesignDisplay1TextBlock}">
+                        Search &amp; select your subjects
+                    </TextBlock>
                 </DockPanel>
                 <Separator />
                 <DockPanel LastChildFill="True"  DockPanel.Dock="Top">

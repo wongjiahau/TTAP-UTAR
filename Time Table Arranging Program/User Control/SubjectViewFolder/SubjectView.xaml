@@ -150,14 +150,12 @@
                                         <ListView.View>
                                             <GridView>
                                                 <!--<GridViewColumn CellTemplate="{StaticResource FirstCell}" />-->
-                                                <GridViewColumn Header="Type" DisplayMemberBinding="{Binding Type}" />
-                                                <GridViewColumn Header="Number" DisplayMemberBinding="{Binding Number}" />
-                                                <GridViewColumn Header="Time"
-                                                                DisplayMemberBinding="{Binding TimePeriod}" />
-                                                <GridViewColumn Header="Day" DisplayMemberBinding="{Binding Day}" />
-                                                <GridViewColumn Header="Week"
-                                                                DisplayMemberBinding="{Binding WeekNumber}" />
-                                                <GridViewColumn Header="Venue" DisplayMemberBinding="{Binding Venue}" />
+                                                <GridViewColumn Header=" TYPE "   DisplayMemberBinding="{Binding Type}" />
+                                                <GridViewColumn Header=" NO. " DisplayMemberBinding="{Binding Number}" />
+                                                <GridViewColumn Header=" TIME "   DisplayMemberBinding="{Binding TimePeriod}" />
+                                                <GridViewColumn Header=" DAY "    DisplayMemberBinding="{Binding Day}" />
+                                                <GridViewColumn Header=" WEEK "   DisplayMemberBinding="{Binding WeekNumber}" />
+                                                <GridViewColumn Header=" VENUE "  DisplayMemberBinding="{Binding Venue}" />
                                             </GridView>
                                         </ListView.View>
                                     </ListView>

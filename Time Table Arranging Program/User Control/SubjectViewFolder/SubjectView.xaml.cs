@@ -121,6 +121,8 @@ namespace Time_Table_Arranging_Program.User_Control.SubjectViewFolder {
         }
 
         private void ListViewItem_PreviewMouseLeftButtonDown(object sender , MouseButtonEventArgs e) {
+            return;
+            //This feature is disabld at the moment
             var item = sender as ListViewItem;
 
             if (item != null) {
