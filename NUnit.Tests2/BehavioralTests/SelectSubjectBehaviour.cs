@@ -181,14 +181,15 @@ namespace NUnit.Tests2.BehavioralTests {
             string behaviour =
                 @"
             Given Ali just loaded slots data (by logging in)
-            When Ali selected a bunch of subjects 
+            When Ali selected a bunch of subjects (A, B, C ... )
             And Then Ali selected a subject X which causes group clashing error
             Then Ali shall see that a clash report will appear for subject X
                 ";
             var input = this.Input();
-            //TODO : Complete the code here
-            Assert.Fail("Incomplete yet");
-
+            input.SelectSubject("MPU32013"); //Subject A = BKA
+            input.SelectSubject("MPU3143"); //Subject B = BMK2
+            input.SelectSubject("MPU33183"); //Subject X = EIS
+            Assert.IsTrue(input.ToList().Find(x => x.Code == "MPU33183").ClashingErrorType == ClashingErrorType.GroupClashingError);
         }
 
         [Test]
@@ -199,12 +200,14 @@ namespace NUnit.Tests2.BehavioralTests {
             When Ali selected a bunch of subjects (A, B, C, D, E)
             And Then Ali selected a subject X which causes group clashing error
             And Then Ali deselected one of the subject (one from A, B, C, D, E)
-            Then TTAP should recalculate to see if subject X still causes Group-Clashing error
-            
+            Then Ali shall see that subject X is enabled again
                 ";
             var input = this.Input();
-            //TODO : Complete the code here
-            Assert.Fail("Incomplete yet");
+            input.SelectSubject("MPU32013"); //Subject A = BKA
+            input.SelectSubject("MPU3143"); //Subject B = BMK2
+            input.SelectSubject("MPU33183"); //Subject X = EIS
+            input.SelectSubject("MPU32013" , false); //Subject A = BKA
+            Assert.IsTrue(input.ToList().Find(x => x.Code == "MPU33183").ClashingErrorType == ClashingErrorType.NoError);
 
         }
     }
