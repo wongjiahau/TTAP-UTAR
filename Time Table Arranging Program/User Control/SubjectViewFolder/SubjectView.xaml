@@ -33,6 +33,11 @@
             </Style.Triggers>
         </Style>
     </UserControl.Style>
+    <UserControl.ContextMenu>
+        <ContextMenu>
+            <MenuItem Header="View slots" Click="ViewSlotsContextMenuItem_OnClick"></MenuItem>
+        </ContextMenu>
+    </UserControl.ContextMenu>
     <materialDesign:DrawerHost x:Name="DrawerHost" CloseOnClickAway="False">
         <materialDesign:DrawerHost.Style>
             <Style TargetType="materialDesign:DrawerHost">

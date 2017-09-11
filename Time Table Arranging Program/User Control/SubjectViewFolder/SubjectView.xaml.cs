@@ -56,12 +56,17 @@ namespace Time_Table_Arranging_Program.User_Control.SubjectViewFolder {
             _subjectModel.FocusMe();
         }
 
-        private void SubjectView_OnMouseLeave(object sender, MouseEventArgs e) {
+        private void SubjectView_OnMouseLeave(object sender , MouseEventArgs e) {
             _subjectModel.IsFocused = false;
         }
 
         private void Border_OnMouseDown(object sender , MouseButtonEventArgs e) {
-            Checkbox.IsChecked = !Checkbox.IsChecked;
+            if (e.ChangedButton == MouseButton.Left)
+                Checkbox.IsChecked = !Checkbox.IsChecked;
+        }
+
+        private void ViewSlotsContextMenuItem_OnClick(object sender , RoutedEventArgs e) {
+            ListViewPopup.IsOpen = true;
         }
         #endregion
 
