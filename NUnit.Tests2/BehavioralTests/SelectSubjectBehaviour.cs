@@ -51,6 +51,25 @@ namespace NUnit.Tests2.BehavioralTests {
             subjectListModel.SelectSubject("MPU34072" , false);
             Assert.Fail(behaviour);
         }
+
+        [Test]
+        public void SelectingClashingSubjectShouldNotUpdateGui() {
+            string behaviour =
+                @"
+            Given Ali just loaded slots data (by logging in)
+            When Ali selected a subject X 
+            And Then Ali selected subject Y which is clashing with X
+            Then Ali shall not see that the TimetableGui is being updated
+                ";
+            var input = this.Input();
+            input.SelectSubject("MPU34072");
+            input.NewListOfTimetablesGenerated += (sender, args) => {
+                Assert.Fail(behaviour);
+            };
+            input.SelectSubject("UEMX4313");
+            Assert.Pass();
+        }
+
         [Test]
         public void ClashReporting_1() {
             string behaviour =
