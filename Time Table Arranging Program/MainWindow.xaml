@@ -115,7 +115,7 @@
                     </Button>
                     <Button Click="FeedbackButton_OnClick">
                         <StackPanel>
-                            <materialDesign:PackIcon Kind="Message" />
+                            <materialDesign:PackIcon Kind="CommentTextOutline" />
                             <Label>Feedback</Label>
                         </StackPanel>
                     </Button>
