@@ -118,6 +118,31 @@ namespace NUnit.Tests2.BehavioralTests {
         }
 
         [Test]
+        public void ClashReporting_4() {
+            string behvaiour =
+                @"
+            Given Ali just loaded slots data (by logging in)
+            When Ali selected subject X
+            And Then Ali selected subject Y which is clashing with X
+            And Then Ali selected subject Z
+            And Then Ali selected subject A which is clashing with Z
+            Then When Ali deselected subject X
+            Ali shall see that only the clash report on Y is cleared, 
+                but the clash report on A still remains
+                ";
+            var input = this.Input();
+            input.SelectSubject("UEMX4313"); //Subject X = ASSD
+            input.SelectSubject("MPU34072"); //Subject Y = ACAD
+            input.SelectSubject("MPU3143"); //Subject Z = BMK2 
+            input.SelectSubject("UEMX4913"); //Subject A = IDP
+            input.SelectSubject("UEMX4313" , false); //Subject X = ASSD
+            var subject_MPU34072 = input.ToList().Find(x => x.Code == "MPU34072");
+            var subject_UEMX4913 = input.ToList().Find(x => x.Code == "UEMX4913");
+            Assert.IsTrue(subject_MPU34072.ClashingErrorType == ClashingErrorType.NoError , behvaiour);
+            Assert.IsTrue(subject_UEMX4913.ClashingErrorType == ClashingErrorType.SingleClashingError , behvaiour);
+        }
+
+        [Test]
         public void ClashReporting_GroupClashing_1() {
             string behaviour =
                 @"

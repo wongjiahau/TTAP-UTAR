@@ -58,14 +58,8 @@ namespace Time_Table_Arranging_Program.Class {
             var currentlyDeselectedSubject = (SubjectModel)sender;
             for (var i = 0 ; i < _disabledSubjects.Count ; i++) {
                 SubjectModel s = _disabledSubjects[i];
-                if (s.ClashingErrorType == ClashingErrorType.SingleClashingError) {
-                    if (s.ClashingCounterparts.Any(x => x.Code == currentlyDeselectedSubject.Code)) {
-                        s.ClashReport = new NullClashReport();
-                        _disabledSubjects.Remove(s);
-                        i--;
-                    }
-                }
-                else {
+                if (s.ClashingErrorType == ClashingErrorType.GroupClashingError ||
+                    s.ClashingCounterparts.Any(x => x.Code == currentlyDeselectedSubject.Code)) {
                     s.ClashReport = new NullClashReport();
                     _disabledSubjects.Remove(s);
                     i--;
