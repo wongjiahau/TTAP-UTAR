@@ -12,7 +12,7 @@ namespace Time_Table_Arranging_Program.Class {
         private readonly List<SubjectModel> _subjectModels;
         private readonly Func<Slot[] , List<List<Slot>>> _permutator;
         public int SelectedSubjectCount { get; private set; }
-        public event EventHandler SubjectSelectionChanged;
+        public event EventHandler SelectedSubjectCountChanged;
         public event EventHandler NewListOfTimetablesGenerated;
         public SubjectSelectionManager(List<SubjectModel> subjectModels , Func<Slot[] , List<List<Slot>>> permutator) {
             this._subjectModels = subjectModels;
@@ -40,7 +40,7 @@ namespace Time_Table_Arranging_Program.Class {
         private SubjectModel _currentlySelectedSubject;
         private void SubjectModel_Selected(object sender , EventArgs e) {
             SelectedSubjectCount++;
-            SubjectSelectionChanged?.Invoke(this , null);
+            SelectedSubjectCountChanged?.Invoke(this , null);
             _currentlySelectedSubject = (SubjectModel)sender;
             var possibleTimetables = _permutator?.Invoke(GetSelectedSlots());
             if (possibleTimetables?.Count == 0) {
@@ -72,7 +72,9 @@ namespace Time_Table_Arranging_Program.Class {
                 }
             }
             SelectedSubjectCount--;
-            SubjectSelectionChanged?.Invoke(this , null);
+            SelectedSubjectCountChanged?.Invoke(this , null);
+            if (SelectedSubjectCount == 0)
+                NewListOfTimetablesGenerated?.Invoke(new List<List<Slot>>() , null);
         }
     }
 }

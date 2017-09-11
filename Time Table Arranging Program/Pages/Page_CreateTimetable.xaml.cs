@@ -121,8 +121,6 @@ namespace Time_Table_Arranging_Program.Pages {
             _windowStateSummary.ShowDialog();
             if (_windowStateSummary.UserClickedDone) {
                 UpdateGUI(_windowStateSummary.RemainingTimetables);
-                //_predicates = _windowStateSummary.Predicates;
-                //UpdateGUI(RunPermutation(_inputSlots.GetSlotsOf(SelectSubjectPanel.UIDofSelectedSlots)));
             }
         }
 

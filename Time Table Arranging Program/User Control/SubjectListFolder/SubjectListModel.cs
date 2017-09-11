@@ -23,7 +23,7 @@ namespace Time_Table_Arranging_Program.User_Control.SubjectListFolder {
         public SubjectListModel(List<SubjectModel> subjectModels , Func<Slot[] , List<List<Slot>>> permutator = null) {
             _subjectModels = subjectModels;
             _subjectSelectionManager = new SubjectSelectionManager(subjectModels , permutator);
-            _subjectSelectionManager.SubjectSelectionChanged += _subjectSelectionManager_SubjectSelectionChanged;
+            _subjectSelectionManager.SelectedSubjectCountChanged += _subjectSelectionManager_SelectedSubjectCountChanged;
             _subjectSelectionManager.NewListOfTimetablesGenerated += _subjectSelectionManager_NewListOfTimetablesGenerated;
             foreach (var subjectModel in _subjectModels) {
                 _nameAndCodeOfAllSubjects.Add(subjectModel.Name);
@@ -37,7 +37,7 @@ namespace Time_Table_Arranging_Program.User_Control.SubjectListFolder {
             NewListOfTimetablesGenerated?.Invoke(sender , null);
         }
 
-        private void _subjectSelectionManager_SubjectSelectionChanged(object sender , EventArgs e) {
+        private void _subjectSelectionManager_SelectedSubjectCountChanged(object sender , EventArgs e) {
             SelectedSubjectCount = _subjectSelectionManager.SelectedSubjectCount;
         }
 
