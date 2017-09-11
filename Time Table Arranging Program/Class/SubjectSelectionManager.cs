@@ -45,8 +45,8 @@ namespace Time_Table_Arranging_Program.Class {
             var possibleTimetables = _permutator?.Invoke(GetSelectedSlots());
             if (possibleTimetables?.Count == 0) {
                 var clashReport = new ClashFinder(_subjectModels , _permutator , _currentlySelectedSubject).GetReport();
-                _currentlySelectedSubject.ClashReport = clashReport;
                 _disabledSubjects.Add(_currentlySelectedSubject);
+                _currentlySelectedSubject.ClashReport = clashReport;
             }
             else {
                 NewListOfTimetablesGenerated?.Invoke(possibleTimetables , null);
@@ -56,6 +56,7 @@ namespace Time_Table_Arranging_Program.Class {
         private readonly List<SubjectModel> _disabledSubjects = new List<SubjectModel>();
         private void SubjectModel_Deselected(object sender , EventArgs e) {
             var currentlyDeselectedSubject = (SubjectModel)sender;
+            if (_disabledSubjects.Any(x => x.Code == currentlyDeselectedSubject.Code)) return;
             for (var i = 0 ; i < _disabledSubjects.Count ; i++) {
                 SubjectModel s = _disabledSubjects[i];
                 if (s.ClashingErrorType == ClashingErrorType.GroupClashingError ||
