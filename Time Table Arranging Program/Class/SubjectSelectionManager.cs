@@ -39,8 +39,6 @@ namespace Time_Table_Arranging_Program.Class {
 
         private SubjectModel _currentlySelectedSubject;
         private void SubjectModel_Selected(object sender , EventArgs e) {
-            SelectedSubjectCount++;
-            SelectedSubjectCountChanged?.Invoke(this , null);
             _currentlySelectedSubject = (SubjectModel)sender;
             var possibleTimetables = _permutator?.Invoke(GetSelectedSlots());
             if (possibleTimetables?.Count == 0) {
@@ -49,6 +47,8 @@ namespace Time_Table_Arranging_Program.Class {
                 _currentlySelectedSubject.ClashReport = clashReport;
             }
             else {
+                SelectedSubjectCount++;
+                SelectedSubjectCountChanged?.Invoke(this , null);
                 NewListOfTimetablesGenerated?.Invoke(possibleTimetables , null);
             }
         }

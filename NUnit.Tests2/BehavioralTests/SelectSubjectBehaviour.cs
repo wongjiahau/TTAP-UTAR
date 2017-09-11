@@ -63,11 +63,26 @@ namespace NUnit.Tests2.BehavioralTests {
                 ";
             var input = this.Input();
             input.SelectSubject("MPU34072");
-            input.NewListOfTimetablesGenerated += (sender, args) => {
+            input.NewListOfTimetablesGenerated += (sender , args) => {
                 Assert.Fail(behaviour);
             };
             input.SelectSubject("UEMX4313");
             Assert.Pass();
+        }
+
+        [Test]
+        public void SelectingClashingSubjectShouldNotUpdateSelectedSubjectCount() {
+            string behaviour =
+                @"
+            Given Ali just loaded slots data (by logging in)
+            When Ali selected a subject X 
+            And Then Ali selected subject Y which is clashing with X
+            Then Ali shall see that the SelectedSubjectCount is still unchanged
+                ";
+            var input = this.Input();
+            input.SelectSubject("MPU34072");
+            input.SelectSubject("UEMX4313");
+            Assert.AreEqual(1 , input.SelectedSubjectCount);
         }
 
         [Test]
