@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Time_Table_Arranging_Program.Model;
 using Time_Table_Arranging_Program.Pages;
+using Time_Table_Arranging_Program.User_Control.CheckboxWithListDownMenuFolder.ErrorMessageType;
 
 namespace Time_Table_Arranging_Program.Class {
     public class SubjectSelectionManager {
@@ -57,7 +58,14 @@ namespace Time_Table_Arranging_Program.Class {
             var currentlyDeselectedSubject = (SubjectModel)sender;
             for (var i = 0 ; i < _disabledSubjects.Count ; i++) {
                 SubjectModel s = _disabledSubjects[i];
-                if (s.ClashingCounterparts.Any(x => x.Code == currentlyDeselectedSubject.Code)) {
+                if (s.ClashingErrorType == ClashingErrorType.SingleClashingError) {
+                    if (s.ClashingCounterparts.Any(x => x.Code == currentlyDeselectedSubject.Code)) {
+                        s.ClashReport = new NullClashReport();
+                        _disabledSubjects.Remove(s);
+                        i--;
+                    }
+                }
+                else {
                     s.ClashReport = new NullClashReport();
                     _disabledSubjects.Remove(s);
                     i--;
