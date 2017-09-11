@@ -17,6 +17,41 @@ namespace NUnit.Tests2.BehavioralTests {
         }
 
         [Test]
+        public void SubjectSelectionShouldTriggerUpdateToUI() {
+            string behaviour =
+                @"
+            Given Ali just loaded slots data (by logging in)
+            When Ali selected subject 'MPU34072' (Art, Craft, And Design)
+            Then Ali shall notice the TimetableGUI is updated
+                ";
+            var subjectListModel = Input();
+            subjectListModel.NewListOfTimetablesGenerated += (sender , args) => {
+                Assert.Pass();
+            };
+            subjectListModel.SelectSubject("MPU34072");
+            Assert.Fail(behaviour);
+        }
+
+        [Test]
+        public void SubjectDeselectionShouldTriggerUpdateToUi() {
+            string behaviour =
+                @"
+            Given Ali just loaded slots data (by logging in)
+            When Ali selected a subject X 
+            And Then Ali selected another subject Y 
+            And Then Ali deselected subject X
+            Then Ali shall notice the TimetableGUI is updated
+                ";
+            var subjectListModel = Input();
+            subjectListModel.SelectSubject("MPU34072");
+            subjectListModel.SelectSubject("UEMX4313");
+            subjectListModel.NewListOfTimetablesGenerated += (sender , args) => {
+                Assert.Pass();
+            };
+            subjectListModel.SelectSubject("MPU34072" , false);
+            Assert.Fail(behaviour);
+        }
+        [Test]
         public void ClashReporting_1() {
             string behaviour =
                 @"
@@ -77,8 +112,8 @@ namespace NUnit.Tests2.BehavioralTests {
             Assert.IsTrue(input.ToList().Find(x => x.Code == "UEMX2363").ClashingErrorType == ClashingErrorType.SingleClashingError , behaviour1);
 
             input.SelectSubject("UEMX4313" , false); //Subject X = Advanced structural steel design
-            Assert.IsTrue(input.ToList().Find(x => x.Code == "MPU34072").ClashingErrorType == ClashingErrorType.NoError, behaviour2);
-            Assert.IsTrue(input.ToList().Find(x => x.Code == "UEMX2363").ClashingErrorType == ClashingErrorType.NoError, behaviour2);
+            Assert.IsTrue(input.ToList().Find(x => x.Code == "MPU34072").ClashingErrorType == ClashingErrorType.NoError , behaviour2);
+            Assert.IsTrue(input.ToList().Find(x => x.Code == "UEMX2363").ClashingErrorType == ClashingErrorType.NoError , behaviour2);
 
         }
 
