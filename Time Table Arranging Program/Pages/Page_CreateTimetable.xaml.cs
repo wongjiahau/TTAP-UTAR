@@ -120,8 +120,9 @@ namespace Time_Table_Arranging_Program.Pages {
                 _windowStateSummary = new Window_StateSummary(_inputSlots.GetSlotsOf(SelectSubjectPanel.UIDofSelectedSlots).ToList() , _raw);
             _windowStateSummary.ShowDialog();
             if (_windowStateSummary.UserClickedDone) {
-                _predicates = _windowStateSummary.Predicates;
-                UpdateGUI(RunPermutation(_inputSlots.GetSlotsOf(SelectSubjectPanel.UIDofSelectedSlots)));
+                UpdateGUI(_windowStateSummary.RemainingTimetables);
+                //_predicates = _windowStateSummary.Predicates;
+                //UpdateGUI(RunPermutation(_inputSlots.GetSlotsOf(SelectSubjectPanel.UIDofSelectedSlots)));
             }
         }
 
