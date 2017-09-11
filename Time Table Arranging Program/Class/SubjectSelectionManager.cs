@@ -73,8 +73,7 @@ namespace Time_Table_Arranging_Program.Class {
             }
             SelectedSubjectCount--;
             SelectedSubjectCountChanged?.Invoke(this , null);
-            if (SelectedSubjectCount == 0)
-                NewListOfTimetablesGenerated?.Invoke(new List<List<Slot>>() , null);
+            NewListOfTimetablesGenerated?.Invoke(_permutator?.Invoke(GetSelectedSlots()) , null);
         }
     }
 }
