@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
 using Time_Table_Arranging_Program.Class;
+using Time_Table_Arranging_Program.Interfaces;
 using Time_Table_Arranging_Program.Model;
 using Time_Table_Arranging_Program.User_Control.CheckboxWithListDownMenuFolder.ErrorMessageType;
 using Time_Table_Arranging_Program.User_Control.SubjectListFolder;
@@ -13,7 +14,7 @@ namespace NUnit.Tests2.BehavioralTests {
     [TestFixture]
     public class SelectSubjectBehaviour {
         private SubjectListModel Input() {
-            return new SubjectListModel(SubjectModel.Parse(TestData.TestSlots) , Permutator.Run_v2_withoutConsideringWeekNumber);
+            return new SubjectListModel(SubjectModel.Parse(TestData.TestSlots) , Permutator.Run_v2_withoutConsideringWeekNumber, new MockTaskRunner());
         }
 
         [Test]

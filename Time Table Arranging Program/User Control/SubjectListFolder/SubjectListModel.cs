@@ -20,9 +20,9 @@ namespace Time_Table_Arranging_Program.User_Control.SubjectListFolder {
 
         public SubjectListModel() { }
 
-        public SubjectListModel(List<SubjectModel> subjectModels , Func<Slot[] , List<List<Slot>>> permutator = null) {
+        public SubjectListModel(List<SubjectModel> subjectModels , Func<Slot[] , List<List<Slot>>> permutator = null, ITaskRunnerWithProgressFeedback taskRunner = null) {
             _subjectModels = subjectModels;
-            _subjectSelectionManager = new SubjectSelectionManager(subjectModels , permutator);
+            _subjectSelectionManager = new SubjectSelectionManager(subjectModels , permutator, taskRunner);
             _subjectSelectionManager.SelectedSubjectCountChanged += _subjectSelectionManager_SelectedSubjectCountChanged;
             _subjectSelectionManager.NewListOfTimetablesGenerated += _subjectSelectionManager_NewListOfTimetablesGenerated;
             foreach (var subjectModel in _subjectModels) {
