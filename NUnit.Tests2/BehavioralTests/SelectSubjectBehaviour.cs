@@ -189,7 +189,7 @@ namespace NUnit.Tests2.BehavioralTests {
             input.SelectSubject("MPU32013"); //Subject A = BKA
             input.SelectSubject("MPU3143"); //Subject B = BMK2
             input.SelectSubject("MPU33183"); //Subject X = EIS
-            Assert.IsTrue(input.ToList().Find(x => x.Code == "MPU33183").ClashingErrorType == ClashingErrorType.GroupClashingError);
+            Assert.IsTrue(input.ToList().Find(x => x.Code == "MPU33183").ClashingErrorType == ClashingErrorType.GroupClashingError, behaviour);
         }
 
         [Test]
@@ -207,7 +207,7 @@ namespace NUnit.Tests2.BehavioralTests {
             input.SelectSubject("MPU3143"); //Subject B = BMK2
             input.SelectSubject("MPU33183"); //Subject X = EIS
             input.SelectSubject("MPU32013" , false); //Subject A = BKA
-            Assert.IsTrue(input.ToList().Find(x => x.Code == "MPU33183").ClashingErrorType == ClashingErrorType.NoError);
+            Assert.IsTrue(input.ToList().Find(x => x.Code == "MPU33183").ClashingErrorType == ClashingErrorType.NoError, behaviour);
 
         }
     }
