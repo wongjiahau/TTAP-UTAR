@@ -48,19 +48,20 @@ namespace Time_Table_Arranging_Program.Class {
 
         private SubjectModel _currentlySelectedSubject;
         private void SubjectModel_Selected(object sender , EventArgs e) {
-                _currentlySelectedSubject = (SubjectModel) sender;
-                var possibleTimetables = GetPossibleTimetables();
-                if (possibleTimetables?.Count == 0) {
-                    var clashReport =
-                        new ClashFinder(_subjectModels, _permutator, _currentlySelectedSubject).GetReport();
-                    _disabledSubjects.Add(_currentlySelectedSubject);
-                    _currentlySelectedSubject.ClashReport = clashReport;
-                }
-                else {
-                    SelectedSubjectCount++;
-                    SelectedSubjectCountChanged?.Invoke(this, null);
-                    NewListOfTimetablesGenerated?.Invoke(possibleTimetables, null);
-                }
+            _currentlySelectedSubject = (SubjectModel)sender;
+            var possibleTimetables = new List<List<Slot>>();
+            _taskRunner.RunTask((() => { possibleTimetables = GetPossibleTimetables(); }));
+            if (possibleTimetables?.Count == 0) {
+                var clashReport =
+                    new ClashFinder(_subjectModels , _permutator , _currentlySelectedSubject).GetReport();
+                _disabledSubjects.Add(_currentlySelectedSubject);
+                _currentlySelectedSubject.ClashReport = clashReport;
+            }
+            else {
+                SelectedSubjectCount++;
+                SelectedSubjectCountChanged?.Invoke(this , null);
+                NewListOfTimetablesGenerated?.Invoke(possibleTimetables , null);
+            }
         }
 
         private readonly List<SubjectModel> _disabledSubjects = new List<SubjectModel>();
@@ -78,7 +79,9 @@ namespace Time_Table_Arranging_Program.Class {
             }
             SelectedSubjectCount--;
             SelectedSubjectCountChanged?.Invoke(this , null);
-            NewListOfTimetablesGenerated?.Invoke(GetPossibleTimetables() , null);
+            var possibleTimeatables = new List<List<Slot>>();
+            _taskRunner.RunTask(() => { possibleTimeatables = GetPossibleTimetables(); });
+            NewListOfTimetablesGenerated?.Invoke(possibleTimeatables , null);
         }
     }
 }
