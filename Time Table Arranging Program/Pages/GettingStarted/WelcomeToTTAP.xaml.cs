@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Time_Table_Arranging_Program.Pages.Login;
 
 namespace Time_Table_Arranging_Program.Pages
 {
@@ -23,6 +25,11 @@ namespace Time_Table_Arranging_Program.Pages
         public WelcomeToTTAP()
         {
             InitializeComponent();
+        }
+
+        private void Hyperlink_OnRequestNavigate(object sender, RequestNavigateEventArgs e) {
+            Process.Start(new ProcessStartInfo(new UrlProvider().DownloadLink));
+            e.Handled = true;
         }
     }
 }

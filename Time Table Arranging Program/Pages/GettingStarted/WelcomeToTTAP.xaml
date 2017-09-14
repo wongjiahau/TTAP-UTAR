@@ -10,7 +10,10 @@
         <StackPanel>
             <Image Source="../../Images/calendarBig.png" Width="250"></Image>
             <TextBlock Style="{StaticResource  MaterialDesignDisplay4TextBlock}">Welcome to TTAP.</TextBlock>
-            <TextBlock Style="{StaticResource MaterialDesignBody2TextBlock}" HorizontalAlignment="Right"> - The time table arranging program for frustrated UTAR students.</TextBlock>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <TextBlock Style="{StaticResource MaterialDesignBody2TextBlock}" Text="The latest version of TTAP can always be downloaded from "></TextBlock>
+                <TextBlock><Hyperlink Foreground="Blue" Style="{StaticResource MaterialDesignBody2Hyperlink}" NavigateUri="xxx" RequestNavigate="Hyperlink_OnRequestNavigate"><Run>here</Run></Hyperlink></TextBlock>
+            </StackPanel>
         </StackPanel>
     </materialDesign:Card>
 </UserControl>

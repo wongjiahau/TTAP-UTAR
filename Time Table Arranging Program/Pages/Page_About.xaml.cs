@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Time_Table_Arranging_Program.Pages.Login;
 using Time_Table_Arranging_Program.User_Control;
 
 namespace Time_Table_Arranging_Program.Pages {
@@ -21,8 +22,6 @@ namespace Time_Table_Arranging_Program.Pages {
     /// </summary>
     public partial class Page_About : Page {
         private const string Email = "jiahau.wong@1utar.my";
-        private const string DownloadLink = "https://goo.gl/5XBxHV";
-        private const string GitHubLink = "https://github.com/wongjiahau/TTAP-UTAR";
         public Page_About() {
             InitializeComponent();
             this.DataContext = new NameList();
@@ -38,12 +37,12 @@ namespace Time_Table_Arranging_Program.Pages {
         }
 
         private void CopyDownloadLinkButton_OnClick(object sender, RoutedEventArgs e) {
-           CopyToClipboard(DownloadLink);
+           CopyToClipboard(new UrlProvider().DownloadLink);
         }
 
 
         private void CopyGitHubLinkButton_OnClick(object sender, RoutedEventArgs e) {
-            CopyToClipboard(GitHubLink);                        
+            CopyToClipboard(new UrlProvider().GitHubLink);                        
         }
 
         private void CopyToClipboard(string x) {
