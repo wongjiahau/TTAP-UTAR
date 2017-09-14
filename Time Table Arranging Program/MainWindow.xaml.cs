@@ -50,7 +50,8 @@ namespace Time_Table_Arranging_Program {
                 new LoadDataFromTestServerCommand(this),
                 new ResetDataCommand(Global.InputSlotList),
                 new SaveLoadedHtmlCommand(Global.Toggles.SaveLoadedHtmlToggle),
-                new ThrowExceptionCommand(null)
+                new ThrowExceptionCommand(null),
+                new StatsCommand(Global.InputSlotList)
             }));
         }
 

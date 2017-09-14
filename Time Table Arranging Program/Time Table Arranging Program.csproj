@@ -194,6 +194,7 @@
     <Compile Include="ConsoleCommands\LoadTestDataCommand.cs" />
     <Compile Include="ConsoleCommands\ResetDataCommand.cs" />
     <Compile Include="ConsoleCommands\SaveLoadedHtmlCommand.cs" />
+    <Compile Include="ConsoleCommands\StatsCommand.cs" />
     <Compile Include="ConsoleCommands\ThrowExceptionCommand.cs" />
     <Compile Include="Interfaces\INeedDataContext.cs" />
     <Compile Include="Interfaces\IPageWithLoadedFunction.cs" />
