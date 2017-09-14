@@ -1,7 +1,6 @@
 [![BCH compliance](https://bettercodehub.com/edge/badge/wongjiahau/TTAP-SCC-Assignment-4?branch=master)](https://bettercodehub.com/)
 # TTAP-UTAR 
 Timetable Arranging Program - UTAR 
-By - Wong Jia Hau
 
 ## Objective
 To help UTAR students to arrange timetable easily.
