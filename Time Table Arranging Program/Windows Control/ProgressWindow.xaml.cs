@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Threading;
 using System.Windows;
 using Time_Table_Arranging_Program.Class;
+using Time_Table_Arranging_Program.Interfaces;
 
 namespace Time_Table_Arranging_Program.Windows_Control {
     /// <summary>
@@ -34,15 +35,16 @@ namespace Time_Table_Arranging_Program.Windows_Control {
     }
 
 
-    public partial class ProgressWindow : Window {
+    public partial class ProgressWindow : Window , IProgressIndicator{
         private readonly AbortableBackgroundWorker _backgroundWorker;
         private readonly Stopwatch _timer;
 
-
-        private ProgressWindow(AbortableBackgroundWorker worker, string message) {
+        public ProgressWindow(string message) {
             InitializeComponent();
             this.Left = SystemParameters.PrimaryScreenWidth - this.Width - 10;
             MessageLabel.Content = message;
+        }
+        private ProgressWindow(AbortableBackgroundWorker worker, string message) : this(message) {
             _backgroundWorker = worker;
             _backgroundWorker.RunWorkerCompleted += _backgroundWorker_RunWorkerCompleted;
             _timer = Stopwatch.StartNew();
@@ -72,6 +74,14 @@ namespace Time_Table_Arranging_Program.Windows_Control {
         private void CancelButton_Click(object sender, RoutedEventArgs e) {
             _backgroundWorker.CancelAsync();
             _backgroundWorker.Abort();
+        }
+
+        public void ShowLoading() {
+            ShowDialog();
+        }
+
+        public void HideLoading() {
+            Hide();
         }
     }
 }

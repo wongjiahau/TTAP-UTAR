@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Time_Table_Arranging_Program.User_Control.CheckboxWithListDownMenuFolder.ErrorMessageType.TypeOneError"
+﻿<UserControl x:Class="Time_Table_Arranging_Program.User_Control.CheckboxWithListDownMenuFolder.ErrorMessageType.SingleClashingError"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 

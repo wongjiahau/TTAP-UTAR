@@ -9,34 +9,23 @@ using Time_Table_Arranging_Program.Class;
 using Time_Table_Arranging_Program.Interfaces;
 using Time_Table_Arranging_Program.Model;
 using Time_Table_Arranging_Program.UserInterface;
-using Time_Table_Arranging_Program.User_Control.CheckboxWithListDownMenuFolder.ErrorMessageType;
 
-namespace Time_Table_Arranging_Program.User_Control.CheckboxWithListDownMenuFolder {
+namespace Time_Table_Arranging_Program.User_Control.SubjectViewFolder {
     /// <summary>
     ///     Interaction logic for CheckBoxWithListDownMenu.xaml
     /// </summary>
-    public interface ICheckBoxWithListDownMenu {
-        bool IsChecked { get; set; }
-        bool IsSelectable { get; }
-        FontWeight FontWeight { set; }
+    public interface ISubjectView {
         string SubjectName { get; set; }
-        string SubjectCode { get; set; }
-        string HighlightText { get; set; }
-
-
         HashSet<int> UIDofDeselectedSlots { get; set; }
         HashSet<int> UIDofSelectedSlots { get; set; }
         string NameOfClashingCounterpart { get; set; }
-        event RoutedEventHandler Checked;
         event RoutedEventHandler ListViewCheckBox_Checked;
-        void Highlight();
-        void SetErrorMessage(ClashingErrorType clashingErrorType);
     }
 
-    public partial class CheckBoxWithListDownMenu : UserControl, ICheckBoxWithListDownMenu, INeedDataContext<SubjectModel> {
+    public partial class SubjectView : UserControl, ISubjectView, INeedDataContext<SubjectModel> {
         private double _listviewOriginalHeight;
         private SubjectModel _subjectModel;
-        public CheckBoxWithListDownMenu() {
+        public SubjectView() {
             InitializeComponent();
             UIDofDeselectedSlots = new HashSet<int>();
             UIDofSelectedSlots = new HashSet<int>();
@@ -52,118 +41,34 @@ namespace Time_Table_Arranging_Program.User_Control.CheckboxWithListDownMenuFold
         }
 
         public string NameOfClashingCounterpart { get; set; }
-        public event RoutedEventHandler Checked;
         public event RoutedEventHandler ListViewCheckBox_Checked;
-        private static CheckBoxWithListDownMenu _ownerOfCurrentFocus;
-        public void Highlight() {
-            _ownerOfCurrentFocus?.Dehighlight();
-            _ownerOfCurrentFocus = this;
-            Border.Background = ColorDictionary.GotFocusedColor;
-        }
-
-        public void SetErrorMessage(ClashingErrorType clashingErrorType) {
-            switch (clashingErrorType) {
-                case ClashingErrorType.NoError:
-                    IsSelectable = true;
-                    break;
-                case ClashingErrorType.SingleClashingError:
-                    IsSelectable = false;                    
-                    ErrorContent.Content = new TypeOneError(NameOfClashingCounterpart);
-                    break;
-                case ClashingErrorType.GroupClashingError:
-                    ErrorContent.Content = new TypeTwoError();
-                    IsSelectable = false;                    
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(clashingErrorType), clashingErrorType, null);
-            }
-        }
-
-        private bool _isSelectable;
-        public bool IsSelectable {
-            get => _isSelectable;
-            private set {
-                if (value) {
-                    DrawerHost.IsRightDrawerOpen = false;
-                    ErrorContent.Content = null;
-                    if (!this.IsChecked) ChooseSlotButton.Visibility = Visibility.Hidden;
-                }
-                else {
-                DrawerHost.IsRightDrawerOpen = true;
-                }
-            }
-        }
-
-        private void Dehighlight() {
-            Border.Background =
-                Checkbox.IsChecked.Value
-                    ? ColorDictionary.CheckedColor
-                    : ColorDictionary.UncheckedColor;
-        }
-
-        public bool IsChecked {
-            get { return _subjectModel.IsSelected == true; }
-            set {
-                _ownerOfCurrentFocus?.Dehighlight();
-                _ownerOfCurrentFocus = this;
-                _subjectModel.IsSelected = value;
-                if (value) {
-                    Border.Background = ColorDictionary.CheckedColor;
-                    ChooseSlotButton.Visibility = Visibility.Visible;
-                }
-                else {
-                    ChooseSlotButton.Visibility = Visibility.Hidden;
-                    Border.Background = null;
-                    Border.Background = ColorDictionary.GotFocusedColor;
-                }
-
-            }
-        }
-
-        public new FontWeight FontWeight {
-            set { Checkbox.FontWeight = value; }
-        }
 
         public string SubjectName {
             get => SubjectNameHighlightTextBlock.Text;
             set => SubjectNameHighlightTextBlock.Text = value;
         }
 
-        public string SubjectCode {
-            get => SubjectCodeHighlightTextBlock.Text;
-            set => SubjectCodeHighlightTextBlock.Text = value;
-        }
-
         public HashSet<int> UIDofDeselectedSlots { get; set; }
         public HashSet<int> UIDofSelectedSlots { get; set; }
 
-        public string HighlightText {
-            get => SubjectNameHighlightTextBlock.HighlightedText;
-
-            set {
-                SubjectNameHighlightTextBlock.HighlightedText = value;
-                SubjectCodeHighlightTextBlock.HighlightedText = value;
-            }
+        #region EventHandlers
+        private void SubjectView_OnMouseEnter(object sender , MouseEventArgs e) {
+            _subjectModel.FocusMe();
         }
 
-
-        private void CheckBoxWithListDownMenu_OnMouseEnter(object sender , MouseEventArgs e) {
-            Highlight();
+        private void SubjectView_OnMouseLeave(object sender , MouseEventArgs e) {
+            _subjectModel.IsFocused = false;
         }
-
-        private void CheckBoxWithListDownMenu_OnMouseLeave(object sender , MouseEventArgs e) {
-            Dehighlight();
-        }
-
 
         private void Border_OnMouseDown(object sender , MouseButtonEventArgs e) {
-            this.IsChecked = !IsChecked;
+            if (e.ChangedButton == MouseButton.Left)
+                Checkbox.IsChecked = !Checkbox.IsChecked;
         }
 
-        private void CheckBox_CheckChanged(object sender , RoutedEventArgs e) {
-            this.IsChecked = (sender as CheckBox).IsChecked.Value;
-            Checked?.Invoke(this , null);
+        private void ViewSlotsContextMenuItem_OnClick(object sender , RoutedEventArgs e) {
+            ListViewPopup.IsOpen = true;
         }
+        #endregion
 
         #region ListDownMenu
         private void InitializeDraggablePopup() {
@@ -221,6 +126,8 @@ namespace Time_Table_Arranging_Program.User_Control.CheckboxWithListDownMenuFold
         }
 
         private void ListViewItem_PreviewMouseLeftButtonDown(object sender , MouseButtonEventArgs e) {
+            return;
+            //This feature is disabld at the moment
             var item = sender as ListViewItem;
 
             if (item != null) {
@@ -288,7 +195,6 @@ namespace Time_Table_Arranging_Program.User_Control.CheckboxWithListDownMenuFold
         }
 
         #endregion
-
 
 
     }

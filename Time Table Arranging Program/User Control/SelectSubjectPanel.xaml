@@ -5,25 +5,41 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Time_Table_Arranging_Program.User_Control"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             mc:Ignorable="d" KeyDown="SelectSubjectPanel_OnKeyDown"   FocusManager.IsFocusScope="True" FocusManager.FocusedElement="{Binding ElementName=SearchBox}"
-           
-             >
+             xmlns:subjectListFolder="clr-namespace:Time_Table_Arranging_Program.User_Control.SubjectListFolder"
+             xmlns:iValueConverter="clr-namespace:Time_Table_Arranging_Program.IValueConverter"
+             mc:Ignorable="d" KeyDown="SelectSubjectPanel_OnKeyDown"   FocusManager.IsFocusScope="True" FocusManager.FocusedElement="{Binding ElementName=SearchBox}" >
+    <UserControl.Resources>
+        <iValueConverter:VisibilityConverter x:Key="VisibilityConverter"></iValueConverter:VisibilityConverter>
+        <iValueConverter:CutoffConverter x:Key="CutoffConverter" />
+        <iValueConverter:IsStringEmptyConverter x:Key="IsStringEmptyConverter" />
+    </UserControl.Resources>
+    <UserControl.DataContext>
+        <subjectListFolder:SubjectListModel />
+    </UserControl.DataContext>
+    <UserControl.InputBindings>
+        <KeyBinding Command="{Binding NavigateToPreviousSubjectCommand}" Key="Up" />
+        <KeyBinding Command="{Binding NavigateToPreviousSubjectCommand}" Key="Left" />
+    </UserControl.InputBindings>
     <materialDesign:Card VerticalAlignment="Stretch">
         <DockPanel LastChildFill="True" >
             <StackPanel DockPanel.Dock="Top">
                 <DockPanel>
-                    <Label VerticalAlignment="Center" FontSize="30" Margin="5" HorizontalAlignment="Center" FontWeight="Bold">
-                        Search &amp; select your subjects</Label>
+                    <TextBlock Margin="10" FontWeight="Bold" Style="{StaticResource MaterialDesignDisplay1TextBlock}">
+                        Search &amp; select your subjects
+                    </TextBlock>
                 </DockPanel>
                 <Separator />
                 <DockPanel LastChildFill="True"  DockPanel.Dock="Top">
 
                     <Border Background="White" DockPanel.Dock="Left" HorizontalAlignment="Stretch">
-                        <local:SearchBox x:Name="SearchBox"  TextChanged="SearchBoxOnTextChanged" OnKeyPressed="SearchBox_OnOnKeyPressed"/>
+                        <local:SearchBox x:Name="SearchBox"  TextChanged="SearchBoxOnTextChanged" OnKeyPressed="SearchBox_OnOnKeyPressed" />
                     </Border>
                 </DockPanel>
             </StackPanel>
-            <TextBlock x:Name="HintLabel" Margin="10,5,5,5" xml:space="preserve" Visibility="Collapsed" DockPanel.Dock="Top">Press ESC to clear text of search box.</TextBlock>
+            <TextBlock x:Name="HintLabel" Margin="10" DockPanel.Dock="Top"
+                       Visibility="{Binding IsHintLabelVisible, Converter={StaticResource VisibilityConverter}}" >
+                Press ESC to clear text of search box.
+            </TextBlock>
             <Grid DockPanel.Dock="Top">
                 <Grid.Resources>
                     <Style TargetType="TextBlock">
@@ -33,30 +49,72 @@
                         <Setter Property="Margin" Value="10" />
                     </Style>
                 </Grid.Resources>
-                <StackPanel x:Name="FeedbackPanel"  Orientation="Horizontal" Visibility="Collapsed" Margin="10">
+                <StackPanel x:Name="FeedbackPanel"  Orientation="Horizontal" Margin="5"
+                            Visibility="{Binding IsFeedbackPanelVisible, Converter={StaticResource VisibilityConverter}}">
                     <TextBlock x:Name="FeedbackTextBlock" Text="Showing result for  " />
-                    <TextBlock  Text="Accounting" FontStyle="Italic" FontWeight="Bold" x:Name="SuggestedTextLabel" />
+                    <TextBlock  Text="{Binding SuggestedText}" FontStyle="Italic" FontWeight="Bold" x:Name="SuggestedTextLabel" />
                     <Button Click="YesButton_OnClick" Visibility="Collapsed">YES</Button>
                 </StackPanel>
-                <TextBlock x:Name="ErrorLabel" FontWeight="Bold" Visibility="Collapsed">No result found . . .</TextBlock>
+                <TextBlock x:Name="ErrorLabel" Margin="10" FontSize="15" FontWeight="Bold"
+                           Visibility="{Binding IsErrorLabelVisible, Converter={StaticResource VisibilityConverter}}">
+                    No result found . . .</TextBlock>
             </Grid>
-            
+            <materialDesign:ColorZone Mode="Light" materialDesign:ShadowAssist.ShadowDepth="Depth3" x:Name="BottomPanel" DockPanel.Dock="Bottom">
+                <materialDesign:ColorZone.Style>
+                    <Style TargetType="materialDesign:ColorZone">
+                        <Setter Property="Height" Value="70" />
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding SelectedSubjectCount, Converter={StaticResource CutoffConverter}, ConverterParameter=0}" Value="False">
+                                <DataTrigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation  Storyboard.TargetProperty="Height" From="70" To="0" Duration="0:0:0.375">
+                                                <DoubleAnimation.EasingFunction>
+                                                    <SineEase EasingMode="EaseOut" />
+                                                </DoubleAnimation.EasingFunction>
+                                            </DoubleAnimation>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </DataTrigger.EnterActions>
+                                <DataTrigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation  Storyboard.TargetProperty="Height" From="0" To="70" Duration="0:0:0.375">
+                                                <DoubleAnimation.EasingFunction>
+                                                    <SineEase EasingMode="EaseIn" />
+                                                </DoubleAnimation.EasingFunction>
+                                            </DoubleAnimation>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </DataTrigger.ExitActions>
+                            </DataTrigger>
+                        </Style.Triggers>
 
-            <materialDesign:ColorZone Mode="Light" materialDesign:ShadowAssist.ShadowDepth="Depth3" Height="0" x:Name="BottomPanel" DockPanel.Dock="Bottom">
+                    </Style>
+                </materialDesign:ColorZone.Style>
                 <StackPanel  Orientation="Horizontal" HorizontalAlignment="Right" >
                     <materialDesign:Badged x:Name="ViewChanger" DockPanel.Dock="Right" HorizontalAlignment="Right" HorizontalContentAlignment="Stretch"                                   
                                        Margin="0"                                   
                                        Width="200"
                                        Height="40"                                           
-                                       VerticalAlignment="Center"
-                >
+                                       Badge="{Binding SelectedSubjectCount}"
+                                       VerticalAlignment="Center" >
                         <Button x:Name="ViewChangerButton" 
                             Height="40" 
                             VerticalAlignment="Center" 
-                            Click="ViewChangerButton_OnClick"
-                            Style="{StaticResource MaterialDesignRaisedButton}"
-                    >
-                            Show selected subjects
+                            Command="{Binding ToggleDisplayModeCommand}">
+                            <Button.Style>
+                                <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedButton}">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding DisplayMode}" Value="DisplayAllSubject">
+                                            <Setter Property="Content" Value="Show selected subjects"></Setter>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding DisplayMode}" Value="DisplaySelectedSubject">
+                                            <Setter Property="Content" Value="Show all subjects"></Setter>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
                         </Button>
                     </materialDesign:Badged>
                     <Button Height="40"                             
@@ -84,7 +142,4 @@
             </Border>
         </DockPanel>
     </materialDesign:Card>
-
-
 </UserControl>
-

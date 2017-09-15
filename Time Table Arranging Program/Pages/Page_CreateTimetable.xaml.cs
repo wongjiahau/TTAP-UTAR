@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms.VisualStyles;
+using System.Windows.Threading;
+using MaterialDesignThemes.Wpf;
 using Microsoft.Win32;
 using Time_Table_Arranging_Program.Class;
 using Time_Table_Arranging_Program.Class.Helper;
@@ -15,6 +18,7 @@ using Time_Table_Arranging_Program.Model;
 using Time_Table_Arranging_Program.MVVM_Framework.Models;
 using Time_Table_Arranging_Program.MVVM_Framework.ViewModels;
 using Time_Table_Arranging_Program.User_Control;
+using Time_Table_Arranging_Program.User_Control.SubjectListFolder;
 using Time_Table_Arranging_Program.Windows_Control;
 
 namespace Time_Table_Arranging_Program.Pages {
@@ -73,8 +77,15 @@ namespace Time_Table_Arranging_Program.Pages {
         private List<SubjectModel> _subjectModels;
         private void InitializeExtraComponents() {
             _subjectModels = SubjectModel.Parse(_inputSlots);
-            SelectSubjectPanel.Initialize(_permutator, _subjectModels);
+            var subjectListModel = new SubjectListModel(_subjectModels , _permutator , new TaskRunnerForMainUi("Finding possible timetables . . ."));
+            subjectListModel.NewListOfTimetablesGenerated += SubjectListModel_NewListOfTimetablesGenerated;
+            SelectSubjectPanel.Initialize(_permutator , subjectListModel);
             SelectSubjectPanel.SetDrawerHost(this.DrawerHost);
+        }
+
+        private void SubjectListModel_NewListOfTimetablesGenerated(object sender , EventArgs e) {
+            var possibleTimetable = (List<List<Slot>>)sender;
+            UpdateGUI(possibleTimetable);
         }
 
         private void UpdateGUI(List<List<Slot>> result) {
@@ -88,7 +99,7 @@ namespace Time_Table_Arranging_Program.Pages {
                 else {
                     _outputTimetables.SetState(TimetableList.NoPossibleCombination);
                     NotificationBar.Show("No possible timetable found." , "Tell me why" , () => {
-                        DialogBox.Show("Why no possible combination?" , new ClashFinder(_subjectModels , _permutator).Message);
+                        //        DialogBox.Show("Why no possible combination?" , new ClashFinder(_subjectModels , _permutator).Message);
                     } , false);
                 }
                 ToolBoxPanel.Visibility = Visibility.Hidden;
@@ -112,8 +123,7 @@ namespace Time_Table_Arranging_Program.Pages {
                 _windowStateSummary = new Window_StateSummary(_inputSlots.GetSlotsOf(SelectSubjectPanel.UIDofSelectedSlots).ToList() , _raw);
             _windowStateSummary.ShowDialog();
             if (_windowStateSummary.UserClickedDone) {
-                _predicates = _windowStateSummary.Predicates;
-                UpdateGUI(RunPermutation(_inputSlots.GetSlotsOf(SelectSubjectPanel.UIDofSelectedSlots)));
+                UpdateGUI(_windowStateSummary.RemainingTimetables);
             }
         }
 
@@ -128,15 +138,15 @@ namespace Time_Table_Arranging_Program.Pages {
         private bool _justDeselectedASubject = false;
         private void SelectSubjectPanel_OnSlotSelectionChanged(object sender , EventArgs e) {
             _predicates.Clear();
-            _inputSlots.SelectedSubjectNames = SelectSubjectPanel.GetNamesOfCheckedSubject().ToList();
+            _inputSlots.SelectedSubjectNames = SelectSubjectPanel.GetNamesOfSelectedSubject().ToList();
             var selectedSlots = _inputSlots.GetSlotsOf(SelectSubjectPanel.UIDofSelectedSlots);
             SetTimeConstraintButton.Visibility = selectedSlots.Length == 0 ? Visibility.Hidden : Visibility.Visible;
-            List<List<Slot>> result = RunPermutation(selectedSlots);
-            if (result != null && result.Count == 0) {
-                _justDeselectedASubject = true;
-                SelectSubjectPanel.DeselectAndDisableLastSelectedSubject(new ClashFinder(_subjectModels , _permutator).CrashingSlots);//
-                return;
-            }
+            List<List<Slot>> result = SelectSubjectPanel.PossibleTimetables;// RunPermutation(selectedSlots);
+                                                                            //            if (result != null && result.Count == 0) {
+                                                                            //                _justDeselectedASubject = true;
+                                                                            //                SelectSubjectPanel.DeselectAndDisableLastSelectedSubject(new ClashFinder(_subjectModels , _permutator).CrashingSlots);//
+                                                                            //                return;
+                                                                            //            }
             if (_justDeselectedASubject) _justDeselectedASubject = false;
             else SelectSubjectPanel.EnableRelevantDisabledSubject();
             _windowStateSummary = new Window_StateSummary(selectedSlots.ToList() , result);

@@ -54,6 +54,8 @@
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>true</Prefer32Bit>
+    <DocumentationFile>
+    </DocumentationFile>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject />
@@ -173,6 +175,11 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Class\BugReportSender.cs" />
+    <Compile Include="Class\FocusNavigator.cs" />
+    <Compile Include="Class\SubjectSelectionManager.cs" />
+    <Compile Include="Interfaces\IProgressIndicator.cs" />
+    <Compile Include="Interfaces\ITaskRunnerWithProgressFeedback.cs" />
+    <Compile Include="IValueConverter\IsStringEmptyConverter.cs" />
     <Compile Include="Class\Helper\Helper.cs" />
     <Compile Include="Class\Helper\WaitCursor.cs" />
     <Compile Include="Class\IndexedSlot.cs" />
@@ -199,6 +206,7 @@
     <Compile Include="Interfaces\INeedDataContext.cs" />
     <Compile Include="Interfaces\IPageWithLoadedFunction.cs" />
     <Compile Include="Interfaces\ToBinary.cs" />
+    <Compile Include="IValueConverter\CutoffConverter.cs" />
     <Compile Include="IValueConverter\TooltipConverterForToggleButton.cs" />
     <Compile Include="Model\BinarizedSlotModel.cs" />
     <Compile Include="Model\SubjectModel.cs" />
@@ -306,11 +314,12 @@
     <Compile Include="TrashFile.cs" />
     <Compile Include="User Control\AutoCloseNotificationBar.cs" />
     <Compile Include="MVVM_Framework\Models\CyclicIndex.cs" />
-    <Compile Include="User Control\CheckboxWithListDownMenuFolder\ErrorMessageType\ClashingErrorType.cs" />
-    <Compile Include="User Control\CheckboxWithListDownMenuFolder\ErrorMessageType\SingleClashingError.xaml.cs">
+    <Compile Include="User Control\SubjectListFolder\SubjectListModel.cs" />
+    <Compile Include="User Control\SubjectViewFolder\ErrorMessageType\ClashingErrorType.cs" />
+    <Compile Include="User Control\SubjectViewFolder\ErrorMessageType\SingleClashingError.xaml.cs">
       <DependentUpon>SingleClashingError.xaml</DependentUpon>
     </Compile>
-    <Compile Include="User Control\CheckboxWithListDownMenuFolder\ErrorMessageType\GroupClashingError.xaml.cs">
+    <Compile Include="User Control\SubjectViewFolder\ErrorMessageType\GroupClashingError.xaml.cs">
       <DependentUpon>GroupClashingError.xaml</DependentUpon>
     </Compile>
     <Compile Include="User Control\ConfirmationForExitPrompt.xaml.cs">
@@ -387,8 +396,8 @@
     <Compile Include="Windows Control\AddRuleWindow_v2.xaml.cs">
       <DependentUpon>AddRuleWindow_v2.xaml</DependentUpon>
     </Compile>
-    <Compile Include="User Control\CheckboxWithListDownMenuFolder\CheckBoxWithListDownMenu.xaml.cs">
-      <DependentUpon>CheckBoxWithListDownMenu.xaml</DependentUpon>
+    <Compile Include="User Control\SubjectViewFolder\SubjectView.xaml.cs">
+      <DependentUpon>SubjectView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Class\ColorGenerator.cs" />
     <Compile Include="Global.cs" />
@@ -485,11 +494,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="User Control\CheckboxWithListDownMenuFolder\ErrorMessageType\SingleClashingError.xaml">
+    <Page Include="User Control\SubjectViewFolder\ErrorMessageType\SingleClashingError.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="User Control\CheckboxWithListDownMenuFolder\ErrorMessageType\GroupClashingError.xaml">
+    <Page Include="User Control\SubjectViewFolder\ErrorMessageType\GroupClashingError.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -581,7 +590,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="User Control\CheckboxWithListDownMenuFolder\CheckBoxWithListDownMenu.xaml">
+    <Page Include="User Control\SubjectViewFolder\SubjectView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

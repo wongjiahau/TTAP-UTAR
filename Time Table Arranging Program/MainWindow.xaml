@@ -29,8 +29,8 @@
                                     >
                             <materialDesign:PackIcon Kind="ArrowRightBold"  Height="30" Width="30"/>
                         </Button>
-                        <Button Style="{StaticResource MaterialDesignFlatButton}" Foreground="White" DockPanel.Dock="Right" Click="ExtraMenuButton_OnClick">
-                            <materialDesign:PackIcon Height="25" Width="25" Kind="DotsVertical" />
+                        <Button Style="{StaticResource MaterialDesignFlatButton}" ToolTip="Extra menu" Foreground="White" DockPanel.Dock="Right" Click="ExtraMenuButton_OnClick">
+                            <materialDesign:PackIcon Height="25" Width="25" Kind="Menu" />
                         </Button>
                         <Grid HorizontalAlignment="Center">
                             <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22">Timetable Arranging Program ( TTAP )</TextBlock>
@@ -115,7 +115,7 @@
                     </Button>
                     <Button Click="FeedbackButton_OnClick">
                         <StackPanel>
-                            <materialDesign:PackIcon Kind="Message" />
+                            <materialDesign:PackIcon Kind="CommentTextOutline" />
                             <Label>Feedback</Label>
                         </StackPanel>
                     </Button>

@@ -31,7 +31,7 @@ namespace NUnit.Tests2 {
                 result =
                     new TimetableFinder().GetPossibleTimetables(input , Permutator.Run_v2_WithConsideringWeekNumber);
             }, "TimetableFinder_ConsideringWeekNumber");
-            Assert.True(result.Count == expectedCount);
+            Assert.True(result.Count == expectedCount, $"Expected count is {expectedCount} but actual is {result.Count}");
         }
 
         [Test]

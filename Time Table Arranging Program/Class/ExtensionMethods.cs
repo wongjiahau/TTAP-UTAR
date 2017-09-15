@@ -5,9 +5,20 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows.Media;
 using HtmlAgilityPack;
+using Time_Table_Arranging_Program.Class;
+using Time_Table_Arranging_Program.Model;
 
 namespace Time_Table_Arranging_Program {
     public static class ExtensionMethods {
+        public static List<Slot> GetSelectedSlots(this List<SubjectModel> subjectModels) {
+            var result = new List<Slot>();
+            for (var i = 0 ; i < subjectModels.Count ; i++) {
+                var model = subjectModels[i];
+                result.AddRange(model.GetSelectedSlots());
+            }
+            return result;
+        }
+
         public static bool ScrambledEquals<T>(this IEnumerable<T> list1 , IEnumerable<T> list2) {
             var cnt = new Dictionary<T , int>();
             foreach (var s in list1) {

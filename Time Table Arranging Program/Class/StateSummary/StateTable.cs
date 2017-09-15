@@ -41,10 +41,7 @@ namespace Time_Table_Arranging_Program.Class.StateSummary {
         }
 
         public static int[] GetStateOfDefinitelyOccupied(List<List<Slot>> timetables) {
-            var states = new int[7];
-            for (int i = 0 ; i < 7 ; i++) {
-                states[i] = Convert.ToInt32("11111111111111111111111111111111" , 2);
-            }
+            var states = new int[7] { -1 , -1 , -1 , -1 , -1 , -1 , -1 }; //Note : -1 = 11111111111111111111111111111111 in binary 
             var o = timetables;
             if (o == null) return null;
             for (int i = 0 ; i < o.Count ; i++) {

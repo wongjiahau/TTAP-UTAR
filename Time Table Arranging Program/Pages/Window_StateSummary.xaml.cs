@@ -36,6 +36,7 @@ namespace Time_Table_Arranging_Program.Pages {
             int remainingCount = _outputTimetables.Count - removedCount;
             Label1.Content = $"Removed {removedCount} unsatisfactory timetables.";
             Label2.Content = $"{remainingCount} timetables remaining.";
+            RemainingTimetables = filteredTimetable;
             TimeTableGui.RegenerateStateSummary(filteredTimetable , _factory);
         }
 
@@ -50,6 +51,8 @@ namespace Time_Table_Arranging_Program.Pages {
 
         public List<Predicate<Slot>> Predicates => _predicates;
         public bool UserClickedDone { get; private set; } = false;
+        public List<List<Slot>> RemainingTimetables { get; private set; }
+
         private void DoneButton_OnClick(object sender , RoutedEventArgs e) {
             UserClickedDone = true;
             this.Hide();

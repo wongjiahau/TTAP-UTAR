@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Time_Table_Arranging_Program.Class;
 using Time_Table_Arranging_Program.Class.Converter;
 using Time_Table_Arranging_Program.Model;
+using Time_Table_Arranging_Program.User_Control.CheckboxWithListDownMenuFolder.ErrorMessageType;
 
 namespace Time_Table_Arranging_Program.Pages {
 
@@ -30,8 +31,12 @@ namespace Time_Table_Arranging_Program.Pages {
 
 
     public class ClashFinder {
-        private List<SubjectModelWithState> _subjectStateList = new List<SubjectModelWithState>();
-        public ClashFinder(List<SubjectModel> subjectModels , Func<Slot[] , List<List<Slot>>> permutator) {
+        private readonly List<SubjectModelWithState> _subjectStateList = new List<SubjectModelWithState>();
+        private readonly SubjectModel _target;
+        private readonly List<SubjectModel> _subjectModels;
+        public ClashFinder(List<SubjectModel> subjectModels , Func<Slot[] , List<List<Slot>>> permutator , SubjectModel target) {
+            _subjectModels = subjectModels;
+            _target = target;
             var selectedSubjects = subjectModels.FindAll(x => x.IsSelected);
             for (var i = 0 ; i < selectedSubjects.Count ; i++) {
                 SubjectModel s = selectedSubjects[i];
@@ -42,14 +47,14 @@ namespace Time_Table_Arranging_Program.Pages {
                 for (int j = 0 ; j < _subjectStateList.Count ; j++) {
                     if (i == j) continue;
                     if (_subjectStateList[i].ClashesWith(_subjectStateList[j])) {
-                        CrashingSlots = (_subjectStateList[i], _subjectStateList[j]);
-                        Message = $"Because\n--{_subjectStateList[i].SubjectName}\nclashes with\n--{_subjectStateList[j].SubjectName}";                   
+                        ClashingSubjects = (_subjectStateList[i], _subjectStateList[j]);
+                        Message = $"Because\n--{_subjectStateList[i].SubjectName}\nclashes with\n--{_subjectStateList[j].SubjectName}";
                         return;
                     }
                 }
             }
             Message = $"Sorry... the reason is too complicated to be explained.";
-            CrashingSlots = null;
+            ClashingSubjects = null;
         }
 
         public static int[] GetSubjectState(List<List<Slot>> outputTimetables) {
@@ -74,7 +79,38 @@ namespace Time_Table_Arranging_Program.Pages {
             return result;
         }
 
-        public (SubjectModelWithState, SubjectModelWithState)? CrashingSlots { get; private set; }
-        public string Message { private set; get; }
+        private (SubjectModelWithState, SubjectModelWithState)? ClashingSubjects { get; set; }
+        private string Message { set; get; }
+
+        private SubjectModel WhoIsCrashingWithTarget() {
+            if (ClashingSubjects == null) return null;
+            var nameOfClashingCounterPart =
+            ClashingSubjects.Value.Item1.SubjectName == _target.Name ?
+            ClashingSubjects.Value.Item2.SubjectName :
+            ClashingSubjects.Value.Item1.SubjectName;
+            return _subjectModels.Find(x => x.Name == nameOfClashingCounterPart);
+        }
+
+        public ClashReport GetReport() {
+            var clashingCounterpart = WhoIsCrashingWithTarget();
+            return clashingCounterpart == null ?
+                new ClashReport(ClashingErrorType.GroupClashingError , null) :
+                new ClashReport(ClashingErrorType.SingleClashingError , clashingCounterpart);
+        }
+    }
+
+    public class ClashReport {
+        public ClashReport(ClashingErrorType clashingErrorType , SubjectModel clashingCounterpart) {
+            ClashingErrorType = clashingErrorType;
+            ClashingCounterpart = clashingCounterpart;
+        }
+        public ClashingErrorType ClashingErrorType { get; set; }
+        public SubjectModel ClashingCounterpart { get; set; }
+    }
+
+    public class NullClashReport : ClashReport {
+        public NullClashReport() : base(ClashingErrorType.NoError, null) {
+            
+        }
     }
 }
