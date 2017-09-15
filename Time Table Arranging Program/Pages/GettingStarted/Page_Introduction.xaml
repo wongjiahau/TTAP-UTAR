@@ -11,43 +11,43 @@
       mc:Ignorable="d"       
       Title="Page_GettingStarted" VerticalAlignment="Stretch">
     <Page.DataContext>
-        <viewModels:BoundedIndexVM></viewModels:BoundedIndexVM>
+        <viewModels:BoundedIndexVM />
     </Page.DataContext>
     <Page.InputBindings>
         <KeyBinding Command="{Binding IncrementCommand}" Key="Right" />
         <KeyBinding Command="{Binding IncrementCommand}" Key="Down" />
         <KeyBinding Command="{Binding DecrementCommand}" Key="Left" />
         <KeyBinding Command="{Binding DecrementCommand}" Key="Up" />
-        <KeyBinding Command="{Binding IncrementCommand}" Key="Space"></KeyBinding>
-        <MouseBinding Command="{Binding IncrementCommand}" MouseAction="LeftClick"></MouseBinding>
+        <KeyBinding Command="{Binding IncrementCommand}" Key="Space" />
+        <MouseBinding Command="{Binding IncrementCommand}" MouseAction="LeftClick" />
     </Page.InputBindings>
     <Grid>
         <DockPanel>
             <DockPanel.Resources>
                 <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignFloatingActionAccentButton}">
-                    <Setter Property="VerticalAlignment" Value="Stretch"></Setter>
-                    <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
-                    <Setter Property="Margin" Value="30"></Setter>
+                    <Setter Property="VerticalAlignment" Value="Stretch" />
+                    <Setter Property="VerticalContentAlignment" Value="Center" />
+                    <Setter Property="Margin" Value="30" />
                     <!--<Setter Property="Height" Value="{Binding Height, RelativeSource={RelativeSource Mode=FindAncestor, 
                         AncestorType={x:Type Page}}}"></Setter>-->
                 </Style>
                 <Style TargetType="materialDesign:PackIcon">
-                    <Setter Property="Height" Value="40"></Setter>
-                    <Setter Property="Width" Value="40"></Setter>
+                    <Setter Property="Height" Value="40" />
+                    <Setter Property="Width" Value="40" />
 
                 </Style>
                 <Style TargetType="materialDesign:TransitionerSlide">
-                    <Setter Property="VerticalAlignment" Value="Center"></Setter>
-                    <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
-                    <Setter Property="Margin" Value="15"></Setter>
+                    <Setter Property="VerticalAlignment" Value="Center" />
+                    <Setter Property="VerticalContentAlignment" Value="Center" />
+                    <Setter Property="Margin" Value="15" />
                     <Setter Property="OpeningEffect">
                         <Setter.Value>
-                            <materialDesign:TransitionEffect Kind="ExpandIn"></materialDesign:TransitionEffect>
+                            <materialDesign:TransitionEffect Kind="ExpandIn" />
                         </Setter.Value>
                     </Setter>       
                     <Setter Property="BackwardWipe">
                         <Setter.Value>
-                            <materialDesign:CircleWipe></materialDesign:CircleWipe>
+                            <materialDesign:CircleWipe />
                         </Setter.Value>
                     </Setter>
                 </Style>
@@ -56,22 +56,22 @@
                 <materialDesign:PackIcon Kind="ChevronLeft" />
             </Button>
             <Button Command="{Binding IncrementCommand}" IsEnabled="{Binding IncrementIsEnabled}"  DockPanel.Dock="Right">
-                <materialDesign:PackIcon Kind="ChevronRight"></materialDesign:PackIcon>
+                <materialDesign:PackIcon Kind="ChevronRight" />
             </Button>
 
             <materialDesign:Transitioner VerticalAlignment="Center"  VerticalContentAlignment="Center"  x:Name="Transitioner"  SelectedIndex="0" AutoApplyTransitionOrigins="True">
                
                 <materialDesign:TransitionerSlide OpeningEffect="{materialDesign:TransitionEffect FadeIn}">
-                    <local:WelcomeToTTAP></local:WelcomeToTTAP>
+                    <local:WelcomeToTTAP />
                 </materialDesign:TransitionerSlide>
                 <materialDesign:TransitionerSlide>
-                    <gettingStarted:DoYouWantToWatchTTAPTutorial></gettingStarted:DoYouWantToWatchTTAPTutorial>
+                    <gettingStarted:DoYouWantToWatchTTAPTutorial />
                 </materialDesign:TransitionerSlide>
                 <materialDesign:TransitionerSlide>
-                    <pageGettingStarted:IfYouAreUsingComputerLabInUtar></pageGettingStarted:IfYouAreUsingComputerLabInUtar>
+                    <pageGettingStarted:IfYouAreUsingComputerLabInUtar />
                 </materialDesign:TransitionerSlide>
                 <materialDesign:TransitionerSlide>
-                    <gettingStarted:LetsGetStarted></gettingStarted:LetsGetStarted>
+                    <gettingStarted:LetsGetStarted />
                 </materialDesign:TransitionerSlide>
             </materialDesign:Transitioner>
         </DockPanel>

@@ -134,13 +134,12 @@
                 </StackPanel>
             </materialDesign:DrawerHost.RightDrawerContent>
             <materialDesign:DrawerHost.BottomDrawerContent>
-                <console:ConsoleTerminal Height="300"  x:Name="ConsoleTerminal"></console:ConsoleTerminal>
+                <console:ConsoleTerminal Height="300"  x:Name="ConsoleTerminal" />
             </materialDesign:DrawerHost.BottomDrawerContent>
             <DockPanel LastChildFill="True">
                 <Grid>
                     <Frame x:Name="MainFrame" Template="{DynamicResource ControlTemplateForNavigator}"
-           Navigating="MainFrame_OnNavigating" >
-                    </Frame>
+           Navigating="MainFrame_OnNavigating" />
                     <materialDesign:Snackbar x:Name="Snackbar"  MessageQueue="{materialDesign:MessageQueue}" />
                 </Grid>
 

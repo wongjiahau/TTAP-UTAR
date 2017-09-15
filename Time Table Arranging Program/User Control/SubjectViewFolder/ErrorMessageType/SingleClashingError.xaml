@@ -7,7 +7,7 @@
              mc:Ignorable="d" >
     <TextBlock x:Name="ErrorTextBlock" VerticalAlignment="Center" Margin="5 5 10 5" MaxWidth="150" TextWrapping="Wrap" Foreground="White">
         <Run>Cannot select this subject because it clashes with :</Run>
-        <Run x:Name="NameOfClashingCounterPart" FontWeight="DemiBold"></Run>
+        <Run x:Name="NameOfClashingCounterPart" FontWeight="DemiBold" />
     </TextBlock>
     
 </UserControl>

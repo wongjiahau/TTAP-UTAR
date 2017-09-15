@@ -60,8 +60,8 @@
             </Border>
             <timeTableArrangingProgram:TimeTableGUI x:Name="TimeTableGui" HorizontalAlignment="Center" />
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Label x:Name="Label1" HorizontalAlignment="Center"></Label>
-                <Label x:Name="Label2" HorizontalAlignment="Center"></Label>
+                <Label x:Name="Label1" HorizontalAlignment="Center" />
+                <Label x:Name="Label2" HorizontalAlignment="Center" />
             </StackPanel>
             <Button DockPanel.Dock="Bottom" Width="150" Height="50" FontSize="25" HorizontalAlignment="Center" Click="DoneButton_OnClick">DONE</Button>
 

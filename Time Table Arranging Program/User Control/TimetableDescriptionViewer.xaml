@@ -21,17 +21,17 @@
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition></RowDefinition>
+                    <RowDefinition />
                 </Grid.RowDefinitions>
                 <Grid.Resources>
                     <Style TargetType="Label">
-                        <Setter Property="BorderThickness" Value="1"></Setter>
-                        <Setter Property="BorderBrush" Value="Gray"></Setter>
-                        <Setter Property="Background" Value="White"></Setter>
-                        <Setter Property="FontWeight" Value="Normal"></Setter>
-                        <Setter Property="FontFamily" Value="Calibri"></Setter>
-                        <Setter Property="HorizontalAlignment" Value="Stretch"></Setter>
-                        <Setter Property="HorizontalContentAlignment" Value="Center"></Setter>
+                        <Setter Property="BorderThickness" Value="1" />
+                        <Setter Property="BorderBrush" Value="Gray" />
+                        <Setter Property="Background" Value="White" />
+                        <Setter Property="FontWeight" Value="Normal" />
+                        <Setter Property="FontFamily" Value="Calibri" />
+                        <Setter Property="HorizontalAlignment" Value="Stretch" />
+                        <Setter Property="HorizontalContentAlignment" Value="Center" />
                     </Style>
                 </Grid.Resources>
                 <Label Grid.Column="0">Course Code</Label>

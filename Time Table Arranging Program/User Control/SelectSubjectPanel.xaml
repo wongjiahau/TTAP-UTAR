@@ -9,7 +9,7 @@
              xmlns:iValueConverter="clr-namespace:Time_Table_Arranging_Program.IValueConverter"
              mc:Ignorable="d" KeyDown="SelectSubjectPanel_OnKeyDown"   FocusManager.IsFocusScope="True" FocusManager.FocusedElement="{Binding ElementName=SearchBox}" >
     <UserControl.Resources>
-        <iValueConverter:VisibilityConverter x:Key="VisibilityConverter"></iValueConverter:VisibilityConverter>
+        <iValueConverter:VisibilityConverter x:Key="VisibilityConverter" />
         <iValueConverter:CutoffConverter x:Key="CutoffConverter" />
         <iValueConverter:IsStringEmptyConverter x:Key="IsStringEmptyConverter" />
     </UserControl.Resources>
@@ -107,10 +107,10 @@
                                 <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedButton}">
                                     <Style.Triggers>
                                         <DataTrigger Binding="{Binding DisplayMode}" Value="DisplayAllSubject">
-                                            <Setter Property="Content" Value="Show selected subjects"></Setter>
+                                            <Setter Property="Content" Value="Show selected subjects" />
                                         </DataTrigger>
                                         <DataTrigger Binding="{Binding DisplayMode}" Value="DisplaySelectedSubject">
-                                            <Setter Property="Content" Value="Show all subjects"></Setter>
+                                            <Setter Property="Content" Value="Show all subjects" />
                                         </DataTrigger>
                                     </Style.Triggers>
                                 </Style>

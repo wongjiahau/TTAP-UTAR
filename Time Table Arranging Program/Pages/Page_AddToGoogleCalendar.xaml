@@ -35,8 +35,7 @@
         <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Label x:Name="InstructionLabel" Visibility="Hidden" FontSize="30">Pick a date that represents the Monday of Week One</Label>
             <Button HorizontalAlignment="Center" x:Name="ChooseDateButton" Content="Pick date" Click="ChooseDateButton_OnClick" />
-            <DatePicker CalendarOpened="DatePicker_OnCalendarOpened" x:Name="DatePicker" Visibility="Hidden" FirstDayOfWeek="Monday"  CalendarClosed="DatePicker_OnCalendarClosed">
-            </DatePicker>
+            <DatePicker CalendarOpened="DatePicker_OnCalendarOpened" x:Name="DatePicker" Visibility="Hidden" FirstDayOfWeek="Monday"  CalendarClosed="DatePicker_OnCalendarClosed" />
         </StackPanel>
     </materialDesign:DialogHost>
 </Page>

@@ -26,16 +26,16 @@
             <Grid>
                 <ItemsControl Name="ItemsControl_Settings">
                     <ItemsControl.DataContext>
-                        <local:Setting></local:Setting>
+                        <local:Setting />
                     </ItemsControl.DataContext>
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <Border BorderThickness="0,0,0,1" BorderBrush="DarkGray">
                                 <DockPanel HorizontalAlignment="Stretch" Margin="10" >
-                                    <Label DockPanel.Dock="Left" Content="{Binding Label}" FontWeight="DemiBold" HorizontalAlignment="Left"></Label>
-                                    <Label></Label>
+                                    <Label DockPanel.Dock="Left" Content="{Binding Label}" FontWeight="DemiBold" HorizontalAlignment="Left" />
+                                    <Label />
                                     <materialDesign:PopupBox DockPanel.Dock="Right" HorizontalAlignment="Right">
-                                        <Button Content="{Binding Explanation}"></Button>
+                                        <Button Content="{Binding Explanation}" />
                                     </materialDesign:PopupBox>
                                     <ToggleButton DockPanel.Dock="Right" Checked="ToggleButton_OnChecked" HorizontalAlignment="Right" IsChecked="{Binding IsChecked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                                 </DockPanel>

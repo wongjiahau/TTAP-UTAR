@@ -35,7 +35,7 @@
     </UserControl.Style>
     <UserControl.ContextMenu>
         <ContextMenu>
-            <MenuItem Header="View slots" Click="ViewSlotsContextMenuItem_OnClick"></MenuItem>
+            <MenuItem Header="View slots" Click="ViewSlotsContextMenuItem_OnClick" />
         </ContextMenu>
     </UserControl.ContextMenu>
     <materialDesign:DrawerHost x:Name="DrawerHost" CloseOnClickAway="False">

@@ -12,7 +12,7 @@
             <materialDesign:DialogHost.DialogContent>
                 <Grid>
                     <Border x:Name="Custom" Visibility="Hidden" Padding="20">
-                        <Frame NavigationUIVisibility="Hidden" x:Name="Frame"></Frame>
+                        <Frame NavigationUIVisibility="Hidden" x:Name="Frame" />
                     </Border>
                     <Border x:Name="Default" Visibility="Hidden" Padding="20">
                         <StackPanel>
