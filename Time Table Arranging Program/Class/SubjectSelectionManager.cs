@@ -34,6 +34,7 @@ namespace Time_Table_Arranging_Program.Class {
 
         public void ToggleSelectionOnCurrentFocusedSubject() {
             var current = _subjectModels.Find(x => x.IsFocused);
+            if (current == null) return;
             current.IsSelected = !current.IsSelected;
         }
 
