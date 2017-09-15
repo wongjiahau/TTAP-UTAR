@@ -14,7 +14,7 @@ namespace NUnit.Tests2.BehavioralTests {
     [TestFixture]
     public class SelectSubjectBehaviour {
         private SubjectListModel Input() {
-            return new SubjectListModel(SubjectModel.Parse(TestData.TestSlots) , Permutator.Run_v2_withoutConsideringWeekNumber, new TaskRunnerWithProgressFeedback(new MockProgressIndicator("Loading . . . ")));
+            return new SubjectListModel(SubjectModel.Parse(TestData.TestSlots) , Permutator.Run_v2_withoutConsideringWeekNumber, new TaskRunnerForUnitTesting());
         }
 
         [Test]

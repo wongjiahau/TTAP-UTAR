@@ -2,8 +2,8 @@
 
 namespace Time_Table_Arranging_Program.Interfaces {
     public interface IProgressIndicator {
-        void Show();
-        void Hide();
+        void ShowLoading();
+        void HideLoading();
     }
 
     public class MockProgressIndicator : IProgressIndicator {
@@ -11,11 +11,11 @@ namespace Time_Table_Arranging_Program.Interfaces {
         public MockProgressIndicator(string message) {
             _message = message;
         }
-        public void Show() {
+        public void ShowLoading() {
             Console.WriteLine(_message);
         }
 
-        public void Hide() {
+        public void HideLoading() {
             Console.WriteLine("Finished.");
         }
     }
