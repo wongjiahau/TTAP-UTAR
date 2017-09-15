@@ -22,6 +22,7 @@ namespace Time_Table_Arranging_Program.Pages {
     /// </summary>
     public partial class Page_About : Page {
         private const string Email = "jiahau.wong@1utar.my";
+
         public Page_About() {
             InitializeComponent();
             DataContext = new NameList();
@@ -33,16 +34,16 @@ namespace Time_Table_Arranging_Program.Pages {
         }
 
         private void CopyEmailButton_OnClick(object sender, RoutedEventArgs e) {
-           CopyToClipboard(Email);
+            CopyToClipboard(Email);
         }
 
         private void CopyDownloadLinkButton_OnClick(object sender, RoutedEventArgs e) {
-           CopyToClipboard(new UrlProvider().DownloadLink);
+            CopyToClipboard(new UrlProvider().DownloadLink);
         }
 
 
         private void CopyGitHubLinkButton_OnClick(object sender, RoutedEventArgs e) {
-            CopyToClipboard(new UrlProvider().GitHubLink);                        
+            CopyToClipboard(new UrlProvider().GitHubLink);
         }
 
         private void CopyToClipboard(string x) {
@@ -57,6 +58,7 @@ namespace Time_Table_Arranging_Program.Pages {
                 "Sean(Initiator), Mummy, Daddy, Dr. Madhavan, Wei Wei, Yau Yau, Keli, Heng, Cheng Feng, QZ, Eric, Kelvin, Guo Ren, Jun Yan, Shu Ming, Kexin, Chee Kong, Ming Siew, You!";
             Names = raw.Split(',').ToList();
         }
+
         public List<string> Names { get; set; }
     }
 }

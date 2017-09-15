@@ -14,19 +14,14 @@ namespace Time_Table_Arranging_Program.MVVM_Framework.ViewModels {
         private ICommand _toRandomCommand;
 
 
-        public CyclicIndexVM() {}
+        public CyclicIndexVM() { }
 
         public CyclicIndexVM(CyclicIndex model) : base(model) {
             model.CurrentValueChanged += Model_CurrentValueChanged;
         }
 
-        private void Model_CurrentValueChanged(object sender , EventArgs e) {
-            OnPropertyChanged("CurrentValue");
-        }
-
         public ICommand IncrementCommand {
-            get
-            {
+            get {
                 return
                     _incrementCommand ??
                     (_incrementCommand = new RelayCommand(() => { CurrentValue++; }))
@@ -35,8 +30,7 @@ namespace Time_Table_Arranging_Program.MVVM_Framework.ViewModels {
         }
 
         public ICommand DecrementCommand {
-            get
-            {
+            get {
                 return
                     _decrementCommand ??
                     (_decrementCommand = new RelayCommand(() => { CurrentValue--; }));
@@ -44,18 +38,18 @@ namespace Time_Table_Arranging_Program.MVVM_Framework.ViewModels {
         }
 
         public ICommand ToRandomCommand {
-            get
-            {
+            get {
                 return
                     _toRandomCommand ??
-                    (_toRandomCommand = new RelayCommand(() => { CurrentValue = new Random().Next(0, Model.MaxValue); }))
+                    (_toRandomCommand = new RelayCommand(() => {
+                        CurrentValue = new Random().Next(0, Model.MaxValue);
+                    }))
                     ;
             }
         }
 
         public ICommand ToFirstCommand {
-            get
-            {
+            get {
                 return _toFirstCommand ??
                        (_toFirstCommand = new RelayCommand(() => { CurrentValue = 1; }))
                     ;
@@ -63,8 +57,7 @@ namespace Time_Table_Arranging_Program.MVVM_Framework.ViewModels {
         }
 
         public ICommand ToLastCommand {
-            get
-            {
+            get {
                 return _toLastCommand ??
                        (_toFirstCommand = new RelayCommand(() => { CurrentValue = MaxValue; }))
                     ;
@@ -74,13 +67,16 @@ namespace Time_Table_Arranging_Program.MVVM_Framework.ViewModels {
 
         public int CurrentValue {
             get { return Model?.CurrentValue + 1 ?? 0; }
-            set
-            {
+            set {
                 Model.CurrentValue = value - 1;
                 OnPropertyChanged();
             }
         }
 
         public int MaxValue => Model?.MaxValue + 1 ?? 0;
+
+        private void Model_CurrentValueChanged(object sender, EventArgs e) {
+            OnPropertyChanged("CurrentValue");
+        }
     }
 }

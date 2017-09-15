@@ -15,15 +15,12 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Time_Table_Arranging_Program.Pages.Login;
 
-namespace Time_Table_Arranging_Program.Pages
-{
+namespace Time_Table_Arranging_Program.Pages {
     /// <summary>
     /// Interaction logic for WelcomeToTTAP.xaml
     /// </summary>
-    public partial class WelcomeToTTAP : UserControl
-    {
-        public WelcomeToTTAP()
-        {
+    public partial class WelcomeToTTAP : UserControl {
+        public WelcomeToTTAP() {
             InitializeComponent();
         }
 

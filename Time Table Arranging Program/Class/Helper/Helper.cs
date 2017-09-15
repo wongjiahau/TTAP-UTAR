@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 
 namespace Time_Table_Arranging_Program.Class.Helper {
     public static class Helper {
-        public static string RawStringOfTestFile(string fileName , string nameSpace = "NUnit.Tests2.TestFiles.") {
+        public static string RawStringOfTestFile(string fileName, string nameSpace = "NUnit.Tests2.TestFiles.") {
             var assembly = Assembly.GetExecutingAssembly();
             var resourceName = nameSpace + fileName;
             using (Stream stream = assembly.GetManifestResourceStream(resourceName))
@@ -21,23 +21,24 @@ namespace Time_Table_Arranging_Program.Class.Helper {
                 return reader.ReadToEnd();
             }
         }
+
         public static BitArray ToBitArray(this List<int> input) {
             int length = 32;
             var vector = new BitArray(length);
-            for (int i = 0 ; i < input.Count ; i++) {
+            for (int i = 0; i < input.Count; i++) {
                 vector[input[i]] = true;
             }
             return vector;
         }
 
         public static BitArray ToBitArray(this int x) {
-            return new BitArray(new int[] { x });
+            return new BitArray(new int[] {x});
 
-            string s = Convert.ToString(x , 2); //Convert to binary in a string
+            string s = Convert.ToString(x, 2); //Convert to binary in a string
 
-            int[] bits = s.PadLeft(8 , '0') // Add 0's from left
-                         .Select(c => int.Parse(c.ToString())) // convert each char to int
-                         .ToArray(); // Convert IEnumerable from select to Array
+            int[] bits = s.PadLeft(8, '0') // Add 0's from left
+                .Select(c => int.Parse(c.ToString())) // convert each char to int
+                .ToArray(); // Convert IEnumerable from select to Array
             return new BitArray(bits);
         }
 
@@ -46,22 +47,22 @@ namespace Time_Table_Arranging_Program.Class.Helper {
                 throw new ArgumentException("Argument length shall be at most 32 bits.");
 
             int[] array = new int[1];
-            bitArray.CopyTo(array , 0);
+            bitArray.CopyTo(array, 0);
             return array[0];
-
         }
 
         public static RenderTargetBitmap GetImage(UserControl view) {
             int qualityFactor = 10;
-            int dotsPerInch = 96; 
-            Size size = new Size((int)view.ActualWidth * qualityFactor, (int)view.ActualHeight * qualityFactor);
+            int dotsPerInch = 96;
+            Size size = new Size((int) view.ActualWidth * qualityFactor, (int) view.ActualHeight * qualityFactor);
             if (size.IsEmpty)
                 return null;
-            
-            RenderTargetBitmap result = new RenderTargetBitmap((int)size.Width , (int)size.Height, dotsPerInch , dotsPerInch , PixelFormats.Pbgra32);
+
+            RenderTargetBitmap result = new RenderTargetBitmap((int) size.Width, (int) size.Height, dotsPerInch,
+                dotsPerInch, PixelFormats.Pbgra32);
             DrawingVisual drawingvisual = new DrawingVisual();
             using (DrawingContext context = drawingvisual.RenderOpen()) {
-                context.DrawRectangle(new VisualBrush(view) , null , new Rect(new Point() , size));
+                context.DrawRectangle(new VisualBrush(view), null, new Rect(new Point(), size));
                 context.Close();
             }
 
@@ -76,14 +77,14 @@ namespace Time_Table_Arranging_Program.Class.Helper {
         }
 
 
-
-        public static void SaveAsPng(RenderTargetBitmap src , string targetPath) {
+        public static void SaveAsPng(RenderTargetBitmap src, string targetPath) {
             Stream outputStream = File.Create(targetPath);
             PngBitmapEncoder encoder = new PngBitmapEncoder();
             encoder.Frames.Add(BitmapFrame.Create(src));
             encoder.Save(outputStream);
             outputStream.Close();
         }
+
         /// <summary>
         /// To check if an element if visible to the user within a certain container
         /// Refer StackOverflow : "In WPF, how can I determine whether a control is visible to the user?"
@@ -93,8 +94,9 @@ namespace Time_Table_Arranging_Program.Class.Helper {
         /// <returns></returns>
         public static bool IsVisibleToUser(this FrameworkElement element, FrameworkElement container) {
             if (!element.IsVisible) return false;
-            Rect bounds = element.TransformToAncestor(container).TransformBounds(new Rect(0.0, 0.0, element.ActualWidth, element.ActualHeight));
-            Rect rect = new Rect(0.0,0.0,container.ActualWidth, container.ActualHeight);
+            Rect bounds = element.TransformToAncestor(container)
+                .TransformBounds(new Rect(0.0, 0.0, element.ActualWidth, element.ActualHeight));
+            Rect rect = new Rect(0.0, 0.0, container.ActualWidth, container.ActualHeight);
             return rect.Contains(bounds.TopLeft) || rect.Contains(bounds.BottomRight);
         }
 

@@ -23,7 +23,7 @@ namespace Time_Table_Arranging_Program.User_Control {
         public Brush Color { get; set; }
     }
 
-    public class SubjectSummaries : List<SubjectSummary> {}
+    public class SubjectSummaries : List<SubjectSummary> { }
 
 
     /// <summary>
@@ -32,22 +32,22 @@ namespace Time_Table_Arranging_Program.User_Control {
     public partial class TimetableDescriptionViewer2 : UserControl {
         public static ObservableCollection<SubjectSummary> SubjectDescriptions = new ObservableCollection
             <SubjectSummary>
-        {
-            new SubjectSummary
             {
-                SubjectName = "English for Professionals",
-                Code = "MPU3113",
-                Color = Brushes.Aqua,
-                TypesAndNumber = "L1, T2, P4"
-            },
-            new SubjectSummary
-            {
-                SubjectName = "Advance Database System",
-                Code = "UESS6533",
-                Color = Brushes.PaleVioletRed,
-                TypesAndNumber = "L1, T2"
-            }
-        };
+                new SubjectSummary
+                {
+                    SubjectName = "English for Professionals",
+                    Code = "MPU3113",
+                    Color = Brushes.Aqua,
+                    TypesAndNumber = "L1, T2, P4"
+                },
+                new SubjectSummary
+                {
+                    SubjectName = "Advance Database System",
+                    Code = "UESS6533",
+                    Color = Brushes.PaleVioletRed,
+                    TypesAndNumber = "L1, T2"
+                }
+            };
 
         public TimetableDescriptionViewer2() {
             InitializeComponent();

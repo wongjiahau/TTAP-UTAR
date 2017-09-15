@@ -42,7 +42,7 @@ namespace Time_Table_Arranging_Program.Interfaces {
         protected T _previousState;
 
         protected ImmutableObservable(T initialState) {
-            Assert.IsTrue(initialState!=null);
+            Assert.IsTrue(initialState != null);
             _currentState = initialState;
             _previousState = initialState;
         }
@@ -71,7 +71,7 @@ namespace Time_Table_Arranging_Program.Interfaces {
     }
 
     public class MutableObservable<T> : ImmutableObservable<T>, IMutableObservable<T> {
-        public MutableObservable(T initialState) : base(initialState) {}
+        public MutableObservable(T initialState) : base(initialState) { }
 
         public void SetState(T newState) {
             _previousState = _currentState;

@@ -14,12 +14,15 @@ namespace Time_Table_Arranging_Program.Class {
             var crashedIndexList = new List<Permutator.KeyValuePair[]>();
             while (true) {
                 prototype.Add(partitioned[0][indices[0].Value]);
-                for (var i = 1 ; i < indices.Count ; i++) {
+                for (var i = 1; i < indices.Count; i++) {
                     var current = partitioned[i][indices[i].Value];
-                    for (var j = prototype.Count - 1 ; j >= 0 ; j--) {
-                        if (!IntersectWith(prototype[j],current)) continue;
+                    for (var j = prototype.Count - 1; j >= 0; j--) {
+                        if (!IntersectWith(prototype[j], current)) continue;
                         crashedIndexList.Add(new Permutator.KeyValuePair[2]
-                            {new Permutator.KeyValuePair(j, indices[j].Value), new Permutator.KeyValuePair(i, indices[i].Value)});
+                        {
+                            new Permutator.KeyValuePair(j, indices[j].Value),
+                            new Permutator.KeyValuePair(i, indices[i].Value)
+                        });
                         goto here;
                     }
                     prototype.Add(current);
@@ -29,16 +32,16 @@ namespace Time_Table_Arranging_Program.Class {
                 do {
                     indices = Increment(indices);
                     if (indices == null) goto final;
-                } while (crashedIndexList.Any(x => ContainCrashedIndex(indices , x)));
+                } while (crashedIndexList.Any(x => ContainCrashedIndex(indices, x)));
                 prototype.Clear();
             }
             final:
             return result;
-
         }
 
         protected abstract bool IntersectWith(Slot slot, Slot current);
-        private static bool ContainCrashedIndex(List<BoundedInt> indices , Permutator.KeyValuePair[] crashedIndex) {
+
+        private static bool ContainCrashedIndex(List<BoundedInt> indices, Permutator.KeyValuePair[] crashedIndex) {
             if (indices[crashedIndex[0].Key].Value == crashedIndex[0].Value
                 &&
                 indices[crashedIndex[1].Key].Value == crashedIndex[1].Value
@@ -50,7 +53,7 @@ namespace Time_Table_Arranging_Program.Class {
             var result = new List<BoundedInt>();
             var bi = new BoundedInt();
             bi.Value = 0;
-            for (var i = 0 ; i < x.Count ; i++) {
+            for (var i = 0; i < x.Count; i++) {
                 bi.UpperLimit = x[i].Count - 1;
                 result.Add(new BoundedInt(bi));
             }
@@ -66,7 +69,7 @@ namespace Time_Table_Arranging_Program.Class {
                 column.Add(copy[0]);
                 var i = 1;
                 while (i < copy.Count) {
-                    for (var j = 0 ; j < column.Count ; j++) {
+                    for (var j = 0; j < column.Count; j++) {
                         if (copy[i].Code != column[j].Code || copy[i].Type != column[j].Type ||
                             copy[i].Number == column[j].Number) {
                             i++;
@@ -99,10 +102,9 @@ namespace Time_Table_Arranging_Program.Class {
                 else return x;
             }
         }
-
     }
 
-    public class Permutator_WithConsideringWeekNumber : IPermutator{
+    public class Permutator_WithConsideringWeekNumber : IPermutator {
         protected override bool IntersectWith(Slot a, Slot b) {
             return a.IntersectWith(b);
         }
@@ -113,9 +115,9 @@ namespace Time_Table_Arranging_Program.Class {
             if (a.Code == b.Code && a.Type == b.Type && a.Number != b.Number) return true;
             if (!a.Day.Equals(b.Day)) return false;
             return a.TimePeriod.IntersectWith(b.TimePeriod);
-
         }
     }
+
     public static class Permutator {
         public static List<List<Slot>> Run_v2_WithConsideringWeekNumber(Slot[] input) {
             if (input == null || input.Length == 0) return null;
@@ -127,12 +129,12 @@ namespace Time_Table_Arranging_Program.Class {
             var crashedIndexList = new List<KeyValuePair[]>();
             while (true) {
                 prototype.Add(partitioned[0][indices[0].Value]);
-                for (var i = 1 ; i < indices.Count ; i++) {
+                for (var i = 1; i < indices.Count; i++) {
                     var current = partitioned[i][indices[i].Value];
-                    for (var j = prototype.Count - 1 ; j >= 0 ; j--) {                        
+                    for (var j = prototype.Count - 1; j >= 0; j--) {
                         if (!prototype[j].IntersectWith(current)) continue;
                         crashedIndexList.Add(new KeyValuePair[2]
-                        {new KeyValuePair(j, indices[j].Value), new KeyValuePair(i, indices[i].Value)});
+                            {new KeyValuePair(j, indices[j].Value), new KeyValuePair(i, indices[i].Value)});
                         goto here;
                     }
                     prototype.Add(current);
@@ -142,13 +144,13 @@ namespace Time_Table_Arranging_Program.Class {
                 do {
                     indices = Increment(indices);
                     if (indices == null) goto final;
-                } while (crashedIndexList.Any(x => ContainCrashedIndex(indices , x)));
+                } while (crashedIndexList.Any(x => ContainCrashedIndex(indices, x)));
                 prototype.Clear();
             }
             final:
             return result;
         }
-        
+
         public static List<List<Slot>> Run_v2_withoutConsideringWeekNumber(Slot[] input) {
             if (input == null || input.Length == 0) return null;
             var result = new List<List<Slot>>();
@@ -159,12 +161,12 @@ namespace Time_Table_Arranging_Program.Class {
             var crashedIndexList = new List<KeyValuePair[]>();
             while (true) {
                 prototype.Add(partitioned[0][indices[0].Value]);
-                for (var i = 1 ; i < indices.Count ; i++) {
+                for (var i = 1; i < indices.Count; i++) {
                     var current = partitioned[i][indices[i].Value];
-                    for (var j = prototype.Count - 1 ; j >= 0 ; j--) {
-                        if (!IntersectWithoutConsideringWeekNumber(prototype[j],current)) continue;
+                    for (var j = prototype.Count - 1; j >= 0; j--) {
+                        if (!IntersectWithoutConsideringWeekNumber(prototype[j], current)) continue;
                         crashedIndexList.Add(new KeyValuePair[2]
-                        {new KeyValuePair(j, indices[j].Value), new KeyValuePair(i, indices[i].Value)});
+                            {new KeyValuePair(j, indices[j].Value), new KeyValuePair(i, indices[i].Value)});
                         goto here;
                     }
                     prototype.Add(current);
@@ -174,17 +176,17 @@ namespace Time_Table_Arranging_Program.Class {
                 do {
                     indices = Increment(indices);
                     if (indices == null) goto final;
-                } while (crashedIndexList.Any(x => ContainCrashedIndex(indices , x)));
+                } while (crashedIndexList.Any(x => ContainCrashedIndex(indices, x)));
                 prototype.Clear();
             }
             final:
             return result;
         }
 
-        private static bool IntersectWithoutConsideringWeekNumber(Slot a , Slot b) {
+        private static bool IntersectWithoutConsideringWeekNumber(Slot a, Slot b) {
             if (a.Code == b.Code && a.Type == b.Type && a.Number != b.Number) return true;
             if (!a.Day.Equals(b.Day)) return false;
-            return a.TimePeriod.IntersectWith(b.TimePeriod);                        
+            return a.TimePeriod.IntersectWith(b.TimePeriod);
         }
 
         [Obsolete("Incomplete yet")]
@@ -192,7 +194,7 @@ namespace Time_Table_Arranging_Program.Class {
             if (input == null || input.Length == 0) return null;
             var result = new List<List<Slot>>();
             var indexedSlots = new List<IndexedSlot>();
-            for (int i = 0 ; i < input.Length ; i++) {
+            for (int i = 0; i < input.Length; i++) {
                 indexedSlots.Add(new IndexedSlot(input[i]));
             }
             var partitioned = Partitionize(indexedSlots.ToArray());
@@ -203,9 +205,9 @@ namespace Time_Table_Arranging_Program.Class {
             var prototype = new int[totalLength];
             var mockResult = new List<Slot>();
             while (true) {
-                for (var i = 0 ; i < indices.Count ; i++) {
+                for (var i = 0; i < indices.Count; i++) {
                     var current = partitioned[i][indices[i].Value];
-                    for (int j = 0 ; j < current.ColumnSpan ; j++) {
+                    for (int j = 0; j < current.ColumnSpan; j++) {
                         int position = current.RowIndex + (current.ColumnIndex + j) * numberOfRows;
                         if (prototype[position] != 0) goto here;
                         prototype[position] = current.UID;
@@ -219,15 +221,14 @@ namespace Time_Table_Arranging_Program.Class {
             }
             final:
             return result;
-
         }
 
 
-        private static bool ContainCrashedIndex(List<BoundedInt> indices , KeyValuePair[] crashedIndex) {
+        private static bool ContainCrashedIndex(List<BoundedInt> indices, KeyValuePair[] crashedIndex) {
             if (indices[crashedIndex[0].Key].Value == crashedIndex[0].Value
                 &&
                 indices[crashedIndex[1].Key].Value == crashedIndex[1].Value
-                ) return true;
+            ) return true;
             return false;
         }
 
@@ -267,7 +268,7 @@ namespace Time_Table_Arranging_Program.Class {
             var result = new List<BoundedInt>();
             var bi = new BoundedInt();
             bi.Value = 0;
-            for (var i = 0 ; i < x.Count ; i++) {
+            for (var i = 0; i < x.Count; i++) {
                 bi.UpperLimit = x[i].Count - 1;
                 result.Add(new BoundedInt(bi));
             }
@@ -283,7 +284,7 @@ namespace Time_Table_Arranging_Program.Class {
                 column.Add(copy[0]);
                 var i = 1;
                 while (i < copy.Count) {
-                    for (var j = 0 ; j < column.Count ; j++) {
+                    for (var j = 0; j < column.Count; j++) {
                         if (copy[i].Code != column[j].Code || copy[i].Type != column[j].Type ||
                             copy[i].Number == column[j].Number) {
                             i++;
@@ -307,7 +308,7 @@ namespace Time_Table_Arranging_Program.Class {
             public readonly int Key;
             public readonly int Value;
 
-            public KeyValuePair(int key , int value) {
+            public KeyValuePair(int key, int value) {
                 Key = key;
                 Value = value;
             }

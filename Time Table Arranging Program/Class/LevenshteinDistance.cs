@@ -27,9 +27,9 @@ namespace Time_Table_Arranging_Program.Class {
             }
 
             // Step 2
-            for (int i = 0; i <= n; d[i, 0] = i++) {}
+            for (int i = 0; i <= n; d[i, 0] = i++) { }
 
-            for (int j = 0; j <= m; d[0, j] = j++) {}
+            for (int j = 0; j <= m; d[0, j] = j++) { }
 
             // Step 3
             for (int i = 1; i <= n; i++) {

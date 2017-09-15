@@ -9,12 +9,11 @@ namespace Time_Table_Arranging_Program.User_Control {
     /// Interaction logic for LikeButton.xaml
     /// </summary>
     public partial class LikeButton : UserControl, IPureObserver<ITimetableList>, IPureObserver<ITimetable> {
+        private readonly string CheckedTooltip = "Remove this timetable from favorites";
+        private readonly string UncheckedTooltip = "Add this timetable to favorites";
         private IImmutableObservable<ITimetable> _observableTimetable;
 
         private IImmutableObservable<ITimetableList> _observableTimetableList;
-
-        private readonly string CheckedTooltip = "Remove this timetable from favorites";
-        private readonly string UncheckedTooltip = "Add this timetable to favorites";
 
         public LikeButton() {
             InitializeComponent();

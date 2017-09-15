@@ -17,7 +17,7 @@ namespace Time_Table_Arranging_Program.Class.TokenParser {
         private List<Slot> FilterOutUnwantedSlots(List<Slot> raw) {
             var result = new List<Slot>();
             foreach (Slot s in raw) {
-                if(!s.Code.Contains("COURSE WITHOUT CLASS"))
+                if (!s.Code.Contains("COURSE WITHOUT CLASS"))
                     result.Add(s);
             }
             return result;
@@ -38,7 +38,8 @@ namespace Time_Table_Arranging_Program.Class.TokenParser {
                     table.SelectNodes("tr") ??
                     table.SelectNodes("tbody")[0].SelectNodes("tr");
                 foreach (HtmlNode row in tableNodes) {
-                    if (firstRowIsSkipped == false) {  //skip one row for the table header
+                    if (firstRowIsSkipped == false) {
+                        //skip one row for the table header
                         firstRowIsSkipped = true;
                         continue;
                     }
@@ -47,20 +48,21 @@ namespace Time_Table_Arranging_Program.Class.TokenParser {
                         continue;
                     }
                     if (cells.Count == 1) {
-                        var tokens = cells[0].InnerText.Split(new string[] { " - " } , StringSplitOptions.None);
+                        var tokens = cells[0].InnerText.Split(new string[] {" - "}, StringSplitOptions.None);
                         currentSubjectCode = tokens[0].Trim();
                         if (tokens.Length > 1)
                             currentSubjectName = tokens[1].Split('[')[0].Trim().Beautify();
                         currentSubjectName = currentSubjectName.Replace("&amp;", "&");
                         continue;
                     }
-                    var slot = new Slot {
-                        Code = currentSubjectCode ,
+                    var slot = new Slot
+                    {
+                        Code = currentSubjectCode,
                         SubjectName = currentSubjectName
                     };
-                    for (var k = 0 ; k < cells.Count ; k++) {
+                    for (var k = 0; k < cells.Count; k++) {
                         int offset = 0;
-                        if (row.GetAttributeValue("id" , "").Contains("subRow")) {
+                        if (row.GetAttributeValue("id", "").Contains("subRow")) {
                             offset = 4;
                             slot.UID = result.Last().UID;
                             slot.Type = result.Last().Type;
@@ -71,14 +73,26 @@ namespace Time_Table_Arranging_Program.Class.TokenParser {
                             case 0:
                                 if (data.IsInteger()) slot.UID = int.Parse(data);
                                 break;
-                            case 1: slot.Type = data; break;
-                            case 2: slot.Number = data; break;
+                            case 1:
+                                slot.Type = data;
+                                break;
+                            case 2:
+                                slot.Number = data;
+                                break;
                             case 3: /*not storing this data*/ break; //class size
-                            case 4: slot.Day = Day.Parse(data); break;
-                            case 5: slot.TimePeriod = TimePeriod.Parse(data); break;
+                            case 4:
+                                slot.Day = Day.Parse(data);
+                                break;
+                            case 5:
+                                slot.TimePeriod = TimePeriod.Parse(data);
+                                break;
                             case 6: /*not storing this data*/ break; //credit hour
-                            case 7: slot.WeekNumber = WeekNumber.Parse(data); break;
-                            case 8: slot.Venue = data; break;
+                            case 7:
+                                slot.WeekNumber = WeekNumber.Parse(data);
+                                break;
+                            case 8:
+                                slot.Venue = data;
+                                break;
                             case 9: /*not storing this data*/ break; //remark
                         }
                     }
@@ -86,7 +100,6 @@ namespace Time_Table_Arranging_Program.Class.TokenParser {
                 }
             }
             return result;
-            
         }
     }
 }

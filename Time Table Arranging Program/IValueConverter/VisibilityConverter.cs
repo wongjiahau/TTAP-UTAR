@@ -6,7 +6,7 @@ namespace Time_Table_Arranging_Program.IValueConverter {
     public class VisibilityConverter : System.Windows.Data.IValueConverter {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture) {
             if (parameter != null) {
-                if (value == null || (bool)value == false) {
+                if (value == null || (bool) value == false) {
                     return Visibility.Visible;
                 }
                 return Visibility.Collapsed;

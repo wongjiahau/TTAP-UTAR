@@ -27,11 +27,10 @@ namespace Time_Table_Arranging_Program.Pages {
         public Page_SaveTimetableAsImage(ITimetable input) {
             InitializeComponent();
             TimeTableGui.GenerateGUI(input);
-            
         }
 
-        private void SaveImageButton_OnClick(object sender , RoutedEventArgs e) {
-            var saveDialog = new SaveFileDialog() { Filter = "Image file (*.png)|*.png" , FileName = "MyTimetable" };
+        private void SaveImageButton_OnClick(object sender, RoutedEventArgs e) {
+            var saveDialog = new SaveFileDialog() {Filter = "Image file (*.png)|*.png", FileName = "MyTimetable"};
             if (saveDialog.ShowDialog() == false) return;
             try {
                 using (new WaitCursor()) {
@@ -43,14 +42,13 @@ namespace Time_Table_Arranging_Program.Pages {
             }
 
             catch (Exception ex) {
-                Global.Snackbar.MessageQueue.Enqueue("Failed to save file." , "SHOW DETAILS" ,
+                Global.Snackbar.MessageQueue.Enqueue("Failed to save file.", "SHOW DETAILS",
                     () => { MessageBox.Show(ex.Message); });
             }
-
         }
 
         private void Page_SaveTimetableAsImage_OnLoaded(object sender, RoutedEventArgs e) {
-            SaveImageButton_OnClick(null , null);            
+            SaveImageButton_OnClick(null, null);
         }
     }
 }

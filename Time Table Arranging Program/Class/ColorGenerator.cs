@@ -10,20 +10,19 @@ namespace Time_Table_Arranging_Program {
 
     public class ColorGenerator : IColorGenerator {
         private readonly Color[] _chosenColors =
-        {            
+        {
             Colors.LightPink,
             Colors.Orange,
             Colors.Yellow,
             Colors.LightGreen,
             Colors.LightBlue,
-            Colors.MediumPurple,            
+            Colors.MediumPurple,
             Colors.LightGray,
             Colors.LightGoldenrodYellow,
-            Colors.MediumPurple,            
-            Colors.MediumVioletRed,          
+            Colors.MediumPurple,
+            Colors.MediumVioletRed,
             Colors.DeepSkyBlue,
             Colors.LightCoral,
-
         };
 
         private int _pointer;

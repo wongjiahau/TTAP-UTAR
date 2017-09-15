@@ -71,6 +71,6 @@ namespace Time_Table_Arranging_Program.Class.TokenParser {
     }
 
     public class EmptyToken : Token {
-        public EmptyToken() : base("") {}
+        public EmptyToken() : base("") { }
     }
 }

@@ -13,6 +13,7 @@ namespace Time_Table_Arranging_Program.Class {
 
     public class MockFocusableObject : IFocusable {
         public bool IsFocused { get; set; }
+
         public void SetSupervisor(ISupervisor focusNavigator) {
             //Do nothing
         }
@@ -23,13 +24,20 @@ namespace Time_Table_Arranging_Program.Class {
     }
 
     public class FocusNavigator : ISupervisor {
-        private readonly CyclicIteratableList<IFocusable> _iteratableList;
         private static IFocusable _lastFocused;
+        private readonly CyclicIteratableList<IFocusable> _iteratableList;
+
         public FocusNavigator(List<IFocusable> focusables) {
             _iteratableList = new CyclicIteratableList<IFocusable>(focusables);
             foreach (var f in focusables) {
                 f.SetSupervisor(this);
             }
+        }
+
+        public void FocusMe(IFocusable supervisee) {
+            _lastFocused.IsFocused = false;
+            supervisee.IsFocused = true;
+            _lastFocused = supervisee;
         }
 
         public IFocusable GetCurrentlyFocusedItem() {
@@ -59,12 +67,6 @@ namespace Time_Table_Arranging_Program.Class {
         private void DefocusLastFocused() {
             if (_lastFocused != null) _lastFocused.IsFocused = false;
             _lastFocused = _iteratableList.GetCurrent();
-        }
-
-        public void FocusMe(IFocusable supervisee) {
-            _lastFocused.IsFocused = false;
-            supervisee.IsFocused = true;
-            _lastFocused = supervisee;
         }
     }
 }

@@ -5,12 +5,11 @@ using Time_Table_Arranging_Program.Class.TokenParser;
 using HtmlAgilityPack;
 
 namespace Time_Table_Arranging_Program.Class {
-    public sealed class StartDateEndDateFinder{
+    public sealed class StartDateEndDateFinder {
         private readonly DateTime _endDate;
         private readonly DateTime _startDate;
 
-        public StartDateEndDateFinder(string input)
-        {
+        public StartDateEndDateFinder(string input) {
             var doc = new HtmlDocument();
             doc.LoadHtml(input);
             HtmlNodeCollection nodes = doc.DocumentNode.SelectNodes("//div");
@@ -21,8 +20,8 @@ namespace Time_Table_Arranging_Program.Class {
             HtmlNodeCollection tableColumn = tableRow.SelectNodes("td");
             string targetColumn = tableColumn[9].InnerText;
             string[] parseTargetColumn = targetColumn.Split(' ');
-            _startDate = DateTime.ParseExact(parseTargetColumn[0],"dd/MM/yyyy", CultureInfo.InvariantCulture);
-            _endDate =DateTime.ParseExact(parseTargetColumn[2],"dd/MM/yyyy", CultureInfo.InvariantCulture);
+            _startDate = DateTime.ParseExact(parseTargetColumn[0], "dd/MM/yyyy", CultureInfo.InvariantCulture);
+            _endDate = DateTime.ParseExact(parseTargetColumn[2], "dd/MM/yyyy", CultureInfo.InvariantCulture);
         }
 
         private DateTime ParseDate(string input) {
@@ -36,7 +35,5 @@ namespace Time_Table_Arranging_Program.Class {
         public DateTime GetEndDate() {
             return _endDate;
         }
-
-      
     }
 }

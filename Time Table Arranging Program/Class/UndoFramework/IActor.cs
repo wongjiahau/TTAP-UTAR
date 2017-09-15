@@ -13,6 +13,7 @@ namespace Time_Table_Arranging_Program.Class.UndoFramework {
         /// A snapshot of the actor's previous post
         /// </param>
         void SetCurrentPost(Snapshot snapshot);
+
         Snapshot TakeSnapshot();
     }
 }

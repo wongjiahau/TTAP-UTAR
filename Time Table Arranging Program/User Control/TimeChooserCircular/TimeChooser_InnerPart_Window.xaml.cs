@@ -31,8 +31,7 @@ namespace Time_Table_Arranging_Program.User_Control.TimeChooserCircular {
 
         public ITime ChosenTime {
             get { return _newChosenTime; }
-            set
-            {
+            set {
                 TimeLabel.Text = value.To12HourFormat(false);
                 _newChosenTime = value;
                 Clock.ChosenHour = value.Hour > 12 ? value.Hour - 12 : value.Hour;

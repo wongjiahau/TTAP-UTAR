@@ -6,10 +6,10 @@ using Time_Table_Arranging_Program.Class.Helper;
 using Time_Table_Arranging_Program.Interfaces;
 
 namespace Time_Table_Arranging_Program.Class.Converter {
-    public interface IDay : 
-        IEquatable<IDay>, 
-        IToConstructionString, 
-        IConvertibleToBinary{
+    public interface IDay :
+        IEquatable<IDay>,
+        IToConstructionString,
+        IConvertibleToBinary {
         string StringValue { get; set; }
         int IntValue { get; set; }
         DayOfWeek ToDayOfWeek();
@@ -28,9 +28,6 @@ namespace Time_Table_Arranging_Program.Class.Converter {
         public static readonly Day NullDay = new Day("Null", -1);
         public static readonly int NumberOfDaysPerWeek = 7;
 
-        public static Day GetDay(int value) {
-            return Days.Find(x => x.IntValue == value);
-        }
         private static readonly List<Day> Days = new List<Day>
         {
             Monday,
@@ -94,6 +91,24 @@ namespace Time_Table_Arranging_Program.Class.Converter {
             }
         }
 
+        public int ToBinary() {
+            var bitArray = new BitArray(7);
+            int intValueInZeroBasedIndex = _intValue - 1;
+            for (int i = 0; i < 7; i++) {
+                if (i == intValueInZeroBasedIndex) {
+                    bitArray[i] = true;
+                }
+                else {
+                    bitArray[i] = false;
+                }
+            }
+            return bitArray.ToInt();
+        }
+
+        public static Day GetDay(int value) {
+            return Days.Find(x => x.IntValue == value);
+        }
+
         /// <summary>
         ///     Check if the string value is day
         /// </summary>
@@ -146,21 +161,6 @@ namespace Time_Table_Arranging_Program.Class.Converter {
 
         public override string ToString() {
             return StringValue;
-        }
-
-        public int ToBinary() {
-            var bitArray = new BitArray(7);
-            int intValueInZeroBasedIndex = _intValue - 1;
-            for (int i = 0; i < 7; i++) {
-                if (i == intValueInZeroBasedIndex) {
-                    bitArray[i] = true;
-                }
-                else {
-                    bitArray[i] = false;
-                }
-            }
-            return bitArray.ToInt();
-
         }
     }
 }

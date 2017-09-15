@@ -21,7 +21,7 @@ namespace Time_Table_Arranging_Program.User_Control.CheckboxWithListDownMenuFold
     public partial class GroupClashingError : UserControl {
         public GroupClashingError() {
             InitializeComponent();
-            ErrorTextBlock.AddHandler(Hyperlink.RequestNavigateEvent ,
+            ErrorTextBlock.AddHandler(Hyperlink.RequestNavigateEvent,
                 new RequestNavigateEventHandler(Hyperlink_RequestNavigate));
         }
 

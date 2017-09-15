@@ -20,10 +20,12 @@ namespace Time_Table_Arranging_Program.Windows_Control {
     /// <summary>
     /// Interaction logic for SummaryWindow.xaml
     /// </summary>
-    public partial class SummaryWindow : Window {           
-        private readonly ITimetableList _timetableList;
-        private readonly CyclicIndex _cylicIndex;
+    public partial class SummaryWindow : Window {
         private static int Shown = 0;
+
+        private static bool HintIsShownBefore = false;
+        private readonly CyclicIndex _cylicIndex;
+        private readonly ITimetableList _timetableList;
 
         public SummaryWindow(ITimetableList timetableList, CyclicIndex cyclicIndex) {
             InitializeComponent();
@@ -31,22 +33,22 @@ namespace Time_Table_Arranging_Program.Windows_Control {
             _cylicIndex = cyclicIndex;
             _cylicIndex.CurrentValueChanged += CylicIndex_CurrentValueChanged;
             DataContext = new CyclicIndexVM(cyclicIndex);
-            if(HintIsShownBefore) HintPanel.Visibility = Visibility.Collapsed;
+            if (HintIsShownBefore) HintPanel.Visibility = Visibility.Collapsed;
         }
 
-        private void CylicIndex_CurrentValueChanged(object sender , EventArgs e) {
+        private void CylicIndex_CurrentValueChanged(object sender, EventArgs e) {
             DescriptionViewer.Update(_timetableList.ToList()[_cylicIndex.CurrentValue].ToList());
         }
 
 
         public void ShowWindow() {
             if (Shown + 1 > 1) return;
-            Shown++;            
+            Shown++;
             if (_timetableList.IsEmpty()) {
                 return;
             }
-            Show();        
-            CylicIndex_CurrentValueChanged(null,null);                
+            Show();
+            CylicIndex_CurrentValueChanged(null, null);
         }
 
         private void BackButton_OnClick(object sender, RoutedEventArgs e) {
@@ -54,7 +56,7 @@ namespace Time_Table_Arranging_Program.Windows_Control {
         }
 
         private void SummaryWindow_OnClosing(object sender, CancelEventArgs e) {
-            Shown--;            
+            Shown--;
         }
 
 
@@ -70,7 +72,6 @@ namespace Time_Table_Arranging_Program.Windows_Control {
             }
         }
 
-        private static bool HintIsShownBefore = false;
         private void OkButton_OnClick(object sender, RoutedEventArgs e) {
             HintPanel.Visibility = Visibility.Collapsed;
             HintIsShownBefore = true;

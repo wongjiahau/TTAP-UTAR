@@ -3,7 +3,7 @@ using System.Linq;
 using Time_Table_Arranging_Program.Model;
 
 namespace Time_Table_Arranging_Program.Class {
-    public static class PermutatorForBinarizedSlot {        
+    public static class PermutatorForBinarizedSlot {
         public static List<List<BinarizedSlotModel>> Run_v2_WithConsideringWeekNumber(BinarizedSlotModel[] input) {
             if (input == null || input.Length == 0) return null;
             var result = new List<List<BinarizedSlotModel>>();
@@ -14,9 +14,9 @@ namespace Time_Table_Arranging_Program.Class {
             var crashedIndexList = new List<KeyValuePair[]>();
             while (true) {
                 prototype.Add(partitioned[0][indices[0].Value]);
-                for (var i = 1 ; i < indices.Count ; i++) {
+                for (var i = 1; i < indices.Count; i++) {
                     var current = partitioned[i][indices[i].Value];
-                    for (var j = prototype.Count - 1 ; j >= 0 ; j--) {
+                    for (var j = prototype.Count - 1; j >= 0; j--) {
                         if (!prototype[j].IntersectWith(current)) continue;
                         crashedIndexList.Add(new KeyValuePair[2]
                             {new KeyValuePair(j, indices[j].Value), new KeyValuePair(i, indices[i].Value)});
@@ -29,7 +29,7 @@ namespace Time_Table_Arranging_Program.Class {
                 do {
                     indices = Increment(indices);
                     if (indices == null) goto final;
-                } while (crashedIndexList.Any(x => ContainCrashedIndex(indices , x)));
+                } while (crashedIndexList.Any(x => ContainCrashedIndex(indices, x)));
                 prototype.Clear();
             }
             final:
@@ -37,7 +37,7 @@ namespace Time_Table_Arranging_Program.Class {
         }
 
 
-        private static bool ContainCrashedIndex(List<BoundedInt> indices , KeyValuePair[] crashedIndex) {
+        private static bool ContainCrashedIndex(List<BoundedInt> indices, KeyValuePair[] crashedIndex) {
             if (indices[crashedIndex[0].Key].Value == crashedIndex[0].Value
                 &&
                 indices[crashedIndex[1].Key].Value == crashedIndex[1].Value
@@ -64,7 +64,7 @@ namespace Time_Table_Arranging_Program.Class {
             var result = new List<BoundedInt>();
             var bi = new BoundedInt();
             bi.Value = 0;
-            for (var i = 0 ; i < x.Count ; i++) {
+            for (var i = 0; i < x.Count; i++) {
                 bi.UpperLimit = x[i].Count - 1;
                 result.Add(new BoundedInt(bi));
             }
@@ -80,7 +80,7 @@ namespace Time_Table_Arranging_Program.Class {
                 column.Add(copy[0]);
                 var i = 1;
                 while (i < copy.Count) {
-                    for (var j = 0 ; j < column.Count ; j++) {
+                    for (var j = 0; j < column.Count; j++) {
                         if (copy[i].Code != column[j].Code || copy[i].Type != column[j].Type ||
                             copy[i].Number == column[j].Number) {
                             i++;
@@ -104,7 +104,7 @@ namespace Time_Table_Arranging_Program.Class {
             public readonly int Key;
             public readonly int Value;
 
-            public KeyValuePair(int key , int value) {
+            public KeyValuePair(int key, int value) {
                 Key = key;
                 Value = value;
             }

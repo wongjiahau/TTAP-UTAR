@@ -1,26 +1,4 @@
-﻿/* MIT License
-
-Copyright (c) 2016 JetBrains http://www.jetbrains.com
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE. */
-
-using System;
+﻿using System;
 
 #pragma warning disable 1591
 // ReSharper disable UnusedMember.Global
@@ -47,7 +25,7 @@ namespace Time_Table_Arranging_Program.Annotations {
         AttributeTargets.Method | AttributeTargets.Parameter | AttributeTargets.Property |
         AttributeTargets.Delegate | AttributeTargets.Field | AttributeTargets.Event |
         AttributeTargets.Class | AttributeTargets.Interface | AttributeTargets.GenericParameter)]
-    public sealed class CanBeNullAttribute : Attribute {}
+    public sealed class CanBeNullAttribute : Attribute { }
 
     /// <summary>
     /// Indicates that the value of the marked element could never be <c>null</c>.
@@ -61,7 +39,7 @@ namespace Time_Table_Arranging_Program.Annotations {
         AttributeTargets.Method | AttributeTargets.Parameter | AttributeTargets.Property |
         AttributeTargets.Delegate | AttributeTargets.Field | AttributeTargets.Event |
         AttributeTargets.Class | AttributeTargets.Interface | AttributeTargets.GenericParameter)]
-    public sealed class NotNullAttribute : Attribute {}
+    public sealed class NotNullAttribute : Attribute { }
 
     /// <summary>
     /// Can be appplied to symbols of types derived from IEnumerable as well as to symbols of Task
@@ -71,7 +49,7 @@ namespace Time_Table_Arranging_Program.Annotations {
     [AttributeUsage(
         AttributeTargets.Method | AttributeTargets.Parameter | AttributeTargets.Property |
         AttributeTargets.Delegate | AttributeTargets.Field)]
-    public sealed class ItemNotNullAttribute : Attribute {}
+    public sealed class ItemNotNullAttribute : Attribute { }
 
     /// <summary>
     /// Can be appplied to symbols of types derived from IEnumerable as well as to symbols of Task
@@ -81,7 +59,7 @@ namespace Time_Table_Arranging_Program.Annotations {
     [AttributeUsage(
         AttributeTargets.Method | AttributeTargets.Parameter | AttributeTargets.Property |
         AttributeTargets.Delegate | AttributeTargets.Field)]
-    public sealed class ItemCanBeNullAttribute : Attribute {}
+    public sealed class ItemCanBeNullAttribute : Attribute { }
 
     /// <summary>
     /// Implicitly apply [NotNull]/[ItemNotNull] annotation to all the of type members and parameters
@@ -89,7 +67,7 @@ namespace Time_Table_Arranging_Program.Annotations {
     /// </summary>
     [AttributeUsage(
         AttributeTargets.Class | AttributeTargets.Struct | AttributeTargets.Interface | AttributeTargets.Assembly)]
-    public sealed class ImplicitNotNullAttribute : Attribute {}
+    public sealed class ImplicitNotNullAttribute : Attribute { }
 
     /// <summary>
     /// Indicates that the marked method builds string by format pattern and (optional) arguments.
@@ -145,7 +123,7 @@ namespace Time_Table_Arranging_Program.Annotations {
     /// }
     /// </code></example>
     [AttributeUsage(AttributeTargets.Parameter)]
-    public sealed class InvokerParameterNameAttribute : Attribute {}
+    public sealed class InvokerParameterNameAttribute : Attribute { }
 
     /// <summary>
     /// Indicates that the method is contained in a type that implements
@@ -187,7 +165,7 @@ namespace Time_Table_Arranging_Program.Annotations {
     /// </example>
     [AttributeUsage(AttributeTargets.Method)]
     public sealed class NotifyPropertyChangedInvocatorAttribute : Attribute {
-        public NotifyPropertyChangedInvocatorAttribute() {}
+        public NotifyPropertyChangedInvocatorAttribute() { }
 
         public NotifyPropertyChangedInvocatorAttribute([NotNull] string parameterName) {
             ParameterName = parameterName;
@@ -243,7 +221,7 @@ namespace Time_Table_Arranging_Program.Annotations {
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = true)]
     public sealed class ContractAnnotationAttribute : Attribute {
         public ContractAnnotationAttribute([NotNull] string contract)
-            : this(contract, false) {}
+            : this(contract, false) { }
 
         public ContractAnnotationAttribute([NotNull] string contract, bool forceFullStates) {
             Contract = contract;
@@ -267,7 +245,7 @@ namespace Time_Table_Arranging_Program.Annotations {
     /// </code></example>
     [AttributeUsage(AttributeTargets.All)]
     public sealed class LocalizationRequiredAttribute : Attribute {
-        public LocalizationRequiredAttribute() : this(true) {}
+        public LocalizationRequiredAttribute() : this(true) { }
 
         public LocalizationRequiredAttribute(bool required) {
             Required = required;
@@ -297,7 +275,7 @@ namespace Time_Table_Arranging_Program.Annotations {
     /// }
     /// </code></example>
     [AttributeUsage(AttributeTargets.Interface | AttributeTargets.Class | AttributeTargets.Struct)]
-    public sealed class CannotApplyEqualityOperatorAttribute : Attribute {}
+    public sealed class CannotApplyEqualityOperatorAttribute : Attribute { }
 
     /// <summary>
     /// When applied to a target attribute, specifies a requirement for any type marked
@@ -328,13 +306,13 @@ namespace Time_Table_Arranging_Program.Annotations {
     [AttributeUsage(AttributeTargets.All)]
     public sealed class UsedImplicitlyAttribute : Attribute {
         public UsedImplicitlyAttribute()
-            : this(ImplicitUseKindFlags.Default, ImplicitUseTargetFlags.Default) {}
+            : this(ImplicitUseKindFlags.Default, ImplicitUseTargetFlags.Default) { }
 
         public UsedImplicitlyAttribute(ImplicitUseKindFlags useKindFlags)
-            : this(useKindFlags, ImplicitUseTargetFlags.Default) {}
+            : this(useKindFlags, ImplicitUseTargetFlags.Default) { }
 
         public UsedImplicitlyAttribute(ImplicitUseTargetFlags targetFlags)
-            : this(ImplicitUseKindFlags.Default, targetFlags) {}
+            : this(ImplicitUseKindFlags.Default, targetFlags) { }
 
         public UsedImplicitlyAttribute(ImplicitUseKindFlags useKindFlags, ImplicitUseTargetFlags targetFlags) {
             UseKindFlags = useKindFlags;
@@ -352,13 +330,13 @@ namespace Time_Table_Arranging_Program.Annotations {
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.GenericParameter)]
     public sealed class MeansImplicitUseAttribute : Attribute {
         public MeansImplicitUseAttribute()
-            : this(ImplicitUseKindFlags.Default, ImplicitUseTargetFlags.Default) {}
+            : this(ImplicitUseKindFlags.Default, ImplicitUseTargetFlags.Default) { }
 
         public MeansImplicitUseAttribute(ImplicitUseKindFlags useKindFlags)
-            : this(useKindFlags, ImplicitUseTargetFlags.Default) {}
+            : this(useKindFlags, ImplicitUseTargetFlags.Default) { }
 
         public MeansImplicitUseAttribute(ImplicitUseTargetFlags targetFlags)
-            : this(ImplicitUseKindFlags.Default, targetFlags) {}
+            : this(ImplicitUseKindFlags.Default, targetFlags) { }
 
         public MeansImplicitUseAttribute(ImplicitUseKindFlags useKindFlags, ImplicitUseTargetFlags targetFlags) {
             UseKindFlags = useKindFlags;
@@ -414,7 +392,7 @@ namespace Time_Table_Arranging_Program.Annotations {
     /// </summary>
     [MeansImplicitUse(ImplicitUseTargetFlags.WithMembers)]
     public sealed class PublicAPIAttribute : Attribute {
-        public PublicAPIAttribute() {}
+        public PublicAPIAttribute() { }
 
         public PublicAPIAttribute([NotNull] string comment) {
             Comment = comment;
@@ -430,7 +408,7 @@ namespace Time_Table_Arranging_Program.Annotations {
     /// If the parameter is an enumerable, indicates that it is enumerated while the method is executed.
     /// </summary>
     [AttributeUsage(AttributeTargets.Parameter)]
-    public sealed class InstantHandleAttribute : Attribute {}
+    public sealed class InstantHandleAttribute : Attribute { }
 
     /// <summary>
     /// Indicates that a method does not make any observable state changes.
@@ -444,14 +422,14 @@ namespace Time_Table_Arranging_Program.Annotations {
     /// }
     /// </code></example>
     [AttributeUsage(AttributeTargets.Method)]
-    public sealed class PureAttribute : Attribute {}
+    public sealed class PureAttribute : Attribute { }
 
     /// <summary>
     /// Indicates that the return value of method invocation must be used.
     /// </summary>
     [AttributeUsage(AttributeTargets.Method)]
     public sealed class MustUseReturnValueAttribute : Attribute {
-        public MustUseReturnValueAttribute() {}
+        public MustUseReturnValueAttribute() { }
 
         public MustUseReturnValueAttribute([NotNull] string justification) {
             Justification = justification;
@@ -480,7 +458,7 @@ namespace Time_Table_Arranging_Program.Annotations {
         AttributeTargets.Field | AttributeTargets.Property | AttributeTargets.Parameter | AttributeTargets.Method |
         AttributeTargets.Class | AttributeTargets.Interface | AttributeTargets.Struct |
         AttributeTargets.GenericParameter)]
-    public sealed class ProvidesContextAttribute : Attribute {}
+    public sealed class ProvidesContextAttribute : Attribute { }
 
     /// <summary>
     /// Indicates that a parameter is a path to a file or a folder within a web project.
@@ -488,9 +466,9 @@ namespace Time_Table_Arranging_Program.Annotations {
     /// </summary>
     [AttributeUsage(AttributeTargets.Parameter)]
     public sealed class PathReferenceAttribute : Attribute {
-        public PathReferenceAttribute() {}
+        public PathReferenceAttribute() { }
 
-        public PathReferenceAttribute([NotNull, PathReference] string basePath) {
+        public PathReferenceAttribute([NotNull] [PathReference] string basePath) {
             BasePath = basePath;
         }
 
@@ -522,7 +500,7 @@ namespace Time_Table_Arranging_Program.Annotations {
     /// </code>
     /// </example>
     [AttributeUsage(AttributeTargets.Method)]
-    public sealed class SourceTemplateAttribute : Attribute {}
+    public sealed class SourceTemplateAttribute : Attribute { }
 
     /// <summary>
     /// Allows specifying a macro for a parameter of a <see cref="SourceTemplateAttribute">source template</see>.
@@ -644,7 +622,7 @@ namespace Time_Table_Arranging_Program.Annotations {
     /// </summary>
     [AttributeUsage(AttributeTargets.Parameter | AttributeTargets.Method)]
     public sealed class AspMvcActionAttribute : Attribute {
-        public AspMvcActionAttribute() {}
+        public AspMvcActionAttribute() { }
 
         public AspMvcActionAttribute([NotNull] string anonymousProperty) {
             AnonymousProperty = anonymousProperty;
@@ -661,7 +639,7 @@ namespace Time_Table_Arranging_Program.Annotations {
     /// </summary>
     [AttributeUsage(AttributeTargets.Parameter)]
     public sealed class AspMvcAreaAttribute : Attribute {
-        public AspMvcAreaAttribute() {}
+        public AspMvcAreaAttribute() { }
 
         public AspMvcAreaAttribute([NotNull] string anonymousProperty) {
             AnonymousProperty = anonymousProperty;
@@ -679,7 +657,7 @@ namespace Time_Table_Arranging_Program.Annotations {
     /// </summary>
     [AttributeUsage(AttributeTargets.Parameter | AttributeTargets.Method)]
     public sealed class AspMvcControllerAttribute : Attribute {
-        public AspMvcControllerAttribute() {}
+        public AspMvcControllerAttribute() { }
 
         public AspMvcControllerAttribute([NotNull] string anonymousProperty) {
             AnonymousProperty = anonymousProperty;
@@ -694,14 +672,14 @@ namespace Time_Table_Arranging_Program.Annotations {
     /// for custom wrappers similar to <c>System.Web.Mvc.Controller.View(String, String)</c>.
     /// </summary>
     [AttributeUsage(AttributeTargets.Parameter)]
-    public sealed class AspMvcMasterAttribute : Attribute {}
+    public sealed class AspMvcMasterAttribute : Attribute { }
 
     /// <summary>
     /// ASP.NET MVC attribute. Indicates that a parameter is an MVC model type. Use this attribute
     /// for custom wrappers similar to <c>System.Web.Mvc.Controller.View(String, Object)</c>.
     /// </summary>
     [AttributeUsage(AttributeTargets.Parameter)]
-    public sealed class AspMvcModelTypeAttribute : Attribute {}
+    public sealed class AspMvcModelTypeAttribute : Attribute { }
 
     /// <summary>
     /// ASP.NET MVC attribute. If applied to a parameter, indicates that the parameter is an MVC
@@ -710,13 +688,13 @@ namespace Time_Table_Arranging_Program.Annotations {
     /// <c>System.Web.Mvc.Html.RenderPartialExtensions.RenderPartial(HtmlHelper, String)</c>.
     /// </summary>
     [AttributeUsage(AttributeTargets.Parameter | AttributeTargets.Method)]
-    public sealed class AspMvcPartialViewAttribute : Attribute {}
+    public sealed class AspMvcPartialViewAttribute : Attribute { }
 
     /// <summary>
     /// ASP.NET MVC attribute. Allows disabling inspections for MVC views within a class or a method.
     /// </summary>
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
-    public sealed class AspMvcSuppressViewErrorAttribute : Attribute {}
+    public sealed class AspMvcSuppressViewErrorAttribute : Attribute { }
 
     /// <summary>
     /// ASP.NET MVC attribute. Indicates that a parameter is an MVC display template.
@@ -724,7 +702,7 @@ namespace Time_Table_Arranging_Program.Annotations {
     /// <c>System.Web.Mvc.Html.DisplayExtensions.DisplayForModel(HtmlHelper, String)</c>.
     /// </summary>
     [AttributeUsage(AttributeTargets.Parameter)]
-    public sealed class AspMvcDisplayTemplateAttribute : Attribute {}
+    public sealed class AspMvcDisplayTemplateAttribute : Attribute { }
 
     /// <summary>
     /// ASP.NET MVC attribute. Indicates that a parameter is an MVC editor template.
@@ -732,7 +710,7 @@ namespace Time_Table_Arranging_Program.Annotations {
     /// <c>System.Web.Mvc.Html.EditorExtensions.EditorForModel(HtmlHelper, String)</c>.
     /// </summary>
     [AttributeUsage(AttributeTargets.Parameter)]
-    public sealed class AspMvcEditorTemplateAttribute : Attribute {}
+    public sealed class AspMvcEditorTemplateAttribute : Attribute { }
 
     /// <summary>
     /// ASP.NET MVC attribute. Indicates that a parameter is an MVC template.
@@ -740,7 +718,7 @@ namespace Time_Table_Arranging_Program.Annotations {
     /// <c>System.ComponentModel.DataAnnotations.UIHintAttribute(System.String)</c>.
     /// </summary>
     [AttributeUsage(AttributeTargets.Parameter)]
-    public sealed class AspMvcTemplateAttribute : Attribute {}
+    public sealed class AspMvcTemplateAttribute : Attribute { }
 
     /// <summary>
     /// ASP.NET MVC attribute. If applied to a parameter, indicates that the parameter
@@ -749,21 +727,21 @@ namespace Time_Table_Arranging_Program.Annotations {
     /// <c>System.Web.Mvc.Controller.View(Object)</c>.
     /// </summary>
     [AttributeUsage(AttributeTargets.Parameter | AttributeTargets.Method)]
-    public sealed class AspMvcViewAttribute : Attribute {}
+    public sealed class AspMvcViewAttribute : Attribute { }
 
     /// <summary>
     /// ASP.NET MVC attribute. If applied to a parameter, indicates that the parameter
     /// is an MVC view component name.
     /// </summary>
     [AttributeUsage(AttributeTargets.Parameter)]
-    public sealed class AspMvcViewComponentAttribute : Attribute {}
+    public sealed class AspMvcViewComponentAttribute : Attribute { }
 
     /// <summary>
     /// ASP.NET MVC attribute. If applied to a parameter, indicates that the parameter
     /// is an MVC view component view. If applied to a method, the MVC view component view name is default.
     /// </summary>
     [AttributeUsage(AttributeTargets.Parameter | AttributeTargets.Method)]
-    public sealed class AspMvcViewComponentViewAttribute : Attribute {}
+    public sealed class AspMvcViewComponentViewAttribute : Attribute { }
 
     /// <summary>
     /// ASP.NET MVC attribute. When applied to a parameter of an attribute,
@@ -777,11 +755,11 @@ namespace Time_Table_Arranging_Program.Annotations {
     /// }
     /// </code></example>
     [AttributeUsage(AttributeTargets.Parameter | AttributeTargets.Property)]
-    public sealed class AspMvcActionSelectorAttribute : Attribute {}
+    public sealed class AspMvcActionSelectorAttribute : Attribute { }
 
     [AttributeUsage(AttributeTargets.Parameter | AttributeTargets.Property | AttributeTargets.Field)]
     public sealed class HtmlElementAttributesAttribute : Attribute {
-        public HtmlElementAttributesAttribute() {}
+        public HtmlElementAttributesAttribute() { }
 
         public HtmlElementAttributesAttribute([NotNull] string name) {
             Name = name;
@@ -807,7 +785,7 @@ namespace Time_Table_Arranging_Program.Annotations {
     /// <c>System.Web.WebPages.WebPageBase.RenderSection(String)</c>.
     /// </summary>
     [AttributeUsage(AttributeTargets.Parameter | AttributeTargets.Method)]
-    public sealed class RazorSectionAttribute : Attribute {}
+    public sealed class RazorSectionAttribute : Attribute { }
 
     /// <summary>
     /// Indicates how method, constructor invocation or property access
@@ -843,7 +821,7 @@ namespace Time_Table_Arranging_Program.Annotations {
     /// <see cref="AssertionConditionAttribute"/> attribute.
     /// </summary>
     [AttributeUsage(AttributeTargets.Method)]
-    public sealed class AssertionMethodAttribute : Attribute {}
+    public sealed class AssertionMethodAttribute : Attribute { }
 
     /// <summary>
     /// Indicates the condition parameter of the assertion method. The method itself should be
@@ -883,7 +861,7 @@ namespace Time_Table_Arranging_Program.Annotations {
     /// </summary>
     [Obsolete("Use [ContractAnnotation('=> halt')] instead")]
     [AttributeUsage(AttributeTargets.Method)]
-    public sealed class TerminatesProgramAttribute : Attribute {}
+    public sealed class TerminatesProgramAttribute : Attribute { }
 
     /// <summary>
     /// Indicates that method is pure LINQ method, with postponed enumeration (like Enumerable.Select,
@@ -891,26 +869,26 @@ namespace Time_Table_Arranging_Program.Annotations {
     /// of delegate type by analyzing LINQ method chains.
     /// </summary>
     [AttributeUsage(AttributeTargets.Method)]
-    public sealed class LinqTunnelAttribute : Attribute {}
+    public sealed class LinqTunnelAttribute : Attribute { }
 
     /// <summary>
     /// Indicates that IEnumerable, passed as parameter, is not enumerated.
     /// </summary>
     [AttributeUsage(AttributeTargets.Parameter)]
-    public sealed class NoEnumerationAttribute : Attribute {}
+    public sealed class NoEnumerationAttribute : Attribute { }
 
     /// <summary>
     /// Indicates that parameter is regular expression pattern.
     /// </summary>
     [AttributeUsage(AttributeTargets.Parameter)]
-    public sealed class RegexPatternAttribute : Attribute {}
+    public sealed class RegexPatternAttribute : Attribute { }
 
     /// <summary>
     /// XAML attribute. Indicates the type that has <c>ItemsSource</c> property and should be treated
     /// as <c>ItemsControl</c>-derived type, to enable inner items <c>DataContext</c> type resolve.
     /// </summary>
     [AttributeUsage(AttributeTargets.Class)]
-    public sealed class XamlItemsControlAttribute : Attribute {}
+    public sealed class XamlItemsControlAttribute : Attribute { }
 
     /// <summary>
     /// XAML attribute. Indicates the property of some <c>BindingBase</c>-derived type, that
@@ -922,7 +900,7 @@ namespace Time_Table_Arranging_Program.Annotations {
     /// marked with the <see cref="XamlItemsControlAttribute"/> attribute.
     /// </remarks>
     [AttributeUsage(AttributeTargets.Property)]
-    public sealed class XamlItemBindingOfItemsControlAttribute : Attribute {}
+    public sealed class XamlItemBindingOfItemsControlAttribute : Attribute { }
 
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
     public sealed class AspChildControlTypeAttribute : Attribute {
@@ -939,13 +917,13 @@ namespace Time_Table_Arranging_Program.Annotations {
     }
 
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Method)]
-    public sealed class AspDataFieldAttribute : Attribute {}
+    public sealed class AspDataFieldAttribute : Attribute { }
 
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Method)]
-    public sealed class AspDataFieldsAttribute : Attribute {}
+    public sealed class AspDataFieldsAttribute : Attribute { }
 
     [AttributeUsage(AttributeTargets.Property)]
-    public sealed class AspMethodPropertyAttribute : Attribute {}
+    public sealed class AspMethodPropertyAttribute : Attribute { }
 
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
     public sealed class AspRequiredAttributeAttribute : Attribute {
@@ -1001,19 +979,19 @@ namespace Time_Table_Arranging_Program.Annotations {
     }
 
     [AttributeUsage(AttributeTargets.Method)]
-    public sealed class RazorHelperCommonAttribute : Attribute {}
+    public sealed class RazorHelperCommonAttribute : Attribute { }
 
     [AttributeUsage(AttributeTargets.Property)]
-    public sealed class RazorLayoutAttribute : Attribute {}
+    public sealed class RazorLayoutAttribute : Attribute { }
 
     [AttributeUsage(AttributeTargets.Method)]
-    public sealed class RazorWriteLiteralMethodAttribute : Attribute {}
+    public sealed class RazorWriteLiteralMethodAttribute : Attribute { }
 
     [AttributeUsage(AttributeTargets.Method)]
-    public sealed class RazorWriteMethodAttribute : Attribute {}
+    public sealed class RazorWriteMethodAttribute : Attribute { }
 
     [AttributeUsage(AttributeTargets.Parameter)]
-    public sealed class RazorWriteMethodParameterAttribute : Attribute {}
+    public sealed class RazorWriteMethodParameterAttribute : Attribute { }
 
     /// <summary>
     /// Prevents the Member Reordering feature from tossing members of the marked class.
@@ -1022,5 +1000,5 @@ namespace Time_Table_Arranging_Program.Annotations {
     /// The attribute must be mentioned in your member reordering patterns
     /// </remarks>
     [AttributeUsage(AttributeTargets.All)]
-    public sealed class NoReorder : Attribute {}
+    public sealed class NoReorder : Attribute { }
 }

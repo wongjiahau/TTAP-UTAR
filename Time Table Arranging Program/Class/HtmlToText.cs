@@ -12,6 +12,7 @@ namespace Time_Table_Arranging_Program.Class {
     internal class HtmlToText {
         // Static data tables
         protected static Dictionary<string, string> _tags;
+
         protected static HashSet<string> _ignoreTags;
         protected string _html;
         protected int _pos;
@@ -228,9 +229,9 @@ namespace Time_Table_Arranging_Program.Class {
         /// </summary>
         protected class TextBuilder {
             private readonly StringBuilder _currLine;
+            private readonly StringBuilder _text;
             private int _emptyLines;
             private bool _preformatted;
-            private readonly StringBuilder _text;
 
             // Construction
             public TextBuilder() {
@@ -247,8 +248,7 @@ namespace Time_Table_Arranging_Program.Class {
             /// </summary>
             public bool Preformatted {
                 get { return _preformatted; }
-                set
-                {
+                set {
                     if (value) {
                         // Clear line buffer if changing to
                         // preformatted mode

@@ -8,8 +8,9 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Time_Table_Arranging_Program.Pages;
 
 namespace Time_Table_Arranging_Program.ConsoleCommands {
-    public class LoadDataFromTestServerCommand : ConsoleCommandBase{
+    public class LoadDataFromTestServerCommand : ConsoleCommandBase {
         public LoadDataFromTestServerCommand(object commandee) : base(commandee) { }
+
         public override string Execute() {
             var mainWindow = Commandee as MainWindow;
             Assert.IsNotNull(mainWindow);

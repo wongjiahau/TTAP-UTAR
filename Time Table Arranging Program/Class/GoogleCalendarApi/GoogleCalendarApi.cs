@@ -27,24 +27,25 @@ namespace Time_Table_Arranging_Program.Class.GoogleCalendarApi {
             using (Stream streamReader = assembly.GetManifestResourceStream(resourceName)) {
                 string credPath = Environment.GetFolderPath(
                     Environment.SpecialFolder.Personal);
-                credPath = Path.Combine(credPath , ".credentials/calendar-dotnet-quickstart.json");
+                credPath = Path.Combine(credPath, ".credentials/calendar-dotnet-quickstart.json");
 
                 credential = GoogleWebAuthorizationBroker.AuthorizeAsync(
-                    GoogleClientSecrets.Load(streamReader).Secrets ,
-                    new List<string> { CalendarService.Scope.Calendar } ,
-                    "user" ,
-                    CancellationToken.None ,
-                    new FileDataStore(credPath , true)).Result;
+                    GoogleClientSecrets.Load(streamReader).Secrets,
+                    new List<string> {CalendarService.Scope.Calendar},
+                    "user",
+                    CancellationToken.None,
+                    new FileDataStore(credPath, true)).Result;
                 //MessageBox.Show(@"Credential file saved to: " + credPath);
             }
-            var service = new CalendarService(new BaseClientService.Initializer {
-                HttpClientInitializer = credential ,
+            var service = new CalendarService(new BaseClientService.Initializer
+            {
+                HttpClientInitializer = credential,
                 ApplicationName = "Time Table Arranging Program (UTAR)"
             });
             return service;
         }
 
-        public static void AddTimetableToCalendar(ITimetable timetable , DateTime dateOfMondayOfWeekOne) {
+        public static void AddTimetableToCalendar(ITimetable timetable, DateTime dateOfMondayOfWeekOne) {
             _dateOfMondayOfWeekOne = dateOfMondayOfWeekOne;
             List<Event> events = ConvertTimetableToEvents(timetable);
             AddEventsToCalendar(events);
@@ -63,38 +64,41 @@ namespace Time_Table_Arranging_Program.Class.GoogleCalendarApi {
             string calendarId = "primary";
             var service = GetRequestService();
             foreach (var e in events) {
-                EventsResource.InsertRequest request = service.Events.Insert(e , calendarId);
+                EventsResource.InsertRequest request = service.Events.Insert(e, calendarId);
                 request.Execute();
             }
         }
 
         private static Event ConvertSlotToEvent(Slot slot) {
-            return new Event {
-                Summary = $"{slot.SubjectName} ({slot.Type}-{slot.Number})" ,
-                Location = slot.Venue ,
-                Description = $"Subject code : {slot.Code}, Week : {slot.WeekNumber}" ,
-                Start = new EventDateTime {
-                    DateTime = GetDateTime(slot.Day , slot.StartTime , _dateOfMondayOfWeekOne) ,
+            return new Event
+            {
+                Summary = $"{slot.SubjectName} ({slot.Type}-{slot.Number})",
+                Location = slot.Venue,
+                Description = $"Subject code : {slot.Code}, Week : {slot.WeekNumber}",
+                Start = new EventDateTime
+                {
+                    DateTime = GetDateTime(slot.Day, slot.StartTime, _dateOfMondayOfWeekOne),
                     // TimeZone = "Asia/Kuala_Lumpur" ,
                     TimeZone = "UTC+08:00"
-                } ,
-                End = new EventDateTime {
-                    DateTime = GetDateTime(slot.Day , slot.EndTime , _dateOfMondayOfWeekOne) ,
+                },
+                End = new EventDateTime
+                {
+                    DateTime = GetDateTime(slot.Day, slot.EndTime, _dateOfMondayOfWeekOne),
                     //TimeZone = "Asia/Kuala_Lumpur" ,
                     TimeZone = "UTC+08:00"
-                } ,
+                },
                 Recurrence = GetRecurrence(slot.WeekNumber)
             };
         }
 
         private static IList<string> GetRecurrence(WeekNumber weekNumber) {
-            return new[] { $"RRULE:FREQ=WEEKLY;COUNT={weekNumber.Max()}" };
+            return new[] {$"RRULE:FREQ=WEEKLY;COUNT={weekNumber.Max()}"};
         }
 
-        private static DateTime? GetDateTime(Day day , ITime startTime , DateTime dateOfMondayOfWeekOne) {
+        private static DateTime? GetDateTime(Day day, ITime startTime, DateTime dateOfMondayOfWeekOne) {
             int interval = day.IntValue - Day.Parse(dateOfMondayOfWeekOne.DayOfWeek).IntValue;
-            var d = dateOfMondayOfWeekOne + new TimeSpan(interval , 0 , 0 , 0);
-            return new DateTime(d.Year , d.Month , d.Day , startTime.Hour , startTime.Minute , 0);
+            var d = dateOfMondayOfWeekOne + new TimeSpan(interval, 0, 0, 0);
+            return new DateTime(d.Year, d.Month, d.Day, startTime.Hour, startTime.Minute, 0);
         }
     }
 }

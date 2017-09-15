@@ -5,8 +5,9 @@ using Time_Table_Arranging_Program.Class.Converter;
 namespace Time_Table_Arranging_Program.Class {
     public class IndexedSlot : Slot {
         private readonly SlotIndex _slotIndex;
+
         public IndexedSlot(Slot s) : base(s) {
-            _slotIndex = new SlotIndex(s.Day , s.StartTime , s.EndTime.Minus(s.StartTime));
+            _slotIndex = new SlotIndex(s.Day, s.StartTime, s.EndTime.Minus(s.StartTime));
             RowIndex = _slotIndex.RowIndex;
             ColumnIndex = _slotIndex.ColumnIndex;
             ColumnSpan = _slotIndex.ColumnSpan;
@@ -19,12 +20,22 @@ namespace Time_Table_Arranging_Program.Class {
         public int RowIndex { get; private set; }
         public int ColumnIndex { get; private set; }
         public int ColumnSpan { get; private set; }
-
     }
 
 
-
     public class SlotIndex : IEquatable<SlotIndex>, IIntersectionCheckable<SlotIndex> {
+        public SlotIndex(Day day, ITime startTime, TimeSpan duration) {
+            RowIndex = GetRowIndex(day);
+            ColumnIndex = GetColumnIndex(startTime);
+            ColumnSpan = GetColumnSpan(duration);
+        }
+
+        public SlotIndex(int rowIndex, int columnIndex, int columnSpan) {
+            RowIndex = rowIndex;
+            ColumnIndex = columnIndex;
+            ColumnSpan = columnSpan;
+        }
+
         /// <summary>
         /// This value depends on Global.Constant.MinTime
         /// </summary>
@@ -41,20 +52,34 @@ namespace Time_Table_Arranging_Program.Class {
         /// </summary>
         public int RowIndex { get; private set; }
 
-        public SlotIndex(Day day , ITime startTime , TimeSpan duration) {
-            RowIndex = GetRowIndex(day);
-            ColumnIndex = GetColumnIndex(startTime);
-            ColumnSpan = GetColumnSpan(duration);
+
+        public bool Equals(SlotIndex other) {
+            Assert.IsTrue(other != null);
+            return
+                RowIndex == other.RowIndex &&
+                ColumnIndex == other.ColumnIndex &&
+                ColumnSpan == other.ColumnSpan;
         }
 
-        public SlotIndex(int rowIndex , int columnIndex , int columnSpan) {
-            RowIndex = rowIndex;
-            ColumnIndex = columnIndex;
-            ColumnSpan = columnSpan;
+        [Obsolete("Still have bugs")]
+        public bool IntersectWith(SlotIndex other) {
+            if (RowIndex != other.RowIndex) return false;
+            if (ColumnSpan > other.ColumnSpan) {
+                for (int i = 0; i < ColumnSpan; i++)
+                    if (ColumnIndex + i == other.ColumnIndex)
+                        return true;
+            }
+            else {
+                for (int j = 0; j < other.ColumnSpan; j++)
+                    if (other.ColumnIndex + j == ColumnIndex)
+                        return true;
+            }
+            return false;
         }
+
         private int GetColumnSpan(TimeSpan time) {
             double result = time.TotalHours * 2;
-            return (int)result;
+            return (int) result;
         }
 
         private int GetRowIndex(Day day) {
@@ -66,31 +91,6 @@ namespace Time_Table_Arranging_Program.Class {
             result = (startTime.Hour - Global.Constant.MinTime) * 2;
             if (startTime.Minute == 30) result++;
             return result;
-        }
-
-
-        public bool Equals(SlotIndex other) {
-            Assert.IsTrue(other != null);
-            return
-            RowIndex == other.RowIndex &&
-            ColumnIndex == other.ColumnIndex &&
-            ColumnSpan == other.ColumnSpan;
-        }
-
-        [Obsolete("Still have bugs")]
-        public bool IntersectWith(SlotIndex other) {
-            if (RowIndex != other.RowIndex) return false;
-            if (ColumnSpan > other.ColumnSpan) {
-                for (int i = 0 ; i < ColumnSpan ; i++)
-                    if (ColumnIndex + i == other.ColumnIndex)
-                        return true;
-            }
-            else {
-                for (int j = 0 ; j < other.ColumnSpan ; j++)
-                    if (other.ColumnIndex + j == ColumnIndex)
-                        return true;
-            }
-            return false;
         }
 
         public override string ToString() {

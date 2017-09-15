@@ -20,16 +20,16 @@ namespace Time_Table_Arranging_Program {
     public partial class TimeTableGUI : UserControl {
         // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty TimetableProperty =
-            DependencyProperty.Register("Timetable" , typeof(ITimetable) , typeof(TimeTableGUI) ,
-                new PropertyMetadata(null , OnInputChanged));
+            DependencyProperty.Register("Timetable", typeof(ITimetable), typeof(TimeTableGUI),
+                new PropertyMetadata(null, OnInputChanged));
 
         private readonly List<UIElement> _addedElement = new List<UIElement>();
         private readonly int _eachDayHaveHowManyRow = 5;
         private readonly int _maxTime = Global.MaxTime;
         private readonly int _minTime = 7;
-        private readonly int _paddingDueToTimeRow = 2;
         private readonly int _paddingDueToDayColumn = 1;
-        private Dictionary<int , HashSet<int>> _occupiedIndex;
+        private readonly int _paddingDueToTimeRow = 2;
+        private Dictionary<int, HashSet<int>> _occupiedIndex;
 
 
         public TimeTableGUI() {
@@ -40,27 +40,19 @@ namespace Time_Table_Arranging_Program {
             BuildTimeRow();
             BuildDayColumn();
             BuildDayTimeCellAtTopLeftCorner();
-            _occupiedIndex = new Dictionary<int , HashSet<int>>();
-        }
-
-        private void BuildDayTimeCellAtTopLeftCorner() {
-            var dayTimeCell = new DayTimeCell(){VerticalAlignment = VerticalAlignment.Bottom};
-            Grid.Children.Add(dayTimeCell);
-            Grid.SetColumn(dayTimeCell , 0);
-            Grid.SetRow(dayTimeCell , 0);
-            Grid.SetRowSpan(dayTimeCell , 2);
+            _occupiedIndex = new Dictionary<int, HashSet<int>>();
         }
 
         public ITimetable Timetable {
-            get { return (ITimetable)GetValue(TimetableProperty); }
-            set { SetValue(TimetableProperty , value); }
+            get { return (ITimetable) GetValue(TimetableProperty); }
+            set { SetValue(TimetableProperty, value); }
         }
 
         private int NumberOfRows {
             get { return Grid.RowDefinitions.Count; }
             set {
                 Grid.RowDefinitions.Clear();
-                for (var i = 0 ; i < value ; i++)
+                for (var i = 0; i < value; i++)
                     Grid.RowDefinitions.Add(new RowDefinition());
             }
         }
@@ -69,22 +61,30 @@ namespace Time_Table_Arranging_Program {
             get { return Grid.ColumnDefinitions.Count; }
             set {
                 Grid.ColumnDefinitions.Clear();
-                for (var i = 0 ; i < value ; i++)
-                    Grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(35) });
+                for (var i = 0; i < value; i++)
+                    Grid.ColumnDefinitions.Add(new ColumnDefinition {Width = new GridLength(35)});
             }
         }
 
-        private static void OnInputChanged(DependencyObject d , DependencyPropertyChangedEventArgs e) {
+        private void BuildDayTimeCellAtTopLeftCorner() {
+            var dayTimeCell = new DayTimeCell() {VerticalAlignment = VerticalAlignment.Bottom};
+            Grid.Children.Add(dayTimeCell);
+            Grid.SetColumn(dayTimeCell, 0);
+            Grid.SetRow(dayTimeCell, 0);
+            Grid.SetRowSpan(dayTimeCell, 2);
+        }
+
+        private static void OnInputChanged(DependencyObject d, DependencyPropertyChangedEventArgs e) {
             var timetableGUI = d as TimeTableGUI;
             timetableGUI.ClearGui();
-            timetableGUI.GenerateGui((ITimetable)e.NewValue);
+            timetableGUI.GenerateGui((ITimetable) e.NewValue);
         }
 
         private void BuildDayColumn() {
             Grid.ColumnDefinitions[0].Width = new GridLength(100);
-            string[] days = { "MON" , "TUE" , "WED" , "THU" , "FRI" , "SAT" , "SUN" };
+            string[] days = {"MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"};
             var rowIndex = 2;
-            for (var i = 0 ; i < days.Length ; i++) {
+            for (var i = 0; i < days.Length; i++) {
                 var border = new Border()
                 {
                     BorderBrush = Brushes.Black,
@@ -100,9 +100,9 @@ namespace Time_Table_Arranging_Program {
                         }
                 };
                 Grid.Children.Add(border);
-                Grid.SetColumn(border , 0);
-                Grid.SetRow(border , rowIndex);
-                Grid.SetRowSpan(border , _eachDayHaveHowManyRow);
+                Grid.SetColumn(border, 0);
+                Grid.SetRow(border, rowIndex);
+                Grid.SetRowSpan(border, _eachDayHaveHowManyRow);
                 rowIndex += _eachDayHaveHowManyRow;
             }
         }
@@ -119,65 +119,67 @@ namespace Time_Table_Arranging_Program {
             //}
 
             //building vertical borders
-            for (var i = 0 ; i < NumberOfColumns ; i++) {
+            for (var i = 0; i < NumberOfColumns; i++) {
                 var border = GetBorder();
                 Grid.Children.Add(border);
-                Grid.SetColumn(border , i);
-                Grid.SetRow(border , 0);
-                Grid.SetRowSpan(border , 2 + 7 * _eachDayHaveHowManyRow);
+                Grid.SetColumn(border, i);
+                Grid.SetRow(border, 0);
+                Grid.SetRowSpan(border, 2 + 7 * _eachDayHaveHowManyRow);
             }
 
             //building horizontal day borders
-            for (var i = 0 + 2 ; i < 2 + 7 * _eachDayHaveHowManyRow ; i += _eachDayHaveHowManyRow) {
-                var border = new Border { BorderThickness = new Thickness(0.5) , BorderBrush = Brushes.Black };
+            for (var i = 0 + 2; i < 2 + 7 * _eachDayHaveHowManyRow; i += _eachDayHaveHowManyRow) {
+                var border = new Border {BorderThickness = new Thickness(0.5), BorderBrush = Brushes.Black};
                 Grid.Children.Add(border);
-                Grid.SetColumn(border , 0);
-                Grid.SetColumnSpan(border , NumberOfColumns);
-                Grid.SetRow(border , i);
-                Grid.SetRowSpan(border , _eachDayHaveHowManyRow);
+                Grid.SetColumn(border, 0);
+                Grid.SetColumnSpan(border, NumberOfColumns);
+                Grid.SetRow(border, i);
+                Grid.SetRowSpan(border, _eachDayHaveHowManyRow);
             }
         }
 
         private Border GetBorder() {
-            return new Border {
-                BorderThickness = new Thickness(0.1) ,
-                BorderBrush = Brushes.Gray ,
+            return new Border
+            {
+                BorderThickness = new Thickness(0.1),
+                BorderBrush = Brushes.Gray,
                 Background = Brushes.WhiteSmoke
             };
         }
 
         private void BuildTimeRow() {
             var columnIndex = 1;
-            for (var i = _minTime ; i < _maxTime ; i++) {
+            for (var i = _minTime; i < _maxTime; i++) {
                 var label1 = GetLabel();
                 label1.Content = $"{(i > 12 ? i - 12 : i)}:00";
                 Grid.Children.Add(label1);
-                Grid.SetColumn(label1 , columnIndex);
-                Grid.SetRow(label1 , 0);
-                Grid.SetColumnSpan(label1 , 2);
+                Grid.SetColumn(label1, columnIndex);
+                Grid.SetRow(label1, 0);
+                Grid.SetColumnSpan(label1, 2);
                 var label2 = GetLabel();
                 label2.Content = $"{(i > 12 ? i - 12 : i) + 1}:00";
                 Grid.Children.Add(label2);
-                Grid.SetColumn(label2 , columnIndex);
-                Grid.SetRow(label2 , 1);
-                Grid.SetColumnSpan(label2 , 2);
+                Grid.SetColumn(label2, columnIndex);
+                Grid.SetRow(label2, 1);
+                Grid.SetColumnSpan(label2, 2);
                 columnIndex += 2;
             }
         }
 
         private Label GetLabel() {
-            return new Label {
-                BorderThickness = new Thickness(0.5) ,
-                BorderBrush = Brushes.Black ,
-                HorizontalContentAlignment = HorizontalAlignment.Center ,
-                FontWeight = FontWeights.Bold ,
+            return new Label
+            {
+                BorderThickness = new Thickness(0.5),
+                BorderBrush = Brushes.Black,
+                HorizontalContentAlignment = HorizontalAlignment.Center,
+                FontWeight = FontWeights.Bold,
                 Height = 30
             };
         }
 
         private int GetColumnSpan(TimeSpan time) {
             double result = time.TotalHours * 2;
-            return (int)result;
+            return (int) result;
         }
 
         private int GetRowIndex(Day day) {
@@ -194,14 +196,14 @@ namespace Time_Table_Arranging_Program {
 
         public void ClearGui() {
             NoOfSelectedSubjectLabel.Content = "";
-            for (var i = 0 ; i < _addedElement.Count ; i++) {
+            for (var i = 0; i < _addedElement.Count; i++) {
                 var ui = _addedElement[i];
                 if (Grid.Children.Contains(ui))
                     Grid.Children.Remove(ui);
             }
             _addedElement.Clear();
             DescriptionViewer.Clear();
-            _occupiedIndex = new Dictionary<int , HashSet<int>>();
+            _occupiedIndex = new Dictionary<int, HashSet<int>>();
         }
 
         public void GenerateGui(ITimetable timetable) {
@@ -229,40 +231,39 @@ namespace Time_Table_Arranging_Program {
             IColorGenerator c = new ColorGenerator();
             foreach (var s in slots) {
                 if (s.SubjectName != previousSubjectName) c.GoToNextColor();
-                var box = GenerateBox(s , c);
+                var box = GenerateBox(s, c);
                 var colIndex = GetColumnIndex(s.StartTime);
                 var rowIndex = GetRowIndex(s.Day);
                 var columnSpan = GetColumnSpan(s.EndTime.Minus(s.StartTime));
-                while (IsOccupied(rowIndex , colIndex , columnSpan)) {
+                while (IsOccupied(rowIndex, colIndex, columnSpan)) {
                     rowIndex++;
                 }
-                AddToGrid(box , colIndex , rowIndex , columnSpan);
+                AddToGrid(box, colIndex, rowIndex, columnSpan);
 
-                UpdateOccupiedIndex(rowIndex , colIndex , columnSpan);
+                UpdateOccupiedIndex(rowIndex, colIndex, columnSpan);
                 previousSubjectName = s.SubjectName;
             }
         }
 
-        private void AddToGrid(UIElement elem , int colIndex , int rowIndex , int columnSpan) {
+        private void AddToGrid(UIElement elem, int colIndex, int rowIndex, int columnSpan) {
             Grid.Children.Add(elem);
-            Grid.SetColumn(elem , colIndex);
-            Grid.SetRow(elem , rowIndex);
-            Grid.SetColumnSpan(elem , columnSpan);
+            Grid.SetColumn(elem, colIndex);
+            Grid.SetRow(elem, rowIndex);
+            Grid.SetColumnSpan(elem, columnSpan);
             _addedElement.Add(elem);
-
         }
 
-        private void UpdateOccupiedIndex(int rowIndex , int colIndex , int columnSpan) {
+        private void UpdateOccupiedIndex(int rowIndex, int colIndex, int columnSpan) {
             if (!_occupiedIndex.ContainsKey(rowIndex))
-                _occupiedIndex.Add(rowIndex , new HashSet<int>());
-            for (int i = 0 ; i < columnSpan ; i++) {
+                _occupiedIndex.Add(rowIndex, new HashSet<int>());
+            for (int i = 0; i < columnSpan; i++) {
                 _occupiedIndex[rowIndex].Add(colIndex + i);
             }
         }
 
-        private bool IsOccupied(int rowIndex , int colIndex , int columnSpan) {
+        private bool IsOccupied(int rowIndex, int colIndex, int columnSpan) {
             if (!_occupiedIndex.ContainsKey(rowIndex)) return false;
-            for (int i = 0 ; i < columnSpan ; i++) {
+            for (int i = 0; i < columnSpan; i++) {
                 if (_occupiedIndex[rowIndex].Contains(colIndex + i))
                     return true;
             }
@@ -270,32 +271,30 @@ namespace Time_Table_Arranging_Program {
         }
 
 
-        private Border GenerateBox(Slot s , IColorGenerator c) {
-            var textblock = new TextBlock {
-                Margin = new Thickness(2) ,
-                TextAlignment = TextAlignment.Center ,
-                FontWeight = FontWeights.DemiBold ,
+        private Border GenerateBox(Slot s, IColorGenerator c) {
+            var textblock = new TextBlock
+            {
+                Margin = new Thickness(2),
+                TextAlignment = TextAlignment.Center,
+                FontWeight = FontWeights.DemiBold,
                 VerticalAlignment = VerticalAlignment.Center
             };
             textblock.Text = GetInfo(s);
-            var border = new Border {
-                BorderThickness = new Thickness(0.75) ,
-                BorderBrush = Brushes.Black ,
-                Child = textblock ,
-                Background = c.GetCurrentBrush() ,
-                CornerRadius = new CornerRadius(2) ,
-                Height = 50 ,
-                ForceCursor = true ,
-                ToolTip = GetTooltip(s) , // s.SubjectName ,                 
+            var border = new Border
+            {
+                BorderThickness = new Thickness(0.75),
+                BorderBrush = Brushes.Black,
+                Child = textblock,
+                Background = c.GetCurrentBrush(),
+                CornerRadius = new CornerRadius(2),
+                Height = 50,
+                ForceCursor = true,
+                ToolTip = GetTooltip(s), // s.SubjectName ,                 
             };
             var originalColor = c.GetCurrentColor();
             var originalBrush = c.GetCurrentBrush();
-            border.MouseEnter += (sender , args) => {
-                border.Background = new SolidColorBrush(originalColor.Darker());
-            };
-            border.MouseLeave += (sender , args) => {
-                border.Background = originalBrush;
-            };
+            border.MouseEnter += (sender, args) => { border.Background = new SolidColorBrush(originalColor.Darker()); };
+            border.MouseLeave += (sender, args) => { border.Background = originalBrush; };
             return border;
         }
 
@@ -316,10 +315,10 @@ namespace Time_Table_Arranging_Program {
         }
 
 
-        public void GenerateStateSummary(List<List<Slot>> outputTimetables , IStateElementFactory factory) {
+        public void GenerateStateSummary(List<List<Slot>> outputTimetables, IStateElementFactory factory) {
             ClearGui();
-            var bg = CustomBackgroundWorker<List<List<Slot>> , StateTable>.
-    RunAndShowLoadingScreen(StateTable.Parse , outputTimetables , "Calculating state table . . .");
+            var bg = CustomBackgroundWorker<List<List<Slot>>, StateTable>.RunAndShowLoadingScreen(StateTable.Parse,
+                outputTimetables, "Calculating state table . . .");
             var stateTable = bg.GetResult();
             foreach (var cell in stateTable) {
                 int paddedRowIndex = cell.RowIndex * _eachDayHaveHowManyRow + _paddingDueToTimeRow;
@@ -327,21 +326,21 @@ namespace Time_Table_Arranging_Program {
                 int colSpan = StateCell.ColumnSpanOfEachCell;
                 switch (cell.State) {
                     case CellState.DefinitelyOccupied:
-                        AddToGrid(factory.CreateDefinitelyOccupiedState() , paddedColIndex , paddedRowIndex , colSpan);
+                        AddToGrid(factory.CreateDefinitelyOccupiedState(), paddedColIndex, paddedRowIndex, colSpan);
                         break;
                     case CellState.MaybeUnoccupied:
-                        AddToGrid(factory.CreateMaybeUnoccupiedState(cell) , paddedColIndex , paddedRowIndex , colSpan);
+                        AddToGrid(factory.CreateMaybeUnoccupiedState(cell), paddedColIndex, paddedRowIndex, colSpan);
                         break;
                     case CellState.DefinitelyUnoccupied:
-                        AddToGrid(factory.CreateDefinitelyUnoccupiedState() , paddedColIndex , paddedRowIndex , 1);
+                        AddToGrid(factory.CreateDefinitelyUnoccupiedState(), paddedColIndex, paddedRowIndex, 1);
                         break;
                 }
             }
         }
 
-        public void RegenerateStateSummary(List<List<Slot>> outputTimetables , IStateElementFactory factory) {
-            var bg = CustomBackgroundWorker<List<List<Slot>> , StateTable>.
-RunAndShowLoadingScreen(StateTable.Parse , outputTimetables , "Recalculating . . .");
+        public void RegenerateStateSummary(List<List<Slot>> outputTimetables, IStateElementFactory factory) {
+            var bg = CustomBackgroundWorker<List<List<Slot>>, StateTable>.RunAndShowLoadingScreen(StateTable.Parse,
+                outputTimetables, "Recalculating . . .");
             var stateTable = bg.GetResult();
             foreach (var cell in stateTable) {
                 int paddedRowIndex = cell.RowIndex * _eachDayHaveHowManyRow + _paddingDueToTimeRow;
@@ -354,21 +353,21 @@ RunAndShowLoadingScreen(StateTable.Parse , outputTimetables , "Recalculating . .
                             Grid.GetRow(e) == paddedRowIndex &&
                             Grid.GetColumn(e) == paddedColIndex);
                 if (element is ToggleButton) {
-                    if (((ToggleButton)element).IsChecked.Value) continue;
+                    if (((ToggleButton) element).IsChecked.Value) continue;
                 }
 
                 switch (cell.State) {
                     case CellState.DefinitelyOccupied:
                         if (element != null) Grid.Children.Remove(element);
-                        AddToGrid(factory.CreateDefinitelyOccupiedState() , paddedColIndex , paddedRowIndex , colSpan);
+                        AddToGrid(factory.CreateDefinitelyOccupiedState(), paddedColIndex, paddedRowIndex, colSpan);
                         break;
                     case CellState.MaybeUnoccupied:
                         if (element != null) Grid.Children.Remove(element);
-                        AddToGrid(factory.CreateMaybeUnoccupiedState(cell) , paddedColIndex , paddedRowIndex , colSpan);
+                        AddToGrid(factory.CreateMaybeUnoccupiedState(cell), paddedColIndex, paddedRowIndex, colSpan);
                         break;
                     case CellState.DefinitelyUnoccupied:
                         if (element != null) Grid.Children.Remove(element);
-                        AddToGrid(factory.CreateDefinitelyUnoccupiedState() , paddedColIndex , paddedRowIndex , 1);
+                        AddToGrid(factory.CreateDefinitelyUnoccupiedState(), paddedColIndex, paddedRowIndex, 1);
                         break;
                 }
             }

@@ -16,9 +16,9 @@ namespace Time_Table_Arranging_Program.Windows_Control {
             RightButtonClicked
         }
 
-        public static object ReturnedValue { get; set; }
-
         public static ResultEnum Result;
+
+        private static DialogBox _lastOpenedDialog;
 
         private ResultEnum _result;
 
@@ -27,19 +27,21 @@ namespace Time_Table_Arranging_Program.Windows_Control {
             AllowsTransparency = true;
         }
 
-        public static ResultEnum Show(string title , string message , string leftButtonText = "Got it!" ,
+        public static object ReturnedValue { get; set; }
+
+        public static ResultEnum Show(string title, string message, string leftButtonText = "Got it!",
                                       string rightButtonText = null) {
             CloseDialog();
             var p = new DialogBox();
             _lastOpenedDialog = p;
-            p.SetContent(title , message , leftButtonText , rightButtonText);
+            p.SetContent(title, message, leftButtonText, rightButtonText);
             p.DialogHost.IsOpen = true;
             p.ShowDialog();
             Result = p._result;
             return p._result;
         }
 
-        private void SetContent(string title , string message , string leftButtonText , string rightButtonText) {
+        private void SetContent(string title, string message, string leftButtonText, string rightButtonText) {
             Button_Right.Visibility = rightButtonText == null ? Visibility.Collapsed : Visibility.Visible;
             TextBlock_Title.Text = title;
             TextBlock_Message.Text = message;
@@ -49,7 +51,6 @@ namespace Time_Table_Arranging_Program.Windows_Control {
             Default.Visibility = Visibility.Visible;
         }
 
-        private static DialogBox _lastOpenedDialog;
         public static void Show(UserControl content) {
             CloseDialog();
             var p = new DialogBox();
@@ -72,18 +73,18 @@ namespace Time_Table_Arranging_Program.Windows_Control {
             Frame.Navigate(content);
         }
 
-        private void Button_Left_OnClick(object sender , RoutedEventArgs e) {
+        private void Button_Left_OnClick(object sender, RoutedEventArgs e) {
             _result = ResultEnum.LeftButtonClicked;
             Close();
         }
 
-        private void Button_Right_OnClick(object sender , RoutedEventArgs e) {
+        private void Button_Right_OnClick(object sender, RoutedEventArgs e) {
             _result = ResultEnum.RightButtonClicked;
             Close();
         }
 
         private void SampleCode() {
-            Show("Title" , "message" , "OK" , "Cancel");
+            Show("Title", "message", "OK", "Cancel");
             switch (Result) {
                 case ResultEnum.LeftButtonClicked:
                     MessageBox.Show("You clicked left button");
@@ -94,11 +95,11 @@ namespace Time_Table_Arranging_Program.Windows_Control {
             }
         }
 
-        private void DialogHost_OnDialogClosing(object sender , DialogClosingEventArgs eventargs) {
+        private void DialogHost_OnDialogClosing(object sender, DialogClosingEventArgs eventargs) {
             Close();
         }
 
-        private void DialogBox_OnClosing(object sender , CancelEventArgs e) {
+        private void DialogBox_OnClosing(object sender, CancelEventArgs e) {
             DialogHost.IsOpen = false;
         }
     }

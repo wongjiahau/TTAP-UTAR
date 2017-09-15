@@ -10,6 +10,7 @@ using Time_Table_Arranging_Program.Model;
 namespace Time_Table_Arranging_Program.ConsoleCommands {
     public class StatsCommand : ConsoleCommandBase {
         public StatsCommand(object commandee) : base(commandee) { }
+
         public override string Execute() {
             var inputSlots = Commandee as SlotList;
             var subjects = SubjectModel.Parse(inputSlots);
@@ -21,12 +22,11 @@ namespace Time_Table_Arranging_Program.ConsoleCommands {
             string result = "";
             result +=
                 $"Total number of subjects = {subjectCount}\n" +
-                $"Average slots count per subject = {averageSlotsCountPerSubject}\n" + 
-                $"Max slots count = {maxSlotsCount} ({subjectWithMostSlotCount})\n"+ 
-                $"Min slots count = {minSlotsCount} ({subjectWithLeastSlotCount})\n" 
+                $"Average slots count per subject = {averageSlotsCountPerSubject}\n" +
+                $"Max slots count = {maxSlotsCount} ({subjectWithMostSlotCount})\n" +
+                $"Min slots count = {minSlotsCount} ({subjectWithLeastSlotCount})\n"
                 ;
             return result;
-
         }
 
         private (string, int) GetMinSlotCount(List<SubjectModel> subjects) {

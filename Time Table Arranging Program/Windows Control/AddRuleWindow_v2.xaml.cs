@@ -26,15 +26,13 @@ namespace Time_Table_Arranging_Program {
         private void AddRuleButton_OnClick(object sender, RoutedEventArgs e) {
             ScrollViewer.ScrollToEnd();
             var r = new RuleSetter();
-            r.xButton_Clicked += (o, args) =>
-            {
+            r.xButton_Clicked += (o, args) => {
                 var animation = CustomAnimation.GetLeavingScreenAnimation(r.ActualHeight, 0);
                 animation.Completed += (sender1, eventArgs) => { innerSp.Children.Remove(o as RuleSetter); };
                 r.BeginAnimation(HeightProperty, animation);
             };
             r.Loaded +=
-                (o, args) =>
-                {
+                (o, args) => {
                     r.BeginAnimation(HeightProperty,
                         CustomAnimation.GetEnteringScreenAnimation(0, r.ActualHeight));
                 };

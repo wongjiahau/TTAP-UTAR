@@ -35,7 +35,7 @@ namespace Time_Table_Arranging_Program.Windows_Control {
     }
 
 
-    public partial class ProgressWindow : Window , IProgressIndicator{
+    public partial class ProgressWindow : Window, IProgressIndicator {
         private readonly AbortableBackgroundWorker _backgroundWorker;
         private readonly Stopwatch _timer;
 
@@ -44,11 +44,20 @@ namespace Time_Table_Arranging_Program.Windows_Control {
             Left = SystemParameters.PrimaryScreenWidth - Width - 10;
             MessageLabel.Content = message;
         }
+
         private ProgressWindow(AbortableBackgroundWorker worker, string message) : this(message) {
             _backgroundWorker = worker;
             _backgroundWorker.RunWorkerCompleted += _backgroundWorker_RunWorkerCompleted;
             _timer = Stopwatch.StartNew();
             _backgroundWorker.RunWorkerAsync();
+        }
+
+        public void ShowLoading() {
+            ShowDialog();
+        }
+
+        public void HideLoading() {
+            Hide();
         }
 
         public static TimeSpan ShowLoadingScreen(AbortableBackgroundWorker bg, string message) {
@@ -74,14 +83,6 @@ namespace Time_Table_Arranging_Program.Windows_Control {
         private void CancelButton_Click(object sender, RoutedEventArgs e) {
             _backgroundWorker.CancelAsync();
             _backgroundWorker.Abort();
-        }
-
-        public void ShowLoading() {
-            ShowDialog();
-        }
-
-        public void HideLoading() {
-            Hide();
         }
     }
 }

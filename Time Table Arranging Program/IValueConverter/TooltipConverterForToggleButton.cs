@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Time_Table_Arranging_Program.IValueConverter {
-    public class TooltipConverterForToggleButton : System.Windows.Data.IValueConverter{
+    public class TooltipConverterForToggleButton : System.Windows.Data.IValueConverter {
         /// <summary>
         /// 
         /// </summary>

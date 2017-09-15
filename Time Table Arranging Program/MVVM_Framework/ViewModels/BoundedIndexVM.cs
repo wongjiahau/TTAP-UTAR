@@ -9,19 +9,13 @@ using Time_Table_Arranging_Program.Pages;
 
 namespace Time_Table_Arranging_Program.MVVM_Framework.ViewModels {
     public class BoundedIndexVM : ViewModelBase<CyclicIndex> {
-
         private ICommand _decrementCommand;
         private ICommand _incrementCommand;
 
-        public BoundedIndexVM() {
+        public BoundedIndexVM() { }
 
-        }
         public BoundedIndexVM(CyclicIndex model) : base(model) {
             model.CurrentValueChanged += Model_CurrentValueChanged;
-        }
-
-        private void Model_CurrentValueChanged(object sender , EventArgs e) {
-            OnPropertyChanged("CurrentValue");
         }
 
         public ICommand IncrementCommand {
@@ -39,7 +33,7 @@ namespace Time_Table_Arranging_Program.MVVM_Framework.ViewModels {
                 return
                     _decrementCommand ??
                     (_decrementCommand = new RelayCommand(() => {
-                       if(DecrementIsEnabled) CurrentValue--;
+                        if (DecrementIsEnabled) CurrentValue--;
                     }));
             }
         }
@@ -47,7 +41,6 @@ namespace Time_Table_Arranging_Program.MVVM_Framework.ViewModels {
 
         public bool DecrementIsEnabled => Model?.CurrentValue > 0;
         public bool IncrementIsEnabled => Model?.CurrentValue < Model?.MaxValue;
-
 
 
         public int CurrentValue {
@@ -58,8 +51,10 @@ namespace Time_Table_Arranging_Program.MVVM_Framework.ViewModels {
                 OnPropertyChanged(nameof(DecrementIsEnabled));
                 OnPropertyChanged(nameof(IncrementIsEnabled));
             }
+        }
 
+        private void Model_CurrentValueChanged(object sender, EventArgs e) {
+            OnPropertyChanged("CurrentValue");
         }
     }
 }
-

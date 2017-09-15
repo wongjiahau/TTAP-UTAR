@@ -8,6 +8,7 @@ using System.Windows.Media;
 namespace Time_Table_Arranging_Program.User_Control {
     public class MaybeUnoccupiedToggleButton : ToggleButton {
         public static SolidColorBrush BackgroundColor = Brushes.LightGreen;
+
         public MaybeUnoccupiedToggleButton() {
             Checked += OnChecked;
             Unchecked += OnUnchecked;
@@ -15,12 +16,12 @@ namespace Time_Table_Arranging_Program.User_Control {
             Cursor = Cursors.Hand;
         }
 
-        private void OnUnchecked(object sender , RoutedEventArgs e) {
-            Content = new Border() { Background = BackgroundColor };
+        private void OnUnchecked(object sender, RoutedEventArgs e) {
+            Content = new Border() {Background = BackgroundColor};
         }
 
-        private void OnChecked(object sender , RoutedEventArgs routedEventArgs) {
-            Content = new PackIcon() { Kind = PackIconKind.Close, Width = 30, Height = 30};
+        private void OnChecked(object sender, RoutedEventArgs routedEventArgs) {
+            Content = new PackIcon() {Kind = PackIconKind.Close, Width = 30, Height = 30};
         }
     }
 }

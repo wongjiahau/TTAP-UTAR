@@ -11,11 +11,10 @@ namespace Time_Table_Arranging_Program.MVVM_Framework.ViewModels {
             _cyclicIndexVM = cyclicIndexVm;
         }
 
-        public TimetableListVM() {}
+        public TimetableListVM() { }
 
         public ITimetable CurrentTimetable {
-            get
-            {
+            get {
                 if (_timetableList == null) return null;
                 return _timetableList.Timetables[_cyclicIndexVM.CurrentValue - 1];
             }

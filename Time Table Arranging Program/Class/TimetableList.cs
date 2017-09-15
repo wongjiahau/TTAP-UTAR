@@ -16,7 +16,9 @@ namespace Time_Table_Arranging_Program.Class {
     }
 
     public class TimetableList : ITimetableList {
-        public static readonly TimetableList NoPossibleCombination = new TimetableList("No possible timetable found :(");
+        public static readonly TimetableList NoPossibleCombination =
+            new TimetableList("No possible timetable found :(");
+
         public static readonly TimetableList NoSlotsIsChosen = new TimetableList("⟸ Search and select your subjects");
 
         public static readonly TimetableList NoLikedTimetable =
@@ -28,8 +30,8 @@ namespace Time_Table_Arranging_Program.Class {
         private TimetableList(string message) {
             Message = message;
         }
-        
-        public TimetableList(List<List<Slot>> inputList) {            
+
+        public TimetableList(List<List<Slot>> inputList) {
             if (inputList == null) throw new NullReferenceException("inputList should not be null");
             _timetables = new List<ITimetable>();
             foreach (List<Slot> x in inputList) {
@@ -136,6 +138,5 @@ namespace Time_Table_Arranging_Program.Class {
         public ITimetable GetCurrent() {
             return _timetables[_cyclicIterator.GetCurrent()];
         }
-      
     }
 }

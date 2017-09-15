@@ -34,7 +34,7 @@ namespace Time_Table_Arranging_Program.Class {
                 if (_boundedInts[_crashedIndexList[i][0].Key].Value == _crashedIndexList[i][0].Value
                     &&
                     _boundedInts[_crashedIndexList[i][1].Key].Value == _crashedIndexList[i][1].Value
-                    ) return true;
+                ) return true;
             }
 
             return false;

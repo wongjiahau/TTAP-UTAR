@@ -26,8 +26,8 @@ namespace Time_Table_Arranging_Program.Interfaces {
 
 
     public class CyclicIterator : ICyclicIteratable<int> {
-        private int _iterator;
         private readonly int _maxIndex;
+        private int _iterator;
 
         /// <summary>
         /// 
@@ -38,7 +38,7 @@ namespace Time_Table_Arranging_Program.Interfaces {
         }
 
         public void GoToNext() {
-            _iterator ++;
+            _iterator++;
             if (_iterator > _maxIndex) _iterator = 0;
         }
 
@@ -77,14 +77,16 @@ namespace Time_Table_Arranging_Program.Interfaces {
 
         public CyclicIteratableList(List<T> list) {
             _list = list;
-            _iterator =new CyclicIterator(list.Count-1);
+            _iterator = new CyclicIterator(list.Count - 1);
         }
+
         public T GetCurrent() {
             if (_iterator.MaxIndex() < 0) return default(T);
             return _list[_iterator.GetCurrent()];
         }
 
         public int Counts => _list.Count;
+
         public void GoToNext() {
             _iterator.GoToNext();
         }

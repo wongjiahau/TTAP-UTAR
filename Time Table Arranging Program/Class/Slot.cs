@@ -14,13 +14,13 @@ namespace Time_Table_Arranging_Program.Class {
             WeekNumber = new WeekNumber(new List<int>());
             OID = _nextOid++;
             IsSelected = false;
-            StartTime = Time.CreateTime_24HourFormat(0 , 0);
-            EndTime = Time.CreateTime_24HourFormat(0 , 0);
+            StartTime = Time.CreateTime_24HourFormat(0, 0);
+            EndTime = Time.CreateTime_24HourFormat(0, 0);
             _day = Day.Unassigned;
         }
 
-        public Slot(int uid , string code , string subjectName , string number , string type , Day day , string venue ,
-            TimePeriod timePeriod , WeekNumber weekNumber) {
+        public Slot(int uid, string code, string subjectName, string number, string type, Day day, string venue,
+                    TimePeriod timePeriod, WeekNumber weekNumber) {
             OID = _nextOid++;
             UID = uid;
             Code = code;
@@ -30,7 +30,7 @@ namespace Time_Table_Arranging_Program.Class {
             Day = day;
             Venue = venue;
             TimePeriod = timePeriod;
-            WeekNumber = weekNumber;                        
+            WeekNumber = weekNumber;
             IsSelected = true;
         }
 
@@ -47,14 +47,16 @@ namespace Time_Table_Arranging_Program.Class {
             WeekNumber = s.WeekNumber;
             IsSelected = s.IsSelected;
         }
+
         public int OID { get; } //OID is unique for each object
         public int UID { get; set; } //public setters of UID is for serialization purpose only!
         public string Code { get; set; }
         public string SubjectName { get; set; }
         public string Number { get; set; }
         public string Type { get; set; }
+
         public Day Day {
-            get { return (Day)_day; }
+            get { return (Day) _day; }
             set { _day = value; }
         }
 
@@ -79,7 +81,7 @@ namespace Time_Table_Arranging_Program.Class {
 
         public int CompareTo(Slot obj) {
             var s = obj;
-            return StringComparer.Ordinal.Compare(SubjectName , s.SubjectName);
+            return StringComparer.Ordinal.Compare(SubjectName, s.SubjectName);
         }
 
         public Slot GetDuplicate() {
@@ -118,7 +120,7 @@ namespace Time_Table_Arranging_Program.Class {
 
         public bool IntersectWith(Slot other) {
             if (Code == other.Code && Type == other.Type && Number != other.Number) return true;
-            if (!Day.Equals(other.Day)) return false;            
+            if (!Day.Equals(other.Day)) return false;
             if (!TimePeriod.IntersectWith(other.TimePeriod)) return false;
             return WeekNumber.IntersectWith(other.WeekNumber);
         }
@@ -152,7 +154,6 @@ namespace Time_Table_Arranging_Program.Class {
         public string ToFullString() {
             return
                 $"({UID}) {Code} [{SubjectName}] {Type}{Number} {Day} {Venue} {TimePeriod} {WeekNumber}";
-       
         }
     }
 }

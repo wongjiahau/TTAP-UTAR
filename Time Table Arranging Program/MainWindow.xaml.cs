@@ -30,6 +30,9 @@ namespace Time_Table_Arranging_Program {
     /// </summary>
     public partial class MainWindow : Window {
         private readonly UrlProvider _urlProvider = new UrlProvider();
+
+        private bool _exitConfirmed = false;
+
         public MainWindow() {
             //The following two lines of code is to reset the PromptForFeedbackSettings to true
             //Please uncomment it, build it, before actual release
@@ -54,42 +57,43 @@ namespace Time_Table_Arranging_Program {
             }));
         }
 
-        private void MainFrame_OnNavigating(object sender , NavigatingCancelEventArgs e) {
+        private void MainFrame_OnNavigating(object sender, NavigatingCancelEventArgs e) {
             if (e.Content.GetType() == (sender as Frame).Content?.GetType()) {
                 if (e.Content.GetType() != typeof(Page_CreateTimetable)) {
                     e.Cancel = true;
                     return;
                 }
             }
-            var ta = new ThicknessAnimation {
-                Duration = CustomAnimation.FullScreenAnimationDuration ,
-                DecelerationRatio = CustomAnimation.DecelerationConstant ,
-                To = new Thickness(0 , 0 , 0 , 0)
+            var ta = new ThicknessAnimation
+            {
+                Duration = CustomAnimation.FullScreenAnimationDuration,
+                DecelerationRatio = CustomAnimation.DecelerationConstant,
+                To = new Thickness(0, 0, 0, 0)
             };
             if (e.NavigationMode == NavigationMode.New || e.NavigationMode == NavigationMode.Forward) {
-                ta.From = new Thickness(ActualWidth / 3 , 0 , 0 , 0);
+                ta.From = new Thickness(ActualWidth / 3, 0, 0, 0);
             }
             else if (e.NavigationMode == NavigationMode.Back) {
-                ta.From = new Thickness(0 , 0 , ActualWidth / 3 , 0);
+                ta.From = new Thickness(0, 0, ActualWidth / 3, 0);
             }
-            ta.Completed += (o , args) => {
+            ta.Completed += (o, args) => {
                 var p = e.Content as IPageWithLoadedFunction;
                 p?.ExecuteLoadedFunction();
             };
-            (e.Content as Page)?.BeginAnimation(MarginProperty , ta);
+            (e.Content as Page)?.BeginAnimation(MarginProperty, ta);
         }
 
-        private bool _exitConfirmed = false;
-        private void MainWindow_OnClosing(object sender , CancelEventArgs e) {
+        private void MainWindow_OnClosing(object sender, CancelEventArgs e) {
             e.Cancel = true;
             if (_exitConfirmed) return;
-            DialogBox.Show("Quit TTAP?" , "Note : Quiting will cause you to lose your current progress." , "Cancel" , "Quit");
+            DialogBox.Show("Quit TTAP?", "Note : Quiting will cause you to lose your current progress.", "Cancel",
+                "Quit");
             if (DialogBox.Result == DialogBox.ResultEnum.LeftButtonClicked) {
                 return;
             }
             else {
                 _exitConfirmed = true;
-                if ((bool)Settings.Default["PromptForFeedback"]) {
+                if ((bool) Settings.Default["PromptForFeedback"]) {
                     DialogHost.DialogContent = new PromptUserForFeedbackControl();
                     DialogHost.IsOpen = true;
                 }
@@ -99,20 +103,20 @@ namespace Time_Table_Arranging_Program {
             }
         }
 
-        private void HelpButton_Click(object sender , RoutedEventArgs e) {
+        private void HelpButton_Click(object sender, RoutedEventArgs e) {
             Process.Start(new ProcessStartInfo(_urlProvider.ReadMeUrl));
             e.Handled = true;
         }
 
-        private void AboutButton_Click(object sender , RoutedEventArgs e) {
+        private void AboutButton_Click(object sender, RoutedEventArgs e) {
             MainFrame.Navigate(new Page_About());
         }
 
-        private void FeedbackButton_OnClick(object sender , RoutedEventArgs e) {
+        private void FeedbackButton_OnClick(object sender, RoutedEventArgs e) {
             Process.Start(new ProcessStartInfo(_urlProvider.FeedbackFormUrl));
         }
 
-        private void SaveSlot_OnClick(object sender , RoutedEventArgs e) {
+        private void SaveSlot_OnClick(object sender, RoutedEventArgs e) {
             if (Global.State.FileIsSavedBefore) {
                 SaveFile();
                 return;
@@ -120,7 +124,7 @@ namespace Time_Table_Arranging_Program {
             OpenSaveFileDialog();
         }
 
-        private void SaveSlotAs_OnClick(object sender , RoutedEventArgs e) {
+        private void SaveSlotAs_OnClick(object sender, RoutedEventArgs e) {
             OpenSaveFileDialog();
         }
 
@@ -138,46 +142,46 @@ namespace Time_Table_Arranging_Program {
 
         private void SaveFile() {
             var os = new ObjectSerializer();
-            bool success = os.SerializeObject(Global.InputSlotList , Global.State.LastSavedFileName);
+            bool success = os.SerializeObject(Global.InputSlotList, Global.State.LastSavedFileName);
             if (success) {
                 Snackbar.MessageQueue.Enqueue($"File saved at: " + $"{Global.State.LastSavedFileName}");
                 //DialogBox.ShowDialog();
             }
         }
 
-        private void LoadSlots_OnClick(object sender , RoutedEventArgs e) {
+        private void LoadSlots_OnClick(object sender, RoutedEventArgs e) {
             var dialog = new OpenFileDialog();
             dialog.Filter = "TTAP file (*.ttap)|*.ttap";
             if (dialog.ShowDialog() == true) {
                 var os = new ObjectSerializer();
                 Global.InputSlotList = os.DeSerializeObject<SlotList>(dialog.FileName);
-                MainFrame.Navigate(Page_CreateTimetable.GetInstance(Global.Settings.SearchByConsideringWeekNumber ,
+                MainFrame.Navigate(Page_CreateTimetable.GetInstance(Global.Settings.SearchByConsideringWeekNumber,
                     Global.Settings.GeneralizeSlot));
             }
         }
 
-        private void SettingButton_OnClick(object sender , RoutedEventArgs e) {
+        private void SettingButton_OnClick(object sender, RoutedEventArgs e) {
             var p = Windows_Settings.GetInstance();
             p.ShowDialog();
             if (p.ApplyClicked == false) return;
             Global.Snackbar.MessageQueue.Enqueue("Settings applied.");
             if (Global.InputSlotList.Count == 0) return;
-            MainFrame.Navigate(Page_CreateTimetable.GetInstance(Global.Settings.SearchByConsideringWeekNumber ,
+            MainFrame.Navigate(Page_CreateTimetable.GetInstance(Global.Settings.SearchByConsideringWeekNumber,
                 Global.Settings.GeneralizeSlot));
         }
 
-        private void ExtraMenuButton_OnClick(object sender , RoutedEventArgs e) {
+        private void ExtraMenuButton_OnClick(object sender, RoutedEventArgs e) {
             DrawerHost.IsRightDrawerOpen = true;
         }
 
-        private void ReportBug_Click(object sender , RoutedEventArgs e) {
+        private void ReportBug_Click(object sender, RoutedEventArgs e) {
             Process.Start(new ProcessStartInfo(_urlProvider.ReportBugUrl));
         }
 
         public void LoadTestData(List<Slot> input) {
             Global.InputSlotList.AddRange(input);
             MainFrame.Navigate(
-                Page_CreateTimetable.GetInstance(Global.Settings.SearchByConsideringWeekNumber ,
+                Page_CreateTimetable.GetInstance(Global.Settings.SearchByConsideringWeekNumber,
                     Global.Settings.GeneralizeSlot));
         }
 

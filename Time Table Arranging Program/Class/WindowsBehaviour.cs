@@ -27,7 +27,8 @@ namespace Time_Table_Arranging_Program {
                 obj.SetValue(HideCloseButtonProperty, value);
             }
 
-            private static void HideCloseButtonChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e) {
+            private static void
+                HideCloseButtonChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e) {
                 var window = d as Window;
                 if (window == null) return;
 
@@ -65,16 +66,14 @@ namespace Time_Table_Arranging_Program {
 
             #endregion
 
-            private static readonly RoutedEventHandler HideWhenLoadedDelegate = (sender, args) =>
-            {
+            private static readonly RoutedEventHandler HideWhenLoadedDelegate = (sender, args) => {
                 if (sender is Window == false) return;
                 var w = (Window) sender;
                 HideCloseButton(w);
                 w.Loaded -= HideWhenLoadedDelegate;
             };
 
-            private static readonly RoutedEventHandler ShowWhenLoadedDelegate = (sender, args) =>
-            {
+            private static readonly RoutedEventHandler ShowWhenLoadedDelegate = (sender, args) => {
                 if (sender is Window == false) return;
                 var w = (Window) sender;
                 ShowCloseButton(w);

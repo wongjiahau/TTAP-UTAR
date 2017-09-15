@@ -21,6 +21,7 @@ namespace Time_Table_Arranging_Program.Class {
     }
 
     public class CustomBackgroundWorker<T1, T2> : ICustomBackgroundWorker<T1, T2> {
+        private readonly Action<T1, T2> _action;
         private readonly Func<T1, T2> _func;
         private readonly T1 _parameter1;
         private readonly T2 _parameter2;
@@ -30,8 +31,6 @@ namespace Time_Table_Arranging_Program.Class {
         {
             WorkerSupportsCancellation = true
         };
-
-        private readonly Action<T1, T2> _action;
 
         private T2 _result;
 

@@ -5,7 +5,7 @@ namespace Time_Table_Arranging_Program.Class {
         public int UpperLimit;
         public int Value;
 
-        public BoundedInt() {}
+        public BoundedInt() { }
 
         public BoundedInt(BoundedInt x) {
             Value = x.Value;

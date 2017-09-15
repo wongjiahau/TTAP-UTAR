@@ -10,6 +10,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Time_Table_Arranging_Program.ConsoleCommands {
     public class HideConsoleCommand : ConsoleCommandBase {
         public HideConsoleCommand(object commandee) : base(commandee) { }
+
         public override string Execute() {
             var drawerHost = Commandee as DrawerHost;
             Assert.IsNotNull(drawerHost);

@@ -11,9 +11,9 @@ namespace Time_Table_Arranging_Program.Pages {
     /// Interaction logic for Page_AddToGoogleCalendar.xaml
     /// </summary>
     public partial class Page_AddToGoogleCalendar : Page {
+        private readonly ITimetable _timetable;
         private int _counter;
         private DateTime _dateOfMondayOfWeekOne;
-        private readonly ITimetable _timetable;
         private BackgroundWorker _worker;
 
         public Page_AddToGoogleCalendar(ITimetable timetable, DateTime dateOfMondayOfWeekOne) {
@@ -50,7 +50,7 @@ namespace Time_Table_Arranging_Program.Pages {
         private void _worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e) {
             if (e.Error != null) {
                 if (_counter == 1) {
-                    DialogBox.Show("Oops . . .","Something went wrong. . .", e.Error.Message);
+                    DialogBox.Show("Oops . . .", "Something went wrong. . .", e.Error.Message);
                     return;
                 }
                 _counter++;
@@ -103,7 +103,7 @@ namespace Time_Table_Arranging_Program.Pages {
             var minDate = DatePicker.DisplayDateStart ?? DateTime.MinValue;
             var maxDate = DatePicker.DisplayDateEnd ?? DateTime.MaxValue;
 
-            for (var d = minDate ; d <= maxDate && DateTime.MaxValue > d ; d = d.AddDays(1)) {
+            for (var d = minDate; d <= maxDate && DateTime.MaxValue > d; d = d.AddDays(1)) {
                 if (d.DayOfWeek != DayOfWeek.Monday) {
                     DatePicker.BlackoutDates.Add(new CalendarDateRange(d));
                 }

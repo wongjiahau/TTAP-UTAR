@@ -133,7 +133,7 @@ namespace Time_Table_Arranging_Program {
             var timeTokens = time.Split(':');
             result.Hour = int.Parse(timeTokens[0]);
             result.Minute = int.Parse(timeTokens[1]);
-            if (amOrPm == "pm" && result.Hour!=12) result.Hour += 12;
+            if (amOrPm == "pm" && result.Hour != 12) result.Hour += 12;
             if (amOrPm == "am" && result.Hour == 12) result.Hour = 0;
             return result;
         }

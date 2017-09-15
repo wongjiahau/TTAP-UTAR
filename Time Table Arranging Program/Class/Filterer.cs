@@ -39,13 +39,14 @@ namespace Time_Table_Arranging_Program.Class {
         public static List<List<Slot>> Filter(TimetablesAndPredicates package) {
             return Filter(package.Timetables, package.Predicates);
         }
+
         public static List<List<Slot>> Filter(List<List<Slot>> timetables, List<Predicate<Slot>> predicateList) {
             var result = new List<List<Slot>>();
             for (int i = 0; i < timetables.Count; i++) {
                 for (int j = 0; j < timetables[i].Count; j++) {
                     for (int k = 0; k < predicateList.Count; k++) {
                         var slot = timetables[i][j];
-                        if (predicateList[k](slot)) goto here;                        
+                        if (predicateList[k](slot)) goto here;
                     }
                 }
                 result.Add(timetables[i]);
@@ -57,9 +58,10 @@ namespace Time_Table_Arranging_Program.Class {
     }
 
     public class TimetablesAndPredicates {
+        public List<Predicate<Slot>> Predicates;
 
         public List<List<Slot>> Timetables;
-        public List<Predicate<Slot>> Predicates;
+
         public TimetablesAndPredicates(List<List<Slot>> timetables, List<Predicate<Slot>> predicates) {
             Timetables = timetables;
             Predicates = predicates;

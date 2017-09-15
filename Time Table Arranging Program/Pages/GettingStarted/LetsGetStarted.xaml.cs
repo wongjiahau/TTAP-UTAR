@@ -14,15 +14,12 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Time_Table_Arranging_Program.Pages.Page_GettingStarted;
 
-namespace Time_Table_Arranging_Program.Pages.GettingStarted
-{
+namespace Time_Table_Arranging_Program.Pages.GettingStarted {
     /// <summary>
     /// Interaction logic for LetsGetStarted.xaml
     /// </summary>
-    public partial class LetsGetStarted : UserControl
-    {        
-        public LetsGetStarted()
-        {
+    public partial class LetsGetStarted : UserControl {
+        public LetsGetStarted() {
             InitializeComponent();
         }
 

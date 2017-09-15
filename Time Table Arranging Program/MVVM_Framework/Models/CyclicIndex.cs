@@ -15,13 +15,12 @@ namespace Time_Table_Arranging_Program.MVVM_Framework.Models {
                 _currentValue = 0;
             }
         }
-        public CyclicIndex() {
-            
-        }
+
+        public CyclicIndex() { }
+
         public int CurrentValue {
             get { return _currentValue; }
-            set
-            {
+            set {
                 int result;
                 if (value > _maxValue) {
                     result = 0;
@@ -32,7 +31,7 @@ namespace Time_Table_Arranging_Program.MVVM_Framework.Models {
                 else {
                     result = value;
                 }
-                SetProperty(ref _currentValue, result);                                    
+                SetProperty(ref _currentValue, result);
                 CurrentValueChanged?.Invoke(this, null);
             }
         }

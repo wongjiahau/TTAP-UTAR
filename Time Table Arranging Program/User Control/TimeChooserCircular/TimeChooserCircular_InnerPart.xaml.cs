@@ -48,8 +48,7 @@ namespace Time_Table_Arranging_Program.User_Control.TimeChooserCircular {
 
         public SolidColorBrush Color {
             get { return _color; }
-            set
-            {
+            set {
                 foreach (var hand in hourHands) {
                     hand.Color = value;
                 }
@@ -63,8 +62,7 @@ namespace Time_Table_Arranging_Program.User_Control.TimeChooserCircular {
 
         public int ChosenHour {
             get { return hourHands.Find(x => x.HandIsVisible).Number; }
-            set
-            {
+            set {
                 foreach (var hand in hourHands) {
                     hand.HandIsVisible = hand.Number == value;
                 }
@@ -73,8 +71,7 @@ namespace Time_Table_Arranging_Program.User_Control.TimeChooserCircular {
 
         public int ChosenMinute {
             get { return minuteHands.Find(x => x.HandIsVisible).Number; }
-            set
-            {
+            set {
                 foreach (var hand in minuteHands) {
                     hand.HandIsVisible = hand.Number == value;
                 }

@@ -16,28 +16,28 @@ namespace Time_Table_Arranging_Program.Pages.Page_GettingStarted {
     /// </summary>
     public partial class Page_Introduction : Page {
         private readonly CyclicIndex _cyclicIndex;
+
         private readonly List<Type> _pages = new List<Type>()
         {
             typeof(WelcomeToTTAP),
             typeof(DoYouWantToWatchTTAPTutorial),
             typeof(IfYouAreUsingComputerLabInUtar),
-            typeof(LetsGetStarted)                       
+            typeof(LetsGetStarted)
         };
-      
+
         public Page_Introduction() {
             InitializeComponent();
             _cyclicIndex = new CyclicIndex(_pages.Count - 1);
             _cyclicIndex.CurrentValueChanged += CyclicIndexOnCurrentValueChanged;
             var cyclicIndexVm = new BoundedIndexVM(_cyclicIndex);
             DataContext = cyclicIndexVm;
-            
         }
 
-        private void CyclicIndexOnCurrentValueChanged(object sender , EventArgs eventArgs) {            
+        private void CyclicIndexOnCurrentValueChanged(object sender, EventArgs eventArgs) {
             Transitioner.SelectedIndex = _cyclicIndex.CurrentValue;
         }
 
-        private void SkipButton_OnClick(object sender , RoutedEventArgs e) {
+        private void SkipButton_OnClick(object sender, RoutedEventArgs e) {
             NavigationService.Navigate(new Page_Login());
         }
     }

@@ -34,8 +34,7 @@ namespace Time_Table_Arranging_Program.User_Control.TimeChooserCircular {
 
         public TimeHandType Type {
             get { return _type; }
-            set
-            {
+            set {
                 _type = value;
                 if (_type == TimeHandType.Hour) {
                     Rectangle.Width = LengthOfHourHand;
@@ -55,8 +54,7 @@ namespace Time_Table_Arranging_Program.User_Control.TimeChooserCircular {
 
         public bool HandIsVisible {
             get { return Rectangle.Visibility == Visibility.Visible; }
-            set
-            {
+            set {
                 if (value) {
                     Rectangle.Visibility = Visibility.Visible;
                     FillCircle(true);
@@ -69,9 +67,8 @@ namespace Time_Table_Arranging_Program.User_Control.TimeChooserCircular {
         }
 
         public int RotateAngle {
-            set
-            {
-                var centreOfRotation = Button.Width/2;
+            set {
+                var centreOfRotation = Button.Width / 2;
                 RenderTransform = new RotateTransform(value - 60, centreOfRotation, centreOfRotation);
                 Button.RenderTransform = new RotateTransform(-(value - 60), centreOfRotation, centreOfRotation);
             }
@@ -79,8 +76,7 @@ namespace Time_Table_Arranging_Program.User_Control.TimeChooserCircular {
 
         public SolidColorBrush Color {
             get { return _color; }
-            set
-            {
+            set {
                 _color = value;
                 Rectangle.Fill = value;
             }

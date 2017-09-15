@@ -17,21 +17,23 @@ namespace Time_Table_Arranging_Program.Windows_Control {
     /// Interaction logic for MyMessageBox.xaml
     /// </summary>
     public partial class MyMessageBox : Window {
-        public static void ShowOk(string title, string message, string buttonContent = "Got it!") {
-            var p = new MyMessageBox(title, message, buttonContent);
-           
-            p.ShowDialog();
-        }        
         public enum MessageboxResult {
             Cancel,
             Action,
         }
-        public MyMessageBox(string title , string message , string buttonContent) {           
+
+        public MyMessageBox(string title, string message, string buttonContent) {
             InitializeComponent();
             DialogHost.IsOpen = true;
             Title.Text = title;
             Message.Text = message;
             DialogButton.Content = buttonContent;
+        }
+
+        public static void ShowOk(string title, string message, string buttonContent = "Got it!") {
+            var p = new MyMessageBox(title, message, buttonContent);
+
+            p.ShowDialog();
         }
 
         private void DialogButton_OnClick(object sender, RoutedEventArgs e) {

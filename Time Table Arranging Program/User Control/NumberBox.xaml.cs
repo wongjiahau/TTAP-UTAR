@@ -13,8 +13,7 @@ namespace Time_Table_Arranging_Program.User_Control {
         }
 
         public int Number {
-            get
-            {
+            get {
                 if (TextBox.Text == string.Empty) return int.MaxValue;
                 return int.Parse(TextBox.Text);
             }

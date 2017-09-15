@@ -23,13 +23,11 @@ namespace Time_Table_Arranging_Program.MVVM_Framework {
         }
 
         public event EventHandler CanExecuteChanged {
-            add
-            {
+            add {
                 if (_canExecute != null)
                     CommandManager.RequerySuggested += value;
             }
-            remove
-            {
+            remove {
                 if (_canExecute != null)
                     CommandManager.RequerySuggested -= value;
             }
@@ -56,6 +54,6 @@ namespace Time_Table_Arranging_Program.MVVM_Framework {
     public class RelayCommand : RelayCommand<object> {
         public RelayCommand(Action execute, Func<bool> canExecute = null) :
             base(obj => execute(),
-                canExecute == null ? null : new Func<object, bool>(obj => canExecute())) {}
+                canExecute == null ? null : new Func<object, bool>(obj => canExecute())) { }
     }
 }

@@ -5,10 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Time_Table_Arranging_Program.Class.TokenParser;
 
-namespace Time_Table_Arranging_Program.Class.Parser
-{
-    public abstract class TokenFinder
-    {
+namespace Time_Table_Arranging_Program.Class.Parser {
+    public abstract class TokenFinder {
         protected TokenFinder(string input) {
             ITokenStream tokenStream = new TokenStream(Tokenizer.Tokenize(input));
 

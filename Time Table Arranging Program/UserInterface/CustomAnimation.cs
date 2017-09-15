@@ -28,13 +28,15 @@ namespace Time_Table_Arranging_Program.UserInterface {
             return result;
         }
 
-        public static DoubleAnimation GetEnteringScreenAnimation(double from, double to, bool setFillBehaviorStop = true) {
+        public static DoubleAnimation GetEnteringScreenAnimation(double from, double to,
+                                                                 bool setFillBehaviorStop = true) {
             var result = GetDoubleAnimation(from, to, setFillBehaviorStop);
             result.Duration = EnteringScreenAnimationDuration;
             return result;
         }
 
-        public static DoubleAnimation GetLeavingScreenAnimation(double from, double to, bool setFillBehaviorStop = true) {
+        public static DoubleAnimation
+            GetLeavingScreenAnimation(double from, double to, bool setFillBehaviorStop = true) {
             var result = GetDoubleAnimation(from, to, setFillBehaviorStop);
             result.Duration = LeavingScreenAnimationDuration;
             return result;
