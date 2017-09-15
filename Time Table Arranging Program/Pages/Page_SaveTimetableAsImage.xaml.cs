@@ -35,7 +35,7 @@ namespace Time_Table_Arranging_Program.Pages {
             if (saveDialog.ShowDialog() == false) return;
             try {
                 using (new WaitCursor()) {
-                    var bitmap = Helper.GetImage(this.TimeTableGui);
+                    var bitmap = Helper.GetImage(TimeTableGui);
                     Helper.SaveAsPng(bitmap, saveDialog.FileName);
                 }
                 Global.Snackbar.MessageQueue.Enqueue("File saved at " + saveDialog.FileName, "OPEN",

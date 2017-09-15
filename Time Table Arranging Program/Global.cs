@@ -27,13 +27,13 @@ namespace Time_Table_Arranging_Program {
 
         public static class Settings {
             public static Setting SearchByConsideringWeekNumber { private set; get; } =
-                new Setting(Windows_Control.Setting.SettingDescription.SearchByConsideringWeekNumber ,
+                new Setting(Setting.SettingDescription.SearchByConsideringWeekNumber ,
                     "Search for timetable by considering week number" ,
                     "Turning this on will allow you to have the chance of getting timetable that contains overlapping timeslots, however this may cause the program to run slower" ,
                     false);
 
             public static Setting GeneralizeSlot { private set; get; } =
-                new Setting(Windows_Control.Setting.SettingDescription.GeneralizedSlot ,
+                new Setting(Setting.SettingDescription.GeneralizedSlot ,
                     "Generalize slots" ,
                     "It means to generalize slots that share the same Day, same Time, same Name and same Type as one slot" ,
                     true);

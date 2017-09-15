@@ -82,7 +82,7 @@ namespace Time_Table_Arranging_Program {
 
     public class StateRow {
         public const int MaxNumberOfColumn = 16 * 2; // 16 hours, 1 column is half hour
-        private int[] _columns = new int[MaxNumberOfColumn];
+        private readonly int[] _columns = new int[MaxNumberOfColumn];
 
 
         public StateRow() {

@@ -24,7 +24,7 @@ namespace Time_Table_Arranging_Program.Windows_Control {
 
         public DialogBox() {
             InitializeComponent();
-            this.AllowsTransparency = true;
+            AllowsTransparency = true;
         }
 
         public static ResultEnum Show(string title , string message , string leftButtonText = "Got it!" ,
@@ -95,7 +95,7 @@ namespace Time_Table_Arranging_Program.Windows_Control {
         }
 
         private void DialogHost_OnDialogClosing(object sender , DialogClosingEventArgs eventargs) {
-            this.Close();
+            Close();
         }
 
         private void DialogBox_OnClosing(object sender , CancelEventArgs e) {

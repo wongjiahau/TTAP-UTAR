@@ -23,7 +23,7 @@ namespace Time_Table_Arranging_Program.Class {
             new TimetableList("👀 No Favorites Yet ! ");
 
         private readonly CyclicIterator _cyclicIterator = new CyclicIterator(0);
-        private List<ITimetable> _timetables = new List<ITimetable>();
+        private readonly List<ITimetable> _timetables = new List<ITimetable>();
 
         private TimetableList(string message) {
             Message = message;

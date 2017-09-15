@@ -68,7 +68,7 @@ namespace Time_Table_Arranging_Program.Class.Converter {
         }
 
         public bool IntersectWith(TimePeriod other) {
-            return (this._dataInBinary & (other)._dataInBinary) > 0;
+            return (_dataInBinary & (other)._dataInBinary) > 0;
             // if (StartTime.MoreThanOrEqual(other.EndTime)) return false;
             // if (EndTime.LessThanOrEqual(other.StartTime)) return false;
             //  return true;
@@ -104,7 +104,7 @@ namespace Time_Table_Arranging_Program.Class.Converter {
         public override bool Equals(object obj) {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != this.GetType()) return false;
+            if (obj.GetType() != GetType()) return false;
             return Equals((TimePeriod) obj);
         }
      

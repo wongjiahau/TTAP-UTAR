@@ -21,8 +21,8 @@ namespace Time_Table_Arranging_Program.Windows_Control {
     /// Interaction logic for SummaryWindow.xaml
     /// </summary>
     public partial class SummaryWindow : Window {           
-        private ITimetableList _timetableList;
-        private CyclicIndex _cylicIndex;
+        private readonly ITimetableList _timetableList;
+        private readonly CyclicIndex _cylicIndex;
         private static int Shown = 0;
 
         public SummaryWindow(ITimetableList timetableList, CyclicIndex cyclicIndex) {
@@ -30,7 +30,7 @@ namespace Time_Table_Arranging_Program.Windows_Control {
             _timetableList = timetableList;
             _cylicIndex = cyclicIndex;
             _cylicIndex.CurrentValueChanged += CylicIndex_CurrentValueChanged;
-            this.DataContext = new CyclicIndexVM(cyclicIndex);
+            DataContext = new CyclicIndexVM(cyclicIndex);
             if(HintIsShownBefore) HintPanel.Visibility = Visibility.Collapsed;
         }
 

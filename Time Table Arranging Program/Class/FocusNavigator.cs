@@ -23,7 +23,7 @@ namespace Time_Table_Arranging_Program.Class {
     }
 
     public class FocusNavigator : ISupervisor {
-        private CyclicIteratableList<IFocusable> _iteratableList;
+        private readonly CyclicIteratableList<IFocusable> _iteratableList;
         private static IFocusable _lastFocused;
         public FocusNavigator(List<IFocusable> focusables) {
             _iteratableList = new CyclicIteratableList<IFocusable>(focusables);

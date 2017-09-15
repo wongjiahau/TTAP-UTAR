@@ -4,7 +4,7 @@ using Time_Table_Arranging_Program.Class.Converter;
 
 namespace Time_Table_Arranging_Program.Class {
     public class IndexedSlot : Slot {
-        private SlotIndex _slotIndex;
+        private readonly SlotIndex _slotIndex;
         public IndexedSlot(Slot s) : base(s) {
             _slotIndex = new SlotIndex(s.Day , s.StartTime , s.EndTime.Minus(s.StartTime));
             RowIndex = _slotIndex.RowIndex;
@@ -42,9 +42,9 @@ namespace Time_Table_Arranging_Program.Class {
         public int RowIndex { get; private set; }
 
         public SlotIndex(Day day , ITime startTime , TimeSpan duration) {
-            this.RowIndex = GetRowIndex(day);
-            this.ColumnIndex = GetColumnIndex(startTime);
-            this.ColumnSpan = GetColumnSpan(duration);
+            RowIndex = GetRowIndex(day);
+            ColumnIndex = GetColumnIndex(startTime);
+            ColumnSpan = GetColumnSpan(duration);
         }
 
         public SlotIndex(int rowIndex , int columnIndex , int columnSpan) {
@@ -72,9 +72,9 @@ namespace Time_Table_Arranging_Program.Class {
         public bool Equals(SlotIndex other) {
             Assert.IsTrue(other != null);
             return
-            this.RowIndex == other.RowIndex &&
-            this.ColumnIndex == other.ColumnIndex &&
-            this.ColumnSpan == other.ColumnSpan;
+            RowIndex == other.RowIndex &&
+            ColumnIndex == other.ColumnIndex &&
+            ColumnSpan == other.ColumnSpan;
         }
 
         [Obsolete("Still have bugs")]

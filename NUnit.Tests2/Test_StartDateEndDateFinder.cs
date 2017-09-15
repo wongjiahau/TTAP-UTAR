@@ -7,9 +7,9 @@ using Time_Table_Arranging_Program.Class;
 namespace NUnit.Tests2 {
     [TestFixture]
     public class Test_StartDateEndDateFinder {
-        string input1 = Helper.RawStringOfTestFile("SampleData-FAM-2017-2ndSem.html");
-        string input2 = Helper.RawStringOfTestFile("SampleData-FCI-2017-2ndSem.html");
-        string input3 = Helper.RawStringOfTestFile("Sample HTML.html");
+        readonly string input1 = Helper.RawStringOfTestFile("SampleData-FAM-2017-2ndSem.html");
+        readonly string input2 = Helper.RawStringOfTestFile("SampleData-FCI-2017-2ndSem.html");
+        readonly string input3 = Helper.RawStringOfTestFile("Sample HTML.html");
 
         [Test]
         public void Test_StartDateEndDateFinder_GetStartDate1() {           

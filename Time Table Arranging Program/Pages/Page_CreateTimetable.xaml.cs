@@ -46,7 +46,7 @@ namespace Time_Table_Arranging_Program.Pages {
 
         private readonly SlotList _inputSlots;
         private Window_StateSummary _windowStateSummary;
-        private List<Predicate<Slot>> _predicates = new List<Predicate<Slot>>();
+        private readonly List<Predicate<Slot>> _predicates = new List<Predicate<Slot>>();
 
         private MutableObservable<IOutputTimetableModel> _timetableList;
         private readonly Func<Slot[] , List<List<Slot>>> _permutator;
@@ -80,7 +80,7 @@ namespace Time_Table_Arranging_Program.Pages {
             var subjectListModel = new SubjectListModel(_subjectModels , _permutator , new TaskRunnerForMainUi("Finding possible timetables . . ."));
             subjectListModel.NewListOfTimetablesGenerated += SubjectListModel_NewListOfTimetablesGenerated;
             SelectSubjectPanel.Initialize(_permutator , subjectListModel);
-            SelectSubjectPanel.SetDrawerHost(this.DrawerHost);
+            SelectSubjectPanel.SetDrawerHost(DrawerHost);
         }
 
         private void SubjectListModel_NewListOfTimetablesGenerated(object sender , EventArgs e) {

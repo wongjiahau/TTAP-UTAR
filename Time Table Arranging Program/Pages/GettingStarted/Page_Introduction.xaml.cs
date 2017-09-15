@@ -29,7 +29,7 @@ namespace Time_Table_Arranging_Program.Pages.Page_GettingStarted {
             _cyclicIndex = new CyclicIndex(_pages.Count - 1);
             _cyclicIndex.CurrentValueChanged += CyclicIndexOnCurrentValueChanged;
             var cyclicIndexVm = new BoundedIndexVM(_cyclicIndex);
-            this.DataContext = cyclicIndexVm;
+            DataContext = cyclicIndexVm;
             
         }
 

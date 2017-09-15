@@ -9,10 +9,10 @@ namespace Time_Table_Arranging_Program.Model {
     public class BinarizedSlotModel : IIntersectionCheckable<BinarizedSlotModel> {
         private int _day;
         private int _timePeriod;
-        private int _weekNumber;
-        private string _code;
-        private string _type;
-        private int _number;
+        private readonly int _weekNumber;
+        private readonly string _code;
+        private readonly string _type;
+        private readonly int _number;
         public string Code => _code;
         public string Type => _type;
         public int Number => _number;

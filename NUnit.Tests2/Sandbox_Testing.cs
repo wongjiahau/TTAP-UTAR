@@ -54,7 +54,7 @@ namespace NUnit.Tests2 {
 
         [Test]
         public void SandboxTest_5() {
-            string[] embeddedResources = Assembly.GetAssembly(this.GetType()).GetManifestResourceNames();
+            string[] embeddedResources = Assembly.GetAssembly(GetType()).GetManifestResourceNames();
             string all = "";
             for (int i = 0; i < embeddedResources.Length; i++) {
                 all += embeddedResources[i] + "\n";

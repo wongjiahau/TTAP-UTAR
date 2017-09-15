@@ -41,7 +41,7 @@ namespace Time_Table_Arranging_Program.Windows_Control {
 
         public ProgressWindow(string message) {
             InitializeComponent();
-            this.Left = SystemParameters.PrimaryScreenWidth - this.Width - 10;
+            Left = SystemParameters.PrimaryScreenWidth - Width - 10;
             MessageLabel.Content = message;
         }
         private ProgressWindow(AbortableBackgroundWorker worker, string message) : this(message) {

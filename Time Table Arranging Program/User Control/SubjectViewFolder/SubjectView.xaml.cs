@@ -33,7 +33,7 @@ namespace Time_Table_Arranging_Program.User_Control.SubjectViewFolder {
         }
         public void SetDataContext(SubjectModel subjectModels) {
             _subjectModel = subjectModels;
-            this.DataContext = subjectModels;
+            DataContext = subjectModels;
             foreach (var item in subjectModels.Slots) {
                 item.IsSelected = true;
                 UIDofSelectedSlots.Add(item.UID);

@@ -17,7 +17,7 @@ namespace Time_Table_Arranging_Program.ConsoleCommands {
 
         readonly string leadingNamespace = "Time_Table_Arranging_Program.SampleData";
         public override string[] Arguments() {
-            string[] embeddedResources = Assembly.GetAssembly(this.GetType()).GetManifestResourceNames();
+            string[] embeddedResources = Assembly.GetAssembly(GetType()).GetManifestResourceNames();
             string[] sampleDataFiles = embeddedResources.ToList().Where(x => x.EndsWith("html")).ToArray();
             for (int i = 0 ; i < sampleDataFiles.Length ; i++) {
                 sampleDataFiles[i] = sampleDataFiles[i].Substring(leadingNamespace.Length + 1);

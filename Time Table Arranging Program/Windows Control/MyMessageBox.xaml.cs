@@ -36,7 +36,7 @@ namespace Time_Table_Arranging_Program.Windows_Control {
 
         private void DialogButton_OnClick(object sender, RoutedEventArgs e) {
             DialogHost.IsOpen = false;
-            this.Close();
+            Close();
         }
     }
 }

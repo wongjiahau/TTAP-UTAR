@@ -9,10 +9,10 @@ using Time_Table_Arranging_Program.Class.UndoFramework;
 namespace NUnit.Tests2 {
     [TestFixture]
     public class Test_UndoManager {
-        private UndoManager _undoManager = new UndoManager();
-        private static IntObject _intObject = new IntObject();
-        private AddOneAction _addOneAction = new AddOneAction(_intObject);
-        private AddTwoAction _addTwoAction = new AddTwoAction(_intObject);
+        private readonly UndoManager _undoManager = new UndoManager();
+        private static readonly IntObject _intObject = new IntObject();
+        private readonly AddOneAction _addOneAction = new AddOneAction(_intObject);
+        private readonly AddTwoAction _addTwoAction = new AddTwoAction(_intObject);
         [Test]
         public void Test_UndoManager_Execute() {
             _undoManager.ClearHistory();

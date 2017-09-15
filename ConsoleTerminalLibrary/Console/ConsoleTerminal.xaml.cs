@@ -16,7 +16,7 @@ namespace EmbeddedConsole.Console {
         private ConsoleTerminalModel _model;
         public void Initialize(ConsoleTerminalModel consoleTerminalModel) {
             _model = consoleTerminalModel;
-            this.DataContext = _model;
+            DataContext = _model;
         }
 
         public new void Focus() {

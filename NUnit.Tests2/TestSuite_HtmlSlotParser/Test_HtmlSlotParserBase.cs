@@ -9,9 +9,9 @@ using Time_Table_Arranging_Program.Class.TokenParser;
 
 namespace NUnit.Tests2.TestSuite_HtmlSlotParser {
     public abstract class Test_HtmlSlotParserBase {
-        private List<Slot> _actualResult;
-        private List<Slot> _expectedResult;
-        private string _resourceName;
+        private readonly List<Slot> _actualResult;
+        private readonly List<Slot> _expectedResult;
+        private readonly string _resourceName;
         /// <summary>
         /// 
         /// </summary>

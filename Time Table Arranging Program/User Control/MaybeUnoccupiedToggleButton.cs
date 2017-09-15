@@ -11,16 +11,16 @@ namespace Time_Table_Arranging_Program.User_Control {
         public MaybeUnoccupiedToggleButton() {
             Checked += OnChecked;
             Unchecked += OnUnchecked;
-            this.Background = BackgroundColor;
-            this.Cursor = Cursors.Hand;
+            Background = BackgroundColor;
+            Cursor = Cursors.Hand;
         }
 
         private void OnUnchecked(object sender , RoutedEventArgs e) {
-            this.Content = new Border() { Background = BackgroundColor };
+            Content = new Border() { Background = BackgroundColor };
         }
 
         private void OnChecked(object sender , RoutedEventArgs routedEventArgs) {
-            this.Content = new PackIcon() { Kind = PackIconKind.Close, Width = 30, Height = 30};
+            Content = new PackIcon() { Kind = PackIconKind.Close, Width = 30, Height = 30};
         }
     }
 }

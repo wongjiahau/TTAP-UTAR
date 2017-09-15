@@ -62,7 +62,7 @@ namespace NUnit.Tests2.BehavioralTests {
             And Then Ali selected subject Y which is clashing with X
             Then Ali shall not see that the TimetableGui is being updated
                 ";
-            var input = this.Input();
+            var input = Input();
             input.SelectSubject("MPU34072");
             input.NewListOfTimetablesGenerated += (sender , args) => {
                 Assert.Fail(behaviour);
@@ -80,7 +80,7 @@ namespace NUnit.Tests2.BehavioralTests {
             And Then Ali selected subject Y which is clashing with X
             Then Ali shall see that the SelectedSubjectCount is still unchanged
                 ";
-            var input = this.Input();
+            var input = Input();
             input.SelectSubject("MPU34072");
             input.SelectSubject("UEMX4313");
             Assert.AreEqual(1 , input.SelectedSubjectCount);
@@ -96,7 +96,7 @@ namespace NUnit.Tests2.BehavioralTests {
             Then Ali shall see a clash report saying 'UEMX4313' cannot be selected
             And the subject UEMX4313 shall not be selected
                 ";
-            var input = this.Input();
+            var input = Input();
             input.SelectSubject("MPU34072");
             input.SelectSubject("UEMX4313");
             var subject_UEMX4313 = input.ToList().Find(x => x.Code == "UEMX4313");
@@ -115,7 +115,7 @@ namespace NUnit.Tests2.BehavioralTests {
             Then Ali shall see the clash report on UEMX4313 is dissappeared
             And the subject UEMX4313 shall not be selected
                 ";
-            var input = this.Input();
+            var input = Input();
             input.SelectSubject("MPU34072");
             input.SelectSubject("UEMX4313");
             input.SelectSubject("MPU34072" , false);
@@ -139,7 +139,7 @@ namespace NUnit.Tests2.BehavioralTests {
             And Then When Ali deslected subject X
             Then Ali shall see that the clash report of Y, Z is dissappeared
                 ";
-            var input = this.Input();
+            var input = Input();
             input.SelectSubject("UEMX4313"); //Subject X = Advanced structural steel design
             input.SelectSubject("MPU34072"); //Subject Y = Art, Craft & Design
             input.SelectSubject("UEMX2363"); //Subject Z = Concrete Structures Design II
@@ -165,7 +165,7 @@ namespace NUnit.Tests2.BehavioralTests {
             Ali shall see that only the clash report on Y is cleared, 
                 but the clash report on A still remains
                 ";
-            var input = this.Input();
+            var input = Input();
             input.SelectSubject("UEMX4313"); //Subject X = ASSD
             input.SelectSubject("MPU34072"); //Subject Y = ACAD
             input.SelectSubject("MPU3143"); //Subject Z = BMK2 
@@ -186,7 +186,7 @@ namespace NUnit.Tests2.BehavioralTests {
             And Then Ali selected a subject X which causes group clashing error
             Then Ali shall see that a clash report will appear for subject X
                 ";
-            var input = this.Input();
+            var input = Input();
             input.SelectSubject("MPU32013"); //Subject A = BKA
             input.SelectSubject("MPU3143"); //Subject B = BMK2
             input.SelectSubject("MPU33183"); //Subject X = EIS
@@ -203,7 +203,7 @@ namespace NUnit.Tests2.BehavioralTests {
             And Then Ali deselected one of the subject (one from A, B, C, D, E)
             Then Ali shall see that subject X is enabled again
                 ";
-            var input = this.Input();
+            var input = Input();
             input.SelectSubject("MPU32013"); //Subject A = BKA
             input.SelectSubject("MPU3143"); //Subject B = BMK2
             input.SelectSubject("MPU33183"); //Subject X = EIS

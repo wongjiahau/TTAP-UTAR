@@ -13,7 +13,7 @@ namespace Time_Table_Arranging_Program.Class.Helper
     /// Refer StackOverflow on how to use this class
     /// </summary>
     public class WaitCursor : IDisposable {
-        private Cursor _previousCursor;
+        private readonly Cursor _previousCursor;
 
         public WaitCursor() {
             _previousCursor = Mouse.OverrideCursor;

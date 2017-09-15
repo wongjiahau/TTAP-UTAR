@@ -24,7 +24,7 @@ namespace Time_Table_Arranging_Program.Pages {
         private const string Email = "jiahau.wong@1utar.my";
         public Page_About() {
             InitializeComponent();
-            this.DataContext = new NameList();
+            DataContext = new NameList();
         }
 
         private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e) {

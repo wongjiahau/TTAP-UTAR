@@ -26,7 +26,7 @@ namespace Time_Table_Arranging_Program.User_Control {
     public partial class SelectSubjectPanel : UserControl, INeedDataContext<SubjectListModel> {
         private List<SubjectView> _anyCheckBoxs;
         private List<string> _nameAndCodeOfAllSubjects;
-        private string _suggestedText = "";
+        private readonly string _suggestedText = "";
         private Func<Slot[] , List<List<Slot>>> _permutator;
         public SelectSubjectPanel() {
             InitializeComponent();
@@ -68,7 +68,7 @@ namespace Time_Table_Arranging_Program.User_Control {
             Update();
         }
 
-        private SubjectView _lastClickedSubject = new SubjectView();
+        private readonly SubjectView _lastClickedSubject = new SubjectView();
 
         private void Update() {
             SlotSelectionChanged(this , null);
@@ -117,7 +117,7 @@ namespace Time_Table_Arranging_Program.User_Control {
         private SubjectListModel _subjectListModel;
         private List<SubjectModel> _previousSelectedSubjects = new List<SubjectModel>();
         public void SetDataContext(SubjectListModel subjectListModel) {
-            this.DataContext = subjectListModel;
+            DataContext = subjectListModel;
             _subjectListModel = subjectListModel;
             _nameAndCodeOfAllSubjects = new List<string>();
             var list = _subjectListModel.ToList();
@@ -164,7 +164,7 @@ namespace Time_Table_Arranging_Program.User_Control {
         }
 
         private void DoneButton_OnClick(object sender , RoutedEventArgs e) {
-            DrawerHost d = this._drawerHost;
+            DrawerHost d = _drawerHost;
             d.IsLeftDrawerOpen = false;
             Global.Snackbar.MessageQueue.Enqueue("Click 'Set time constraint' button.");
         }

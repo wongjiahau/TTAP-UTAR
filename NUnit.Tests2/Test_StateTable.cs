@@ -48,7 +48,7 @@ namespace NUnit.Tests2 {
             var result = "";
             string previousName = "null";
             int firstId;
-            foreach (var slot in TestData.TestSlots) {
+            foreach (var slot in TestSlots) {
                 if (slot.SubjectName == previousName) continue;
                 firstId = slot.UID;
                 result += $"{firstId - 2}); \n";

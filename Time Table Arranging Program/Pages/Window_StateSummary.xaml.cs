@@ -15,7 +15,7 @@ namespace Time_Table_Arranging_Program.Pages {
     /// </summary>
     public partial class Window_StateSummary : Window {
         private List<Slot> _inputSlots;
-        private List<List<Slot>> _outputTimetables;
+        private readonly List<List<Slot>> _outputTimetables;
         private readonly List<Predicate<Slot>> _predicates = new List<Predicate<Slot>>();
         private readonly IStateElementFactory _factory;
         public Window_StateSummary(List<Slot> inputSlots , List<List<Slot>> outputTimetables) {
@@ -55,12 +55,12 @@ namespace Time_Table_Arranging_Program.Pages {
 
         private void DoneButton_OnClick(object sender , RoutedEventArgs e) {
             UserClickedDone = true;
-            this.Hide();
+            Hide();
         }
 
         private void BackButton_OnClick(object sender , RoutedEventArgs e) {
             UserClickedDone = false;
-            this.Hide();
+            Hide();
         }
 
 
@@ -113,11 +113,11 @@ namespace Time_Table_Arranging_Program.Pages {
     }
 
     public class RealStateElementFactory : MockStateElementFactory {
-        private ModifyPredicateListDelegate _checkAction;
-        private ModifyPredicateListDelegate _uncheckedAction;
+        private readonly ModifyPredicateListDelegate _checkAction;
+        private readonly ModifyPredicateListDelegate _uncheckedAction;
         public RealStateElementFactory(ModifyPredicateListDelegate checkAction , ModifyPredicateListDelegate uncheckedAction) {
-            this._checkAction = checkAction;
-            this._uncheckedAction = uncheckedAction;
+            _checkAction = checkAction;
+            _uncheckedAction = uncheckedAction;
         }
 
 

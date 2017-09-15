@@ -13,8 +13,8 @@ using Time_Table_Arranging_Program.MVVM_Framework;
 
 namespace Time_Table_Arranging_Program.User_Control.SubjectListFolder {
     public class SubjectListModel : ObservableObject {
-        private List<SubjectModel> _subjectModels;
-        private SubjectSelectionManager _subjectSelectionManager;
+        private readonly List<SubjectModel> _subjectModels;
+        private readonly SubjectSelectionManager _subjectSelectionManager;
         private readonly List<string> _nameAndCodeOfAllSubjects = new List<string>();
         public event EventHandler NewListOfTimetablesGenerated;
 
@@ -156,7 +156,7 @@ namespace Time_Table_Arranging_Program.User_Control.SubjectListFolder {
         private bool SearchForMatchingSubjectAndDisplayThem(string searchedText) {
             bool somethingFound = false;
             var found = new List<SubjectModel>();
-            var list = this.ToList();
+            var list = ToList();
             foreach (SubjectModel subject in list) {
                 string comparedString = subject.Name.ToLower() + subject.Code.ToLower() + subject.Name.GetInitial().ToLower();
                 if (comparedString.Contains(searchedText)) {

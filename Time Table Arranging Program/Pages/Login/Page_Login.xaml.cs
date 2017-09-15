@@ -22,7 +22,7 @@ namespace Time_Table_Arranging_Program.Pages {
     /// Interaction logic for Page_First.xaml
     /// </summary>
     public partial class Page_Login : Page {
-        private UrlProvider _urlProvider;
+        private readonly UrlProvider _urlProvider;
         private string _studentIdInput;
         private string _passwordInput;
         private string _captchaInput;
@@ -34,7 +34,7 @@ namespace Time_Table_Arranging_Program.Pages {
             _urlProvider = new UrlProvider();
             InitializeComponent();
             bool gotInternet = CheckForInternetConnection();
-            if (gotInternet) this.Loaded += Page_Login_Loaded;
+            if (gotInternet) Loaded += Page_Login_Loaded;
         }
 
         private void Page_Login_Loaded(object sender , RoutedEventArgs e) {
@@ -48,7 +48,7 @@ namespace Time_Table_Arranging_Program.Pages {
                     "CANCEL" , "LOGIN AGAIN");
                 switch (DialogBox.Result) {
                     case DialogBox.ResultEnum.LeftButtonClicked:
-                        this.NavigationService.GoForward();
+                        NavigationService.GoForward();
                         break;
                     case DialogBox.ResultEnum.RightButtonClicked:
                         Global.InputSlotList.Clear();
@@ -66,7 +66,7 @@ namespace Time_Table_Arranging_Program.Pages {
             _loadDataFromTestServer = loadDataFromTestServer;
         }
 
-        private bool _browsingToCourseTimetablePreview = false;
+        private readonly bool _browsingToCourseTimetablePreview = false;
         private async void Browser_OnLoadCompleted(object sender , NavigationEventArgs e) {
             KapchaBrowser.Navigate(_urlProvider.KaptchaUrl);
             ResetButton.IsEnabled = true;
@@ -87,7 +87,7 @@ namespace Time_Table_Arranging_Program.Pages {
             void DisplayLoginFailedMessage()
             {
                 Global.Snackbar.MessageQueue.Enqueue("Login failed. Please make sure you entered the correct information.");
-                this.NavigationService.Refresh();
+                NavigationService.Refresh();
                 _navigationCount = 0;
             }
             void NavigateToCourseTimeTablePreview()

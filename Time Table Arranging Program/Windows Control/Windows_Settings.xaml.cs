@@ -35,17 +35,17 @@ namespace Time_Table_Arranging_Program.Windows_Control {
 
         private void ApplyButton_OnClick(object sender , RoutedEventArgs e) {
             ApplyClicked = true;
-            this.Hide();
+            Hide();
         }
 
         private void CancelButton_OnClick(object sender , RoutedEventArgs e) {
             ApplyClicked = false;
-            this.Hide();
+            Hide();
         }
 
         private void Windows_Settings_OnClosing(object sender , CancelEventArgs e) {
             e.Cancel = true;
-            this.Hide();
+            Hide();
         }
 
         private void ToggleButton_OnChecked(object sender , RoutedEventArgs e) {

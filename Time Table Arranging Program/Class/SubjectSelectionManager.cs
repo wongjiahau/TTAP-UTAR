@@ -18,7 +18,7 @@ namespace Time_Table_Arranging_Program.Class {
         public event EventHandler SelectedSubjectCountChanged;
         public event EventHandler NewListOfTimetablesGenerated;
         public SubjectSelectionManager(List<SubjectModel> subjectModels , Func<Slot[] , List<List<Slot>>> permutator , ITaskRunnerWithProgressFeedback taskRunner) {
-            this._subjectModels = subjectModels;
+            _subjectModels = subjectModels;
             _permutator = permutator;
             _taskRunner = taskRunner;
             foreach (var subjectModel in _subjectModels) {

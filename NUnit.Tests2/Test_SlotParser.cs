@@ -13,7 +13,7 @@ using Time_Table_Arranging_Program.Model;
 namespace NUnit.Tests2 {
     [TestFixture]
     public class Test_SlotParser {
-        private static object[] _stringInputs =
+        private static readonly object[] _stringInputs =
         {
             ExtensionMethods.RemoveTags(Helper.RawStringOfTestFile("Sample HTML.txt")),
             Helper.RawStringOfTestFile("CopiedTextFromSampleHTML.txt")
@@ -58,8 +58,8 @@ namespace NUnit.Tests2 {
         }
 
         private class CodeAndCount {
-            public string Code;
-            public int SlotCount;
+            public readonly string Code;
+            public readonly int SlotCount;
 
             public CodeAndCount(string code , int slotCount) {
                 Code = code;

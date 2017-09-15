@@ -6,8 +6,8 @@ using HtmlAgilityPack;
 
 namespace Time_Table_Arranging_Program.Class {
     public sealed class StartDateEndDateFinder{
-        private  DateTime _endDate;
-        private  DateTime _startDate;
+        private readonly DateTime _endDate;
+        private readonly DateTime _startDate;
 
         public StartDateEndDateFinder(string input)
         {

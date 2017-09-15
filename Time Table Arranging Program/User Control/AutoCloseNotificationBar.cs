@@ -24,13 +24,13 @@ namespace Time_Table_Arranging_Program.User_Control {
             VerticalOffset = -(Global.MainWindow.ActualHeight / 2 - 90);
             HorizontalAlignment = HorizontalAlignment.Center;
             PopupAnimation = PopupAnimation.Slide;
-            this._label = GetLabel();
-            this._button = new Button(){Style = Application.Current.FindResource("MaterialDesignRaisedAccentButton") as Style };
-            this.Child = GetBorder();
+            _label = GetLabel();
+            _button = new Button(){Style = Application.Current.FindResource("MaterialDesignRaisedAccentButton") as Style };
+            Child = GetBorder();
         }
 
         protected void Initialize(string message , string actionContent , Action actionHandler , bool closePopupAfterActionButtonClicked = true) {
-            Action defaultAction = () => { this.IsOpen = false; };
+            Action defaultAction = () => { IsOpen = false; };
             Action resultAction;
             if (actionHandler == null) resultAction = defaultAction;
             else {

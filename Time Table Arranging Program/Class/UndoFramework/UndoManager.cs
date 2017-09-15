@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Time_Table_Arranging_Program.Class.UndoFramework {
     public class UndoManager {
-        private Stack<IUndoableAction> _undoableActions = new Stack<IUndoableAction>();
-        private Stack<IUndoableAction> _redoableActions = new Stack<IUndoableAction>();
+        private readonly Stack<IUndoableAction> _undoableActions = new Stack<IUndoableAction>();
+        private readonly Stack<IUndoableAction> _redoableActions = new Stack<IUndoableAction>();
        public void Execute(IUndoableAction action) {
             action.Execute();
             _undoableActions.Push(action);

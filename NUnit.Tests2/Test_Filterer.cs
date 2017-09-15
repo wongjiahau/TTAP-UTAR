@@ -8,8 +8,8 @@ using Time_Table_Arranging_Program.Class.Converter;
 namespace NUnit.Tests2 {
     [TestFixture]
     public class Test_Filterer {
-        private static List<Predicate<Slot>> Predicates_AllDay = new List<Predicate<Slot>>() { x => x.Day == Day.Monday };
-        private static List<Predicate<Slot>> Predicates_Before = new List<Predicate<Slot>>() { x => x.StartTime.LessThan(Time.CreateTime_24HourFormat(8 , 0)) };
+        private static readonly List<Predicate<Slot>> Predicates_AllDay = new List<Predicate<Slot>>() { x => x.Day == Day.Monday };
+        private static readonly List<Predicate<Slot>> Predicates_Before = new List<Predicate<Slot>>() { x => x.StartTime.LessThan(Time.CreateTime_24HourFormat(8 , 0)) };
         [Test]
         public void Test_Predicates_AllDay_1() {
             var input = TestData.GetSlotRange(309 , 315).ToArray();

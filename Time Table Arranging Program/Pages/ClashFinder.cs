@@ -23,7 +23,7 @@ namespace Time_Table_Arranging_Program.Pages {
 
         public bool ClashesWith(SubjectModelWithState s) {
             for (int i = 0 ; i < Day.NumberOfDaysPerWeek ; i++) {
-                if ((this.StateOfEachDay[i] & s.StateOfEachDay[i]) > 0) return true;
+                if ((StateOfEachDay[i] & s.StateOfEachDay[i]) > 0) return true;
             }
             return false;
         }

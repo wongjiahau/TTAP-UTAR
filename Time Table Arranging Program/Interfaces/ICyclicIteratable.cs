@@ -72,8 +72,8 @@ namespace Time_Table_Arranging_Program.Interfaces {
     }
 
     public class CyclicIteratableList<T> : ICyclicIteratable<T> {
-        private CyclicIterator _iterator;
-        private List<T> _list;
+        private readonly CyclicIterator _iterator;
+        private readonly List<T> _list;
 
         public CyclicIteratableList(List<T> list) {
             _list = list;
