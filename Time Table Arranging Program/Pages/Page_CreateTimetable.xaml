@@ -20,8 +20,7 @@
         <materialDesign:DrawerHost x:Name="DrawerHost" CloseOnClickAway="False" IsLeftDrawerOpen="False"
                                    IsBottomDrawerOpen="False">
             <materialDesign:DrawerHost.LeftDrawerContent>
-                <userControl:SelectSubjectPanel x:Name="SelectSubjectPanel" DockPanel.Dock="Left"
-                                                SlotSelectionChanged="SelectSubjectPanel_OnSlotSelectionChanged"
+                <userControl:SelectSubjectPanel x:Name="SelectSubjectPanel" DockPanel.Dock="Left" 
                                                 Visibility="{Binding IsChecked, ElementName=ToggleViewButton, Converter={StaticResource VisibilityConverter}, ConverterParameter=1}" />
             </materialDesign:DrawerHost.LeftDrawerContent>
             <materialDesign:DrawerHost.BottomDrawerContent>

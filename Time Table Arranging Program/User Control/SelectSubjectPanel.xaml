@@ -56,7 +56,6 @@
                     <TextBlock x:Name="FeedbackTextBlock" Text="Showing result for  " />
                     <TextBlock Text="{Binding SuggestedText}" FontStyle="Italic" FontWeight="Bold"
                                x:Name="SuggestedTextLabel" />
-                    <Button Click="YesButton_OnClick" Visibility="Collapsed">YES</Button>
                 </StackPanel>
                 <TextBlock x:Name="ErrorLabel" Margin="10" FontSize="15" FontWeight="Bold"
                            Visibility="{Binding IsErrorLabelVisible, Converter={StaticResource VisibilityConverter}}">
