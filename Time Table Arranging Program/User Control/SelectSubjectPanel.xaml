@@ -145,7 +145,7 @@
                               HorizontalScrollBarVisibility="Hidden" ToolTipService.ShowOnDisabled="True"
                               ToolTipService.InitialShowDelay="0">
 
-                    <StackPanel FlowDirection="LeftToRight" Name="CheckerBoxStackPanel" HorizontalAlignment="Stretch"
+                    <StackPanel FlowDirection="LeftToRight" Name="SubjectViewsStackPanel" HorizontalAlignment="Stretch"
                                 VerticalAlignment="Top"
                                 CanVerticallyScroll="True" Margin="1" />
                 </ScrollViewer>

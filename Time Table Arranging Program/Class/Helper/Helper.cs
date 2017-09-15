@@ -100,6 +100,12 @@ namespace Time_Table_Arranging_Program.Class.Helper {
             return rect.Contains(bounds.TopLeft) || rect.Contains(bounds.BottomRight);
         }
 
+        public static bool IsAtTopBoundOfContainer(this FrameworkElement element, FrameworkElement container) {
+            Rect bounds = element.TransformToAncestor(container)
+                .TransformBounds(new Rect(0.0, 0.0, element.ActualWidth, element.ActualHeight));
+            return bounds.Y < 0;
+        }
+
         /// <summary>
         /// Return true if there are Internet connection, else false
         /// </summary>

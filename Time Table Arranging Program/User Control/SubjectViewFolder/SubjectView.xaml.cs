@@ -33,17 +33,23 @@ namespace Time_Table_Arranging_Program.User_Control.SubjectViewFolder {
             InitializeDraggablePopup();
         }
 
-        public void SetDataContext(SubjectModel subjectModels) {
-            _subjectModel = subjectModels;
-            DataContext = subjectModels;
-            foreach (var item in subjectModels.Slots) {
+        public void SetDataContext(SubjectModel subjectModel) {
+            _subjectModel = subjectModel;
+            _subjectModel.Focused += _subjectModel_Focused;
+            DataContext = subjectModel;
+            foreach (var item in subjectModel.Slots) {
                 item.IsSelected = true;
                 UIDofSelectedSlots.Add(item.UID);
             }
         }
 
+        private void _subjectModel_Focused(object sender , EventArgs e) {
+            Focused?.Invoke(this , null);
+        }
+
         public string NameOfClashingCounterpart { get; set; }
         public event RoutedEventHandler ListViewCheckBox_Checked;
+        public event EventHandler Focused;
 
         public string SubjectName {
             get => SubjectNameHighlightTextBlock.Text;
@@ -55,20 +61,20 @@ namespace Time_Table_Arranging_Program.User_Control.SubjectViewFolder {
 
         #region EventHandlers
 
-        private void SubjectView_OnMouseEnter(object sender, MouseEventArgs e) {
+        private void SubjectView_OnMouseEnter(object sender , MouseEventArgs e) {
             _subjectModel.FocusMe();
         }
 
-        private void SubjectView_OnMouseLeave(object sender, MouseEventArgs e) {
+        private void SubjectView_OnMouseLeave(object sender , MouseEventArgs e) {
             _subjectModel.IsFocused = false;
         }
 
-        private void Border_OnMouseDown(object sender, MouseButtonEventArgs e) {
+        private void Border_OnMouseDown(object sender , MouseButtonEventArgs e) {
             if (e.ChangedButton == MouseButton.Left)
                 Checkbox.IsChecked = !Checkbox.IsChecked;
         }
 
-        private void ViewSlotsContextMenuItem_OnClick(object sender, RoutedEventArgs e) {
+        private void ViewSlotsContextMenuItem_OnClick(object sender , RoutedEventArgs e) {
             ListViewPopup.IsOpen = true;
         }
 
@@ -77,37 +83,36 @@ namespace Time_Table_Arranging_Program.User_Control.SubjectViewFolder {
         #region ListDownMenu
 
         private void InitializeDraggablePopup() {
-            var thumb = new Thumb
-            {
-                Width = 0,
-                Height = 0,
+            var thumb = new Thumb {
+                Width = 0 ,
+                Height = 0 ,
                 Cursor = Cursors.SizeAll
             };
             PopupDp.Children.Add(thumb);
-            MouseDown += (sender, e) => {
+            MouseDown += (sender , e) => {
                 if (ListViewPopup.IsOpen) {
                     thumb.RaiseEvent(e);
                 }
             };
 
-            thumb.DragDelta += (sender, e) => {
+            thumb.DragDelta += (sender , e) => {
                 ListViewPopup.HorizontalOffset += e.HorizontalChange;
                 ListViewPopup.VerticalOffset += e.VerticalChange;
             };
         }
 
-        private void ChooseSlotButton_Click(object sender, RoutedEventArgs e) {
+        private void ChooseSlotButton_Click(object sender , RoutedEventArgs e) {
             ListViewPopup.IsOpen = !ListViewPopup.IsOpen;
         }
 
-        private void ListViewItemCheckBox_Checked(object sender, RoutedEventArgs e) {
+        private void ListViewItemCheckBox_Checked(object sender , RoutedEventArgs e) {
             var c = sender as CheckBox;
-            var selectedSlot = (Slot) (c.Tag as ListViewItem).Content;
+            var selectedSlot = (Slot)(c.Tag as ListViewItem).Content;
             selectedSlot.IsSelected = c.IsChecked.Value;
             CascadeEffectToSimilarSlot(selectedSlot);
         }
 
-        private void ToggleCheckButton_OnClick(object sender, RoutedEventArgs e) {
+        private void ToggleCheckButton_OnClick(object sender , RoutedEventArgs e) {
             var temp = ListView.ItemsSource;
             ListView.ItemsSource = null;
             ListView.ItemsSource = temp;
@@ -115,8 +120,8 @@ namespace Time_Table_Arranging_Program.User_Control.SubjectViewFolder {
                 ToggleCheckButton.Content = "Tick all slots";
                 InstructionLabel.Content = ". . . Tick the slots that you want";
                 foreach (var item in ListView.ItemsSource) {
-                    ((Slot) item).IsSelected = false;
-                    UIDofDeselectedSlots.Add(((Slot) item).UID);
+                    ((Slot)item).IsSelected = false;
+                    UIDofDeselectedSlots.Add(((Slot)item).UID);
                     UIDofSelectedSlots.Clear();
                 }
             }
@@ -124,23 +129,23 @@ namespace Time_Table_Arranging_Program.User_Control.SubjectViewFolder {
                 ToggleCheckButton.Content = "Untick all slots";
                 InstructionLabel.Content = ". . . Untick the slots that you don't want";
                 foreach (var item in ListView.ItemsSource) {
-                    ((Slot) item).IsSelected = true;
-                    UIDofSelectedSlots.Add(((Slot) item).UID);
+                    ((Slot)item).IsSelected = true;
+                    UIDofSelectedSlots.Add(((Slot)item).UID);
                     UIDofDeselectedSlots.Clear();
                 }
             }
-            ListViewCheckBox_Checked?.Invoke(this, null);
+            ListViewCheckBox_Checked?.Invoke(this , null);
         }
 
-        private void ListViewItem_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e) {
+        private void ListViewItem_PreviewMouseLeftButtonDown(object sender , MouseButtonEventArgs e) {
             return;
             //This feature is disabld at the moment
             var item = sender as ListViewItem;
 
             if (item != null) {
-                ((Slot) item.Content).IsSelected = !((Slot) item.Content).IsSelected;
+                ((Slot)item.Content).IsSelected = !((Slot)item.Content).IsSelected;
             }
-            CascadeEffectToSimilarSlot((Slot) item.Content);
+            CascadeEffectToSimilarSlot((Slot)item.Content);
         }
 
         private void CascadeEffectToSimilarSlot(Slot selectedSlot) {
@@ -165,27 +170,27 @@ namespace Time_Table_Arranging_Program.User_Control.SubjectViewFolder {
             var temp = ListView.ItemsSource;
             ListView.ItemsSource = null;
             ListView.ItemsSource = temp;
-            ListViewCheckBox_Checked?.Invoke(this, null);
+            ListViewCheckBox_Checked?.Invoke(this , null);
         }
 
-        private void CloseButton_OnClick(object sender, RoutedEventArgs e) {
+        private void CloseButton_OnClick(object sender , RoutedEventArgs e) {
             ListViewPopup.IsOpen = false;
         }
 
-        private void ListViewPopup_OnClosed(object sender, EventArgs e) {
+        private void ListViewPopup_OnClosed(object sender , EventArgs e) {
             ListViewPopup.VerticalOffset = 0;
             ListViewPopup.HorizontalOffset = 0;
         }
 
-        private void HideButton_Click(object sender, RoutedEventArgs e) {
+        private void HideButton_Click(object sender , RoutedEventArgs e) {
             _listviewOriginalHeight = ListView.ActualHeight;
-            var da1 = CustomAnimation.GetLeavingScreenAnimation(_listviewOriginalHeight, 0);
-            da1.Completed += (o, args) => { ListView.Visibility = Visibility.Collapsed; };
+            var da1 = CustomAnimation.GetLeavingScreenAnimation(_listviewOriginalHeight , 0);
+            da1.Completed += (o , args) => { ListView.Visibility = Visibility.Collapsed; };
 
             if (ListView.Visibility == Visibility.Visible) {
                 ToggleCheckButton.Visibility = Visibility.Collapsed;
                 InstructionLabel.Visibility = Visibility.Collapsed;
-                ListView.BeginAnimation(HeightProperty, da1);
+                ListView.BeginAnimation(HeightProperty , da1);
                 var maximizeIcon = new PackIcon();
                 maximizeIcon.Kind = PackIconKind.WindowMaximize;
                 HidePopupButton.Content = maximizeIcon;
