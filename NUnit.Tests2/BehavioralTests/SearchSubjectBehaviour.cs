@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
+using Time_Table_Arranging_Program.Class;
+using Time_Table_Arranging_Program.Interfaces;
 using Time_Table_Arranging_Program.Model;
 using Time_Table_Arranging_Program.User_Control.SubjectListFolder;
 
@@ -324,13 +326,13 @@ namespace NUnit.Tests2.BehavioralTests {
             Then Ali shall see that the first subject in the list is selected
                 ";
             var models = SubjectModel.Parse(TestData.TestSlots);
-            var input = new SubjectListModel(models);
+            var input = new SubjectListModel(models , Permutator.Run_v2_withoutConsideringWeekNumber , new TaskRunnerForUnitTesting());
             input.Search("ASSD".ToLower());
             input.ToggleSelectionOnCurrentFocusedSubject();
             Assert.IsTrue(models.Find(x => x.CodeAndNameInitials.Contains("ASSD")).IsSelected
                 , expectedBehaviour);
         }
- 
+
         [Test]
         public void DeselectSubjectByPressingEnter() {
             string expectedBehaviour =
@@ -341,7 +343,7 @@ namespace NUnit.Tests2.BehavioralTests {
             Then Ali shall see that the first subject in the list is selected
                 ";
             var models = SubjectModel.Parse(TestData.TestSlots);
-            var input = new SubjectListModel(models);
+            var input = new SubjectListModel(models , Permutator.Run_v2_withoutConsideringWeekNumber , new TaskRunnerForUnitTesting());
             input.Search("ASSD".ToLower());
             input.ToggleSelectionOnCurrentFocusedSubject();
             input.ToggleSelectionOnCurrentFocusedSubject();
