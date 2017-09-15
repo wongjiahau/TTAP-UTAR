@@ -19,6 +19,10 @@ namespace EmbeddedConsole.Console {
             this.DataContext = _model;
         }
 
+        public new void Focus() {
+            Keyboard.Focus(InputBlock);
+        }
+
         private void ConsoleTerminal_OnLoaded(object sender , RoutedEventArgs e) {
             InputBlock.Focus();
         }

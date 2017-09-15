@@ -185,5 +185,10 @@ namespace Time_Table_Arranging_Program {
             var page_login = new Page_Login(true);
             MainFrame.Navigate(page_login);
         }
+
+        private void OpenConsoleButton_OnClick(object sender, RoutedEventArgs e) {
+            DrawerHost.IsBottomDrawerOpen = true;
+            ConsoleTerminal.Focus();
+        }
     }
 }
