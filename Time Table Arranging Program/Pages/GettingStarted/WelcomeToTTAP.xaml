@@ -12,7 +12,7 @@
             <TextBlock Style="{StaticResource  MaterialDesignDisplay4TextBlock}">Welcome to TTAP.</TextBlock>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <TextBlock Style="{StaticResource MaterialDesignBody2TextBlock}" Text="The latest version of TTAP can always be downloaded from "></TextBlock>
-                <TextBlock><Hyperlink Foreground="Blue" Style="{StaticResource MaterialDesignBody2Hyperlink}" NavigateUri="xxx" RequestNavigate="Hyperlink_OnRequestNavigate"><Run>here</Run></Hyperlink></TextBlock>
+                <TextBlock><Hyperlink Foreground="Blue" Style="{StaticResource MaterialDesignBody2Hyperlink}" NavigateUri="xxx" RequestNavigate="Hyperlink_OnRequestNavigate"><Run>goo.gl/5XBxHV</Run></Hyperlink></TextBlock>
             </StackPanel>
         </StackPanel>
     </materialDesign:Card>
