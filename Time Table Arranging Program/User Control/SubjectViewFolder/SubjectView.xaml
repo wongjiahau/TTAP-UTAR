@@ -138,16 +138,10 @@
                                 <Border BorderThickness="1" BorderBrush="LightGray">
                                     <ListView x:Name="ListView" DockPanel.Dock="Bottom" Margin="4"
                                               ItemsSource="{Binding Slots}">
-                                        <ListView.Resources>
-                                            <Style TargetType="{x:Type GridViewColumnHeader}">
-                                                <Setter Property="HorizontalContentAlignment" Value="Center" />
-                                            </Style>
-                                        </ListView.Resources>
                                         <ListView.ItemContainerStyle>
-                                            <Style TargetType="ListViewItem">
+                                            <Style TargetType="ListViewItem" BasedOn="{StaticResource MaterialDesignGridViewItem}">
                                                 <EventSetter Event="PreviewMouseLeftButtonDown"
                                                              Handler="ListViewItem_PreviewMouseLeftButtonDown" />
-                                                <Setter Property="HorizontalContentAlignment" Value="Center" />
                                             </Style>
                                         </ListView.ItemContainerStyle>
 
