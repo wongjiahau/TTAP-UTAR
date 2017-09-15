@@ -29,7 +29,6 @@ namespace Time_Table_Arranging_Program {
     ///     Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window {
-        private readonly List<string> _previousInputString = new List<string>();
         private readonly UrlProvider _urlProvider = new UrlProvider();
         public MainWindow() {
             //The following two lines of code is to reset the PromptForFeedbackSettings to true
@@ -107,17 +106,6 @@ namespace Time_Table_Arranging_Program {
 
         private void AboutButton_Click(object sender , RoutedEventArgs e) {
             MainFrame.Navigate(new Page_About());
-        }
-
-        private void GoToCourseRegistrationWebsiteButton_OnClick(object sender , RoutedEventArgs e) {
-            Process.Start(
-                new ProcessStartInfo(
-                    "https://unitreg.utar.edu.my/portal/courseRegStu/login.jsp"));
-            e.Handled = true;
-        }
-
-        private void GoToAddSlotPage_OnClick(object sender , RoutedEventArgs e) {
-            MainFrame.Navigate(new Page_AddSlot());
         }
 
         private void FeedbackButton_OnClick(object sender , RoutedEventArgs e) {
