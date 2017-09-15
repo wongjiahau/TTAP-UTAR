@@ -50,7 +50,7 @@ namespace Time_Table_Arranging_Program.Class {
         private void SubjectModel_Selected(object sender , EventArgs e) {
             _currentlySelectedSubject = (SubjectModel)sender;
             var possibleTimetables = new List<List<Slot>>();
-            _taskRunner.RunTask((() => { possibleTimetables = GetPossibleTimetables(); }));
+            _taskRunner.RunTask(() => possibleTimetables = GetPossibleTimetables());
             if (possibleTimetables?.Count == 0) {
                 var clashReport =
                     new ClashFinder(_subjectModels , _permutator , _currentlySelectedSubject).GetReport();
@@ -80,7 +80,7 @@ namespace Time_Table_Arranging_Program.Class {
             SelectedSubjectCount--;
             SelectedSubjectCountChanged?.Invoke(this , null);
             var possibleTimeatables = new List<List<Slot>>();
-            _taskRunner.RunTask(() => { possibleTimeatables = GetPossibleTimetables(); });
+            _taskRunner.RunTask(() => possibleTimeatables = GetPossibleTimetables());
             NewListOfTimetablesGenerated?.Invoke(possibleTimeatables , null);
         }
     }

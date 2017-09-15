@@ -21,6 +21,9 @@ namespace Time_Table_Arranging_Program.Windows_Control {
             InitializeComponent();
         }
 
+        public BasicLoadingScreen(string message) : this() {
+            Message = message;
+        }
         public string Message{
             set => MessageTextBlock.Text = value;
         }

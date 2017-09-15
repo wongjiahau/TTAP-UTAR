@@ -6,6 +6,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms.VisualStyles;
+using MaterialDesignThemes.Wpf;
 using Microsoft.Win32;
 using Time_Table_Arranging_Program.Class;
 using Time_Table_Arranging_Program.Class.Helper;
@@ -22,7 +23,7 @@ namespace Time_Table_Arranging_Program.Pages {
     /// <summary>
     ///     Interaction logic for Page_SelectSubject.xaml
     /// </summary>
-    public partial class Page_CreateTimetable : Page, IDirtyObserver<IOutputTimetableModel>, IPageWithLoadedFunction {
+    public partial class Page_CreateTimetable : Page, IDirtyObserver<IOutputTimetableModel>, IPageWithLoadedFunction, IProgressIndicator {
         public static Page_CreateTimetable GetInstance(Setting searchByConsideringWeekNumber ,
                                                        Setting generalizeSlot) {
             ISlotGeneralizer generalizer = generalizeSlot.IsChecked
@@ -74,7 +75,7 @@ namespace Time_Table_Arranging_Program.Pages {
         private List<SubjectModel> _subjectModels;
         private void InitializeExtraComponents() {
             _subjectModels = SubjectModel.Parse(_inputSlots);
-            var subjectListModel = new SubjectListModel(_subjectModels , _permutator, new MockTaskRunner());
+            var subjectListModel = new SubjectListModel(_subjectModels , _permutator , new TaskRunnerWithProgressFeedback(this));
             subjectListModel.NewListOfTimetablesGenerated += SubjectListModel_NewListOfTimetablesGenerated;
             SelectSubjectPanel.Initialize(_permutator , subjectListModel);
             SelectSubjectPanel.SetDrawerHost(this.DrawerHost);
@@ -210,6 +211,15 @@ namespace Time_Table_Arranging_Program.Pages {
                 Global.Snackbar.MessageQueue.Enqueue("Failed to save file." , "SHOW DETAILS" ,
                     () => { MessageBox.Show(ex.Message); });
             }
+        }
+
+        private readonly BasicLoadingScreen _basicLoadingScreen = new BasicLoadingScreen("Finding possible timetables . . .");
+        public void Show() {
+            _basicLoadingScreen.Show();
+        }
+
+        public void Hide() {
+            _basicLoadingScreen.Hide();
         }
     }
 }
