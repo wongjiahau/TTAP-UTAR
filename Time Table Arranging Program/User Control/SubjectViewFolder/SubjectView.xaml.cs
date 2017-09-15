@@ -185,9 +185,8 @@ namespace Time_Table_Arranging_Program.User_Control.SubjectViewFolder {
             }
             else {
                 ListView.Visibility = Visibility.Visible;
-                ToggleCheckButton.Visibility = Visibility.Visible;
-                InstructionLabel.Visibility = Visibility.Visible;
-
+                //ToggleCheckButton.Visibility = Visibility.Visible;
+                //InstructionLabel.Visibility = Visibility.Visible;
                 var minimizeIcon = new PackIcon();
                 minimizeIcon.Kind = PackIconKind.WindowMinimize;
                 HidePopupButton.Content = minimizeIcon;
