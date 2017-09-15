@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Time_Table_Arranging_Program.Pages.GettingStarted"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d">
-    <materialDesign:Card Padding="40">
+    <materialDesign:Card Padding="40" Background="GhostWhite">
         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
             <TextBlock HorizontalAlignment="Center" Style="{StaticResource  MaterialDesignDisplay2TextBlock}">Do you want to watch tutorial of TTAP?</TextBlock>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">

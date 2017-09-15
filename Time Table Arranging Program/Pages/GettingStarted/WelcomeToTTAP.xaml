@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Time_Table_Arranging_Program.Pages"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d">
-    <materialDesign:Card Padding="40" HorizontalAlignment="Center">
+    <materialDesign:Card Padding="40" HorizontalAlignment="Center" Background="GhostWhite">
         <StackPanel>
             <Image Source="../../Images/calendarBig.png" Width="250" />
             <TextBlock Style="{StaticResource  MaterialDesignDisplay4TextBlock}">Welcome to TTAP.</TextBlock>

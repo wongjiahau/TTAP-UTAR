@@ -12,7 +12,7 @@
                        Style="{StaticResource  MaterialDesignDisplay2TextBlock}">
                 If you are using computer lab in UTAR . . .
             </TextBlock>
-            <materialDesign:Card DockPanel.Dock="Top" HorizontalAlignment="Center">
+            <materialDesign:Card DockPanel.Dock="Top" HorizontalAlignment="Center" Background="GhostWhite">
                 <Image DockPanel.Dock="Top" Height="500" Source="../../Images/Screenshots_utarict.PNG" />
             </materialDesign:Card>
         </DockPanel>
