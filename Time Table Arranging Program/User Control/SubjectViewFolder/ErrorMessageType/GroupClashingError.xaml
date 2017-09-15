@@ -1,16 +1,21 @@
-﻿<UserControl x:Class="Time_Table_Arranging_Program.User_Control.CheckboxWithListDownMenuFolder.ErrorMessageType.GroupClashingError"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Time_Table_Arranging_Program.User_Control.CheckboxWithListDownMenuFolder.ErrorMessageType"
-             mc:Ignorable="d" >
+﻿<UserControl
+    x:Class="Time_Table_Arranging_Program.User_Control.CheckboxWithListDownMenuFolder.ErrorMessageType.GroupClashingError"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Time_Table_Arranging_Program.User_Control.CheckboxWithListDownMenuFolder.ErrorMessageType"
+    mc:Ignorable="d">
     <StackPanel>
-        <TextBlock x:Name="ErrorTextBlock" VerticalAlignment="Center" Margin="5 5 10 5" MaxWidth="150" TextWrapping="Wrap" Foreground="White">
+        <TextBlock x:Name="ErrorTextBlock" VerticalAlignment="Center" Margin="5 5 10 5" MaxWidth="150"
+                   TextWrapping="Wrap" Foreground="White">
             <Run>Cannot select this subject because it causes</Run>
             <TextBlock>
-                <Hyperlink Foreground="LightBlue" FontWeight="DemiBold" Cursor="Hand" NavigateUri="https://github.com/wongjiahau/TTAP-UTAR/wiki/FAQ#what-is-group-clashing"
-                          RequestNavigate="Hyperlink_RequestNavigate" ToolTip="Learn more about Group-Clashing"><Run Text="Group-Clashing"/></Hyperlink>
+                <Hyperlink Foreground="LightBlue" FontWeight="DemiBold" Cursor="Hand"
+                           NavigateUri="https://github.com/wongjiahau/TTAP-UTAR/wiki/FAQ#what-is-group-clashing"
+                           RequestNavigate="Hyperlink_RequestNavigate" ToolTip="Learn more about Group-Clashing">
+                    <Run Text="Group-Clashing" />
+                </Hyperlink>
             </TextBlock>
         </TextBlock>
     </StackPanel>

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Time_Table_Arranging_Program.User_Control.TimeChooserCircular"
         mc:Ignorable="d"
-        Title="Pick a time" Width="400" WindowStyle="None" WindowStartupLocation="CenterScreen" Height="522.667"  >
+        Title="Pick a time" Width="400" WindowStyle="None" WindowStartupLocation="CenterScreen" Height="522.667">
     <Grid>
         <Canvas Margin="35,120,35,0">
             <Ellipse x:Name="Circle" Width="330" Height="330" Stroke="Black" Fill="WhiteSmoke" StrokeThickness="0" />

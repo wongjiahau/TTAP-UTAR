@@ -3,15 +3,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-               xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:Time_Table_Arranging_Program"
              xmlns:userControl="clr-namespace:Time_Table_Arranging_Program.User_Control"
              mc:Ignorable="d">
-   <UserControl.Resources>
+    <UserControl.Resources>
         <Style TargetType="Border">
-            <Setter Property="ToolTipService.InitialShowDelay" Value="0"/>
+            <Setter Property="ToolTipService.InitialShowDelay" Value="0" />
         </Style>
-      
+
     </UserControl.Resources>
     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
@@ -21,7 +21,7 @@
 
         <UniformGrid Grid.IsSharedSizeScope="True">
             <Grid x:Name="Grid">
-               
+
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
@@ -33,5 +33,5 @@
         </UniformGrid>
         <userControl:TimetableDescriptionViewer Visibility="Collapsed" x:Name="DescriptionViewer" />
     </StackPanel>
-    
+
 </UserControl>

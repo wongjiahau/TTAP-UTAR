@@ -1,14 +1,14 @@
 ﻿<Page x:Class="Time_Table_Arranging_Program.Pages.Page_GettingStarted.Page_Introduction"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:Time_Table_Arranging_Program.Pages"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       xmlns:viewModels="clr-namespace:Time_Table_Arranging_Program.MVVM_Framework.ViewModels"
       xmlns:gettingStarted="clr-namespace:Time_Table_Arranging_Program.Pages.GettingStarted"
       xmlns:pageGettingStarted="clr-namespace:Time_Table_Arranging_Program.Pages.Page_GettingStarted"
-      mc:Ignorable="d"       
+      mc:Ignorable="d"
       Title="Page_GettingStarted" VerticalAlignment="Stretch">
     <Page.DataContext>
         <viewModels:BoundedIndexVM />
@@ -44,7 +44,7 @@
                         <Setter.Value>
                             <materialDesign:TransitionEffect Kind="ExpandIn" />
                         </Setter.Value>
-                    </Setter>       
+                    </Setter>
                     <Setter Property="BackwardWipe">
                         <Setter.Value>
                             <materialDesign:CircleWipe />
@@ -52,15 +52,17 @@
                     </Setter>
                 </Style>
             </DockPanel.Resources>
-            <Button Command="{Binding DecrementCommand}" IsEnabled="{Binding DecrementIsEnabled}"  DockPanel.Dock="Left">
+            <Button Command="{Binding DecrementCommand}" IsEnabled="{Binding DecrementIsEnabled}" DockPanel.Dock="Left">
                 <materialDesign:PackIcon Kind="ChevronLeft" />
             </Button>
-            <Button Command="{Binding IncrementCommand}" IsEnabled="{Binding IncrementIsEnabled}"  DockPanel.Dock="Right">
+            <Button Command="{Binding IncrementCommand}" IsEnabled="{Binding IncrementIsEnabled}"
+                    DockPanel.Dock="Right">
                 <materialDesign:PackIcon Kind="ChevronRight" />
             </Button>
 
-            <materialDesign:Transitioner VerticalAlignment="Center"  VerticalContentAlignment="Center"  x:Name="Transitioner"  SelectedIndex="0" AutoApplyTransitionOrigins="True">
-               
+            <materialDesign:Transitioner VerticalAlignment="Center" VerticalContentAlignment="Center"
+                                         x:Name="Transitioner" SelectedIndex="0" AutoApplyTransitionOrigins="True">
+
                 <materialDesign:TransitionerSlide OpeningEffect="{materialDesign:TransitionEffect FadeIn}">
                     <local:WelcomeToTTAP />
                 </materialDesign:TransitionerSlide>
@@ -75,13 +77,9 @@
                 </materialDesign:TransitionerSlide>
             </materialDesign:Transitioner>
         </DockPanel>
-        <Button Style="{StaticResource MaterialDesignFlatButton}" Click="SkipButton_OnClick" HorizontalAlignment="Right" Height="40" Width="100" VerticalAlignment="Bottom" Margin="10">SKIP</Button>
+        <Button Style="{StaticResource MaterialDesignFlatButton}" Click="SkipButton_OnClick"
+                HorizontalAlignment="Right" Height="40" Width="100" VerticalAlignment="Bottom" Margin="10">
+            SKIP
+        </Button>
     </Grid>
 </Page>
-
-
-
-
-
-
-

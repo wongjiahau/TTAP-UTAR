@@ -8,7 +8,8 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:viewModels="clr-namespace:Time_Table_Arranging_Program.MVVM_Framework.ViewModels"
         mc:Ignorable="d"
-        Title="This Window will always stay on top!" SizeToContent="WidthAndHeight"  Topmost="True" ResizeMode="NoResize" Closing="SummaryWindow_OnClosing" WindowStartupLocation="CenterScreen" >
+        Title="This Window will always stay on top!" SizeToContent="WidthAndHeight" Topmost="True"
+        ResizeMode="NoResize" Closing="SummaryWindow_OnClosing" WindowStartupLocation="CenterScreen">
     <Window.DataContext>
         <viewModels:CyclicIndexVM />
     </Window.DataContext>
@@ -16,14 +17,21 @@
         <Grid DockPanel.Dock="Top" x:Name="HintPanel">
             <materialDesign:Card materialDesign:ShadowAssist.ShadowDepth="Depth5" Padding="10" Margin="5">
                 <DockPanel>
-                    <TextBlock x:Name="TipsLabel" DockPanel.Dock="Left" FontWeight="Bold"  FontSize="20">You can use this to help you to bid timetable!</TextBlock>
-                    <Button DockPanel.Dock="Right" HorizontalAlignment="Center" Margin="5,0,0,0" Click="OkButton_OnClick">OK</Button>
+                    <TextBlock x:Name="TipsLabel" DockPanel.Dock="Left" FontWeight="Bold" FontSize="20">You can use this to help you to bid timetable!</TextBlock>
+                    <Button DockPanel.Dock="Right" HorizontalAlignment="Center" Margin="5,0,0,0"
+                            Click="OkButton_OnClick">
+                        OK
+                    </Button>
                 </DockPanel>
             </materialDesign:Card>
         </Grid>
         <DockPanel DockPanel.Dock="Top">
             <Button x:Name="BackButton" Content="Back" Click="BackButton_OnClick" DockPanel.Dock="Left" />
-            <Button  DockPanel.Dock="Right" x:Name="ToggleViewButton"  Style="{StaticResource MaterialDesignRaisedLightButton}" HorizontalAlignment="Right" Click="ToggleViewButton_OnClick">Minimize</Button>
+            <Button DockPanel.Dock="Right" x:Name="ToggleViewButton"
+                    Style="{StaticResource MaterialDesignRaisedLightButton}" HorizontalAlignment="Right"
+                    Click="ToggleViewButton_OnClick">
+                Minimize
+            </Button>
             <StackPanel DockPanel.Dock="Right" HorizontalAlignment="Center" Orientation="Horizontal">
                 <StackPanel.Resources>
                     <Style TargetType="Label">
@@ -31,13 +39,15 @@
                         <Setter Property="FontFamily" Value="Consolas" />
                     </Style>
                 </StackPanel.Resources>
-                <Button  Visibility="Visible" ToolTip="Go to previous timetable" Style="{StaticResource MaterialDesignFlatButton}" Command="{Binding DecrementCommand}">
+                <Button Visibility="Visible" ToolTip="Go to previous timetable"
+                        Style="{StaticResource MaterialDesignFlatButton}" Command="{Binding DecrementCommand}">
                     <materialDesign:PackIcon Kind="ChevronLeft" />
                 </Button>
                 <Label x:Name="CurrentValueLabel" Content="{Binding CurrentValue, UpdateSourceTrigger=PropertyChanged}" />
                 <Label>/</Label>
                 <Label x:Name="MaxValueLabel" Content="{Binding MaxValue}" />
-                <Button ToolTip="Go to next timetable" Style="{StaticResource MaterialDesignFlatButton}" Command="{Binding IncrementCommand}">
+                <Button ToolTip="Go to next timetable" Style="{StaticResource MaterialDesignFlatButton}"
+                        Command="{Binding IncrementCommand}">
                     <materialDesign:PackIcon Kind="ChevronRight" />
                 </Button>
             </StackPanel>

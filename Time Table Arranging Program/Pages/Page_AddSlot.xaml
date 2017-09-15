@@ -11,29 +11,31 @@
       xmlns:userControl="clr-namespace:Time_Table_Arranging_Program.User_Control"
       xmlns:timeChooserCircular="clr-namespace:Time_Table_Arranging_Program.User_Control.TimeChooserCircular"
       mc:Ignorable="d"
-      Title="Page_AddSlot" >
+      Title="Page_AddSlot">
     <DockPanel LastChildFill="True">
         <DockPanel LastChildFill="True">
-            
-                <StackPanel x:Name="InnerSp" HorizontalAlignment="Stretch" DockPanel.Dock="Bottom" Margin="0,10,0,20" >
-                <Button x:Name="CreateTimetableButton" HorizontalAlignment="Center" Style="{StaticResource MaterialDesignRaisedAccentButton}" Height="70" 
+
+            <StackPanel x:Name="InnerSp" HorizontalAlignment="Stretch" DockPanel.Dock="Bottom" Margin="0,10,0,20">
+                <Button x:Name="CreateTimetableButton" HorizontalAlignment="Center"
+                        Style="{StaticResource MaterialDesignRaisedAccentButton}" Height="70"
                         Click="CreateTimetableButton_Click">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="Timetable" Height="40" Width="40" />
-                    <TextBlock FontSize="30" >Create Timetable</TextBlock>
+                        <TextBlock FontSize="30">Create Timetable</TextBlock>
                     </StackPanel>
                 </Button>
-               
+
             </StackPanel>
-          
-            <StackPanel  Orientation="Horizontal" DockPanel.Dock="Top" HorizontalAlignment="Center">
+
+            <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" HorizontalAlignment="Center">
                 <Label Content="Number of added slots : " VerticalContentAlignment="Center" />
                 <Label x:Name="NOAS_Label">0</Label>
             </StackPanel>
             <Border HorizontalAlignment="Center" Padding="15" BorderBrush="Gray" BorderThickness="1" CornerRadius="5">
-                <Grid >
-                    <ListView x:Name="InputSlotsListView" 
-                  MouseRightButtonDown="InputSlotsListView_MouseRightButtonDown" KeyDown="InputSlotsListView_KeyDown" >
+                <Grid>
+                    <ListView x:Name="InputSlotsListView"
+                              MouseRightButtonDown="InputSlotsListView_MouseRightButtonDown"
+                              KeyDown="InputSlotsListView_KeyDown">
                         <ListView.DataContext>
                             <class:Slot />
                         </ListView.DataContext>
@@ -57,13 +59,16 @@
 
                     </ListView>
                     <StackPanel HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,30,20">
-                        <materialDesign:Badged               
-                                   x:Name="CountingBadge"                            
-                                   BadgeColorZoneMode="PrimaryDark">
-                            <Button x:Name="AddSlotButton" Content="Add slots"  FontSize="20" Height="40" Click="AddSlotButton_Click" />
+                        <materialDesign:Badged
+                            x:Name="CountingBadge"
+                            BadgeColorZoneMode="PrimaryDark">
+                            <Button x:Name="AddSlotButton" Content="Add slots" FontSize="20" Height="40"
+                                    Click="AddSlotButton_Click" />
                         </materialDesign:Badged>
 
-                        <Button x:Name="ResetButton" IsEnabled="False" Style="{StaticResource MaterialDesignRaisedLightButton}" Content=" Reset" Click="ResetButton_Click" />
+                        <Button x:Name="ResetButton" IsEnabled="False"
+                                Style="{StaticResource MaterialDesignRaisedLightButton}" Content=" Reset"
+                                Click="ResetButton_Click" />
                     </StackPanel>
                 </Grid>
             </Border>

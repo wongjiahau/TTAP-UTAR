@@ -14,13 +14,15 @@
     <Page.Resources>
         <iValueConverter:ComboBoxSelectionConverter x:Key="ComboBoxSelectionConverter" />
         <iValueConverter:VisibilityConverter x:Key="VisibilityConverter" />
-        <iValueConverter:TooltipConverterForToggleButton x:Key="TooltipConverterForToggleButton"/>
+        <iValueConverter:TooltipConverterForToggleButton x:Key="TooltipConverterForToggleButton" />
     </Page.Resources>
     <Grid>
-        <materialDesign:DrawerHost x:Name="DrawerHost" CloseOnClickAway="False" IsLeftDrawerOpen="False" IsBottomDrawerOpen="False">
+        <materialDesign:DrawerHost x:Name="DrawerHost" CloseOnClickAway="False" IsLeftDrawerOpen="False"
+                                   IsBottomDrawerOpen="False">
             <materialDesign:DrawerHost.LeftDrawerContent>
-                <userControl:SelectSubjectPanel   x:Name="SelectSubjectPanel" DockPanel.Dock="Left" SlotSelectionChanged="SelectSubjectPanel_OnSlotSelectionChanged" 
-                                            Visibility="{Binding IsChecked, ElementName=ToggleViewButton, Converter={StaticResource VisibilityConverter}, ConverterParameter=1}"/>
+                <userControl:SelectSubjectPanel x:Name="SelectSubjectPanel" DockPanel.Dock="Left"
+                                                SlotSelectionChanged="SelectSubjectPanel_OnSlotSelectionChanged"
+                                                Visibility="{Binding IsChecked, ElementName=ToggleViewButton, Converter={StaticResource VisibilityConverter}, ConverterParameter=1}" />
             </materialDesign:DrawerHost.LeftDrawerContent>
             <materialDesign:DrawerHost.BottomDrawerContent>
                 <Grid>
@@ -44,76 +46,78 @@
                         </Style>
                     </Grid.Resources>
                     <StackPanel HorizontalAlignment="Center" Margin="0" Orientation="Horizontal">
-               
-                    <Label FontSize="20" VerticalAlignment="Center" FontWeight="Bold">Save this timetable as . . .</Label>
-                    <Button Click="SaveAsPicture_OnClick">
-                        <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="Image" />
-                            <TextBlock>Picture (*.png)</TextBlock>
-                        </StackPanel>
-                    </Button>
-                    <Button Click="SaveAsNotepadFile_OnClick">
-                        <StackPanel>
-                            <materialDesign:PackIcon Kind="NoteText" />
-                            <TextBlock>Notepad file (*.txt)</TextBlock>
-                        </StackPanel>
+
+                        <Label FontSize="20" VerticalAlignment="Center" FontWeight="Bold">Save this timetable as . . .</Label>
+                        <Button Click="SaveAsPicture_OnClick">
+                            <StackPanel Orientation="Horizontal">
+                                <materialDesign:PackIcon Kind="Image" />
+                                <TextBlock>Picture (*.png)</TextBlock>
+                            </StackPanel>
                         </Button>
-                    <Button Click="SaveToGoogleCalendarButton_OnClick">
-                        <StackPanel>
-                            <materialDesign:PackIcon Kind="Calendar" />
-                            <TextBlock>Google Calendar</TextBlock>
-                        </StackPanel>
+                        <Button Click="SaveAsNotepadFile_OnClick">
+                            <StackPanel>
+                                <materialDesign:PackIcon Kind="NoteText" />
+                                <TextBlock>Notepad file (*.txt)</TextBlock>
+                            </StackPanel>
+                        </Button>
+                        <Button Click="SaveToGoogleCalendarButton_OnClick">
+                            <StackPanel>
+                                <materialDesign:PackIcon Kind="Calendar" />
+                                <TextBlock>Google Calendar</TextBlock>
+                            </StackPanel>
                         </Button>
 
-                </StackPanel>
-                    <Button HorizontalAlignment="Right" 
+                    </StackPanel>
+                    <Button HorizontalAlignment="Right"
                             Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand }"
                             CommandParameter="{x:Static Dock.Bottom}"
-                            ToolTip="Hide this drawer"
-                            >
+                            ToolTip="Hide this drawer">
                         <materialDesign:PackIcon Foreground="Black" Margin="0" Kind="ArrowDownBold" />
                     </Button>
                 </Grid>
             </materialDesign:DrawerHost.BottomDrawerContent>
 
 
-
             <Grid>
-                <Button HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10" 
-                    Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand }"
+                <Button HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10"
+                        Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand }"
                         CommandParameter="{x:Static Dock.Left}"
-                    Style="{StaticResource MaterialDesignRaisedButton}"
-                    Height="40"
-                    >
+                        Style="{StaticResource MaterialDesignRaisedButton}"
+                        Height="40">
                     <StackPanel Orientation="Horizontal">
-                        <materialDesign:PackIcon Kind="Menu" Margin="0,0,5,0" Height="20" Width="20" VerticalAlignment="Center" />
+                        <materialDesign:PackIcon Kind="Menu" Margin="0,0,5,0" Height="20" Width="20"
+                                                 VerticalAlignment="Center" />
                         <Label VerticalAlignment="Center" Foreground="White">Select subjects</Label>
                     </StackPanel>
                 </Button>
                 <DockPanel DockPanel.Dock="Right">
                     <DockPanel VerticalAlignment="Center">
-                        <Border x:Name="ToolBoxPanel" DockPanel.Dock="Bottom" VerticalAlignment="Top" Margin="1"  HorizontalAlignment="Center" >
+                        <Border x:Name="ToolBoxPanel" DockPanel.Dock="Bottom" VerticalAlignment="Top" Margin="1"
+                                HorizontalAlignment="Center">
                             <Grid>
                                 <StackPanel Orientation="Horizontal">
-                                    <Button x:Name="SetTimeConstraintButton" 
+                                    <Button x:Name="SetTimeConstraintButton"
                                             Foreground="Black"
-                                        Visibility="Visible" Height="auto"                                            
-                                        VerticalAlignment="Stretch"
-                                        FontSize="20"  Click="SetTimeConstraintButton_OnClick" 
-                                        Style="{StaticResource MaterialDesignRaisedAccentButton}" 
-                                        HorizontalAlignment="Right" ToolTip="Set what time you don't want to have class"                                            
-                                            >
+                                            Visibility="Visible" Height="auto"
+                                            VerticalAlignment="Stretch"
+                                            FontSize="20" Click="SetTimeConstraintButton_OnClick"
+                                            Style="{StaticResource MaterialDesignRaisedAccentButton}"
+                                            HorizontalAlignment="Right"
+                                            ToolTip="Set what time you don't want to have class">
 
                                         <StackPanel Orientation="Horizontal">
                                             <materialDesign:PackIcon Kind="Clock" Height="30" Width="30" />
-                                            <TextBlock Margin="5,0,0,0" Text="Set time constraint" VerticalAlignment="Center" />
+                                            <TextBlock Margin="5,0,0,0" Text="Set time constraint"
+                                                       VerticalAlignment="Center" />
                                         </StackPanel>
                                     </Button>
-                                    <views:CyclicIndexView Margin="10,0,0,0" x:Name="CyclicIndexView" HorizontalAlignment="Center" />
-                                    <Grid  
-                          HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                                    <views:CyclicIndexView Margin="10,0,0,0" x:Name="CyclicIndexView"
+                                                           HorizontalAlignment="Center" />
+                                    <Grid
+                                        HorizontalAlignment="Right" VerticalAlignment="Bottom">
                                         <Grid.Resources>
-                                            <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedButton}">
+                                            <Style TargetType="Button"
+                                                   BasedOn="{StaticResource MaterialDesignRaisedButton}">
                                                 <Setter Property="Height" Value="55" />
                                                 <Setter Property="Width" Value="70" />
                                                 <Setter Property="Foreground" Value="White" />
@@ -126,37 +130,40 @@
                                         </Grid.Resources>
 
                                         <StackPanel Orientation="Horizontal">
-                                            <Button 
-                                                    Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand }"
-                                                    CommandParameter="{x:Static Dock.Bottom}"
-                                                    ToolTip="Save this timetable as . . .">
+                                            <Button
+                                                Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand }"
+                                                CommandParameter="{x:Static Dock.Bottom}"
+                                                ToolTip="Save this timetable as . . .">
                                                 <materialDesign:PackIcon Kind="ContentSave" />
                                             </Button>
-                                            <Button x:Name="AddToGoogleCalenderButton"  Visibility="Collapsed"                                   
-                                    ToolTip="Add this timetable to Google Calendar" Click="SaveToGoogleCalendarButton_OnClick">
+                                            <Button x:Name="AddToGoogleCalenderButton" Visibility="Collapsed"
+                                                    ToolTip="Add this timetable to Google Calendar"
+                                                    Click="SaveToGoogleCalendarButton_OnClick">
                                                 <!--Visibility="{Binding IsChecked, ElementName=ToggleViewButton, Converter={StaticResource VisibilityConverter}}"-->
 
                                                 <materialDesign:PackIcon Kind="CalendarPlus" />
                                             </Button>
-                                            <Button x:Name="PrintAsPng"  Visibility="Collapsed"                                   
-                                                    ToolTip="Save this timetable as an image" Click="SaveAsPicture_OnClick">
+                                            <Button x:Name="PrintAsPng" Visibility="Collapsed"
+                                                    ToolTip="Save this timetable as an image"
+                                                    Click="SaveAsPicture_OnClick">
                                                 <!--Visibility="{Binding IsChecked, ElementName=ToggleViewButton, Converter={StaticResource VisibilityConverter}}"-->
 
                                                 <materialDesign:PackIcon Kind="Image" />
                                             </Button>
                                             <Button x:Name="ShowSummaryButton"
-                            	Click="ShowSummaryButton_OnClick"                                                                                                         
-                                                    ToolTip="Show summary" >
+                                                    Click="ShowSummaryButton_OnClick"
+                                                    ToolTip="Show summary">
                                                 <!--Visibility="{Binding IsChecked, ElementName=ToggleViewButton, Converter={StaticResource VisibilityConverter}}"-->
                                                 <materialDesign:PackIcon Kind="ViewList" />
                                             </Button>
-                                            <materialDesign:PopupBox PopupMode="Click" Visibility="Collapsed"  >
+                                            <materialDesign:PopupBox PopupMode="Click" Visibility="Collapsed">
                                                 <materialDesign:PopupBox.ToggleContent>
                                                     <materialDesign:PackIcon Kind="DotsVertical" Foreground="White" />
                                                 </materialDesign:PopupBox.ToggleContent>
                                                 <StackPanel>
                                                     <Button Click="ShowSummaryButton_OnClick" Content="Show summary" />
-                                                    <Button  Content="Add this timetable to Google Calendar" Click="SaveToGoogleCalendarButton_OnClick" />
+                                                    <Button Content="Add this timetable to Google Calendar"
+                                                            Click="SaveToGoogleCalendarButton_OnClick" />
                                                 </StackPanel>
                                             </materialDesign:PopupBox>
                                         </StackPanel>
@@ -164,7 +171,8 @@
                                 </StackPanel>
                             </Grid>
                         </Border>
-                        <userControl:TimetableViewer Height="480" VerticalAlignment="Bottom" x:Name="TimetableViewer" Visibility="Visible" ViewChanged="TimetableViewer_OnViewChanged"/>
+                        <userControl:TimetableViewer Height="480" VerticalAlignment="Bottom" x:Name="TimetableViewer"
+                                                     Visibility="Visible" ViewChanged="TimetableViewer_OnViewChanged" />
 
                     </DockPanel>
                 </DockPanel>

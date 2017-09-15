@@ -1,18 +1,24 @@
 ﻿<UserControl x:Class="Time_Table_Arranging_Program.Pages.WelcomeToTTAP"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:Time_Table_Arranging_Program.Pages"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             mc:Ignorable="d" >
-    <materialDesign:Card Padding="40"  HorizontalAlignment="Center">
+             mc:Ignorable="d">
+    <materialDesign:Card Padding="40" HorizontalAlignment="Center">
         <StackPanel>
             <Image Source="../../Images/calendarBig.png" Width="250" />
             <TextBlock Style="{StaticResource  MaterialDesignDisplay4TextBlock}">Welcome to TTAP.</TextBlock>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <TextBlock Style="{StaticResource MaterialDesignBody2TextBlock}" Text="The latest version of TTAP can always be downloaded from " />
-                <TextBlock><Hyperlink Foreground="Blue" Style="{StaticResource MaterialDesignBody2Hyperlink}" NavigateUri="xxx" RequestNavigate="Hyperlink_OnRequestNavigate"><Run>goo.gl/5XBxHV</Run></Hyperlink></TextBlock>
+                <TextBlock Style="{StaticResource MaterialDesignBody2TextBlock}"
+                           Text="The latest version of TTAP can always be downloaded from " />
+                <TextBlock>
+                    <Hyperlink Foreground="Blue" Style="{StaticResource MaterialDesignBody2Hyperlink}"
+                               NavigateUri="xxx" RequestNavigate="Hyperlink_OnRequestNavigate">
+                        <Run>goo.gl/5XBxHV</Run>
+                    </Hyperlink>
+                </TextBlock>
             </StackPanel>
         </StackPanel>
     </materialDesign:Card>

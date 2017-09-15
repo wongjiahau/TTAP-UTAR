@@ -8,15 +8,19 @@
         mc:Ignorable="d"
         Title="MyMessageBox" WindowStartupLocation="CenterScreen" WindowStyle="None" Height="0" Width="0">
     <Grid>
-        <materialDesign:DialogHost x:Name="DialogHost" IsOpen="False"  >
+        <materialDesign:DialogHost x:Name="DialogHost" IsOpen="False">
             <materialDesign:DialogHost.DialogContent>
                 <Border Padding="20">
                     <StackPanel>
                         <TextBlock x:Name="Title" Margin="10" FontSize="30" FontWeight="Bold">Title</TextBlock>
-                        <TextBlock x:Name="Message" Margin="10" FontSize="20" MinWidth="300" MaxWidth="{Binding Path=ActualWidth, ElementName=Title }" TextWrapping="Wrap">
+                        <TextBlock x:Name="Message" Margin="10" FontSize="20" MinWidth="300"
+                                   MaxWidth="{Binding Path=ActualWidth, ElementName=Title }" TextWrapping="Wrap">
                             Message : Who live in a pineapple under the sea?
                         </TextBlock>
-                        <Button x:Name="DialogButton" Margin="10" HorizontalAlignment="Center" FontSize="20" Height="40" Click="DialogButton_OnClick">Got it!</Button>
+                        <Button x:Name="DialogButton" Margin="10" HorizontalAlignment="Center" FontSize="20"
+                                Height="40" Click="DialogButton_OnClick">
+                            Got it!
+                        </Button>
                     </StackPanel>
                 </Border>
             </materialDesign:DialogHost.DialogContent>

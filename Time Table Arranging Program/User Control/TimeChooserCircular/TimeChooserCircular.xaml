@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:Time_Table_Arranging_Program.User_Control.TimeChooserCircular"
              mc:Ignorable="d">
     <StackPanel>
-        <Button x:Name="ChooseTimeButton" Style="{StaticResource MaterialDesignRaisedLightButton}" Width="90" Height="auto" Content=" 1:00 PM " Click="ChooseTimeButton_OnClick" />
+        <Button x:Name="ChooseTimeButton" Style="{StaticResource MaterialDesignRaisedLightButton}" Width="90"
+                Height="auto" Content=" 1:00 PM " Click="ChooseTimeButton_OnClick" />
     </StackPanel>
 </UserControl>

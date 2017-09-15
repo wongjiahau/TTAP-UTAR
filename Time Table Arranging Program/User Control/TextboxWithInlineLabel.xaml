@@ -1,12 +1,16 @@
 ﻿<UserControl x:Class="Time_Table_Arranging_Program.User_Control.TextboxWithInlineLabel"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:Time_Table_Arranging_Program.User_Control"
-             mc:Ignorable="d"              >
+             mc:Ignorable="d">
     <Grid>
-            <TextBox x:Name="TextBox"  TextChanged="TextBox_OnTextChanged" VerticalContentAlignment="Center" Background="White" BorderThickness="1" />
-        <Label x:Name="Label"  VerticalContentAlignment="Center"   Foreground="Gray" MouseDown="Label_OnMouseDown" Cursor="IBeam">hey</Label>
+        <TextBox x:Name="TextBox" TextChanged="TextBox_OnTextChanged" VerticalContentAlignment="Center"
+                 Background="White" BorderThickness="1" />
+        <Label x:Name="Label" VerticalContentAlignment="Center" Foreground="Gray" MouseDown="Label_OnMouseDown"
+               Cursor="IBeam">
+            hey
+        </Label>
     </Grid>
 </UserControl>

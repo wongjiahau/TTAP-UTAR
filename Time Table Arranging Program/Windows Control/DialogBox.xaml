@@ -5,10 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="DialogBoxx" ShowInTaskbar="False" WindowState="Maximized" AllowsTransparency="True" Background="Transparent"
+        Title="DialogBoxx" ShowInTaskbar="False" WindowState="Maximized" AllowsTransparency="True"
+        Background="Transparent"
         WindowStyle="None" WindowStartupLocation="CenterScreen" Closing="DialogBox_OnClosing">
     <Grid>
-        <materialDesign:DialogHost x:Name="DialogHost" DialogClosing="DialogHost_OnDialogClosing" CloseOnClickAway="False" IsOpen="False">
+        <materialDesign:DialogHost x:Name="DialogHost" DialogClosing="DialogHost_OnDialogClosing"
+                                   CloseOnClickAway="False" IsOpen="False">
             <materialDesign:DialogHost.DialogContent>
                 <Grid>
                     <Border x:Name="Custom" Visibility="Hidden" Padding="20">
@@ -20,7 +22,8 @@
                                        FontSize="30" TextWrapping="Wrap" FontWeight="Bold">
                                 Why no possible timetable?
                             </TextBlock>
-                            <TextBlock x:Name="TextBlock_Message" Margin="10" FontSize="20" MinWidth="300" MaxWidth="300"
+                            <TextBlock x:Name="TextBlock_Message" Margin="10" FontSize="20" MinWidth="300"
+                                       MaxWidth="300"
                                        TextWrapping="Wrap">
                                 Please make sure you copied the correct content and is using Google Chrome
                             </TextBlock>

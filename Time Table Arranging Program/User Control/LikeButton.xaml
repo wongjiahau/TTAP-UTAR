@@ -1,14 +1,16 @@
 ﻿<UserControl x:Class="Time_Table_Arranging_Program.User_Control.LikeButton"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:Time_Table_Arranging_Program.User_Control"
-             mc:Ignorable="d"              >
+             mc:Ignorable="d">
     <Grid>
-        <ToggleButton x:Name="ToggleButton" Width="45" Height="45" Foreground="DeepPink" Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}" Click="ToggleButton_OnClick" ToolTip="Add this timetable to favorites">
-            <materialDesign:PackIcon Kind="Heart" Width="30" Height="30"/>
+        <ToggleButton x:Name="ToggleButton" Width="45" Height="45" Foreground="DeepPink"
+                      Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}" Click="ToggleButton_OnClick"
+                      ToolTip="Add this timetable to favorites">
+            <materialDesign:PackIcon Kind="Heart" Width="30" Height="30" />
         </ToggleButton>
     </Grid>
 </UserControl>

@@ -3,14 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             xmlns:local="clr-namespace:Time_Table_Arranging_Program.User_Control"              
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:local="clr-namespace:Time_Table_Arranging_Program.User_Control"
              xmlns:conv="clr-namespace:Time_Table_Arranging_Program.IValueConverter"
              mc:Ignorable="d">
     <UserControl.Resources>
         <local:IndexViewerVisibilityConverter x:Key="IndexViewerVisibilityConverter" />
     </UserControl.Resources>
-    <materialDesign:Card >
+    <materialDesign:Card>
         <!--Visibility="{Binding MaxValue, Converter={StaticResource IndexViewerVisibilityConverter}}">-->
         <StackPanel Margin="5">
             <StackPanel.Resources>
@@ -33,11 +33,13 @@
                     <Border BorderThickness="0" BorderBrush="Black">
                         <StackPanel Orientation="Horizontal">
                             <TextBlock x:Name="CurrentIndexLabel" VerticalAlignment="Center" TextAlignment="Center"
-                                       Width="{Binding ActualWidth, ElementName=MaxIndexLabel, Converter={StaticResource AddConverter}, ConverterParameter=5}" FontWeight="Bold" FontFamily="Consolas" FontSize="20" Style="{x:Null}" 
-                                       Text="{Binding Path=Current, Converter={StaticResource AddConverter}, ConverterParameter=1}"/>
-                            <Label VerticalAlignment="Center"  FontFamily="consolas" FontSize="20" Content="/"/>
-                            <TextBlock x:Name="MaxIndexLabel" VerticalAlignment="Center"  FontFamily="consolas" FontSize="20" Style="{x:Null}" 
-                                       Text="{Binding Path=Max, Converter={StaticResource AddConverter}, ConverterParameter=1}"/>
+                                       Width="{Binding ActualWidth, ElementName=MaxIndexLabel, Converter={StaticResource AddConverter}, ConverterParameter=5}"
+                                       FontWeight="Bold" FontFamily="Consolas" FontSize="20" Style="{x:Null}"
+                                       Text="{Binding Path=Current, Converter={StaticResource AddConverter}, ConverterParameter=1}" />
+                            <Label VerticalAlignment="Center" FontFamily="consolas" FontSize="20" Content="/" />
+                            <TextBlock x:Name="MaxIndexLabel" VerticalAlignment="Center" FontFamily="consolas"
+                                       FontSize="20" Style="{x:Null}"
+                                       Text="{Binding Path=Max, Converter={StaticResource AddConverter}, ConverterParameter=1}" />
                         </StackPanel>
                     </Border>
                 </StackPanel>
@@ -48,10 +50,12 @@
             </StackPanel>
             <DockPanel>
 
-                <Button Visibility="Collapsed" x:Name="RandomButton" DockPanel.Dock="Right" ToolTip="Get random timetable" Click="RandomButton_OnClick">
+                <Button Visibility="Collapsed" x:Name="RandomButton" DockPanel.Dock="Right"
+                        ToolTip="Get random timetable" Click="RandomButton_OnClick">
                     <materialDesign:PackIcon Kind="Dice5" />
                 </Button>
-                <Slider x:Name="Slider" Visibility ="Collapsed" HorizontalAlignment="Stretch" Value="{Binding Current}" Maximum="{Binding Max}" Margin="10,0,0,0" VerticalAlignment="Center" />
+                <Slider x:Name="Slider" Visibility="Collapsed" HorizontalAlignment="Stretch" Value="{Binding Current}"
+                        Maximum="{Binding Max}" Margin="10,0,0,0" VerticalAlignment="Center" />
             </DockPanel>
         </StackPanel>
     </materialDesign:Card>

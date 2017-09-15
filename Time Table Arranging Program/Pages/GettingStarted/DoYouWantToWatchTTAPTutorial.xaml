@@ -1,16 +1,19 @@
 ﻿<UserControl x:Class="Time_Table_Arranging_Program.Pages.GettingStarted.DoYouWantToWatchTTAPTutorial"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:Time_Table_Arranging_Program.Pages.GettingStarted"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             mc:Ignorable="d" >
+             mc:Ignorable="d">
     <materialDesign:Card Padding="40">
         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
             <TextBlock HorizontalAlignment="Center" Style="{StaticResource  MaterialDesignDisplay2TextBlock}">Do you want to watch tutorial of TTAP?</TextBlock>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button FontSize="20" Height="60" Style="{StaticResource MaterialDesignRaisedButton}" Click="ButtonBase_OnClick" Margin="10 10 10 0">WATCH</Button>
+                <Button FontSize="20" Height="60" Style="{StaticResource MaterialDesignRaisedButton}"
+                        Click="ButtonBase_OnClick" Margin="10 10 10 0">
+                    WATCH
+                </Button>
             </StackPanel>
         </StackPanel>
     </materialDesign:Card>

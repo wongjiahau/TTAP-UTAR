@@ -6,12 +6,15 @@
         xmlns:local="clr-namespace:Time_Table_Arranging_Program.Windows_Control"
         mc:Ignorable="d"
         WindowStyle="None"
-        Width="400" Height="200" Title="Loading . . ." WindowStartupLocation="Manual" Top="10" >
+        Width="400" Height="200" Title="Loading . . ." WindowStartupLocation="Manual" Top="10">
     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
         <Label FontSize="20" FontWeight="Bold" x:Name="MessageLabel">Finding possible timetables . . .</Label>
         <Label />
         <ProgressBar x:Name="ProgressBar" Height="10" Width="300" IsIndeterminate="True" />
         <Label />
-        <Button x:Name="CancelButton" Visibility="Collapsed" HorizontalAlignment="Center" Width="200" Click="CancelButton_Click">Cancel</Button>
+        <Button x:Name="CancelButton" Visibility="Collapsed" HorizontalAlignment="Center" Width="200"
+                Click="CancelButton_Click">
+            Cancel
+        </Button>
     </StackPanel>
 </Window>
