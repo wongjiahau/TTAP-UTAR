@@ -100,7 +100,7 @@ namespace Time_Table_Arranging_Program.Pages {
                 }
                 else {
                     Browser.Navigate(_urlProvider.LoginPageUrl);
-                    Global.Snackbar.MessageQueue.Enqueue("No record found, please try again.");
+                    Global.Snackbar.MessageQueue.Enqueue($"No record found.");
                     ResetButton_OnClick(null , null);
                 }
             }
