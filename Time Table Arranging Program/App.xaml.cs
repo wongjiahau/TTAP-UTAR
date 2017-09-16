@@ -16,7 +16,10 @@ namespace Time_Table_Arranging_Program {
 
         private void OnUnhandledExeption(object sender, DispatcherUnhandledExceptionEventArgs e) {
             BugReportSender.SendIssue(e.Exception, Global.LoadedHtml);
-            DialogBox.Show("🐛......", "You have encountered a bug!", "Nevermind", "Report it!");
+            DialogBox.Show("TTAP has crashed due to some issue . . .", 
+                "Sorry for the inconvenience. We will fixed the issue after we received the bug report.", 
+                "Nevermind", 
+                "Report the bug");
             if (DialogBox.Result == DialogBox.ResultEnum.RightButtonClicked) {
                 Process.Start(
                     new ProcessStartInfo(
