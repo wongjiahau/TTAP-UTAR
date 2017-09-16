@@ -178,7 +178,7 @@ namespace NUnit.Tests2.BehavioralTests {
         }
 
         [Test]
-        public void ClashReporting_GroupClashing_1() {
+        public void ClashReporting_GroupClashing() {
             string behaviour =
                 @"
             Given Ali just loaded slots data (by logging in)
@@ -194,13 +194,14 @@ namespace NUnit.Tests2.BehavioralTests {
         }
 
         [Test]
-        public void ClashReporting_GroupClashing_2() {
+        public void ClashReporting_GroupClashing_ReleasingGroupClashedSubject_1() {
             string behaviour =
                 @"
             Given Ali just loaded slots data (by logging in)
-            When Ali selected a bunch of subjects (A, B, C, D, E)
+            When Ali selected a set of subjects (A, B, C) 
+                which is the MINIMUM set that causes group clash if subject X is selected
             And Then Ali selected a subject X which causes group clashing error
-            And Then Ali deselected one of the subject (one from A, B, C, D, E)
+            And Then Ali deselected one of the subject (one from A, B, C)
             Then Ali shall see that subject X is enabled again
                 ";
             var input = Input();
@@ -210,6 +211,28 @@ namespace NUnit.Tests2.BehavioralTests {
             input.SelectSubject("MPU32013" , false); //Subject A = BKA
             Assert.IsTrue(input.ToList().Find(x => x.Code == "MPU33183").ClashingErrorType == ClashingErrorType.NoError, behaviour);
 
+        }
+
+        [Test]
+        public void ClashReporting_GroupClashing_ReleasingGroupClashedSubject_2() {
+            string behaviour =
+                @"
+            Given Ali just loaded slots data (by logging in)
+            When Ali selected a set of subjects (A, B, C) 
+                which is a MINIMUM set that causes group clash if subject X is selected
+            And Then Ali selected a subject X which causes group clashing error
+            And Then Ali selected a subject D 
+            And Then Ali deselected subject D
+            Then Ali shall see that subject X is still disabled
+                ";
+            var input = Input();
+            input.SelectSubject("MPU32013"); //Subject A = BKA
+            input.SelectSubject("MPU3143"); //Subject B = BMK2
+            input.SelectSubject("MPU33183"); //Subject X = EIS
+            input.SelectSubject("UEMX4313"); //Subject X = ASSD
+            input.SelectSubject("UEMX4313", false); //Subject X = ASSD
+            Assert.IsTrue(input.ToList().Find(x => x.Code == "MPU33183").
+                ClashingErrorType == ClashingErrorType.GroupClashingError, behaviour);
         }
     }
 }
