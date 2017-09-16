@@ -409,9 +409,6 @@
     <Compile Include="Windows Control\DialogBox.xaml.cs">
       <DependentUpon>DialogBox.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows Control\MyMessageBox.xaml.cs">
-      <DependentUpon>MyMessageBox.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Windows Control\ProgressWindow.xaml.cs">
       <DependentUpon>ProgressWindow.xaml</DependentUpon>
       <SubType>Component</SubType>
@@ -611,10 +608,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows Control\DialogBox.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Windows Control\MyMessageBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

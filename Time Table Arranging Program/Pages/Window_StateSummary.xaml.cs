@@ -71,11 +71,10 @@ namespace Time_Table_Arranging_Program.Pages {
         }
 
         private void HelpButton_OnClick(object sender, RoutedEventArgs e) {
-            MyMessageBox.ShowOk(
+            DialogBox.Show(
                 "How it works?",
                 "It works by searching through all the possible combination and check for which time period definitely have class and vice versa."
             );
-            //DialogHost.IsOpen = true;                            
         }
     }
 
