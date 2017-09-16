@@ -12,7 +12,7 @@ using Time_Table_Arranging_Program.User_Control.SubjectListFolder;
 
 namespace NUnit.Tests2.BehavioralTests {
     [TestFixture]
-    public class SelectSubjectBehaviour {
+    public class SelectSubjectFeature {
         private SubjectListModel Input() {
             return new SubjectListModel(SubjectModel.Parse(TestData.TestSlots) , Permutator.Run_v2_withoutConsideringWeekNumber, new TaskRunnerForUnitTesting());
         }

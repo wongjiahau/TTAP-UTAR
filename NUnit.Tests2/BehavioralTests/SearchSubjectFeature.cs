@@ -11,7 +11,7 @@ using Time_Table_Arranging_Program.User_Control.SubjectListFolder;
 
 namespace NUnit.Tests2.BehavioralTests {
     [TestFixture]
-    public class SearchSubjectexpectedBehaviour {
+    public class SearchSubjectFeature {
         [Test]
         public void InitialState() {
             string behvaiour =
