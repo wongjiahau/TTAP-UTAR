@@ -11,13 +11,12 @@ using Time_Table_Arranging_Program.User_Control.CheckboxWithListDownMenuFolder.E
 namespace Time_Table_Arranging_Program.Class {
     public class SubjectSelectionManager {
         private readonly List<SubjectModel> _disabledSubjects = new List<SubjectModel>();
-        private readonly Func<Slot[], List<List<Slot>>> _permutator;
+        private readonly Func<Slot[] , List<List<Slot>>> _permutator;
         private readonly List<SubjectModel> _subjectModels;
         private readonly ITaskRunnerWithProgressFeedback _taskRunner;
 
-        private SubjectModel _currentlySelectedSubject;
 
-        public SubjectSelectionManager(List<SubjectModel> subjectModels, Func<Slot[], List<List<Slot>>> permutator,
+        public SubjectSelectionManager(List<SubjectModel> subjectModels , Func<Slot[] , List<List<Slot>>> permutator ,
                                        ITaskRunnerWithProgressFeedback taskRunner) {
             _subjectModels = subjectModels;
             _permutator = permutator;
@@ -28,7 +27,15 @@ namespace Time_Table_Arranging_Program.Class {
             }
         }
 
-        public int SelectedSubjectCount { get; private set; }
+        private int _selectedSubjectCount;
+        public int SelectedSubjectCount {
+            get => _selectedSubjectCount;
+            private set {
+                _selectedSubjectCount = value;
+                SelectedSubjectCountChanged?.Invoke(this , null);
+            }
+        }
+
         public event EventHandler SelectedSubjectCountChanged;
         public event EventHandler NewListOfTimetablesGenerated;
 
@@ -42,9 +49,10 @@ namespace Time_Table_Arranging_Program.Class {
             var possibleTimetables = _permutator?.Invoke(GetSelectedSlots());
             return possibleTimetables;
 
-            Slot[] GetSelectedSlots() {
+            Slot[] GetSelectedSlots()
+            {
                 var result = new List<Slot>();
-                for (int i = 0; i < _subjectModels.Count; i++) {
+                for (int i = 0 ; i < _subjectModels.Count ; i++) {
                     if (_subjectModels[i].IsSelected)
                         result.AddRange(_subjectModels[i]
                             .Slots); //Not using GetSelectedSlots here because this feature shall be moved to another place
@@ -53,40 +61,61 @@ namespace Time_Table_Arranging_Program.Class {
             }
         }
 
-        private void SubjectModel_Selected(object sender, EventArgs e) {
-            _currentlySelectedSubject = (SubjectModel) sender;
+        private void SubjectModel_Selected(object sender , EventArgs e) {
+            var currentlySelectedSubject = (SubjectModel)sender;
             var possibleTimetables = new List<List<Slot>>();
             _taskRunner.RunTask(() => possibleTimetables = GetPossibleTimetables());
             if (possibleTimetables?.Count == 0) {
-                var clashReport =
-                    new ClashFinder(_subjectModels, _permutator, _currentlySelectedSubject).GetReport();
-                _disabledSubjects.Add(_currentlySelectedSubject);
-                _currentlySelectedSubject.ClashReport = clashReport;
+                DisableClashingSubject(currentlySelectedSubject);
             }
             else {
                 SelectedSubjectCount++;
-                SelectedSubjectCountChanged?.Invoke(this, null);
-                NewListOfTimetablesGenerated?.Invoke(possibleTimetables, null);
+                NewListOfTimetablesGenerated?.Invoke(possibleTimetables , null);
             }
         }
 
-        private void SubjectModel_Deselected(object sender, EventArgs e) {
-            var currentlyDeselectedSubject = (SubjectModel) sender;
+        private void DisableClashingSubject(SubjectModel currentlySelectedSubject) {
+            var clashReport =
+                new ClashFinder(_subjectModels, _permutator, currentlySelectedSubject).GetReport();
+            _disabledSubjects.Add(currentlySelectedSubject);
+            currentlySelectedSubject.ClashReport = clashReport;
+        }
+
+        private void SubjectModel_Deselected(object sender , EventArgs e) {
+            var currentlyDeselectedSubject = (SubjectModel)sender;
             if (_disabledSubjects.Any(x => x.Code == currentlyDeselectedSubject.Code)) return;
-            for (var i = 0; i < _disabledSubjects.Count; i++) {
-                SubjectModel s = _disabledSubjects[i];
-                if (s.ClashingErrorType == ClashingErrorType.GroupClashingError ||
-                    s.ClashingCounterparts.Any(x => x.Code == currentlyDeselectedSubject.Code)) {
-                    s.ClashReport = new NullClashReport();
-                    _disabledSubjects.Remove(s);
-                    i--;
-                }
-            }
+            EnableClashedSubjectIfPossible(currentlyDeselectedSubject);
             SelectedSubjectCount--;
-            SelectedSubjectCountChanged?.Invoke(this, null);
             var possibleTimeatables = new List<List<Slot>>();
             _taskRunner.RunTask(() => possibleTimeatables = GetPossibleTimetables());
-            NewListOfTimetablesGenerated?.Invoke(possibleTimeatables, null);
+            NewListOfTimetablesGenerated?.Invoke(possibleTimeatables , null);
+        }
+
+        private void EnableClashedSubjectIfPossible(SubjectModel currentlyDeselectedSubject) {
+            for (var i = 0 ; i < _disabledSubjects.Count ; i++) {
+                SubjectModel s = _disabledSubjects[i];
+                switch (s.ClashingErrorType) {
+                    case ClashingErrorType.SingleClashingError:
+                        if (s.ClashingCounterparts.Any(x => x.Code == currentlyDeselectedSubject.Code))
+                            goto default;
+                        else break;
+                    case ClashingErrorType.GroupClashingError:
+                        if (!StillGroupClashWithCurrentlySelectedSubject(s)) goto default;
+                        else break;
+                    default:
+                        s.ClashReport = new NullClashReport();
+                        _disabledSubjects.Remove(s);
+                        i--;
+                        break;
+                }
+            }
+        }
+
+        private bool StillGroupClashWithCurrentlySelectedSubject(SubjectModel currentlySelectedSubject) {
+            var list = new List<Slot>();
+            list.AddRange(currentlySelectedSubject.GetSelectedSlots());
+            list.AddRange(_subjectModels.GetSelectedSlots());
+            return _permutator?.Invoke(list.ToArray()).Count == 0;
         }
     }
 }
