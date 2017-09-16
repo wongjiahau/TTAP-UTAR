@@ -40,7 +40,9 @@
             </StackPanel>
             <TextBlock x:Name="HintLabel" Margin="10" DockPanel.Dock="Top"
                        Visibility="{Binding IsHintLabelVisible, Converter={StaticResource VisibilityConverter}}">
-                Press ESC to clear text of search box.
+                Press ARROW KEY to navigate,
+                ENTER to select subject. <LineBreak/>
+                Press ESC to clear search box. 
             </TextBlock>
             <Grid DockPanel.Dock="Top">
                 <Grid.Resources>
