@@ -2,6 +2,9 @@
 using Time_Table_Arranging_Program;
 using Time_Table_Arranging_Program.Class;
 using Time_Table_Arranging_Program.Class.Converter;
+using Time_Table_Arranging_Program.Interfaces;
+using Time_Table_Arranging_Program.Model;
+using Time_Table_Arranging_Program.User_Control.SubjectListFolder;
 using static NUnit.Tests2.TestData.Subjects;
 
 namespace NUnit.Tests2 {
@@ -455,6 +458,10 @@ new Slot(703,"UKMM1043", " Basic Economics, Accounting And Management", "7", "T"
             }
         }
 
+        public static SubjectListModel GetSubjectListModel() {
+            return new SubjectListModel(SubjectModel.Parse(TestSlots), Permutator.Run_v2_withoutConsideringWeekNumber, new TaskRunnerForUnitTesting());
+            
+        }
         public enum Subjects {
 
             HubunganEtnik,
