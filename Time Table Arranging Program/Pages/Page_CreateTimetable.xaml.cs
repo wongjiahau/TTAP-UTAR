@@ -37,7 +37,6 @@ namespace Time_Table_Arranging_Program.Pages {
         private readonly Func<Slot[] , List<List<Slot>>> _permutator;
         private CyclicIndex _cyclicIndex;
 
-        private bool _justDeselectedASubject = false;
         private bool _leftDrawerIsOpened = false;
 
 

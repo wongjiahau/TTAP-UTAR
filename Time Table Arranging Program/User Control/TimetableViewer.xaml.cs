@@ -32,14 +32,16 @@ namespace Time_Table_Arranging_Program.User_Control {
             ITimetableList currentState = _observableTimetableList.GetCurrentState();
             if (currentState.IsEmpty()) {
                 InstructionLabel.Content = currentState.Message;
-                InstructionLabel.Visibility = Visibility.Visible;
+                TtapIcon.Visibility = Visibility.Visible;
+                //InstructionLabel.Visibility = Visibility.Visible;
                 TimeTableGui.Visibility = Visibility.Collapsed;
                 TimeTableGui.ClearGui();
                 return;
             }
             _outputTimeTable = currentState.ToList();
             TimeTableGui.GenerateGui(_outputTimeTable[0]);
-            InstructionLabel.Visibility = Visibility.Collapsed;
+            TtapIcon.Visibility = Visibility.Collapsed;
+            //InstructionLabel.Visibility = Visibility.Collapsed;
             TimeTableGui.Visibility = Visibility.Visible;
             //  IndexViewer.Initialize(_cyclicIndex);
         }

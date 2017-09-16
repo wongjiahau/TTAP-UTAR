@@ -18,8 +18,10 @@
                     <Grid VerticalAlignment="Center">
                         <Label x:Name="InstructionLabel" x:FieldModifier="private" HorizontalAlignment="Center"
                                VerticalAlignment="Center"
+                               Visibility="Hidden"
                                FontSize="50" FontWeight="Bold" Content="⟸ Search and select your subjects" />
                         <timeTableArrangingProgram:TimeTableGUI x:Name="TimeTableGui" Visibility="Collapsed" />
+                        <Image x:Name="TtapIcon" Source="../Images/calendarBig.png" Width="250" HorizontalAlignment="Center" VerticalAlignment="Center" />
                     </Grid>
 
                 </ScrollViewer>
