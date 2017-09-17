@@ -35,7 +35,7 @@ namespace Time_Table_Arranging_Program.Class {
                 return true;
             }
             catch (Exception ex) {
-                DialogBox.Show("Oops..", "Couldn't save the file", ex.Message, "OK");
+                DialogBox.Show("Oops.. Couldn't save the file", ex.Message, "OK");
                 // Exception inner = ex.InnerException;
                 //do {
                 //    MessageBox.Show(inner.Message);
