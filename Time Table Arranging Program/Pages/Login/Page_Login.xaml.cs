@@ -53,7 +53,7 @@ namespace Time_Table_Arranging_Program.Pages {
             }
             if (Global.InputSlotList.Count == 0) Browser.Navigate(_urlProvider.LoginPageUrl);
             else {
-                DialogBox.Show("Login again?", "WARNING : If you login again your previous data will be overwrited.",
+                DialogBox.Show("Login again?", "WARNING : If you login again your previous data will be overwritten.",
                     "CANCEL", "LOGIN AGAIN");
                 switch (DialogBox.Result) {
                     case DialogBox.ResultEnum.LeftButtonClicked:

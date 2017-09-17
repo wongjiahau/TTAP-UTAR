@@ -28,12 +28,15 @@
                                 Please make sure you copied the correct content and is using Google Chrome
                             </TextBlock>
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                                <Button x:Name="Button_Left" materialDesign:ShadowAssist.ShadowDepth="Depth0"
+                                <Button x:Name="Button_Left" 
+                                        Style="{StaticResource MaterialDesignFlatButton}"
+                                        materialDesign:ShadowAssist.ShadowDepth="Depth0"
                                         Margin="10,10,0,0" HorizontalAlignment="Center" FontSize="20" Height="40"
                                         Click="Button_Left_OnClick">
                                     Left
                                 </Button>
                                 <Button x:Name="Button_Right" materialDesign:ShadowAssist.ShadowDepth="Depth0"
+                                        Style="{StaticResource MaterialDesignFlatButton}"
                                         Margin="10,10,0,0" HorizontalAlignment="Center" FontSize="20" Height="40"
                                         Click="Button_Right_OnClick">
                                     Right

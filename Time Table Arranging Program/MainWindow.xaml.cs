@@ -86,8 +86,8 @@ namespace Time_Table_Arranging_Program {
         private void MainWindow_OnClosing(object sender, CancelEventArgs e) {
             e.Cancel = true;
             if (_exitConfirmed) return;
-            DialogBox.Show("Quit TTAP?", "Note : Quiting will cause you to lose your current progress.", "Cancel",
-                "Quit");
+            DialogBox.Show("Quit TTAP?", "Note : Quiting will cause you to lose your current progress.", "CANCEL",
+                "QUIT");
             if (DialogBox.Result == DialogBox.ResultEnum.LeftButtonClicked) {
                 return;
             }
