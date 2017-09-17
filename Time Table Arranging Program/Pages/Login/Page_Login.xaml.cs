@@ -8,6 +8,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Navigation;
 using Time_Table_Arranging_Program.Class;
+using Time_Table_Arranging_Program.Class.ConfigFileManager;
 using Time_Table_Arranging_Program.Class.Helper;
 using Time_Table_Arranging_Program.Class.TokenParser;
 using Time_Table_Arranging_Program.Pages.Login;
@@ -95,6 +96,7 @@ namespace Time_Table_Arranging_Program.Pages {
             }
 
             void NavigateToCourseTimeTablePreview() {
+                new DataManager().SaveData(new UserInfo(_studentIdInput, _passwordInput));
                 _currentPage = 1;
                 if (_browsingToCourseTimetablePreview) return;
                 if (_navigationCount < NavigationCountUpperLimit) {
@@ -245,5 +247,10 @@ namespace Time_Table_Arranging_Program.Pages {
         }
 
         #endregion
+
+        private void PasswordBox_OnGotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e) {
+            var passwordToBeFilled = new DataManager().TryGetPassword(UserNameBox.Text);
+            if (passwordToBeFilled != null) PasswordBox.Password = passwordToBeFilled;
+        }
     }
 }

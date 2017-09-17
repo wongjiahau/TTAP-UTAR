@@ -175,8 +175,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Class\BugReportSender.cs" />
+    <Compile Include="Class\ConfigFileManager\UserInfo.cs" />
     <Compile Include="Class\FocusNavigator.cs" />
     <Compile Include="Class\SubjectSelectionManager.cs" />
+    <Compile Include="Class\ConfigFileManager\ConfigFileManager.cs" />
     <Compile Include="Interfaces\IProgressIndicator.cs" />
     <Compile Include="Interfaces\ITaskRunnerWithProgressFeedback.cs" />
     <Compile Include="IValueConverter\IsStringEmptyConverter.cs" />
