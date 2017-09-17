@@ -52,5 +52,14 @@ namespace Time_Table_Arranging_Program.Class.ConfigFileManager {
             return user?.DecryptedPassword;
         }
 
+        public List<string> GetStudentIds() {
+            ReadData();
+            if(_userInfos == null) return new List<string>();
+            var result = new List<string>();
+            foreach (var userInfo in _userInfos) {
+                result.Add(userInfo.UserId);
+            }
+            return result;
+        }
     }
 }

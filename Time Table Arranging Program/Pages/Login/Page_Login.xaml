@@ -55,10 +55,14 @@
                         </materialDesign:ColorZone>
                         <StackPanel Visibility="Visible" DockPanel.Dock="Top" HorizontalAlignment="Center"
                                     VerticalAlignment="Center">
-                            <TextBox x:Name="UserNameBox" Margin="0 20 0 0" HorizontalAlignment="Center"
-                                     Width="{Binding ElementName=PasswordBox, Path=Width}" FontSize="20"
-                                     materialDesign:HintAssist.Hint="Student-ID (e.g. 1507693)"
-                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                            <ComboBox
+                                x:Name="UserIdBox" Margin="0 20 0 0"
+                                FontSize="20"
+                                materialDesign:HintAssist.Hint="Student-ID (e.g. 1507693)"
+                                Width="{Binding ElementName=PasswordBox, Path=Width}"
+                                IsEditable="True"
+                                Style="{StaticResource MaterialDesignFloatingHintComboBox}">
+                            </ComboBox>
                             <PasswordBox
                                 x:Name="PasswordBox"
                                 Margin="0 12 0 0" Width="300" FontSize="20"

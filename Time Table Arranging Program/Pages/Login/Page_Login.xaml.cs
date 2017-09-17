@@ -41,15 +41,18 @@ namespace Time_Table_Arranging_Program.Pages {
             _loadDataFromTestServer = loadDataFromTestServer;
         }
 
-        private void Page_Login_Loaded(object sender, RoutedEventArgs e) {
+        private void Page_Login_Loaded(object sender , RoutedEventArgs e) {
             if (_loadDataFromTestServer) {
                 Browser.Navigate(_urlProvider.TestServerUrl);
                 return;
             }
-            if (Global.InputSlotList.Count == 0) Browser.Navigate(_urlProvider.LoginPageUrl);
+            if (Global.InputSlotList.Count == 0) {
+                Browser.Navigate(_urlProvider.LoginPageUrl);
+                InitializeUserIdBox();
+            }
             else {
-                DialogBox.Show("Login again?", "WARNING : If you login again your previous data will be overwritten.",
-                    "CANCEL", "LOGIN AGAIN");
+                DialogBox.Show("Login again?" , "WARNING : If you login again your previous data will be overwritten." ,
+                    "CANCEL" , "LOGIN AGAIN");
                 switch (DialogBox.Result) {
                     case DialogBox.ResultEnum.LeftButtonClicked:
                         NavigationService.GoForward();
@@ -57,14 +60,21 @@ namespace Time_Table_Arranging_Program.Pages {
                     case DialogBox.ResultEnum.RightButtonClicked:
                         Global.InputSlotList.Clear();
                         //Need to reset two times to properly load the login page again
-                        ResetButton_OnClick(null, null);
-                        ResetButton_OnClick(null, null);
+                        ResetButton_OnClick(null , null);
+                        ResetButton_OnClick(null , null);
                         break;
                 }
             }
         }
 
-        private async void Browser_OnLoadCompleted(object sender, NavigationEventArgs e) {
+        private void InitializeUserIdBox() {
+            var possibleStudentIds = new DataManager().GetStudentIds();
+            foreach (string id in possibleStudentIds) {
+                UserIdBox.Items.Add(id);
+            }
+        }
+
+        private async void Browser_OnLoadCompleted(object sender , NavigationEventArgs e) {
             KapchaBrowser.Navigate(_urlProvider.KaptchaUrl);
             ResetButton.IsEnabled = true;
             string currentUrl = Browser.Source.ToString();
@@ -77,21 +87,24 @@ namespace Time_Table_Arranging_Program.Pages {
 
             #region NestedFunctions
 
-            void AssertLoginPageIsLoadedProperly() {
+            void AssertLoginPageIsLoadedProperly()
+            {
                 string html = GetHtml(Browser);
                 if (!html.Contains("Course Registration System"))
                     Browser.Navigate(_urlProvider.LoginPageUrl);
             }
 
-            void DisplayLoginFailedMessage() {
+            void DisplayLoginFailedMessage()
+            {
                 Global.Snackbar.MessageQueue.Enqueue(
                     "Login failed. Please make sure you entered the correct information.");
                 NavigationService.Refresh();
                 _navigationCount = 0;
             }
 
-            void NavigateToCourseTimeTablePreview() {
-                new DataManager().SaveData(new UserInfo(_studentIdInput, _passwordInput));
+            void NavigateToCourseTimeTablePreview()
+            {
+                new DataManager().SaveData(new UserInfo(_studentIdInput , _passwordInput));
                 _currentPage = 1;
                 if (_browsingToCourseTimetablePreview) return;
                 if (_navigationCount < NavigationCountUpperLimit) {
@@ -101,11 +114,12 @@ namespace Time_Table_Arranging_Program.Pages {
                 else {
                     Browser.Navigate(_urlProvider.LoginPageUrl);
                     Global.Snackbar.MessageQueue.Enqueue($"No record found.");
-                    ResetButton_OnClick(null, null);
+                    ResetButton_OnClick(null , null);
                 }
             }
 
-            async void ExtractData() {
+            async void ExtractData()
+            {
                 string html = GetHtml(Browser);
                 DisplayLoadingBar(true);
                 await Task.Run(() => {
@@ -115,31 +129,33 @@ namespace Time_Table_Arranging_Program.Pages {
                     TryGetStartDateAndEndDate(html);
                 });
                 if (CanGoToPage(_currentPage + 1)) {
-                    Browser.InvokeScript("changePage", _currentPage + 1);
+                    Browser.InvokeScript("changePage" , _currentPage + 1);
                     _currentPage++;
                 }
                 else {
                     DisplayLoadingBar(false);
                     if (Global.InputSlotList.Count == 0) {
-                        DialogBox.Show("No data available.", "", "OK");
-                        ResetButton_OnClick(null, null);
+                        DialogBox.Show("No data available." , "" , "OK");
+                        ResetButton_OnClick(null , null);
                         return;
                     }
                     Browser.Navigate(_urlProvider.EndUrl);
                     NavigationService.Navigate(
-                        Page_CreateTimetable.GetInstance(Global.Settings.SearchByConsideringWeekNumber,
+                        Page_CreateTimetable.GetInstance(Global.Settings.SearchByConsideringWeekNumber ,
                             Global.Settings.GeneralizeSlot));
                 }
 
                 #region NestedFunctions
 
-                bool CanGoToPage(int pageNumber) {
+                bool CanGoToPage(int pageNumber)
+                {
                     dynamic doc = Browser.Document;
                     string htmlText = doc.documentElement.InnerHtml;
                     return htmlText.Contains($"javascript:changePage(\'{pageNumber}\')");
                 }
 
-                void TryGetStartDateAndEndDate(string input) {
+                void TryGetStartDateAndEndDate(string input)
+                {
                     try {
                         var parser = new StartDateEndDateFinder(input);
                         Global.TimetableStartDate = parser.GetStartDate();
@@ -160,7 +176,7 @@ namespace Time_Table_Arranging_Program.Pages {
             saveFileDialog.Filter = "Text file (*.html)|*.html";
             saveFileDialog.FileName = "SampleHtmlData";
             if (saveFileDialog.ShowDialog() == true) {
-                File.WriteAllText(saveFileDialog.FileName, html);
+                File.WriteAllText(saveFileDialog.FileName , html);
                 Global.Snackbar.MessageQueue.Enqueue("File saved.");
             }
         }
@@ -188,61 +204,61 @@ namespace Time_Table_Arranging_Program.Pages {
 
         #region EventHandlers
 
-        private void ResetButton_OnClick(object sender, RoutedEventArgs e) {
-            UserNameBox.Text = "";
+        private void ResetButton_OnClick(object sender , RoutedEventArgs e) {
+            UserIdBox.Text = "";
             PasswordBox.Password = "";
             CaptchaBox.Text = "";
             Browser.Navigate(_urlProvider.LoginPageUrl);
         }
 
 
-        private void GotItButton_OnClick(object sender, RoutedEventArgs e) {
+        private void GotItButton_OnClick(object sender , RoutedEventArgs e) {
             DialogHost.IsOpen = false;
             Browser.Navigate(_urlProvider.LoginPageUrl);
             Browser.Visibility = Visibility.Visible;
         }
 
-        private void KapchaBrowser_OnLoadCompleted(object sender, NavigationEventArgs e) {
-            KapchaBrowser.InvokeScript("execScript", "document.body.style.overflow ='hidden'", "JavaScript");
+        private void KapchaBrowser_OnLoadCompleted(object sender , NavigationEventArgs e) {
+            KapchaBrowser.InvokeScript("execScript" , "document.body.style.overflow ='hidden'" , "JavaScript");
         }
 
-        private void LoginButton_OnClick(object sender, RoutedEventArgs e) {
+        private void LoginButton_OnClick(object sender , RoutedEventArgs e) {
             if (!CheckForInternetConnection()) return;
             try {
-                _studentIdInput = UserNameBox.Text;
+                _studentIdInput = UserIdBox.Text;
                 _passwordInput = PasswordBox.Password;
                 _captchaInput = CaptchaBox.Text;
-                Browser.InvokeScript("execScript",
-                    "document.getElementsByName('reqFregkey')[0].value='" + _studentIdInput + "'", "JavaScript");
-                Browser.InvokeScript("execScript",
-                    "document.getElementsByName('reqPassword')[0].value='" + _passwordInput + "'", "JavaScript");
-                Browser.InvokeScript("execScript",
-                    "document.getElementsByName('kaptchafield')[0].value='" + _captchaInput + "'", "JavaScript");
-                Browser.InvokeScript("execScript",
-                    "document.getElementsByName('_submit')[0].click()", "JavaScript");
+                Browser.InvokeScript("execScript" ,
+                    "document.getElementsByName('reqFregkey')[0].value='" + _studentIdInput + "'" , "JavaScript");
+                Browser.InvokeScript("execScript" ,
+                    "document.getElementsByName('reqPassword')[0].value='" + _passwordInput + "'" , "JavaScript");
+                Browser.InvokeScript("execScript" ,
+                    "document.getElementsByName('kaptchafield')[0].value='" + _captchaInput + "'" , "JavaScript");
+                Browser.InvokeScript("execScript" ,
+                    "document.getElementsByName('_submit')[0].click()" , "JavaScript");
             }
             catch (Exception ex) {
                 //If the flow went here, it may be due to the following steps : 
                 // 1. User login into account, and successfully loaded slots
                 // 2. User clicked back
                 // 3. User login again
-                ResetButton_OnClick(null, null);
+                ResetButton_OnClick(null , null);
             }
         }
 
-        private void CaptchaBox_OnKeyUp(object sender, KeyEventArgs e) {
+        private void CaptchaBox_OnKeyUp(object sender , KeyEventArgs e) {
             if (e.Key == Key.Enter)
-                LoginButton_OnClick(null, null);
+                LoginButton_OnClick(null , null);
         }
 
-        private void RetryButton_OnClicked(object sender, RoutedEventArgs e) {
+        private void RetryButton_OnClicked(object sender , RoutedEventArgs e) {
             CheckForInternetConnection();
         }
 
         #endregion
 
-        private void PasswordBox_OnGotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e) {
-            var passwordToBeFilled = new DataManager().TryGetPassword(UserNameBox.Text);
+        private void PasswordBox_OnGotKeyboardFocus(object sender , KeyboardFocusChangedEventArgs e) {
+            var passwordToBeFilled = new DataManager().TryGetPassword(UserIdBox.Text);
             if (passwordToBeFilled != null) PasswordBox.Password = passwordToBeFilled;
         }
     }
