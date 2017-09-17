@@ -6,16 +6,20 @@ using System.Threading.Tasks;
 
 namespace Time_Table_Arranging_Program.Class.ConfigFileManager {
     public class UserInfo {
-        public UserInfo(string userId, string password) {
+        public UserInfo(string userId , string password) {
             UserId = userId;
-            Password = password;
+            EncryptedPassword = StringCipher.Encrypt(password, userId);
         }
 
         public UserInfo() {
-            
+            //For deserialzation purpose
         }
 
         public string UserId { get; set; }
-        public string Password { get; set; }
+
+        public string EncryptedPassword { get; set; }
+
+        public string DecryptedPassword => StringCipher.Decrypt(EncryptedPassword , UserId);
+
     }
 }

@@ -7,7 +7,7 @@ namespace Time_Table_Arranging_Program.Class.ConfigFileManager {
     public class DataManager {
         private static List<UserInfo> _userInfos;
         private const string Path = @"c:\.ttap";
-        private const string DataFilePath = Path + @"\_data.xml";
+        private const string DataFilePath = Path + @"\_userIdAndPassword.xml";
 
         public DataManager() {
             ReadData();
@@ -50,7 +50,7 @@ namespace Time_Table_Arranging_Program.Class.ConfigFileManager {
 
         public string TryGetPassword(string userId) {
             var user = _userInfos?.Find(x => x.UserId == userId);
-            return user?.Password;
+            return user?.DecryptedPassword;
         }
 
     }
