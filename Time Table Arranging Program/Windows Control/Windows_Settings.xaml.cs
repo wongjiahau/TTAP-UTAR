@@ -2,7 +2,6 @@
 using System.ComponentModel;
 using System.Windows;
 using Time_Table_Arranging_Program.Class.AbstractClass;
-using Time_Table_Arranging_Program.MVVM_Framework;
 
 namespace Time_Table_Arranging_Program.Windows_Control {
     /// <summary>
@@ -18,7 +17,7 @@ namespace Time_Table_Arranging_Program.Windows_Control {
         }
 
         public List<Setting> Settings { private set; get; }
-        public bool ApplyClicked { get; private set; } = false;
+        public bool ApplyClicked { get; private set; }
 
         private void InitializeSettings() {
             Settings = new List<Setting>

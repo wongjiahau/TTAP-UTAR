@@ -1,10 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media.Animation;
-using System.Windows.Navigation;
 using MaterialDesignThemes.Wpf;
-using Time_Table_Arranging_Program.UserInterface;
 
 namespace Time_Table_Arranging_Program.Windows_Control {
     /// <summary>

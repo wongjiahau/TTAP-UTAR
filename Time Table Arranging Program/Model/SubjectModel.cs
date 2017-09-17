@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Time_Table_Arranging_Program.Class;
 using Time_Table_Arranging_Program.Class.AbstractClass;
 using Time_Table_Arranging_Program.Pages;

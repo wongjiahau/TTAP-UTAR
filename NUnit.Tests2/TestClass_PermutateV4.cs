@@ -1,9 +1,8 @@
-﻿using NUnit.Framework;
-using NUnit.Framework.Internal;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using NUnit.Framework;
 using Time_Table_Arranging_Program;
 using Time_Table_Arranging_Program.Class;
 using Time_Table_Arranging_Program.Model;

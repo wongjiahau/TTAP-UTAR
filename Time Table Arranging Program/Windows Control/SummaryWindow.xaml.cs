@@ -1,17 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using Time_Table_Arranging_Program.Class;
 using Time_Table_Arranging_Program.MVVM_Framework.Models;
 using Time_Table_Arranging_Program.MVVM_Framework.ViewModels;
@@ -21,9 +10,9 @@ namespace Time_Table_Arranging_Program.Windows_Control {
     /// Interaction logic for SummaryWindow.xaml
     /// </summary>
     public partial class SummaryWindow : Window {
-        private static int Shown = 0;
+        private static int Shown;
 
-        private static bool HintIsShownBefore = false;
+        private static bool HintIsShownBefore;
         private readonly CyclicIndex _cylicIndex;
         private readonly ITimetableList _timetableList;
 

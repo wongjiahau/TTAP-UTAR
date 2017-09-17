@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Time_Table_Arranging_Program.Class.UndoFramework {
+﻿namespace Time_Table_Arranging_Program.Class.UndoFramework {
     public interface IUndoableAction {
         string ToolTipMessage { get; }
         void Execute();

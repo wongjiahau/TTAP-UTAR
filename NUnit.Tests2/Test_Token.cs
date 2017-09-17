@@ -1,8 +1,5 @@
 ﻿using NUnit.Framework;
-using NUnit.Framework.Internal;
-using Time_Table_Arranging_Program.Class;
 using Time_Table_Arranging_Program.Class.TokenParser;
-
 
 namespace NUnit.Tests2 {
     [TestFixture]

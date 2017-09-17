@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using NUnit.Framework;
 using Time_Table_Arranging_Program;
-using Time_Table_Arranging_Program.User_Control.SubjectListFolder;
 
 namespace NUnit.Tests2 {
     [TestFixture]

@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using HtmlAgilityPack;
 using Time_Table_Arranging_Program.Class.Converter;
 
@@ -48,7 +46,7 @@ namespace Time_Table_Arranging_Program.Class.TokenParser {
                         continue;
                     }
                     if (cells.Count == 1) {
-                        var tokens = cells[0].InnerText.Split(new string[] {" - "}, StringSplitOptions.None);
+                        var tokens = cells[0].InnerText.Split(new[] {" - "}, StringSplitOptions.None);
                         currentSubjectCode = tokens[0].Trim();
                         if (tokens.Length > 1)
                             currentSubjectName = tokens[1].Split('[')[0].Trim().Beautify();

@@ -2,7 +2,6 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Time_Table_Arranging_Program.Class;
 
 namespace Time_Table_Arranging_Program.User_Control {

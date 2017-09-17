@@ -1,5 +1,4 @@
-﻿using System.Windows.Forms;
-using System.Windows.Media;
+﻿using System.Windows.Media;
 
 namespace Time_Table_Arranging_Program {
     public interface IColorGenerator {
@@ -22,7 +21,7 @@ namespace Time_Table_Arranging_Program {
             Colors.MediumPurple,
             Colors.MediumVioletRed,
             Colors.DeepSkyBlue,
-            Colors.LightCoral,
+            Colors.LightCoral
         };
 
         private int _pointer;

@@ -1,14 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
-using Time_Table_Arranging_Program.MVVM_Framework;
 using Time_Table_Arranging_Program.MVVM_Framework.Models;
 using Time_Table_Arranging_Program.MVVM_Framework.ViewModels;
 using Time_Table_Arranging_Program.Pages.GettingStarted;
-using Time_Table_Arranging_Program.Windows_Control;
 
 namespace Time_Table_Arranging_Program.Pages.Page_GettingStarted {
     /// <summary>
@@ -17,7 +13,7 @@ namespace Time_Table_Arranging_Program.Pages.Page_GettingStarted {
     public partial class Page_Introduction : Page {
         private readonly CyclicIndex _cyclicIndex;
 
-        private readonly List<Type> _pages = new List<Type>()
+        private readonly List<Type> _pages = new List<Type>
         {
             typeof(WelcomeToTTAP),
             typeof(DoYouWantToWatchTTAPTutorial),

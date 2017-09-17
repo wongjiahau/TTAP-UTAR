@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using Time_Table_Arranging_Program.Class.Converter;
 using Time_Table_Arranging_Program.Class.Helper;
 
@@ -59,7 +58,7 @@ namespace Time_Table_Arranging_Program.Class.StateSummary {
             var o = timetables;
             if (o == null) return null;
             for (int i = 0; i < o.Count; i++) {
-                int[] result = new[] {0, 0, 0, 0, 0, 0, 0};
+                int[] result = {0, 0, 0, 0, 0, 0, 0};
                 for (int j = 0; j < o[i].Count; j++) {
                     var slot = o[i][j];
                     int day = slot.Day.IntValue - 1;
@@ -88,7 +87,7 @@ namespace Time_Table_Arranging_Program.Class.StateSummary {
             var o = outputTimetables;
             if (o == null) return new List<IStateCell>();
             for (int i = 0; i < o.Count; i++) {
-                int[] result = new[] {0, 0, 0, 0, 0, 0, 0};
+                int[] result = {0, 0, 0, 0, 0, 0, 0};
                 for (int j = 0; j < o[i].Count; j++) {
                     var slot = o[i][j];
                     int day = slot.Day.IntValue - 1;
@@ -109,7 +108,7 @@ namespace Time_Table_Arranging_Program.Class.StateSummary {
                 Time time = Time.CreateTime_24HourFormat(7, 0);
                 for (int j = 0; j < length; j++) {
                     var c = new StateCell(i, j, day, time);
-                    if (and_value[j] == true) c.State = CellState.DefinitelyOccupied;
+                    if (and_value[j]) c.State = CellState.DefinitelyOccupied;
                     else if (or_value[j] == false) c.State = CellState.DefinitelyUnoccupied;
                     else c.State = CellState.MaybeUnoccupied;
                     stateCells.Add(c);

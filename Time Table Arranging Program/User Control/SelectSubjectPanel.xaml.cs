@@ -4,19 +4,12 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media.Animation;
 using System.Windows.Threading;
 using MaterialDesignThemes.Wpf;
 using Time_Table_Arranging_Program.Class.Helper;
 using Time_Table_Arranging_Program.Interfaces;
-using Time_Table_Arranging_Program.Model;
-using Time_Table_Arranging_Program.Pages;
-using Time_Table_Arranging_Program.UserInterface;
-using Time_Table_Arranging_Program.User_Control.CheckboxWithListDownMenuFolder;
-using Time_Table_Arranging_Program.User_Control.CheckboxWithListDownMenuFolder.ErrorMessageType;
 using Time_Table_Arranging_Program.User_Control.SubjectListFolder;
-using static System.Windows.Visibility;
-using SubjectView = Time_Table_Arranging_Program.User_Control.SubjectViewFolder.SubjectView;
+using Time_Table_Arranging_Program.User_Control.SubjectViewFolder;
 
 namespace Time_Table_Arranging_Program.User_Control {
     /// <summary>

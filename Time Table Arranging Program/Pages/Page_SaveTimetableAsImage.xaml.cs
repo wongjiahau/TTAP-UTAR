@@ -1,23 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using Microsoft.Win32;
 using Time_Table_Arranging_Program.Class;
 using Time_Table_Arranging_Program.Class.Helper;
-using Time_Table_Arranging_Program.Windows_Control;
 
 namespace Time_Table_Arranging_Program.Pages {
     /// <summary>
@@ -30,7 +17,7 @@ namespace Time_Table_Arranging_Program.Pages {
         }
 
         private void SaveImageButton_OnClick(object sender, RoutedEventArgs e) {
-            var saveDialog = new SaveFileDialog() {Filter = "Image file (*.png)|*.png", FileName = "MyTimetable"};
+            var saveDialog = new SaveFileDialog {Filter = "Image file (*.png)|*.png", FileName = "MyTimetable"};
             if (saveDialog.ShowDialog() == false) return;
             try {
                 using (new WaitCursor()) {

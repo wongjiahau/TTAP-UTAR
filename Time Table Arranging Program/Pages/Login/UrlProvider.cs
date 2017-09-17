@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Time_Table_Arranging_Program.Pages.Login {
     public class UrlProvider {
@@ -35,8 +31,8 @@ namespace Time_Table_Arranging_Program.Pages.Login {
         }
 
         public bool IsAtLoginPage(string url) {
-            return url.Split(new string[] {"//"}, StringSplitOptions.None)[1] ==
-                   LoginPageUrl.Split(new string[] {"//"}, StringSplitOptions.None)[1];
+            return url.Split(new[] {"//"}, StringSplitOptions.None)[1] ==
+                   LoginPageUrl.Split(new[] {"//"}, StringSplitOptions.None)[1];
         }
     }
 }

@@ -1,12 +1,9 @@
-﻿using MaterialDesignThemes.Wpf;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Windows;
 using System.Windows.Controls;
+using MaterialDesignThemes.Wpf;
 using Time_Table_Arranging_Program.Class;
-using Time_Table_Arranging_Program.Class.SlotGeneralizer;
 using Time_Table_Arranging_Program.Class.UndoFramework;
-using Time_Table_Arranging_Program.Pages;
 using Time_Table_Arranging_Program.Windows_Control;
 
 namespace Time_Table_Arranging_Program {

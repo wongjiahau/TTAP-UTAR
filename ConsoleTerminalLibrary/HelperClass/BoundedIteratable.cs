@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ConsoleTerminalLibrary.HelperClass {
     public interface IBoundedIteratable<T> {
@@ -18,7 +15,7 @@ namespace ConsoleTerminalLibrary.HelperClass {
 
     }
     public class BoundedIteratable<T> : IBoundedIteratable<T> {
-        private int _counter = 0;
+        private int _counter;
         private readonly List<T> _items = new List<T>();
         public void GoToPrevious() {
             if (_counter == 0) return;

@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Navigation;
 using System.Windows.Threading;
 using Time_Table_Arranging_Program.Class;
-using Time_Table_Arranging_Program.Class.SlotGeneralizer;
 using Time_Table_Arranging_Program.Class.TokenParser;
 using Time_Table_Arranging_Program.UserInterface;
 using Time_Table_Arranging_Program.Windows_Control;

@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Windows;
-using System.Windows.Media;
-using Time_Table_Arranging_Program.UserInterface;
 
 namespace Time_Table_Arranging_Program.User_Control.TimeChooserCircular {
     /// <summary>

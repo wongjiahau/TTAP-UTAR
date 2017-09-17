@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Threading;
 using System.Windows;
-using Time_Table_Arranging_Program.Class;
 using Time_Table_Arranging_Program.Interfaces;
 
 namespace Time_Table_Arranging_Program.Windows_Control {

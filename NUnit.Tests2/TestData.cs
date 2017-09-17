@@ -9,7 +9,7 @@ using static NUnit.Tests2.TestData.Subjects;
 
 namespace NUnit.Tests2 {
     public static class TestData {
-        public static readonly List<Slot> TestSlots = new List<Slot>()
+        public static readonly List<Slot> TestSlots = new List<Slot>
         {
          new Slot(3,"MPU3113", " Hubungan Etnik (for Local Students)", "1", "L", Day.Parse("Mon"), "KB521", new TimePeriod(Time.CreateTime_24HourFormat(9,0),Time.CreateTime_24HourFormat(12,0)), WeekNumber.Parse("1-14")),
 new Slot(5,"MPU3113", " Hubungan Etnik (for Local Students)", "2", "L", Day.Parse("Mon"), "KB521", new TimePeriod(Time.CreateTime_24HourFormat(14,0),Time.CreateTime_24HourFormat(17,0)), WeekNumber.Parse("1-14")),
@@ -361,7 +361,7 @@ new Slot(695,"UKMM1043", " Basic Economics, Accounting And Management", "1", "T"
 new Slot(697,"UKMM1043", " Basic Economics, Accounting And Management", "3", "T", Day.Parse("Tue"), "KB320", new TimePeriod(Time.CreateTime_24HourFormat(17,0),Time.CreateTime_24HourFormat(18,30)), WeekNumber.Parse("1-14")),
 new Slot(699,"UKMM1043", " Basic Economics, Accounting And Management", "5", "T", Day.Parse("Thu"), "KB516", new TimePeriod(Time.CreateTime_24HourFormat(11,30),Time.CreateTime_24HourFormat(13,0)), WeekNumber.Parse("1-14")),
 new Slot(701,"UKMM1043", " Basic Economics, Accounting And Management", "6", "T", Day.Parse("Fri"), "KB318", new TimePeriod(Time.CreateTime_24HourFormat(14,30),Time.CreateTime_24HourFormat(16,0)), WeekNumber.Parse("1-14")),
-new Slot(703,"UKMM1043", " Basic Economics, Accounting And Management", "7", "T", Day.Parse("Fri"), "KB318", new TimePeriod(Time.CreateTime_24HourFormat(16,0),Time.CreateTime_24HourFormat(17,30)), WeekNumber.Parse("1-14")),
+new Slot(703,"UKMM1043", " Basic Economics, Accounting And Management", "7", "T", Day.Parse("Fri"), "KB318", new TimePeriod(Time.CreateTime_24HourFormat(16,0),Time.CreateTime_24HourFormat(17,30)), WeekNumber.Parse("1-14"))
 
        };
 
@@ -501,7 +501,7 @@ new Slot(703,"UKMM1043", " Basic Economics, Accounting And Management", "7", "T"
             EngineeringApplicationInEnvironment,
             IntroductionToKorean,
             SunZisArtOfWarAndBusinessStrategies,
-            BasicEconomicsAccountingAndManagement,
+            BasicEconomicsAccountingAndManagement
         }
 
     }

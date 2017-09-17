@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Time_Table_Arranging_Program.Class.AbstractClass;
+﻿using Time_Table_Arranging_Program.Class.AbstractClass;
 
 namespace Time_Table_Arranging_Program.MVVM_Framework {
     public abstract class ViewModelBase : ObservableObject { }

@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Input;
 using Time_Table_Arranging_Program.Class;
 using Time_Table_Arranging_Program.Class.AbstractClass;
@@ -128,21 +125,21 @@ namespace Time_Table_Arranging_Program.User_Control.SubjectListFolder {
 
         #region SearchingProperties
 
-        private bool _isHintLabelVisible = false;
+        private bool _isHintLabelVisible;
 
         public bool IsHintLabelVisible {
             get => _isHintLabelVisible;
             set => SetProperty(ref _isHintLabelVisible, value);
         }
 
-        private bool _isFeedbackPanelVisible = false;
+        private bool _isFeedbackPanelVisible;
 
         public bool IsFeedbackPanelVisible {
             get => _isFeedbackPanelVisible;
             set => SetProperty(ref _isFeedbackPanelVisible, value);
         }
 
-        private bool _isErrorLabelVisible = false;
+        private bool _isErrorLabelVisible;
 
         public bool IsErrorLabelVisible {
             get => _isErrorLabelVisible;

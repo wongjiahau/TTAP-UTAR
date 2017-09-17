@@ -1,9 +1,8 @@
-﻿using NUnit.Framework;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using NUnit.Framework;
 using Time_Table_Arranging_Program;
 using Time_Table_Arranging_Program.Class;
-using Time_Table_Arranging_Program.Class.StateSummary;
 using static NUnit.Tests2.TestData;
 
 namespace NUnit.Tests2 {

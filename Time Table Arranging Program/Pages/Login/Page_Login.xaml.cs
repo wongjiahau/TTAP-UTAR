@@ -1,22 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Navigation;
+using Microsoft.Win32;
 using Time_Table_Arranging_Program.Class;
 using Time_Table_Arranging_Program.Class.ConfigFileManager;
 using Time_Table_Arranging_Program.Class.Helper;
 using Time_Table_Arranging_Program.Class.TokenParser;
 using Time_Table_Arranging_Program.Pages.Login;
 using Time_Table_Arranging_Program.Windows_Control;
-using KeyEventArgs = System.Windows.Input.KeyEventArgs;
-using MessageBox = System.Windows.MessageBox;
-using SaveFileDialog = Microsoft.Win32.SaveFileDialog;
-using WebBrowser = System.Windows.Controls.WebBrowser;
 
 namespace Time_Table_Arranging_Program.Pages {
     /// <summary>
@@ -31,7 +26,7 @@ namespace Time_Table_Arranging_Program.Pages {
         private readonly UrlProvider _urlProvider;
         private string _captchaInput;
         private int _currentPage = 1;
-        private int _navigationCount = 0;
+        private int _navigationCount;
         private string _passwordInput;
         private string _studentIdInput;
 
@@ -175,10 +170,8 @@ namespace Time_Table_Arranging_Program.Pages {
                 DrawerHost.IsBottomDrawerOpen = false;
                 return true;
             }
-            else {
-                DrawerHost.IsBottomDrawerOpen = true;
-                return false;
-            }
+            DrawerHost.IsBottomDrawerOpen = true;
+            return false;
         }
 
         private string GetHtml(WebBrowser b) {

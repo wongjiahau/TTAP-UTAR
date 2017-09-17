@@ -2,16 +2,10 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Forms.VisualStyles;
-using System.Windows.Threading;
-using MaterialDesignThemes.Wpf;
 using Microsoft.Win32;
 using Time_Table_Arranging_Program.Class;
-using Time_Table_Arranging_Program.Class.Helper;
 using Time_Table_Arranging_Program.Class.SlotGeneralizer;
 using Time_Table_Arranging_Program.Interfaces;
 using Time_Table_Arranging_Program.Model;
@@ -37,7 +31,7 @@ namespace Time_Table_Arranging_Program.Pages {
         private readonly Func<Slot[] , List<List<Slot>>> _permutator;
         private CyclicIndex _cyclicIndex;
 
-        private bool _leftDrawerIsOpened = false;
+        private bool _leftDrawerIsOpened;
 
 
         private List<List<Slot>> _raw;
@@ -159,7 +153,8 @@ namespace Time_Table_Arranging_Program.Pages {
 
         private void SaveAsPicture_OnClick(object sender , RoutedEventArgs e) {
             DrawerHost.IsBottomDrawerOpen = false;
-            var p = new Window() {
+            var p = new Window
+            {
                 SizeToContent = SizeToContent.WidthAndHeight ,
                 Content = new Page_SaveTimetableAsImage(TimetableViewer.GetCurrentTimetable())
             };
@@ -171,14 +166,15 @@ namespace Time_Table_Arranging_Program.Pages {
             DrawerHost.IsBottomDrawerOpen = false;
             var slots = TimetableViewer.GetCurrentTimetable().ToList();
             var subjects = SubjectSummaryModel.GroupIntoSubjects(slots);
-            var p = new SaveFileDialog() {
+            var p = new SaveFileDialog
+            {
                 Filter = "Notepad file (*.txt)|*.txt" ,
                 FileName = "MyTimetableSummary"
             };
             if (p.ShowDialog() == false) return;
             string result = "";
             foreach (var s in subjects) {
-                result += s.ToString() + "\r\n\r\n";
+                result += s + "\r\n\r\n";
             }
             try {
                 File.WriteAllText(p.FileName , result);

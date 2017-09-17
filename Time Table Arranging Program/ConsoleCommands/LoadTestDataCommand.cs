@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using ConsoleTerminalLibrary.Console;
 using Time_Table_Arranging_Program.Class;
 using Time_Table_Arranging_Program.Class.Helper;
 using Time_Table_Arranging_Program.Class.TokenParser;
-using Time_Table_Arranging_Program.Pages;
 
 namespace Time_Table_Arranging_Program.ConsoleCommands {
     public class LoadTestDataCommand : ConsoleCommandWithArgument {

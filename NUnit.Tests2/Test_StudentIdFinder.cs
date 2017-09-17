@@ -1,14 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using NUnit.Framework;
 using Time_Table_Arranging_Program;
-using Time_Table_Arranging_Program.Class;
 using Time_Table_Arranging_Program.Class.Parser;
 using Time_Table_Arranging_Program.Class.TokenParser;
-
 
 namespace NUnit.Tests2 {
     [TestFixture]

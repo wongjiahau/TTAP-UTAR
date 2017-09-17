@@ -1,6 +1,6 @@
-﻿using NUnit.Framework;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using NUnit.Framework;
 using Time_Table_Arranging_Program.Class.Converter;
 
 namespace NUnit.Tests2 {

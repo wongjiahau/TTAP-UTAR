@@ -1,5 +1,4 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using Time_Table_Arranging_Program.Class;
 using Time_Table_Arranging_Program.Interfaces;

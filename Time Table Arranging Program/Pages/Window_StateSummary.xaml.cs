@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -28,7 +27,7 @@ namespace Time_Table_Arranging_Program.Pages {
         }
 
         public List<Predicate<Slot>> Predicates => _predicates;
-        public bool UserClickedDone { get; private set; } = false;
+        public bool UserClickedDone { get; private set; }
         public List<List<Slot>> RemainingTimetables { get; private set; }
 
         private void RegenerateOutput() {
@@ -91,7 +90,7 @@ namespace Time_Table_Arranging_Program.Pages {
 
     public class MockStateElementFactory : IStateElementFactory {
         public UIElement CreateDefinitelyOccupiedState() {
-            return new Border() {Background = Brushes.DarkRed, Height = 50};
+            return new Border {Background = Brushes.DarkRed, Height = 50};
         }
 
         public virtual UIElement CreateMaybeUnoccupiedState(IStateCell cell,
@@ -102,7 +101,7 @@ namespace Time_Table_Arranging_Program.Pages {
             //    ToolTip = cell.ToString() ,
             //    Style = style
             //};
-            var result = new MaybeUnoccupiedToggleButton()
+            var result = new MaybeUnoccupiedToggleButton
             {
                 ToolTip = cell.ToString()
             };
@@ -114,7 +113,7 @@ namespace Time_Table_Arranging_Program.Pages {
 
 
         public UIElement CreateDefinitelyUnoccupiedState() {
-            return new Border() {Background = Brushes.DarkGray, Height = 50};
+            return new Border {Background = Brushes.DarkGray, Height = 50};
         }
     }
 

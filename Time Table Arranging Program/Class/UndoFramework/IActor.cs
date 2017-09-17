@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Time_Table_Arranging_Program.Class.UndoFramework {
+﻿namespace Time_Table_Arranging_Program.Class.UndoFramework {
     public interface IActor {
         /// <summary>
         /// Set the current post of the actor based on the snapshot

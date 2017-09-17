@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Globalization;
-using Time_Table_Arranging_Program.Class.Parser;
-using Time_Table_Arranging_Program.Class.TokenParser;
 using HtmlAgilityPack;
 
 namespace Time_Table_Arranging_Program.Class {

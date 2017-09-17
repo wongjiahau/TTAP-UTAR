@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ConsoleTerminalLibrary.Console;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Time_Table_Arranging_Program.Pages;
 
 namespace Time_Table_Arranging_Program.ConsoleCommands {
     public class LoadDataFromTestServerCommand : ConsoleCommandBase {

@@ -1,17 +1,10 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
-using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Threading;
-using MaterialDesignThemes.Wpf;
 using Time_Table_Arranging_Program.MVVM_Framework;
 
 namespace Time_Table_Arranging_Program.User_Control {
@@ -30,7 +23,7 @@ namespace Time_Table_Arranging_Program.User_Control {
             HorizontalAlignment = HorizontalAlignment.Center;
             PopupAnimation = PopupAnimation.Slide;
             _label = GetLabel();
-            _button = new Button()
+            _button = new Button
             {
                 Style = Application.Current.FindResource("MaterialDesignRaisedAccentButton") as Style
             };
@@ -45,7 +38,7 @@ namespace Time_Table_Arranging_Program.User_Control {
             else {
                 if (closePopupAfterActionButtonClicked) {
                     resultAction =
-                        (Action) Delegate.Combine(new List<Action>() {defaultAction, actionHandler}.ToArray());
+                        (Action) Delegate.Combine(new List<Action> {defaultAction, actionHandler}.ToArray());
                 }
                 else {
                     resultAction = actionHandler;
@@ -72,7 +65,7 @@ namespace Time_Table_Arranging_Program.User_Control {
                 Padding = new Thickness(5),
                 Margin = new Thickness(5),
                 Background = Brushes.Black,
-                Child = new StackPanel()
+                Child = new StackPanel
                 {
                     Orientation = Orientation.Horizontal,
                     Children =

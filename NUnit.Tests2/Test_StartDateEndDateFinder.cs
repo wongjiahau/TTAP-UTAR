@@ -1,7 +1,5 @@
-﻿using NUnit.Framework;
-using System;
-using System.IO;
-using Time_Table_Arranging_Program;
+﻿using System;
+using NUnit.Framework;
 using Time_Table_Arranging_Program.Class;
 
 namespace NUnit.Tests2 {

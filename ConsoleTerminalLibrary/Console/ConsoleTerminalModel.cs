@@ -1,18 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
 using ConsoleTerminalLibrary.BuildIn_Command;
 using ConsoleTerminalLibrary.HelperClass;
-
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ConsoleTerminalLibrary.Console {
     public class ConsoleTerminalModel : INotifyPropertyChanged {
         private string _consoleInput = string.Empty;
-        private ObservableCollection<string> _consoleOutput = new ObservableCollection<string>() { "Type '/help' to list available commands." };
+        private ObservableCollection<string> _consoleOutput = new ObservableCollection<string> { "Type '/help' to list available commands." };
         private readonly List<IConsoleCommand> _commandList;
         private readonly IBoundedIteratable<string> _inputHistory = new BoundedIteratable<string>();
 
@@ -20,7 +18,7 @@ namespace ConsoleTerminalLibrary.Console {
             //Adding built in command
             _commandList = new List<IConsoleCommand>();
             _commandList.AddRange(
-                new List<IConsoleCommand>()
+                new List<IConsoleCommand>
                 {
                     new HelpCommand(_commandList),
                     new ClearScreenCommand(_consoleOutput),

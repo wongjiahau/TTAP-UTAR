@@ -4,14 +4,12 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
-using System.Windows.Input;
 using System.Windows.Media;
 using Time_Table_Arranging_Program.Class;
 using Time_Table_Arranging_Program.Class.Converter;
 using Time_Table_Arranging_Program.Class.StateSummary;
 using Time_Table_Arranging_Program.Pages;
 using Time_Table_Arranging_Program.User_Control.TimetableGuiControls;
-using Time_Table_Arranging_Program.Windows_Control;
 
 namespace Time_Table_Arranging_Program {
     /// <summary>
@@ -67,7 +65,7 @@ namespace Time_Table_Arranging_Program {
         }
 
         private void BuildDayTimeCellAtTopLeftCorner() {
-            var dayTimeCell = new DayTimeCell() {VerticalAlignment = VerticalAlignment.Bottom};
+            var dayTimeCell = new DayTimeCell {VerticalAlignment = VerticalAlignment.Bottom};
             Grid.Children.Add(dayTimeCell);
             Grid.SetColumn(dayTimeCell, 0);
             Grid.SetRow(dayTimeCell, 0);
@@ -85,7 +83,7 @@ namespace Time_Table_Arranging_Program {
             string[] days = {"MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"};
             var rowIndex = 2;
             for (var i = 0; i < days.Length; i++) {
-                var border = new Border()
+                var border = new Border
                 {
                     BorderBrush = Brushes.Black,
                     BorderThickness = new Thickness(0, 0, 1, 0),
@@ -289,7 +287,7 @@ namespace Time_Table_Arranging_Program {
                 CornerRadius = new CornerRadius(2),
                 Height = 50,
                 ForceCursor = true,
-                ToolTip = GetTooltip(s), // s.SubjectName ,                 
+                ToolTip = GetTooltip(s) // s.SubjectName ,                 
             };
             var originalColor = c.GetCurrentColor();
             var originalBrush = c.GetCurrentBrush();

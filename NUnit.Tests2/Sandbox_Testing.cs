@@ -1,7 +1,7 @@
-﻿using NUnit.Framework;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
+using NUnit.Framework;
 using Time_Table_Arranging_Program;
 using Time_Table_Arranging_Program.Class;
 using Time_Table_Arranging_Program.Class.SlotGeneralizer;
@@ -11,7 +11,7 @@ namespace NUnit.Tests2 {
     public class Sandbox_Testing {
         [Test]
         public void SandBoxTest_1() {
-            var list = new List<int>() { 1 , 2 , 3 };
+            var list = new List<int> { 1 , 2 , 3 };
             Mutate(list);
             Assert.True(list.Count == 0);
 

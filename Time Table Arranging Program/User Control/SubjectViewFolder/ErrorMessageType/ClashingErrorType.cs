@@ -2,6 +2,6 @@
     public enum ClashingErrorType {
         NoError,
         SingleClashingError, //Clashing with one subject
-        GroupClashingError, //Clashing with combinations of several subjects
+        GroupClashingError //Clashing with combinations of several subjects
     }
 }

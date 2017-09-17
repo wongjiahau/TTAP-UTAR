@@ -1,5 +1,5 @@
-﻿using NUnit.Framework;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using NUnit.Framework;
 using Time_Table_Arranging_Program.Class;
 using Time_Table_Arranging_Program.User_Control;
 

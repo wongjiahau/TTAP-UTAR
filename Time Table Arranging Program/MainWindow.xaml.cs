@@ -1,28 +1,22 @@
-﻿using System;
-using Microsoft.Win32;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.IO;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
 using System.Windows.Media.Animation;
 using System.Windows.Navigation;
 using ConsoleTerminalLibrary.Console;
+using Microsoft.Win32;
 using Time_Table_Arranging_Program.Class;
-using Time_Table_Arranging_Program.Class.SlotGeneralizer;
-using Time_Table_Arranging_Program.Class.TokenParser;
 using Time_Table_Arranging_Program.ConsoleCommands;
 using Time_Table_Arranging_Program.Interfaces;
 using Time_Table_Arranging_Program.Pages;
 using Time_Table_Arranging_Program.Pages.Login;
 using Time_Table_Arranging_Program.Pages.Page_GettingStarted;
-using Time_Table_Arranging_Program.User_Control;
+using Time_Table_Arranging_Program.Properties;
 using Time_Table_Arranging_Program.UserInterface;
+using Time_Table_Arranging_Program.User_Control;
 using Time_Table_Arranging_Program.Windows_Control;
-using static Time_Table_Arranging_Program.Windows_Control.Setting.SettingDescription;
-using Settings = Time_Table_Arranging_Program.Properties.Settings;
 
 namespace Time_Table_Arranging_Program {
     /// <summary>
@@ -31,7 +25,7 @@ namespace Time_Table_Arranging_Program {
     public partial class MainWindow : Window {
         private readonly UrlProvider _urlProvider = new UrlProvider();
 
-        private bool _exitConfirmed = false;
+        private bool _exitConfirmed;
 
         public MainWindow() {
             //The following two lines of code is to reset the PromptForFeedbackSettings to true
@@ -45,7 +39,7 @@ namespace Time_Table_Arranging_Program {
             Global.Snackbar = Snackbar;
             var firstPage = new Page_Introduction();
             MainFrame.Navigate(firstPage);
-            ConsoleTerminal.Initialize(new ConsoleTerminalModel(new List<IConsoleCommand>()
+            ConsoleTerminal.Initialize(new ConsoleTerminalModel(new List<IConsoleCommand>
             {
                 new LoadTestDataCommand(this),
                 new HideConsoleCommand(DrawerHost),
@@ -88,9 +82,7 @@ namespace Time_Table_Arranging_Program {
             if (_exitConfirmed) return;
             DialogBox.Show("Quit TTAP?", "Note : Quiting will cause you to lose your current progress.", "CANCEL",
                 "QUIT");
-            if (DialogBox.Result == DialogBox.ResultEnum.LeftButtonClicked) {
-                return;
-            }
+            if (DialogBox.Result == DialogBox.ResultEnum.LeftButtonClicked) { }
             else {
                 _exitConfirmed = true;
                 if ((bool) Settings.Default["PromptForFeedback"]) {

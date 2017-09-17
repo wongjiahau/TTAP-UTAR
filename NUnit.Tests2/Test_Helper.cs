@@ -1,7 +1,7 @@
-﻿using NUnit.Framework;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using NUnit.Framework;
 using Time_Table_Arranging_Program.Class.Helper;
 
 namespace NUnit.Tests2 {
@@ -23,7 +23,7 @@ namespace NUnit.Tests2 {
         public void Test_ToBitArray_1() {
             int input = Convert.ToInt32("1100",2);
             var result = input.ToBitArray();
-            var expected = new List<bool>() { false,false,true,true};
+            var expected = new List<bool> { false,false,true,true};
             for (int i = 0; i < 4; i++) {
                Assert.IsTrue(result[i]== expected[i]);
             }

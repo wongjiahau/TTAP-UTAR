@@ -1,5 +1,5 @@
-﻿using NUnit.Framework;
-using System;
+﻿using System;
+using NUnit.Framework;
 using Time_Table_Arranging_Program;
 using Time_Table_Arranging_Program.Class;
 using Time_Table_Arranging_Program.Class.Converter;
@@ -7,7 +7,8 @@ using Time_Table_Arranging_Program.Class.Converter;
 namespace NUnit.Tests2 {
     [TestFixture]
     public class Test_SlotIndex {
-        public static Slot TestSlot = new Slot() {
+        public static Slot TestSlot = new Slot
+        {
             Day = Day.Monday ,
             StartTime = Time.CreateTime_24HourFormat(7 , 0) ,
             EndTime = Time.CreateTime_24HourFormat(8 , 0)
@@ -26,7 +27,8 @@ namespace NUnit.Tests2 {
 
         [Test]
         public void Test_SlotIndex_2() {
-            var s = new Slot() {
+            var s = new Slot
+            {
                 Day = Day.Tuesday ,
                 StartTime = Time.CreateTime_24HourFormat(7 , 30) ,
                 EndTime = Time.CreateTime_24HourFormat(9 , 0)
@@ -41,7 +43,8 @@ namespace NUnit.Tests2 {
 
         [Test]
         public void Test_SlotIndex_3() {
-            var s = new Slot() {
+            var s = new Slot
+            {
                 Day = Day.Tuesday ,
                 StartTime = Time.CreateTime_24HourFormat(9 , 0) ,
                 EndTime = Time.CreateTime_24HourFormat(12 , 0)

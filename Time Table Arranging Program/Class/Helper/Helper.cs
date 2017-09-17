@@ -10,7 +10,6 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
-
 namespace Time_Table_Arranging_Program.Class.Helper {
     public static class Helper {
         public static string RawStringOfTestFile(string fileName, string nameSpace = "NUnit.Tests2.TestFiles.") {
@@ -32,7 +31,7 @@ namespace Time_Table_Arranging_Program.Class.Helper {
         }
 
         public static BitArray ToBitArray(this int x) {
-            return new BitArray(new int[] {x});
+            return new BitArray(new[] {x});
 
             string s = Convert.ToString(x, 2); //Convert to binary in a string
 

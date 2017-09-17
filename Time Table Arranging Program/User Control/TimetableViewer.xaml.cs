@@ -5,7 +5,6 @@ using System.Windows.Controls;
 using Time_Table_Arranging_Program.Class;
 using Time_Table_Arranging_Program.Interfaces;
 using Time_Table_Arranging_Program.MVVM_Framework.Models;
-using Time_Table_Arranging_Program.MVVM_Framework.ViewModels;
 
 namespace Time_Table_Arranging_Program.User_Control {
     /// <summary>

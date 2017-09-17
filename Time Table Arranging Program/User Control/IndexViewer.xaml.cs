@@ -1,9 +1,8 @@
-﻿using MaterialDesignThemes.Wpf;
-using System;
+﻿using System;
 using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
-using Time_Table_Arranging_Program.Interfaces;
+using MaterialDesignThemes.Wpf;
 using Time_Table_Arranging_Program.MVVM_Framework.Models;
 
 namespace Time_Table_Arranging_Program.User_Control {
