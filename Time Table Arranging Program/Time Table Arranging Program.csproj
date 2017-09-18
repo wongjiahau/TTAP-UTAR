@@ -104,8 +104,9 @@
     <SignManifests>false</SignManifests>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ExtraTools">
-      <HintPath>..\ExtraTools\bin\Release\ExtraTools.dll</HintPath>
+    <Reference Include="ExtraTools, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DependencyPackages\ExtraTools.dll</HintPath>
     </Reference>
     <Reference Include="Google.Apis, Version=1.26.2.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
       <HintPath>..\packages\Google.Apis.1.26.2\lib\net45\Google.Apis.dll</HintPath>
@@ -710,6 +711,7 @@
     <EmbeddedResource Include="SampleData\SampleData-FAM-2017-2ndSem.html" />
     <EmbeddedResource Include="SampleData\SampleData-FCI-2017-2ndSem.html" />
     <Resource Include="Images\calendarBig.png" />
+    <Content Include="DependencyPackages\ExtraTools.dll" />
     <Content Include="SampleData\SampleHTML_FromLocalTestServer.html" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
