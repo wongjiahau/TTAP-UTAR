@@ -69,13 +69,14 @@
                                 GotKeyboardFocus="PasswordBox_OnGotKeyboardFocus"
                                 materialDesign:HintAssist.Hint="Password (e.g. 960813-14-5677)"
                                 Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" />
-                            <Grid>
+                            <StackPanel >
                                 <TextBox x:Name="CaptchaBox" VerticalAlignment="Top" KeyUp="CaptchaBox_OnKeyUp"
                                          Margin="0 12 0 0" HorizontalAlignment="Center" FontSize="20"
                                          Width="{Binding ElementName=PasswordBox, Path=Width}"
                                          materialDesign:HintAssist.Hint="Enter captcha"
                                          Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
-                                <Border HorizontalAlignment="Right" Width="150" Height="60">
+                                <Image x:Name="Image"></Image>
+                                <Border HorizontalAlignment="Center">
                                     <WebBrowser Visibility="Visible" HorizontalAlignment="Center" Margin="5"
                                                 LoadCompleted="KapchaBrowser_OnLoadCompleted" Name="KapchaBrowser"
                                                 OverridesDefaultStyle="False"
@@ -83,7 +84,7 @@
                                                 ScrollViewer.HorizontalScrollBarVisibility="Hidden"
                                                 ScrollViewer.VerticalScrollBarVisibility="Hidden" />
                                 </Border>
-                            </Grid>
+                            </StackPanel>
                             <Button Margin="0 20 0 0" Width="200" FontSize="20" FontWeight="Bold" Height="50"
                                     Click="LoginButton_OnClick">
                                 LOGIN

@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using ExtraTools;
 using Microsoft.Win32;
@@ -76,7 +77,8 @@ namespace Time_Table_Arranging_Program.Pages {
         }
 
         private async void Browser_OnLoadCompleted(object sender , NavigationEventArgs e) {
-            KapchaBrowser.Navigate(_urlProvider.KaptchaUrl);
+            Image.Source = new BitmapImage(new Uri("https://unitreg.utar.edu.my/portal/Kaptcha.jpg?tmp=1505662346229"));
+            //KapchaBrowser.Navigate(_urlProvider.KaptchaUrl);
             ResetButton.IsEnabled = true;
             string currentUrl = Browser.Source.ToString();
             if (currentUrl == _urlProvider.EndUrl) return;
