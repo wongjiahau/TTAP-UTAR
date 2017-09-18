@@ -104,6 +104,9 @@
     <SignManifests>false</SignManifests>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ExtraTools">
+      <HintPath>..\ExtraTools\bin\Release\ExtraTools.dll</HintPath>
+    </Reference>
     <Reference Include="Google.Apis, Version=1.26.2.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
       <HintPath>..\packages\Google.Apis.1.26.2\lib\net45\Google.Apis.dll</HintPath>
       <Private>True</Private>
@@ -408,9 +411,6 @@
     <Compile Include="User Control\RuleSetter.xaml.cs">
       <DependentUpon>RuleSetter.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows Control\DialogBox.xaml.cs">
-      <DependentUpon>DialogBox.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Windows Control\ProgressWindow.xaml.cs">
       <DependentUpon>ProgressWindow.xaml</DependentUpon>
       <SubType>Component</SubType>
@@ -606,10 +606,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="User Control\RuleSetter.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Windows Control\DialogBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

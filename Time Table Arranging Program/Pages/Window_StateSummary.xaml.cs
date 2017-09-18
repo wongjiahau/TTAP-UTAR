@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using ExtraTools;
 using Time_Table_Arranging_Program.Class;
 using Time_Table_Arranging_Program.Class.StateSummary;
 using Time_Table_Arranging_Program.User_Control;

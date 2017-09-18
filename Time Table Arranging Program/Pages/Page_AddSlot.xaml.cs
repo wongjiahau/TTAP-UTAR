@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Threading;
+using ExtraTools;
 using Time_Table_Arranging_Program.Class;
 using Time_Table_Arranging_Program.Class.TokenParser;
 using Time_Table_Arranging_Program.UserInterface;

@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using ExtraTools;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Threading;
 using Time_Table_Arranging_Program.Class;
@@ -23,7 +24,7 @@ namespace Time_Table_Arranging_Program {
                 "Sorry for the inconvenience. We will fixed the issue after we received the bug report." ,
                 "Nevermind" ,
                 "Report the bug");
-            if (DialogBox.Result == DialogBox.ResultEnum.RightButtonClicked) {
+            if (DialogBox.Result == DialogBox.Result_.RightButtonClicked) {
                 Process.Start(new ProcessStartInfo(new UrlProvider().ReportBugUrl));
             }
             e.Handled = true;

@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Navigation;
+using ExtraTools;
 using Microsoft.Win32;
 using Time_Table_Arranging_Program.Class;
 using Time_Table_Arranging_Program.Class.ConfigFileManager;
@@ -54,10 +55,10 @@ namespace Time_Table_Arranging_Program.Pages {
                 DialogBox.Show("Login again?" , "WARNING : If you login again your previous data will be overwritten." ,
                     "CANCEL" , "LOGIN AGAIN");
                 switch (DialogBox.Result) {
-                    case DialogBox.ResultEnum.LeftButtonClicked:
+                    case DialogBox.Result_.LeftButtonClicked:
                         NavigationService.GoForward();
                         break;
-                    case DialogBox.ResultEnum.RightButtonClicked:
+                    case DialogBox.Result_.RightButtonClicked:
                         Global.InputSlotList.Clear();
                         //Need to reset two times to properly load the login page again
                         ResetButton_OnClick(null , null);

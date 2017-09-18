@@ -3,21 +3,21 @@ using System.Windows;
 using System.Windows.Controls;
 using MaterialDesignThemes.Wpf;
 
-namespace Time_Table_Arranging_Program.Windows_Control {
+namespace ExtraTools {
     /// <summary>
     ///     Interaction logic for DialogBox.xaml
     /// </summary>
     public partial class DialogBox : Window {
-        public enum ResultEnum {
+        public enum Result_ {
             LeftButtonClicked,
             RightButtonClicked
         }
 
-        public static ResultEnum Result;
+        public static Result_ Result;
 
         private static DialogBox _lastOpenedDialog;
 
-        private ResultEnum _result;
+        private Result_ _result;
 
         public DialogBox() {
             InitializeComponent();
@@ -26,7 +26,7 @@ namespace Time_Table_Arranging_Program.Windows_Control {
 
         public static object ReturnedValue { get; set; }
 
-        public static ResultEnum Show(string title, string message, string leftButtonText = "Got it!",
+        public static Result_ Show(string title, string message, string leftButtonText = "Got it!",
                                       string rightButtonText = null) {
             CloseDialog();
             var p = new DialogBox();
@@ -71,22 +71,22 @@ namespace Time_Table_Arranging_Program.Windows_Control {
         }
 
         private void Button_Left_OnClick(object sender, RoutedEventArgs e) {
-            _result = ResultEnum.LeftButtonClicked;
+            _result = Result_.LeftButtonClicked;
             Close();
         }
 
         private void Button_Right_OnClick(object sender, RoutedEventArgs e) {
-            _result = ResultEnum.RightButtonClicked;
+            _result = Result_.RightButtonClicked;
             Close();
         }
 
         private void SampleCode() {
             Show("Title", "message", "OK", "Cancel");
             switch (Result) {
-                case ResultEnum.LeftButtonClicked:
+                case Result_.LeftButtonClicked:
                     MessageBox.Show("You clicked left button");
                     break;
-                case ResultEnum.RightButtonClicked:
+                case Result_.RightButtonClicked:
                     MessageBox.Show("you clicked right button");
                     break;
             }

@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
+using ExtraTools;
 using Time_Table_Arranging_Program.Class;
 using Time_Table_Arranging_Program.Class.GoogleCalendarApi;
 using Time_Table_Arranging_Program.Windows_Control;

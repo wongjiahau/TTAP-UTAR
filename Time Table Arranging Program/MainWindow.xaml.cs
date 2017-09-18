@@ -6,6 +6,7 @@ using System.Windows.Controls;
 using System.Windows.Media.Animation;
 using System.Windows.Navigation;
 using ConsoleTerminalLibrary.Console;
+using ExtraTools;
 using Microsoft.Win32;
 using Time_Table_Arranging_Program.Class;
 using Time_Table_Arranging_Program.ConsoleCommands;
@@ -82,7 +83,7 @@ namespace Time_Table_Arranging_Program {
             if (_exitConfirmed) return;
             DialogBox.Show("Quit TTAP?", "Note : Quiting will cause you to lose your current progress.", "CANCEL",
                 "QUIT");
-            if (DialogBox.Result == DialogBox.ResultEnum.LeftButtonClicked) { }
+            if (DialogBox.Result == DialogBox.Result_.LeftButtonClicked) { }
             else {
                 _exitConfirmed = true;
                 if ((bool) Settings.Default["PromptForFeedback"]) {
