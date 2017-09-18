@@ -9,8 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NUnit.Tests2", "NUnit.Tests
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleTerminalLibrary", "ConsoleTerminalLibrary\ConsoleTerminalLibrary.csproj", "{E45E716A-B210-4293-AC75-89D41AAB9E05}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExtraTools", "ExtraTools\ExtraTools.csproj", "{C18E35E9-E983-4DB9-A69E-7C1BDA4705DD}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
