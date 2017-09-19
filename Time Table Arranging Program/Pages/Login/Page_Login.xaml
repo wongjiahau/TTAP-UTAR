@@ -75,9 +75,13 @@
                                          materialDesign:HintAssist.Hint="Enter captcha"
                                          Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
                             <Image x:Name="KapchaImage" Width="{Binding ElementName=PasswordBox, Path=Width}" Margin="0 12 0 0"/>
-                            <DockPanel Width="{Binding ElementName=PasswordBox, Path=Width}">
-                                <Button DockPanel.Dock="Left" x:Name="ResetButton" Width="{Binding ElementName=LoginButton, Path=Width}" Height="{Binding ElementName=LoginButton, Path=Height}" HorizontalAlignment="Left"
-                                IsEnabled="True" Margin="0 10 10 10" VerticalAlignment="Center" FontSize="15"
+                            <StackPanel  Width="{Binding ElementName=PasswordBox, Path=Width}">
+                                <Button Height="{Binding ElementName=PasswordBox, Path=ActualHeight}" x:Name="LoginButton" HorizontalAlignment="Stretch" Margin="0 12 0 0" FontSize="15" 
+                                        Click="LoginButton_OnClick">
+                                    LOGIN
+                                </Button>
+                                <Button x:Name="ResetButton" Width="{Binding ElementName=LoginButton, Path=ActualWidth}" Height="{Binding ElementName=LoginButton, Path=Height}" HorizontalAlignment="Left"
+                                IsEnabled="True" Margin="0 12 0 0" VerticalAlignment="Center" FontSize="15"
                                 ToolTip="Refresh" Style="{StaticResource MaterialDesignFlatButton}"
                                 Click="ResetButton_OnClick">
                                     <StackPanel Orientation="Horizontal">
@@ -85,12 +89,7 @@
                                         <TextBlock Margin="5,0,0,0">RESET</TextBlock>
                                     </StackPanel>
                                 </Button>
-                                <Button x:Name="LoginButton" Margin="0 10 0 10" Width="110" FontSize="15" 
-                                        Click="LoginButton_OnClick">
-                                    LOGIN
-                                </Button>
-
-                            </DockPanel>
+                            </StackPanel>
                         </StackPanel>
                         <ProgressBar x:Name="ProgressBar" Visibility="Hidden" IsIndeterminate="True" />
                     </StackPanel>
