@@ -244,7 +244,14 @@ namespace Time_Table_Arranging_Program.Pages {
                 if (clipboardData == null) return;
                 if (!clipboardData.GetDataPresent(System.Windows.Forms.DataFormats.Bitmap)) return;
                 var bitmap = (Bitmap)clipboardData.GetData(System.Windows.Forms.DataFormats.Bitmap);
-                KapchaImage.Source = System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(bitmap.GetHbitmap() , IntPtr.Zero , Int32Rect.Empty , BitmapSizeOptions.FromEmptyOptions());
+                var hBitmap = bitmap.GetHbitmap();
+                try {
+                    KapchaImage.Source = System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(hBitmap,
+                        IntPtr.Zero, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
+                }
+                finally {
+                    DeleteObject(hBitmap);
+                }
             }
         }
 
