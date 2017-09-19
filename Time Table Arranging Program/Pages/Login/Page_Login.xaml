@@ -69,36 +69,29 @@
                                 GotKeyboardFocus="PasswordBox_OnGotKeyboardFocus"
                                 materialDesign:HintAssist.Hint="Password (e.g. 960813-14-5677)"
                                 Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" />
-                            <StackPanel >
-                                <TextBox x:Name="CaptchaBox" VerticalAlignment="Top" KeyUp="CaptchaBox_OnKeyUp"
+                            <TextBox x:Name="CaptchaBox" VerticalAlignment="Top" KeyUp="CaptchaBox_OnKeyUp"
                                          Margin="0 12 0 0" HorizontalAlignment="Center" FontSize="20"
                                          Width="{Binding ElementName=PasswordBox, Path=Width}"
                                          materialDesign:HintAssist.Hint="Enter captcha"
                                          Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
-                                <Image x:Name="Image"></Image>
-                                <Border HorizontalAlignment="Center">
-                                    <WebBrowser Visibility="Visible" HorizontalAlignment="Center" Margin="5"
-                                                LoadCompleted="KapchaBrowser_OnLoadCompleted" Name="KapchaBrowser"
-                                                OverridesDefaultStyle="False"
-                                                ScrollViewer.CanContentScroll="False"
-                                                ScrollViewer.HorizontalScrollBarVisibility="Hidden"
-                                                ScrollViewer.VerticalScrollBarVisibility="Hidden" />
-                                </Border>
-                            </StackPanel>
-                            <Button Margin="0 20 0 0" Width="200" FontSize="20" FontWeight="Bold" Height="50"
-                                    Click="LoginButton_OnClick">
-                                LOGIN
-                            </Button>
-                        </StackPanel>
-                        <Button x:Name="ResetButton" FontSize="15" Width="200" HorizontalAlignment="Center"
-                                IsEnabled="True" Margin="0 12 0 12" DockPanel.Dock="Bottom" VerticalAlignment="Top"
+                            <Image x:Name="KapchaImage" Width="{Binding ElementName=PasswordBox, Path=Width}" Margin="0 12 0 0"/>
+                            <DockPanel Width="{Binding ElementName=PasswordBox, Path=Width}">
+                                <Button DockPanel.Dock="Left" x:Name="ResetButton" Width="{Binding ElementName=LoginButton, Path=Width}" Height="{Binding ElementName=LoginButton, Path=Height}" HorizontalAlignment="Left"
+                                IsEnabled="True" Margin="0 10 10 10" VerticalAlignment="Center" FontSize="15"
                                 ToolTip="Refresh" Style="{StaticResource MaterialDesignFlatButton}"
                                 Click="ResetButton_OnClick">
-                            <StackPanel Orientation="Horizontal">
-                                <materialDesign:PackIcon Kind="Refresh" VerticalAlignment="Center" />
-                                <TextBlock Margin="5,0,0,0">RESET</TextBlock>
-                            </StackPanel>
-                        </Button>
+                                    <StackPanel Orientation="Horizontal">
+                                        <materialDesign:PackIcon Kind="Refresh" VerticalAlignment="Center" />
+                                        <TextBlock Margin="5,0,0,0">RESET</TextBlock>
+                                    </StackPanel>
+                                </Button>
+                                <Button x:Name="LoginButton" Margin="0 10 0 10" Width="110" FontSize="15" 
+                                        Click="LoginButton_OnClick">
+                                    LOGIN
+                                </Button>
+
+                            </DockPanel>
+                        </StackPanel>
                         <ProgressBar x:Name="ProgressBar" Visibility="Hidden" IsIndeterminate="True" />
                     </StackPanel>
                 </materialDesign:Card>
@@ -112,7 +105,14 @@
                             ScrollViewer.HorizontalScrollBarVisibility="Hidden"
                             ScrollViewer.VerticalScrollBarVisibility="Hidden" />
             </materialDesign:Card>
-
+            <Border Visibility="Hidden" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <WebBrowser Visibility="Visible" HorizontalAlignment="Center" Margin="5"
+                    LoadCompleted="KapchaBrowser_OnLoadCompleted" Name="KapchaBrowser"
+                    OverridesDefaultStyle="False"
+                    ScrollViewer.CanContentScroll="False"
+                    ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                    ScrollViewer.VerticalScrollBarVisibility="Hidden" />
+            </Border>
         </Grid>
     </materialDesign:DialogHost>
 

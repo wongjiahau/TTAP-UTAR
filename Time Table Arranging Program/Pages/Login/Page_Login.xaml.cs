@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
@@ -7,6 +8,7 @@ using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using ExtraTools;
+using mshtml;
 using Microsoft.Win32;
 using Time_Table_Arranging_Program.Class;
 using Time_Table_Arranging_Program.Class.ConfigFileManager;
@@ -16,14 +18,13 @@ using Time_Table_Arranging_Program.Pages.Login;
 using Time_Table_Arranging_Program.Windows_Control;
 
 namespace Time_Table_Arranging_Program.Pages {
-    /// <summary>
-    /// Interaction logic for Page_First.xaml
-    /// </summary>
     public partial class Page_Login : Page {
+        //This two line is to prevent memory leak
+        [System.Runtime.InteropServices.DllImport("gdi32.dll")]
+        public static extern bool DeleteObject(IntPtr hObject);
+
         private const int NavigationCountUpperLimit = 3;
-
         private readonly bool _browsingToCourseTimetablePreview = false;
-
         private readonly bool _loadDataFromTestServer;
         private readonly UrlProvider _urlProvider;
         private string _captchaInput;
@@ -77,8 +78,7 @@ namespace Time_Table_Arranging_Program.Pages {
         }
 
         private async void Browser_OnLoadCompleted(object sender , NavigationEventArgs e) {
-            Image.Source = new BitmapImage(new Uri("https://unitreg.utar.edu.my/portal/Kaptcha.jpg?tmp=1505662346229"));
-            //KapchaBrowser.Navigate(_urlProvider.KaptchaUrl);
+            KapchaBrowser.Navigate(_urlProvider.KaptchaUrl);
             ResetButton.IsEnabled = true;
             string currentUrl = Browser.Source.ToString();
             if (currentUrl == _urlProvider.EndUrl) return;
@@ -223,7 +223,32 @@ namespace Time_Table_Arranging_Program.Pages {
 
         private void KapchaBrowser_OnLoadCompleted(object sender , NavigationEventArgs e) {
             KapchaBrowser.InvokeScript("execScript" , "document.body.style.overflow ='hidden'" , "JavaScript");
+            CopyBrowserImageToClipboard();
+            LoadCopiedImageIntoImageControl();
+            void CopyBrowserImageToClipboard()
+            {
+                //https://stackoverflow.com/questions/2566898/save-images-in-webbrowser-control-without-redownloading-them-from-the-internet
+                var doc = (HTMLDocument)KapchaBrowser.Document;
+                var imgRange = (IHTMLControlRange)((HTMLBody)doc.body).createControlRange();
+                foreach (IHTMLImgElement img in doc.images) {
+                    imgRange.add((IHTMLControlElement)img);
+                    imgRange.execCommand("Copy" , false , null);
+                }
+            }
+
+            void LoadCopiedImageIntoImageControl()
+            {
+                //https://stackoverflow.com/questions/25749843/wpf-image-source-clipboard-getimage-is-not-displayed
+                if (!Clipboard.ContainsImage()) return;
+                var clipboardData = System.Windows.Forms.Clipboard.GetDataObject();
+                if (clipboardData == null) return;
+                if (!clipboardData.GetDataPresent(System.Windows.Forms.DataFormats.Bitmap)) return;
+                var bitmap = (Bitmap)clipboardData.GetData(System.Windows.Forms.DataFormats.Bitmap);
+                KapchaImage.Source = System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(bitmap.GetHbitmap() , IntPtr.Zero , Int32Rect.Empty , BitmapSizeOptions.FromEmptyOptions());
+            }
         }
+
+
 
         private void LoginButton_OnClick(object sender , RoutedEventArgs e) {
             if (!CheckForInternetConnection()) return;
