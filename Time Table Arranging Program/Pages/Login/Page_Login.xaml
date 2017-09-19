@@ -81,7 +81,7 @@
                                     LOGIN
                                 </Button>
                                 <Button x:Name="ResetButton" Width="{Binding ElementName=LoginButton, Path=ActualWidth}" Height="{Binding ElementName=LoginButton, Path=Height}" HorizontalAlignment="Left"
-                                IsEnabled="True" Margin="0 12 0 0" VerticalAlignment="Center" FontSize="15"
+                                IsEnabled="True" Margin="0 10 0 10" VerticalAlignment="Center" FontSize="15"
                                 ToolTip="Refresh" Style="{StaticResource MaterialDesignFlatButton}"
                                 Click="ResetButton_OnClick">
                                     <StackPanel Orientation="Horizontal">
