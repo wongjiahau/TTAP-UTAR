@@ -24,34 +24,25 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Page.Resources>
-    <materialDesign:DialogHost x:Name="DialogHost" IsOpen="False">
-        <materialDesign:DialogHost.DialogContent>
-            <StackPanel>
-                <TextBlock FontWeight="Bold" FontSize="30" Margin="20">Please log in to your account</TextBlock>
-                <Button Margin="0,0,0,20" FontSize="20" Height="40" HorizontalAlignment="Center"
-                        Click="GotItButton_OnClick">
-                    Got it!
-                </Button>
-            </StackPanel>
-        </materialDesign:DialogHost.DialogContent>
-        <Grid>
-            <materialDesign:DrawerHost x:Name="DrawerHost" CloseOnClickAway="False">
-                <materialDesign:DrawerHost.TopDrawerContent>
-                    <ProgressBar Height="5" IsIndeterminate="True" />
-                </materialDesign:DrawerHost.TopDrawerContent>
-                <materialDesign:DrawerHost.BottomDrawerContent>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                        <materialDesign:PackIcon Margin="10 10 0 10" VerticalAlignment="Center" Width="20" Height="20"
+    <Grid>
+        <materialDesign:DrawerHost x:Name="DrawerHost" CloseOnClickAway="False">
+            <materialDesign:DrawerHost.TopDrawerContent>
+                <ProgressBar Height="5" IsIndeterminate="True" />
+            </materialDesign:DrawerHost.TopDrawerContent>
+            <materialDesign:DrawerHost.BottomDrawerContent>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <materialDesign:PackIcon Margin="10 10 0 10" VerticalAlignment="Center" Width="20" Height="20"
                                                  Foreground="DarkRed" Kind="AlertCircle" />
-                        <TextBlock Margin="10" VerticalAlignment="Center" FontSize="15">Error : Please make sure you have Internet connection.</TextBlock>
-                        <Button Margin="10" Click="RetryButton_OnClicked">RETRY</Button>
-                    </StackPanel>
-                </materialDesign:DrawerHost.BottomDrawerContent>
-                <materialDesign:Card Width="400" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock Margin="10" VerticalAlignment="Center" FontSize="15">Error : Please make sure you have Internet connection.</TextBlock>
+                    <Button Margin="10" Click="RetryButton_OnClicked">RETRY</Button>
+                </StackPanel>
+            </materialDesign:DrawerHost.BottomDrawerContent>
+            <StackPanel  VerticalAlignment="Center" HorizontalAlignment="Center">
+                <materialDesign:Card Width="360" HorizontalAlignment="Center" VerticalAlignment="Center">
                     <StackPanel VerticalAlignment="Center">
                         <materialDesign:ColorZone Padding="16" materialDesign:ShadowAssist.ShadowDepth="Depth1"
                                                   CornerRadius="3" Mode="PrimaryDark">
-                            <TextBlock Margin="16,0,0,0" FontSize="24" FontWeight="DemiBold" VerticalAlignment="Center">Log in to your UTAR account.</TextBlock>
+                            <TextBlock HorizontalAlignment="Center" Style="{StaticResource MaterialDesignHeadlineTextBlock}" Margin="16,0,0,0" VerticalAlignment="Center">Log in to your UTAR account.</TextBlock>
                         </materialDesign:ColorZone>
                         <StackPanel Visibility="Visible" DockPanel.Dock="Top" HorizontalAlignment="Center"
                                     VerticalAlignment="Center">
@@ -61,58 +52,60 @@
                                 materialDesign:HintAssist.Hint="Student-ID (e.g. 1507693)"
                                 Width="{Binding ElementName=PasswordBox, Path=Width}"
                                 IsEditable="True"
+                                Cursor="Hand"
                                 Style="{StaticResource MaterialDesignFloatingHintComboBox}">
                             </ComboBox>
                             <PasswordBox
                                 x:Name="PasswordBox"
+                                Cursor="Hand"
                                 Margin="0 12 0 0" Width="300" FontSize="20"
                                 GotKeyboardFocus="PasswordBox_OnGotKeyboardFocus"
                                 materialDesign:HintAssist.Hint="Password (e.g. 960813-14-5677)"
                                 Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" />
                             <TextBox x:Name="CaptchaBox" VerticalAlignment="Top" KeyUp="CaptchaBox_OnKeyUp"
+                                         Cursor="Hand"
                                          Margin="0 12 0 0" HorizontalAlignment="Center" FontSize="20"
                                          Width="{Binding ElementName=PasswordBox, Path=Width}"
                                          materialDesign:HintAssist.Hint="Enter captcha"
                                          Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
-                            <Image x:Name="KapchaImage" Width="{Binding ElementName=PasswordBox, Path=Width}" Margin="0 12 0 0"/>
-                            <StackPanel  Width="{Binding ElementName=PasswordBox, Path=Width}">
-                                <Button Height="{Binding ElementName=PasswordBox, Path=ActualHeight}" x:Name="LoginButton" HorizontalAlignment="Stretch" Margin="0 12 0 0" FontSize="15" 
-                                        Click="LoginButton_OnClick">
-                                    LOGIN
-                                </Button>
-                                <Button x:Name="ResetButton" Width="{Binding ElementName=LoginButton, Path=ActualWidth}" Height="{Binding ElementName=LoginButton, Path=Height}" HorizontalAlignment="Left"
-                                IsEnabled="True" Margin="0 10 0 10" VerticalAlignment="Center" FontSize="15"
+                            <Grid Margin="0 12 0 0">
+                                <Image x:Name="KapchaImage" Width="{Binding ElementName=PasswordBox, Path=Width}"/>
+                                <Button x:Name="ResetButton" Margin="2" Foreground="Black" HorizontalAlignment="Right"
+                                IsEnabled="True" VerticalAlignment="Top" 
                                 ToolTip="Refresh" Style="{StaticResource MaterialDesignFlatButton}"
                                 Click="ResetButton_OnClick">
                                     <StackPanel Orientation="Horizontal">
                                         <materialDesign:PackIcon Kind="Refresh" VerticalAlignment="Center" />
-                                        <TextBlock Margin="5,0,0,0">RESET</TextBlock>
                                     </StackPanel>
                                 </Button>
-                            </StackPanel>
+                            </Grid>
+                            <Button Height="{Binding ElementName=PasswordBox, Path=ActualHeight}" x:Name="LoginButton" HorizontalAlignment="Stretch" Margin="0 12 0 20" FontSize="15" 
+                                        Click="LoginButton_OnClick" Style="{StaticResource MaterialDesignRaisedAccentButton}">
+                                LOGIN
+                            </Button>
                         </StackPanel>
                         <ProgressBar x:Name="ProgressBar" Visibility="Hidden" IsIndeterminate="True" />
                     </StackPanel>
                 </materialDesign:Card>
-            </materialDesign:DrawerHost>
-            <materialDesign:Card Visibility="Hidden" DockPanel.Dock="Top" Width="100" Height="100" Margin="5"
+            </StackPanel>
+        </materialDesign:DrawerHost>
+        <materialDesign:Card Visibility="Hidden" DockPanel.Dock="Top" Width="100" Height="100" Margin="5"
                                  HorizontalAlignment="Center" VerticalAlignment="Stretch">
-                <WebBrowser Visibility="Collapsed" HorizontalAlignment="Center" Margin="5"
+            <WebBrowser Visibility="Collapsed" HorizontalAlignment="Center" Margin="5"
                             LoadCompleted="Browser_OnLoadCompleted" Name="Browser"
                             OverridesDefaultStyle="False"
                             ScrollViewer.CanContentScroll="False"
                             ScrollViewer.HorizontalScrollBarVisibility="Hidden"
                             ScrollViewer.VerticalScrollBarVisibility="Hidden" />
-            </materialDesign:Card>
-            <Border Visibility="Hidden" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <WebBrowser Visibility="Visible" HorizontalAlignment="Center" Margin="5"
+        </materialDesign:Card>
+        <Border Visibility="Hidden" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <WebBrowser Visibility="Visible" HorizontalAlignment="Center" Margin="5"
                     LoadCompleted="KapchaBrowser_OnLoadCompleted" Name="KapchaBrowser"
                     OverridesDefaultStyle="False"
                     ScrollViewer.CanContentScroll="False"
                     ScrollViewer.HorizontalScrollBarVisibility="Hidden"
                     ScrollViewer.VerticalScrollBarVisibility="Hidden" />
-            </Border>
-        </Grid>
-    </materialDesign:DialogHost>
+        </Border>
+    </Grid>
 
 </Page>

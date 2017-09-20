@@ -102,6 +102,7 @@ namespace Time_Table_Arranging_Program.Pages {
                 Global.Snackbar.MessageQueue.Enqueue(
                     "Login failed. Please make sure you entered the correct information.");
                 NavigationService.Refresh();
+                CaptchaBox.Text = "";
                 _navigationCount = 0;
             }
 
@@ -117,6 +118,7 @@ namespace Time_Table_Arranging_Program.Pages {
                 else {
                     Browser.Navigate(_urlProvider.LoginPageUrl);
                     Global.Snackbar.MessageQueue.Enqueue($"No record found.");
+                    CaptchaBox.Text = "";
                     ResetButton_OnClick(null , null);
                 }
             }
@@ -208,17 +210,7 @@ namespace Time_Table_Arranging_Program.Pages {
         #region EventHandlers
 
         private void ResetButton_OnClick(object sender , RoutedEventArgs e) {
-            UserIdBox.Text = "";
-            PasswordBox.Password = "";
-            CaptchaBox.Text = "";
             Browser.Navigate(_urlProvider.LoginPageUrl);
-        }
-
-
-        private void GotItButton_OnClick(object sender , RoutedEventArgs e) {
-            DialogHost.IsOpen = false;
-            Browser.Navigate(_urlProvider.LoginPageUrl);
-            Browser.Visibility = Visibility.Visible;
         }
 
         private void KapchaBrowser_OnLoadCompleted(object sender , NavigationEventArgs e) {
