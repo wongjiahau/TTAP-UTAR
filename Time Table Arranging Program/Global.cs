@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using MaterialDesignThemes.Wpf;
 using Time_Table_Arranging_Program.Class;
+using Time_Table_Arranging_Program.Class.DataManagerClass;
 using Time_Table_Arranging_Program.Class.UndoFramework;
 using Time_Table_Arranging_Program.Windows_Control;
 
@@ -16,8 +17,7 @@ namespace Time_Table_Arranging_Program {
         public static DateTime TimetableEndDate;
         public static SlotList InputSlotList = new SlotList();
         public static string LoadedHtml = "";
-        public static UndoManager UndoManager = new UndoManager();
-
+        public static UserInfo CurrentUser;
         public static class Toggles {
             public static ToggableObject SaveLoadedHtmlToggle = new ToggableObject(false);
         }

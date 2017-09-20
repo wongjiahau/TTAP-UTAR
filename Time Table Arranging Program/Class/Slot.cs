@@ -48,7 +48,7 @@ namespace Time_Table_Arranging_Program.Class {
             IsSelected = s.IsSelected;
         }
 
-        public int OID { get; } //OID is unique for each object
+        public int OID { get; } //OID is unique for each slot object
         public int UID { get; set; } //public setters of UID is for serialization purpose only!
         public string Code { get; set; }
         public string SubjectName { get; set; }

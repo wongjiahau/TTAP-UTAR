@@ -1,4 +1,4 @@
-﻿namespace Time_Table_Arranging_Program.Class.ConfigFileManager {
+﻿namespace Time_Table_Arranging_Program.Class.DataManagerClass {
     public class UserInfo {
         public UserInfo(string userId , string password) {
             UserId = userId;

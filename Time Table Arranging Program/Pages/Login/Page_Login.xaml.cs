@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Threading.Tasks;
@@ -11,7 +12,7 @@ using ExtraTools;
 using mshtml;
 using Microsoft.Win32;
 using Time_Table_Arranging_Program.Class;
-using Time_Table_Arranging_Program.Class.ConfigFileManager;
+using Time_Table_Arranging_Program.Class.DataManagerClass;
 using Time_Table_Arranging_Program.Class.Helper;
 using Time_Table_Arranging_Program.Class.TokenParser;
 using Time_Table_Arranging_Program.Pages.Login;
@@ -71,7 +72,7 @@ namespace Time_Table_Arranging_Program.Pages {
         }
 
         private void InitializeUserIdBox() {
-            var possibleStudentIds = new DataManager().GetStudentIds();
+            var possibleStudentIds = new UserInfoManager().GetStudentIds();
             foreach (string id in possibleStudentIds) {
                 UserIdBox.Items.Add(id);
             }
@@ -108,7 +109,8 @@ namespace Time_Table_Arranging_Program.Pages {
 
             void NavigateToCourseTimeTablePreview()
             {
-                new DataManager().SaveData(new UserInfo(_studentIdInput , _passwordInput));
+                Global.CurrentUser = new UserInfo(_studentIdInput , _passwordInput);
+                new UserInfoManager().SaveData(Global.CurrentUser);
                 _currentPage = 1;
                 if (_browsingToCourseTimetablePreview) return;
                 if (_navigationCount < NavigationCountUpperLimit) {
@@ -117,9 +119,10 @@ namespace Time_Table_Arranging_Program.Pages {
                 }
                 else {
                     Browser.Navigate(_urlProvider.LoginPageUrl);
-                    Global.Snackbar.MessageQueue.Enqueue($"No record found.");
                     CaptchaBox.Text = "";
                     ResetButton_OnClick(null , null);
+                    Global.Snackbar.MessageQueue.Enqueue($"No record found.");
+                    TryLoadAutoSavedData();
                 }
             }
 
@@ -145,6 +148,7 @@ namespace Time_Table_Arranging_Program.Pages {
                         return;
                     }
                     Browser.Navigate(_urlProvider.EndUrl);
+                    new UserSlotManager().SaveSlotDataAsync(Global.CurrentUser.UserId , Global.LoadedHtml);
                     NavigationService.Navigate(
                         Page_CreateTimetable.GetInstance(Global.Settings.SearchByConsideringWeekNumber ,
                             Global.Settings.GeneralizeSlot));
@@ -173,6 +177,17 @@ namespace Time_Table_Arranging_Program.Pages {
             }
 
             #endregion
+        }
+
+        private void TryLoadAutoSavedData() {
+            List<Slot> data = new UserSlotManager().GetAutoSavedData(_studentIdInput);
+            if (data == null) { return; }
+            Global.Snackbar.MessageQueue.Enqueue($"Loading auto-saved data.");
+            Global.InputSlotList.Clear();
+            Global.InputSlotList.AddRange(data);
+            NavigationService.Navigate(
+                Page_CreateTimetable.GetInstance(Global.Settings.SearchByConsideringWeekNumber ,
+                    Global.Settings.GeneralizeSlot));
         }
 
 
@@ -238,8 +253,8 @@ namespace Time_Table_Arranging_Program.Pages {
                 var bitmap = (Bitmap)clipboardData.GetData(System.Windows.Forms.DataFormats.Bitmap);
                 var hBitmap = bitmap.GetHbitmap();
                 try {
-                    KapchaImage.Source = System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(hBitmap,
-                        IntPtr.Zero, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
+                    KapchaImage.Source = System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(hBitmap ,
+                        IntPtr.Zero , Int32Rect.Empty , BitmapSizeOptions.FromEmptyOptions());
                 }
                 finally {
                     DeleteObject(hBitmap);
@@ -285,7 +300,7 @@ namespace Time_Table_Arranging_Program.Pages {
         #endregion
 
         private void PasswordBox_OnGotKeyboardFocus(object sender , KeyboardFocusChangedEventArgs e) {
-            var passwordToBeFilled = new DataManager().TryGetPassword(UserIdBox.Text);
+            var passwordToBeFilled = new UserInfoManager().TryGetPassword(UserIdBox.Text);
             if (passwordToBeFilled != null) PasswordBox.Password = passwordToBeFilled;
         }
     }

@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.Windows;
 using System.Windows.Threading;
 using Time_Table_Arranging_Program.Class;
-using Time_Table_Arranging_Program.Class.ConfigFileManager;
+using Time_Table_Arranging_Program.Class.DataManagerClass;
 using Time_Table_Arranging_Program.Pages.Login;
 using Time_Table_Arranging_Program.Windows_Control;
 
@@ -15,7 +15,7 @@ namespace Time_Table_Arranging_Program {
     public partial class App : Application {
         public App() {
             DispatcherUnhandledException += OnUnhandledExeption;
-            new DataManager().CreateDirectory();
+            new UserInfoManager().CreateDirectory();
         }
 
         private void OnUnhandledExeption(object sender , DispatcherUnhandledExceptionEventArgs e) {

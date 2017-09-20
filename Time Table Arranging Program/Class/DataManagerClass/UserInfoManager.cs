@@ -2,20 +2,20 @@
 using System.Collections.Generic;
 using System.IO;
 
-namespace Time_Table_Arranging_Program.Class.ConfigFileManager {
-    public class DataManager {
+namespace Time_Table_Arranging_Program.Class.DataManagerClass {
+    public class UserInfoManager {
         private static List<UserInfo> _userInfos;
-        private const string Path = @"c:\.ttap";
-        private const string DataFilePath = Path + @"\_userIdAndPassword.xml";
+        public const string RootPath = @"c:\.ttap";
+        private const string DataFilePath = RootPath + @"\_userIdAndPassword.xml";
 
-        public DataManager() {
+        public UserInfoManager() {
             ReadData();
         }
 
         public void CreateDirectory() {
             try {
-                if (Directory.Exists(Path)) return;
-                DirectoryInfo di = Directory.CreateDirectory(Path);
+                if (Directory.Exists(RootPath)) return;
+                DirectoryInfo di = Directory.CreateDirectory(RootPath);
             }
             catch (Exception e) {
                 //Do nothing if cannot create directory
