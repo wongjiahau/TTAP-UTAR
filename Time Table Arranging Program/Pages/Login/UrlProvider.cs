@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 
 namespace Time_Table_Arranging_Program.Pages.Login {
     public class UrlProvider {
@@ -35,4 +36,13 @@ namespace Time_Table_Arranging_Program.Pages.Login {
                    LoginPageUrl.Split(new[] {"//"}, StringSplitOptions.None)[1];
         }
     }
+
+    public class UrlOpener {
+        public static void OpenLinkInBrowser(string url) {
+            Process.Start(new ProcessStartInfo(url));
+            
+        }
+    }
+
+
 }

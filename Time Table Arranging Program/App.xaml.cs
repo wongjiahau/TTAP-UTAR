@@ -1,4 +1,5 @@
-﻿using ExtraTools;
+﻿using System;
+using ExtraTools;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Threading;
@@ -14,8 +15,7 @@ namespace Time_Table_Arranging_Program {
     public partial class App : Application {
         public App() {
             DispatcherUnhandledException += OnUnhandledExeption;
-            var dataManger = new DataManager();
-            dataManger.CreateDirectory();
+            new DataManager().CreateDirectory();
         }
 
         private void OnUnhandledExeption(object sender , DispatcherUnhandledExceptionEventArgs e) {

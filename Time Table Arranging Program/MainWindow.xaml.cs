@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Windows;
@@ -50,8 +51,25 @@ namespace Time_Table_Arranging_Program {
                 new ThrowExceptionCommand(null),
                 new StatsCommand(Global.InputSlotList)
             }));
+            CheckIfThisVersionIsUpToDate();
         }
 
+        private void CheckIfThisVersionIsUpToDate() {
+            if (new VersionChecker().ThisVersionIsUpToDate()) return;
+            DialogBox.Show("This version of TTAP is outdated.",
+                "Do you want to download the latest version? ",
+                "CANCEL",
+                "DOWNLOAD");
+            switch (DialogBox.Result) {
+                case DialogBox.Result_.LeftButtonClicked: return;
+                case DialogBox.Result_.RightButtonClicked:
+                    UrlOpener.OpenLinkInBrowser(new UrlProvider().DownloadLink);
+                    Application.Current.Shutdown();
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
         private void MainFrame_OnNavigating(object sender, NavigatingCancelEventArgs e) {
             if (e.Content.GetType() == (sender as Frame).Content?.GetType()) {
                 if (e.Content.GetType() != typeof(Page_CreateTimetable)) {
