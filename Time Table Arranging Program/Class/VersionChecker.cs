@@ -15,7 +15,7 @@ namespace Time_Table_Arranging_Program.Class {
         public Version LatestVersion() {
             return
                 Version.Parse(DownloadFile(
-                    "https://raw.githubusercontent.com/wongjiahau/TTAP-UTAR/master/version.txt"));
+                    "https://raw.githubusercontent.com/wongjiahau/TTAP-UTAR/master/Time%20Table%20Arranging%20Program/version.txt"));
         }
 
         private static string DownloadFile(string sourceUrl) //https://gist.github.com/nboubakr/7812375
