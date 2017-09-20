@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace Time_Table_Arranging_Program.Class {
     public class VersionChecker {
         public Version CurrentVersion() {
-            return new Version(11 , 1 , 0);
+            return Version.Parse(Helper.Helper.RawStringOfTestFile("version.txt", "Time_Table_Arranging_Program."));
         }
 
         public Version LatestVersion() {

@@ -8,7 +8,7 @@ using Time_Table_Arranging_Program.Class;
 
 namespace NUnit.Tests2 {
     [TestFixture]
-    public class Test_VersionChecker {
+    public class TestVersionChecker {
         [Test]
         public void Test_ThisVersionIsUpToDate() {
             var c = new VersionChecker();

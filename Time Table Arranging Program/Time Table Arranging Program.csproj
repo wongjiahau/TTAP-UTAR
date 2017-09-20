@@ -710,6 +710,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="version.txt" />
     <EmbeddedResource Include="SampleData\QingShengSampleHtmlData.html" />
     <EmbeddedResource Include="SampleData\SE-2017-1stSem.html" />
     <EmbeddedResource Include="SampleData\SampleData-FAM-2017-2ndSem.html" />
