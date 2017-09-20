@@ -31,7 +31,7 @@ namespace Time_Table_Arranging_Program.Class {
             Venue = venue;
             TimePeriod = timePeriod;
             WeekNumber = weekNumber;
-            IsSelected = true;
+            IsSelected = false;
         }
 
         public Slot(Slot s) {

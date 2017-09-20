@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
 using Time_Table_Arranging_Program.Class;
+using Time_Table_Arranging_Program.Class.TokenParser;
 using Time_Table_Arranging_Program.Interfaces;
 using Time_Table_Arranging_Program.Model;
 using Time_Table_Arranging_Program.User_Control.CheckboxWithListDownMenuFolder.ErrorMessageType;
@@ -10,6 +11,14 @@ namespace NUnit.Tests2.BehavioralTests {
     public class SelectSubjectFeature {
         private SubjectListModel Input() {
             return new SubjectListModel(SubjectModel.Parse(TestData.TestSlots) , Permutator.Run_v2_withoutConsideringWeekNumber, new TaskRunnerForUnitTesting());
+        }
+
+        private SubjectListModel Input2() {
+            return new SubjectListModel(
+                SubjectModel.Parse( new HtmlSlotParser().Parse(
+                        Helper.RawStringOfTestFile("SampleData-FAM-2017-2ndSem.html"))) ,
+                Permutator.Run_v2_withoutConsideringWeekNumber,
+                new TaskRunnerForUnitTesting());
         }
 
         [Test]
@@ -97,6 +106,24 @@ namespace NUnit.Tests2.BehavioralTests {
             var subject_UEMX4313 = input.ToList().Find(x => x.Code == "UEMX4313");
             Assert.IsTrue(subject_UEMX4313.ClashingErrorType == ClashingErrorType.SingleClashingError , behaviour);
             Assert.IsFalse(subject_UEMX4313.IsSelected , behaviour);
+        }
+
+        [Test]
+        public void ClashReporting_1_1() {
+            string behaviour =
+                @"
+            Given Ali just loaded slots data (by logging in)
+            When Ali selected subject 'MPU34022' [ACP]
+            And Then Ali selected subject 'MPU32013' [BKA]
+            Then Ali shall see a clash report saying 'MPU32013' cannot be selected
+            And the clash report should be Single-Clashing error, not Group-Clashing error
+                ";
+            var input = Input2();
+            input.SelectSubject("MPU34022");
+            input.SelectSubject("MPU32013");
+            var subject_MPU32013 = input.ToList().Find(x => x.Code == "MPU32013");
+            Assert.IsTrue(subject_MPU32013.ClashingErrorType == ClashingErrorType.SingleClashingError , behaviour);
+            Assert.IsFalse(subject_MPU32013.IsSelected , behaviour);
         }
 
         [Test]
