@@ -67,12 +67,15 @@ namespace Time_Table_Arranging_Program.Model {
 
         public event EventHandler Selected;
         public event EventHandler Deselected;
-        private bool _isSelected;
+        private bool _isSelected = false;
 
         public bool IsSelected {
             get => _isSelected;
             set {
                 SetProperty(ref _isSelected , value);
+                for (int i = 0; i < Slots.Count; i++) {
+                    Slots[i].IsSelected = value;
+                }
                 if (value) {
                     Selected?.Invoke(this , null);
                 }
