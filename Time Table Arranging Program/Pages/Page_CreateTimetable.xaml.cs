@@ -16,9 +16,6 @@ using Time_Table_Arranging_Program.User_Control.SubjectListFolder;
 using Time_Table_Arranging_Program.Windows_Control;
 
 namespace Time_Table_Arranging_Program.Pages {
-    /// <summary>
-    ///     Interaction logic for Page_SelectSubject.xaml
-    /// </summary>
     public partial class Page_CreateTimetable : Page, IDirtyObserver<IOutputTimetableModel>, IPageWithLoadedFunction {
         private readonly MutableObservable<ITimetable> _currentViewedTimetable =
             new ObservableTimetable(Timetable.Empty);
@@ -34,7 +31,7 @@ namespace Time_Table_Arranging_Program.Pages {
         private bool _leftDrawerIsOpened;
 
 
-        private List<List<Slot>> _raw;
+        private List<List<Slot>> _newListOfTimetables;
         private List<SubjectModel> _subjectModels;
         private MutableObservable<IOutputTimetableModel> _timetableList;
         private Window_StateSummary _windowStateSummary;
@@ -94,12 +91,12 @@ namespace Time_Table_Arranging_Program.Pages {
 
         private void SubjectListModel_NewListOfTimetablesGenerated(object sender , EventArgs e) {
             _windowStateSummary = null;
-            var possibleTimetable = (List<List<Slot>>)sender;
-            UpdateGUI(possibleTimetable);
+            _newListOfTimetables  = (List<List<Slot>>)sender;
+            UpdateGUI(_newListOfTimetables);
         }
 
         private void UpdateGUI(List<List<Slot>> result) {
-            _raw = result;
+            _newListOfTimetables = result;
             _cyclicIndex = new CyclicIndex();
             if (result == null || result.Count == 0) {
                 if (_inputSlots.NoSlotIsChosen()) {
@@ -127,7 +124,7 @@ namespace Time_Table_Arranging_Program.Pages {
 
         private void SetTimeConstraintButton_OnClick(object sender , RoutedEventArgs e) {
             if (_windowStateSummary == null)
-                _windowStateSummary = new Window_StateSummary(_subjectModels.GetSelectedSlots() , _raw);
+                _windowStateSummary = new Window_StateSummary(_subjectModels.GetSelectedSlots() , _newListOfTimetables);
             _windowStateSummary.ShowDialog();
             if (_windowStateSummary.UserClickedDone) {
                 UpdateGUI(_windowStateSummary.RemainingTimetables);
@@ -153,8 +150,7 @@ namespace Time_Table_Arranging_Program.Pages {
 
         private void SaveAsPicture_OnClick(object sender , RoutedEventArgs e) {
             DrawerHost.IsBottomDrawerOpen = false;
-            var p = new Window
-            {
+            var p = new Window {
                 SizeToContent = SizeToContent.WidthAndHeight ,
                 Content = new Page_SaveTimetableAsImage(TimetableViewer.GetCurrentTimetable())
             };
@@ -166,8 +162,7 @@ namespace Time_Table_Arranging_Program.Pages {
             DrawerHost.IsBottomDrawerOpen = false;
             var slots = TimetableViewer.GetCurrentTimetable().ToList();
             var subjects = SubjectSummaryModel.GroupIntoSubjects(slots);
-            var p = new SaveFileDialog
-            {
+            var p = new SaveFileDialog {
                 Filter = "Notepad file (*.txt)|*.txt" ,
                 FileName = "MyTimetableSummary"
             };
@@ -185,6 +180,13 @@ namespace Time_Table_Arranging_Program.Pages {
                 Global.Snackbar.MessageQueue.Enqueue("Failed to save file." , "SHOW DETAILS" ,
                     () => { MessageBox.Show(ex.Message); });
             }
+        }
+
+        private void ChooseSpecificSlotsButton_onClick(object sender , RoutedEventArgs e) {
+            var w = new Window_ChooseSpecificSlot(_newListOfTimetables , _subjectModels.FindAll(x => x.IsSelected));
+            w.ShowDialog();
+            if (w.NewListOfTimetables == null) return;
+            UpdateGUI(w.NewListOfTimetables);
         }
     }
 }

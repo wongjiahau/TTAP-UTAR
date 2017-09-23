@@ -1,0 +1,87 @@
+﻿<UserControl x:Class="Time_Table_Arranging_Program.User_Control.SubjectViewFolder.SubjectViewForChoosingSlots"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:local="clr-namespace:Time_Table_Arranging_Program.User_Control"
+             xmlns:model="clr-namespace:Time_Table_Arranging_Program.Model"
+             mc:Ignorable="d">
+    <UserControl.Resources>
+        <DataTemplate x:Key="FirstCell">
+            <StackPanel Orientation="Horizontal">
+                <CheckBox IsChecked="{Binding Path=IsSelected}" Tag="{Binding RelativeSource={RelativeSource AncestorType={x:Type ListViewItem}}}" />
+            </StackPanel>
+        </DataTemplate>
+    </UserControl.Resources>
+    <UserControl.DataContext>
+        <model:SubjectModel />
+    </UserControl.DataContext>
+    <Expander x:Name="Border" BorderBrush="Gray" BorderThickness="0,0,0,1" Padding="2" Cursor="Hand">
+        <Expander.Header>
+            <StackPanel DockPanel.Dock="Left" VerticalAlignment="Center">
+                <local:HighlightTextBlock FontSize="14" DockPanel.Dock="Left"
+                                                  x:Name="SubjectNameHighlightTextBlock" Text="{Binding Name}"
+                                                  HighlightedText="{Binding HighlightedText}" Margin="10,5,5,2"
+                                                  Cursor="Hand" VerticalAlignment="Center" FontWeight="DemiBold" />
+                <local:HighlightTextBlock x:Name="SubjectCodeHighlightTextBlock" VerticalAlignment="Center"
+                                                  Text="{Binding CodeAndNameInitials}"
+                                                  HighlightedText="{Binding HighlightedText}" Margin="15,0,0,5" />
+            </StackPanel>
+        </Expander.Header>
+        <DockPanel HorizontalAlignment="Stretch">
+            <materialDesign:Card>
+                <Border BorderThickness="3" BorderBrush="Black" Background="White" Padding="5">
+                    <DockPanel LastChildFill="True">
+                        <Border Background="White" DockPanel.Dock="Top">
+                            <DockPanel LastChildFill="True">
+                                <DockPanel.Resources>
+                                    <Style TargetType="Button">
+                                        <Setter Property="Background" Value="White" />
+                                        <Setter Property="Width" Value="30" />
+                                        <Setter Property="HorizontalAlignment" Value="Right" />
+                                        <Setter Property="FontWeight" Value="ExtraBold" />
+                                        <Setter Property="FontSize" Value="15" />
+                                        <Setter Property="BorderThickness" Value="0" />
+                                    </Style>
+                                </DockPanel.Resources>
+                            </DockPanel>
+                        </Border>
+                        <Button Visibility="Collapsed" x:Name="ToggleCheckButton" Content="Untick all slots"
+                                        Width="auto"
+                                        DockPanel.Dock="Bottom"
+                                        Click="ToggleCheckButton_OnClick" HorizontalAlignment="Center" Margin="0,5,0,0" />
+                        <Label Visibility="Collapsed" x:Name="InstructionLabel" DockPanel.Dock="Top"
+                                       Background="WhiteSmoke"
+                                       FontWeight="DemiBold">
+                            . . . Untick the slots that you don't want
+                        </Label>
+                        <Rectangle DockPanel.Dock="Top" Height="1" Fill="LightGray" />
+                        <Border BorderThickness="1" BorderBrush="LightGray">
+                            <ListView x:Name="ListView" DockPanel.Dock="Bottom" Margin="4"
+                                              ItemsSource="{Binding Slots}">
+                                <ListView.ItemContainerStyle>
+                                    <Style TargetType="ListViewItem" BasedOn="{StaticResource MaterialDesignGridViewItem}">
+                                        <EventSetter Event="PreviewMouseLeftButtonDown"
+                                                             Handler="ListViewItem_PreviewMouseLeftButtonDown" />
+                                    </Style>
+                                </ListView.ItemContainerStyle>
+                                <ListView.View>
+                                    <GridView>
+                                        <GridViewColumn CellTemplate="{StaticResource FirstCell}" />
+                                        <GridViewColumn Header=" TYPE "  DisplayMemberBinding="{Binding Type}" />
+                                        <GridViewColumn Header=" NO. "   DisplayMemberBinding="{Binding Number}" />
+                                        <GridViewColumn Header=" TIME "  DisplayMemberBinding="{Binding TimePeriod}" />
+                                        <GridViewColumn Header=" DAY "   DisplayMemberBinding="{Binding Day}" />
+                                        <GridViewColumn Header=" WEEK "  DisplayMemberBinding="{Binding WeekNumber}" />
+                                        <GridViewColumn Header=" VENUE " DisplayMemberBinding="{Binding Venue}" />
+                                    </GridView>
+                                </ListView.View>
+                            </ListView>
+                        </Border>
+                    </DockPanel>
+                </Border>
+            </materialDesign:Card>
+        </DockPanel>
+    </Expander>
+</UserControl>

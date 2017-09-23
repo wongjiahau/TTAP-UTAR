@@ -11,18 +11,7 @@ using Time_Table_Arranging_Program.Model;
 using Time_Table_Arranging_Program.UserInterface;
 
 namespace Time_Table_Arranging_Program.User_Control.SubjectViewFolder {
-    /// <summary>
-    ///     Interaction logic for CheckBoxWithListDownMenu.xaml
-    /// </summary>
-    public interface ISubjectView {
-        string SubjectName { get; set; }
-        HashSet<int> UIDofDeselectedSlots { get; set; }
-        HashSet<int> UIDofSelectedSlots { get; set; }
-        string NameOfClashingCounterpart { get; set; }
-        event RoutedEventHandler ListViewCheckBox_Checked;
-    }
-
-    public partial class SubjectView : UserControl, ISubjectView, INeedDataContext<SubjectModel> {
+    public partial class SubjectView : UserControl, INeedDataContext<SubjectModel> {
         private double _listviewOriginalHeight;
         private SubjectModel _subjectModel;
 
@@ -105,74 +94,6 @@ namespace Time_Table_Arranging_Program.User_Control.SubjectViewFolder {
             ListViewPopup.IsOpen = !ListViewPopup.IsOpen;
         }
 
-        private void ListViewItemCheckBox_Checked(object sender , RoutedEventArgs e) {
-            var c = sender as CheckBox;
-            var selectedSlot = (Slot)(c.Tag as ListViewItem).Content;
-            selectedSlot.IsSelected = c.IsChecked.Value;
-            CascadeEffectToSimilarSlot(selectedSlot);
-        }
-
-        private void ToggleCheckButton_OnClick(object sender , RoutedEventArgs e) {
-            var temp = ListView.ItemsSource;
-            ListView.ItemsSource = null;
-            ListView.ItemsSource = temp;
-            if (ToggleCheckButton.Content.ToString() == "Untick all slots") {
-                ToggleCheckButton.Content = "Tick all slots";
-                InstructionLabel.Content = ". . . Tick the slots that you want";
-                foreach (var item in ListView.ItemsSource) {
-                    ((Slot)item).IsSelected = false;
-                    UIDofDeselectedSlots.Add(((Slot)item).UID);
-                    UIDofSelectedSlots.Clear();
-                }
-            }
-            else {
-                ToggleCheckButton.Content = "Untick all slots";
-                InstructionLabel.Content = ". . . Untick the slots that you don't want";
-                foreach (var item in ListView.ItemsSource) {
-                    ((Slot)item).IsSelected = true;
-                    UIDofSelectedSlots.Add(((Slot)item).UID);
-                    UIDofDeselectedSlots.Clear();
-                }
-            }
-            ListViewCheckBox_Checked?.Invoke(this , null);
-        }
-
-        private void ListViewItem_PreviewMouseLeftButtonDown(object sender , MouseButtonEventArgs e) {
-            return;
-            //This feature is disabld at the moment
-            var item = sender as ListViewItem;
-
-            if (item != null) {
-                ((Slot)item.Content).IsSelected = !((Slot)item.Content).IsSelected;
-            }
-            CascadeEffectToSimilarSlot((Slot)item.Content);
-        }
-
-        private void CascadeEffectToSimilarSlot(Slot selectedSlot) {
-            if (selectedSlot.IsSelected == false) {
-                foreach (Slot s in ListView.Items) {
-                    if (s.Code == selectedSlot.Code && s.Type == selectedSlot.Type && s.Number == selectedSlot.Number) {
-                        s.IsSelected = false;
-                        UIDofDeselectedSlots.Add(s.UID);
-                        UIDofSelectedSlots.Remove(s.UID);
-                    }
-                }
-            }
-            else {
-                foreach (Slot s in ListView.Items) {
-                    if (s.Code == selectedSlot.Code && s.Type == selectedSlot.Type && s.Number == selectedSlot.Number) {
-                        s.IsSelected = true;
-                        UIDofDeselectedSlots.Remove(s.UID);
-                        UIDofSelectedSlots.Add(s.UID);
-                    }
-                }
-            }
-            var temp = ListView.ItemsSource;
-            ListView.ItemsSource = null;
-            ListView.ItemsSource = temp;
-            ListViewCheckBox_Checked?.Invoke(this , null);
-        }
-
         private void CloseButton_OnClick(object sender , RoutedEventArgs e) {
             ListViewPopup.IsOpen = false;
         }
@@ -188,7 +109,6 @@ namespace Time_Table_Arranging_Program.User_Control.SubjectViewFolder {
             da1.Completed += (o , args) => { ListView.Visibility = Visibility.Collapsed; };
 
             if (ListView.Visibility == Visibility.Visible) {
-                ToggleCheckButton.Visibility = Visibility.Collapsed;
                 InstructionLabel.Visibility = Visibility.Collapsed;
                 ListView.BeginAnimation(HeightProperty , da1);
                 var maximizeIcon = new PackIcon();
@@ -197,8 +117,6 @@ namespace Time_Table_Arranging_Program.User_Control.SubjectViewFolder {
             }
             else {
                 ListView.Visibility = Visibility.Visible;
-                //ToggleCheckButton.Visibility = Visibility.Visible;
-                //InstructionLabel.Visibility = Visibility.Visible;
                 var minimizeIcon = new PackIcon();
                 minimizeIcon.Kind = PackIconKind.WindowMinimize;
                 HidePopupButton.Content = minimizeIcon;

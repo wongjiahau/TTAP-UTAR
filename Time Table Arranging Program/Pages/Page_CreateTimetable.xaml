@@ -129,40 +129,28 @@
                                         </Grid.Resources>
 
                                         <StackPanel Orientation="Horizontal">
-                                            <Button
+                                            <Button x:Name="SaveButton"
                                                 Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand }"
                                                 CommandParameter="{x:Static Dock.Bottom}"
                                                 ToolTip="Save this timetable as . . .">
                                                 <materialDesign:PackIcon Kind="ContentSave" />
                                             </Button>
-                                            <Button x:Name="AddToGoogleCalenderButton" Visibility="Collapsed"
-                                                    ToolTip="Add this timetable to Google Calendar"
-                                                    Click="SaveToGoogleCalendarButton_OnClick">
-                                                <!--Visibility="{Binding IsChecked, ElementName=ToggleViewButton, Converter={StaticResource VisibilityConverter}}"-->
-
-                                                <materialDesign:PackIcon Kind="CalendarPlus" />
-                                            </Button>
-                                            <Button x:Name="PrintAsPng" Visibility="Collapsed"
-                                                    ToolTip="Save this timetable as an image"
-                                                    Click="SaveAsPicture_OnClick">
-                                                <!--Visibility="{Binding IsChecked, ElementName=ToggleViewButton, Converter={StaticResource VisibilityConverter}}"-->
-
-                                                <materialDesign:PackIcon Kind="Image" />
-                                            </Button>
                                             <Button x:Name="ShowSummaryButton"
                                                     Click="ShowSummaryButton_OnClick"
                                                     ToolTip="Show summary">
-                                                <!--Visibility="{Binding IsChecked, ElementName=ToggleViewButton, Converter={StaticResource VisibilityConverter}}"-->
                                                 <materialDesign:PackIcon Kind="ViewList" />
+                                            </Button>
+                                            <Button x:Name="ChooseSpecificSlotButton"
+                                                    Click="ChooseSpecificSlotsButton_onClick"
+                                                    ToolTip="Choose specific slot">
+                                                <materialDesign:PackIcon Kind="CrosshairsGps" />
                                             </Button>
                                             <materialDesign:PopupBox PopupMode="Click" Visibility="Collapsed">
                                                 <materialDesign:PopupBox.ToggleContent>
                                                     <materialDesign:PackIcon Kind="DotsVertical" Foreground="White" />
                                                 </materialDesign:PopupBox.ToggleContent>
                                                 <StackPanel>
-                                                    <Button Click="ShowSummaryButton_OnClick" Content="Show summary" />
-                                                    <Button Content="Add this timetable to Google Calendar"
-                                                            Click="SaveToGoogleCalendarButton_OnClick" />
+                                                    <Button Content="Choose specific slots" />
                                                 </StackPanel>
                                             </materialDesign:PopupBox>
                                         </StackPanel>

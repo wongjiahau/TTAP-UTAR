@@ -353,6 +353,9 @@
     <Compile Include="User Control\Snackbar.xaml.cs">
       <DependentUpon>Snackbar.xaml</DependentUpon>
     </Compile>
+    <Compile Include="User Control\SubjectViewFolder\SubjectViewForChoosingSlots.xaml.cs">
+      <DependentUpon>SubjectViewForChoosingSlots.xaml</DependentUpon>
+    </Compile>
     <Compile Include="User Control\TimeChooserDialog.xaml.cs">
       <DependentUpon>TimeChooserDialog.xaml</DependentUpon>
     </Compile>
@@ -435,6 +438,9 @@
     </Compile>
     <Compile Include="Windows Control\Windows_Settings.xaml.cs">
       <DependentUpon>Windows_Settings.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows Control\Window_ChooseSpecificSlot.xaml.cs">
+      <DependentUpon>Window_ChooseSpecificSlot.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows Control\Window_GetConstructionStringOfSlots.xaml.cs">
       <DependentUpon>Window_GetConstructionStringOfSlots.xaml</DependentUpon>
@@ -528,6 +534,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="User Control\Snackbar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User Control\SubjectViewFolder\SubjectViewForChoosingSlots.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -632,6 +642,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows Control\Windows_Settings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows Control\Window_ChooseSpecificSlot.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
