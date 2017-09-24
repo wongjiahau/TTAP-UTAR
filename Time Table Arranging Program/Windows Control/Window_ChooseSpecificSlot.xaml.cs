@@ -20,15 +20,25 @@ namespace Time_Table_Arranging_Program.Windows_Control {
             foreach (var subject in selectedSubjects) {
                 var s = new SubjectViewForChoosingSlots() { DataContext = subject };
                 s.SlotSelectionChanged += SlotSelectionChanged;
+                s.ListOfSlotSelected += ListOfSlotSelected;
+                s.ListOfSlotDeselected += ListOfSlotDeselected;
                 StackPanel.Children.Add(s);
             }
         }
 
+        private void ListOfSlotSelected(object sender, EventArgs eventArgs) {
+            _model.SelectSlots((List<int>)sender);
+        }
+
+        private void ListOfSlotDeselected(object sender, EventArgs eventArgs) {
+            _model.DeselectSlots((List<int>)sender);
+        }
+        
         private void SlotSelectionChanged(object sender , EventArgs e) {
             InfoStackPanel.Visibility = Visibility.Visible;
             var targetSlot = (Slot)sender;
             if (targetSlot.IsSelected) _model.SelectSlot(targetSlot.UID);
-            else _model.SelectSlot(targetSlot.UID);
+            else _model.DeselectSlot(targetSlot.UID);
         }
 
         public List<List<Slot>> NewListOfTimetables { get; private set; } = null;

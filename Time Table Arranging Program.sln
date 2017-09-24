@@ -10,6 +10,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleTerminalLibrary", "ConsoleTerminalLibrary\ConsoleTerminalLibrary.csproj", "{E45E716A-B210-4293-AC75-89D41AAB9E05}"
 EndProject
 Global
+	GlobalSection(Performance) = preSolution
+		HasPerformanceSessions = true
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|x64 = Debug|x64
@@ -41,14 +44,6 @@ Global
 		{E45E716A-B210-4293-AC75-89D41AAB9E05}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E45E716A-B210-4293-AC75-89D41AAB9E05}.Release|x64.ActiveCfg = Release|Any CPU
 		{E45E716A-B210-4293-AC75-89D41AAB9E05}.Release|x64.Build.0 = Release|Any CPU
-		{C18E35E9-E983-4DB9-A69E-7C1BDA4705DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C18E35E9-E983-4DB9-A69E-7C1BDA4705DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C18E35E9-E983-4DB9-A69E-7C1BDA4705DD}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{C18E35E9-E983-4DB9-A69E-7C1BDA4705DD}.Debug|x64.Build.0 = Debug|Any CPU
-		{C18E35E9-E983-4DB9-A69E-7C1BDA4705DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C18E35E9-E983-4DB9-A69E-7C1BDA4705DD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C18E35E9-E983-4DB9-A69E-7C1BDA4705DD}.Release|x64.ActiveCfg = Release|Any CPU
-		{C18E35E9-E983-4DB9-A69E-7C1BDA4705DD}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,19 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using Time_Table_Arranging_Program.Class;
-using Time_Table_Arranging_Program.Model;
 
 namespace Time_Table_Arranging_Program.User_Control.SubjectViewFolder {
     /// <summary>
@@ -21,6 +11,8 @@ namespace Time_Table_Arranging_Program.User_Control.SubjectViewFolder {
     /// </summary>
     public partial class SubjectViewForChoosingSlots : UserControl {
         public event EventHandler SlotSelectionChanged;
+        public event EventHandler ListOfSlotSelected;
+        public event EventHandler ListOfSlotDeselected;
         public SubjectViewForChoosingSlots() {
             InitializeComponent();
         }
@@ -31,7 +23,7 @@ namespace Time_Table_Arranging_Program.User_Control.SubjectViewFolder {
             if (slot == null) return;
             slot.IsSelected = !slot.IsSelected;
             CascadeEffectToSimilarSlot(slot);
-            SlotSelectionChanged?.Invoke(slot, null);
+            SlotSelectionChanged?.Invoke(slot , null);
         }
 
         private void CascadeEffectToSimilarSlot(Slot selectedSlot) {
@@ -49,21 +41,26 @@ namespace Time_Table_Arranging_Program.User_Control.SubjectViewFolder {
         }
 
         private void ToggleCheckButton_OnClick(object sender , RoutedEventArgs e) {
+            var uidOfTargetSlots = new List<int>();
             if (ToggleCheckButton.Content.ToString() == "Untick all slots") {
                 ToggleCheckButton.Content = "Tick all slots";
                 InstructionLabel.Content = ". . . Tick the slots that you want";
                 foreach (var item in ListView.ItemsSource) {
                     ((Slot)item).IsSelected = false;
+                    uidOfTargetSlots.Add(((Slot)item).UID);
                 }
+                ListOfSlotDeselected?.Invoke(uidOfTargetSlots , null);
             }
             else {
                 ToggleCheckButton.Content = "Untick all slots";
                 InstructionLabel.Content = ". . . Untick the slots that you don't want";
                 foreach (var item in ListView.ItemsSource) {
                     ((Slot)item).IsSelected = true;
+                    uidOfTargetSlots.Add(((Slot)item).UID);
                 }
+                ListOfSlotSelected?.Invoke(uidOfTargetSlots , null);
             }
             UpdateListView();
         }
-   }
+    }
 }

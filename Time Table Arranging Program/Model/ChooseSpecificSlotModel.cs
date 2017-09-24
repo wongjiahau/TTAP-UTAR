@@ -45,7 +45,20 @@ namespace Time_Table_Arranging_Program.Model {
             UpdateViewProperties();
         }
 
+        public void SelectSlots(List<int> uids) {
+            for (int i = 0; i < uids.Count; i++) {
+                SelectSlot(uids[i]);
+            }
+        }
+
+        public void DeselectSlots(List<int> uids) {
+            for (int i = 0; i < uids.Count; i++) {
+                DeselectSlot(uids[i]);
+            }
+        }
+
         private void UpdateViewProperties() {
+            if (NewListOfTimetables == null) return;
             NumberOfRemainingTimetables = NewListOfTimetables.Count;
             NumberOfRemovedTimetables = _filteredTimetables.Count;
         }
