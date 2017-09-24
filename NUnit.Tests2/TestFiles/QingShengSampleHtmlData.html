@@ -1,0 +1,828 @@
+<HEAD><TITLE>myUTAR - The Universiti Tunku Abdul Rahman Web Portal</TITLE>
+<SCRIPT language=javascript>
+function MM_openBrWindow(theURL,winName,features) { 
+  window.open(theURL,winName,features);
+}
+function mypopup(url, sbar, resize, width, height, top, left){
+	tit=''
+	reWin=window.open(url, tit, 'toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=' + sbar + ',resizable=' + resize + ',width=' + width + ',height=' + height + ',top=' + top + ',left=' + left) 
+}
+function checkPhone(evt){
+	evt = (evt) ? evt : window.event
+	var charCode = (evt.which) ? evt.which : evt.keyCode
+	
+	if ((charCode > 46 && charCode < 58) || charCode==45 || charCode==13){				
+		return true
+	}
+	else{
+		alert("You can only key in numeric number")
+		return false
+	}
+}
+function checkNumeric(evt){
+	evt = (evt) ? evt : window.event
+	var charCode = (evt.which) ? evt.which : evt.keyCode
+	
+	if((charCode > 47 && charCode < 58) || charCode==13){				
+		return true
+	}
+	else{
+		alert("You can only key in numeric number")
+		return false
+	}
+}
+function IsNumeric(strString)
+{
+   var strValidChars = "0123456789.-/";
+   var strChar;
+   var blnResult = true;
+
+   if (strString.length == 0) return false;
+   for (i = 0; i < strString.length && blnResult == true; i++)
+   {
+      strChar = strString.charAt(i);
+      if (strValidChars.indexOf(strChar) == -1)
+      {
+         blnResult = false;
+      }
+   }
+   return blnResult;
+}
+function logout(myPath,logoutURL){	
+	//alert(myPath+logoutURL)
+	if(confirm("Are you sure to log out?")){
+		window.location=myPath+logoutURL;
+	}else
+		return false;
+}
+function expireSession(){
+	alert("Session Expired !!!");
+	window.location="https://unitreg.utar.edu.my/portal/courseRegStu/logout.jsp";
+}
+
+setTimeout('expireSession()',360000);
+</SCRIPT>
+<LINK rel=stylesheet type=text/css href="https://unitreg.utar.edu.my/portal/courseRegStu/skin/main.css"><LINK rel=stylesheet type=text/css href="https://unitreg.utar.edu.my/portal/courseRegStu/skin/print.css"></HEAD>
+<BODY>
+<TABLE id=notDisplay cellSpacing=0 cellPadding=0 width="100%" border=0>
+<TBODY>
+<TR class=utarbgcolor>
+<TD class=utar_logo width=70></TD>
+<TD vAlign=bottom width=693>
+<DIV class=topmenu>&nbsp;</DIV>
+<TABLE height=23 cellSpacing=0 cellPadding=0 border=0>
+<TBODY>
+<TR class=utarbgcolor>
+<TD class=tab_back_on><A onmouseover="window.status='Done'; return true;" class=tab-on href="#"><SPAN class=tab-on>Home</SPAN></A> </TD>
+<TD class=tab_right_on width=7></TD>
+<TD width=7><IMG border=0 hspace=0 src="https://unitreg.utar.edu.my/portal/courseRegStu/images/tab_left_off.gif" width=7 height=23><BR></TD>
+<TD bgColor=#21455a background=https://unitreg.utar.edu.my/portal/courseRegStu/images/tab_back_off.gif noWrap align=center>&nbsp;&nbsp; <A onclick="logout('https://unitreg.utar.edu.my/portal/courseRegStu/','logout.jsp');" class=tab-off href="#"><SPAN class=tab-off>Log Out</SPAN></A>&nbsp;&nbsp;</TD>
+<TD width=7><IMG border=0 hspace=0 src="https://unitreg.utar.edu.my/portal/courseRegStu/images/tab_right_off.gif" width=7 height=23><BR></TD></TR></TBODY></TABLE></TD></TR>
+<TR>
+<TD class=menubgcolor colSpan=2 noWrap>&nbsp; </TD></TR></TBODY></TABLE>
+<TABLE height=530 cellSpacing=0 cellPadding=0 width="100%" border=0>
+<TBODY>
+<TR>
+<TD>Welcome, CHAN KING SERN (15UEB04004) <IMG style="MARGIN-LEFT: 5em" border=0 src="../images/help_icon.gif"> <A href="../GD-ICTC-001.pdf" target=_blank>User Guide</A> </TD></TR>
+<TR>
+<TD vAlign=top width="100%">
+<TABLE height=520 cellSpacing=0 cellPadding=0 width="100%" border=0>
+<TBODY>
+<TR>
+<TD vAlign=top width="100%">
+<TABLE cellSpacing=0 cellPadding=0 width="100%" align=center border=0>
+<TBODY>
+<TR>
+<TD><!--  Start Content -->
+<SCRIPT language=javascript>
+	function changePage(pageNo){
+		document.frmRefresh.reqCPage.value=pageNo;
+		document.frmRefresh.submit();	
+	}	
+	
+	function checkUnit(){
+		
+		try{
+		
+			if(!validateSpecialChar(document.frmParam.reqUnit, "Unit")){
+				return false;
+			}
+			
+			if("Any"==document.frmParam.reqFrom.value && "Any"!=document.frmParam.reqTo.value){
+				alert("Please select from time");
+				return false;
+			}
+			
+			if("Any"!=document.frmParam.reqFrom.value && "Any"==document.frmParam.reqTo.value){
+				alert("Please select to time");
+				return false;
+			}		
+			
+			if("Any"!=document.frmParam.reqFrom.value && "Any"!=document.frmParam.reqTo.value){
+				if(!checkFTtime(document.frmParam.reqFrom,document.frmParam.reqTo))
+					return false
+			}
+			
+			document.frmParam.search.disabled = true;
+			return true;
+		}catch(e){alert(e);}		
+	}	
+
+	function validateSpecialChar(objectField, msg){
+	
+		var iChars = "!@#$%^&*()+=-[]\\\';,./{}|\":<>?";
+		
+		for (var i = 0; i < objectField.value.length; i++) {
+			if (iChars.indexOf(objectField.value.charAt(i)) != -1) {
+				alert ("Your "+msg+" has special characters. \nThese are not allowed.\n Please remove them and try again.");
+				return false;
+			}
+		}
+		return true;
+	}	
+	
+
+	function checkFTtime(objFrom,objTo)
+	{
+		if (objTo.value != "" && objFrom.value!=""){	
+			if (objFrom.value == objTo.value){
+				alert('Cant be the same time');
+				return false;
+			} else {
+				var Fh=0, Fhh=0,Fmm=0;
+				var Fmin=0;
+				Fhh = objFrom.value.substr(0,objFrom.value.indexOf(":"));
+				Fmm = objFrom.value.substr(objFrom.value.indexOf(":")+1,2);
+				if ((objFrom.value.indexOf("PM") > 2) && Fhh < 12)
+					{Fh=12;}
+				Fmin=(((Fhh-0)+Fh)*60)+(Fmm-0);
+				
+				var Th=0, Thh=0,Tmm=0;
+				var Tmin=0;
+				Thh = objTo.value.substr(0,objTo.value.indexOf(":"));
+				Tmm = objTo.value.substr(objTo.value.indexOf(":")+1,2);
+				if ((objTo.value.indexOf("PM") > 2) && Thh < 12){
+					Th=12;
+				}
+				Tmin=(((Thh-0)+Th)*60)+(Tmm-0);
+				
+				if (Fmin > Tmin){
+					alert("(From time) can't bigger than the (To time)");
+					return false;
+				}
+				return true;
+			}
+		}
+	}	
+	
+	function viewUnit(){
+		document.getElementById('unit').style.display='';	
+	}
+</SCRIPT>
+
+<TABLE cellSpacing=0 cellPadding=0 width="100%" align=center border=0>
+<TBODY>
+<TR>
+<TD class=dotted><IMG src="https://unitreg.utar.edu.my/portal/courseRegStu/images/clear.gif" width=1 height=1></TD></TR>
+<TR>
+<TD width="100%">
+<H2><IMG src="https://unitreg.utar.edu.my/portal/courseRegStu/images/link1.gif"> Course Timetable Preview</H2></TD></TR>
+<TR>
+<TD class=dotted><IMG src="https://unitreg.utar.edu.my/portal/courseRegStu/images/clear.gif" width=1 height=1></TD></TR></TBODY></TABLE>
+<TABLE id=notDisplay cellSpacing=0 cellPadding=0 border=0>
+<TBODY>
+<TR>
+<TD class=tab-selected><IMG alt="" src="https://unitreg.utar.edu.my/portal/courseRegStu/images/clear.gif" width=9 height=19></TD>
+<TD class=tab-selected><A class=tab-link-selected href="https://unitreg.utar.edu.my/portal/courseRegStu/schedule/masterSchedule.jsp">Course Timetable Preview </A></TD>
+<TD class=tab-mid2><IMG alt="" src="https://unitreg.utar.edu.my/portal/courseRegStu/images/clear.gif" width=30 height=8> </TD>
+<TD class=tab-unselected><A class=tab-link-unselected href="https://unitreg.utar.edu.my/portal/courseRegStu/registration/studentRegistration.jsp">My Course Registration </A></TD>
+<TD class=tab-mid-end><IMG alt="" src="https://unitreg.utar.edu.my/portal/courseRegStu/images/clear.gif" width=30 height=8> </TD></TR></TBODY></TABLE>
+<TABLE id=notDisplay height=6 cellSpacing=0 cellPadding=0 width="100%" border=0>
+<TBODY>
+<TR>
+<TD class=tab-dblue-table><IMG src="https://unitreg.utar.edu.my/portal/courseRegStu/images/clear.gif" width=1 height=4></TD></TR>
+<TR>
+<TD class=tab-dwhite-table><IMG src="https://unitreg.utar.edu.my/portal/courseRegStu/images/clear.gif" width=1 height=4></TD></TR></TBODY></TABLE>
+<DIV>
+<TABLE class=normal cellSpacing=0 cellPadding=0 width="100%" align=center border=0>
+<TBODY>
+<TR>
+<TD class=normalTbl-subheader>Session</TD>
+<TD>201710</TD>
+<TD class=normalTbl-subheader>Class Type</TD>
+<TD>Full-time</TD>
+<TD class=normalTbl-subheader>Faculty</TD>
+<TD>LKC FES</TD>
+<TD class=normalTbl-subheader>Campus</TD>
+<TD>Sungai Long Campus</TD>
+<TD class=normalTbl-subheader>Duration (Weeks)</TD>
+<TD>16/10/2017 - 03/12/2017 (7)</TD></TR></TBODY></TABLE></DIV>
+<DIV id=debugSql></DIV><BR>
+<DIV align=center>
+<TABLE id=tblGrid class=normal width="60%">
+<FORM onsubmit="return checkUnit();" method=post name=frmParam action=masterSchedule.jsp><INPUT type=hidden value=view name=act> 
+<TBODY>
+<TR>
+<TD class=normalTbl-subheader width="35%" align=left>Course</TD>
+<TD align=left><INPUT id=reqUnit class=iform maxLength=15 size=17 name=reqUnit> <INPUT class=button type=submit value=Search name=search> </TD></TR>
+<TR>
+<TD class=normalTbl-subheader align=left>Day</TD>
+<TD align=left><SELECT class=iform name=reqDay> <OPTION selected value="">Any</OPTION> <OPTION value=1>Mon</OPTION> <OPTION value=2>Tue</OPTION> <OPTION value=3>Wed</OPTION> <OPTION value=4>Thu</OPTION> <OPTION value=5>Fri</OPTION> <OPTION value=6>Sat</OPTION> <OPTION value=7>Sun</OPTION></SELECT> </TD></TR>
+<TR>
+<TD class=normalTbl-subheader align=left>Duration</TD>
+<TD align=left>From<SELECT class=iform name=reqFrom> <OPTION selected value=Any>Any</OPTION> <OPTION value="7:00 AM">7:00 AM</OPTION> <OPTION value="7:30 AM">7:30 AM</OPTION> <OPTION value="8:00 AM">8:00 AM</OPTION> <OPTION value="8:30 AM">8:30 AM</OPTION> <OPTION value="9:00 AM">9:00 AM</OPTION> <OPTION value="9:30 AM">9:30 AM</OPTION> <OPTION value="10:00 AM">10:00 AM</OPTION> <OPTION value="10:30 AM">10:30 AM</OPTION> <OPTION value="11:00 AM">11:00 AM</OPTION> <OPTION value="11:30 AM">11:30 AM</OPTION> <OPTION value="12:00 PM">12:00 PM</OPTION> <OPTION value="12:30 PM">12:30 PM</OPTION> <OPTION value="1:00 PM">1:00 PM</OPTION> <OPTION value="1:30 PM">1:30 PM</OPTION> <OPTION value="2:00 PM">2:00 PM</OPTION> <OPTION value="2:30 PM">2:30 PM</OPTION> <OPTION value="3:00 PM">3:00 PM</OPTION> <OPTION value="3:30 PM">3:30 PM</OPTION> <OPTION value="4:00 PM">4:00 PM</OPTION> <OPTION value="4:30 PM">4:30 PM</OPTION> <OPTION value="5:00 PM">5:00 PM</OPTION> <OPTION value="5:30 PM">5:30 PM</OPTION> <OPTION value="6:00 PM">6:00 PM</OPTION> <OPTION value="6:30 PM">6:30 PM</OPTION> <OPTION value="7:00 PM">7:00 PM</OPTION> <OPTION value="7:30 PM">7:30 PM</OPTION> <OPTION value="8:00 PM">8:00 PM</OPTION> <OPTION value="8:30 PM">8:30 PM</OPTION> <OPTION value="9:00 PM">9:00 PM</OPTION> <OPTION value="9:30 PM">9:30 PM</OPTION> <OPTION value="10:00 PM">10:00 PM</OPTION> <OPTION value="10:30 PM">10:30 PM</OPTION> <OPTION value="11:00 PM">11:00 PM</OPTION></SELECT> To<SELECT class=iform name=reqTo> <OPTION selected value=Any>Any</OPTION> <OPTION value="7:00 AM">7:00 AM</OPTION> <OPTION value="7:30 AM">7:30 AM</OPTION> <OPTION value="8:00 AM">8:00 AM</OPTION> <OPTION value="8:30 AM">8:30 AM</OPTION> <OPTION value="9:00 AM">9:00 AM</OPTION> <OPTION value="9:30 AM">9:30 AM</OPTION> <OPTION value="10:00 AM">10:00 AM</OPTION> <OPTION value="10:30 AM">10:30 AM</OPTION> <OPTION value="11:00 AM">11:00 AM</OPTION> <OPTION value="11:30 AM">11:30 AM</OPTION> <OPTION value="12:00 PM">12:00 PM</OPTION> <OPTION value="12:30 PM">12:30 PM</OPTION> <OPTION value="1:00 PM">1:00 PM</OPTION> <OPTION value="1:30 PM">1:30 PM</OPTION> <OPTION value="2:00 PM">2:00 PM</OPTION> <OPTION value="2:30 PM">2:30 PM</OPTION> <OPTION value="3:00 PM">3:00 PM</OPTION> <OPTION value="3:30 PM">3:30 PM</OPTION> <OPTION value="4:00 PM">4:00 PM</OPTION> <OPTION value="4:30 PM">4:30 PM</OPTION> <OPTION value="5:00 PM">5:00 PM</OPTION> <OPTION value="5:30 PM">5:30 PM</OPTION> <OPTION value="6:00 PM">6:00 PM</OPTION> <OPTION value="6:30 PM">6:30 PM</OPTION> <OPTION value="7:00 PM">7:00 PM</OPTION> <OPTION value="7:30 PM">7:30 PM</OPTION> <OPTION value="8:00 PM">8:00 PM</OPTION> <OPTION value="8:30 PM">8:30 PM</OPTION> <OPTION value="9:00 PM">9:00 PM</OPTION> <OPTION value="9:30 PM">9:30 PM</OPTION> <OPTION value="10:00 PM">10:00 PM</OPTION> <OPTION value="10:30 PM">10:30 PM</OPTION> <OPTION value="11:00 PM">11:00 PM</OPTION></SELECT> </TD></TR></FORM></TBODY></TABLE></DIV>
+<DIV>
+<BLOCKQUOTE>During the pre-registration period, it is highly recommended that you <U>plan carefully by referring to the programme structure of your programme</U> and <U>seek the advice and guidance of your <STRONG>Academic Advisor</STRONG></U> in registering units for the following trimester. It is your responsibility to ensure that you fulfil all requirements and conditions of your programme for graduation.<BR></BLOCKQUOTE></DIV><BR>
+<DIV id=overviewSector>
+<TABLE class=normal cellSpacing=0 cellPadding=0 width="100%" align=center border=0>
+<FORM method=post name=frmSummary action=masterSchedulePro.jsp><INPUT type=hidden name=act> 
+<TBODY>
+<TR align=center>
+<TD class=normalTbl-subheader width="3%">No</TD>
+<TD class=normalTbl-subheader width="3%">Type</TD>
+<TD class=normalTbl-subheader width="5%">Group</TD>
+<TD class=normalTbl-subheader width="5%">Class Size</TD>
+<TD class=normalTbl-subheader width="4%">Day</TD>
+<TD class=normalTbl-subheader width="14%">Time</TD>
+<TD class=normalTbl-subheader width="5%">Hour</TD>
+<TD class=normalTbl-subheader width="10%">Week</TD>
+<TD class=normalTbl-subheader width="15%">Room</TD>
+<TD class=normalTbl-subheader width="5%">Remark</TD></TR>
+<TR>
+<TD class=normalTbl-sub3header height=15 colSpan=10>MPU3113 - HUBUNGAN ETNIK (FOR LOCAL STUDENTS) [3.00]</TD></TR>
+<TR align=center>
+<TD rowSpan=2>1</TD>
+<TD rowSpan=2>L</TD>
+<TD rowSpan=2>1</TD>
+<TD rowSpan=2 align=right>70</TD>
+<TD>Mon</TD>
+<TD>08:00 AM - 11:00 AM</TD>
+<TD>3.0</TD>
+<TD>1-7</TD>
+<TD>KB207</TD>
+<TD rowSpan=2></TD></TR>
+<TR id=subRow_222676 align=center>
+<TD>Thu</TD>
+<TD>02:00 PM - 05:00 PM</TD>
+<TD>3.0</TD>
+<TD>1-7</TD>
+<TD>KB207</TD></TR>
+<TR align=center>
+<TD rowSpan=2>2</TD>
+<TD rowSpan=2>L</TD>
+<TD rowSpan=2>2</TD>
+<TD rowSpan=2 align=right>70</TD>
+<TD>Mon</TD>
+<TD>02:00 PM - 05:00 PM</TD>
+<TD>3.0</TD>
+<TD>1-7</TD>
+<TD>KB207</TD>
+<TD rowSpan=2></TD></TR>
+<TR id=subRow_222677 align=center>
+<TD>Thu</TD>
+<TD>08:00 AM - 11:00 AM</TD>
+<TD>3.0</TD>
+<TD>1-7</TD>
+<TD>KB208</TD></TR>
+<TR align=center>
+<TD rowSpan=2>3</TD>
+<TD rowSpan=2>L</TD>
+<TD rowSpan=2>3</TD>
+<TD rowSpan=2 align=right>70</TD>
+<TD>Tue</TD>
+<TD>08:00 AM - 11:00 AM</TD>
+<TD>3.0</TD>
+<TD>1-7</TD>
+<TD>KB208</TD>
+<TD rowSpan=2></TD></TR>
+<TR id=subRow_222680 align=center>
+<TD>Thu</TD>
+<TD>02:00 PM - 05:00 PM</TD>
+<TD>3.0</TD>
+<TD>1-7</TD>
+<TD>KB209</TD></TR>
+<TR>
+<TD class=normalTbl-sub3header height=15 colSpan=10>MPU3123 - TAMADUN ISLAM DAN TAMADUN ASIA (TITAS) [3.00]</TD></TR>
+<TR align=center>
+<TD class=red colSpan=10>No record found!!!</TD></TR>
+<TR>
+<TD class=normalTbl-sub3header height=15 colSpan=10>MPU3143 - BAHASA MELAYU KOMUNIKASI 2 [3.00]</TD></TR>
+<TR align=center>
+<TD rowSpan=2>4</TD>
+<TD rowSpan=2>L</TD>
+<TD rowSpan=2>1</TD>
+<TD rowSpan=2 align=right>10</TD>
+<TD>Tue</TD>
+<TD>08:00 AM - 11:00 AM</TD>
+<TD>3.0</TD>
+<TD>1-7</TD>
+<TD>KB312</TD>
+<TD rowSpan=2></TD></TR>
+<TR id=subRow_224721 align=center>
+<TD>Thu</TD>
+<TD>02:30 PM - 05:30 PM</TD>
+<TD>3.0</TD>
+<TD>1-7</TD>
+<TD>KB311</TD></TR>
+<TR>
+<TD class=normalTbl-sub3header height=15 colSpan=10>MPU3173 - MALAYSIAN STUDIES 3 (FOR INTERNATIONAL STUDENTS) [3.00]</TD></TR>
+<TR align=center>
+<TD rowSpan=2>5</TD>
+<TD rowSpan=2>L</TD>
+<TD rowSpan=2>1</TD>
+<TD rowSpan=2 align=right>10</TD>
+<TD>Tue</TD>
+<TD>03:00 PM - 06:00 PM</TD>
+<TD>3.0</TD>
+<TD>1-7</TD>
+<TD>KB201</TD>
+<TD rowSpan=2></TD></TR>
+<TR id=subRow_223028 align=center>
+<TD>Fri</TD>
+<TD>02:30 PM - 05:30 PM</TD>
+<TD>3.0</TD>
+<TD>1-7</TD>
+<TD>KB201</TD></TR>
+<TR>
+<TD class=normalTbl-sub3header height=15 colSpan=10>MPU32013 - BAHASA KEBANGSAAN A [3.00]</TD></TR>
+<TR align=center>
+<TD rowSpan=2>6</TD>
+<TD rowSpan=2>L</TD>
+<TD rowSpan=2>1</TD>
+<TD rowSpan=2 align=right>10</TD>
+<TD>Tue</TD>
+<TD>08:00 AM - 11:00 AM</TD>
+<TD>3.0</TD>
+<TD>1-7</TD>
+<TD>KB204</TD>
+<TD rowSpan=2></TD></TR>
+<TR id=subRow_223026 align=center>
+<TD>Wed</TD>
+<TD>08:00 AM - 11:00 AM</TD>
+<TD>3.0</TD>
+<TD>1-7</TD>
+<TD>KB201</TD></TR>
+<TR>
+<TD class=normalTbl-sub3header height=15 colSpan=10>UALB1003 - INTRODUCTION TO GERMAN LANGUAGE [3.00]</TD></TR>
+<TR align=center>
+<TD class=red colSpan=10>No record found!!!</TD></TR>
+<TR>
+<TD class=normalTbl-sub3header height=15 colSpan=10>UALF1003 - INTRODUCTION TO FRENCH [3.00]</TD></TR>
+<TR align=center>
+<TD class=red colSpan=10>No record found!!!</TD></TR>
+<TR>
+<TD class=normalTbl-sub3header height=15 colSpan=10>UALJ2013 - INTRODUCTION TO JAPANESE [3.00]</TD></TR>
+<TR align=center>
+<TD class=red colSpan=10>No record found!!!</TD></TR>
+<TR>
+<TD class=normalTbl-sub3header height=15 colSpan=10>UBMM1013 - MANAGEMENT PRINCIPLES [3.00]</TD></TR>
+<TR align=center>
+<TD rowSpan=2>7</TD>
+<TD rowSpan=2>L</TD>
+<TD rowSpan=2>1</TD>
+<TD rowSpan=2 align=right>100</TD>
+<TD>Mon</TD>
+<TD>02:00 PM - 04:00 PM</TD>
+<TD>2.0</TD>
+<TD>1-7</TD>
+<TD>KB208</TD>
+<TD rowSpan=2></TD></TR>
+<TR id=subRow_222971 align=center>
+<TD>Wed</TD>
+<TD>08:00 AM - 10:00 AM</TD>
+<TD>2.0</TD>
+<TD>1-7</TD>
+<TD>KB208</TD></TR>
+<TR align=center>
+<TD>8</TD>
+<TD>T</TD>
+<TD>1</TD>
+<TD align=right>20</TD>
+<TD>Mon</TD>
+<TD>08:00 AM - 11:00 AM</TD>
+<TD>3.0</TD>
+<TD>1-7</TD>
+<TD>KB516</TD>
+<TD></TD></TR>
+<TR align=center>
+<TD>9</TD>
+<TD>T</TD>
+<TD>2</TD>
+<TD align=right>20</TD>
+<TD>Wed</TD>
+<TD>12:00 PM - 03:00 PM</TD>
+<TD>3.0</TD>
+<TD>1-7</TD>
+<TD>KB326</TD>
+<TD></TD></TR>
+<TR align=center>
+<TD>10</TD>
+<TD>T</TD>
+<TD>3</TD>
+<TD align=right>20</TD>
+<TD>Wed</TD>
+<TD>03:00 PM - 06:00 PM</TD>
+<TD>3.0</TD>
+<TD>1-7</TD>
+<TD>KB326</TD>
+<TD></TD></TR>
+<TR align=center>
+<TD>11</TD>
+<TD>T</TD>
+<TD>4</TD>
+<TD align=right>20</TD>
+<TD>Thu</TD>
+<TD>10:00 AM - 01:00 PM</TD>
+<TD>3.0</TD>
+<TD>1-7</TD>
+<TD>KB318</TD>
+<TD></TD></TR>
+<TR align=center>
+<TD>12</TD>
+<TD>T</TD>
+<TD>5</TD>
+<TD align=right>20</TD>
+<TD>Thu</TD>
+<TD>03:00 PM - 06:00 PM</TD>
+<TD>3.0</TD>
+<TD>1-7</TD>
+<TD>KB318</TD>
+<TD></TD></TR>
+<TR>
+<TD class=normalTbl-sub3header height=15 colSpan=10>UEGE3114 - INDUSTRIAL TRAINING [4.00]</TD></TR>
+<TR align=center>
+<TD>13</TD>
+<TD>P</TD>
+<TD>4</TD>
+<TD align=right>100</TD>
+<TD>Sun</TD>
+<TD>08:00 AM - 12:00 PM</TD>
+<TD>4.0</TD>
+<TD>1-7</TD>
+<TD>To be arranged</TD>
+<TD></TD></TR>
+<TR align=center>
+<TD>14</TD>
+<TD>P</TD>
+<TD>7</TD>
+<TD align=right>200</TD>
+<TD>Sun</TD>
+<TD>08:00 AM - 12:00 PM</TD>
+<TD>4.0</TD>
+<TD>1-7</TD>
+<TD>To be arranged</TD>
+<TD></TD></TR>
+<TR>
+<TD class=normalTbl-sub3header height=15 colSpan=10>UEME4253 - PROJECT MANAGEMENT [3.00]</TD></TR>
+<TR align=center>
+<TD rowSpan=2>15</TD>
+<TD rowSpan=2>L</TD>
+<TD rowSpan=2>1</TD>
+<TD rowSpan=2 align=right>170</TD>
+<TD>Wed</TD>
+<TD>12:00 PM - 03:00 PM</TD>
+<TD>3.0</TD>
+<TD>1-7</TD>
+<TD>KB209</TD>
+<TD rowSpan=2></TD></TR>
+<TR id=subRow_223633 align=center>
+<TD>Fri</TD>
+<TD>09:30 AM - 12:30 PM</TD>
+<TD>3.0</TD>
+<TD>1-7</TD>
+<TD>KB209</TD></TR>
+<TR align=center>
+<TD>16</TD>
+<TD>T</TD>
+<TD>1</TD>
+<TD align=right>28</TD>
+<TD>Tue</TD>
+<TD>08:00 AM - 09:00 AM</TD>
+<TD>1.0</TD>
+<TD>2-7</TD>
+<TD>KB321</TD>
+<TD></TD></TR>
+<TR align=center>
+<TD>17</TD>
+<TD>T</TD>
+<TD>2</TD>
+<TD align=right>30</TD>
+<TD>Tue</TD>
+<TD>09:00 AM - 10:00 AM</TD>
+<TD>1.0</TD>
+<TD>2-7</TD>
+<TD>KB321</TD>
+<TD></TD></TR>
+<TR align=center>
+<TD>18</TD>
+<TD>T</TD>
+<TD>3</TD>
+<TD align=right>28</TD>
+<TD>Tue</TD>
+<TD>04:00 PM - 05:00 PM</TD>
+<TD>1.0</TD>
+<TD>2-7</TD>
+<TD>KB517</TD>
+<TD></TD></TR>
+<TR align=center>
+<TD>19</TD>
+<TD>T</TD>
+<TD>4</TD>
+<TD align=right>28</TD>
+<TD>Wed</TD>
+<TD>08:00 AM - 09:00 AM</TD>
+<TD>1.0</TD>
+<TD>2-7</TD>
+<TD>KB326</TD>
+<TD></TD></TR>
+<TR align=center>
+<TD>20</TD>
+<TD>T</TD>
+<TD>5</TD>
+<TD align=right>28</TD>
+<TD>Wed</TD>
+<TD>09:00 AM - 10:00 AM</TD>
+<TD>1.0</TD>
+<TD>2-7</TD>
+<TD>KB326</TD>
+<TD></TD></TR>
+<TR align=center>
+<TD>21</TD>
+<TD>T</TD>
+<TD>6</TD>
+<TD align=right>28</TD>
+<TD>Thu</TD>
+<TD>11:00 AM - 12:00 PM</TD>
+<TD>1.0</TD>
+<TD>2-7</TD>
+<TD>KB323</TD>
+<TD></TD></TR>
+<TR>
+<TD class=normalTbl-sub3header height=15 colSpan=10>UJLL1093 - INTRODUCTION TO KOREAN [3.00]</TD></TR>
+<TR align=center>
+<TD class=red colSpan=10>No record found!!!</TD></TR>
+<TR>
+<TD class=normalTbl-sub3header height=15 colSpan=10>UKMM1011 - SUN ZI'S ART OF WAR AND BUSINESS STRATEGIES [1.00]</TD></TR>
+<TR align=center>
+<TD>22</TD>
+<TD>L</TD>
+<TD>1</TD>
+<TD align=right>70</TD>
+<TD>Mon</TD>
+<TD>04:00 PM - 06:00 PM</TD>
+<TD>2.0</TD>
+<TD>1-7</TD>
+<TD>KB208</TD>
+<TD></TD></TR>
+<TR align=center>
+<TD>23</TD>
+<TD>L</TD>
+<TD>2</TD>
+<TD align=right>70</TD>
+<TD>Wed</TD>
+<TD>10:00 AM - 12:00 PM</TD>
+<TD>2.0</TD>
+<TD>1-7</TD>
+<TD>KB211</TD>
+<TD></TD></TR>
+<TR align=center>
+<TD>24</TD>
+<TD>L</TD>
+<TD>3</TD>
+<TD align=right>70</TD>
+<TD>Thu</TD>
+<TD>10:00 AM - 12:00 PM</TD>
+<TD>2.0</TD>
+<TD>1-7</TD>
+<TD>KB300</TD>
+<TD></TD></TR>
+<TR align=center>
+<TD>25</TD>
+<TD>L</TD>
+<TD>4</TD>
+<TD align=right>70</TD>
+<TD>Mon</TD>
+<TD>10:00 AM - 12:00 PM</TD>
+<TD>2.0</TD>
+<TD>1-7</TD>
+<TD>KB300</TD>
+<TD></TD></TR>
+<TR align=center>
+<TD>26</TD>
+<TD>L</TD>
+<TD>5</TD>
+<TD align=right>70</TD>
+<TD>Tue</TD>
+<TD>01:00 PM - 03:00 PM</TD>
+<TD>2.0</TD>
+<TD>1-7</TD>
+<TD>KB208</TD>
+<TD></TD></TR>
+<TR align=center>
+<TD>27</TD>
+<TD>L</TD>
+<TD>7</TD>
+<TD align=right>70</TD>
+<TD>Wed</TD>
+<TD>04:00 PM - 06:00 PM</TD>
+<TD>2.0</TD>
+<TD>1-7</TD>
+<TD>KB301</TD>
+<TD></TD></TR>
+<TR>
+<TD class=normalTbl-sub3header height=15 colSpan=10>UKMM1043 - BASIC ECONOMICS, ACCOUNTING AND MANAGEMENT [3.00]</TD></TR>
+<TR align=center>
+<TD rowSpan=2>28</TD>
+<TD rowSpan=2>L</TD>
+<TD rowSpan=2>1</TD>
+<TD rowSpan=2 align=right>150</TD>
+<TD>Mon</TD>
+<TD>11:00 AM - 01:00 PM</TD>
+<TD>2.0</TD>
+<TD>1-7</TD>
+<TD>KB209</TD>
+<TD rowSpan=2></TD></TR>
+<TR id=subRow_222943 align=center>
+<TD>Wed</TD>
+<TD>08:00 AM - 10:00 AM</TD>
+<TD>2.0</TD>
+<TD>1-7</TD>
+<TD>KB207</TD></TR>
+<TR align=center>
+<TD rowSpan=2>29</TD>
+<TD rowSpan=2>L</TD>
+<TD rowSpan=2>2</TD>
+<TD rowSpan=2 align=right>150</TD>
+<TD>Tue</TD>
+<TD>11:00 AM - 01:00 PM</TD>
+<TD>2.0</TD>
+<TD>1-7</TD>
+<TD>KB208</TD>
+<TD rowSpan=2></TD></TR>
+<TR id=subRow_222944 align=center>
+<TD>Wed</TD>
+<TD>12:00 PM - 02:00 PM</TD>
+<TD>2.0</TD>
+<TD>1-7</TD>
+<TD>KB207</TD></TR>
+<TR align=center>
+<TD>30</TD>
+<TD>T</TD>
+<TD>1</TD>
+<TD align=right>20</TD>
+<TD>Mon</TD>
+<TD>08:00 AM - 11:00 AM</TD>
+<TD>3.0</TD>
+<TD>1-7</TD>
+<TD>KB517</TD>
+<TD></TD></TR>
+<TR align=center>
+<TD>31</TD>
+<TD>T</TD>
+<TD>2</TD>
+<TD align=right>20</TD>
+<TD>Mon</TD>
+<TD>01:00 PM - 04:00 PM</TD>
+<TD>3.0</TD>
+<TD>1-7</TD>
+<TD>KB318</TD>
+<TD></TD></TR>
+<TR align=center>
+<TD>32</TD>
+<TD>T</TD>
+<TD>3</TD>
+<TD align=right>25</TD>
+<TD>Mon</TD>
+<TD>03:00 PM - 06:00 PM</TD>
+<TD>3.0</TD>
+<TD>1-7</TD>
+<TD>KB326</TD>
+<TD></TD></TR>
+<TR align=center>
+<TD>33</TD>
+<TD>T</TD>
+<TD>4</TD>
+<TD align=right>20</TD>
+<TD>Tue</TD>
+<TD>08:00 AM - 11:00 AM</TD>
+<TD>3.0</TD>
+<TD>1-7</TD>
+<TD>KB517</TD>
+<TD></TD></TR>
+<TR align=center>
+<TD>34</TD>
+<TD>T</TD>
+<TD>5</TD>
+<TD align=right>20</TD>
+<TD>Tue</TD>
+<TD>01:00 PM - 04:00 PM</TD>
+<TD>3.0</TD>
+<TD>1-7</TD>
+<TD>KB517</TD>
+<TD></TD></TR>
+<TR align=center>
+<TD>35</TD>
+<TD>T</TD>
+<TD>6</TD>
+<TD align=right>20</TD>
+<TD>Wed</TD>
+<TD>10:00 AM - 01:00 PM</TD>
+<TD>3.0</TD>
+<TD>1-7</TD>
+<TD>KB516</TD>
+<TD></TD></TR>
+<TR align=center>
+<TD>36</TD>
+<TD>T</TD>
+<TD>7</TD>
+<TD align=right>20</TD>
+<TD>Wed</TD>
+<TD>12:00 PM - 03:00 PM</TD>
+<TD>3.0</TD>
+<TD>1-7</TD>
+<TD>KB325</TD>
+<TD></TD></TR>
+<TR align=center>
+<TD>37</TD>
+<TD>T</TD>
+<TD>8</TD>
+<TD align=right>20</TD>
+<TD>Wed</TD>
+<TD>01:00 PM - 04:00 PM</TD>
+<TD>3.0</TD>
+<TD>1-7</TD>
+<TD>KB516</TD>
+<TD></TD></TR>
+<TR align=center>
+<TD>38</TD>
+<TD>T</TD>
+<TD>9</TD>
+<TD align=right>25</TD>
+<TD>Wed</TD>
+<TD>03:00 PM - 06:00 PM</TD>
+<TD>3.0</TD>
+<TD>1-7</TD>
+<TD>KB321</TD>
+<TD></TD></TR>
+<TR align=center>
+<TD>39</TD>
+<TD>T</TD>
+<TD>10</TD>
+<TD align=right>20</TD>
+<TD>Thu</TD>
+<TD>08:00 AM - 11:00 AM</TD>
+<TD>3.0</TD>
+<TD>1-7</TD>
+<TD>KB321</TD>
+<TD></TD></TR>
+<TR align=center>
+<TD>40</TD>
+<TD>T</TD>
+<TD>11</TD>
+<TD align=right>20</TD>
+<TD>Thu</TD>
+<TD>10:00 AM - 01:00 PM</TD>
+<TD>3.0</TD>
+<TD>1-7</TD>
+<TD>KB319</TD>
+<TD></TD></TR>
+<TR align=center>
+<TD>41</TD>
+<TD>T</TD>
+<TD>12</TD>
+<TD align=right>20</TD>
+<TD>Thu</TD>
+<TD>01:00 PM - 04:00 PM</TD>
+<TD>3.0</TD>
+<TD>1-7</TD>
+<TD>KB321</TD>
+<TD></TD></TR>
+<TR align=center>
+<TD>42</TD>
+<TD>T</TD>
+<TD>13</TD>
+<TD align=right>20</TD>
+<TD>Fri</TD>
+<TD>09:30 AM - 12:30 PM</TD>
+<TD>3.0</TD>
+<TD>1-7</TD>
+<TD>KB318</TD>
+<TD></TD></TR>
+<TR align=center>
+<TD>43</TD>
+<TD>T</TD>
+<TD>14</TD>
+<TD align=right>20</TD>
+<TD>Fri</TD>
+<TD>09:30 AM - 12:30 PM</TD>
+<TD>3.0</TD>
+<TD>1-7</TD>
+<TD>KB319</TD>
+<TD></TD></TR></FORM></TBODY></TABLE><BR><BR><BR></DIV>
+<FORM method=get name=frmRefresh action=masterSchedule.jsp><INPUT type=hidden value=1 name=reqCPage> <INPUT type=hidden name=reqUnit> <INPUT type=hidden name=reqDay> <INPUT type=hidden value=Any name=reqFrom> <INPUT type=hidden value=Any name=reqTo> </FORM>
+<DIV><FONT id=notDisplay color=black>Page Loaded In 16 miliseconds </FONT></DIV><!-- End Content --></TD></TR></TBODY></TABLE></TD>
+<TD rowSpan=2 width=10><IMG src="https://unitreg.utar.edu.my/portal/courseRegStu/images/clear.gif" width=10></TD></TR></TBODY></TABLE></TD></TR><!--<script src="https://unitreg.utar.edu.my/portal/publicFunction.js"></script>-->
+<TR id=notDisplay>
+<TD class=footerFont vAlign=top>
+<HR align=center SIZE=1 width="99%" noShade>
+Copyright © 2017, Universiti Tunku Abdul Rahman. All rights reserved. <BR>Info Optimized for Internet Explorer 5.0 and above. Best viewed with 1024 x 768 pixels.<BR>Terms of Usage </TD></TR></TBODY></TABLE></BODY>

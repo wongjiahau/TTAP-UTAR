@@ -8,17 +8,17 @@ using Time_Table_Arranging_Program.Class.AbstractClass;
 
 namespace Time_Table_Arranging_Program.Model {
     public class ChooseSpecificSlotModel : ObservableObject {
-        private readonly List<List<Slot>> _originalTimetables;
         private readonly List<List<Slot>> _filteredTimetables = new List<List<Slot>>();
         public List<List<Slot>> NewListOfTimetables { get; private set; } = new List<List<Slot>>();
         public List<SubjectModel> SelectedSubjects { get; }
 
         [Obsolete("This constructor is for initialization of XAML designer only")]
-        public ChooseSpecificSlotModel() { } 
+        public ChooseSpecificSlotModel() { }
 
         public ChooseSpecificSlotModel(List<SubjectModel> selectedSubjects , List<List<Slot>> originalTimetables) {
             SelectedSubjects = selectedSubjects;
-            _originalTimetables = originalTimetables;
+            NewListOfTimetables = originalTimetables;
+            UpdateViewProperties();
         }
 
         public void SelectSlot(int uid) {
