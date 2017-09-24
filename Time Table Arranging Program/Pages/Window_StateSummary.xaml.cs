@@ -22,6 +22,7 @@ namespace Time_Table_Arranging_Program.Pages {
         public Window_StateSummary(List<Slot> inputSlots, List<List<Slot>> outputTimetables) {
             _inputSlots = inputSlots;
             _outputTimetables = outputTimetables;
+            RemainingTimetables = _outputTimetables;
             _factory = new RealStateElementFactory(Checked, Unchecked);
             InitializeComponent();
             TimeTableGui.GenerateStateSummary(_outputTimetables, _factory);
