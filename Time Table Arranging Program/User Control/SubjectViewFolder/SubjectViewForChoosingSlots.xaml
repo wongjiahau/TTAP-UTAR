@@ -29,59 +29,51 @@
                                                   HighlightedText="{Binding HighlightedText}" Margin="15,0,0,5" />
             </StackPanel>
         </Expander.Header>
-        <DockPanel HorizontalAlignment="Stretch">
-            <materialDesign:Card>
-                <Border BorderThickness="3" BorderBrush="Black" Background="White" Padding="5">
-                    <DockPanel LastChildFill="True">
-                        <Border Background="White" DockPanel.Dock="Top">
-                            <DockPanel LastChildFill="True">
-                                <DockPanel.Resources>
-                                    <Style TargetType="Button">
-                                        <Setter Property="Background" Value="White" />
-                                        <Setter Property="Width" Value="30" />
-                                        <Setter Property="HorizontalAlignment" Value="Right" />
-                                        <Setter Property="FontWeight" Value="ExtraBold" />
-                                        <Setter Property="FontSize" Value="15" />
-                                        <Setter Property="BorderThickness" Value="0" />
-                                    </Style>
-                                </DockPanel.Resources>
-                            </DockPanel>
-                        </Border>
-                        <Button Visibility="Collapsed" x:Name="ToggleCheckButton" Content="Untick all slots"
+        <DockPanel LastChildFill="True" HorizontalAlignment="Stretch">
+            <Border Background="White" DockPanel.Dock="Top">
+                <DockPanel LastChildFill="True">
+                    <DockPanel.Resources>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="White" />
+                            <Setter Property="Width" Value="30" />
+                            <Setter Property="HorizontalAlignment" Value="Right" />
+                            <Setter Property="FontWeight" Value="ExtraBold" />
+                            <Setter Property="FontSize" Value="15" />
+                            <Setter Property="BorderThickness" Value="0" />
+                        </Style>
+                    </DockPanel.Resources>
+                </DockPanel>
+            </Border>
+            <Button Visibility="Visible" x:Name="ToggleCheckButton" Content="Untick all slots"
                                         Width="auto"
                                         DockPanel.Dock="Bottom"
                                         Click="ToggleCheckButton_OnClick" HorizontalAlignment="Center" Margin="0,5,0,0" />
-                        <Label Visibility="Collapsed" x:Name="InstructionLabel" DockPanel.Dock="Top"
+            <Label Visibility="Visible" x:Name="InstructionLabel" DockPanel.Dock="Top"
                                        Background="WhiteSmoke"
                                        FontWeight="DemiBold">
-                            . . . Untick the slots that you don't want
-                        </Label>
-                        <Rectangle DockPanel.Dock="Top" Height="1" Fill="LightGray" />
-                        <Border BorderThickness="1" BorderBrush="LightGray">
-                            <ListView x:Name="ListView" DockPanel.Dock="Bottom" Margin="4"
+                . . . Untick the slots that you don't want
+            </Label>
+            <Rectangle DockPanel.Dock="Top" Height="1" Fill="LightGray" />
+            <ListView x:Name="ListView" DockPanel.Dock="Bottom" Margin="4"
                                               ItemsSource="{Binding Slots}">
-                                <ListView.ItemContainerStyle>
-                                    <Style TargetType="ListViewItem" BasedOn="{StaticResource MaterialDesignGridViewItem}">
-                                        <EventSetter Event="PreviewMouseLeftButtonDown"
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem" BasedOn="{StaticResource MaterialDesignGridViewItem}">
+                        <EventSetter Event="PreviewMouseLeftButtonDown"
                                                              Handler="ListViewItem_PreviewMouseLeftButtonDown" />
-                                    </Style>
-                                </ListView.ItemContainerStyle>
-                                <ListView.View>
-                                    <GridView>
-                                        <GridViewColumn CellTemplate="{StaticResource FirstCell}" />
-                                        <GridViewColumn Header=" TYPE "  DisplayMemberBinding="{Binding Type}" />
-                                        <GridViewColumn Header=" NO. "   DisplayMemberBinding="{Binding Number}" />
-                                        <GridViewColumn Header=" TIME "  DisplayMemberBinding="{Binding TimePeriod}" />
-                                        <GridViewColumn Header=" DAY "   DisplayMemberBinding="{Binding Day}" />
-                                        <GridViewColumn Header=" WEEK "  DisplayMemberBinding="{Binding WeekNumber}" />
-                                        <GridViewColumn Header=" VENUE " DisplayMemberBinding="{Binding Venue}" />
-                                    </GridView>
-                                </ListView.View>
-                            </ListView>
-                        </Border>
-                    </DockPanel>
-                </Border>
-            </materialDesign:Card>
+                    </Style>
+                </ListView.ItemContainerStyle>
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn CellTemplate="{StaticResource FirstCell}" />
+                        <GridViewColumn Header=" TYPE "  DisplayMemberBinding="{Binding Type}" />
+                        <GridViewColumn Header=" NO. "   DisplayMemberBinding="{Binding Number}" />
+                        <GridViewColumn Header=" TIME "  DisplayMemberBinding="{Binding TimePeriod}" />
+                        <GridViewColumn Header=" DAY "   DisplayMemberBinding="{Binding Day}" />
+                        <GridViewColumn Header=" WEEK "  DisplayMemberBinding="{Binding WeekNumber}" />
+                        <GridViewColumn Header=" VENUE " DisplayMemberBinding="{Binding Venue}" />
+                    </GridView>
+                </ListView.View>
+            </ListView>
         </DockPanel>
     </Expander>
 </UserControl>

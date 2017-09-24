@@ -19,10 +19,12 @@
                 </Button>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                     <materialDesign:PackIcon Height="50" Width="50" VerticalAlignment="Center" Kind="Clock" />
-                    <Label FontSize="40" VerticalAlignment="Center" FontWeight="Bold" HorizontalAlignment="Center"
-                           Margin="10">
+                    <TextBlock
+                        VerticalAlignment="Center"
+                        Margin="10"
+                        Style="{StaticResource MaterialDesignDisplay3TextBlock}">
                         Set time constraint
-                    </Label>
+                    </TextBlock>
                     <Button ToolTip="Tell me how it works" Click="HelpButton_OnClick" HorizontalAlignment="Right"
                             VerticalAlignment="Center" Style="{StaticResource MaterialDesignFlatButton}">
                         <materialDesign:PackIcon Width="20" Height="20" Kind="HelpCircle" />

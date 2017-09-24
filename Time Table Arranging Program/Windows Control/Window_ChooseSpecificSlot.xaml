@@ -4,10 +4,17 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Time_Table_Arranging_Program.Windows_Control"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         WindowStyle="None"
         Title="Window_ChooseSpecificSlot" WindowState="Maximized">
-        <StackPanel x:Name="StackPanel" VerticalAlignment="Center" HorizontalAlignment="Center">
-            
-        </StackPanel>
+    <StackPanel>
+
+        <ScrollViewer>
+            <materialDesign:Card HorizontalAlignment="Center" VerticalAlignment="Center">
+                <StackPanel x:Name="StackPanel"/>
+            </materialDesign:Card>
+        </ScrollViewer>
+    </StackPanel>
 </Window>
+
