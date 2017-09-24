@@ -14,7 +14,7 @@
         <StackPanel Margin="10" VerticalAlignment="Top" HorizontalAlignment="Stretch">
             <Grid>
                 <Button HorizontalAlignment="Left" VerticalAlignment="Top" Click="BackButton_OnClick"
-                        Style="{StaticResource MaterialDesignRaisedLightButton}" Margin="0,10,0,0">
+                        Style="{StaticResource MaterialDesignRaisedLightButton}" >
                     BACK
                 </Button>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
@@ -22,7 +22,7 @@
                     <TextBlock
                         VerticalAlignment="Center"
                         Margin="10"
-                        Style="{StaticResource MaterialDesignDisplay3TextBlock}">
+                        Style="{StaticResource MaterialDesignDisplay2TextBlock}">
                         Set time constraint
                     </TextBlock>
                     <Button ToolTip="Tell me how it works" Click="HelpButton_OnClick" HorizontalAlignment="Right"
@@ -30,7 +30,6 @@
                         <materialDesign:PackIcon Width="20" Height="20" Kind="HelpCircle" />
                     </Button>
                 </StackPanel>
-
             </Grid>
             <Border Padding="5" HorizontalAlignment="Center" BorderBrush="LightGray" BorderThickness="1">
                 <Grid HorizontalAlignment="Center" x:Name="LegendGrid" IsSharedSizeScope="True">

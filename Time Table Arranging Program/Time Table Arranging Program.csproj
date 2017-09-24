@@ -220,6 +220,7 @@
     <Compile Include="IValueConverter\CutoffConverter.cs" />
     <Compile Include="IValueConverter\TooltipConverterForToggleButton.cs" />
     <Compile Include="Model\BinarizedSlotModel.cs" />
+    <Compile Include="Model\ChooseSpecificSlotModel.cs" />
     <Compile Include="Model\SubjectModel.cs" />
     <Compile Include="MVVM_Framework\Models\TimetableList_2.cs" />
     <Compile Include="MVVM_Framework\ObservableObject.cs" />

@@ -74,6 +74,7 @@
     <Compile Include="TestSuite_HtmlSlotParser\TestHtmlSlotParser_SampleHtml.cs" />
     <Compile Include="TestSuite_HtmlSlotParser\TestHtmlSlotParser_MainFrame.cs" />
     <Compile Include="TestUrlProvider.cs" />
+    <Compile Include="Test_ChooseSpecificSlotModel.cs" />
     <Compile Include="Test_ClashFinder.cs" />
     <Compile Include="Test_Class_ExtensionMethods.cs" />
     <Compile Include="Test_Class_Subject.cs" />

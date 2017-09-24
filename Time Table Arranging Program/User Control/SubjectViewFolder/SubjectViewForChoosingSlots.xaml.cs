@@ -65,5 +65,5 @@ namespace Time_Table_Arranging_Program.User_Control.SubjectViewFolder {
             }
             UpdateListView();
         }
-    }
+   }
 }

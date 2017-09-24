@@ -5,16 +5,59 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Time_Table_Arranging_Program.Windows_Control"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:model="clr-namespace:Time_Table_Arranging_Program.Model"
         mc:Ignorable="d"
         WindowStyle="None"
         Title="Window_ChooseSpecificSlot" WindowState="Maximized">
-    <StackPanel>
-
+    <Window.DataContext>
+        <model:ChooseSpecificSlotModel />
+    </Window.DataContext>
+    <DockPanel Margin="10" LastChildFill="True">
+        <Grid DockPanel.Dock="Top">
+            <Button HorizontalAlignment="Left" VerticalAlignment="Top" Click="BackButton_OnClick"
+                        Style="{StaticResource MaterialDesignRaisedLightButton}" >
+                BACK
+            </Button>
+            <StackPanel DockPanel.Dock="Top" Margin="15" Orientation="Horizontal" HorizontalAlignment="Center">
+                <materialDesign:PackIcon Height="50" Width="50" VerticalAlignment="Center" Kind="CrosshairsGps" />
+                <TextBlock
+                        VerticalAlignment="Center"
+                        Margin="10"
+                        Style="{StaticResource MaterialDesignDisplay2TextBlock}">
+                        Choose specific slots
+                </TextBlock>
+            </StackPanel>
+        </Grid>
+        <Button DockPanel.Dock="Bottom" Width="150" Height="50" FontSize="25" HorizontalAlignment="Center"
+                Click="DoneButton_OnClick">
+            DONE
+        </Button>
+        <StackPanel x:Name="InfoStackPanel" Visibility="Hidden" Margin="10" DockPanel.Dock="Bottom" HorizontalAlignment="Center" Orientation="Horizontal">
+            <TextBlock Text="Removed " />
+            <TextBlock Text="{Binding NumberOfRemovedTimetables}" />
+            <TextBlock Text=" timetables. " />
+            <TextBlock Text="{Binding NumberOfRemainingTimetables}" />
+            <TextBlock Text=" timetables remaining." />
+        </StackPanel>
         <ScrollViewer>
             <materialDesign:Card HorizontalAlignment="Center" VerticalAlignment="Center">
                 <StackPanel x:Name="StackPanel"/>
             </materialDesign:Card>
         </ScrollViewer>
-    </StackPanel>
+    </DockPanel>
 </Window>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

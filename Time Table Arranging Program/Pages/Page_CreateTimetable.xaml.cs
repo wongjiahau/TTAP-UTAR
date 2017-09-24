@@ -35,6 +35,7 @@ namespace Time_Table_Arranging_Program.Pages {
         private List<SubjectModel> _subjectModels;
         private MutableObservable<IOutputTimetableModel> _timetableList;
         private Window_StateSummary _windowStateSummary;
+        private ChooseSpecificSlotModel _chooseSpecificSlotModel;
 
         private Page_CreateTimetable(SlotList inputSlots , Func<Slot[] , List<List<Slot>>> permutator) {
             _inputSlots = inputSlots;
@@ -91,7 +92,9 @@ namespace Time_Table_Arranging_Program.Pages {
 
         private void SubjectListModel_NewListOfTimetablesGenerated(object sender , EventArgs e) {
             _windowStateSummary = null;
-            _newListOfTimetables  = (List<List<Slot>>)sender;
+            _newListOfTimetables = (List<List<Slot>>)sender;
+            _chooseSpecificSlotModel = new ChooseSpecificSlotModel(_subjectModels.FindAll(x => x.IsSelected) , _newListOfTimetables);
+            _chooseSpecificSlotWindow = new Window_ChooseSpecificSlot(_chooseSpecificSlotModel);
             UpdateGUI(_newListOfTimetables);
         }
 
@@ -182,11 +185,10 @@ namespace Time_Table_Arranging_Program.Pages {
             }
         }
 
+        private Window_ChooseSpecificSlot _chooseSpecificSlotWindow;
         private void ChooseSpecificSlotsButton_onClick(object sender , RoutedEventArgs e) {
-            var w = new Window_ChooseSpecificSlot(_newListOfTimetables , _subjectModels.FindAll(x => x.IsSelected));
-            w.ShowDialog();
-            if (w.NewListOfTimetables == null) return;
-            UpdateGUI(w.NewListOfTimetables);
+            _chooseSpecificSlotWindow.ShowDialog();
+            if(_chooseSpecificSlotWindow.UserClickedDone) UpdateGUI(_chooseSpecificSlotModel.NewListOfTimetables);
         }
     }
 }

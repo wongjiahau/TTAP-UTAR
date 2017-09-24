@@ -1,36 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using Time_Table_Arranging_Program.Class;
+using Time_Table_Arranging_Program.Interfaces;
 using Time_Table_Arranging_Program.Model;
 using Time_Table_Arranging_Program.User_Control.SubjectViewFolder;
 
 namespace Time_Table_Arranging_Program.Windows_Control {
-    /// <summary>
-    /// Interaction logic for Window_ChooseSpecificSlot.xaml
-    /// </summary>
     public partial class Window_ChooseSpecificSlot : Window {
-        private readonly List<List<Slot>> _originalTimetables;
-        private readonly List<SubjectModel> _selectedSubjects;
-        public Window_ChooseSpecificSlot(List<List<Slot>> originalTimetables , List<SubjectModel> selectedSubjects) {
-            _originalTimetables = originalTimetables;
-            _selectedSubjects = selectedSubjects;
+        private readonly ChooseSpecificSlotModel _model;
+        public Window_ChooseSpecificSlot(ChooseSpecificSlotModel model) {
             InitializeComponent();
-            InitializeUi();
+            _model = model;
+            this.DataContext = _model;
+            InitializeUi(_model.SelectedSubjects);
         }
 
-        private void InitializeUi() {
-            foreach (var subject in _selectedSubjects) {
+        private void InitializeUi(List<SubjectModel> selectedSubjects) {
+            foreach (var subject in selectedSubjects) {
                 var s = new SubjectViewForChoosingSlots() { DataContext = subject };
                 s.SlotSelectionChanged += SlotSelectionChanged;
                 StackPanel.Children.Add(s);
@@ -38,9 +25,24 @@ namespace Time_Table_Arranging_Program.Windows_Control {
         }
 
         private void SlotSelectionChanged(object sender , EventArgs e) {
-
+            InfoStackPanel.Visibility = Visibility.Visible;
+            var targetSlot = (Slot)sender;
+            if (targetSlot.IsSelected) _model.SelectSlot(targetSlot.UID);
+            else _model.SelectSlot(targetSlot.UID);
         }
 
         public List<List<Slot>> NewListOfTimetables { get; private set; } = null;
+
+        private void BackButton_OnClick(object sender, RoutedEventArgs e) {
+            UserClickedDone = false;
+            Hide();
+        }
+
+        private void DoneButton_OnClick(object sender, RoutedEventArgs e) {
+            UserClickedDone = true;
+            Hide();
+        }
+
+        public bool UserClickedDone { get; private set; }
     }
 }
