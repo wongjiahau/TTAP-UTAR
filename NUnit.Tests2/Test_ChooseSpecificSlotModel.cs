@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using NUnit.Framework;
 using Time_Table_Arranging_Program.Class;
 using Time_Table_Arranging_Program.Class.TokenParser;
@@ -17,7 +18,8 @@ namespace NUnit.Tests2 {
             };
             subjectListModel.SelectSubject("MPU3143"); //BMK2
             subjectListModel.SelectSubject("UKMM1043"); //BEAM
-            return new ChooseSpecificSlotModel(subjectListModel.ToList().FindAll(x => x.IsSelected) , outputTimetables);
+            throw new NotImplementedException();
+            //return new ChooseSpecificSlotModel(subjectListModel.ToList().FindAll(x => x.IsSelected) , outputTimetables);
         }
 
         [Test]
@@ -33,23 +35,10 @@ namespace NUnit.Tests2 {
         }
 
         [Test]
-        public void Test_InitialStateOf_NumberOfRemainingTimetables() {
-            var model = Input();
-            Assert.IsTrue(model.NumberOfRemainingTimetables > 0);
-        }
-
-        [Test]
-        public void Test_InitialStateOf_NumberOfRemovedTimetables() {
-            var model = Input();
-            Assert.IsTrue(model.NumberOfRemovedTimetables == 0);
-        }
-
-        [Test]
         public void Test_DeselectSlot() {
             var model = Input();
             model.DeselectSlot(4);
-            Assert.IsTrue(model.NumberOfRemainingTimetables == 0);
-            Assert.IsTrue(model.NumberOfRemovedTimetables > 0);
+            Assert.Fail();
         }
 
         [Test]
@@ -57,8 +46,7 @@ namespace NUnit.Tests2 {
             var model = Input();
             model.DeselectSlot(4);
             model.SelectSlot(4);
-            Assert.IsTrue(model.NumberOfRemainingTimetables > 0);
-            Assert.IsTrue(model.NumberOfRemovedTimetables == 0);
+            Assert.Fail();
         }
     }
 }

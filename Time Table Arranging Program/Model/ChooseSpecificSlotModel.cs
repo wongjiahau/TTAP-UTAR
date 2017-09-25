@@ -1,81 +1,72 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Time_Table_Arranging_Program.Class;
 using Time_Table_Arranging_Program.Class.AbstractClass;
 
 namespace Time_Table_Arranging_Program.Model {
     public class ChooseSpecificSlotModel : ObservableObject {
-        private readonly List<List<Slot>> _filteredTimetables = new List<List<Slot>>();
+        private Func<Slot[] , List<List<Slot>>> _permutator;
+        private List<Slot> _allSlots = new List<Slot>();
+        private List<SubjectSchema> _subjectSchemas = new List<SubjectSchema>();
         public List<List<Slot>> NewListOfTimetables { get; private set; } = new List<List<Slot>>();
         public List<SubjectModel> SelectedSubjects { get; }
 
         [Obsolete("This constructor is for initialization of XAML designer only")]
         public ChooseSpecificSlotModel() { }
 
-        public ChooseSpecificSlotModel(List<SubjectModel> selectedSubjects , List<List<Slot>> originalTimetables) {
+        public ChooseSpecificSlotModel(List<SubjectModel> selectedSubjects ,
+           Func<Slot[] , List<List<Slot>>> permutator) {
             SelectedSubjects = selectedSubjects;
-            NewListOfTimetables = originalTimetables;
-            UpdateViewProperties();
+            _permutator = permutator;
+            for (int i = 0 ; i < selectedSubjects.Count ; i++) {
+                _allSlots.AddRange(selectedSubjects[i].Slots);
+            }
+            GenerateSubjectSchemas();
         }
 
-        public void SelectSlot(int uid) {
-            for (int i = 0 ; i < _filteredTimetables.Count ; i++) {
-                var timetable = _filteredTimetables[i];
-                if (timetable.Any(slot => slot.UID == uid)) {
-                    NewListOfTimetables.Add(timetable);
-                    _filteredTimetables.Remove(timetable);
-                    i--;
-                }
+        private void GenerateSubjectSchemas() {
+            throw new NotImplementedException();
+        }
+
+        private void ToggleSlotSelection(int uid , bool isSelected) {
+            var matchingSlots = _allSlots.FindAll(x => x.UID == uid);
+            for (int i = 0 ; i < matchingSlots.Count ; i++) {
+                matchingSlots[i].IsSelected = isSelected;
             }
-            UpdateViewProperties();
+            NewListOfTimetables = _permutator.Invoke(_allSlots.FindAll(x => x.IsSelected).ToArray());
+        }
+        public void SelectSlot(int uid) {
+            ToggleSlotSelection(uid , true);
         }
 
         public void DeselectSlot(int uid) {
-            for (int i = 0 ; i < NewListOfTimetables.Count ; i++) {
-                var timetable = NewListOfTimetables[i];
-                if (timetable.Any(slot => slot.UID == uid)) {
-                    _filteredTimetables.Add(timetable);
-                    NewListOfTimetables.Remove(timetable);
-                    i--;
-                }
-            }
-            UpdateViewProperties();
+            ToggleSlotSelection(uid , false);
         }
 
         public void SelectSlots(List<int> uids) {
-            for (int i = 0; i < uids.Count; i++) {
+            for (int i = 0 ; i < uids.Count ; i++) {
                 SelectSlot(uids[i]);
             }
         }
 
         public void DeselectSlots(List<int> uids) {
-            for (int i = 0; i < uids.Count; i++) {
+            for (int i = 0 ; i < uids.Count ; i++) {
                 DeselectSlot(uids[i]);
             }
         }
 
-        private void UpdateViewProperties() {
-            if (NewListOfTimetables == null) return;
-            NumberOfRemainingTimetables = NewListOfTimetables.Count;
-            NumberOfRemovedTimetables = _filteredTimetables.Count;
+        public void CheckForError() {
+            throw new NotImplementedException();
         }
+
+        public bool GotError { get; private set; }
         #region ViewProperties
-        private int _numberOfRemainingTimetables;
-        public int NumberOfRemainingTimetables {
-            get => _numberOfRemainingTimetables;
-            set => SetProperty(ref _numberOfRemainingTimetables , value);
+        private string _errorMessage;
+        public string ErrorMessage {
+            get => _errorMessage;
+            set => SetProperty(ref _errorMessage , value);
         }
-
-        private int _numberOfRemovedTimetables;
-        public int NumberOfRemovedTimetables {
-            get => _numberOfRemovedTimetables;
-            set => SetProperty(ref _numberOfRemovedTimetables , value);
-        }
-
-
         #endregion
 
     }

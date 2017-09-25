@@ -99,6 +99,7 @@
     <Compile Include="Test_StudentIdFinder.cs" />
     <Compile Include="Test_SubjectListModel.cs" />
     <Compile Include="Test_SubjectModel.cs" />
+    <Compile Include="Test_SubjectSchema.cs" />
     <Compile Include="Test_TimetableFinder.cs" />
     <Compile Include="Test_TimetableRow.cs" />
     <Compile Include="Test_Token.cs" />
