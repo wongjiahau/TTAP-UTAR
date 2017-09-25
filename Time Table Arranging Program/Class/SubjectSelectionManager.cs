@@ -98,7 +98,7 @@ namespace Time_Table_Arranging_Program.Class {
                             goto default;
                         else break;
                     case ClashingErrorType.GroupClashingError:
-                        if (!StillGroupClashWithCurrentlySelectedSubject(s)) goto default;
+                        if (!StillGroupClashWithCurrentlySelectedSubjects(s)) goto default;
                         else break;
                     default:
                         s.ClashReport = new NullClashReport();
@@ -109,9 +109,9 @@ namespace Time_Table_Arranging_Program.Class {
             }
         }
 
-        private bool StillGroupClashWithCurrentlySelectedSubject(SubjectModel currentlySelectedSubject) {
+        private bool StillGroupClashWithCurrentlySelectedSubjects(SubjectModel disabledSubject) {
             var list = new List<Slot>();
-            list.AddRange(currentlySelectedSubject.GetSelectedSlots());
+            list.AddRange(disabledSubject.Slots);
             list.AddRange(_subjectModels.GetSelectedSlots());
             return _permutator?.Invoke(list.ToArray()).Count == 0;
         }
