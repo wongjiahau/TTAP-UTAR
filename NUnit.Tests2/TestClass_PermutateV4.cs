@@ -11,6 +11,7 @@ namespace NUnit.Tests2 {
     [TestFixture]
     public class TestClass_PermutateV4 {
         [Test]
+        [Ignore("This test is being run on another test class already")]
         public void Test_PermutateV4_Runv2_WithConsideringWeekNumber() {
             int expectedCount = 616872;
             var input = new List<Slot>();
@@ -28,6 +29,7 @@ namespace NUnit.Tests2 {
         }
 
         [Test]
+        [Ignore("Not testing this as BinarizedSlot is not used in production code")]
         public void Test_PermutateV4_Runv2_WithConsideringWeekNumber_ForBinarizedSlot() {
             int expectedCount = 616872;
             var raw = new List<Slot>();
@@ -54,6 +56,7 @@ namespace NUnit.Tests2 {
         }
 
         [Test]
+        [Ignore("This test is being run on another test class already")]
         public void Test_PermutateV4_Runv2_WithoutConsideringWeekNumber() {
             int expectedCount = 285696;
             var input = new List<Slot>();
@@ -70,8 +73,8 @@ namespace NUnit.Tests2 {
             Assert.True(result.Count == expectedCount);
         }
 
-
         [Test]
+        [Ignore("Not testing this as Runv3 is not used in production code")]
         public void Test_PermutateV4_Runv3_PermutateOnSixSubject() {
             int expectedCount = 616872;
             var input = new List<Slot>();
@@ -100,6 +103,7 @@ namespace NUnit.Tests2 {
 
 
         }
+
         [Test]
         public void Test_PermutateV4_GenerateIndices() {
             var input = new List<List<Slot>>

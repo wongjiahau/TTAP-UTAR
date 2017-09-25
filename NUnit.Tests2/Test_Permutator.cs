@@ -20,6 +20,7 @@ namespace NUnit.Tests2 {
         }
 
         [Test]
+        [Ignore("Not testing this as TimetableFinder is not used in production code")]
         public void Test_TimetableFinder_UsingRunByConsideringWeekNumber() {
             int expectedCount = 616872;
             List<List<Slot>> result = new List<List<Slot>>();
@@ -32,6 +33,7 @@ namespace NUnit.Tests2 {
         }
 
         [Test]
+        [Ignore("Not testing this as TimetableFinder is not used in production code")]
         public void Test_TimetableFinder_UsingRunByWithoutConsideringWeekNumber() {
             int expectedCount = 285696;
             List<List<Slot>> result = new List<List<Slot>>();
