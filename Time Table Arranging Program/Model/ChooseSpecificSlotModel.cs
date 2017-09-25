@@ -70,6 +70,8 @@ namespace Time_Table_Arranging_Program.Model {
         }
 
         public bool GotError { get; private set; }
+        public List<Slot> AllSlot => _allSlots;
+
         #region ViewProperties
         private string _errorMessage;
         public string ErrorMessage {

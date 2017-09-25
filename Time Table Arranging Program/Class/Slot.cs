@@ -133,6 +133,7 @@ namespace Time_Table_Arranging_Program.Class {
 
         public override string ToString() {
             return
+                $"[{UID}] " + 
                 Code + " : \t" +
                 Type + " " +
                 Number + " " +

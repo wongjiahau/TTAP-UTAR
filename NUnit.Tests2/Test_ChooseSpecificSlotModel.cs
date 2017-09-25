@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using NUnit.Framework;
 using Time_Table_Arranging_Program.Class;
 using Time_Table_Arranging_Program.Class.TokenParser;
@@ -30,14 +29,22 @@ namespace NUnit.Tests2 {
         [Test]
         public void Test_InitialStateOf_NewListOfTimetables() {
             var model = Input();
-            Assert.IsTrue(model.NewListOfTimetables.Count > 0);
+            Assert.IsTrue(model.NewListOfTimetables.Count == 0);
         }
 
+        public void Test_InitialStateOf_AllSlot_ShouldBeAllSelected() {
+            var model = Input();
+            foreach (Slot s in model.AllSlot) {
+                if(s.IsSelected == false) 
+                    Assert.Fail("All slots of AllSlot should be selected initially.");
+            }
+            Assert.Pass();
+        }
         [Test]
         public void Test_DeselectSlot() {
             var model = Input();
             model.DeselectSlot(4);
-            Assert.Fail();
+            Assert.IsTrue(model.AllSlot.Find(x=> x.UID == 4).IsSelected == false);
         }
 
         [Test]
@@ -45,7 +52,7 @@ namespace NUnit.Tests2 {
             var model = Input();
             model.DeselectSlot(4);
             model.SelectSlot(4);
-            Assert.Fail();
+            Assert.IsTrue(model.AllSlot.Find(x=> x.UID == 4).IsSelected);
         }
     }
 }
