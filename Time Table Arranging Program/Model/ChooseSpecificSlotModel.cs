@@ -22,11 +22,13 @@ namespace Time_Table_Arranging_Program.Model {
             for (int i = 0 ; i < selectedSubjects.Count ; i++) {
                 _allSlots.AddRange(selectedSubjects[i].Slots);
             }
-            GenerateSubjectSchemas();
+            GenerateSubjectSchemas(selectedSubjects);
         }
 
-        private void GenerateSubjectSchemas() {
-            throw new NotImplementedException();
+        private void GenerateSubjectSchemas(List<SubjectModel> selectedSubjects) {
+            foreach (SubjectModel s in selectedSubjects) {
+                _subjectSchemas.Add(new SubjectSchema(s.Slots));
+            }
         }
 
         private void ToggleSlotSelection(int uid , bool isSelected) {
@@ -57,7 +59,13 @@ namespace Time_Table_Arranging_Program.Model {
         }
 
         public void CheckForError() {
-            throw new NotImplementedException();
+            var timetable = NewListOfTimetables[0];
+            ErrorMessage = "";
+            foreach (var schema in _subjectSchemas) {
+                string message = schema.Validate(timetable);
+                if (message != null) ErrorMessage += message;
+            }
+            GotError = ErrorMessage.Length > 0;
         }
 
         public bool GotError { get; private set; }

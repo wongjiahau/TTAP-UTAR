@@ -4,7 +4,8 @@ using Time_Table_Arranging_Program.Class;
 
 namespace Time_Table_Arranging_Program.Model {
     public class SubjectSchema {
-        public string SubjectCode = null;
+        private string _subjectName;
+        public string SubjectCode { get; private set; } = null;
         public bool GotLecture { get; private set; } = false;
         public bool GotTutorial { get; private set; } = false;
         public bool GotPractical { get; private set; } = false;
@@ -14,28 +15,48 @@ namespace Time_Table_Arranging_Program.Model {
         /// </summary>
         /// <param name="slots">Slots must from the same subject</param>
         public SubjectSchema(List<Slot> slots) {
+            if (slots.Count == 0) return;
             CheckForCorrectness(slots);
             GenerateSchema(slots);
         }
 
+        /// <summary>
+        /// To check whether the timetable conforms to this schema
+        /// </summary>
+        /// <param name="timetable"></param>
+        /// <returns>Return null if the timetable does conform this schema
+        /// Else return error message
+        /// </returns>
+        public string Validate(List<Slot> timetable) {
+            var matchingSlots = timetable.FindAll(x => x.Code == SubjectCode);
+            var schema = new SubjectSchema(matchingSlots);
+            return schema.ConformsTo(this);
+        }
+
+        public string ConformsTo(SubjectSchema subjectSchema) {
+            string result = "";
+            if (subjectSchema.GotLecture && this.GotLecture == false)
+                result += $"At least one lecture is needed for {subjectSchema._subjectName}.\n";
+            if(subjectSchema.GotTutorial && this.GotTutorial == false)
+                result += $"At least one tutorial is needed for {subjectSchema._subjectName}.\n";
+            if(subjectSchema.GotPractical && this.GotPractical == false) 
+                result += $"At least one practical is needed for {subjectSchema._subjectName}.\n";
+            return result.Length == 0 ? null : result;
+        }
+
         private void GenerateSchema(List<Slot> slots) {
-            for (int i = 0; i < slots.Count; i++) {
-                switch (slots[i].Type) {
-                    case "L":
-                        GotLecture = true;
-                        break;
-                    case "T":
-                        GotTutorial = true; 
-                        break;
-                    case "P":
-                        GotPractical = true;
-                        break;
+            foreach (Slot s in slots) {
+                switch (s.Type) {
+                    case "L": GotLecture = true; break;
+                    case "T": GotTutorial = true; break;
+                    case "P": GotPractical = true; break;
                 }
             }
         }
 
         private void CheckForCorrectness(List<Slot> slots) {
             SubjectCode = slots[0].Code;
+            _subjectName = slots[0].SubjectName;
             for (int i = 0 ; i < slots.Count ; i++) {
                 if (slots[i].Code != SubjectCode)
                     throw new ArgumentException("Not all of the slots passed in are from the same subject.");

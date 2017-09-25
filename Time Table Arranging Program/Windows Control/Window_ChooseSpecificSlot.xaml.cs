@@ -49,6 +49,8 @@ namespace Time_Table_Arranging_Program.Windows_Control {
         }
 
         private void DoneButton_OnClick(object sender, RoutedEventArgs e) {
+            _model.CheckForError();
+            if (_model.GotError) return;
             UserClickedDone = true;
             Hide();
         }
