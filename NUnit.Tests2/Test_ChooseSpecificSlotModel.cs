@@ -18,8 +18,7 @@ namespace NUnit.Tests2 {
             };
             subjectListModel.SelectSubject("MPU3143"); //BMK2
             subjectListModel.SelectSubject("UKMM1043"); //BEAM
-            throw new NotImplementedException();
-            //return new ChooseSpecificSlotModel(subjectListModel.ToList().FindAll(x => x.IsSelected) , outputTimetables);
+            return new ChooseSpecificSlotModel(subjectListModel.ToList().FindAll(x => x.IsSelected) , Permutator.Run_v2_withoutConsideringWeekNumber);
         }
 
         [Test]

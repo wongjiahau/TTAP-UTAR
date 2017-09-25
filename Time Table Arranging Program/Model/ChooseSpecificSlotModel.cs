@@ -59,7 +59,8 @@ namespace Time_Table_Arranging_Program.Model {
         }
 
         public void CheckForError() {
-            var timetable = NewListOfTimetables[0];
+            List<Slot> timetable = null;
+            if (NewListOfTimetables != null) timetable = NewListOfTimetables[0];
             ErrorMessage = "";
             foreach (var schema in _subjectSchemas) {
                 string message = schema.Validate(timetable);

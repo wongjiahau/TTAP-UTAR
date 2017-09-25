@@ -61,6 +61,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BehavioralTests\ChooseSpecificSlotFeature.cs" />
     <Compile Include="BehavioralTests\SearchSubjectFeature.cs" />
     <Compile Include="BehavioralTests\SelectSubjectFeature.cs" />
     <Compile Include="Helper.cs" />
