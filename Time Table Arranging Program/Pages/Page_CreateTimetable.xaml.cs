@@ -188,7 +188,10 @@ namespace Time_Table_Arranging_Program.Pages {
         private Window_ChooseSpecificSlot _chooseSpecificSlotWindow;
         private void ChooseSpecificSlotsButton_onClick(object sender , RoutedEventArgs e) {
             _chooseSpecificSlotWindow.ShowDialog();
-            if(_chooseSpecificSlotWindow.UserClickedDone) UpdateGUI(_chooseSpecificSlotModel.NewListOfTimetables);
+            if (_chooseSpecificSlotWindow.UserClickedDone) {
+                UpdateGUI(_chooseSpecificSlotModel.NewListOfTimetables);
+                _windowStateSummary = null;
+            }
         }
     }
 }
