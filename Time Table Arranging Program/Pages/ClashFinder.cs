@@ -15,13 +15,13 @@ namespace Time_Table_Arranging_Program.Pages {
         public int[ /*7*/] StateOfEachDay;
         public string SubjectName;
 
-        public SubjectModelWithState(string subjectName, int[] stateOfEachDay) {
+        public SubjectModelWithState(string subjectName , int[] stateOfEachDay) {
             SubjectName = subjectName;
             StateOfEachDay = stateOfEachDay;
         }
 
         public bool ClashesWith(SubjectModelWithState s) {
-            for (int i = 0; i < Day.NumberOfDaysPerWeek; i++) {
+            for (int i = 0 ; i < Day.NumberOfDaysPerWeek ; i++) {
                 if ((StateOfEachDay[i] & s.StateOfEachDay[i]) > 0) return true;
             }
             return false;
@@ -30,44 +30,45 @@ namespace Time_Table_Arranging_Program.Pages {
 
 
     public class ClashFinder {
-        private readonly List<SubjectModel> _subjectModels;
+        private readonly List<SubjectModel> _selectedSubjects;
         private readonly List<SubjectModelWithState> _subjectStateList = new List<SubjectModelWithState>();
         private readonly SubjectModel _target;
 
-        public ClashFinder(List<SubjectModel> subjectModels, Func<Slot[], List<List<Slot>>> permutator,
+        public ClashFinder(List<SubjectModel> selectedSubjects , Func<Slot[] , List<List<Slot>>> permutator ,
                            SubjectModel target) {
-            _subjectModels = subjectModels;
+            _selectedSubjects = selectedSubjects;
             _target = target;
-            var selectedSubjects = subjectModels.FindAll(x => x.IsSelected);
-            for (var i = 0; i < selectedSubjects.Count; i++) {
+            if (selectedSubjects.Count == 2) {
+                ClashingSubjects = (
+                    new SubjectModelWithState(target.Name , null),
+                    new SubjectModelWithState(selectedSubjects.Find(x => x.Code != target.Code).Name , null));
+                return;
+            }
+            for (var i = 0 ; i < selectedSubjects.Count ; i++) {
                 SubjectModel s = selectedSubjects[i];
                 int[] subjectState = GetSubjectState(permutator(s.GetSelectedSlots().ToArray()));
-                _subjectStateList.Add(new SubjectModelWithState(s.Name, subjectState));
+                _subjectStateList.Add(new SubjectModelWithState(s.Name , subjectState));
             }
-            for (int i = 0; i < _subjectStateList.Count; i++) {
-                for (int j = 0; j < _subjectStateList.Count; j++) {
+            for (int i = 0 ; i < _subjectStateList.Count ; i++) {
+                for (int j = 0 ; j < _subjectStateList.Count ; j++) {
                     if (i == j) continue;
                     if (_subjectStateList[i].ClashesWith(_subjectStateList[j])) {
                         ClashingSubjects = (_subjectStateList[i], _subjectStateList[j]);
-                        Message =
-                            $"Because\n--{_subjectStateList[i].SubjectName}\nclashes with\n--{_subjectStateList[j].SubjectName}";
                         return;
                     }
                 }
             }
-            Message = $"Sorry... the reason is too complicated to be explained.";
             ClashingSubjects = null;
         }
 
         private (SubjectModelWithState, SubjectModelWithState)? ClashingSubjects { get; set; }
-        private string Message { set; get; }
 
         public static int[] GetSubjectState(List<List<Slot>> outputTimetables) {
-            var finalResult = new int[7] {-1, -1, -1, -1, -1, -1, -1};
-            for (var i = 0; i < outputTimetables.Count; i++) {
+            var finalResult = new int[7] { -1 , -1 , -1 , -1 , -1 , -1 , -1 };
+            for (var i = 0 ; i < outputTimetables.Count ; i++) {
                 var timetable = outputTimetables[i];
                 var stateOfThisTimetable = GetTimetableState(timetable);
-                for (int k = 0; k < Day.NumberOfDaysPerWeek; k++) {
+                for (int k = 0 ; k < Day.NumberOfDaysPerWeek ; k++) {
                     finalResult[k] &= stateOfThisTimetable[k];
                 }
             }
@@ -75,8 +76,8 @@ namespace Time_Table_Arranging_Program.Pages {
         }
 
         public static int[] GetTimetableState(List<Slot> timetable) {
-            var result = new int[7] {0, 0, 0, 0, 0, 0, 0};
-            for (var j = 0; j < timetable.Count; j++) {
+            var result = new int[7] { 0 , 0 , 0 , 0 , 0 , 0 , 0 };
+            for (var j = 0 ; j < timetable.Count ; j++) {
                 var slot = timetable[j];
                 result[slot.Day.IntValue - 1] |= slot.TimePeriod.ToBinary();
             }
@@ -89,19 +90,19 @@ namespace Time_Table_Arranging_Program.Pages {
                 ClashingSubjects.Value.Item1.SubjectName == _target.Name
                     ? ClashingSubjects.Value.Item2.SubjectName
                     : ClashingSubjects.Value.Item1.SubjectName;
-            return _subjectModels.Find(x => x.Name == nameOfClashingCounterPart);
+            return _selectedSubjects.Find(x => x.Name == nameOfClashingCounterPart);
         }
 
         public ClashReport GetReport() {
             var clashingCounterpart = WhoIsCrashingWithTarget();
             return clashingCounterpart == null
-                ? new ClashReport(ClashingErrorType.GroupClashingError, null)
-                : new ClashReport(ClashingErrorType.SingleClashingError, clashingCounterpart);
+                ? new ClashReport(ClashingErrorType.GroupClashingError , null)
+                : new ClashReport(ClashingErrorType.SingleClashingError , clashingCounterpart);
         }
     }
 
     public class ClashReport {
-        public ClashReport(ClashingErrorType clashingErrorType, SubjectModel clashingCounterpart) {
+        public ClashReport(ClashingErrorType clashingErrorType , SubjectModel clashingCounterpart) {
             ClashingErrorType = clashingErrorType;
             ClashingCounterpart = clashingCounterpart;
         }
@@ -111,6 +112,6 @@ namespace Time_Table_Arranging_Program.Pages {
     }
 
     public class NullClashReport : ClashReport {
-        public NullClashReport() : base(ClashingErrorType.NoError, null) { }
+        public NullClashReport() : base(ClashingErrorType.NoError , null) { }
     }
 }

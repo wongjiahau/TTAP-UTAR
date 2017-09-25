@@ -74,7 +74,7 @@ namespace Time_Table_Arranging_Program.Class {
 
         private void DisableClashingSubject(SubjectModel currentlySelectedSubject) {
             var clashReport =
-                new ClashFinder(_subjectModels, _permutator, currentlySelectedSubject).GetReport();
+                new ClashFinder(_subjectModels.FindAll(x => x.IsSelected) , _permutator , currentlySelectedSubject).GetReport();
             _disabledSubjects.Add(currentlySelectedSubject);
             currentlySelectedSubject.ClashReport = clashReport;
         }
