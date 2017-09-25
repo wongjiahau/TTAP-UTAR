@@ -63,7 +63,7 @@ namespace NUnit.Tests2 {
                 {TestData.GetSlot(167), TestData.GetSlot(171)});
             string result = schemaToBeValidated.ConformsTo(targetSchema);
             Console.WriteLine(result);
-            Assert.IsTrue(result.Contains("At least one tutorial is needed"));
+            Assert.IsTrue(result.Contains("At least one TUTORIAL is needed"));
         }
 
         [Test]
