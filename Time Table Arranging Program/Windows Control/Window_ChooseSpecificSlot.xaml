@@ -8,6 +8,9 @@
         xmlns:model="clr-namespace:Time_Table_Arranging_Program.Model"
         mc:Ignorable="d"
         WindowStyle="None"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
         Title="Window_ChooseSpecificSlot" WindowState="Maximized">
     <Window.DataContext>
         <model:ChooseSpecificSlotModel />
@@ -47,7 +50,7 @@
             </StackPanel.Style>
             <TextBlock Text="{Binding ErrorMessage}" Foreground="Red"/>
         </StackPanel>
-        <Border BorderThickness="1" BorderBrush="WhiteSmoke">
+        <Border BorderThickness="1" BorderBrush="Gray">
             <ScrollViewer>
                 <materialDesign:Card HorizontalAlignment="Center" VerticalAlignment="Center">
                     <StackPanel x:Name="StackPanel"/>

@@ -8,6 +8,11 @@
         xmlns:views="clr-namespace:Time_Table_Arranging_Program.MVVM_Framework.Views"
         xmlns:console="clr-namespace:EmbeddedConsole.Console;assembly=ConsoleTerminalLibrary"
         mc:Ignorable="d"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        Background="{DynamicResource MaterialDesignPaper}"
+        TextElement.FontWeight="Medium"
+        TextElement.FontSize="14"
+        FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
         Title="Time Table Arranging Program (TTAP) - UTAR" WindowState="Maximized" Icon="Icon/calendar.png"
         Closing=" MainWindow_OnClosing">
     <Window.Resources>

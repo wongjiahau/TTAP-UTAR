@@ -8,8 +8,12 @@
         xmlns:userControl="clr-namespace:Time_Table_Arranging_Program.User_Control"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        Background="{DynamicResource MaterialDesignPaper}"
+        TextElement.FontWeight="Medium"
+        TextElement.FontSize="14"
+        FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
         Title="Page_StateSummary" WindowStyle="None" WindowState="Maximized" Loaded="Window_StateSummary_OnLoaded">
-
     <ScrollViewer>
         <StackPanel Margin="10" VerticalAlignment="Top" HorizontalAlignment="Stretch">
             <Grid>
