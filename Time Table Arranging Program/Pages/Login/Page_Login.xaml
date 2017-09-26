@@ -7,6 +7,10 @@
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       xmlns:userControl="clr-namespace:Time_Table_Arranging_Program.User_Control"
       mc:Ignorable="d"
+      TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+      TextElement.FontWeight="Normal"
+      TextElement.FontSize="14"
+      FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
       Title="Page_First">
     <Page.Resources>
         <ResourceDictionary>
