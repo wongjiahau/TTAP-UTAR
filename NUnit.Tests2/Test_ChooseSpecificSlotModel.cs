@@ -32,6 +32,12 @@ namespace NUnit.Tests2 {
             Assert.IsTrue(model.NewListOfTimetables.Count == 0);
         }
 
+        [Test]
+        public void Test_InitialStateOf_GotError() {
+            var model = Input();
+            Assert.IsFalse(model.GotError);
+        }
+
         public void Test_InitialStateOf_AllSlot_ShouldBeAllSelected() {
             var model = Input();
             foreach (Slot s in model.AllSlot) {

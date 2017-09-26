@@ -35,10 +35,27 @@ namespace NUnit.Tests2.BehavioralTests {
         }
 
         [Test]
+        public void ClickDoneDirectly() {
+            string behavior = 
+                @"
+                    Given Ali chosen subject BMK2
+                    And Ali opened the ChooseSpecificSlot window
+                    When Ali clicked DONE button directly
+                    Then Ali shall go back to the previous window without error
+                ";
+            var input = Input_2();
+            input.CheckForError();
+            Console.WriteLine(input.ErrorMessage);
+            Assert.IsFalse(input.GotError, behavior);
+        }
+
+        [Test]
         public void DeselectedAllSlots() {
             string behavior = 
                 @"
-                    If Ali deselected all slots 
+                    Given Ali chosen subject BMK2
+                    And Ali opened the ChooseSpecificSlot window
+                    When Ali deselected all slots 
                     Then he should see error messages
                 ";
             var input = Input_2();

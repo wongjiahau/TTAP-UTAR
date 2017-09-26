@@ -6,6 +6,7 @@ using Time_Table_Arranging_Program.Class.AbstractClass;
 
 namespace Time_Table_Arranging_Program.Model {
     public class ChooseSpecificSlotModel : ObservableObject {
+        private bool _userHadToggledSlotSelection = false;
         private Func<Slot[] , List<List<Slot>>> _permutator;
         private List<Slot> _allSlots = new List<Slot>();
         private List<SubjectSchema> _subjectSchemas = new List<SubjectSchema>();
@@ -32,6 +33,7 @@ namespace Time_Table_Arranging_Program.Model {
         }
 
         private void ToggleSlotSelection(int uid , bool isSelected) {
+            _userHadToggledSlotSelection = true;
             var matchingSlots = _allSlots.FindAll(x => x.UID == uid);
             for (int i = 0 ; i < matchingSlots.Count ; i++) {
                 matchingSlots[i].IsSelected = isSelected;
@@ -59,6 +61,7 @@ namespace Time_Table_Arranging_Program.Model {
         }
 
         public void CheckForError() {
+            if (!_userHadToggledSlotSelection) return;
             List<Slot> timetable = null;
             if (NewListOfTimetables != null) timetable = NewListOfTimetables[0];
             ErrorMessage = "";
