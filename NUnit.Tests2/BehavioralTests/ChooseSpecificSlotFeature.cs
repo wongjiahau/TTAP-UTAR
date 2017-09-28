@@ -47,6 +47,7 @@ namespace NUnit.Tests2.BehavioralTests {
             input.CheckForError();
             Console.WriteLine(input.ErrorMessage);
             Assert.IsFalse(input.GotError, behavior);
+            Assert.IsFalse(input.SlotSelectionIsChanged);
         }
 
         [Test]
@@ -63,6 +64,7 @@ namespace NUnit.Tests2.BehavioralTests {
             input.CheckForError();
             Console.WriteLine(input.ErrorMessage);
             Assert.IsTrue(input.GotError, behavior);
+            Assert.IsTrue(input.SlotSelectionIsChanged);
         }
     }
 }

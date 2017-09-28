@@ -93,7 +93,7 @@ namespace Time_Table_Arranging_Program.Pages {
         private void SubjectListModel_NewListOfTimetablesGenerated(object sender , EventArgs e) {
             _windowStateSummary = null;
             _newListOfTimetables = (List<List<Slot>>)sender;
-            _chooseSpecificSlotModel = new ChooseSpecificSlotModel(_subjectModels.FindAll(x => x.IsSelected), _permutator);
+            _chooseSpecificSlotModel = new ChooseSpecificSlotModel(_subjectModels.FindAll(x => x.IsSelected) , _permutator);
             _chooseSpecificSlotWindow = new Window_ChooseSpecificSlot(_chooseSpecificSlotModel);
             UpdateGUI(_newListOfTimetables);
         }
@@ -188,7 +188,7 @@ namespace Time_Table_Arranging_Program.Pages {
         private Window_ChooseSpecificSlot _chooseSpecificSlotWindow;
         private void ChooseSpecificSlotsButton_onClick(object sender , RoutedEventArgs e) {
             _chooseSpecificSlotWindow.ShowDialog();
-            if (_chooseSpecificSlotWindow.UserClickedDone) {
+            if (_chooseSpecificSlotWindow.UserClickedDone && _chooseSpecificSlotWindow.SlotSelectionIsChanged) {
                 UpdateGUI(_chooseSpecificSlotModel.NewListOfTimetables);
                 _windowStateSummary = null;
             }

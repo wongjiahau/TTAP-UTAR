@@ -56,5 +56,7 @@ namespace Time_Table_Arranging_Program.Windows_Control {
         }
 
         public bool UserClickedDone { get; private set; }
+
+        public bool SlotSelectionIsChanged => _model.SlotSelectionIsChanged;
     }
 }
