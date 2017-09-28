@@ -23,10 +23,7 @@ namespace Time_Table_Arranging_Program.ConsoleCommands {
         }
 
         protected override string Execute(string resourceName) {
-            if (resourceName == "default") {
-                ((MainWindow) Commandee).LoadTestData(TestData.TestSlots);
-                return "Loaded default data.";
-            }
+            if (resourceName == "default") resourceName = Arguments()[0];
             string raw = Helper.RawStringOfTestFile(resourceName, leadingNamespace + ".");
             var slots = new HtmlSlotParser().Parse(raw);
             try {
