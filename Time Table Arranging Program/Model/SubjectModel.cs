@@ -44,6 +44,20 @@ namespace Time_Table_Arranging_Program.Model {
             return result;
         }
 
+        public void ToggleSelectionOn(Slot slot) {
+            slot.IsSelected = !slot.IsSelected;
+            CascadeEffectToSimilarSlot(slot);
+            IsAllSlotsSelected = Slots.All(x => x.IsSelected);
+
+            void CascadeEffectToSimilarSlot(Slot selectedSlot)
+            {
+                foreach (Slot s in Slots) {
+                    if (s.UID != selectedSlot.UID) continue;
+                    s.IsSelected = selectedSlot.IsSelected;
+                }
+            }
+        }
+
         public static List<SubjectModel> Parse(List<Slot> slots) {
             var result = new List<SubjectModel>();
             var dic = new Dictionary<string , List<Slot>>();
@@ -82,7 +96,7 @@ namespace Time_Table_Arranging_Program.Model {
                     Selected?.Invoke(this , null);
                 }
                 else Deselected?.Invoke(this , null);
-                IsAllSlotsSelected = Slots.All(x => x.IsSelected);
+                IsAllSlotsSelected = value;
             }
         }
 
@@ -183,5 +197,6 @@ namespace Time_Table_Arranging_Program.Model {
         #endregion
 
         #endregion
+
     }
 }

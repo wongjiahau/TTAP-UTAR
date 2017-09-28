@@ -14,20 +14,20 @@ namespace Time_Table_Arranging_Program.User_Control.SubjectViewFolder {
         public event EventHandler ListOfSlotDeselected;
         public SubjectViewForChoosingSlots() => InitializeComponent();
 
+        public void SetDataContext(SubjectModel subjectModel) {
+            _model = subjectModel;
+            this.DataContext = _model;
+        }
+
         private void ListViewItem_PreviewMouseLeftButtonDown(object sender , MouseButtonEventArgs e) {
             var item = sender as ListViewItem;
             var slot = item?.Content as Slot;
             if (slot == null) return;
-            slot.IsSelected = !slot.IsSelected;
-            CascadeEffectToSimilarSlot(slot);
-            SlotSelectionChanged?.Invoke(slot , null);
+            _model.ToggleSelectionOn(slot);
+            UpdateListView();
         }
 
-        private void CascadeEffectToSimilarSlot(Slot selectedSlot) {
-            foreach (Slot s in ListView.Items) {
-                if (s.UID != selectedSlot.UID) continue;
-                s.IsSelected = selectedSlot.IsSelected;
-            }
+        private void ToggleCheckButton_OnClick(object sender , RoutedEventArgs e) {
             UpdateListView();
         }
 
@@ -37,13 +37,5 @@ namespace Time_Table_Arranging_Program.User_Control.SubjectViewFolder {
             ListView.ItemsSource = temp;
         }
 
-        private void ToggleCheckButton_OnClick(object sender , RoutedEventArgs e) {
-            UpdateListView();
-        }
-
-        public void SetDataContext(SubjectModel subjectModel) {
-            _model = subjectModel;
-            this.DataContext = _model;
-        }
     }
 }
