@@ -35,7 +35,7 @@
                 Click="DoneButton_OnClick">
             DONE
         </Button>
-        <StackPanel x:Name="InfoStackPanel" Visibility="Hidden" Margin="10" DockPanel.Dock="Bottom" HorizontalAlignment="Center" Orientation="Horizontal">
+        <StackPanel x:Name="InfoStackPanel" Margin="10" DockPanel.Dock="Bottom" HorizontalAlignment="Center" Orientation="Horizontal">
             <StackPanel.Style>
                 <Style TargetType="StackPanel">
                     <Style.Triggers>
@@ -43,7 +43,7 @@
                             <Setter Property="Visibility" Value="Visible" />
                         </DataTrigger>
                         <DataTrigger Binding="{Binding  GotError}" Value="False">
-                            <Setter Property="Visibility" Value="Collapsed" />
+                            <Setter Property="Visibility" Value="Hidden" />
                         </DataTrigger>
                     </Style.Triggers>
                 </Style>

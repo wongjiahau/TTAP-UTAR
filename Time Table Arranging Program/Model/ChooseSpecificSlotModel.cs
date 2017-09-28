@@ -49,7 +49,6 @@ namespace Time_Table_Arranging_Program.Model {
             GotError = ErrorMessage.Length > 0;
         }
 
-        public bool GotError { get; private set; }
         public List<Slot> AllSlot => _allSlots;
 
         #region ViewProperties
@@ -57,9 +56,14 @@ namespace Time_Table_Arranging_Program.Model {
         private string _errorMessage;
         public string ErrorMessage {
             get => _errorMessage;
-            set => SetProperty(ref _errorMessage , value);
+            private set => SetProperty(ref _errorMessage , value);
         }
 
+        private bool _gotError;
+        public bool GotError {
+            get => _gotError;
+            private set => SetProperty(ref _gotError, value);
+        }
         #endregion
     }
 }
