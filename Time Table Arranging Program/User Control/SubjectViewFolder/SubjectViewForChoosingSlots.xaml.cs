@@ -9,9 +9,6 @@ using Time_Table_Arranging_Program.Model;
 namespace Time_Table_Arranging_Program.User_Control.SubjectViewFolder {
     public partial class SubjectViewForChoosingSlots : UserControl, INeedDataContext<SubjectModel> {
         private SubjectModel _model;
-        public event EventHandler SlotSelectionChanged;
-        public event EventHandler ListOfSlotSelected;
-        public event EventHandler ListOfSlotDeselected;
         public SubjectViewForChoosingSlots() => InitializeComponent();
 
         public void SetDataContext(SubjectModel subjectModel) {
@@ -23,7 +20,7 @@ namespace Time_Table_Arranging_Program.User_Control.SubjectViewFolder {
             var item = sender as ListViewItem;
             var slot = item?.Content as Slot;
             if (slot == null) return;
-            _model.ToggleSelectionOn(slot);
+            _model.ToggleSlotSelection(slot.UID);
             UpdateListView();
         }
 

@@ -9,10 +9,6 @@ using Time_Table_Arranging_Program.User_Control.SubjectListFolder;
 namespace NUnit.Tests2 {
     [TestFixture]
     public class Test_SubjectModel {
-        private SubjectListModel Input() {
-            return new SubjectListModel(SubjectModel.Parse(TestData.TestSlots) ,
-                Permutator.Run_v2_withoutConsideringWeekNumber , new TaskRunnerForUnitTesting());
-        }
 
         private SubjectListModel Input2() {
             return new SubjectListModel(
@@ -51,21 +47,21 @@ namespace NUnit.Tests2 {
 
         [Test]
         public void Test_SubjectModel_IsSelected_2() {
-            var input = Input();
-            input.SelectSubject("MPU34072");
-            var mpu34072 = input.ToList().Find(x => x.Code == "MPU34072");
-            foreach (var s in mpu34072.Slots) {
+            var input = Input2();
+            input.SelectSubject("MPU34022");
+            var MPU34022 = input.ToList().Find(x => x.Code == "MPU34022");
+            foreach (var s in MPU34022.Slots) {
                 Assert.IsTrue(s.IsSelected);
             }
         }
 
         [Test]
         public void Test_SubjectModel_IsDeselected_1() {
-            var input = Input();
-            input.SelectSubject("MPU34072");
-            input.SelectSubject("MPU34072" , false);
-            var mpu34072 = input.ToList().Find(x => x.Code == "MPU34072");
-            foreach (var s in mpu34072.Slots) {
+            var input = Input2();
+            input.SelectSubject("MPU34022");
+            input.SelectSubject("MPU34022" , false);
+            var MPU34022 = input.ToList().Find(x => x.Code == "MPU34022");
+            foreach (var s in MPU34022.Slots) {
                 Assert.IsFalse(s.IsSelected);
             }
 
@@ -103,6 +99,16 @@ namespace NUnit.Tests2 {
             input.IsSelected = true;
             input.ToggleAllSlotSelectionCommand.Execute(null);
             Assert.IsFalse(input.IsAllSlotsSelected);
+        }
+
+        [Test]
+        public void Test_ToggleAllSlotSelectionCommandShouldTriggerSlotSelectionChangedEvent() {
+            var input = Input3();
+            input.SlotSelectionChanged += (sender, args) => {
+                Assert.Pass();
+            };
+            input.ToggleAllSlotSelectionCommand.Execute(null);
+            Assert.Fail();
         }
     }
 }

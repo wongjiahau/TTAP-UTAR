@@ -47,7 +47,24 @@ namespace NUnit.Tests2.BehavioralTests {
             input.CheckForError();
             Console.WriteLine(input.ErrorMessage);
             Assert.IsFalse(input.GotError, behavior);
-            Assert.IsFalse(input.SlotSelectionIsChanged);
+            Assert.IsFalse(input.IsSlotSelectionChanged);
+        }
+
+        [Test]
+        public void DeselectedSomeSlots() {
+            string behavior =
+                @"
+                    Given Ali chosen subject BMK2
+                    And Ali opened the ChooseSpecificSlot window
+                    When Ali deselected Lecture 1 of BMK2
+                    Then he should see error messages
+                ";
+            var input = Input_2();
+            input.Subjects.Find(x => x.Code == "MPU3143").ToggleSlotSelection(4);
+            input.CheckForError();
+            Console.WriteLine(input.ErrorMessage);
+            Assert.IsTrue(input.GotError , behavior);
+            Assert.IsTrue(input.IsSlotSelectionChanged);
         }
 
         [Test]
@@ -60,11 +77,11 @@ namespace NUnit.Tests2.BehavioralTests {
                     Then he should see error messages
                 ";
             var input = Input_2();
-            input.DeselectSlot(4);
+            input.Subjects.Find(x=>x.Code == "MPU3143").ToggleAllSlotSelectionCommand.Execute(null);
             input.CheckForError();
             Console.WriteLine(input.ErrorMessage);
             Assert.IsTrue(input.GotError, behavior);
-            Assert.IsTrue(input.SlotSelectionIsChanged);
+            Assert.IsTrue(input.IsSlotSelectionChanged);
         }
     }
 }

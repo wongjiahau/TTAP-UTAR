@@ -10,6 +10,7 @@ using Time_Table_Arranging_Program.User_Control.CheckboxWithListDownMenuFolder.E
 
 namespace Time_Table_Arranging_Program.Model {
     public class SubjectModel : ObservableObject, IFocusable {
+        public event EventHandler SlotSelectionChanged;
         public SubjectModel() {
             Name = "Testing Subject 123";
             CodeAndNameInitials = "MPU329999";
@@ -44,18 +45,13 @@ namespace Time_Table_Arranging_Program.Model {
             return result;
         }
 
-        public void ToggleSelectionOn(Slot slot) {
-            slot.IsSelected = !slot.IsSelected;
-            CascadeEffectToSimilarSlot(slot);
-            IsAllSlotsSelected = Slots.All(x => x.IsSelected);
-
-            void CascadeEffectToSimilarSlot(Slot selectedSlot)
-            {
-                foreach (Slot s in Slots) {
-                    if (s.UID != selectedSlot.UID) continue;
-                    s.IsSelected = selectedSlot.IsSelected;
-                }
+        public void ToggleSlotSelection(int slotUid) {
+            foreach (Slot s in Slots) {
+                if (s.UID != slotUid) continue;
+                s.IsSelected = !s.IsSelected;
             }
+            IsAllSlotsSelected = Slots.All(x => x.IsSelected);
+            SlotSelectionChanged?.Invoke(this , null);
         }
 
         public static List<SubjectModel> Parse(List<Slot> slots) {
@@ -193,6 +189,7 @@ namespace Time_Table_Arranging_Program.Model {
                        }
                    }
                    IsAllSlotsSelected = !IsAllSlotsSelected;
+                   SlotSelectionChanged?.Invoke(this , null);
                }));
         #endregion
 

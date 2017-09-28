@@ -13,34 +13,17 @@ namespace Time_Table_Arranging_Program.Windows_Control {
             InitializeComponent();
             _model = model;
             this.DataContext = _model;
-            InitializeUi(_model.SelectedSubjects);
+            InitializeUi(_model.Subjects);
         }
 
         private void InitializeUi(List<SubjectModel> selectedSubjects) {
             foreach (var subject in selectedSubjects) {
                 var s = new SubjectViewForChoosingSlots();
                 s.SetDataContext(subject);
-                s.SlotSelectionChanged += SlotSelectionChanged;
-                s.ListOfSlotSelected += ListOfSlotSelected;
-                s.ListOfSlotDeselected += ListOfSlotDeselected;
                 StackPanel.Children.Add(s);
             }
         }
 
-        private void ListOfSlotSelected(object sender, EventArgs eventArgs) {
-            _model.SelectSlots((List<int>)sender);
-        }
-
-        private void ListOfSlotDeselected(object sender, EventArgs eventArgs) {
-            _model.DeselectSlots((List<int>)sender);
-        }
-        
-        private void SlotSelectionChanged(object sender , EventArgs e) {
-            InfoStackPanel.Visibility = Visibility.Visible;
-            var targetSlot = (Slot)sender;
-            if (targetSlot.IsSelected) _model.SelectSlot(targetSlot.UID);
-            else _model.DeselectSlot(targetSlot.UID);
-        }
 
         public List<List<Slot>> NewListOfTimetables { get; private set; } = null;
 
@@ -58,6 +41,6 @@ namespace Time_Table_Arranging_Program.Windows_Control {
 
         public bool UserClickedDone { get; private set; }
 
-        public bool SlotSelectionIsChanged => _model.SlotSelectionIsChanged;
+        public bool SlotSelectionIsChanged => _model.IsSlotSelectionChanged;
     }
 }

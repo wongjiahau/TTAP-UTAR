@@ -23,7 +23,7 @@ namespace NUnit.Tests2 {
         [Test]
         public void Test_InitialStateOf_SelectedSubjects() {
             var model = Input();
-            Assert.IsTrue(model.SelectedSubjects.Count == 2);
+            Assert.IsTrue(model.Subjects.Count == 2);
         }
 
         [Test]
@@ -38,6 +38,7 @@ namespace NUnit.Tests2 {
             Assert.IsFalse(model.GotError);
         }
 
+        [Test]
         public void Test_InitialStateOf_AllSlot_ShouldBeAllSelected() {
             var model = Input();
             foreach (Slot s in model.AllSlot) {
@@ -46,19 +47,5 @@ namespace NUnit.Tests2 {
             }
             Assert.Pass();
         }
-        [Test]
-        public void Test_DeselectSlot() {
-            var model = Input();
-            model.DeselectSlot(4);
-            Assert.IsTrue(model.AllSlot.Find(x=> x.UID == 4).IsSelected == false);
-        }
-
-        [Test]
-        public void Test_SelectSlot() {
-            var model = Input();
-            model.DeselectSlot(4);
-            model.SelectSlot(4);
-            Assert.IsTrue(model.AllSlot.Find(x=> x.UID == 4).IsSelected);
-        }
-    }
+   }
 }
