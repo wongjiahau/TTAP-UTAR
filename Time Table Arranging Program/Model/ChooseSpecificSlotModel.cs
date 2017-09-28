@@ -39,6 +39,13 @@ namespace Time_Table_Arranging_Program.Model {
 
         public void CheckForError() {
             if (!IsSlotSelectionChanged) return;
+            if (NewListOfTimetables != null && NewListOfTimetables.Count == 0) {
+                GotError = true;
+                ErrorMessage =
+                    "The currently selected slots does not produce any possible timetable. " +
+                    "Try selecting more slots.";
+                return;
+            }
             List<Slot> timetable = null;
             if (NewListOfTimetables != null) timetable = NewListOfTimetables[0];
             ErrorMessage = "";

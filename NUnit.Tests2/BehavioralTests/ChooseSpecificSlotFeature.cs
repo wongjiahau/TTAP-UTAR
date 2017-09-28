@@ -83,5 +83,26 @@ namespace NUnit.Tests2.BehavioralTests {
             Assert.IsTrue(input.GotError, behavior);
             Assert.IsTrue(input.IsSlotSelectionChanged);
         }
+ 
+        [Test]
+        public void SelectedSlotsWhichGenerateNoPossibleTimetables() {
+            string behavior = 
+                @"
+                    Given Ali chosen subject BMK2 & BEAM
+                    And Ali opened the ChooseSpecificSlot window
+                    When Ali deselected some slots on both subjects
+                    And those slots would not generate any possible timetable
+                    Then he should see error messages
+                ";
+            var input = Input_1();
+            var subject_UKMM1043 = input.Subjects.Find(x=>x.Code == "UKMM1043");
+            subject_UKMM1043.ToggleAllSlotSelectionCommand.Execute(null);
+            subject_UKMM1043.ToggleSlotSelection(28);
+            subject_UKMM1043.ToggleSlotSelection(33);
+            input.CheckForError();
+            Console.WriteLine(input.ErrorMessage);
+            Assert.IsTrue(input.GotError, behavior);
+            Assert.IsTrue(input.IsSlotSelectionChanged);
+        }
     }
 }
