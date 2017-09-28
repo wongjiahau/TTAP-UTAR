@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using NUnit.Framework;
 using Time_Table_Arranging_Program.Class;
 using Time_Table_Arranging_Program.Class.TokenParser;
@@ -24,6 +20,14 @@ namespace NUnit.Tests2 {
                     Helper.RawStringOfTestFile("SampleData-FAM-2017-2ndSem.html"))) ,
                 Permutator.Run_v2_withoutConsideringWeekNumber ,
                 new TaskRunnerForUnitTesting());
+        }
+
+        private SubjectModel Input3() {
+            return new SubjectListModel(
+                SubjectModel.Parse(new HtmlSlotParser().Parse(
+                    Helper.RawStringOfTestFile("SampleData-FAM-2017-2ndSem.html"))) ,
+                Permutator.Run_v2_withoutConsideringWeekNumber ,
+                new TaskRunnerForUnitTesting()).ToList()[0];
         }
 
         [Test]
@@ -64,6 +68,41 @@ namespace NUnit.Tests2 {
             foreach (var s in mpu34072.Slots) {
                 Assert.IsFalse(s.IsSelected);
             }
+
+        }
+
+        [Test]
+        public void Test_StateOfSelectionOfAllSlots_1() {
+            var input = Input3();
+            Assert.IsFalse(input.Slots.All(x => x.IsSelected));
+        }
+
+        [Test]
+        public void Test_StateOfSelectionOfAllSlots_2() {
+            var input = Input3();
+            Assert.IsFalse(input.IsAllSlotsSelected);
+        }
+
+        [Test]
+        public void Test_StateOfSelectionOfAllSlots_3() {
+            var input = Input3();
+            input.IsSelected = true;
+            Assert.IsTrue(input.Slots.All(x => x.IsSelected));
+        }
+
+        [Test]
+        public void Test_StateOfSelectionOfAllSlots_4() {
+            var input = Input3();
+            input.IsSelected = true;
+            Assert.IsTrue(input.IsAllSlotsSelected);
+        }
+
+        [Test]
+        public void Test_ToggleAllSlotSelectionCommand() {
+            var input = Input3();
+            input.IsSelected = true;
+            input.ToggleAllSlotSelectionCommand.Execute(null);
+            Assert.IsFalse(input.IsAllSlotsSelected);
 
         }
     }

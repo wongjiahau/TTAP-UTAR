@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Time_Table_Arranging_Program.Class;
 using Time_Table_Arranging_Program.Class.AbstractClass;
 
@@ -11,7 +10,7 @@ namespace Time_Table_Arranging_Program.Model {
         private List<SubjectSchema> _subjectSchemas = new List<SubjectSchema>();
         public List<List<Slot>> NewListOfTimetables { get; private set; } = new List<List<Slot>>();
         public List<SubjectModel> SelectedSubjects { get; }
-        public bool SlotSelectionIsChanged { get; private set; }= false;
+        public bool SlotSelectionIsChanged { get; private set; } = false;
 
         [Obsolete("This constructor is for initialization of XAML designer only")]
         public ChooseSpecificSlotModel() { }
@@ -76,12 +75,13 @@ namespace Time_Table_Arranging_Program.Model {
         public List<Slot> AllSlot => _allSlots;
 
         #region ViewProperties
+
         private string _errorMessage;
         public string ErrorMessage {
             get => _errorMessage;
             set => SetProperty(ref _errorMessage , value);
         }
-        #endregion
 
+        #endregion
     }
 }

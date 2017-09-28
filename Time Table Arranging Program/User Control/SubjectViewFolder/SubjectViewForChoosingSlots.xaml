@@ -46,16 +46,38 @@
             </Border>
             <Border DockPanel.Dock="Top" Background="WhiteSmoke">
                 <DockPanel DockPanel.Dock="Top">
-                    <Button Visibility="Visible" x:Name="ToggleCheckButton" Content="Untick all slots"
+                    <DockPanel.Resources>
+                        <Style TargetType="Button">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsAllSlotsSelected}" Value="True">
+                                    <Setter Property="Content" Value="Untick all slots" />
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding IsAllSlotsSelected}" Value="False">
+                                    <Setter Property="Content" Value="Tick all slots" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                        <Style TargetType="Label">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsAllSlotsSelected}" Value="True">
+                                    <Setter Property="Content" Value="Untick the slots that you don't want." />
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding IsAllSlotsSelected}" Value="False">
+                                    <Setter Property="Content" Value="Tick the slots that you want." />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DockPanel.Resources>
+                    <Button Visibility="Visible" x:Name="ToggleCheckButton" 
                                         Width="auto"  Style="{StaticResource MaterialDesignFlatButton}"
                                         VerticalAlignment="Center"
                                         DockPanel.Dock="Right"
-                                        Click="ToggleCheckButton_OnClick" HorizontalAlignment="Center" Margin="5" />
+                                        Command="{Binding ToggleAllSlotSelectionCommand}"
+                                        Click="ToggleCheckButton_OnClick"
+                                        HorizontalAlignment="Center" Margin="5" />
                     <Label Visibility="Visible" x:Name="InstructionLabel" DockPanel.Dock="Left"
                                        VerticalAlignment="Center"
-                                       FontWeight="DemiBold">
-                        . . . Untick the slots that you don't want
-                    </Label>
+                                       FontWeight="DemiBold" />
                 </DockPanel>
             </Border>
             <Rectangle DockPanel.Dock="Top" Height="1" Fill="LightGray" />
@@ -84,3 +106,6 @@
         </DockPanel>
     </Expander>
 </UserControl>
+
+
+

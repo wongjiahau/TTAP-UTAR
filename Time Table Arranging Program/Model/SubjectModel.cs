@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Input;
 using Time_Table_Arranging_Program.Class;
 using Time_Table_Arranging_Program.Class.AbstractClass;
+using Time_Table_Arranging_Program.MVVM_Framework;
 using Time_Table_Arranging_Program.Pages;
 using Time_Table_Arranging_Program.User_Control.CheckboxWithListDownMenuFolder.ErrorMessageType;
 
@@ -73,13 +75,14 @@ namespace Time_Table_Arranging_Program.Model {
             get => _isSelected;
             set {
                 SetProperty(ref _isSelected , value);
-                for (int i = 0; i < Slots.Count; i++) {
+                for (int i = 0 ; i < Slots.Count ; i++) {
                     Slots[i].IsSelected = value;
                 }
                 if (value) {
                     Selected?.Invoke(this , null);
                 }
                 else Deselected?.Invoke(this , null);
+                IsAllSlotsSelected = Slots.All(x => x.IsSelected);
             }
         }
 
@@ -90,7 +93,7 @@ namespace Time_Table_Arranging_Program.Model {
             get => _isFocused;
             set {
                 SetProperty(ref _isFocused , value);
-                if(value) Focused?.Invoke(this, null);
+                if (value) Focused?.Invoke(this , null);
             }
         }
 
@@ -153,6 +156,31 @@ namespace Time_Table_Arranging_Program.Model {
         }
 
         public string NameOfClashingCounterpart { get; private set; }
+
+        private bool _isAllSlotsSelected = false;
+        public bool IsAllSlotsSelected {
+            get => _isAllSlotsSelected;
+            set => SetProperty(ref _isAllSlotsSelected , value);
+        }
+        #region Commands
+
+        private ICommand _toggleAllSelectionCommand;
+        public ICommand ToggleAllSlotSelectionCommand
+            => _toggleAllSelectionCommand ??
+               (_toggleAllSelectionCommand = new RelayCommand(() => {
+                   if (IsAllSlotsSelected) {
+                       foreach (Slot s in Slots) {
+                           s.IsSelected = false;
+                       }
+                   }
+                   else {
+                       foreach (Slot s in Slots) {
+                           s.IsSelected = true;
+                       }
+                   }
+                   IsAllSlotsSelected = !IsAllSlotsSelected;
+               }));
+        #endregion
 
         #endregion
     }

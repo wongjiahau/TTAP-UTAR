@@ -41,6 +41,8 @@ namespace Time_Table_Arranging_Program.User_Control.SubjectViewFolder {
         }
 
         private void ToggleCheckButton_OnClick(object sender , RoutedEventArgs e) {
+            UpdateListView();
+            return;
             var uidOfTargetSlots = new List<int>();
             if (ToggleCheckButton.Content.ToString() == "Untick all slots") {
                 ToggleCheckButton.Content = "Tick all slots";
