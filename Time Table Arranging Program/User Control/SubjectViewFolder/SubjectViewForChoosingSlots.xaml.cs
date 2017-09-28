@@ -1,21 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using Time_Table_Arranging_Program.Class;
+using Time_Table_Arranging_Program.Interfaces;
+using Time_Table_Arranging_Program.Model;
 
 namespace Time_Table_Arranging_Program.User_Control.SubjectViewFolder {
-    /// <summary>
-    /// Interaction logic for SubjectViewForChoosingSlots.xaml
-    /// </summary>
-    public partial class SubjectViewForChoosingSlots : UserControl {
+    public partial class SubjectViewForChoosingSlots : UserControl, INeedDataContext<SubjectModel> {
+        private SubjectModel _model;
         public event EventHandler SlotSelectionChanged;
         public event EventHandler ListOfSlotSelected;
         public event EventHandler ListOfSlotDeselected;
-        public SubjectViewForChoosingSlots() {
-            InitializeComponent();
-        }
+        public SubjectViewForChoosingSlots() => InitializeComponent();
 
         private void ListViewItem_PreviewMouseLeftButtonDown(object sender , MouseButtonEventArgs e) {
             var item = sender as ListViewItem;
@@ -42,27 +39,11 @@ namespace Time_Table_Arranging_Program.User_Control.SubjectViewFolder {
 
         private void ToggleCheckButton_OnClick(object sender , RoutedEventArgs e) {
             UpdateListView();
-            return;
-            var uidOfTargetSlots = new List<int>();
-            if (ToggleCheckButton.Content.ToString() == "Untick all slots") {
-                ToggleCheckButton.Content = "Tick all slots";
-                InstructionLabel.Content = ". . . Tick the slots that you want";
-                foreach (var item in ListView.ItemsSource) {
-                    ((Slot)item).IsSelected = false;
-                    uidOfTargetSlots.Add(((Slot)item).UID);
-                }
-                ListOfSlotDeselected?.Invoke(uidOfTargetSlots , null);
-            }
-            else {
-                ToggleCheckButton.Content = "Untick all slots";
-                InstructionLabel.Content = ". . . Untick the slots that you don't want";
-                foreach (var item in ListView.ItemsSource) {
-                    ((Slot)item).IsSelected = true;
-                    uidOfTargetSlots.Add(((Slot)item).UID);
-                }
-                ListOfSlotSelected?.Invoke(uidOfTargetSlots , null);
-            }
-            UpdateListView();
+        }
+
+        public void SetDataContext(SubjectModel subjectModel) {
+            _model = subjectModel;
+            this.DataContext = _model;
         }
     }
 }

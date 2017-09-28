@@ -103,7 +103,6 @@ namespace NUnit.Tests2 {
             input.IsSelected = true;
             input.ToggleAllSlotSelectionCommand.Execute(null);
             Assert.IsFalse(input.IsAllSlotsSelected);
-
         }
     }
 }

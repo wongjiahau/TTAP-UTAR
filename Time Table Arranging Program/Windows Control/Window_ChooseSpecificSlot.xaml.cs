@@ -18,7 +18,8 @@ namespace Time_Table_Arranging_Program.Windows_Control {
 
         private void InitializeUi(List<SubjectModel> selectedSubjects) {
             foreach (var subject in selectedSubjects) {
-                var s = new SubjectViewForChoosingSlots() { DataContext = subject };
+                var s = new SubjectViewForChoosingSlots();
+                s.SetDataContext(subject);
                 s.SlotSelectionChanged += SlotSelectionChanged;
                 s.ListOfSlotSelected += ListOfSlotSelected;
                 s.ListOfSlotDeselected += ListOfSlotDeselected;

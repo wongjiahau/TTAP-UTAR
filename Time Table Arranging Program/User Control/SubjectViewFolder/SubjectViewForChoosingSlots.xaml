@@ -47,7 +47,7 @@
             <Border DockPanel.Dock="Top" Background="WhiteSmoke">
                 <DockPanel DockPanel.Dock="Top">
                     <DockPanel.Resources>
-                        <Style TargetType="Button">
+                        <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignFlatButton}">
                             <Style.Triggers>
                                 <DataTrigger Binding="{Binding IsAllSlotsSelected}" Value="True">
                                     <Setter Property="Content" Value="Untick all slots" />
@@ -69,15 +69,15 @@
                         </Style>
                     </DockPanel.Resources>
                     <Button Visibility="Visible" x:Name="ToggleCheckButton" 
-                                        Width="auto"  Style="{StaticResource MaterialDesignFlatButton}"
+                                        Width="auto" 
                                         VerticalAlignment="Center"
                                         DockPanel.Dock="Right"
                                         Command="{Binding ToggleAllSlotSelectionCommand}"
                                         Click="ToggleCheckButton_OnClick"
                                         HorizontalAlignment="Center" Margin="5" />
-                    <Label Visibility="Visible" x:Name="InstructionLabel" DockPanel.Dock="Left"
+                    <Label Visibility="Visible" Margin="10,0,0,0" x:Name="InstructionLabel" DockPanel.Dock="Left"
                                        VerticalAlignment="Center"
-                                       FontWeight="DemiBold" />
+                                       FontWeight="Normal" />
                 </DockPanel>
             </Border>
             <Rectangle DockPanel.Dock="Top" Height="1" Fill="LightGray" />
