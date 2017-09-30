@@ -52,7 +52,7 @@
         </StackPanel>
         <Border BorderThickness="1" BorderBrush="Gray">
             <ScrollViewer>
-                <materialDesign:Card HorizontalAlignment="Center" VerticalAlignment="Center">
+                <materialDesign:Card HorizontalAlignment="Center" Margin="5" VerticalAlignment="Center">
                     <StackPanel x:Name="StackPanel"/>
                 </materialDesign:Card>
             </ScrollViewer>
