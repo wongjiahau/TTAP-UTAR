@@ -21,6 +21,14 @@ namespace NUnit.Tests2 {
         }
 
         [Test]
+        public void Test_ConstructorForUnitTesting() {
+            var s = new SubjectSchema(true , false , true);
+            Assert.IsTrue(s.GotLecture);
+            Assert.IsFalse(s.GotTutorial);
+            Assert.IsTrue(s.GotPractical);
+        }
+
+        [Test]
         public void Test_Constructor_1() {
             var s = new SubjectSchema(TestData.GetSlotsByName(TestData.Subjects.AdvancedStructuralSteelDesign));
             Assert.AreEqual("UEMX4313" , s.SubjectCode);
@@ -75,5 +83,27 @@ namespace NUnit.Tests2 {
             string result = schemaToBeValidated.ConformsTo(targetSchema);
             Assert.IsTrue(result == null);
         }
+
+        [Test]
+        public void Test_AreEqual_1() {
+            var s1 = new SubjectSchema(true , false , true);
+            var s2 = new SubjectSchema(true , false , true);
+            Assert.IsTrue(s1.Equals(s2));
+        }
+
+        [Test]
+        public void Test_AreEqual_2() {
+            var s1 = new SubjectSchema(false , true , false);
+            var s2 = new SubjectSchema(false , true , false);
+            Assert.IsTrue(s1.Equals(s2));
+        }
+
+        [Test]
+        public void Test_AreNotEqual_1() {
+            var s1 = new SubjectSchema(true , false , true);
+            var s2 = new SubjectSchema(false , false , true);
+            Assert.IsFalse(s1.Equals(s2));
+        }
+
     }
 }

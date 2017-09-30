@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Time_Table_Arranging_Program.Class;
 
 namespace Time_Table_Arranging_Program.Model {
-    public class SubjectSchema {
+    public class SubjectSchema : IEquatable<SubjectSchema> {
         private string _subjectName;
         public string SubjectCode { get; private set; } = null;
         public bool GotLecture { get; private set; } = false;
@@ -18,6 +18,18 @@ namespace Time_Table_Arranging_Program.Model {
             if (slots.Count == 0) return;
             CheckForCorrectness(slots);
             GenerateSchema(slots);
+        }
+
+        /// <summary>
+        /// This constructor is for the purpose of unit testing only
+        /// </summary>
+        /// <param name="gotLecture"></param>
+        /// <param name="gotTutorial"></param>
+        /// <param name="gotPractical"></param>
+        public SubjectSchema(bool gotLecture, bool gotTutorial, bool gotPractical) {
+            GotLecture = gotLecture;
+            GotTutorial = gotTutorial;
+            GotPractical = gotPractical;
         }
 
         /// <summary>
@@ -67,6 +79,13 @@ namespace Time_Table_Arranging_Program.Model {
                 if (slots[i].Code != SubjectCode)
                     throw new ArgumentException("Not all of the slots passed in are from the same subject.");
             }
+        }
+
+
+        public bool Equals(SubjectSchema other) {
+            return this.GotLecture == other.GotLecture &&
+                   this.GotTutorial == other.GotTutorial &&
+                   this.GotPractical == other.GotPractical;
         }
     }
 
