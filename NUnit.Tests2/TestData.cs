@@ -2,6 +2,7 @@
 using Time_Table_Arranging_Program;
 using Time_Table_Arranging_Program.Class;
 using Time_Table_Arranging_Program.Class.Converter;
+using Time_Table_Arranging_Program.Class.TokenParser;
 using Time_Table_Arranging_Program.Interfaces;
 using Time_Table_Arranging_Program.Model;
 using Time_Table_Arranging_Program.User_Control.SubjectListFolder;
@@ -365,6 +366,9 @@ new Slot(703,"UKMM1043", " Basic Economics, Accounting And Management", "7", "T"
 
        };
 
+        public static List<Slot> Default() {
+            return new HtmlSlotParser().Parse(Helper.RawStringOfTestFile("QingShengSampleHtmlData.html"));
+        }
 
         public static Slot GetSlot(int uid) {
             return TestSlots.Find(x => x.UID == uid);

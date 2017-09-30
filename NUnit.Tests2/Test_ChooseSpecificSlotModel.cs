@@ -10,7 +10,7 @@ namespace NUnit.Tests2 {
     [TestFixture]
     public class Test_ChooseSpecificSlotModel {
         private ChooseSpecificSlotModel Input() {
-            var subjectListModel = new SubjectListModel(SubjectModel.Parse(new HtmlSlotParser().Parse(Helper.RawStringOfTestFile("QingShengSampleHtmlData.html"))) , Permutator.Run_v2_withoutConsideringWeekNumber , new TaskRunnerForUnitTesting());
+            var subjectListModel = new SubjectListModel(SubjectModel.Parse(TestData.Default()) , Permutator.Run_v2_withoutConsideringWeekNumber , new TaskRunnerForUnitTesting());
             var outputTimetables = new List<List<Slot>>();
             subjectListModel.NewListOfTimetablesGenerated += (sender , args) => {
                 outputTimetables = (List<List<Slot>>)sender;

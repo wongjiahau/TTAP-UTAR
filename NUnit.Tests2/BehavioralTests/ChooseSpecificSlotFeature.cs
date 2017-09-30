@@ -14,7 +14,7 @@ namespace NUnit.Tests2.BehavioralTests {
     [TestFixture]
     public class ChooseSpecificSlotFeature {
         private ChooseSpecificSlotModel Input_1() {
-            var subjectListModel = new SubjectListModel(SubjectModel.Parse(new HtmlSlotParser().Parse(Helper.RawStringOfTestFile("QingShengSampleHtmlData.html"))) , Permutator.Run_v2_withoutConsideringWeekNumber , new TaskRunnerForUnitTesting());
+            var subjectListModel = new SubjectListModel(SubjectModel.Parse(TestData.Default()) , Permutator.Run_v2_withoutConsideringWeekNumber , new TaskRunnerForUnitTesting());
             var outputTimetables = new List<List<Slot>>();
             subjectListModel.NewListOfTimetablesGenerated += (sender , args) => {
                 outputTimetables = (List<List<Slot>>)sender;
@@ -25,7 +25,7 @@ namespace NUnit.Tests2.BehavioralTests {
         }
 
         private ChooseSpecificSlotModel Input_2() {
-            var subjectListModel = new SubjectListModel(SubjectModel.Parse(new HtmlSlotParser().Parse(Helper.RawStringOfTestFile("QingShengSampleHtmlData.html"))) , Permutator.Run_v2_withoutConsideringWeekNumber , new TaskRunnerForUnitTesting());
+            var subjectListModel = new SubjectListModel(SubjectModel.Parse(TestData.Default()) , Permutator.Run_v2_withoutConsideringWeekNumber , new TaskRunnerForUnitTesting());
             var outputTimetables = new List<List<Slot>>();
             subjectListModel.NewListOfTimetablesGenerated += (sender , args) => {
                 outputTimetables = (List<List<Slot>>)sender;
