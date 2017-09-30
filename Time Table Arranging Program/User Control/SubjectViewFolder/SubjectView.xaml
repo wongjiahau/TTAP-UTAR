@@ -127,6 +127,7 @@
                                               ItemsSource="{Binding Slots}">
                                         <ListView.View>
                                             <GridView>
+                                                <GridViewColumn Header="UID" DisplayMemberBinding="{Binding UID}" />
                                                 <GridViewColumn Header=" TYPE " DisplayMemberBinding="{Binding Type}" />
                                                 <GridViewColumn Header=" NO. " DisplayMemberBinding="{Binding Number}" />
                                                 <GridViewColumn Header=" TIME "
