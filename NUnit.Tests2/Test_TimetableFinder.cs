@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using NUnit.Framework;
 using Time_Table_Arranging_Program.Class;
+using Time_Table_Arranging_Program.Class.TokenParser;
 using Time_Table_Arranging_Program.Model;
 using Time_Table_Arranging_Program.TimetableFinder;
 
@@ -38,7 +39,7 @@ namespace NUnit.Tests2 {
             var result = new TimetableFinder().GetPossibleTimetables(input.ToArray());
             Assert.AreEqual(null , result);
         }
- 
+
         [Test]
         public void Test_Correctness_2() {
             var input = new List<Slot>();
@@ -47,6 +48,19 @@ namespace NUnit.Tests2 {
             input.AddRange(TestData.Default().FindAll(x => x.UID == 6));//L1 of BKA
             var result = new TimetableFinder().GetPossibleTimetables(input.ToArray());
             Assert.AreEqual(null , result);
+        }
+
+        [Test]
+        [Ignore("This test is slow to run")]
+        public void FullTest_1() {
+            var data = new HtmlSlotParser().Parse(Helper.RawStringOfTestFile("SampleData-FAM-2017-2ndSem.html"));
+            var input = new List<Slot>();
+            input.AddRange(data.FindAll(x => x.Code == "UKAF4023")); //ATP
+            input.AddRange(data.FindAll(x => x.Code == "MPU34022")); //ACP
+            input.AddRange(data.FindAll(x => x.Code == "MPU34032")); //CP
+            input.AddRange(data.FindAll(x => x.Code == "UKAI3013")); //E
+            var result = new TimetableFinder().GetPossibleTimetables(input.ToArray());
+            Assert.AreEqual(112 , result.Count);
         }
     }
 }
