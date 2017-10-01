@@ -7,7 +7,7 @@ using Time_Table_Arranging_Program.TimetableFinder;
 
 namespace NUnit.Tests2 {
     [TestFixture]
-    public class Test_TimetableFinder {
+    public class TestTimetableFinder {
         private List<Slot> GetInput() {
             var input = TestData.GetSlotsByName(TestData.Subjects.FluidMechanicsII);
             input.AddRange(TestData.GetSlotsByName(TestData.Subjects.HighwayAndTransportation));
@@ -35,22 +35,18 @@ namespace NUnit.Tests2 {
             var input = new List<Slot>();
             input.AddRange(TestData.Default().FindAll(x => x.UID == 28)); //Lecture of BEAM
             input.AddRange(TestData.Default().FindAll(x => x.UID == 6));//Lecture of BKA
-            var subjects = SubjectModel.Parse(input);
-            var timtableFinder = new TimetableFinder();
-            var result = timtableFinder.GetPossibleTimetables(subjects , Permutator.Run_v2_withoutConsideringWeekNumber);
-            Assert.AreEqual(0 , result.Count);
+            var result = new TimetableFinder().GetPossibleTimetables(input.ToArray());
+            Assert.AreEqual(null , result);
         }
-
+ 
         [Test]
         public void Test_Correctness_2() {
             var input = new List<Slot>();
-            input.AddRange(TestData.Default().FindAll(x => x.UID == 28)); //Lecture of BEAM
-            input.AddRange(TestData.Default().FindAll(x => x.UID == 6));//Lecture of BKA
-            var subjects = SubjectModel.Parse(input);
-            var timtableFinder = new TimetableFinder();
-            var result = timtableFinder.GetPossibleTimetables(subjects , Permutator.Run_v2_withoutConsideringWeekNumber);
-            if (result.Count == 0) Assert.Pass();
-            Assert.AreEqual(4 , result[0].Count);
+            input.AddRange(TestData.Default().FindAll(x => x.UID == 29)); //L2 of BEAM
+            input.AddRange(TestData.Default().FindAll(x => x.UID == 33)); //T4 of BEAM
+            input.AddRange(TestData.Default().FindAll(x => x.UID == 6));//L1 of BKA
+            var result = new TimetableFinder().GetPossibleTimetables(input.ToArray());
+            Assert.AreEqual(null , result);
         }
     }
 }

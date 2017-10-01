@@ -25,22 +25,20 @@ namespace NUnit.Tests2 {
             int expectedCount = 616872;
             List<List<Slot>> result = new List<List<Slot>>();
             Benchmark(() => {
-                var input = SubjectModel.Parse(this.input());
                 result =
-                    new TimetableFinder().GetPossibleTimetables(input , Permutator.Run_v2_WithConsideringWeekNumber);
+                    new TimetableFinder().GetPossibleTimetables(input().ToArray());
             }, "TimetableFinder_ConsideringWeekNumber");
             Assert.True(result.Count == expectedCount, $"Expected count is {expectedCount} but actual is {result.Count}");
         }
 
         [Test]
-        [Ignore("Not testing this as TimetableFinder is not used in production code")]
+       // [Ignore("Not testing this as TimetableFinder is not used in production code")]
         public void Test_TimetableFinder_UsingRunByWithoutConsideringWeekNumber() {
             int expectedCount = 285696;
             List<List<Slot>> result = new List<List<Slot>>();
             Benchmark(() => {
-                var input = SubjectModel.Parse(this.input());
                 result =
-                    new TimetableFinder().GetPossibleTimetables(input , Permutator.Run_v2_withoutConsideringWeekNumber);
+                    new TimetableFinder().GetPossibleTimetables(input().ToArray());
             } , "TimetableFinder_WithoutConsideringWeekNumber");
             Assert.True(result.Count == expectedCount);
 
@@ -87,7 +85,7 @@ namespace NUnit.Tests2 {
                 var result = SubjectModel.Parse(input());
             }, "SubjectModel.Parse()");
         }
-        private static void Benchmark(Action act , string methodName , int iterations = 1) {
+        private static void Benchmark(Action act , string methodName , int iterations = 5) {
             GC.Collect();
             act.Invoke(); // run once outside of loop to avoid initialization costs
             Stopwatch timer = Stopwatch.StartNew();
