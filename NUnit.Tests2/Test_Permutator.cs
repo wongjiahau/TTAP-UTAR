@@ -85,7 +85,7 @@ namespace NUnit.Tests2 {
                 var result = SubjectModel.Parse(input());
             }, "SubjectModel.Parse()");
         }
-        private static void Benchmark(Action act , string methodName , int iterations = 5) {
+        private static void Benchmark(Action act , string methodName , int iterations = 1) {
             GC.Collect();
             act.Invoke(); // run once outside of loop to avoid initialization costs
             Stopwatch timer = Stopwatch.StartNew();
