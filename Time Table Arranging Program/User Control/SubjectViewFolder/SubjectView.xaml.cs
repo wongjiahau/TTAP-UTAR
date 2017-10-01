@@ -109,7 +109,6 @@ namespace Time_Table_Arranging_Program.User_Control.SubjectViewFolder {
             da1.Completed += (o , args) => { ListView.Visibility = Visibility.Collapsed; };
 
             if (ListView.Visibility == Visibility.Visible) {
-                InstructionLabel.Visibility = Visibility.Collapsed;
                 ListView.BeginAnimation(HeightProperty , da1);
                 var maximizeIcon = new PackIcon();
                 maximizeIcon.Kind = PackIconKind.WindowMaximize;
