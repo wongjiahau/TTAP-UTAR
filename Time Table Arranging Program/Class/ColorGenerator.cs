@@ -1,4 +1,8 @@
-﻿using System.Windows.Media;
+﻿using System;
+using System.Drawing;
+using System.Windows.Media;
+using Brush = System.Windows.Media.Brush;
+using Color = System.Windows.Media.Color;
 
 namespace Time_Table_Arranging_Program {
     public interface IColorGenerator {
@@ -31,8 +35,20 @@ namespace Time_Table_Arranging_Program {
         }
 
         public Color GetCurrentColor() {
-            if (_pointer == _chosenColors.Length) return Colors.White;
+            if (_pointer >= _chosenColors.Length) return RandomColor();
             return _chosenColors[_pointer];
+        }
+
+        private Color RandomColor() {
+            var randomGen = new Random();
+            var names = (KnownColor[])Enum.GetValues(typeof(KnownColor));
+            KnownColor randomColorName = names[randomGen.Next(names.Length)];
+            var color = System.Drawing.Color.FromKnownColor(randomColorName);
+            return ConvertToSystemWindowMediaColor(color);
+        }
+
+        private Color ConvertToSystemWindowMediaColor(System.Drawing.Color color) {
+            return System.Windows.Media.Color.FromArgb(color.A , color.R , color.G , color.B);
         }
 
         public Brush GetCurrentBrush() {
