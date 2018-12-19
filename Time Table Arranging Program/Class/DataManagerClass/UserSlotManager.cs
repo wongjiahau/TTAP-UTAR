@@ -7,7 +7,7 @@ using Time_Table_Arranging_Program.Class.TokenParser;
 
 namespace Time_Table_Arranging_Program.Class.DataManagerClass {
     public class UserSlotManager {
-        public async void SaveSlotDataAsync(string studentId , string loadedHtml) {
+        public void SaveSlotDataAsync(string studentId , string loadedHtml) {
             try {
                 System.IO.File.WriteAllText(GetPath(studentId) , loadedHtml);
             }
