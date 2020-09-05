@@ -19,19 +19,6 @@ namespace ConsoleTerminalLibrary.Console {
         public abstract string Help();
     }
 
-    public abstract class ConsoleCommandWithArgument : ConsoleCommandBase {
-        public ConsoleCommandWithArgument(object commandee) : base(commandee) { }
-        public sealed override string Execute() {
-            throw new NotImplementedException();
-        }
-        public abstract string[] Arguments();
-
-        public string ExecuteCommand(string arg) {
-            return ArgumentIsValid(arg) ?
-                Execute(arg) : 
-                $"'{arg}' is not a valid argument for '{Keyword()}'" ;
-        }
-
         protected virtual bool ArgumentIsValid(string arg) {
             return Arguments().ToList().Contains(arg);
         }
