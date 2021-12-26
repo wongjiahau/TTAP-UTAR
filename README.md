@@ -1,3 +1,6 @@
+# DEPRECATION NOTICE
+This is deprecated in favor of https://github.com/wongjiahau/ttap-web.
+
 [![BCH compliance](https://bettercodehub.com/edge/badge/wongjiahau/TTAP-SCC-Assignment-4?branch=master)](https://bettercodehub.com/)
 # TTAP-UTAR 
 Timetable Arranging Program - UTAR 
